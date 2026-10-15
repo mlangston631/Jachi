@@ -13,6 +13,11 @@ export function wantsDemo(): boolean {
   return Platform.OS === 'web' && typeof window !== 'undefined' && /[?&]demo\b/.test(window.location.search);
 }
 
+/** Web preview laid out like a phone (status bar and home indicator space), with or without sample data. */
+export function wantsPhoneFrame(): boolean {
+  return Platform.OS === 'web' && typeof window !== 'undefined' && /[?&](demo|preview)\b/.test(window.location.search);
+}
+
 export async function seedDemo(): Promise<void> {
   if (!wantsDemo()) return;
   usePrefs.getState().set({ onboarded: true, adult: true, name: 'Maria', focus: ['urgent', 'refill'], milestonesSeen: [3, 7, 14, 30, 60, 100, 180, 365], waitlist: { email: 'maria@example.com', state: 'TX', name: 'Maria', interests: ['refills'], at: Date.now(), queued: false } });
