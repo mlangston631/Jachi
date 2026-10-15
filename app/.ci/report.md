@@ -1,23 +1,20 @@
 # App checks
 
-Commit: 0625b7b11e1d47cbca54de93ac066f33640f5b04  
-Date: 2026-10-15 21:37 UTC
+Commit: 73d719ea833cbf987b503a5e35e1daab03869277  
+Date: 2026-10-15 22:17 UTC
 
-- FAIL: versions (exit 1, 0s)
-- pass: typescript (1s)
-- pass: tests (2s)
-- FAIL: expo doctor (exit 1, 4s)
+- pass: versions (1s)
+- pass: typescript (5s)
+- FAIL: tests (exit 1, 2s)
+- pass: expo doctor (5s)
 - pass: native config (6s)
-- pass: ios and android bundles (28s)
-- pass: web build (16s)
+- pass: ios and android bundles (66s)
+- pass: web build (36s)
 
-## versions (exit 1)
+## versions (exit 0)
 ```
-The following packages should be updated for best compatibility with the installed expo version:
-  @types/jest@30.0.0 - expected version: 29.5.14
-  jest@30.5.2 - expected version: ~29.7.0
-Your project may not work correctly until you install the expected versions of the packages.
-Found outdated dependencies
+Skipped checking dependencies: react-native, jest, and @types/jest. These dependencies are listed in expo.install.exclude in package.json. Learn more: https://docs.expo.dev/more/expo-cli/#configuring-dependency-validation
+Dependencies are up to date
 ```
 
 ## typescript (exit 0)
@@ -25,33 +22,160 @@ Found outdated dependencies
 
 ```
 
-## tests (exit 0)
+## tests (exit 1)
 ```
-No tests found, exiting with code 0
+FAIL __tests__/summary.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/schedule.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/reminders.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/i18n.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/units.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/insights.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/forms.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/dates.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/streak.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/csv.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/safety.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/finder.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/search.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+FAIL __tests__/content.test.ts
+  ● Test suite failed to run
+
+    Cannot find module 'expo-modules-core' from 'node_modules/jest-expo/src/preset/setup.js'
+
+    To mock a module that does not exist on disk, pass `{virtual: true}` in the mock options. See https://jestjs.io/docs/jest-object#jestmockmodulename-factory-options
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (node_modules/jest-expo/src/preset/setup.js:256:6)
+
+Test Suites: 14 failed, 14 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        1.617 s
+Ran all test suites.
 ```
 
-## expo doctor (exit 1)
+## expo doctor (exit 0)
 ```
 npm warn exec The following package was not found and will be installed: expo-doctor@1.21.4
 Running 20 checks on your project...
-19/20 checks passed. 1 checks failed. Possible issues detected:
-Use the --verbose flag to see more details about passed checks.
-
-✖ Check that packages match versions required by installed Expo SDK
-
-❗ Major version mismatches
-package      expected  found   
-@types/jest  29.5.14   30.0.0  
-jest         ~29.7.0   30.5.2  
-
-
-
-2 packages out of date.
-Advice:
-Use 'npx expo install --check' to review and upgrade your dependencies.
-To ignore specific packages, add them to "expo.install.exclude" in package.json. Learn more: https://expo.fyi/dependency-validation
-
-1 check failed, indicating possible issues with the project.
+20/20 checks passed. No issues detected!
 ```
 
 ## native config (exit 0)
@@ -59,28 +183,27 @@ To ignore specific packages, add them to "expo.install.exclude" in package.json.
 - Creating native directories (./ios and ./android)
 ✔ Created native directories
 - Updating package.json
-› Using react-native@0.88.0-rc.4 instead of recommended react-native@0.88.0.
-- Updating package.json
 ✔ Updated package.json | no changes
 - Running prebuild
 ✔ Finished prebuild
 total 36
-drwxr-xr-x 2 runner runner 4096 Oct 15 21:36 .
-drwxr-xr-x 5 runner runner 4096 Oct 15 21:36 ..
--rw-r--r-- 1 runner runner 3630 Oct 15 21:36 AndroidManifest.xml
--rw-r--r-- 1 runner runner 4042 Oct 15 21:36 Info.plist
--rw-r--r-- 1 runner runner  255 Oct 15 21:36 JachiHealth.entitlements
--rw-r--r-- 1 runner runner 1432 Oct 15 21:36 PrivacyInfo.xcprivacy
--rw-r--r-- 1 runner runner 8209 Oct 15 21:36 android-app-build.gradle
+drwxr-xr-x 2 runner runner 4096 Oct 15 22:15 .
+drwxr-xr-x 5 runner runner 4096 Oct 15 22:15 ..
+-rw-r--r-- 1 runner runner 3630 Oct 15 22:15 AndroidManifest.xml
+-rw-r--r-- 1 runner runner 4042 Oct 15 22:15 Info.plist
+-rw-r--r-- 1 runner runner  255 Oct 15 22:15 JachiHealth.entitlements
+-rw-r--r-- 1 runner runner 1432 Oct 15 22:15 PrivacyInfo.xcprivacy
+-rw-r--r-- 1 runner runner 8209 Oct 15 22:15 android-app-build.gradle
 ```
 
 ## ios and android bundles (exit 0)
 ```
+Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-iOS Bundled 21953ms node_modules/expo-router/entry.js (1074 modules)
-Android Bundled 26845ms node_modules/expo-router/entry.js (1109 modules)
+Android Bundled 52174ms node_modules/expo-router/entry.js (2089 modules)
+iOS Bundled 64489ms node_modules/expo-router/entry.js (2073 modules)
 
 › Assets (34):
 node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
@@ -99,29 +222,30 @@ node_modules/expo-router/assets/react-navigation/elements/search-icon.png (7 var
 node_modules/expo-router/assets/sitemap.png (465B)
 node_modules/expo-router/assets/unmatched.png (4.8KB)
 
-› ios bundles (1):
-_expo/static/js/ios/entry-211eed339e81f8a5b11beb0b111c5cee.hbc (2.4MB)
-
 › android bundles (1):
-_expo/static/js/android/entry-c3ab69f4a7fda4370b8f62bc8290f4b8.hbc (2.5MB)
+_expo/static/js/android/entry-fd602c33a552d92aefbeb253370a405d.hbc (5.7MB)
+
+› ios bundles (1):
+_expo/static/js/ios/entry-5c15833efd2a54e9e15abe4beb96f23e.hbc (5.6MB)
 
 › Files (1):
 metadata.json (3.4KB)
 
 Exported: .ci-dist/native
-2.5M	.ci-dist/native/_expo/static/js/android/entry-c3ab69f4a7fda4370b8f62bc8290f4b8.hbc
-2.4M	.ci-dist/native/_expo/static/js/ios/entry-211eed339e81f8a5b11beb0b111c5cee.hbc
-5.9M	.ci-dist/native
+5.5M	.ci-dist/native/_expo/static/js/android/entry-fd602c33a552d92aefbeb253370a405d.hbc
+5.4M	.ci-dist/native/_expo/static/js/ios/entry-5c15833efd2a54e9e15abe4beb96f23e.hbc
+12M	.ci-dist/native
 ```
 
 ## web build (exit 0)
 ```
+Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-Web Bundled 13942ms node_modules/expo-router/entry.js (746 modules)
+Web Bundled 34283ms node_modules/expo-router/entry.js (1674 modules)
 
-› Assets (18):
+› Assets (19):
 node_modules/expo-router/assets/arrow_down.017bc6ba3fc25503e5eb5e53826d48a8.png (9.5KB)
 node_modules/expo-router/assets/error.d1ea1496f9057eb392d5bbf3732a61b7.png (469B)
 node_modules/expo-router/assets/file.19eeb73b9593a38f8e9f418337fc7d10.png (138B)
@@ -134,12 +258,36 @@ node_modules/expo-router/assets/react-navigation/elements/close-icon.808e1b1b9b5
 node_modules/expo-router/assets/react-navigation/elements/search-icon.286d67d3f74808a60a78d3ebf1a5fb57.png (928B)
 node_modules/expo-router/assets/sitemap.412dd9275b6b48ad28f5e3d81bb1f626.png (465B)
 node_modules/expo-router/assets/unmatched.20e71bdf79e3a97bf55fd9e164041578.png (4.8KB)
+node_modules/expo-sqlite/web/wa-sqlite/wa-sqlite.5e61fe84c4a4f49e0b1a33661b45c791.wasm (641KB)
 
-› web bundles (1):
-_expo/static/js/web/entry-a12ffb7a2e028c196e07844a2f6bbc7b.js (1.1MB)
+› web bundles (24):
+_expo/static/css/native-tabs.module-78b0f59737571f455720970791a36bdd.css (2.5KB)
+_expo/static/js/web/__common-ffdac7c100ddf82a4909bf90ef562ef5.js (1.8MB)
+_expo/static/js/web/__expo-metro-runtime-8c088df87a31e4e6accd81c554ec290d.js (3.8KB)
+_expo/static/js/web/_layout-728ed77516cfc8741b878ae982c4717e.js (51KB)
+_expo/static/js/web/_layout-c83920dafb31374d3faa3b188e4c2891.js (295KB)
+_expo/static/js/web/[key]-30e32d8149a98d913095baa3f6254c31.js (5KB)
+_expo/static/js/web/+not-found-2b63b41f825f93f53bb40b95d4f7ca3c.js (1.2KB)
+_expo/static/js/web/account-7e7d117a4ff64e252fce0df2e78b162d.js (11KB)
+_expo/static/js/web/care-b25d41e7cfaa3ae83d9dfb328c26397d.js (15KB)
+_expo/static/js/web/checkin-85cc5f60f56d5f5546a476ec625fc585.js (6.3KB)
+_expo/static/js/web/entry-7b65eb9fb731d6b8f33047a9dd5df695.js (1.1MB)
+_expo/static/js/web/finder-29f68beb98d1719ddb8bbd0705d17f83.js (9.9KB)
+_expo/static/js/web/guide-e4f3e4a7156b90abd46e5e6ad4cbd7fd.js (9.6KB)
+_expo/static/js/web/index-d6ae23b0d51110cf574eef344f0c647c.js (15KB)
+_expo/static/js/web/journal-435448bb636a603951d02777ff29ceec.js (13KB)
+_expo/static/js/web/med-d1016d8191511a903d4994b9d2335112.js (5.8KB)
+_expo/static/js/web/meds-0752f39754dfada967cb6ee05f1846f8.js (9.9KB)
+_expo/static/js/web/onboarding-50ca043927754ab6a441ed0185870e5b.js (9.8KB)
+_expo/static/js/web/settings-9ea446f6d63aff6bb30bf067df405ce4.js (8.4KB)
+_expo/static/js/web/summary-1ac9f4379a7d299e928edf6ec6913fca.js (18KB)
+_expo/static/js/web/ticket-75799be9c94084048a261c17cf8145c3.js (4.7KB)
+_expo/static/js/web/vital-f1a07264b955aa76c76eedac969df93f.js (5.3KB)
+_expo/static/js/web/waitlist-2ad5b8becdd9c0bff323b685785de7b5.js (5.7KB)
+_expo/static/js/web/worker-0da25fdcd1e6e532dc37ea4af7232a97.js (137KB)
 
 › Files (2):
-index.html (1.2KB)
+index.html (1.6KB)
 metadata.json (49B)
 
 Exported: .ci-dist/web
