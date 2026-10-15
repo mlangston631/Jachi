@@ -10,6 +10,7 @@ import ast
 import html
 import json
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -17,9 +18,19 @@ sys.path.insert(0, str(ROOT))
 import content as EN  # noqa: E402
 import content_es as ES  # noqa: E402
 import pages as PAGES  # noqa: E402
+import brand as BRAND  # noqa: E402
+import strings as STRINGS  # noqa: E402
 
 OUT = ROOT / "app" / "src" / "content" / "content.json"
 ICONS_OUT = ROOT / "app" / "src" / "content" / "icons.json"
+STRINGS_OUT = ROOT / "app" / "src" / "content" / "site-strings.json"
+# Reviewed website wording the app reuses word for word: the care finder (f_), account (a_), help chat (c_),
+# support ticket (t_), early access (j_) and weight check (e_) messages, and a few form errors.
+STRING_PREFIXES = ("f_", "a_", "c_", "t_", "j_", "e_")
+STRING_KEYS = {"choose_state", "choose_answer", "fix_one", "fix_many", "enter_email", "valid_email", "launch_note",
+               "continue"}
+STRING_SKIP = {"a_meta_title", "a_meta_desc", "a_h1", "a_noscript", "a_create_note", "a_tabs", "c_off", "t_preview",
+               "j_preview", "a_home"}
 SITE_URL = "https://www.jachihealth.com"
 
 
@@ -30,6 +41,34 @@ def from_build(name):
         if isinstance(node, ast.Assign) and any(getattr(t, "id", "") == name for t in node.targets):
             return ast.literal_eval(node.value)
     raise SystemExit(f"{name} not found in build.py")
+
+
+def icon_shapes(markup):
+    """The site's 24x24 stroke icons as [tag, attributes] pairs, so the app draws them without parsing SVG."""
+    root = ET.fromstring(f'<svg xmlns="http://www.w3.org/2000/svg">{markup}</svg>')
+    shapes = []
+    for el in root:
+        tag = el.tag.split('}')[-1]
+        if tag not in ("path", "rect", "circle"):
+            raise SystemExit(f"icon uses <{tag}>, which the app doesn't draw")
+        attrs = {k: (float(v) if k in ("x", "y", "width", "height", "rx", "ry", "cx", "cy", "r") else v)
+                 for k, v in el.attrib.items()}
+        shapes.append([tag, attrs])
+    return shapes
+
+
+def site_strings():
+    keys = [k for k in STRINGS.EN if (k.startswith(STRING_PREFIXES) or k in STRING_KEYS) and k not in STRING_SKIP]
+    out = {"en": {}, "es": {}}
+    for k in keys:
+        for lang, table in (("en", STRINGS.EN), ("es", STRINGS.ES)):
+            text = table.get(k)
+            if not isinstance(text, str):
+                raise SystemExit(f"strings.py: {lang} is missing {k}")
+            if "<" in text:
+                raise SystemExit(f"strings.py: {k} has HTML, which the app can't show; add it to STRING_SKIP")
+            out[lang][k] = html.unescape(text)
+    return out
 
 
 def states():
@@ -104,10 +143,13 @@ def main():
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n")
-    icons = from_build("ICONS")
-    ICONS_OUT.write_text(json.dumps(icons, ensure_ascii=False, indent=1, sort_keys=True) + "\n")
+    icons = {name: icon_shapes(markup) for name, markup in sorted(from_build("ICONS").items())}
+    icons["_leaf"] = {"leaf": BRAND.LEAF, "j": BRAND.J_PATH, "veins": BRAND.VEINS, "stem": BRAND.STEM}
+    ICONS_OUT.write_text(json.dumps(icons, ensure_ascii=False, separators=(",", ":")) + "\n")
+    strings = site_strings()
+    STRINGS_OUT.write_text(json.dumps(strings, ensure_ascii=False, indent=1) + "\n")
     print(f"wrote {OUT.relative_to(ROOT)}: {len(data['services'])} services, {len(data['conditions'])} conditions; "
-          f"{ICONS_OUT.relative_to(ROOT)}: {len(icons)} icons")
+          f"{ICONS_OUT.relative_to(ROOT)}: {len(icons) - 1} icons; {STRINGS_OUT.relative_to(ROOT)}: {len(strings['en'])} strings")
 
 
 if __name__ == "__main__":
