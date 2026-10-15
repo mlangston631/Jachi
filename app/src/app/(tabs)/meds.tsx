@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 import { Empty, useToast } from '@/components/feedback';
@@ -63,7 +63,7 @@ export default function Meds() {
         </Card>
       ) : (
         <>
-          {hasScheduled && perm === 'denied' ? (
+          {hasScheduled && perm === 'denied' && Platform.OS !== 'web' ? (
             <Card tone="warn" style={styles.gapSm}>
               <Row>
                 <Icon name="bell" size={20} color={c.warn} />
@@ -80,8 +80,10 @@ export default function Meds() {
                 size={84}
                 label={t('meds.adherenceTitle')}
                 value={week.due ? t('meds.adherence', { taken: week.taken, due: week.due }) : t('meds.adherenceNone')}>
-                <Txt variant="numberSmall">{week.rate === null ? '–' : Math.round(week.rate * 100)}</Txt>
-                {week.rate === null ? null : <Txt variant="caption" tone="text3">%</Txt>}
+                <View style={styles.ringValue}>
+                  <Txt variant="numberSmall">{week.rate === null ? '–' : Math.round(week.rate * 100)}</Txt>
+                  {week.rate === null ? null : <Txt variant="footnote" tone="text3">%</Txt>}
+                </View>
               </Ring>
               <View style={[styles.flex, styles.gapXs]}>
                 <Txt variant="title3" heading>{t('meds.adherenceTitle')}</Txt>
@@ -180,6 +182,7 @@ const styles = StyleSheet.create({
   gapMd: { gap: space.md },
   selfStart: { alignSelf: 'flex-start' },
   adherence: { flexDirection: 'row', alignItems: 'center', gap: space.lg },
+  ringValue: { flexDirection: 'row', alignItems: 'baseline' },
   timeline: { gap: 0 },
   tlRow: { flexDirection: 'row', gap: space.md },
   tlRail: { width: 22, alignItems: 'center', paddingTop: space.xl },

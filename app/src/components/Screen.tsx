@@ -10,7 +10,7 @@ import { space, useTheme } from '@/theme';
 import { Icon } from './Icon';
 import { Tap, Txt } from './ui';
 
-export const TAB_BAR = Platform.select({ ios: 54, android: 84, default: 64 });
+export const TAB_BAR = Platform.select({ ios: 54, android: 84, default: 92 });
 export const MAX_WIDTH = 640;
 
 type TabScreenProps = {

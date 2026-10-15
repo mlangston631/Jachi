@@ -159,8 +159,10 @@ export default function Today() {
               size={88}
               label={t('today.weekLabel')}
               value={t('today.weekGoal', { done: doneThisWeek, goal })}>
-              <Txt variant="numberSmall">{doneThisWeek}</Txt>
-              <Txt variant="caption" tone="text3">/{goal}</Txt>
+              <View style={styles.ringValue}>
+                <Txt variant="numberSmall">{doneThisWeek}</Txt>
+                <Txt variant="footnote" tone="text3">/{goal}</Txt>
+              </View>
             </Ring>
             <View style={[styles.flex, styles.gapXs]}>
               <Row gap={space.xs}>
@@ -324,6 +326,7 @@ const styles = StyleSheet.create({
   gapMd: { gap: space.md },
   gapLg: { gap: space.lg },
   selfStart: { alignSelf: 'flex-start' },
+  ringValue: { flexDirection: 'row', alignItems: 'baseline' },
   checkBadge: { width: 26, height: 26, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
   metrics: { flexDirection: 'row', gap: space.md },
   metric: { flex: 1, alignItems: 'center', gap: 4 },
