@@ -57,7 +57,7 @@ export default function Meds() {
 
   return (
     <TabScreen title={t('meds.title')} right={<IconButton icon="plus" label={t('meds.add')} onPress={() => router.push('/med')} filled />}>
-      {meds.length === 0 ? (
+      {!data ? null : meds.length === 0 ? (
         <Card>
           <Empty icon="pill" title={t('meds.emptyTitle')} body={t('meds.emptyBody')} action={<Button label={t('meds.add')} icon="plus" onPress={() => router.push('/med')} />} />
         </Card>

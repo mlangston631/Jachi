@@ -26,25 +26,29 @@ export function TabScreen({ title, eyebrow, right, children, refresh, scrollRef 
   const c = useTheme();
   const insets = useSafeAreaInsets();
   return (
-    <ScrollView
-      ref={scrollRef}
-      style={{ backgroundColor: c.bg }}
-      contentContainerStyle={[styles.tabContent, { paddingTop: insets.top + space.md, paddingBottom: insets.bottom + TAB_BAR + space.x3 }]}
-      keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag"
-      refreshControl={refresh}
-      showsVerticalScrollIndicator={false}>
-      <View style={styles.inner}>
-        <View style={styles.header}>
-          <View style={styles.flex}>
-            {eyebrow ? <Txt variant="eyebrow" tone="accent">{eyebrow}</Txt> : null}
-            <Txt variant="largeTitle" heading>{title}</Txt>
+    <View style={[styles.flex, { backgroundColor: c.bg }]}>
+      <ScrollView
+        ref={scrollRef}
+        style={{ backgroundColor: c.bg }}
+        contentContainerStyle={[styles.tabContent, { paddingTop: insets.top + space.md, paddingBottom: insets.bottom + TAB_BAR + space.x3 }]}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        refreshControl={refresh}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.inner}>
+          <View style={styles.header}>
+            <View style={styles.flex}>
+              {eyebrow ? <Txt variant="eyebrow" tone="accent">{eyebrow}</Txt> : null}
+              <Txt variant="largeTitle" heading>{title}</Txt>
+            </View>
+            {right}
           </View>
-          {right}
+          {children}
         </View>
-        {children}
-      </View>
-    </ScrollView>
+      </ScrollView>
+      {/* Keeps scrolled content from running under the clock and battery. */}
+      <View style={[styles.statusScrim, { height: insets.top, backgroundColor: c.bg }]} />
+    </View>
   );
 }
 
@@ -118,6 +122,7 @@ export function Section({ title, action, children, gap = space.md }: { title?: s
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  statusScrim: { position: 'absolute', top: 0, left: 0, right: 0, opacity: 0.94, pointerEvents: 'none' },
   tabContent: { paddingHorizontal: space.xl },
   inner: { width: '100%', maxWidth: MAX_WIDTH, alignSelf: 'center', gap: space.xxl },
   header: { flexDirection: 'row', alignItems: 'flex-end', gap: space.md, marginBottom: -space.sm },

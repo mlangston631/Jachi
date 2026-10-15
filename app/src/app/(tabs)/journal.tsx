@@ -64,7 +64,7 @@ export default function Journal() {
       </View>
 
       <View onLayout={e => setWidth(e.nativeEvent.layout.width)} style={styles.gapLg}>
-        {view === 'checkins' ? (
+        {!data ? null : view === 'checkins' ? (
           checkins.length === 0 ? (
             <Card>
               <Empty title={t('journal.emptyTitle')} body={t('journal.emptyBody')} action={<Button label={t('today.checkinCta')} onPress={() => router.push('/checkin')} />} />
