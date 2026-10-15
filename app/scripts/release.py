@@ -6,7 +6,7 @@ Run by .github/workflows/app-release.yml. Uses GitHub secrets (never stored in t
   APPLE_TEAM_ID                       Apple Developer Team ID (10 characters).
   ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8   App Store Connect API key with the Admin role (the .p8 file's text).
   ASC_APP_ID                          The app's Apple ID number in App Store Connect (for TestFlight upload).
-  GOOGLE_SERVICE_ACCOUNT_JSON         Google Play service account key (after the first upload by hand).
+  GOOGLE_SERVICE_ACCOUNT_JSON         Google Play service account key (the app must exist in Play Console first).
 
   python3 scripts/release.py check    say what can run with the secrets that are set
   python3 scripts/release.py run      build (and submit where possible)
@@ -52,7 +52,7 @@ def check():
     print(f"iOS build: {'yes' if p['ios'] else 'no (missing ' + ', '.join(p['missing_ios']) + ')'}")
     print(f"iOS upload to TestFlight: {'yes' if p['ios_submit'] else 'no (needs ASC_APP_ID)'}")
     print(f"Android build: {'yes' if p['android'] else 'no'}")
-    print(f"Android upload to Play internal testing: {'yes' if p['android_submit'] else 'no (needs GOOGLE_SERVICE_ACCOUNT_JSON after the first upload by hand)'}")
+    print(f"Android upload to Play internal testing: {'yes' if p['android_submit'] else 'no (needs GOOGLE_SERVICE_ACCOUNT_JSON)'}")
     return p
 
 
