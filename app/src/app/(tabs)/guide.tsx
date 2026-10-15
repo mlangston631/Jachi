@@ -76,6 +76,11 @@ export default function Guide() {
   const [text, setText] = useState('');
   const [keyboard, setKeyboard] = useState(false);
   const list = useRef<FlatList<Message>>(null);
+  // Scroll by measured sizes: FlatList's scrollToEnd can stop short before a new message has been measured.
+  const sizes = useRef({ content: 0, view: 0 });
+  const toEnd = () => {
+    if (messages.length || busy) list.current?.scrollToOffset({ offset: Math.max(0, sizes.current.content - sizes.current.view), animated: true });
+  };
 
   useEffect(() => {
     const show = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', () => setKeyboard(true));
@@ -161,7 +166,14 @@ export default function Guide() {
           ) : undefined
         }
         contentContainerStyle={styles.listContent}
-        onContentSizeChange={() => list.current?.scrollToEnd({ animated: true })}
+        onContentSizeChange={(_, height) => {
+          sizes.current.content = height;
+          toEnd();
+        }}
+        onLayout={e => {
+          sizes.current.view = e.nativeEvent.layout.height;
+          toEnd();
+        }}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="interactive"
         style={styles.flex}
