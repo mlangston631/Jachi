@@ -1,0 +1,82 @@
+{
+  "expo": {
+    "name": "Jachi Health",
+    "slug": "jachi-health",
+    "scheme": "jachihealth",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#F5F7F2",
+    "runtimeVersion": { "policy": "appVersion" },
+    "ios": {
+      "bundleIdentifier": "com.jachihealth.app",
+      "supportsTablet": false,
+      "config": { "usesNonExemptEncryption": false },
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true,
+        "CFBundleLocalizations": ["en", "es"],
+        "NSFaceIDUsageDescription": "Jachi uses Face ID to lock your health journal so only you can open it."
+      },
+      "privacyManifests": {
+        "NSPrivacyAccessedAPITypes": [
+          { "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults", "NSPrivacyAccessedAPITypeReasons": ["CA92.1"] },
+          { "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp", "NSPrivacyAccessedAPITypeReasons": ["C617.1"] },
+          { "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime", "NSPrivacyAccessedAPITypeReasons": ["35F9.1"] },
+          { "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace", "NSPrivacyAccessedAPITypeReasons": ["E174.1"] }
+        ]
+      }
+    },
+    "android": {
+      "package": "com.jachihealth.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-foreground.png",
+        "monochromeImage": "./assets/images/adaptive-monochrome.png",
+        "backgroundColor": "#1E4A3B"
+      },
+      "permissions": ["android.permission.USE_BIOMETRIC", "android.permission.USE_FINGERPRINT", "android.permission.POST_NOTIFICATIONS"],
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO"
+      ],
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 120,
+          "backgroundColor": "#F5F7F2",
+          "dark": { "image": "./assets/images/splash-icon-dark.png", "backgroundColor": "#0E1A15" }
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Fraunces-Display.ttf",
+            "./assets/fonts/Fraunces-DisplayItalic.ttf",
+            "./assets/fonts/Fraunces-Heading.ttf",
+            "./assets/fonts/InstrumentSans-Regular.ttf",
+            "./assets/fonts/InstrumentSans-Medium.ttf",
+            "./assets/fonts/InstrumentSans-SemiBold.ttf"
+          ]
+        }
+      ],
+      "expo-secure-store",
+      "expo-sqlite",
+      "expo-localization",
+      ["expo-local-authentication", { "faceIDPermission": "Jachi uses Face ID to lock your health journal so only you can open it." }],
+      ["expo-notifications", { "icon": "./assets/images/notification-icon.png", "color": "#1E4A3B" }],
+      "expo-sharing",
+      "expo-web-browser"
+    ],
+    "experiments": { "reactCompiler": true }
+  }
+}
