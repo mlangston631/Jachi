@@ -5,7 +5,9 @@ Run from the repo root after `python3 build.py`:   python3 tests/qa.py
 It starts a local stand-in for Netlify (tests/serve.py), uses the real brand fonts (tools/get_fonts.sh),
 and saves screenshots to tests/out/. Exits non-zero if any check fails.
 """
+import html
 import json
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -1062,11 +1064,12 @@ with sync_playwright() as p:
               canonical: (document.querySelector('link[rel=canonical]') || {}).href,
               related: [...document.querySelectorAll('.related a')].map(a => a.getAttribute('href')),
               faq: document.querySelectorAll('.faq-item').length,
-              ld: [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => JSON.parse(s.textContent)['@type']),
+              ld: [...document.querySelectorAll('script[type="application/ld+json"]')]
+                .flatMap(s => { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); }),
             })""")
             ok = (info["h1"] == 1 and info["crumbs"] == 3 and len(info["join"]) >= 3 and len(set(info["join"])) == 1
                   and info["canonical"] == f"https://www.jachihealth.com/{slug}/" and len(info["related"]) == 3 and info["faq"] >= 3
-                  and info["ld"] == ["BreadcrumbList", "FAQPage"])
+                  and info["ld"] == ["MedicalOrganization", "MedicalWebPage", "BreadcrumbList", "FAQPage"])
             check(f"/{slug}/ @{w}: heading, breadcrumb, sign-up links, canonical, related pages, FAQ and schema", ok, json.dumps(info))
             if w == 1440:
                 problems = page.evaluate(STATIC_A11Y_JS)
@@ -1158,6 +1161,41 @@ with sync_playwright() as p:
     missing = [u for u in ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs]
                if f"<loc>https://www.jachihealth.com{u}</loc>" not in sm]
     check("sitemap lists every page, with the Spanish alternate", not missing and 'hreflang="es"' in sm, str(missing))
+    # Structured data, titles and descriptions on every page search engines see
+    indexable = ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs]
+    nodes_by_page, sd_problems, meta_problems = {}, [], []
+    for u in indexable:
+        h = (ROOT / "public" / u.strip("/") / "index.html").read_text()
+        try:
+            blocks = [json.loads(x) for x in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S)]
+        except ValueError as err:
+            sd_problems.append(f"{u}: invalid JSON-LD ({err})"); continue
+        nodes = [n for b in blocks for n in b.get("@graph", [b])]
+        nodes_by_page[u] = nodes
+        if any(b.get("@context") != "https://schema.org" for b in blocks):
+            sd_problems.append(f"{u}: missing @context")
+        for n in nodes:
+            if n.get("@type") == "BreadcrumbList" and any("#" in e["item"] for e in n["itemListElement"]):
+                sd_problems.append(f"{u}: breadcrumb step that is only an anchor")
+        title = html.unescape(re.search(r"<title>(.*?)</title>", h).group(1))
+        desc = html.unescape(re.search(r'<meta name="description" content="([^"]*)"', h).group(1))
+        if len(title) > 65 or len(desc) > 160 or len(desc) < 50:
+            meta_problems.append(f"{u}: title {len(title)}, description {len(desc)}")
+    site_ids = {n["@id"] for n in nodes_by_page.get("/", []) if "@id" in n}
+    for u, nodes in nodes_by_page.items():
+        known = site_ids | {n["@id"] for n in nodes if "@id" in n}
+        refs = re.findall(r'\{"@id": "([^"]+)"\}', json.dumps(nodes))
+        sd_problems += [f"{u}: {r} isn't defined" for r in refs if r not in known]
+    home_types = [[n.get("@type") for n in nodes_by_page.get(u, [])] for u in ("/", "/es/")]
+    service_ok = all(any(n.get("@type") == "MedicalWebPage" and n.get("about") for n in nodes_by_page[f"/{s}/"]) for s in slugs)
+    check("structured data: valid, connected, organization and website on both home pages, conditions on service pages",
+          not sd_problems and all(t == ["MedicalOrganization", "WebSite", "WebPage"] for t in home_types) and service_ok,
+          json.dumps(sd_problems[:6] + home_types))
+    check("search titles fit (65 characters) and descriptions fit (50 to 160)", not meta_problems, json.dumps(meta_problems))
+    home_html = (ROOT / "public" / "index.html").read_text()
+    check("only the two main fonts are preloaded (the italic waits, so the page paints sooner)",
+          len(re.findall(r'rel="preload"[^>]*as="font"', home_html)) == 2 and "fraunces-italic" not in
+          "".join(re.findall(r'<link rel="preload"[^>]*>', home_html)))
     font_file = next((ROOT / "public" / "fonts").glob("fraunces.*.woff2")).name
     status, headers, body = get(f"/fonts/{font_file}")
     check("fonts are served by the site with a long cache", status == 200 and "immutable" in headers.get("Cache-Control", ""), str(dict(headers)))

@@ -3,6 +3,10 @@
 Each page targets what people search for. "list" items name rows from content.TREATED (their notes are shown
 too), or are given as (title, note) pairs. Keep every claim true for launch: no visits can be booked yet, nothing here
 is medical advice, and no prices are shown until the owner has a quote (see content.py).
+
+"about" (conditions, or treatments as {"@type": "MedicalTherapy"}) and "specialty" (a schema.org MedicalSpecialty)
+only feed the page's structured data for search engines; nothing about them shows on the page.
+"how_title" and "faq_title" name the page's topic in its section headings (the last word is set in italics).
 """
 
 WHEN = ("When will Jachi open?",
@@ -26,6 +30,11 @@ PAGES = [
         "description": "See a licensed clinician online for colds, flu, sinus infections, UTIs, pink eye, rashes and more. "
                        "No insurance needed. Launching in Texas.",
         "crumb": "Urgent care",
+        "about": ["Common cold", "Flu", "COVID-19", "Sinus infection", "Sore throat", "Bronchitis",
+                  "Urinary tract infection", "Pink eye", "Seasonal allergies", "Hives", "Stomach bug", "Migraine"],
+        "specialty": "PrimaryCare",
+        "how_title": "How online urgent care works",
+        "faq_title": "Urgent care questions, answered",
         "h1": ("Online urgent care,", "without the waiting room."),
         "lead": "A licensed clinician can treat many everyday illnesses online, from colds and sinus infections to UTIs "
                 "and rashes, and send any prescription to the pharmacy you choose.",
@@ -57,9 +66,12 @@ PAGES = [
     {
         "slug": "uti-treatment", "key": "urgent",
         "title": "UTI Treatment Online in Texas | Jachi Health",
-        "description": "Get treated for a urinary tract infection online by a licensed clinician, with antibiotics sent to "
-                       "your pharmacy if they're right for you. No insurance needed. Launching in Texas.",
+        "description": "A licensed clinician can treat a UTI online and send antibiotics to your pharmacy if they're right for you. No insurance needed. Launching in Texas.",
         "crumb": "UTI treatment",
+        "about": [{"@type": "MedicalCondition", "name": "Urinary tract infection", "alternateName": "UTI"}],
+        "specialty": "PrimaryCare",
+        "how_title": "How online UTI treatment works",
+        "faq_title": "UTI treatment questions, answered",
         "h1": ("UTI treatment online,", "without the wait."),
         "lead": "Burning when you urinate, a strong urge to go or needing to go often? A licensed clinician can review "
                 "your symptoms online and, if antibiotics are right for you, send them to your pharmacy.",
@@ -91,9 +103,13 @@ PAGES = [
     {
         "slug": "prescription-refills", "key": "refill",
         "title": "Online Prescription Refills in Texas | Jachi Health",
-        "description": "Renew medications you already take, like blood pressure, cholesterol, thyroid and diabetes "
-                       "medicines, with a licensed clinician online. No insurance needed. Launching in Texas.",
+        "description": "Renew blood pressure, cholesterol, thyroid and diabetes medicines you already take, online with a licensed clinician. No insurance needed. Launching in Texas.",
         "crumb": "Prescription refills",
+        "about": ["High blood pressure", "High cholesterol", "Hypothyroidism", "Asthma", "Acid reflux (GERD)",
+                  "Type 2 diabetes"],
+        "specialty": "PrimaryCare",
+        "how_title": "How online prescription refills work",
+        "faq_title": "Refill questions, answered",
         "h1": ("Prescription refills,", "without the runaround."),
         "lead": "Running low on a medication you already take? A licensed clinician can review your history, renew many "
                 "everyday prescriptions and send them to your pharmacy.",
@@ -123,10 +139,13 @@ PAGES = [
     },
     {
         "slug": "online-therapy", "key": "therapy",
-        "title": "Online Therapy in Texas | Jachi Health",
+        "title": "Online Therapy in Texas, Licensed Therapists | Jachi Health",
         "description": "Private video sessions with a licensed therapist for stress, anxiety, depression, grief, "
                        "relationships and more. No insurance needed. Launching in Texas.",
         "crumb": "Therapy",
+        "about": ["Anxiety", "Depression", "Panic attacks", "Stress", "Grief", "Trauma"],
+        "how_title": "How online therapy works",
+        "faq_title": "Therapy questions, answered",
         "h1": ("Online therapy,", "on your schedule."),
         "lead": "Meet with a licensed therapist by private video, from wherever you're comfortable.",
         "list_title": "What therapy can help with",
@@ -159,10 +178,14 @@ PAGES = [
     },
     {
         "slug": "anxiety-depression-treatment", "key": "mental",
-        "title": "Online Anxiety & Depression Treatment | Jachi Health",
+        "title": "Online Anxiety & Depression Treatment in Texas | Jachi Health",
         "description": "Medication care for anxiety and depression from licensed clinicians online, with regular "
                        "check-ins. No insurance needed. Launching in Texas.",
         "crumb": "Anxiety & depression",
+        "about": ["Anxiety", "Depression", "Panic attacks"],
+        "specialty": "Psychiatric",
+        "how_title": "How online anxiety and depression care works",
+        "faq_title": "Anxiety and depression questions, answered",
         "h1": ("Anxiety and depression care,", "with real follow-up."),
         "lead": "A licensed clinician evaluates how you're feeling, builds a plan with you and prescribes medication "
                 "when it's right for you, then checks in as you go.",
@@ -191,10 +214,13 @@ PAGES = [
     },
     {
         "slug": "sexual-health", "key": "sexual",
-        "title": "Online STI Testing, Herpes Treatment & PrEP | Jachi Health",
-        "description": "Private, judgment-free sexual health care online: STI testing at a nearby lab, treatment, herpes "
-                       "care and PrEP for HIV prevention. No insurance needed. Launching in Texas.",
+        "title": "STI Testing, Herpes & PrEP Online in Texas | Jachi Health",
+        "description": "Private sexual health care online: STI testing at a nearby lab, treatment, herpes care and PrEP for HIV prevention. No insurance needed. Launching in Texas.",
         "crumb": "Sexual health",
+        "about": ["Chlamydia", "Gonorrhea", "Genital herpes", "HIV", "Trichomoniasis", "Genital warts"],
+        "specialty": "Infectious",
+        "how_title": "How online sexual health care works",
+        "faq_title": "Sexual health questions, answered",
         "h1": ("Sexual health care,", "private and judgment-free."),
         "lead": "A licensed clinician can order STI tests at a nearby lab, treat common infections and prescribe herpes "
                 "treatment or PrEP to help prevent HIV.",
@@ -225,10 +251,13 @@ PAGES = [
     },
     {
         "slug": "mens-health", "key": "mens",
-        "title": "ED & Hair Loss Treatment Online | Jachi Health",
-        "description": "Discreet online care for erectile dysfunction, hair loss and premature ejaculation from licensed "
-                       "clinicians, with treatment sent to your pharmacy. No insurance needed. Launching in Texas.",
+        "title": "ED & Hair Loss Treatment Online in Texas | Jachi Health",
+        "description": "Discreet online care for erectile dysfunction, hair loss and premature ejaculation from licensed clinicians. No insurance needed. Launching in Texas.",
         "crumb": "Men's health",
+        "about": ["Erectile dysfunction", "Hair loss", "Premature ejaculation"],
+        "specialty": "Urologic",
+        "how_title": "How online ED and hair loss treatment works",
+        "faq_title": "ED and hair loss questions, answered",
         "h1": ("ED and hair loss treatment,", "handled discreetly."),
         "lead": "A licensed clinician reviews your health and medications, then prescribes treatment for erectile "
                 "dysfunction, hair loss or premature ejaculation when it's right for you.",
@@ -256,10 +285,15 @@ PAGES = [
     },
     {
         "slug": "womens-health", "key": "womens",
-        "title": "Birth Control Online & Women's Health Care | Jachi Health",
-        "description": "Birth control, emergency contraception, menopause care, and yeast infection and BV treatment "
-                       "from licensed clinicians online. No insurance needed. Launching in Texas.",
+        "title": "Birth Control Online in Texas & Women's Health | Jachi Health",
+        "description": "Birth control, emergency contraception, menopause care, and yeast infection and BV treatment online. No insurance needed. Launching in Texas.",
         "crumb": "Women's health",
+        "about": [{"@type": "MedicalTherapy", "name": "Birth control"},
+                  {"@type": "MedicalTherapy", "name": "Emergency contraception"}, "Menopause", "Yeast infection",
+                  "Bacterial vaginosis", "Hair thinning"],
+        "specialty": "Gynecologic",
+        "how_title": "How birth control online works",
+        "faq_title": "Women's health questions, answered",
         "h1": ("Birth control and women's health,", "online."),
         "lead": "A licensed clinician can help with birth control, emergency contraception, menopause symptoms, yeast "
                 "infections and BV, and send prescriptions to your pharmacy.",
@@ -288,10 +322,13 @@ PAGES = [
     },
     {
         "slug": "skin-care", "key": "skin",
-        "title": "Online Acne & Skin Care | Jachi Health",
-        "description": "Treatment plans for acne, rosacea, eczema, psoriasis, cold sores and fungal infections from "
-                       "licensed clinicians online. No insurance needed. Launching in Texas.",
+        "title": "Acne & Skin Care Online in Texas | Jachi Health",
+        "description": "Treatment plans for acne, rosacea, eczema, psoriasis and cold sores from licensed clinicians online. No insurance needed. Launching in Texas.",
         "crumb": "Skin care",
+        "about": ["Acne", "Rosacea", "Eczema", "Psoriasis", "Cold sores", "Fungal skin infection", "Dandruff"],
+        "specialty": "Dermatology",
+        "how_title": "How online skin care works",
+        "faq_title": "Skin care questions, answered",
         "h1": ("Clearer skin,", "with a real plan."),
         "lead": "A licensed clinician can treat acne, rosacea, eczema, psoriasis, cold sores and fungal infections, and "
                 "send prescriptions to your pharmacy.",
@@ -322,6 +359,9 @@ PAGES = [
         "description": "A clinician-led weight care program with FDA-approved medication, like a GLP-1, when it's right "
                        "for you. No insurance needed. Launching in Texas.",
         "crumb": "Weight care",
+        "about": ["Obesity", "Overweight"],
+        "how_title": "How online medical weight loss works",
+        "faq_title": "Weight loss questions, answered",
         "h1": ("Medical weight care,", "led by clinicians."),
         "lead": "A licensed clinician builds a plan around your health and prescribes FDA-approved medication, such as "
                 "a GLP-1, when it's right for you.",

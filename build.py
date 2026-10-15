@@ -270,6 +270,12 @@ def part(lang, name):
     return (SRC / lang / f"{name}.html").read_text()
 
 
+def accent_last(text):
+    """A heading with its last word in italics, the site's heading style: 'How online therapy <em>works.</em>'"""
+    head, last = text.rsplit(" ", 1)
+    return f"{esc(head)} <em>{esc(last)}.</em>"
+
+
 def crumbs(trail):
     items = []
     for label, href in trail:
@@ -280,12 +286,16 @@ def crumbs(trail):
     return f'<nav class="crumbs" aria-label="Breadcrumb"><ol>{"".join(items)}</ol></nav>'
 
 
+def breadcrumb_node(trail, path):
+    """BreadcrumbList for search. Steps that are only an anchor on another page (like /#services) are left out."""
+    steps = [(label, href) for label, href in trail if not (href and "#" in href)]
+    elements = [{"@type": "ListItem", "position": i, "name": label, "item": SITE_URL + (href if href else path)}
+                for i, (label, href) in enumerate(steps, 1)]
+    return {"@type": "BreadcrumbList", "@id": f"{SITE_URL}{path}#breadcrumb", "itemListElement": elements}
+
+
 def breadcrumb_ld(trail, path):
-    elements = []
-    for i, (label, href) in enumerate(trail, 1):
-        url = SITE_URL + (href if href else path)
-        elements.append({"@type": "ListItem", "position": i, "name": label, "item": url})
-    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": elements}
+    return {"@context": "https://schema.org", **breadcrumb_node(trail, path)}
 
 
 css = (SRC / "style.css").read_text()
@@ -327,7 +337,9 @@ def js_for(lang, rules=False):
 def head(page, main_html):
     lang = page["lang"]
     url = SITE_URL + page["path"]
-    preload = ["fraunces", "instrument-sans"] + (["fraunces-italic"] if "<em" in main_html else [])
+    # The italic (76 KB) is only a few words in headings: preloading it slowed the main fonts and the page's
+    # largest paint (LCP) on phones, so it loads when first used instead.
+    preload = ["fraunces", "instrument-sans"]
     links = "\n".join(f'<link rel="preload" href="/fonts/{FONT_FILES[f]}" as="font" type="font/woff2" crossorigin>'
                       for f in preload)
     alternates = ""
@@ -426,17 +438,43 @@ def write(path, text):
     return out
 
 
-DESCRIPTION = ("See a licensed clinician online for urgent care, refills, therapy, sexual health, men's and women's "
-               "health, skin and weight care. No insurance needed. Launching in Texas.")
-TITLE = "Jachi Health | Online urgent care, therapy, sexual health and more"
-ES_DESCRIPTION = ("Consulte en línea a un profesional de la salud con licencia para atención de urgencia, resurtidos, "
-                  "terapia, salud sexual, salud del hombre y de la mujer, piel y control de peso. Sin seguro médico. "
-                  "Abrimos pronto en Texas.")
-ES_TITLE = "Jachi Health | Atención médica en línea, terapia, salud sexual y más"
+# Search titles and descriptions: under about 60 and 160 characters so Google shows them whole.
+ORG_DESCRIPTION = ("See a licensed clinician online for urgent care, refills, therapy, sexual health, men's and women's "
+                   "health, skin and weight care. No insurance needed. Launching in Texas.")
+DESCRIPTION = ("Licensed clinicians online for urgent care, UTIs, refills, therapy, birth control, ED and weight care. "
+               "No insurance needed. Launching in Texas.")
+TITLE = "Online Doctor in Texas, No Insurance Needed | Jachi Health"
+ES_DESCRIPTION = ("Profesionales de la salud con licencia, en línea: atención de urgencia, resurtidos, terapia, salud "
+                  "sexual y más. Sin seguro médico. Abrimos pronto en Texas.")
+ES_TITLE = "Doctor en línea en Texas, sin seguro médico | Jachi Health"
 SHARE_ALT = "Jachi Health: online care, rooted in real medicine. Licensed clinicians, no insurance needed."
 SHARE_ALT_ES = "Jachi Health: atención en línea, arraigada en la medicina real. Profesionales con licencia, sin seguro médico."
-ORG_LD = {"@context": "https://schema.org", "@type": "Organization", "name": "Jachi Health", "url": f"{SITE_URL}/",
-          "logo": f"{SITE_URL}/apple-touch-icon.png", "email": EMAIL, "description": DESCRIPTION}
+# ---------- Structured data (schema.org JSON-LD) ----------
+# One connected graph per page: the organization and website are defined once (by @id) and every page points at them.
+# Only facts that are true today: no clinician names, reviews, ratings or prices until they exist.
+ORG_ID, SITE_ID = f"{SITE_URL}/#organization", f"{SITE_URL}/#website"
+ORG_NODE = {
+    "@type": "MedicalOrganization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/",
+    "logo": {"@type": "ImageObject", "url": f"{SITE_URL}/apple-touch-icon.png", "width": 180, "height": 180},
+    "image": f"{SITE_URL}/og.jpg", "email": EMAIL, "description": ORG_DESCRIPTION,
+    "areaServed": {"@type": "State", "name": "Texas"}, "knowsLanguage": ["en", "es"],
+    "medicalSpecialty": [f"https://schema.org/{x}" for x in
+                         ("PrimaryCare", "Psychiatric", "Dermatology", "Gynecologic", "Urologic")],
+    "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": EMAIL,
+                     "availableLanguage": ["English", "Spanish"]},
+}
+ORG_REF = {"@type": "MedicalOrganization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/"}
+SITE_NODE = {"@type": "WebSite", "@id": SITE_ID, "url": f"{SITE_URL}/", "name": "Jachi Health",
+             "inLanguage": ["en", "es"], "publisher": {"@id": ORG_ID}}
+
+
+def ld_graph(*nodes):
+    return {"@context": "https://schema.org", "@graph": list(nodes)}
+
+
+def page_node(kind, path, title, description, lang, **extra):
+    return {"@type": kind, "@id": f"{SITE_URL}{path}#webpage", "url": f"{SITE_URL}{path}", "name": title,
+            "description": description, "inLanguage": lang, "isPartOf": {"@id": SITE_ID}, **extra}
 HOME_ALTERNATES = {"en": "/", "es": "/es/"}
 SITEMAP = []
 
@@ -476,7 +514,9 @@ def build_home(lang):
     page = {"lang": lang, "path": path, "alternates": HOME_ALTERNATES, "main": main,
             "title": TITLE if lang == "en" else ES_TITLE,
             "description": DESCRIPTION if lang == "en" else ES_DESCRIPTION,
-            "ld": [ORG_LD] if lang == "en" else []}
+            "ld": [ld_graph(ORG_NODE, SITE_NODE, page_node(
+                "WebPage", path, TITLE if lang == "en" else ES_TITLE,
+                DESCRIPTION if lang == "en" else ES_DESCRIPTION, lang, about={"@id": ORG_ID}))]}
     write(path, document(page, body))
     SITEMAP.append((path, HOME_ALTERNATES))
     return body
@@ -556,6 +596,8 @@ def service_page(p):
         "{{SVC_KNOW}}": know,
         "{{SVC_SAFETY}}": safety,
         "{{SVC_FAQ}}": faq_items(faq),
+        "{{SVC_HOW_TITLE}}": accent_last(p["how_title"]),
+        "{{SVC_FAQ_TITLE}}": accent_last(p["faq_title"]),
         "{{SVC_RELATED}}": related,
     }
     main = render(part("en", "service"), L, tokens)
@@ -564,8 +606,12 @@ def service_page(p):
         render(part("en", n), L, tokens) for n in ("footer", "dock", "chat"))
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}
-    page = {"lang": "en", "path": path, "main": main, "title": p["title"],
-            "description": p["description"], "ld": [breadcrumb_ld(trail, path), faq_ld]}
+    about = [{"@type": "MedicalCondition", "name": a} if isinstance(a, str) else a for a in p["about"]]
+    web = page_node("MedicalWebPage", path, p["title"], p["description"], "en", publisher={"@id": ORG_ID},
+                    breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"}, medicalAudience={"@type": "Patient"},
+                    about=about, **({"specialty": f"https://schema.org/{p['specialty']}"} if p.get("specialty") else {}))
+    page = {"lang": "en", "path": path, "main": main, "title": p["title"], "description": p["description"],
+            "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path)), faq_ld]}
     write(path, document(page, body))
     SITEMAP.append((path, None))
 
