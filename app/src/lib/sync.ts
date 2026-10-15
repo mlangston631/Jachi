@@ -7,12 +7,13 @@ import { usePrefs } from '@/state/prefs';
 import { dayKey } from './dates';
 import { allMeds, checkinOn, database, onJournalChange } from './db';
 import { seedDemo, wantsDemo } from './demo';
+import { loadFonts } from './fonts';
 import { flushOutbox } from './forms';
 import { configureNotifications, reschedule } from './notify';
 
 export async function boot(): Promise<void> {
   configureNotifications();
-  await database();
+  await Promise.all([database(), loadFonts()]);
   if (wantsDemo()) await seedDemo();
 }
 
