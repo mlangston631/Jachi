@@ -1,0 +1,1173 @@
+(() => {
+  'use strict';
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const ICONS = /*ICONS_JSON*/;
+  const PRICES = /*PRICES_JSON*/;
+  const SERVICES = /*SERVICES_JSON*/;
+  const EMAIL = /*EMAIL_JSON*/;
+  const icon =(name, cls = '') => `<svg class="i${cls ? ` ${cls}` : ''}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name] || ''}</svg>`;
+  const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mqDesktop = window.matchMedia('(min-width: 960px)');
+  const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const reduced = () => mqReduce.matches;
+  const behavior = () => (reduced() ? 'auto' : 'smooth');
+  const hasIO = 'IntersectionObserver' in window;
+  const onMedia = (mq, fn) => (mq.addEventListener ? mq.addEventListener('change', fn) : mq.addListener(fn));
+
+  /* ---------- Header state ---------- */
+  const header = $('#site-header');
+  let headerTick = false;
+  const syncHeader = () => {
+    headerTick = false;
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  window.addEventListener('scroll', () => {
+    if (!headerTick) { headerTick = true; requestAnimationFrame(syncHeader); }
+  }, { passive: true });
+  syncHeader();
+
+  /* ---------- Mobile menu ---------- */
+  const toggle = $('.menu-toggle');
+  const menu = $('#mobile-menu');
+  const dock = $('#dock');
+  const outside = [$('#main'), $('.footer'), dock];
+  let updateDock = () => {};
+  const menuOpen = () => menu.classList.contains('is-open');
+  const setMenu = (open, restoreFocus = true) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.classList.toggle('is-open', open);
+    header.classList.toggle('menu-open', open);
+    document.documentElement.classList.toggle('is-locked', open);
+    outside.forEach(el => { if (el) el.inert = open; });
+    if (open) {
+      const first = $('a', menu);
+      if (first) first.focus({ preventScroll: true });
+    } else if (restoreFocus) {
+      toggle.focus({ preventScroll: true });
+    }
+    updateDock();
+  };
+  toggle.addEventListener('click', () => setMenu(!menuOpen()));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false, false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen()) setMenu(false); });
+  onMedia(mqDesktop, e => { if (e.matches && menuOpen()) setMenu(false, false); });
+
+  /* ---------- Active section in the nav ---------- */
+  const navLinks = $$('.nav a[href^="#"]');
+  if (hasIO && navLinks.length) {
+    const seen = new Map();
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(en => seen.set(en.target.id, en.isIntersecting));
+      let current = '';
+      navLinks.forEach(a => { const id = a.getAttribute('href').slice(1); if (seen.get(id)) current = id; });
+      navLinks.forEach(a => {
+        const on = a.getAttribute('href') === '#' + current;
+        a.classList.toggle('is-active', on);
+        if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    navLinks.forEach(a => { const t = $(a.getAttribute('href')); if (t) spy.observe(t); });
+  }
+
+  /* ---------- Reveal on scroll ----------
+     Everything is visible at rest. Once the visitor scrolls, blocks still
+     below the fold are hidden and fade up as they come into view. */
+  const revealEls = $$('[data-reveal]');
+  let armed = false;
+  const armReveal = () => {
+    if (armed || reduced() || !hasIO) return;
+    armed = true;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        io.unobserve(el);
+        el.classList.add('is-in');
+        window.setTimeout(() => el.classList.remove('pre', 'is-in'), 2600);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    const limit = window.innerHeight + 40;
+    revealEls.forEach(el => {
+      if (el.getBoundingClientRect().top > limit) { el.classList.add('pre'); io.observe(el); }
+    });
+  };
+  window.addEventListener('scroll', armReveal, { passive: true, once: true });
+
+  /* ---------- Hero parallax and tile spotlight (fine pointers only) ---------- */
+  const stage = $('#stage');
+  const hero = $('.hero');
+  if (stage && hero && mqFine.matches && !reduced()) {
+    let raf = 0, px = 0, py = 0;
+    const clamp = v => Math.max(-1, Math.min(1, v));
+    hero.addEventListener('pointermove', e => {
+      const r = stage.getBoundingClientRect();
+      px = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2));
+      py = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2));
+      if (!raf) raf = requestAnimationFrame(() => {
+        raf = 0;
+        stage.style.setProperty('--px', px.toFixed(3));
+        stage.style.setProperty('--py', py.toFixed(3));
+      });
+    });
+    hero.addEventListener('pointerleave', () => {
+      stage.style.setProperty('--px', '0');
+      stage.style.setProperty('--py', '0');
+    });
+  }
+  if (mqFine.matches) {
+    $$('.tile').forEach(t => t.addEventListener('pointermove', e => {
+      const r = t.getBoundingClientRect();
+      t.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      t.style.setProperty('--my', `${e.clientY - r.top}px`);
+    }));
+  }
+
+  /* ---------- Shared form helpers ---------- */
+  const setError = (key, message) => {
+    const box = document.getElementById(`err-${key}`);
+    const fields = $$(`[data-field="${key}"]`);
+    if (message) {
+      if (box) { $('span', box).textContent = message; box.hidden = false; }
+      fields.forEach(f => (f.tagName === 'FIELDSET' ? f.classList.add('has-error') : f.setAttribute('aria-invalid', 'true')));
+    } else {
+      if (box) { box.hidden = true; $('span', box).textContent = ''; }
+      fields.forEach(f => (f.tagName === 'FIELDSET' ? f.classList.remove('has-error') : f.removeAttribute('aria-invalid')));
+    }
+    return !message;
+  };
+  const hasError = key => { const box = document.getElementById(`err-${key}`); return !!box && !box.hidden; };
+  const radioValue = (form, name) => { const r = form.querySelector(`input[name="${name}"]:checked`); return r ? r.value : ''; };
+  const scrollToEl = el => {
+    const headerH = header.getBoundingClientRect().height;
+    const top = el.getBoundingClientRect().top;
+    if (top < headerH + 8 || top > window.innerHeight * 0.6) {
+      window.scrollTo({ top: window.scrollY + top - headerH - 16, behavior: behavior() });
+    }
+  };
+
+  /* ---------- Eligibility check ---------- */
+  const E = {
+    tool: $('#elig-tool'),
+    form: $('#elig-form'),
+    steps: $$('#elig-form [data-step]'),
+    count: $('#elig-count'),
+    bars: $$('#elig-progress span'),
+    back: $('#elig-back'),
+    nextLabel: $('#elig-next-label'),
+    state: $('#elig-state'),
+    ft: $('#elig-ft'),
+    inch: $('#elig-in'),
+    lb: $('#elig-lb'),
+    gauge: $('#gauge'),
+    gaugeWrap: $('#gauge-wrap'),
+    fill: $('#gauge-fill'),
+    num: $('#bmi-num'),
+    hint: $('#bmi-hint'),
+    live: $('#bmi-live'),
+    result: $('#elig-result'),
+  };
+  const R = {
+    icon: $('#res-icon'),
+    title: $('#res-title'),
+    chips: $('#res-chips'),
+    body: $('#res-body'),
+    note: $('#res-note'),
+    join: $('#res-join'),
+    restart: $('#res-restart'),
+  };
+
+  if (E.form) {
+    let step = 1;
+    let liveTimer = 0;
+    const onlyDigits = v => v.replace(/\D/g, '');
+    const decimal = v => {
+      const clean = v.replace(/[^\d.]/g, '');
+      const i = clean.indexOf('.');
+      return i === -1 ? clean : clean.slice(0, i + 1) + clean.slice(i + 1).replace(/\./g, '').slice(0, 1);
+    };
+    const heightParts = () => {
+      const ft = onlyDigits(E.ft.value);
+      const inch = onlyDigits(E.inch.value);
+      return { ft: ft === '' ? NaN : Number(ft), inch: inch === '' ? 0 : Number(inch) };
+    };
+    const weight = () => { const v = decimal(E.lb.value); return v === '' || v === '.' ? NaN : Number(v); };
+    const heightOk = () => { const h = heightParts(); return h.ft >= 4 && h.ft <= 7 && h.inch >= 0 && h.inch <= 11; };
+    const weightOk = () => { const w = weight(); return w >= 70 && w <= 700; };
+    const bmi = () => {
+      if (!heightOk() || !weightOk()) return null;
+      const h = heightParts();
+      const inches = h.ft * 12 + h.inch;
+      return Math.round((703 * weight() / (inches * inches)) * 10) / 10;
+    };
+
+    const rules = {
+      state: () => (E.state.value ? '' : 'Choose your state.'),
+      age: () => (radioValue(E.form, 'age') ? '' : 'Choose yes or no.'),
+      height: () => (heightOk() ? '' : 'Enter a height between 4 ft 0 in and 7 ft 11 in.'),
+      weight: () => (weightOk() ? '' : 'Enter a weight between 70 and 700 lb.'),
+      cond: () => ($$('input[name="cond"]:checked', E.form).length ? '' : 'Select any that apply, or choose None of these.'),
+      mtc: () => (radioValue(E.form, 'mtc') ? '' : 'Choose an answer.'),
+      preg: () => (radioValue(E.form, 'preg') ? '' : 'Choose an answer.'),
+    };
+    const focusFor = {
+      state: () => E.state,
+      age: () => $('input[name="age"]', E.form),
+      height: () => (onlyDigits(E.ft.value) === '' || !(Number(onlyDigits(E.ft.value)) >= 4 && Number(onlyDigits(E.ft.value)) <= 7) ? E.ft : E.inch),
+      weight: () => E.lb,
+      cond: () => $('input[name="cond"]', E.form),
+      mtc: () => $('input[name="mtc"]', E.form),
+      preg: () => $('input[name="preg"]', E.form),
+    };
+    const stepKeys = { 1: ['state', 'age'], 2: ['height', 'weight'], 3: ['cond', 'mtc', 'preg'] };
+
+    const validateStep = n => {
+      const bad = stepKeys[n].filter(k => !setError(k, rules[k]()));
+      if (bad.length) focusFor[bad[0]]().focus();
+      return bad.length === 0;
+    };
+
+    const updateGauge = () => {
+      const value = bmi();
+      if (value === null) {
+        E.gaugeWrap.classList.add('is-empty');
+        E.gauge.style.setProperty('--t', '0');
+        E.fill.style.strokeDasharray = '0 100';
+        E.num.textContent = '–';
+        E.hint.textContent = 'Enter your height and weight';
+        return null;
+      }
+      const t = Math.max(0, Math.min(1, (value - 15) / 30));
+      E.gaugeWrap.classList.remove('is-empty');
+      E.gauge.style.setProperty('--t', t.toFixed(4));
+      E.fill.style.strokeDasharray = `${(t * 100).toFixed(2)} 100`;
+      E.num.textContent = value.toFixed(1);
+      E.hint.textContent = value >= 30 ? 'At or above 30' : value >= 27 ? 'Between 27 and 30' : 'Below 27';
+      window.clearTimeout(liveTimer);
+      liveTimer = window.setTimeout(() => { E.live.textContent = `Your BMI is ${value.toFixed(1)}.`; }, 700);
+      return value;
+    };
+
+    const showStep = (n, moveFocus = true) => {
+      step = n;
+      E.steps.forEach(s => { s.hidden = Number(s.dataset.step) !== n; });
+      E.bars.forEach((b, i) => b.classList.toggle('is-done', i < n));
+      E.count.textContent = `Step ${n} of 3`;
+      E.back.hidden = n === 1;
+      E.nextLabel.textContent = n === 3 ? 'See my results' : 'Continue';
+      if (moveFocus) {
+        const title = $('.q-title', E.steps[n - 1]);
+        if (title) title.focus({ preventScroll: true });
+        scrollToEl(E.tool);
+      }
+    };
+
+    const stateName = () => (E.state.selectedOptions[0] ? E.state.selectedOptions[0].textContent.trim() : '');
+
+    const showResult = () => {
+      const age = radioValue(E.form, 'age');
+      const mtc = radioValue(E.form, 'mtc');
+      const preg = radioValue(E.form, 'preg');
+      const conds = $$('input[name="cond"]:checked', E.form).map(c => c.value).filter(v => v !== 'none');
+      const value = age === 'no' ? null : bmi();
+      const name = stateName();
+      let kind, title, body;
+
+      if (age === 'no') {
+        kind = 'minor';
+        title = 'Jachi is for adults 18 and older.';
+        body = "If you're under 18 and want help with your weight, talk with a parent or your doctor about the right next step.";
+      } else if (mtc === 'yes' || preg === 'yes') {
+        kind = 'caution';
+        title = 'Medication may not be safe for you.';
+        const parts = [];
+        if (mtc === 'yes') parts.push("GLP-1 medications shouldn't be used by people with a personal or family history of medullary thyroid cancer or MEN2.");
+        if (preg === 'yes') parts.push("GLP-1 weight-loss medications usually aren't prescribed during pregnancy, while breastfeeding or when you're planning a pregnancy.");
+        parts.push('A doctor can help you find a safe approach.');
+        body = parts.join(' ');
+      } else if (value >= 30 || (value >= 27 && conds.length)) {
+        kind = 'likely';
+        title = 'You may be a good fit for medical weight care.';
+        body = value >= 30
+          ? `Your BMI of ${value.toFixed(1)} meets the general guideline for FDA-approved weight-loss medication.`
+          : `Your BMI of ${value.toFixed(1)}, together with a weight-related condition, meets the general guideline for FDA-approved weight-loss medication.`;
+        body += ' A licensed clinician will review your full health history before recommending any treatment.';
+        if (mtc === 'unsure') body += ' They will also ask about your family history of thyroid cancer.';
+      } else {
+        kind = 'unlikely';
+        title = 'Medication may not be the right fit right now.';
+        body = `FDA-approved weight-loss medications are generally for a BMI of 30 or higher, or 27 or higher with a weight-related condition. Your BMI is ${value.toFixed(1)}. We'll share more ways to help as Jachi grows.`;
+      }
+
+      const icons = { likely: 'check', unlikely: 'info', caution: 'alert', minor: 'info' };
+      E.result.className = `result result--${kind}`;
+      R.icon.innerHTML = icon(icons[kind]);
+      R.title.textContent = title;
+      R.body.textContent = body;
+
+      R.chips.innerHTML = '';
+      const chip = text => { const s = document.createElement('span'); s.textContent = text; R.chips.appendChild(s); };
+      if (value !== null) chip(`BMI ${value.toFixed(1)}`);
+      if (name && kind !== 'minor') chip(name);
+      if (conds.length && kind !== 'minor') chip(conds.length === 1 ? '1 related condition' : `${conds.length} related conditions`);
+      R.chips.hidden = R.chips.childElementCount === 0;
+
+      if (kind === 'minor') {
+        R.note.hidden = true;
+      } else {
+        R.note.hidden = false;
+        R.note.textContent = E.state.value === 'TX'
+          ? 'Texas is our first state. Join early access to be first in line when we open.'
+          : `We're launching in Texas first. Join early access and we'll email you when we open in ${name}.`;
+      }
+      R.join.hidden = kind === 'minor';
+      R.join.dataset.state = E.state.value;
+
+      E.form.hidden = true;
+      E.result.hidden = false;
+      E.count.textContent = 'Your results';
+      E.bars.forEach(b => b.classList.add('is-done'));
+      R.title.focus({ preventScroll: true });
+      scrollToEl(E.tool);
+    };
+
+    const restart = () => {
+      E.form.reset();
+      Object.keys(rules).forEach(k => setError(k, ''));
+      updateGauge();
+      E.live.textContent = '';
+      E.result.hidden = true;
+      E.form.hidden = false;
+      showStep(1);
+    };
+
+    E.form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!validateStep(step)) return;
+      if (step === 1 && radioValue(E.form, 'age') === 'no') { showResult(); return; }
+      if (step < 3) showStep(step + 1); else showResult();
+    });
+    E.back.addEventListener('click', () => showStep(Math.max(1, step - 1)));
+    R.restart.addEventListener('click', restart);
+
+    E.form.addEventListener('input', e => {
+      const t = e.target;
+      if (t === E.ft) { const v = onlyDigits(t.value).slice(0, 1); if (v !== t.value) t.value = v; }
+      if (t === E.inch) { const v = onlyDigits(t.value).slice(0, 2); if (v !== t.value) t.value = v; }
+      if (t === E.lb) { const v = decimal(t.value).slice(0, 5); if (v !== t.value) t.value = v; }
+      if (t === E.ft || t === E.inch || t === E.lb) updateGauge();
+      if (t === E.ft && t.value.length === 1 && heightParts().ft >= 4 && heightParts().ft <= 7) E.inch.focus();
+    });
+    E.form.addEventListener('change', e => {
+      const t = e.target;
+      if (t.name === 'cond') {
+        const boxes = $$('input[name="cond"]', E.form);
+        if (t.value === 'none' && t.checked) boxes.forEach(b => { if (b !== t) b.checked = false; });
+        else if (t.checked) boxes.forEach(b => { if (b.value === 'none') b.checked = false; });
+      }
+      const holder = t.closest('[data-field]');
+      const key = holder ? holder.dataset.field : '';
+      if (key && rules[key] && hasError(key)) setError(key, rules[key]());
+    });
+    E.form.addEventListener('input', e => {
+      const holder = e.target.closest('[data-field]');
+      const key = holder ? holder.dataset.field : '';
+      if (key && rules[key] && hasError(key)) setError(key, rules[key]());
+    });
+
+    R.join.addEventListener('click', e => {
+      e.preventDefault();
+      goToJoin({ state: R.join.dataset.state, interest: 'weight-care' });
+    });
+
+    updateGauge();
+  }
+
+  /* ---------- Jump to the weight care check ---------- */
+  function goToElig() {
+    const section = $('#eligibility');
+    if (!section) return;
+    section.scrollIntoView({ behavior: behavior(), block: 'start' });
+    const result = $('#elig-result');
+    const target = result && !result.hidden ? $('#res-title') : $$('#elig-form .q-title').find(t => !t.closest('[hidden]'));
+    if (target) target.focus({ preventScroll: true });
+  }
+  $$('[data-elig]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goToElig(); }));
+
+  /* ---------- Care finder ---------- */
+  const F = {
+    tool: $('#finder-tool'),
+    form: $('#finder-form'),
+    steps: $$('#finder-form [data-fstep]'),
+    paths: $$('#finder-form [data-path]'),
+    count: $('#finder-count'),
+    bars: $$('#finder-progress span'),
+    back: $('#finder-back'),
+    nextLabel: $('#finder-next-label'),
+    result: $('#finder-result'),
+    icon: $('#fres-icon'),
+    title: $('#fres-title'),
+    chips: $('#fres-chips'),
+    body: $('#fres-body'),
+    hotline: $('#fres-hotline'),
+    note: $('#fres-note'),
+    cta: $('#fres-cta'),
+    restart: $('#fres-restart'),
+  };
+
+  if (F.form) {
+    let fstep = 1;
+    const LAUNCH = "We're launching in Texas first. Join early access and we'll email you when we open in your state.";
+    const need = () => radioValue(F.form, 'need');
+    const flagKey = () => `flag-${need()}`;
+    const syncLabel = () => {
+      F.nextLabel.textContent = fstep === 2 || need() === 'weight' ? 'See my options' : 'Continue';
+    };
+
+    const showFStep = (n, moveFocus = true) => {
+      fstep = n;
+      F.steps.forEach(s => { s.hidden = Number(s.dataset.fstep) !== n; });
+      if (n === 2) F.paths.forEach(p => { p.hidden = p.dataset.path !== need(); });
+      F.bars.forEach((b, i) => b.classList.toggle('is-done', i < n));
+      F.count.textContent = `Step ${n} of 2`;
+      F.back.hidden = n === 1;
+      syncLabel();
+      if (moveFocus) {
+        const title = $('.q-title', F.steps[n - 1]);
+        if (title) title.focus({ preventScroll: true });
+        scrollToEl(F.tool);
+      }
+    };
+
+    const chipsFor = key => [SERVICES[key].name, `${SERVICES[key].price} ${SERVICES[key].unit}`];
+    const joinCta = interest => ({ href: '#join', label: 'Get early access', mode: 'join', interest });
+    const inPerson = (title, body) => ({ kind: 'inperson', icon: 'alert', title, body });
+    const match = (key, icon, title, body, extra = '') => ({
+      kind: 'likely', icon, title, chips: chipsFor(key), body: body + extra, note: LAUNCH, cta: joinCta(SERVICES[key].interest),
+    });
+    const CRISIS = {
+      kind: 'crisis', icon: 'heart', title: "You don't have to go through this alone.",
+      body: 'Please reach out now. Trained crisis counselors are ready to listen and help, any time of day or night.',
+      hotline: true,
+    };
+
+    const outcome = () => {
+      const n = need();
+      const flag = n === 'weight' ? '' : radioValue(F.form, flagKey());
+      switch (n) {
+        case 'urgent':
+          if (flag === 'yes') {
+            return {
+              kind: 'emergency', icon: 'alert', title: 'Call 911 now.',
+              body: "These can be signs of a medical emergency. Call 911 or go to the nearest emergency room. Don't wait for an online visit.",
+              cta: { href: 'tel:911', label: 'Call 911', icon: 'phone', danger: true },
+            };
+          }
+          return match('urgent', 'thermo', 'Urgent care is a good place to start.',
+            "A licensed clinician can treat many everyday illnesses online, like colds, flu, sinus infections, UTIs, pink eye and rashes, and send any prescription to your pharmacy. If you need an exam or a test in person, they'll tell you.");
+        case 'refill':
+          if (flag === 'yes') {
+            return {
+              kind: 'caution', icon: 'alert', title: "We can't refill controlled substances.",
+              body: "Medications like Adderall, Xanax, opioid pain medicine and testosterone have special prescribing rules. Please contact the clinician who prescribes yours, and don't stop taking it suddenly without their advice. We can still help with refills of many other medications.",
+              cta: { href: '#services', label: 'See our services', mode: 'link' },
+            };
+          }
+          if (flag === 'unsure') {
+            return match('refill', 'pill', 'A refill visit may be a good fit.',
+              "We don't refill controlled substances. If you're not sure whether yours is one, your pharmacist can tell you, and your clinician will check before approving a refill. We can renew many everyday medications, like blood pressure, cholesterol, thyroid and diabetes medicines.");
+          }
+          return match('refill', 'pill', 'A refill visit is a good fit.',
+            'A licensed clinician can renew many medications you already take, like blood pressure, cholesterol, thyroid and diabetes medicines, and send the refill to your pharmacy. They may ask about recent lab work or readings first.');
+        case 'mental':
+          if (flag === 'yes') return CRISIS;
+          return {
+            kind: 'likely', icon: 'mind', title: 'Therapy, medication or both can help.',
+            chips: [`Therapy ${PRICES.therapy} per session`, `Medication care ${PRICES.mental} per month`],
+            body: "Talk with a licensed therapist by video, get medication care for anxiety and depression from a licensed clinician, or do both. Many people feel better with therapy and medication together. If you ever have thoughts of suicide, call or text 988 any time.",
+            note: LAUNCH,
+            cta: joinCta(`${SERVICES.therapy.interest},${SERVICES.mental.interest}`),
+          };
+        case 'sexual':
+          if (flag === 'yes') {
+            return inPerson("Get care today. Don't wait.",
+              'If you may have been exposed to HIV in the last 72 hours, medicine called PEP can lower your chance of infection. It works best the sooner you start, so go to an urgent care clinic or emergency room today.');
+          }
+          return match('sexual', 'heart', 'Sexual health care is a good fit.',
+            'A licensed clinician can order STI tests at a nearby lab, treat common infections, and prescribe herpes treatment or PrEP to help prevent HIV. Lab tests are billed separately.',
+            flag === 'unsure' ? " If there's any chance you were exposed to HIV in the last 72 hours, don't wait: an urgent care clinic or emergency room can start PEP today." : '');
+        case 'mens':
+          if (flag === 'yes') {
+            return {
+              kind: 'caution', icon: 'alert', title: 'ED pills may not be safe for you.',
+              body: 'ED medications like sildenafil and tadalafil can cause a dangerous drop in blood pressure when taken with nitrates. Talk with the doctor who treats your heart before starting ED treatment. We can still help with hair loss.',
+              cta: joinCta(SERVICES.mens.interest),
+            };
+          }
+          return match('mens', 'male', "Men's health care is a good fit.",
+            "A licensed clinician can treat ED, hair loss and premature ejaculation, with medication sent to your pharmacy when it's right for you.",
+            flag === 'unsure' ? " Your clinician will check your medications first, because ED pills aren't safe with nitrates." : '');
+        case 'womens':
+          if (flag === 'yes') {
+            return inPerson('Get seen in person today.',
+              "Heavy bleeding, severe pain in your belly or pelvis, or a fever can be signs of a problem that needs an exam right away. Go to an urgent care clinic or emergency room, or call 911 if it's severe.");
+          }
+          return match('womens', 'female', "Women's health care is a good fit.",
+            'A licensed clinician can help with birth control, emergency contraception, menopause symptoms, yeast infections and BV, and send prescriptions to your pharmacy.');
+        case 'skin':
+          if (flag === 'yes') {
+            return inPerson('Get seen in person today.',
+              "A rash or sore that's spreading fast, very painful or comes with a fever can be a serious infection. Go to an urgent care clinic today, or call 911 if you feel very sick.");
+          }
+          return match('skin', 'drop', 'Skin care is a good fit.',
+            "A licensed clinician can treat acne, rosacea, eczema, psoriasis, cold sores and fungal infections, and send prescriptions to your pharmacy. If you need to be seen in person, they'll tell you.");
+        default:
+          return {
+            kind: 'likely', icon: 'scale', title: 'Start with our weight care check.',
+            chips: chipsFor('weight'),
+            body: "Weight-loss medication isn't right for everyone. Our three-step check shows whether you may meet the general guidelines for FDA-approved medication.",
+            cta: { href: '#eligibility', label: 'Check your eligibility', mode: 'elig' },
+          };
+      }
+    };
+
+    const showFResult = () => {
+      const o = outcome();
+      F.result.className = `result result--${o.kind}`;
+      F.icon.innerHTML = icon(o.icon);
+      F.title.textContent = o.title;
+      F.body.textContent = o.body;
+      F.chips.textContent = '';
+      (o.chips || []).forEach(t => { const s = document.createElement('span'); s.textContent = t; F.chips.appendChild(s); });
+      F.chips.hidden = F.chips.childElementCount === 0;
+      F.hotline.hidden = !o.hotline;
+      F.note.hidden = !o.note;
+      F.note.textContent = o.note || '';
+      if (o.cta) {
+        F.cta.hidden = false;
+        F.cta.href = o.cta.href;
+        F.cta.dataset.mode = o.cta.mode || '';
+        F.cta.dataset.interest = o.cta.interest || '';
+        F.cta.classList.toggle('btn--danger', !!o.cta.danger);
+        F.cta.innerHTML = o.cta.icon ? `${icon(o.cta.icon)}<span></span>` : `<span></span>${icon('arrow', 'i--arrow')}`;
+        $('span', F.cta).textContent = o.cta.label;
+      } else {
+        F.cta.hidden = true;
+      }
+      F.form.hidden = true;
+      F.result.hidden = false;
+      F.count.textContent = 'Your options';
+      F.bars.forEach(b => b.classList.add('is-done'));
+      F.title.focus({ preventScroll: true });
+      scrollToEl(F.tool);
+    };
+
+    const fRestart = () => {
+      F.form.reset();
+      ['need', ...F.paths.map(p => p.dataset.field)].forEach(k => setError(k, ''));
+      F.result.hidden = true;
+      F.form.hidden = false;
+      showFStep(1);
+    };
+
+    F.form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (fstep === 1) {
+        if (!setError('need', need() ? '' : 'Choose what you need help with.')) {
+          $('input[name="need"]', F.form).focus();
+          return;
+        }
+        if (need() === 'weight') showFResult(); else showFStep(2);
+        return;
+      }
+      const key = flagKey();
+      if (!setError(key, radioValue(F.form, key) ? '' : 'Choose an answer.')) {
+        $(`input[name="${key}"]`, F.form).focus();
+        return;
+      }
+      showFResult();
+    });
+    F.form.addEventListener('change', e => {
+      const t = e.target;
+      if (t.name === 'need') syncLabel();
+      const holder = t.closest('[data-field]');
+      const key = holder ? holder.dataset.field : '';
+      if (key && hasError(key) && radioValue(F.form, key)) setError(key, '');
+    });
+    F.back.addEventListener('click', () => showFStep(1));
+    F.restart.addEventListener('click', fRestart);
+    F.cta.addEventListener('click', e => {
+      const mode = F.cta.dataset.mode;
+      if (mode === 'join') { e.preventDefault(); goToJoin({ interest: F.cta.dataset.interest }); }
+      else if (mode === 'elig') { e.preventDefault(); goToElig(); }
+    });
+  }
+
+  /* ---------- Condition search ---------- */
+  const L = {
+    root: $('#lookup'),
+    input: $('#lookup-q'),
+    clear: $('#lookup-clear'),
+    list: $('#lookup-results'),
+    count: $('#lookup-count'),
+    empty: $('#lookup-empty'),
+    term: $('#lookup-term'),
+  };
+  if (L.root && L.input && L.list) {
+    L.root.hidden = false;
+    const norm = v => v.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/['’]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    const rows = $$('.hit', L.list).map((el, i) => ({
+      el,
+      i,
+      name: norm(el.dataset.name || ''),
+      words: norm(`${el.dataset.name || ''} ${el.dataset.terms || ''}`).split(' '),
+      urgent: el.classList.contains('hit--911') || el.classList.contains('hit--988') ? 1 : 0,
+    }));
+    let announce = 0;
+    const search = () => {
+      const raw = L.input.value.trim();
+      const q = norm(raw);
+      L.clear.hidden = L.input.value === '';
+      L.root.classList.toggle('has-query', q !== '');
+      window.clearTimeout(announce);
+      rows.forEach(r => { r.el.hidden = true; });
+      if (!q) {
+        L.list.hidden = true;
+        L.empty.hidden = true;
+        L.count.textContent = '';
+        return;
+      }
+      const tokens = q.split(' ');
+      const hits = rows.filter(r => tokens.every(t => r.words.some(w => w.startsWith(t))));
+      hits.sort((a, b) => (b.urgent - a.urgent) || (Number(b.name.startsWith(q)) - Number(a.name.startsWith(q))) || (a.i - b.i));
+      hits.forEach(r => { r.el.hidden = false; L.list.appendChild(r.el); });
+      L.list.hidden = hits.length === 0;
+      L.empty.hidden = hits.length > 0;
+      L.term.textContent = raw;
+      const message = hits.length
+        ? `${hits.length} ${hits.length === 1 ? 'result' : 'results'} for “${raw}”`
+        : `No results for “${raw}”`;
+      announce = window.setTimeout(() => { L.count.textContent = message; }, 250);
+    };
+    L.input.addEventListener('input', search);
+    L.input.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && L.input.value) { e.preventDefault(); L.input.value = ''; search(); }
+      if (e.key === 'Enter') { e.preventDefault(); if (!mqFine.matches) L.input.blur(); }
+    });
+    L.clear.addEventListener('click', () => { L.input.value = ''; search(); L.input.focus(); });
+    $$('[data-q]', L.root).forEach(btn => btn.addEventListener('click', () => { L.input.value = btn.dataset.q; search(); }));
+    search();
+  }
+
+  /* ---------- FAQ ---------- */
+  $$('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      item.classList.toggle('is-open', open);
+    });
+  });
+
+  /* ---------- Early access form ---------- */
+  const J = {
+    form: $('#join-form'),
+    name: $('#join-name'),
+    email: $('#join-email'),
+    state: $('#join-state'),
+    consent: $('#join-consent'),
+    submit: $('#join-submit'),
+    label: $('#join-submit .btn__label'),
+    status: $('#join-status'),
+    success: $('#join-success'),
+  };
+  const joinRules = {
+    name: () => { const v = J.name.value.trim(); return v ? '' : 'Enter your first name.'; },
+    email: () => {
+      const v = J.email.value.trim();
+      if (!v) return 'Enter your email address.';
+      return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : 'Enter a valid email, like name@example.com.';
+    },
+    jstate: () => (J.state.value ? '' : 'Choose your state.'),
+    interest: () => (interests().length ? '' : 'Choose at least one service.'),
+    consent: () => (J.consent.checked ? '' : 'Check this box so we can email you about the launch.'),
+  };
+  function interests() { return $$('input[name="interest"]:checked', J.form).map(c => c.value); }
+  const joinFocus = {
+    name: () => J.name,
+    email: () => J.email,
+    jstate: () => J.state,
+    interest: () => $('input[name="interest"]', J.form),
+    consent: () => J.consent,
+  };
+  const setStatus = (kind, message) => {
+    J.status.className = `form-status${kind ? ` is-${kind}` : ''}`;
+    J.status.innerHTML = message ? `${icon(kind === 'error' ? 'alert' : 'info')}<span></span>` : '';
+    if (message) $('span', J.status).textContent = message;
+  };
+  const setBusy = busy => {
+    J.submit.disabled = busy;
+    J.submit.setAttribute('aria-busy', String(busy));
+    J.submit.classList.toggle('is-loading', busy);
+    J.label.textContent = busy ? 'Saving your spot…' : 'Get early access';
+  };
+  const showJoinSuccess = () => {
+    const first = J.name.value.trim();
+    $('#join-success-name').textContent = first ? `, ${first}` : '';
+    $('#join-success-email').textContent = J.email.value.trim();
+    $('#join-success-state').textContent = J.state.selectedOptions[0] ? J.state.selectedOptions[0].textContent.trim() : 'your state';
+    J.form.hidden = true;
+    J.success.hidden = false;
+    $('#join-success-title').focus({ preventScroll: true });
+    scrollToEl($('.form-card'));
+  };
+
+  function goToJoin({ state, interest } = {}) {
+    const card = $('.form-card');
+    if (J.success && !J.success.hidden) {
+      $('#join-success-title').focus({ preventScroll: true });
+      scrollToEl(card);
+      return;
+    }
+    if (state && !J.state.value) { J.state.value = state; setError('jstate', ''); }
+    if (interest) {
+      String(interest).split(',').forEach(value => {
+        const box = $(`input[name="interest"][value="${value.trim()}"]`, J.form);
+        if (box) { box.checked = true; setError('interest', ''); }
+      });
+    }
+    // With a mouse, start typing right away. On touch screens, land on the form
+    // without popping the keyboard over it.
+    (mqFine.matches ? J.name : $('#join-form-title')).focus({ preventScroll: true });
+    scrollToEl(card);
+  }
+
+  if (J.form) {
+    J.form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const bad = Object.keys(joinRules).filter(k => !setError(k, joinRules[k]()));
+      if (bad.length) {
+        setStatus('error', bad.length === 1 ? 'Please fix the highlighted field.' : `Please fix the ${bad.length} highlighted fields.`);
+        joinFocus[bad[0]]().focus();
+        return;
+      }
+      setStatus('', '');
+      const trap = J.form.querySelector('input[name="bot-field"]');
+      if (trap && trap.value) { showJoinSuccess(); return; }
+      if ('claude' in window) {
+        setStatus('info', "This is a preview of the site, so sign-ups aren't saved here yet.");
+        return;
+      }
+      setBusy(true);
+      try {
+        const data = new FormData(J.form);
+        if (!data.has('form-name')) data.set('form-name', J.form.getAttribute('name'));
+        data.set('interest', interests().join(', '));
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString(),
+        });
+        if (!res.ok) throw new Error(`Request failed with ${res.status}`);
+        setBusy(false);
+        showJoinSuccess();
+      } catch (err) {
+        setBusy(false);
+        setStatus('error', "We couldn't save your spot just now. Check your connection and try again.");
+      }
+    });
+    const recheck = e => {
+      const holder = e.target.closest('[data-field]');
+      const key = holder ? holder.dataset.field : '';
+      if (key && joinRules[key] && hasError(key)) setError(key, joinRules[key]());
+      if (J.status.classList.contains('is-error') && !Object.keys(joinRules).some(hasError)) setStatus('', '');
+    };
+    J.form.addEventListener('input', recheck);
+    J.form.addEventListener('change', recheck);
+    $('#join-again').addEventListener('click', () => {
+      J.form.reset();
+      Object.keys(joinRules).forEach(k => setError(k, ''));
+      setStatus('', '');
+      J.success.hidden = true;
+      J.form.hidden = false;
+      J.name.focus();
+    });
+  }
+  $$('[data-join]').forEach(btn => btn.addEventListener('click', () => goToJoin({ interest: btn.dataset.join })));
+
+  /* ---------- Help chat: AI assistant and support tickets ---------- */
+  const C = {
+    root: $('#chat'),
+    launcher: $('#chat-launcher'),
+    close: $('#chat-close'),
+    title: $('#chat-title'),
+    talk: $('#chat-talk'),
+    log: $('#chat-log'),
+    quick: $('#chat-quick'),
+    form: $('#chat-form'),
+    input: $('#chat-input'),
+    send: $('#chat-send'),
+    ticket: $('#chat-ticket'),
+    tForm: $('#ticket-form'),
+    tTitle: $('#ticket-title'),
+    tName: $('#ticket-name'),
+    tEmail: $('#ticket-email'),
+    tMsg: $('#ticket-message'),
+    tIncludeRow: $('#ticket-include-row'),
+    tInclude: $('#ticket-include'),
+    tTranscript: $('#ticket-transcript'),
+    tSubmit: $('#ticket-submit'),
+    tLabel: $('#ticket-submit .btn__label'),
+    tStatus: $('#ticket-status'),
+    tSuccess: $('#ticket-success'),
+  };
+
+  if (C.root) {
+    const RULES = /*CHAT_RULES*/;
+    const PREVIEW = 'claude' in window;
+    const mqPhone = window.matchMedia('(max-width: 599px)');
+    const blockedWhileOpen = [$('#main'), header, $('.footer'), dock, C.launcher];
+    const turns = [];
+    let busy = false;
+    let opener = null;
+    let closeTimer = 0;
+
+    const EMERGENCY = /\b(chest pain|chest pressure|heart attack|can'?t breathe|cannot breathe|trouble breathing|difficulty breathing|short(ness)? of breath|stroke|face (is )?drooping|slurred speech|overdos(e|ed|ing)|poisoned|poisoning|severe bleeding|bleeding (heavily|a lot)|won'?t stop bleeding|anaphyla\w*|throat (is )?(closing|swelling)|unconscious|passed out|seizure|seizing)\b/i;
+    const CRISIS = /\b(suicid\w*|kill(ing)? myself|end(ing)? my life|end it all|want(ing)? to die|wanna die|self[- ]?harm\w*|hurt(ing)? myself|cut(ting)? myself|(don'?t|do not) want to (live|be alive)|better off dead)\b/i;
+    const CRISIS_TEXT = "I'm really sorry you're going through this, and you don't have to face it alone. Call or text 988 to reach the Suicide & Crisis Lifeline. It's free, confidential and open 24/7. If you're in immediate danger, call 911.";
+    const EMERGENCY_TEXT = "This could be an emergency. Please call 911 now or go to the nearest emergency room. I'm an AI assistant and can't help with emergencies.";
+
+    const isOpen = () => !C.root.hidden;
+    const scrollLog = () => { C.log.scrollTop = C.log.scrollHeight; };
+
+    // Plain text with only our own safe links: the support email, 911 and 988.
+    const escapeRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const LINKABLE = new RegExp(`(${escapeRe(EMAIL)}|\\b911\\b|\\b988\\b)`);
+    const fillText = (el, text) => {
+      el.textContent = '';
+      String(text).split(LINKABLE).forEach(part => {
+        if (!part) return;
+        if (part === EMAIL || part === '911' || part === '988') {
+          const a = document.createElement('a');
+          a.href = part === EMAIL ? `mailto:${part}` : `tel:${part}`;
+          a.textContent = part;
+          el.appendChild(a);
+        } else {
+          el.appendChild(document.createTextNode(part));
+        }
+      });
+    };
+
+    const addMsg = (who, text, extra) => {
+      const el = document.createElement('div');
+      el.className = `msg msg--${who}${extra ? ` ${extra}` : ''}`;
+      // Safety replies carry their own call buttons, so their text stays plain.
+      if (text) { if (extra === 'msg--alert') el.textContent = text; else fillText(el, text); }
+      C.log.appendChild(el);
+      scrollLog();
+      return el;
+    };
+
+    const addActions = (el, actions) => {
+      const row = document.createElement('div');
+      row.className = 'msg__actions';
+      actions.forEach(a => {
+        const node = document.createElement(a.href ? 'a' : 'button');
+        node.className = `btn btn--sm${a.ghost ? ' btn--ghost' : ''}${a.danger ? ' btn--danger' : ''}`;
+        if (a.href) node.href = a.href; else node.type = 'button';
+        if (a.ticket) node.setAttribute('data-ticket', '');
+        node.innerHTML = a.icon ? icon(a.icon) : '';
+        node.appendChild(document.createTextNode(a.label));
+        row.appendChild(node);
+      });
+      el.appendChild(row);
+      scrollLog();
+    };
+
+    const typingBubble = () => {
+      const el = addMsg('bot', '', 'msg--typing');
+      el.setAttribute('aria-label', 'The assistant is typing');
+      el.innerHTML = '<span class="typing" aria-hidden="true"><span></span><span></span><span></span></span>';
+      return el;
+    };
+
+    const setBusy = on => {
+      busy = on;
+      C.send.disabled = on || !C.input.value.trim();
+      C.root.classList.toggle('is-busy', on);
+    };
+
+    const askSite = async () => {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: turns.slice(-12) }),
+      });
+      if (res.status === 429) throw { code: 'rate_limited' };
+      if (!res.ok) throw { code: 'unavailable' };
+      const data = await res.json();
+      if (!data || typeof data.reply !== 'string' || !data.reply.trim()) throw { code: 'unavailable' };
+      return data.reply.trim();
+    };
+
+    const askPreview = async bubble => {
+      const sample = RULES && window.claude && typeof window.claude.use === 'function' ? await window.claude.use('sample') : null;
+      if (!sample) throw { code: 'unavailable' };
+      const input = [
+        { role: 'user', content: `${RULES}\n\nThe website visitor's messages follow. Reply as the assistant, following the rules above.` },
+        ...turns.slice(-12),
+      ];
+      const { text } = await sample(input, {
+        cache: false,
+        modelTier: 'quick',
+        onText: ({ text: so_far }) => { bubble.classList.remove('msg--typing'); fillText(bubble, so_far); scrollLog(); },
+      });
+      return text.trim();
+    };
+
+    const failCopy = code => {
+      if (code === 'rate_limited') return 'Lots of questions right now. Please try again in a minute, or submit a ticket and our team will reply by email.';
+      if (code === 'not_granted') return 'AI replies are turned off for this preview. You can still submit a ticket.';
+      return "I can't answer right now. You can submit a ticket and our team will reply by email.";
+    };
+
+    const ask = async raw => {
+      const text = String(raw || '').trim().slice(0, 800);
+      if (!text || busy) return;
+      C.quick.hidden = true;
+      addMsg('user', text);
+      turns.push({ role: 'user', content: text });
+      if (CRISIS.test(text)) {
+        const el = addMsg('bot', CRISIS_TEXT, 'msg--alert');
+        addActions(el, [{ label: 'Call 988', href: 'tel:988', icon: 'phone' }, { label: 'Text 988', href: 'sms:988', icon: 'msg', ghost: true }]);
+        turns.push({ role: 'assistant', content: CRISIS_TEXT });
+        return;
+      }
+      if (EMERGENCY.test(text)) {
+        const el = addMsg('bot', EMERGENCY_TEXT, 'msg--alert');
+        addActions(el, [{ label: 'Call 911', href: 'tel:911', icon: 'phone', danger: true }]);
+        turns.push({ role: 'assistant', content: EMERGENCY_TEXT });
+        return;
+      }
+      setBusy(true);
+      const bubble = typingBubble();
+      try {
+        const reply = PREVIEW ? await askPreview(bubble) : await askSite();
+        bubble.classList.remove('msg--typing');
+        bubble.removeAttribute('aria-label');
+        fillText(bubble, reply);
+        turns.push({ role: 'assistant', content: reply });
+      } catch (err) {
+        bubble.classList.remove('msg--typing');
+        bubble.removeAttribute('aria-label');
+        fillText(bubble, failCopy(err && err.code));
+        addActions(bubble, [{ label: 'Submit a ticket', ticket: true, ghost: true }]);
+      } finally {
+        setBusy(false);
+        scrollLog();
+      }
+    };
+
+    const growInput = () => {
+      C.input.style.height = 'auto';
+      C.input.style.height = `${Math.min(C.input.scrollHeight, 120)}px`;
+    };
+
+    const showTalk = (focus = true) => {
+      C.ticket.hidden = true;
+      C.talk.hidden = false;
+      if (focus && !mqPhone.matches) C.input.focus({ preventScroll: true });
+      scrollLog();
+    };
+
+    const showTicket = () => {
+      C.talk.hidden = true;
+      C.ticket.hidden = false;
+      C.tIncludeRow.hidden = turns.length === 0;
+      if (!C.tSuccess.hidden) { $('#ticket-success-title').focus({ preventScroll: true }); return; }
+      C.tTitle.focus({ preventScroll: true });
+    };
+
+    const openChat = from => {
+      window.clearTimeout(closeTimer);
+      if (menuOpen()) setMenu(false, false);
+      opener = from || C.launcher;
+      const phone = mqPhone.matches;
+      C.root.hidden = false;
+      C.root.setAttribute('aria-modal', String(phone));
+      document.documentElement.classList.add('chat-open');
+      if (phone) {
+        document.documentElement.classList.add('is-locked');
+        blockedWhileOpen.forEach(el => { if (el) el.inert = true; });
+      }
+      $$('[data-chat-open]').forEach(b => b.setAttribute('aria-expanded', 'true'));
+      requestAnimationFrame(() => C.root.classList.add('is-open'));
+      if (!C.ticket.hidden) showTicket();
+      else if (phone) C.title.focus({ preventScroll: true });
+      else C.input.focus({ preventScroll: true });
+      scrollLog();
+    };
+
+    const closeChat = () => {
+      if (!isOpen()) return;
+      C.root.classList.remove('is-open');
+      document.documentElement.classList.remove('chat-open', 'is-locked');
+      blockedWhileOpen.forEach(el => { if (el) el.inert = false; });
+      $$('[data-chat-open]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+      closeTimer = window.setTimeout(() => { C.root.hidden = true; }, reduced() ? 0 : 280);
+      const shown = el => !!el && el.isConnected && el.getClientRects().length > 0;
+      const back = shown(opener) ? opener : C.launcher;
+      if (shown(back)) back.focus({ preventScroll: true });
+    };
+
+    document.addEventListener('click', e => {
+      const openBtn = e.target.closest('[data-chat-open]');
+      if (openBtn) { e.preventDefault(); if (isOpen()) closeChat(); else openChat(openBtn); return; }
+      if (e.target.closest('#chat [data-ticket]')) { showTicket(); return; }
+      const askBtn = e.target.closest('#chat [data-ask]');
+      if (askBtn) ask(askBtn.dataset.ask);
+    });
+    C.close.addEventListener('click', closeChat);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen()) { e.preventDefault(); closeChat(); } });
+    onMedia(mqPhone, () => { if (isOpen()) { closeChat(); } });
+
+    C.form.addEventListener('submit', e => {
+      e.preventDefault();
+      const value = C.input.value;
+      if (!value.trim() || busy) return;
+      C.input.value = '';
+      growInput();
+      C.send.disabled = true;
+      ask(value);
+    });
+    C.input.addEventListener('input', () => { growInput(); C.send.disabled = busy || !C.input.value.trim(); });
+    C.input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); C.form.requestSubmit(); }
+    });
+
+    // Support tickets
+    const ticketRules = {
+      tname: () => (C.tName.value.trim() ? '' : 'Enter your name.'),
+      temail: () => {
+        const v = C.tEmail.value.trim();
+        if (!v) return 'Enter your email address.';
+        return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : 'Enter a valid email, like name@example.com.';
+      },
+      tmsg: () => (C.tMsg.value.trim().length >= 10 ? '' : 'Tell us a little more (at least 10 characters).'),
+    };
+    const ticketFocus = { tname: () => C.tName, temail: () => C.tEmail, tmsg: () => C.tMsg };
+    const ticketStatus = (kind, message) => {
+      C.tStatus.className = `form-status${kind ? ` is-${kind}` : ''}`;
+      C.tStatus.innerHTML = message ? `${icon(kind === 'error' ? 'alert' : 'info')}<span></span>` : '';
+      if (message) $('span', C.tStatus).textContent = message;
+    };
+    const ticketBusy = on => {
+      C.tSubmit.disabled = on;
+      C.tSubmit.setAttribute('aria-busy', String(on));
+      C.tSubmit.classList.toggle('is-loading', on);
+      C.tLabel.textContent = on ? 'Sending…' : 'Send ticket';
+    };
+    const transcript = () => turns
+      .map(t => `${t.role === 'user' ? 'Visitor' : 'Assistant'}: ${t.content}`)
+      .join('\n\n')
+      .slice(-6000);
+
+    C.tForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const bad = Object.keys(ticketRules).filter(k => !setError(k, ticketRules[k]()));
+      if (bad.length) {
+        ticketStatus('error', bad.length === 1 ? 'Please fix the highlighted field.' : `Please fix the ${bad.length} highlighted fields.`);
+        ticketFocus[bad[0]]().focus();
+        return;
+      }
+      ticketStatus('', '');
+      const trap = C.tForm.querySelector('input[name="bot-field"]');
+      const done = () => {
+        $('#ticket-success-email').textContent = C.tEmail.value.trim();
+        C.tForm.hidden = true;
+        C.tSuccess.hidden = false;
+        $('#ticket-success-title').focus({ preventScroll: true });
+      };
+      if (trap && trap.value) { done(); return; }
+      if (PREVIEW) {
+        ticketStatus('info', `This is a preview of the site, so tickets aren't sent here. On the live site they go to ${EMAIL}.`);
+        return;
+      }
+      C.tTranscript.value = C.tInclude.checked ? transcript() : '';
+      ticketBusy(true);
+      try {
+        const data = new FormData(C.tForm);
+        data.set('form-name', C.tForm.getAttribute('name'));
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString(),
+        });
+        if (!res.ok) throw new Error(`Request failed with ${res.status}`);
+        ticketBusy(false);
+        done();
+      } catch (err) {
+        ticketBusy(false);
+        ticketStatus('error', `We couldn't send your ticket. Check your connection and try again, or email ${EMAIL}.`);
+      }
+    });
+    const recheckTicket = e => {
+      const holder = e.target.closest('[data-field]');
+      const key = holder ? holder.dataset.field : '';
+      if (key && ticketRules[key] && hasError(key)) setError(key, ticketRules[key]());
+      if (C.tStatus.classList.contains('is-error') && !Object.keys(ticketRules).some(hasError)) ticketStatus('', '');
+    };
+    C.tForm.addEventListener('input', recheckTicket);
+    $('#ticket-back').addEventListener('click', () => showTalk());
+    $('#ticket-done').addEventListener('click', () => {
+      C.tForm.reset();
+      Object.keys(ticketRules).forEach(k => setError(k, ''));
+      ticketStatus('', '');
+      C.tSuccess.hidden = true;
+      C.tForm.hidden = false;
+      showTalk();
+    });
+  }
+
+  /* ---------- Privacy notice ---------- */
+  const sheet = $('#privacy');
+  let opener = null;
+  $$('[data-open="privacy"]').forEach(btn => btn.addEventListener('click', () => {
+    opener = btn;
+    if (typeof sheet.showModal === 'function') sheet.showModal(); else sheet.setAttribute('open', '');
+  }));
+  $$('[data-close]', sheet).forEach(btn => btn.addEventListener('click', () => sheet.close ? sheet.close() : sheet.removeAttribute('open')));
+  sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); });
+  sheet.addEventListener('close', () => { if (opener) opener.focus({ preventScroll: true }); });
+
+  /* ---------- Mobile call-to-action dock ---------- */
+  if (dock && hasIO) {
+    const heroCta = $('.hero .cta-row');
+    const blockers = [$('#care-finder'), $('#eligibility'), $('#join'), $('.footer')].filter(Boolean);
+    const blocking = new Set();
+    let pastHero = false;
+    let typing = false;
+    updateDock = () => {
+      const on = pastHero && blocking.size === 0 && !menuOpen() && !typing;
+      dock.classList.toggle('is-visible', on);
+      document.documentElement.classList.toggle('dock-on', on);
+      document.documentElement.classList.toggle('past-hero', pastHero);
+      document.documentElement.classList.toggle('is-typing', typing);
+    };
+    // Keep the bar out of the way while someone is typing on a phone keyboard.
+    const isTextField = el => el && el.matches && el.matches('input:not([type="checkbox"]):not([type="radio"]), select, textarea');
+    document.addEventListener('focusin', e => { typing = isTextField(e.target); updateDock(); });
+    document.addEventListener('focusout', () => { typing = false; window.setTimeout(updateDock, 0); });
+    new IntersectionObserver(([en]) => {
+      pastHero = !en.isIntersecting && en.boundingClientRect.top < 0;
+      updateDock();
+    }).observe(heroCta);
+    const bo = new IntersectionObserver(entries => {
+      entries.forEach(en => (en.isIntersecting ? blocking.add(en.target) : blocking.delete(en.target)));
+      updateDock();
+    });
+    blockers.forEach(b => bo.observe(b));
+  }
+})();

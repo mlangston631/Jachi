@@ -1,0 +1,876 @@
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Jachi Health home">
+      {{MARK:m-head:full}}
+      <span class="brand__word" aria-hidden="true"><b>Jachi</b> <span>Health</span></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#approach">Our approach</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn--sm header-cta" href="#join">Get early access</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="line" aria-hidden="true"></span><span class="line" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <nav aria-label="Menu">
+    <ul>
+      <li><a href="#services" style="--i:0">Services and pricing {{I:arrow}}</a></li>
+      <li><a href="#care-finder" style="--i:1">Care finder {{I:arrow}}</a></li>
+      <li><a href="#how" style="--i:2">How it works {{I:arrow}}</a></li>
+      <li><a href="#approach" style="--i:3">Our approach {{I:arrow}}</a></li>
+      <li><a href="#eligibility" style="--i:4">Weight care check {{I:arrow}}</a></li>
+      <li><a href="#faq" style="--i:5">FAQ {{I:arrow}}</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-menu__foot">
+    <a class="btn btn--block btn--lg" href="#join">Get early access {{I:arrow:i--arrow}}</a>
+    <p class="fine">Launching in Texas first.</p>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero grain" id="top" aria-labelledby="hero-title">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="pill" data-rise style="--d:0ms"><span class="pill__dot" aria-hidden="true"></span>Early access open · Launching in Texas</p>
+        <h1 class="display" id="hero-title" data-rise style="--d:90ms">Online care, rooted in <em>real medicine.</em></h1>
+        <p class="lead" data-rise style="--d:180ms">Licensed clinicians online for everything from colds and refills to therapy, sexual health and weight care. A care assistant checks in between visits, and every price is clear up front.</p>
+        <div class="cta-row" data-rise style="--d:270ms">
+          <a class="btn btn--lg" href="#care-finder">Find the right care {{I:arrow:i--arrow}}</a>
+          <a class="btn btn--ghost btn--lg" href="#services">See services and prices</a>
+        </div>
+        <ul class="trust" data-rise style="--d:360ms">
+          <li><span class="trust__ic">{{I:check}}</span>Licensed clinicians</li>
+          <li><span class="trust__ic">{{I:check}}</span>{{PRICE_VISIT}} visits</li>
+          <li><span class="trust__ic">{{I:check}}</span>No insurance needed</li>
+        </ul>
+      </div>
+
+      <div class="hero__visual" data-rise style="--d:220ms">
+        <div class="stage" id="stage" role="img" aria-label="Preview of the Jachi app: a check-in, an upcoming therapy session and a refill sent to your pharmacy">
+          <svg class="stage__leaf" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="leaf-fill" x1="0.15" y1="0" x2="0.85" y2="1">
+                <stop offset="0" stop-color="#E3EFE6"/>
+                <stop offset="0.55" stop-color="#BBD7C2"/>
+                <stop offset="1" stop-color="#8FB89A"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 4C40 16 58 34 32 52C6 34 24 16 32 4Z" fill="url(#leaf-fill)"/>
+            <g class="veins" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-opacity=".75">
+              <path pathLength="100" stroke-width=".55" d="M32 9V50"/>
+              <path pathLength="100" stroke-width=".42" d="M32 22Q35.5 21 37.5 16.5"/>
+              <path pathLength="100" stroke-width=".42" d="M32 30Q37 28.5 40 23"/>
+              <path pathLength="100" stroke-width=".42" d="M32 37Q37.5 35.5 40.5 30"/>
+              <path pathLength="100" stroke-width=".42" d="M32 22Q28.5 21 26.5 16.5"/>
+              <path pathLength="100" stroke-width=".42" d="M32 30Q27 28.5 24 23"/>
+              <path pathLength="100" stroke-width=".42" d="M32 37Q26.5 35.5 23.5 30"/>
+            </g>
+            <path d="M32 52C32 56 31.5 58.5 29.5 61" fill="none" stroke="#8FB89A" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <div class="stage__orbit" aria-hidden="true"></div>
+          <div class="stage__glow" aria-hidden="true"></div>
+
+          <div class="phone" aria-hidden="true">
+            <div class="phone__screen">
+              <div class="app">
+                <span class="app__notch"></span>
+                <div class="app__top">
+                  <span class="app__brand">{{MARK:m-app:solid}}<span>Jachi</span></span>
+                  <span class="app__avatar">{{I:user}}</span>
+                </div>
+                <div>
+                  <p class="app__hello">Good morning</p>
+                  <p class="app__sub">Here's your care for today.</p>
+                </div>
+                <div class="app__card">
+                  <p class="k">Check-in</p>
+                  <p class="t">How are you feeling since your visit?</p>
+                  <div class="app__chips"><span class="on">Better</span><span>Same</span><span>Worse</span></div>
+                </div>
+                <div class="app__prog">
+                  <div class="app__prog-top"><b>This week</b><span>3 of 4 check-ins</span></div>
+                  <div class="app__bar"><span></span></div>
+                </div>
+                <div class="app__row"><span class="ic">{{I:video}}</span><div><b>Therapy session</b><small>Thursday at 6:00 PM</small></div></div>
+                <div class="app__row"><span class="ic">{{I:pill}}</span><div><b>Refill approved</b><small>Sent to your pharmacy.</small></div></div>
+                <div class="app__tabs"><span class="on">{{I:home}}</span><span>{{I:clip}}</span><span>{{I:msg}}</span><span>{{I:user}}</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="float float--a" aria-hidden="true">
+            <span class="float__ic float__ic--solid">{{I:check}}</span>
+            <span><b>Visit complete</b><small>Your care plan is ready.</small></span>
+          </div>
+          <div class="float float--b" aria-hidden="true">
+            <span class="float__ic">{{I:spark}}</span>
+            <span><b>Care assistant <em class="ai-tag">AI</em></b><small>Your check-in is ready.</small></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services and pricing -->
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Services and pricing</p>
+        <h2 class="h2" id="services-title">The care you need, <em>priced up front.</em></h2>
+        <p class="lead">Licensed clinicians for everyday illness, prescriptions, mental health, sexual health and more. No insurance needed.</p>
+      </div>
+
+      <div class="lookup" id="lookup" hidden>
+        <div class="lookup__bar">
+          {{I:search}}
+          <label class="visually-hidden" for="lookup-q">Search conditions and medications</label>
+          <input class="lookup__input" id="lookup-q" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Search a condition or medication" aria-controls="lookup-results" aria-describedby="lookup-hint">
+          <button class="lookup__clear" type="button" id="lookup-clear" aria-label="Clear search" hidden>{{I:x}}</button>
+        </div>
+        <p class="visually-hidden" id="lookup-hint">Results appear below as you type.</p>
+        <div class="lookup__chips">
+          <span class="lookup__try" aria-hidden="true">Popular</span>
+          {{POPULAR}}
+        </div>
+        <p class="lookup__count" id="lookup-count" role="status"></p>
+        <ul class="lookup__results" id="lookup-results" aria-label="Search results" hidden>
+          {{CONDITION_ROWS}}
+        </ul>
+        <div class="lookup__empty" id="lookup-empty" hidden>
+          <p><strong>No match for &ldquo;<span id="lookup-term"></span>&rdquo;.</strong> Try another word, use the <a href="#care-finder">care finder</a> or email <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>.</p>
+        </div>
+      </div>
+
+      <div class="services">
+        {{SERVICE_CARDS}}
+      </div>
+
+      <ul class="svc-notes">
+        <li>{{I:info}}<span>Medication and lab tests are billed separately by your pharmacy and lab.</span></li>
+        <li>{{I:info}}<span>Memberships are month to month. Cancel anytime.</span></li>
+        <li>{{I:info}}<span>For adults 18 and older. No controlled substances, such as ADHD stimulants, Xanax, opioids or testosterone.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Care finder -->
+  <section class="section section--paper" id="care-finder" aria-labelledby="finder-title">
+    <div class="wrap finder__grid">
+      <div class="finder__intro">
+        <div class="section-head">
+          <p class="eyebrow">Care finder</p>
+          <h2 class="h2" id="finder-title">Not sure where to start? <em>We'll point the way.</em></h2>
+          <p class="lead">Answer two quick questions to see which service fits, what it costs, and when to get help in person instead.</p>
+        </div>
+        <div class="explain explain--alert">
+          <h3><span class="explain__ic" aria-hidden="true">{{I:alert}}</span>Some things can't wait</h3>
+          <p>Jachi isn't for emergencies. For chest pain, trouble breathing or signs of a stroke, call <a href="tel:911">911</a>. If you're thinking about suicide or are in crisis, call or text <a href="tel:988">988</a>, any time.</p>
+        </div>
+      </div>
+
+      <div class="tool" id="finder-tool">
+        <div class="tool__head">
+          <p class="tool__title">Find the right care</p>
+          <p class="tool__count" id="finder-count">Step 1 of 2</p>
+        </div>
+        <div class="progress progress--2" id="finder-progress" aria-hidden="true"><span class="is-done"></span><span></span></div>
+
+        <form id="finder-form" novalidate>
+          <div class="q" data-fstep="1">
+            <h3 class="q-title" tabindex="-1">What do you need help with?</h3>
+            <fieldset class="fs" data-field="need" aria-describedby="err-need">
+              <legend class="visually-hidden">What do you need help with?</legend>
+              <div class="needs">{{FINDER_NEEDS}}</div>
+              <p class="err" id="err-need" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+          </div>
+
+          <div class="q" data-fstep="2" hidden>
+            <h3 class="q-title" tabindex="-1">One safety question</h3>
+
+            <fieldset class="fs" data-field="flag-urgent" data-path="urgent" aria-describedby="redflags err-flag-urgent" hidden>
+              <legend class="label">Do you have any of these right now?</legend>
+              <ul class="redflags" id="redflags">
+                <li>Chest pain or pressure</li>
+                <li>Trouble breathing</li>
+                <li>Face drooping, arm weakness or trouble speaking</li>
+                <li>Severe bleeding or a serious injury</li>
+                <li>Fainting or a severe allergic reaction</li>
+              </ul>
+              <div class="seg">
+                <label><input type="radio" name="flag-urgent" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="flag-urgent" value="no"><span>No</span></label>
+              </div>
+              <p class="err" id="err-flag-urgent" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+
+            <fieldset class="fs" data-field="flag-refill" data-path="refill" aria-describedby="err-flag-refill" hidden>
+              <legend class="label">Is it a controlled substance, like Adderall, Xanax, opioid pain medicine or testosterone?</legend>
+              <div class="seg">
+                <label><input type="radio" name="flag-refill" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="flag-refill" value="no"><span>No</span></label>
+                <label><input type="radio" name="flag-refill" value="unsure"><span>Not sure</span></label>
+              </div>
+              <p class="err" id="err-flag-refill" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+
+            <fieldset class="fs" data-field="flag-mental" data-path="mental" aria-describedby="err-flag-mental" hidden>
+              <legend class="label">Are you having thoughts of hurting yourself or someone else?</legend>
+              <div class="seg">
+                <label><input type="radio" name="flag-mental" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="flag-mental" value="no"><span>No</span></label>
+              </div>
+              <p class="err" id="err-flag-mental" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+
+            <fieldset class="fs" data-field="flag-sexual" data-path="sexual" aria-describedby="err-flag-sexual" hidden>
+              <legend class="label">Do you think you were exposed to HIV in the last 72 hours?</legend>
+              <div class="seg">
+                <label><input type="radio" name="flag-sexual" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="flag-sexual" value="no"><span>No</span></label>
+                <label><input type="radio" name="flag-sexual" value="unsure"><span>Not sure</span></label>
+              </div>
+              <p class="err" id="err-flag-sexual" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+
+            <fieldset class="fs" data-field="flag-mens" data-path="mens" aria-describedby="err-flag-mens" hidden>
+              <legend class="label">Do you take a nitrate medicine for chest pain, like nitroglycerin?</legend>
+              <div class="seg">
+                <label><input type="radio" name="flag-mens" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="flag-mens" value="no"><span>No</span></label>
+                <label><input type="radio" name="flag-mens" value="unsure"><span>Not sure</span></label>
+              </div>
+              <p class="err" id="err-flag-mens" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+
+            <fieldset class="fs" data-field="flag-womens" data-path="womens" aria-describedby="err-flag-womens" hidden>
+              <legend class="label">Do you have heavy bleeding, severe belly or pelvic pain, or a fever?</legend>
+              <div class="seg">
+                <label><input type="radio" name="flag-womens" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="flag-womens" value="no"><span>No</span></label>
+              </div>
+              <p class="err" id="err-flag-womens" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+
+            <fieldset class="fs" data-field="flag-skin" data-path="skin" aria-describedby="err-flag-skin" hidden>
+              <legend class="label">Is it spreading fast, very painful, or do you have a fever?</legend>
+              <div class="seg">
+                <label><input type="radio" name="flag-skin" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="flag-skin" value="no"><span>No</span></label>
+              </div>
+              <p class="err" id="err-flag-skin" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+          </div>
+
+          <div class="tool__nav">
+            <button class="btn btn--ghost" type="button" id="finder-back" hidden>{{I:arrow-left}} Back</button>
+            <button class="btn" type="submit" id="finder-next"><span id="finder-next-label">Continue</span>{{I:arrow:i--arrow}}</button>
+          </div>
+        </form>
+
+        <div class="result" id="finder-result" hidden>
+          <span class="result__icon" id="fres-icon" aria-hidden="true"></span>
+          <h3 class="result__title" id="fres-title" tabindex="-1"></h3>
+          <div class="result__chips" id="fres-chips"></div>
+          <p class="result__body" id="fres-body"></p>
+          <div class="hotline" id="fres-hotline" hidden>
+            <p class="hotline__num">988</p>
+            <p class="hotline__text">Call or text 988 to reach the Suicide &amp; Crisis Lifeline. It's free, confidential and open 24/7. If you or someone else is in immediate danger, call 911.</p>
+            <p class="hotline__links"><a class="btn btn--sm" href="tel:988">{{I:phone}} Call 988</a><a class="btn btn--ghost btn--sm" href="sms:988">{{I:msg}} Text 988</a></p>
+          </div>
+          <p class="result__note" id="fres-note" hidden></p>
+          <div class="result__actions">
+            <a class="btn" href="#join" id="fres-cta">Get early access {{I:arrow:i--arrow}}</a>
+            <button class="btn btn--ghost" type="button" id="fres-restart">Start over</button>
+          </div>
+        </div>
+
+        <p class="tool__privacy">{{I:lock}}<span>For information only, not medical advice. Your answers stay in your browser and aren't saved or sent.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Jachi -->
+  <section class="section" id="why" aria-labelledby="why-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why Jachi</p>
+        <h2 class="h2" id="why-title">Real medicine, <em>made simple.</em></h2>
+        <p class="lead">Licensed clinicians, modern tools and honest pricing, built around your life.</p>
+      </div>
+
+      <div class="bento">
+        <article class="tile tile--wide" data-reveal>
+          <div class="tile__text">
+            <span class="tile__ic">{{I:steth}}</span>
+            <h3>Real clinicians make every decision.</h3>
+            <p>A clinician licensed in your state reviews your history, decides on your treatment and follows up as you go.</p>
+          </div>
+          <div class="tile__visual">
+            <div class="review" aria-hidden="true">
+              <div class="review__head">
+                <span class="review__av">{{I:user}}</span>
+                <span><b>Clinician review</b><small>Licensed in your state</small></span>
+                <span class="review__tag">Complete</span>
+              </div>
+              <ul>
+                <li style="--i:0"><span class="tick">{{I:check}}</span>Symptoms and history<em>Reviewed</em></li>
+                <li style="--i:1"><span class="tick">{{I:check}}</span>Current medications<em>Reviewed</em></li>
+                <li style="--i:2"><span class="tick">{{I:check}}</span>Allergies<em>Reviewed</em></li>
+              </ul>
+              <div class="review__foot">{{I:shield}} Treatment plan approved</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tile" data-reveal style="--d:90ms">
+          <h3>FDA-approved treatments</h3>
+          <p>We prescribe FDA-approved medications, and only when they're right for you.</p>
+          <div class="tile__visual">
+            <div class="vis-rx" aria-hidden="true">
+              <span class="ring r3"></span><span class="ring r2"></span><span class="ring r1"></span>
+              <span class="shield">{{I:shield}}</span>
+              <span class="chip chip--a">FDA-approved</span>
+              <span class="chip chip--b">Only when appropriate</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="tile" data-reveal>
+          <h3>A care assistant that checks in</h3>
+          <p>Our AI assistant handles check-ins, reminders and everyday questions, and sends anything medical to your clinician.</p>
+          <div class="tile__visual">
+            <div class="vis-chat" aria-hidden="true">
+              <div class="bubble bubble--ai" style="--i:0"><span class="who">{{I:spark}} Care assistant · AI</span>How are you feeling since your visit?</div>
+              <div class="bubble bubble--me" style="--i:1">Better, but the cough is still there.</div>
+              <div class="bubble bubble--ai" style="--i:2">Thanks for telling me. I've sent this to your clinician to review.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tile" data-reveal style="--d:90ms">
+          <h3>Prescriptions, handled</h3>
+          <p>Your clinician sends prescriptions to the pharmacy you choose, or to one that ships to your door.</p>
+          <div class="tile__visual">
+            <div class="vis-ship" aria-hidden="true">
+              <div class="ship-route">
+                <div class="node"><span>{{I:steth}}</span><small>Your clinician</small></div>
+                <div class="route"><span class="runner"></span></div>
+                <div class="node"><span>{{I:pharmacy}}</span><small>Your pharmacy</small></div>
+              </div>
+              <ul class="ship-steps">
+                <li>{{I:check}}Visit complete</li>
+                <li>{{I:check}}Prescription sent</li>
+                <li class="now"><span class="pulse"></span>Ready for pickup or delivery</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="tile" data-reveal style="--d:180ms">
+          <h3>Clear prices, no insurance needed</h3>
+          <p>Every service has one upfront price. Medication and lab tests are billed separately.</p>
+          <div class="tile__visual">
+            <div class="vis-price" aria-hidden="true">
+              <ul class="price-rows">
+                <li><span>Visits</span><b>{{PRICE_VISIT}}</b></li>
+                <li><span>Refills</span><b>{{PRICE_REFILL}}</b></li>
+                <li><span>Therapy</span><b>{{PRICE_THERAPY}}<small>/session</small></b></li>
+                <li><span>Anxiety &amp; depression</span><b>{{PRICE_MENTAL}}<small>/mo</small></b></li>
+                <li><span>Weight care</span><b>{{PRICE_WEIGHT}}<small>/mo</small></b></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section section--paper" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head section-head--center">
+        <p class="eyebrow">How it works</p>
+        <h2 class="h2" id="how-title">From first question <em>to feeling better.</em></h2>
+        <p class="lead">Everything happens online, and a licensed clinician is part of every step that matters.</p>
+      </div>
+      <div class="steps-wrap" data-reveal>
+        <ol class="steps">
+          <li class="step" style="--i:0">
+            <span class="step__num" aria-hidden="true">1</span>
+            <div class="step__body">
+              <h3>Tell us what you need</h3>
+              <p>Pick a service and answer a few questions. Our care assistant guides you and explains anything that's unclear.</p>
+              <span class="tag">{{I:clip}} Online, on your schedule</span>
+            </div>
+          </li>
+          <li class="step" style="--i:1">
+            <span class="step__num" aria-hidden="true">2</span>
+            <div class="step__body">
+              <h3>A clinician reviews</h3>
+              <p>A licensed clinician reviews your answers and history. They may message you or start a video visit.</p>
+              <span class="tag">{{I:steth}} Licensed in your state</span>
+            </div>
+          </li>
+          <li class="step" style="--i:2">
+            <span class="step__num" aria-hidden="true">3</span>
+            <div class="step__body">
+              <h3>Get treated</h3>
+              <p>If you need medication or tests, your clinician sends the prescription to your pharmacy or orders tests at a nearby lab.</p>
+              <span class="tag">{{I:pharmacy}} Sent to your pharmacy</span>
+            </div>
+          </li>
+          <li class="step" style="--i:3">
+            <span class="step__num" aria-hidden="true">4</span>
+            <div class="step__body">
+              <h3>Stay on track</h3>
+              <p>Message your care team, check in between visits and request refills when you need them.</p>
+              <span class="tag">{{I:msg}} Ongoing care</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section class="section section--dark approach on-dark" id="approach" aria-labelledby="approach-title">
+    {{MARK:m-art1:outline:approach__art}}
+    <div class="wrap approach__grid">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--light">Our approach</p>
+        <h2 class="h2 h2--light" id="approach-title">Technology that listens. <em>Clinicians who decide.</em></h2>
+        <p class="lead lead--light">Jachi uses AI to make care faster and more personal. It never diagnoses, prescribes or provides therapy. Every medical decision is made by a licensed clinician.</p>
+      </div>
+      <div>
+        <div class="duo">
+          <article class="panel" data-reveal>
+            <div class="panel__head">
+              <span class="panel__icon">{{I:spark}}</span>
+              <div><p class="panel__who">AI</p><h3>Your care assistant</h3></div>
+            </div>
+            <ul>
+              <li>{{I:check}}Guides you through your health questions</li>
+              <li>{{I:check}}Organizes your answers for your clinician</li>
+              <li>{{I:check}}Sends check-ins and reminders</li>
+              <li>{{I:check}}Answers everyday questions about your care</li>
+              <li>{{I:check}}Flags anything urgent or medical to your care team</li>
+            </ul>
+          </article>
+          <article class="panel panel--human" data-reveal style="--d:120ms">
+            <div class="panel__head">
+              <span class="panel__icon">{{I:steth}}</span>
+              <div><p class="panel__who">Human</p><h3>Your clinician</h3></div>
+            </div>
+            <ul>
+              <li>{{I:check}}Reviews your full health history</li>
+              <li>{{I:check}}Diagnoses and decides on treatment</li>
+              <li>{{I:check}}Writes and adjusts your prescriptions</li>
+              <li>{{I:check}}Reviews everything the AI prepares</li>
+              <li>{{I:check}}Is licensed in your state</li>
+            </ul>
+          </article>
+        </div>
+        <p class="disclosure" id="ai-disclosure">{{I:info}}<span><strong>AI disclosure</strong>We'll always tell you when you're talking with AI. A licensed clinician reviews everything it prepares for your care.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weight care eligibility -->
+  <section class="section" id="eligibility" aria-labelledby="elig-title">
+    <div class="wrap elig__grid">
+      <div class="elig__intro">
+        <div class="section-head">
+          <p class="eyebrow">Weight care check</p>
+          <h2 class="h2" id="elig-title">See if weight-loss medication <em>could be right for you.</em></h2>
+          <p class="lead">Three quick steps. Your answers stay on this device and are never saved.</p>
+        </div>
+        <div class="explain">
+          <h3>How eligibility works</h3>
+          <p>FDA-approved weight-loss medications are generally for adults who meet one of these BMI guidelines:</p>
+          <div class="thresholds">
+            <div><b>30+</b><span>BMI on its own</span></div>
+            <div><b>27+</b><span>BMI with a weight-related condition</span></div>
+          </div>
+          <p>BMI is a screening number, not a measure of your health. A licensed clinician looks at your full health picture before recommending any treatment.</p>
+        </div>
+      </div>
+
+      <div class="tool" id="elig-tool">
+        <div class="tool__head">
+          <p class="tool__title">Weight care check</p>
+          <p class="tool__count" id="elig-count">Step 1 of 3</p>
+        </div>
+        <div class="progress" id="elig-progress" aria-hidden="true"><span class="is-done"></span><span></span><span></span></div>
+
+        <form id="elig-form" novalidate>
+          <div class="q" data-step="1">
+            <h3 class="q-title" tabindex="-1">Let's start with the basics</h3>
+            <div class="field">
+              <label class="label" for="elig-state">Which state do you live in?</label>
+              <select class="select" id="elig-state" name="elig-state" data-field="state" aria-describedby="err-state">
+                <option value="">Select your state</option>
+                {{STATE_OPTIONS}}
+              </select>
+              <p class="err" id="err-state" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <fieldset class="fs" data-field="age" aria-describedby="err-age">
+              <legend class="label">Are you 18 or older?</legend>
+              <div class="seg">
+                <label><input type="radio" name="age" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="age" value="no"><span>No</span></label>
+              </div>
+              <p class="err" id="err-age" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+          </div>
+
+          <div class="q" data-step="2" hidden>
+            <h3 class="q-title" tabindex="-1">Your height and weight</h3>
+            <div class="hw">
+              <fieldset class="fs" data-field="height" aria-describedby="err-height">
+                <legend class="label">Height</legend>
+                <div class="hw__pair">
+                  <div class="unit"><input class="input" id="elig-ft" name="ft" inputmode="numeric" autocomplete="off" maxlength="1" placeholder="5" aria-label="Feet" data-field="height"><span aria-hidden="true">ft</span></div>
+                  <div class="unit"><input class="input" id="elig-in" name="in" inputmode="numeric" autocomplete="off" maxlength="2" placeholder="9" aria-label="Inches" data-field="height"><span aria-hidden="true">in</span></div>
+                </div>
+                <p class="err" id="err-height" hidden>{{I:alert}}<span></span></p>
+              </fieldset>
+              <div class="field">
+                <label class="label" for="elig-lb">Weight</label>
+                <div class="unit"><input class="input" id="elig-lb" name="lb" inputmode="decimal" autocomplete="off" maxlength="5" placeholder="190" data-field="weight" aria-describedby="err-weight"><span aria-hidden="true">lb</span></div>
+                <p class="err" id="err-weight" hidden>{{I:alert}}<span></span></p>
+              </div>
+            </div>
+            <div class="bmi">
+              <div class="gauge-wrap is-empty" id="gauge-wrap">
+                <svg class="gauge" id="gauge" viewBox="0 0 240 156" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="gauge-grad" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0" stop-color="#CFE3D4"/>
+                      <stop offset="0.5" stop-color="#9BC1A3"/>
+                      <stop offset="1" stop-color="#1E4A3B"/>
+                    </linearGradient>
+                  </defs>
+                  <path class="gauge__track" d="M20 132A100 100 0 0 1 220 132" pathLength="100"/>
+                  <path class="gauge__fill" id="gauge-fill" d="M20 132A100 100 0 0 1 220 132" pathLength="100" stroke="url(#gauge-grad)"/>
+                  <line class="gauge__tick" x1="92.8" y1="48.3" x2="85.4" y2="25.5"/>
+                  <line class="gauge__tick" x1="120" y1="44" x2="120" y2="20"/>
+                  <text class="gauge__label" x="80.6" y="17" text-anchor="middle">27</text>
+                  <text class="gauge__label" x="120" y="12" text-anchor="middle">30</text>
+                  <text class="gauge__label" x="20" y="154" text-anchor="middle">15</text>
+                  <text class="gauge__label" x="220" y="154" text-anchor="middle">45</text>
+                  <g class="gauge__marker" id="gauge-marker"><circle cx="20" cy="132" r="9"/></g>
+                </svg>
+                <div class="gauge-readout"><span class="lbl">Your BMI</span><span class="num" id="bmi-num">–</span></div>
+              </div>
+              <p class="bmi__hint" id="bmi-hint">Enter your height and weight</p>
+              <p class="visually-hidden" id="bmi-live" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="q" data-step="3" hidden>
+            <h3 class="q-title" tabindex="-1">A few health questions</h3>
+            <fieldset class="fs" data-field="cond" aria-describedby="err-cond">
+              <legend class="label">Do you have any of these conditions?<span class="label__hint">Select all that apply.</span></legend>
+              <div class="checks">
+                <label class="check"><input type="checkbox" name="cond" value="bp"><span>High blood pressure</span></label>
+                <label class="check"><input type="checkbox" name="cond" value="t2d"><span>Type 2 diabetes</span></label>
+                <label class="check"><input type="checkbox" name="cond" value="chol"><span>High cholesterol</span></label>
+                <label class="check"><input type="checkbox" name="cond" value="osa"><span>Sleep apnea</span></label>
+                <label class="check"><input type="checkbox" name="cond" value="heart"><span>Heart disease</span></label>
+                <label class="check"><input type="checkbox" name="cond" value="none"><span>None of these</span></label>
+              </div>
+              <p class="err" id="err-cond" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+            <fieldset class="fs" data-field="mtc" aria-describedby="err-mtc">
+              <legend class="label">Have you or anyone in your family had medullary thyroid cancer or MEN2?</legend>
+              <div class="seg">
+                <label><input type="radio" name="mtc" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="mtc" value="no"><span>No</span></label>
+                <label><input type="radio" name="mtc" value="unsure"><span>Not sure</span></label>
+              </div>
+              <p class="err" id="err-mtc" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+            <fieldset class="fs" data-field="preg" aria-describedby="err-preg">
+              <legend class="label">Are you pregnant, breastfeeding or planning a pregnancy?</legend>
+              <div class="seg">
+                <label><input type="radio" name="preg" value="yes"><span>Yes</span></label>
+                <label><input type="radio" name="preg" value="no"><span>No</span></label>
+              </div>
+              <p class="err" id="err-preg" hidden>{{I:alert}}<span></span></p>
+            </fieldset>
+          </div>
+
+          <div class="tool__nav">
+            <button class="btn btn--ghost" type="button" id="elig-back" hidden>{{I:arrow-left}} Back</button>
+            <button class="btn" type="submit" id="elig-next"><span id="elig-next-label">Continue</span>{{I:arrow:i--arrow}}</button>
+          </div>
+        </form>
+
+        <div class="result" id="elig-result" hidden>
+          <span class="result__icon" id="res-icon" aria-hidden="true"></span>
+          <h3 class="result__title" id="res-title" tabindex="-1"></h3>
+          <div class="result__chips" id="res-chips"></div>
+          <p class="result__body" id="res-body"></p>
+          <p class="result__note" id="res-note" hidden></p>
+          <div class="result__actions">
+            <a class="btn" href="#join" id="res-join">Get early access {{I:arrow:i--arrow}}</a>
+            <button class="btn btn--ghost" type="button" id="res-restart">Start over</button>
+          </div>
+        </div>
+
+        <p class="tool__privacy">{{I:lock}}<span>For information only, not medical advice. Your answers stay in your browser and aren't saved or sent.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--paper" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq__grid">
+      <div class="faq__intro">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2" id="faq-title">Questions, <em>answered.</em></h2>
+          <p class="lead">What to know about our clinicians, services, prices and AI.</p>
+        </div>
+        <div class="faq-more">
+          <p>Have a question we didn't cover? Ask our AI assistant, or email our team and we'll get back to you. Please don't include health details.</p>
+          <div class="faq-more__actions">
+            <button class="btn btn--sm" type="button" data-chat-open aria-controls="chat">{{I:chat}} Ask our assistant</button>
+            <a class="btn btn--ghost btn--sm" href="mailto:{{EMAIL}}">{{I:mail}} {{EMAIL}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="faq-list">
+        {{FAQ_ITEMS}}
+      </div>
+    </div>
+  </section>
+
+  <!-- Early access -->
+  <section class="section join grain on-dark" id="join" aria-labelledby="join-title">
+    {{MARK:m-art4:outline:join__art}}
+    <div class="wrap join__grid">
+      <div class="join__copy">
+        <p class="eyebrow eyebrow--light">Early access</p>
+        <h2 class="h2 h2--light" id="join-title">Be first <em>in line.</em></h2>
+        <p class="lead lead--light">We're opening in Texas first. Join the list and we'll email you when Jachi launches in your state.</p>
+        <ul class="perks">
+          <li>{{I:check}}Launch news for your state</li>
+          <li>{{I:check}}First access to appointments when we open</li>
+          <li>{{I:check}}Only a few emails. Unsubscribe anytime.</li>
+        </ul>
+      </div>
+
+      <div class="form-card">
+        <form class="form" id="join-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <h3 class="form__title" id="join-form-title" tabindex="-1">Get early access</h3>
+          <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="form__row">
+            <div class="field">
+              <label class="label" for="join-name">First name</label>
+              <input class="input" id="join-name" name="first_name" type="text" autocomplete="given-name" maxlength="60" required data-field="name" aria-describedby="err-name">
+              <p class="err" id="err-name" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <div class="field">
+              <label class="label" for="join-email">Email</label>
+              <input class="input" id="join-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required data-field="email" aria-describedby="err-email">
+              <p class="err" id="err-email" hidden>{{I:alert}}<span></span></p>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="join-state">State</label>
+            <select class="select" id="join-state" name="state" autocomplete="address-level1" required data-field="jstate" aria-describedby="err-jstate">
+              <option value="">Select your state</option>
+              {{STATE_OPTIONS}}
+            </select>
+            <p class="err" id="err-jstate" hidden>{{I:alert}}<span></span></p>
+          </div>
+          <fieldset class="fs" data-field="interest" aria-describedby="err-interest">
+            <legend class="label">I'm interested in<span class="label__hint">Select all that apply.</span></legend>
+            <div class="checks checks--chips">{{JOIN_INTERESTS}}</div>
+            <p class="err" id="err-interest" hidden>{{I:alert}}<span></span></p>
+          </fieldset>
+          <div class="field">
+            <label class="consent" for="join-consent">
+              <input type="checkbox" id="join-consent" name="consent" value="yes" required data-field="consent" aria-describedby="err-consent">
+              <span>Email me about Jachi Health's launch. I can unsubscribe at any time.</span>
+            </label>
+            <p class="err" id="err-consent" hidden>{{I:alert}}<span></span></p>
+          </div>
+          <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Get early access</span></button>
+          <div class="form-status" id="join-status" role="status"></div>
+          <p class="fine">We'll never sell your information. Read our <button class="linkish" type="button" data-open="privacy">privacy notice</button>.</p>
+        </form>
+
+        <div class="success" id="join-success" hidden>
+          <span class="success__icon" aria-hidden="true">{{I:check}}</span>
+          <h3 id="join-success-title" tabindex="-1">You're on the list<span id="join-success-name"></span>.</h3>
+          <p>We'll email <strong id="join-success-email"></strong> when Jachi opens in <strong id="join-success-state"></strong>.</p>
+          <button class="btn btn--ghost" type="button" id="join-again">Add another email</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer on-dark">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="brand brand--light" href="#top" aria-label="Jachi Health home">
+          {{MARK:m-foot:full}}
+          <span class="brand__word" aria-hidden="true"><b>Jachi</b> <span>Health</span></span>
+        </a>
+        <p class="footer__tag">Online care, rooted in real medicine.</p>
+        <a class="footer__mail" href="mailto:{{EMAIL}}">{{I:mail}}{{EMAIL}}</a>
+        <a class="btn btn--light btn--sm" href="#join">Get early access {{I:arrow:i--arrow}}</a>
+      </div>
+      <nav class="footer__col" aria-label="Care">
+        <h2 class="footer__h">Care</h2>
+        <ul>{{FOOTER_CARE}}<li><a href="#care-finder">Care finder</a></li></ul>
+      </nav>
+      <nav class="footer__col" aria-label="Company">
+        <h2 class="footer__h">Company</h2>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#approach">Our approach</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#join">Early access</a></li>
+          <li><button class="linkish" type="button" data-chat-open aria-controls="chat">Help chat</button></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Legal">
+        <h2 class="footer__h">Legal</h2>
+        <ul>
+          <li><button class="linkish" type="button" data-open="privacy">Privacy notice</button></li>
+          <li><a href="#ai-disclosure">AI disclosure</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer__legal">
+      <p class="emergency">{{I:alert}}<span>Jachi Health is not for emergencies. If you think you're having a medical emergency, call 911. If you're in crisis or thinking about suicide, call or text 988.</span></p>
+      <p>Jachi Health provides technology and administrative services. Medical and mental health care is provided by independent, licensed clinicians and therapists. Our care assistant is an AI tool. It doesn't diagnose, prescribe, provide therapy or replace your clinician. Jachi is for adults 18 and older, and we don't prescribe controlled substances.</p>
+      <p>© 2026 Jachi Health. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="btn btn--lg" href="#care-finder">Find the right care {{I:arrow:i--arrow}}</a>
+  <button class="dock__chat" type="button" data-chat-open aria-controls="chat" aria-label="Open help chat">{{I:chat}}</button>
+</div>
+
+<button class="chat-launcher" id="chat-launcher" type="button" data-chat-open aria-controls="chat" aria-expanded="false">
+  <span class="chat-launcher__ic">{{I:chat}}</span><span class="chat-launcher__label">Help</span>
+</button>
+
+<section class="chat" id="chat" role="dialog" aria-labelledby="chat-title" aria-describedby="chat-sub" hidden>
+  <header class="chat__head">
+    <span class="chat__avatar" aria-hidden="true">{{MARK:m-chat:solid}}</span>
+    <div class="chat__who">
+      <h2 class="chat__title" id="chat-title" tabindex="-1">Jachi Help</h2>
+      <p class="chat__sub" id="chat-sub"><span class="ai-tag">AI</span>Assistant · No live agents yet</p>
+    </div>
+    <button class="chat__close" type="button" id="chat-close" aria-label="Close help chat">{{I:x}}</button>
+  </header>
+
+  <div class="chat__talk" id="chat-talk">
+    <div class="chat__log" id="chat-log" role="log" aria-live="polite" aria-label="Conversation" tabindex="0">
+      <div class="msg msg--bot">Hi! I'm Jachi's AI assistant. I can answer questions about our services, prices and how Jachi works. I can't give medical advice, so please don't share personal health details here.</div>
+    </div>
+    <div class="chat__quick" id="chat-quick">
+      <button type="button" data-ask="What can Jachi help with?">What can you help with?</button>
+      <button type="button" data-ask="How much does it cost?">Prices</button>
+      <button type="button" data-ask="When and where are you launching?">When do you launch?</button>
+      <button type="button" data-ask="Do I need insurance?">Insurance</button>
+      <button type="button" data-ticket>Submit a ticket</button>
+    </div>
+    <form class="chat__composer" id="chat-form" novalidate>
+      <label class="visually-hidden" for="chat-input">Message Jachi's AI assistant</label>
+      <textarea class="chat__input" id="chat-input" rows="1" maxlength="800" placeholder="Ask a question" enterkeyhint="send"></textarea>
+      <button class="chat__send" type="submit" id="chat-send" aria-label="Send message" disabled>{{I:send}}</button>
+    </form>
+    <p class="chat__fine">AI can make mistakes and isn't medical advice. <button class="linkish" type="button" data-ticket>Submit a ticket</button> to reach our team.</p>
+  </div>
+
+  <div class="chat__ticket" id="chat-ticket" hidden>
+    <form class="ticket" id="ticket-form" name="support-ticket" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <button class="chat__back" type="button" id="ticket-back">{{I:arrow-left}} Back to chat</button>
+      <h3 class="ticket__title" id="ticket-title" tabindex="-1">Submit a ticket</h3>
+      <p class="ticket__lead">Live agents aren't available yet. Send a ticket and our team will reply by email.</p>
+      <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <div class="field">
+        <label class="label" for="ticket-name">Name</label>
+        <input class="input" id="ticket-name" name="name" type="text" autocomplete="name" maxlength="80" data-field="tname" aria-describedby="err-tname">
+        <p class="err" id="err-tname" hidden>{{I:alert}}<span></span></p>
+      </div>
+      <div class="field">
+        <label class="label" for="ticket-email">Email</label>
+        <input class="input" id="ticket-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" data-field="temail" aria-describedby="err-temail">
+        <p class="err" id="err-temail" hidden>{{I:alert}}<span></span></p>
+      </div>
+      <div class="field">
+        <label class="label" for="ticket-topic">Topic</label>
+        <select class="select" id="ticket-topic" name="topic">
+          <option>General question</option>
+          <option>Early access</option>
+          <option>Services and prices</option>
+          <option>Website problem</option>
+          <option>Partnerships or press</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="ticket-message">Message<span class="label__hint">Please don't include health details.</span></label>
+        <textarea class="input ticket__msg" id="ticket-message" name="message" rows="4" maxlength="2000" data-field="tmsg" aria-describedby="err-tmsg"></textarea>
+        <p class="err" id="err-tmsg" hidden>{{I:alert}}<span></span></p>
+      </div>
+      <label class="consent" for="ticket-include" id="ticket-include-row">
+        <input type="checkbox" id="ticket-include" name="include_chat" value="yes">
+        <span>Include my chat with the AI assistant</span>
+      </label>
+      <input type="hidden" name="chat_transcript" id="ticket-transcript">
+      <button class="btn btn--block" type="submit" id="ticket-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Send ticket</span></button>
+      <div class="form-status" id="ticket-status" role="status"></div>
+    </form>
+    <div class="success ticket__done" id="ticket-success" hidden>
+      <span class="success__icon" aria-hidden="true">{{I:check}}</span>
+      <h3 id="ticket-success-title" tabindex="-1">Ticket sent.</h3>
+      <p>We'll reply to <strong id="ticket-success-email"></strong> by email.</p>
+      <button class="btn btn--ghost" type="button" id="ticket-done">Back to chat</button>
+    </div>
+  </div>
+</section>
+
+<dialog class="sheet" id="privacy" aria-labelledby="privacy-title">
+  <div class="sheet__inner">
+    <button class="sheet__close" type="button" data-close aria-label="Close privacy notice">{{I:x}}</button>
+    <p class="eyebrow">Privacy</p>
+    <h2 class="sheet__title" id="privacy-title">Privacy at a glance</h2>
+    <h3>The care finder, condition search and weight care check</h3>
+    <p>They run entirely in your browser. What you type or choose, including your height, weight and health details, is never sent to us or stored.</p>
+    <h3>Early access sign-ups</h3>
+    <p>If you join early access, we collect your first name, email, state and the services you're interested in. We use them only to email you about our launch. Sign-ups are stored with our website host.</p>
+    <h3>Help chat and support tickets</h3>
+    <p>Messages you send to our AI assistant pass through our website host, Netlify, to our AI provider, Anthropic, so it can write a reply. We don't save chats. If you send a ticket, we collect your name, email, topic, message and, if you choose, your chat, and use them only to answer you. Tickets are stored with our website host and sent to our support inbox.</p>
+    <h3>What we don't do</h3>
+    <p>We don't sell your information, and this site doesn't use advertising cookies or tracking.</p>
+    <h3>Your choices</h3>
+    <p>To leave the list or ask about your information, email <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>, reply to any email from us or use the unsubscribe link in it. Please don't send health details by email.</p>
+    <h3>Your medical information</h3>
+    <p>When you become a patient, your health information is protected under HIPAA and stored in the United States.</p>
+    <p class="fine">Last updated October 2026.</p>
+  </div>
+</dialog>

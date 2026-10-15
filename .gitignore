@@ -1,0 +1,11 @@
+# Built previews, caches and test output (none of it is deployed)
+dist/
+.cache/
+tests/out/
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
+.netlify/
+.env
+.env.*

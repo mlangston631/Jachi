@@ -1,0 +1,24 @@
+# Netlify reads this file on every deploy. Settings here override the ones in Netlify's dashboard.
+
+[build]
+  # The site is built locally with `python3 build.py` and the output is committed,
+  # so Netlify has nothing to build. It just publishes this folder.
+  publish = "public"
+
+[functions]
+  # The help chat's server code (served at /api/chat).
+  directory = "netlify/functions"
+
+# Security headers for every page and file.
+# The Content-Security-Policy only allows our own code, Google Fonts and our own /api/chat.
+# If you add an outside service (analytics, video visits, a booking widget), it must be added here
+# or the browser will block it.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    Strict-Transport-Security = "max-age=31536000"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
