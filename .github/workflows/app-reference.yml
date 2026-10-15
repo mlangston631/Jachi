@@ -1,0 +1,50 @@
+# Saves the current Expo template's source and the type definitions of the libraries the app uses to app/.ci/ref/,
+# so the app is written against the exact APIs of this SDK. Runs only when this file changes on the "app" branch.
+name: app-reference
+on:
+  push:
+    branches: [app]
+    paths: ['.github/workflows/app-reference.yml']
+permissions:
+  contents: write
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Template and libraries
+        run: |
+          npx --yes create-expo-app@latest tpl --template default --yes > create.log 2>&1 || cat create.log
+          cd tpl
+          npx --yes expo install expo-secure-store expo-sqlite expo-notifications expo-local-authentication \
+            expo-localization expo-haptics expo-blur expo-linear-gradient react-native-svg expo-sharing \
+            expo-file-system expo-crypto expo-device expo-application expo-updates expo-build-properties > /dev/null 2>&1 || true
+      - name: Copy source and type definitions
+        run: |
+          REF=$GITHUB_WORKSPACE/app/.ci/ref
+          mkdir -p $REF/types
+          cd tpl
+          cp -r src $REF/template-src
+          cp AGENTS.md README.md $REF/ 2>/dev/null || true
+          cp -r scripts $REF/template-scripts 2>/dev/null || true
+          for p in expo-router expo-sqlite expo-notifications expo-secure-store expo-local-authentication expo-localization \
+                   expo-file-system expo-sharing expo-haptics expo-glass-effect expo-symbols expo-blur expo-linear-gradient \
+                   expo-crypto expo-splash-screen expo-image expo-status-bar expo-system-ui expo-device expo-application; do
+            if [ -d node_modules/$p ]; then
+              mkdir -p $REF/types/$p
+              cp node_modules/$p/package.json $REF/types/$p/
+              (cd node_modules/$p && find build -name '*.d.ts' -size -60k 2>/dev/null | head -200 | xargs -r -I{} cp --parents {} $REF/types/$p/)
+            fi
+          done
+          find $REF -type f | wc -l
+          du -sh $REF
+      - name: Save
+        run: |
+          git config user.name "jachi-ci"
+          git config user.email "ci@jachihealth.com"
+          git add app/.ci/ref
+          git commit -m "CI: template source and library type definitions [skip ci]" || true
+          git push
