@@ -37,7 +37,6 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="jachihealth"/>
-        <data android:scheme="exp+jachi-health"/>
       </intent-filter>
     </activity>
   </application>
