@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tests"))
 import serve  # noqa: E402
 from common import ensure_fonts, use_brand_fonts  # noqa: E402
-from content import PRICES, EMAIL  # noqa: E402
+from content import EMAIL, PRICING_NOTE  # noqa: E402
 import pages as PAGES  # noqa: E402
 import strings  # noqa: E402
 
@@ -31,9 +31,6 @@ OUT = ROOT / "tests" / "out"
 OUT.mkdir(exist_ok=True)
 ensure_fonts()
 
-
-def price(key, unit):
-    return f"{PRICES[key]} {unit}"
 
 
 server = serve.start(PORT)
@@ -217,7 +214,8 @@ with sync_playwright() as p:
     page.locator("fieldset[data-field='flag-urgent'] label:has(input[value='no'])").click()
     page.locator("#finder-next").click(); page.wait_for_timeout(700)
     chips = page.locator("#fres-chips").inner_text()
-    check("finder: urgent result with price", "Urgent care" in page.locator("#fres-title").inner_text() and price("visit", "per visit") in chips, chips)
+    check("finder: urgent result names the service, no price", "Urgent care" in page.locator("#fres-title").inner_text()
+          and "Online visit" in chips and "$" not in chips, chips)
     check("finder: launch note shown", "Texas" in page.locator("#fres-note").inner_text())
     check("finder: CTA arrow restored", page.locator("#fres-cta .i--arrow").count() == 1 and "btn--danger" not in page.locator("#fres-cta").get_attribute("class"))
     page.screenshot(path=str(OUT / "finder-urgent-mobile.png"))
@@ -412,7 +410,7 @@ with sync_playwright() as p:
             route.fulfill(status=503, content_type="application/json", body='{"error":"not_configured"}')
         else:
             route.fulfill(status=200, content_type="application/json",
-                          body=json.dumps({"reply": f"Visits are $49 and refills are $39. Questions? Email {EMAIL}."}))
+                          body=json.dumps({"reply": f"Our clinicians are licensed in your state. Questions? Email {EMAIL}."}))
     page.route("**/api/chat", chat_route)
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(500)
     launcher = page.locator("#chat-launcher")
@@ -423,11 +421,11 @@ with sync_playwright() as p:
     check("chat: input focused on desktop", page.evaluate("document.activeElement.id") == "chat-input")
     check("chat: send disabled while empty", page.locator("#chat-send").is_disabled())
     page.screenshot(path=str(OUT / "chat-open-desktop.png"))
-    page.locator("#chat-quick button[data-ask='How much does it cost?']").click(); page.wait_for_timeout(700)
+    page.locator("#chat-quick button[data-ask='Who are the clinicians?']").click(); page.wait_for_timeout(700)
     bots = page.locator("#chat-log .msg--bot")
-    check("chat: quick question gets an AI reply", "Visits are $49" in bots.last.inner_text(), bots.last.inner_text())
+    check("chat: quick question gets an AI reply", "licensed in your state" in bots.last.inner_text(), bots.last.inner_text())
     check("chat: quick replies hide after first question", page.locator("#chat-quick").is_hidden())
-    check("chat: request carries the conversation", chat_bodies and json.loads(chat_bodies[-1])["messages"][-1] == {"role": "user", "content": "How much does it cost?"}, str(chat_bodies[-1:]))
+    check("chat: request carries the conversation", chat_bodies and json.loads(chat_bodies[-1])["messages"][-1] == {"role": "user", "content": "Who are the clinicians?"}, str(chat_bodies[-1:]))
     check("chat: support email becomes a link", page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
     page.locator("#chat-input").fill("Do you take insurance?")
     page.keyboard.press("Enter"); page.wait_for_timeout(700)
@@ -543,7 +541,7 @@ with sync_playwright() as p:
     ctx.close()
     page, ctx, o, lg = run_finder("refill", "unsure")
     check("refill unsure → may be a fit, pharmacist note", "may be a good fit" in o["title"] and "pharmacist" in o["body"]
-          and price("refill", "per refill") in o["chips"], json.dumps(o))
+          and "Online refill" in o["chips"], json.dumps(o))
     ctx.close()
     page, ctx, o, lg = run_finder("refill", "no", "refill")
     check("refill no → good fit", o["title"] == "A refill visit is a good fit." and o["label"] == "Get early access", json.dumps(o))
@@ -556,8 +554,8 @@ with sync_playwright() as p:
     check("crisis offers call and text 988", links == ["tel:988", "sms:988"], str(links))
     ctx.close()
     page, ctx, o, lg = run_finder("mental", "no", "mental")
-    check("mental no → therapy or medication, prices, 988", "Therapy, medication or both" in o["title"] and price("therapy", "per session") in o["chips"]
-          and price("mental", "per month") in o["chips"] and "988" in o["body"], json.dumps(o))
+    check("mental no → therapy or medication, 988", "Therapy, medication or both" in o["title"] and "Therapy" in o["chips"]
+          and "Medication care" in o["chips"] and "988" in o["body"] and "$" not in o["chips"], json.dumps(o))
     page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
     check("mental CTA preselects therapy and medication care", page.locator("input[name='interest'][value='therapy']").is_checked()
           and page.locator("input[name='interest'][value='anxiety-depression']").is_checked())
@@ -567,7 +565,7 @@ with sync_playwright() as p:
           and not o["cta"] and "result--inperson" in o["kind"], json.dumps(o))
     ctx.close()
     page, ctx, o, lg = run_finder("sexual", "unsure")
-    check("sexual unsure → fit plus PEP warning", "Sexual health" in o["title"] and price("visit", "per visit") in o["chips"] and "72 hours" in o["body"], json.dumps(o))
+    check("sexual unsure → fit plus PEP warning", "Sexual health" in o["title"] and "Online visit" in o["chips"] and "72 hours" in o["body"], json.dumps(o))
     page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
     check("sexual CTA preselects sexual health", page.locator("input[name='interest'][value='sexual-health']").is_checked())
     ctx.close()
@@ -576,7 +574,7 @@ with sync_playwright() as p:
           and "hair loss" in o["body"], json.dumps(o))
     ctx.close()
     page, ctx, o, lg = run_finder("mens", "no", "mens")
-    check("men's no → fit", "Men's health" in o["title"] and price("visit", "per visit") in o["chips"], json.dumps(o))
+    check("men's no → fit", "Men's health" in o["title"] and "Online visit" in o["chips"], json.dumps(o))
     page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
     check("men's CTA preselects men's health", page.locator("input[name='interest'][value='mens-health']").is_checked())
     ctx.close()
@@ -596,7 +594,7 @@ with sync_playwright() as p:
     ctx.close()
     page, ctx, o, lg = run_finder("weight", None, "weight")
     check("weight → skips safety step to eligibility", "weight care check" in o["title"] and o["href"] == "#eligibility"
-          and price("weight", "per month") in o["chips"], json.dumps(o))
+          and "Ongoing care" in o["chips"], json.dumps(o))
     page.locator("#fres-cta").click(); page.wait_for_timeout(1300)
     t = page.evaluate("document.getElementById('eligibility').getBoundingClientRect().top")
     check("weight CTA scrolls to the check", -5 <= t < 140, f"top={t}")
@@ -850,7 +848,7 @@ with sync_playwright() as p:
     page, logs = setup(ctx)
     page.add_init_script("navigator.share = async data => { window.__shared = data; };")
     page.route("**/api/chat", lambda r: r.fulfill(status=200, content_type="application/json",
-                                                     body=json.dumps({"reply": f"Las consultas cuestan $49. Escriba a {EMAIL}."})))
+                                                     body=json.dumps({"reply": f"Compartiremos los precios antes de abrir. Escriba a {EMAIL}."})))
     page.goto(ES_URL + "#care-finder", wait_until="networkidle"); page.wait_for_timeout(500)
     page.locator("#finder-next").click(); page.wait_for_timeout(300)
     check("es finder: empty step shows the Spanish error", page.locator("#err-need").inner_text().strip() == ES["f_need"])
@@ -867,8 +865,8 @@ with sync_playwright() as p:
     page.locator("fieldset[data-field='flag-mental'] label:has(input[value='no'])").click()
     page.locator("#finder-next").click(); page.wait_for_timeout(600)
     chips = page.locator("#fres-chips").inner_text()
-    check("es finder: therapy and medication result with Spanish prices", page.locator("#fres-title").inner_text() == ES["f_mental_title"]
-          and f"Terapia: {PRICES['therapy']} por sesión" in chips, chips)
+    check("es finder: therapy and medication result in Spanish", page.locator("#fres-title").inner_text() == ES["f_mental_title"]
+          and ES["f_mental_chip_therapy"] in chips and ES["f_mental_chip_meds"] in chips, chips)
     page.screenshot(path=str(OUT / "es-finder-phone.png"))
 
     page.goto(ES_URL + "#services", wait_until="networkidle"); page.wait_for_timeout(400)
@@ -933,7 +931,7 @@ with sync_playwright() as p:
     alert = page.locator("#chat-log .msg--alert").last
     check("es chat: Spanish crisis gets 988 in Spanish", "AYUDA" in alert.inner_text() and alert.locator("a[href='tel:988']").count() == 1)
     page.locator("#chat-input").fill("¿Cuánto cuesta?"); page.locator("#chat-send").click(); page.wait_for_timeout(700)
-    check("es chat: AI reply shown with the email linked", "$49" in page.locator("#chat-log .msg--bot").last.inner_text()
+    check("es chat: AI reply shown with the email linked", "antes de abrir" in page.locator("#chat-log .msg--bot").last.inner_text()
           and page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
     page.screenshot(path=str(OUT / "es-chat-phone.png"))
     page.locator("#chat .chat__fine [data-ticket]").click(); page.wait_for_timeout(300)
@@ -1044,6 +1042,29 @@ with sync_playwright() as p:
             if w == 390:
                 page.screenshot(path=str(OUT / f"legal-{slug}-390.png"), full_page=True)
             ctx.close()
+
+    # 12b) No prices anywhere until the owner has a quote (terms keep their $100 liability cap)
+    import re as _re
+    priced = []
+    for f in sorted((ROOT / "public").rglob("*.html")):
+        rel = "/" + str(f.relative_to(ROOT / "public"))
+        if rel == "/terms/index.html":
+            continue
+        if _re.search(r"\$\s?\d", f.read_text()):
+            priced.append(rel)
+    chat_src = (ROOT / "netlify" / "functions" / "chat.mjs").read_text()
+    check("no prices on any page or in the assistant's instructions", not priced and not _re.search(r"\$\s?\d", chat_src)
+          and "Prices aren't set yet" in chat_src, str(priced))
+    ctx = browser.new_context(viewport={"width": 1280, "height": 900})
+    page, logs = setup(ctx)
+    page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
+    check("service notes say prices come before opening", PRICING_NOTE in page.locator(".svc-notes").inner_text())
+    page.goto(f"{BASE}/weight-loss/", wait_until="networkidle"); page.wait_for_timeout(300)
+    glance = page.locator(".glance").inner_text()
+    check("service page summary: service, kind of care, no price", "Weight care" in glance and "Ongoing care" in glance
+          and PRICING_NOTE in glance and "$" not in glance, glance)
+    check("no prices: no console errors", not logs, json.dumps(logs))
+    ctx.close()
 
     # 13) Search engine files and fonts
     status, headers, body = get("/sitemap.xml")

@@ -37,7 +37,6 @@ for d in (PUBLIC, FUNCTIONS, DIST):
     d.mkdir(parents=True, exist_ok=True)
 
 SITE_URL = "https://www.jachihealth.com"
-PRICES = EN_CONTENT.PRICES
 EMAIL = EN_CONTENT.EMAIL
 esc = html.escape
 
@@ -116,13 +115,14 @@ class Lang:
             self.popular = list(c.POPULAR)
             self.faq = list(c.FAQ)
             self.build = c.BUILD
+            self.pricing_note = c.PRICING_NOTE
             self.state_name = dict(STATES)
         else:
             es = ES_CONTENT
             self.services = []
             for s in EN_CONTENT.SERVICES:
                 t = es.SERVICES[s["key"]]
-                self.services.append({**s, **t, "chip": t.get("chip", t["name"]), "member": s["tag"] == "Membership"})
+                self.services.append({**s, **t, "chip": t.get("chip", t["name"])})
             self.finder = [(k, ic, *es.FINDER[k]) for k, ic, _t, _s in EN_CONTENT.FINDER]
             self.treated = [(es.TREATED[n][0], cat, f"{es.TREATED[n][1]} {terms}", es.TREATED[n][2])
                             for n, cat, terms, _note in EN_CONTENT.TREATED]
@@ -134,9 +134,10 @@ class Lang:
             self.popular = list(es.POPULAR)
             self.faq = list(es.FAQ)
             self.build = es.BUILD
+            self.pricing_note = es.PRICING_NOTE
             self.state_name = {c: es.STATES.get(c, n) for c, n in STATES}
         for s in self.services:
-            s.setdefault("member", s["tag"] == "Membership")
+            s.setdefault("ongoing", False)
         self.by_key = {s["key"]: s for s in self.services}
 
 
@@ -164,7 +165,7 @@ def faq_items(items):
 def service_card(L, svc, i):
     B = L.build
     items = "".join(f"<li>{icon_svg('check')}<span>{esc(t)}</span></li>" for t in svc["items"])
-    tag_cls = "svc__tag svc__tag--member" if svc["member"] else "svc__tag"
+    tag_cls = "svc__tag svc__tag--ongoing" if svc["ongoing"] else "svc__tag"
     name_lower = esc(svc["name"].lower())
     if svc.get("elig"):
         cta = (f'<a class="btn btn--ghost btn--block" href="#eligibility" data-elig>{esc(B["check_elig_long"])}'
@@ -181,7 +182,6 @@ def service_card(L, svc, i):
     return (f'<article class="svc" id="svc-{svc["key"]}" data-reveal style="--d:{(i % 3) * 80}ms">'
             f'<span class="svc__ic">{icon_svg(svc["icon"])}</span>{title}'
             f'<span class="{tag_cls}">{esc(svc["tag"])}</span>'
-            f'<p class="svc__price"><b>{svc["price"]}</b><span>{esc(svc["unit"])}</span></p>'
             f'<p class="svc__desc">{esc(svc["desc"])}</p>'
             f'<ul class="svc__list">{items}</ul>{cta}</article>')
 
@@ -199,11 +199,11 @@ def condition_rows(L):
     for name, cat, terms, note in L.treated:
         lower = esc(lower_first(name))
         if cat == "mental+therapy":
-            meta = esc(B["mental_meta"].format(therapy=PRICES["therapy"], mental=PRICES["mental"]))
+            meta = esc(B["mental_meta"])
             ic, interest = "mind", "therapy,anxiety-depression"
         else:
             svc = L.by_key[cat]
-            meta = f"{esc(svc['name'])} · {svc['price']} {esc(svc['unit'])}"
+            meta = f"{esc(svc['name'])} · {esc(svc['tag'])}"
             ic, interest = svc["icon"], svc["interest"]
         if cat == "weight":
             cta = (f'<a class="btn btn--ghost btn--sm hit__cta" href="#eligibility" data-elig>{esc(B["check_elig"])}'
@@ -237,9 +237,7 @@ def footer_care(L, home):
 def render(text, L, tokens):
     for token, value in tokens.items():
         text = text.replace(token, value)
-    for key, value in PRICES.items():
-        text = text.replace("{{PRICE_" + key.upper() + "}}", value)
-    text = text.replace("{{EMAIL}}", EMAIL)
+    text = text.replace("{{EMAIL}}", EMAIL).replace("{{PRICING_NOTE}}", esc(L.pricing_note))
     text = re.sub(r"\{\{MARK:([\w-]+):(\w+)(?::([\w -]+))?\}\}",
                   lambda m: mark(m.group(1), m.group(2), m.group(3) or ""), text)
     text = re.sub(r"\{\{I:([\w-]+)(?::([\w -]+))?\}\}",
@@ -296,12 +294,10 @@ def js_for(lang, rules=False):
     L = Lang(lang)
     text = ((SRC / "app.js").read_text()
             .replace("/*ICONS_JSON*/", json.dumps(ICONS))
-            .replace("/*PRICES_JSON*/", json.dumps(PRICES))
             .replace("/*EMAIL_JSON*/", json.dumps(EMAIL))
             .replace("/*STRINGS_JSON*/", json.dumps(L.T, ensure_ascii=False))
-            .replace("/*SERVICES_JSON*/", json.dumps({s["key"]: {"name": s["name"], "price": s["price"], "unit": s["unit"],
-                                                               "interest": s["interest"]} for s in L.services},
-                                                     ensure_ascii=False)))
+            .replace("/*SERVICES_JSON*/", json.dumps({s["key"]: {"name": s["name"], "tag": s["tag"], "interest": s["interest"]}
+                                                      for s in L.services}, ensure_ascii=False)))
     if "/*CHAT_RULES*/" not in text:
         raise SystemExit("chat rules hook missing")
     text = text.replace("/*CHAT_RULES*/", json.dumps(chatbot.system_prompt()) if rules else "null")
@@ -384,12 +380,12 @@ def write(path, text):
     return out
 
 
-DESCRIPTION = (f"See a licensed clinician online for urgent care, refills, therapy, sexual health, men's and women's "
-               f"health, skin and weight care. {PRICES['visit']} visits, no insurance needed. Launching in Texas.")
+DESCRIPTION = ("See a licensed clinician online for urgent care, refills, therapy, sexual health, men's and women's "
+               "health, skin and weight care. No insurance needed. Launching in Texas.")
 TITLE = "Jachi Health | Online urgent care, therapy, sexual health and more"
-ES_DESCRIPTION = (f"Consulte en línea a un profesional de la salud con licencia para atención de urgencia, resurtidos, "
-                  f"terapia, salud sexual, salud del hombre y de la mujer, piel y control de peso. Consultas de "
-                  f"{PRICES['visit']}, sin seguro médico. Abrimos pronto en Texas.")
+ES_DESCRIPTION = ("Consulte en línea a un profesional de la salud con licencia para atención de urgencia, resurtidos, "
+                  "terapia, salud sexual, salud del hombre y de la mujer, piel y control de peso. Sin seguro médico. "
+                  "Abrimos pronto en Texas.")
 ES_TITLE = "Jachi Health | Atención médica en línea, terapia, salud sexual y más"
 SHARE_ALT = "Jachi Health: online care, rooted in real medicine. Licensed clinicians, no insurance needed."
 SHARE_ALT_ES = "Jachi Health: atención en línea, arraigada en la medicina real. Profesionales con licencia, sin seguro médico."
@@ -445,10 +441,6 @@ if (SRC / "es" / "home.html").exists():
 
 # ---------- Service pages (English) ----------
 
-def fill(text):
-    return text.format(**PRICES)
-
-
 def service_page(p):
     L = Lang("en")
     svc = L.by_key[p["key"]]
@@ -468,7 +460,7 @@ def service_page(p):
         items.append(f"<li>{icon_svg('check')}<span><b>{esc(title)}</b>{note_html}</span></li>")
     steps = "".join(f'<li><span class="n" aria-hidden="true">{i}</span><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></li>'
                     for i, (t, d) in enumerate(p.get("steps", PAGES.STEPS), 1))
-    know = "".join(f"<li>{icon_svg('info')}<span>{esc(fill(k))}</span></li>" for k in p["know"])
+    know = "".join(f"<li>{icon_svg('info')}<span>{esc(k)}</span></li>" for k in p["know"])
     s = p["safety"]
     flags = "".join(f"<li>{esc(x)}</li>" for x in s["items"])
     flags_html = f'<ul class="flags">{flags}</ul>' if flags else ""
@@ -488,24 +480,23 @@ def service_page(p):
         second = '<a class="btn btn--ghost btn--lg" href="/#care-finder">Find the right care</a>'
     perks = ["No insurance needed",
              "Licensed therapists in your state" if p["key"] == "therapy" else "Licensed clinicians in your state",
-             "Month to month, cancel anytime" if svc["member"] else
-             ("No subscription" if p["key"] == "therapy" else "Prescriptions sent to your pharmacy")]
+             "Regular check-ins" if svc["ongoing"] else
+             ("Private video sessions" if p["key"] == "therapy" else "Prescriptions sent to your pharmacy")]
     perk_items = "".join(f"<li>{icon_svg('check')}<span>{esc(x)}</span></li>" for x in perks)
-    card = (f'<aside class="price-card" aria-label="{esc(svc["name"])} price">'
+    tag_cls = "svc__tag svc__tag--ongoing" if svc["ongoing"] else "svc__tag"
+    card = (f'<aside class="glance" aria-label="{esc(svc["name"])} at a glance">'
             f'<span class="svc__ic">{icon_svg(svc["icon"])}</span>'
-            f'<p class="price-card__name">{esc(svc["name"])}</p>'
-            f'<p class="price-card__price"><b>{svc["price"]}</b><span>{esc(svc["unit"])}</span></p>'
+            f'<p class="glance__name">{esc(svc["name"])}</p>'
+            f'<span class="{tag_cls}">{esc(svc["tag"])}</span>'
             f'<ul>{perk_items}</ul>'
-            f'<p class="fine">Medication and lab tests are billed separately.</p></aside>')
-    related = "".join(
-        f'<li><a href="/{r}/">{esc(PAGES.BY_SLUG[r]["crumb"])}<small>{L.by_key[PAGES.BY_SLUG[r]["key"]]["price"]}</small></a></li>'
-        for r in p["related"])
-    faq = [(q, fill(a)) for q, a in p["faq"]]
+            f'<p class="fine">{esc(L.pricing_note)} Medication and lab tests are billed separately.</p></aside>')
+    related = "".join(f'<li><a href="/{r}/">{esc(PAGES.BY_SLUG[r]["crumb"])}</a></li>' for r in p["related"])
+    faq = list(p["faq"])
     tokens = {
         **chrome_tokens(L, "/", "/", join_href),
         "{{CRUMBS}}": crumbs(trail),
         "{{SVC_H1}}": f'{esc(p["h1"][0])} <em>{esc(p["h1"][1])}</em>',
-        "{{SVC_LEAD}}": esc(fill(p["lead"])) + f' {esc(svc["price"])} {esc(svc["unit"])}, no insurance needed.',
+        "{{SVC_LEAD}}": esc(p["lead"]) + " No insurance needed.",
         "{{SVC_SECOND_CTA}}": second,
         "{{SVC_CARD}}": card,
         "{{SVC_CRUMB}}": esc(p["crumb"]),
@@ -525,8 +516,8 @@ def service_page(p):
         render(part("en", n), L, tokens) for n in ("footer", "dock", "chat"))
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}
-    page = {"lang": "en", "path": path, "main": main, "title": fill(p["title"]),
-            "description": fill(p["description"]), "ld": [breadcrumb_ld(trail, path), faq_ld]}
+    page = {"lang": "en", "path": path, "main": main, "title": p["title"],
+            "description": p["description"], "ld": [breadcrumb_ld(trail, path), faq_ld]}
     write(path, document(page, body))
     SITEMAP.append((path, None))
 

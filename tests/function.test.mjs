@@ -10,7 +10,7 @@ const req = (body, { method = 'POST', origin = 'https://www.jachihealth.com' } =
   method, headers: { 'content-type': 'application/json', ...(origin ? { origin } : {}) }, body: method === 'POST' ? (typeof body === 'string' ? body : JSON.stringify(body)) : undefined,
 });
 let calls = [];
-let upstream = { status: 200, body: { content: [{ type: 'text', text: 'Visits are $49.' }] } };
+let upstream = { status: 200, body: { content: [{ type: 'text', text: 'We launch in Texas first.' }] } };
 globalThis.fetch = async (url, init) => { calls.push({ url, init }); return new Response(JSON.stringify(upstream.body), { status: upstream.status }); };
 
 delete process.env.ANTHROPIC_API_KEY;
@@ -36,12 +36,13 @@ r = await handler(req({ messages: [
   { role: 'user', content: 'x'.repeat(5000) },
 ] }), { ip: '1.1.1.6' });
 const out = await r.json();
-check('valid → 200 with reply', r.status === 200 && out.reply === 'Visits are $49.', JSON.stringify(out));
+check('valid → 200 with reply', r.status === 200 && out.reply === 'We launch in Texas first.', JSON.stringify(out));
 const sent = calls[0] && JSON.parse(calls[0].init.body);
 check('calls the Messages API', calls[0] && calls[0].url === 'https://api.anthropic.com/v1/messages');
 check('sends key and version headers', calls[0].init.headers['x-api-key'] === 'test-key' && calls[0].init.headers['anthropic-version'] === '2023-06-01');
 check('uses Haiku 5.5, thinking off, small max_tokens', sent.model === 'claude-haiku-5-5' && sent.thinking.type === 'disabled' && sent.max_tokens === 500);
-check('system prompt has rules and prices', sent.system[0].text.includes('call 911') && sent.system[0].text.includes('$49') && sent.system[0].text.includes('988'));
+check('system prompt has the safety rules', sent.system[0].text.includes('call 911') && sent.system[0].text.includes('988'));
+check('system prompt has no prices and says so', !/\$\s?\d/.test(sent.system[0].text) && sent.system[0].text.includes("Prices aren't set yet"));
 check('system prompt answers in the visitor\'s language', sent.system[0].text.includes('reply in the language the visitor writes in') && sent.system[0].text.includes('AYUDA'));
 check('drops leading assistant + system roles, merges user turns', sent.messages.length === 1 && sent.messages[0].role === 'user' && sent.messages[0].content.startsWith('How much\n\ndoes it cost?'));
 check('caps message length', sent.messages[0].content.length <= 1500 * 3 + 4, String(sent.messages[0].content.length));

@@ -1,6 +1,6 @@
 # Jachi Health website
 
-The website for [jachihealth.com](https://www.jachihealth.com): services and prices, a care finder, condition search,
+The website for [jachihealth.com](https://www.jachihealth.com): services, a care finder, condition search,
 a weight care check, early-access sign-up, an AI help chat with support tickets, a page for each service, a Spanish
 home page, and the privacy policy, terms of use and Texas Medical Board notice.
 
@@ -45,7 +45,7 @@ The published files are generated. Edit the source, then rebuild:
 
 | To change | Edit |
 | --- | --- |
-| Prices, services, conditions, FAQ, support email | `content.py` (Spanish wording in `content_es.py`) |
+| Services, conditions, FAQ, support email | `content.py` (Spanish wording in `content_es.py`) |
 | Home page layout and wording | `src/en/home.html`, then `python3 tools/es_home.py` for Spanish |
 | Header, footer, help chat | `src/en/*.html` and the Spanish copies in `src/es/` |
 | Words the page script shows (results, errors, chat) | `strings.py` (both languages) |

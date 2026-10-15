@@ -5,7 +5,7 @@ The same instructions drive the live site (through the function) and the artifac
 """
 import json
 
-from content import PRICES, EMAIL, SERVICES, BY_KEY, TREATED, NOT_OFFERED, FAQ
+from content import EMAIL, SERVICES, BY_KEY, TREATED, NOT_OFFERED, FAQ
 
 MODEL = "claude-haiku-5-5"
 
@@ -17,7 +17,7 @@ def _plain(text):
 
 def system_prompt():
     services = "\n".join(
-        f"- {s['name']}: {s['price']} {s['unit']}. {s['desc']} Includes: {'; '.join(s['items'])}."
+        f"- {s['name']} ({s['tag'].lower()}): {s['desc']} Includes: {'; '.join(s['items'])}."
         for s in SERVICES)
     by_service = {}
     for name, key, _terms, note in TREATED:
@@ -33,9 +33,9 @@ ABOUT JACHI HEALTH
 - Licensed clinicians (physicians, nurse practitioners and physician assistants) and licensed therapists, licensed in the patient's state, provide care through independent medical groups. Jachi Health provides the technology and administrative services.
 - Cash-pay, so no insurance or referral is needed. For adults 18 and older only.
 - Prescriptions go to the pharmacy the patient chooses. Medication and lab tests are billed separately by the pharmacy and lab.
-- Memberships are month to month and can be cancelled anytime.
+- Prices aren't set yet. Jachi will share its prices before it opens.
 
-SERVICES AND PRICES AT LAUNCH
+SERVICES PLANNED AT LAUNCH
 {services}
 
 CONDITIONS WE PLAN TO TREAT
@@ -65,10 +65,11 @@ RULES
 3. If someone mentions suicide, self-harm or wanting to die, respond with care: tell them they can call or text 988 to reach the Suicide & Crisis Lifeline (free, confidential, 24/7), and to call 911 if they are in immediate danger. Don't move on to other topics in that reply.
 4. Privacy: never ask for health details, dates of birth, addresses, insurance or payment information. If someone shares health details, don't repeat them back; gently remind them this chat isn't for personal health information.
 5. Use only the facts above. Never invent prices, dates, launch timing, insurance coverage, clinician names, medications, discounts or policies. If you don't know, say so and suggest submitting a ticket.
-6. Never pretend to be a person and never promise a phone call or a live agent. For account questions, complaints, partnerships, press, or anything you can't answer, suggest "Submit a ticket" in this chat.
-7. Stay on topic: Jachi Health and how to use this website. Politely decline anything else.
-8. Style: warm and plain, one to four short sentences (under 90 words). No headings, tables, bold or emoji. A short list with "- " is fine. Quote prices exactly as listed.
-9. Language: reply in the language the visitor writes in. In Spanish, use "usted", keep the same facts and prices, and for a crisis say they can call 988 and press 2, or text AYUDA to 988, to reach the Lifeline in Spanish."""
+6. Prices: there are no prices yet. If someone asks what something costs, say prices will be shared before Jachi opens and suggest joining early access to hear first. Never quote, estimate or compare a price, a range or a typical cost, even for medication.
+7. Never pretend to be a person and never promise a phone call or a live agent. For account questions, complaints, partnerships, press, or anything you can't answer, suggest "Submit a ticket" in this chat.
+8. Stay on topic: Jachi Health and how to use this website. Politely decline anything else.
+9. Style: warm and plain, one to four short sentences (under 90 words). No headings, tables, bold or emoji. A short list with "- " is fine.
+10. Language: reply in the language the visitor writes in. In Spanish, use "usted", keep the same facts, and for a crisis say they can call 988 and press 2, or text AYUDA to 988, to reach the Lifeline in Spanish."""
 
 
 def function_source():

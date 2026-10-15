@@ -1,8 +1,8 @@
 """The service pages (one per service, plus UTI treatment), built by build.py from src/en/service.html.
 
-Each page targets what people search for. Prices come from content.py through {visit}, {refill}, {therapy},
-{mental} and {weight}. "list" items name rows from content.TREATED (their notes are shown too), or are given as
-(title, note) pairs. Keep every claim true for launch: no visits can be booked yet, and nothing here is medical advice.
+Each page targets what people search for. "list" items name rows from content.TREATED (their notes are shown
+too), or are given as (title, note) pairs. Keep every claim true for launch: no visits can be booked yet, nothing here
+is medical advice, and no prices are shown until the owner has a quote (see content.py).
 """
 
 WHEN = ("When will Jachi open?",
@@ -22,9 +22,9 @@ CALL_911 = ["Chest pain or pressure", "Trouble breathing", "Face drooping, arm w
 PAGES = [
     {
         "slug": "urgent-care", "key": "urgent",
-        "title": "Online Urgent Care in Texas | {visit} Visits | Jachi Health",
+        "title": "Online Urgent Care in Texas | Jachi Health",
         "description": "See a licensed clinician online for colds, flu, sinus infections, UTIs, pink eye, rashes and more. "
-                       "{visit} per visit, no insurance needed. Launching in Texas.",
+                       "No insurance needed. Launching in Texas.",
         "crumb": "Urgent care",
         "h1": ("Online urgent care,", "without the waiting room."),
         "lead": "A licensed clinician can treat many everyday illnesses online, from colds and sinus infections to UTIs "
@@ -33,7 +33,7 @@ PAGES = [
         "list": ["Cold and flu", "COVID-19", "Sinus infection", "Sore throat", "Bronchitis",
                  "Urinary tract infection (UTI)", "Pink eye", "Seasonal allergies", "Rashes, hives and bites",
                  "Stomach bug", "Migraine"],
-        "know": ["{visit} per visit. Any medication is billed separately by your pharmacy.",
+        "know": ["No insurance needed. Any medication is billed separately by your pharmacy.",
                  "If you need an exam, a test or an X-ray, your clinician will tell you where to go in person.",
                  "For adults 18 and older. We don't prescribe controlled substances."],
         "safety": {"kind": "911", "title": "Call 911 for an emergency",
@@ -45,7 +45,7 @@ PAGES = [
              "allergies, rashes, stomach bugs and migraines. If something needs a hands-on exam or a test, your "
              "clinician will tell you."),
             ("How much does a visit cost?",
-             "{visit} per visit, with no insurance needed. Any medication is billed separately by your pharmacy, and "
+             "We'll share our prices before we open. You won't need insurance, and any medication is billed separately by your pharmacy, and "
              "lab tests by the lab."),
             ("Can I get a prescription?",
              "If your clinician decides medication is right for you, they send the prescription to the pharmacy you "
@@ -56,9 +56,9 @@ PAGES = [
     },
     {
         "slug": "uti-treatment", "key": "urgent",
-        "title": "UTI Treatment Online in Texas | {visit} Visits | Jachi Health",
+        "title": "UTI Treatment Online in Texas | Jachi Health",
         "description": "Get treated for a urinary tract infection online by a licensed clinician, with antibiotics sent to "
-                       "your pharmacy if they're right for you. {visit} per visit. Launching in Texas.",
+                       "your pharmacy if they're right for you. No insurance needed. Launching in Texas.",
         "crumb": "UTI treatment",
         "h1": ("UTI treatment online,", "without the wait."),
         "lead": "Burning when you urinate, a strong urge to go or needing to go often? A licensed clinician can review "
@@ -66,7 +66,7 @@ PAGES = [
         "list_title": "Common signs of a UTI",
         "list": [("Burning or pain when you urinate", ""), ("Needing to urinate often or urgently", ""),
                  ("Cloudy or strong-smelling urine", ""), ("Pressure or pain in your lower belly", "")],
-        "know": ["{visit} per visit. Antibiotics are billed separately by your pharmacy.",
+        "know": ["No insurance needed. Antibiotics are billed separately by your pharmacy.",
                  "Your clinician may ask for a urine test at a nearby lab. Lab fees are billed separately.",
                  "For adults 18 and older. Your clinician will tell you if you need to be seen in person."],
         "safety": {"kind": "inperson", "title": "Get seen in person today if you have",
@@ -79,7 +79,7 @@ PAGES = [
              "Often, yes. Many bladder infections can be treated after a clinician reviews your symptoms and health "
              "history online. If you need a urine test or an exam, your clinician will tell you."),
             ("How much does UTI treatment cost?",
-             "{visit} for the visit, with no insurance needed. Antibiotics are billed separately by your pharmacy, and "
+             "We'll share our prices before we open. You won't need insurance, and antibiotics are billed separately by your pharmacy, and "
              "any lab test by the lab."),
             ("What if my UTI keeps coming back?",
              "Tell your clinician. Infections that keep coming back may need a urine culture or an in-person visit to "
@@ -90,9 +90,9 @@ PAGES = [
     },
     {
         "slug": "prescription-refills", "key": "refill",
-        "title": "Online Prescription Refills | {refill} per Refill | Jachi Health",
+        "title": "Online Prescription Refills in Texas | Jachi Health",
         "description": "Renew medications you already take, like blood pressure, cholesterol, thyroid and diabetes "
-                       "medicines, with a licensed clinician online. {refill} per refill. Launching in Texas.",
+                       "medicines, with a licensed clinician online. No insurance needed. Launching in Texas.",
         "crumb": "Prescription refills",
         "h1": ("Prescription refills,", "without the runaround."),
         "lead": "Running low on a medication you already take? A licensed clinician can review your history, renew many "
@@ -100,7 +100,7 @@ PAGES = [
         "list_title": "Medications we can often renew",
         "list": ["High blood pressure", "High cholesterol", "Hypothyroidism", "Asthma", "Acid reflux (GERD)",
                  "Type 2 diabetes"],
-        "know": ["{refill} per refill or renewal. The medication is billed separately by your pharmacy.",
+        "know": ["No insurance needed. The medication is billed separately by your pharmacy.",
                  "Your clinician may ask about recent lab work or readings, like a blood pressure log, before renewing.",
                  "Have your medication name, dose and pharmacy handy."],
         "safety": {"kind": "caution", "title": "Controlled substances can't be refilled online",
@@ -113,7 +113,7 @@ PAGES = [
              "Many everyday medications, including those for blood pressure, cholesterol, thyroid, asthma, acid reflux "
              "and type 2 diabetes. Your clinician decides whether a refill is safe and right for you."),
             ("How much does a refill cost?",
-             "{refill} per refill or renewal, with no insurance needed. The medication itself is billed by your pharmacy."),
+             "We'll share our prices before we open. You won't need insurance, and the medication itself is billed by your pharmacy."),
             ("Do you refill ADHD medication or Xanax?",
              "No. We don't prescribe or refill controlled substances, such as ADHD stimulants, benzodiazepines like "
              "Xanax, opioids, testosterone or sleep medicines like Ambien."),
@@ -123,22 +123,21 @@ PAGES = [
     },
     {
         "slug": "online-therapy", "key": "therapy",
-        "title": "Online Therapy in Texas | {therapy} per Session | Jachi Health",
+        "title": "Online Therapy in Texas | Jachi Health",
         "description": "Private video sessions with a licensed therapist for stress, anxiety, depression, grief, "
-                       "relationships and more. {therapy} per session, no subscription. Launching in Texas.",
+                       "relationships and more. No insurance needed. Launching in Texas.",
         "crumb": "Therapy",
         "h1": ("Online therapy,", "on your schedule."),
-        "lead": "Meet with a licensed therapist by private video, from wherever you're comfortable. Pay session by "
-                "session, with no subscription and no insurance needed.",
+        "lead": "Meet with a licensed therapist by private video, from wherever you're comfortable.",
         "list_title": "What therapy can help with",
         "list": ["Anxiety", "Depression", "Panic attacks", "Stress and burnout", "Grief and loss",
                  "Relationship issues", "Trauma", "Life changes"],
         "steps": [
             ("Tell us what's going on", "Answer a few questions about what you'd like help with."),
             ("Meet your therapist", "Talk with a licensed therapist by private video."),
-            ("Keep going at your pace", "Book sessions when you need them. There's no subscription."),
+            ("Keep going", "Keep meeting with your therapist as you work toward what matters to you."),
         ],
-        "know": ["{therapy} per session. No subscription, so you can stop anytime.",
+        "know": ["No insurance needed. Sessions are by private video, from wherever you're comfortable.",
                  "Therapists don't prescribe medication. If medication could help, our anxiety and depression care "
                  "can work alongside your therapy.",
                  "For adults 18 and older."],
@@ -151,7 +150,7 @@ PAGES = [
              "Licensed mental health professionals who are licensed in your state and practice through independent "
              "groups."),
             ("How much does therapy cost?",
-             "{therapy} per session, with no subscription and no insurance needed."),
+             "We'll share our prices before we open. You won't need insurance."),
             ("Is online therapy private?",
              "Sessions happen by private video, and your health information is protected under HIPAA."),
             WHEN,
@@ -160,32 +159,32 @@ PAGES = [
     },
     {
         "slug": "anxiety-depression-treatment", "key": "mental",
-        "title": "Online Anxiety & Depression Treatment | {mental}/month | Jachi Health",
+        "title": "Online Anxiety & Depression Treatment | Jachi Health",
         "description": "Medication care for anxiety and depression from licensed clinicians online, with regular "
-                       "check-ins. {mental} a month, cancel anytime. Launching in Texas.",
+                       "check-ins. No insurance needed. Launching in Texas.",
         "crumb": "Anxiety & depression",
         "h1": ("Anxiety and depression care,", "with real follow-up."),
         "lead": "A licensed clinician evaluates how you're feeling, builds a plan with you and prescribes medication "
                 "when it's right for you, then checks in as you go.",
         "list_title": "What we treat",
         "list": ["Anxiety", "Depression", "Panic attacks"],
-        "know": ["{mental} a month for your evaluation, prescriptions and check-ins. Medication is billed separately "
-                 "by your pharmacy.",
-                 "Month to month. Cancel anytime.",
-                 "Prefer to talk it through? Therapy is {therapy} per session, and many people do both."],
+        "know": ["Your care includes an evaluation, prescriptions when they're right for you, and regular check-ins. "
+                 "Medication is billed separately by your pharmacy.",
+                 "No insurance needed. For adults 18 and older.",
+                 "Prefer to talk it through? You can also see a licensed therapist, and many people do both."],
         "safety": {"kind": "988", "title": "If you're in crisis, reach out now",
                    "text": "Call or text 988 to reach the Suicide & Crisis Lifeline. It's free, confidential and open "
                            "24/7. If you or someone else is in immediate danger, call 911.",
                    "items": []},
         "faq": [
-            ("What does the membership include?",
+            ("What does anxiety and depression care include?",
              "An evaluation with a licensed clinician, a personal plan, prescriptions when they're right for you, and "
              "regular check-ins and dose adjustments."),
             ("Do you prescribe Xanax or other controlled medications?",
              "No. We don't prescribe controlled substances, such as benzodiazepines like Xanax or ADHD stimulants. "
              "Your clinician decides which treatment is right for you."),
             ("Can I do therapy too?",
-             "Yes. Therapy is {therapy} per session, and many people feel better with therapy and medication together."),
+             "Yes. You can see a licensed therapist too, and many people feel better with therapy and medication together."),
             WHEN,
         ],
         "related": ["online-therapy", "prescription-refills", "weight-loss"],
@@ -194,7 +193,7 @@ PAGES = [
         "slug": "sexual-health", "key": "sexual",
         "title": "Online STI Testing, Herpes Treatment & PrEP | Jachi Health",
         "description": "Private, judgment-free sexual health care online: STI testing at a nearby lab, treatment, herpes "
-                       "care and PrEP for HIV prevention. {visit} per visit. Launching in Texas.",
+                       "care and PrEP for HIV prevention. No insurance needed. Launching in Texas.",
         "crumb": "Sexual health",
         "h1": ("Sexual health care,", "private and judgment-free."),
         "lead": "A licensed clinician can order STI tests at a nearby lab, treat common infections and prescribe herpes "
@@ -202,7 +201,7 @@ PAGES = [
         "list_title": "What we help with",
         "list": ["STI testing", "Chlamydia", "Gonorrhea", "Genital herpes", "HIV prevention (PrEP)", "Doxy-PEP",
                  "Trichomoniasis", "Genital warts"],
-        "know": ["{visit} per visit. Lab tests are billed separately by the lab, and medication by your pharmacy.",
+        "know": ["No insurance needed. Lab tests are billed separately by the lab, and medication by your pharmacy.",
                  "Some infections, like gonorrhea, are treated with a shot given in person.",
                  "For adults 18 and older."],
         "safety": {"kind": "inperson", "title": "Possible HIV exposure? Don't wait.",
@@ -226,16 +225,16 @@ PAGES = [
     },
     {
         "slug": "mens-health", "key": "mens",
-        "title": "ED & Hair Loss Treatment Online | {visit} Visits | Jachi Health",
+        "title": "ED & Hair Loss Treatment Online | Jachi Health",
         "description": "Discreet online care for erectile dysfunction, hair loss and premature ejaculation from licensed "
-                       "clinicians, with treatment sent to your pharmacy. {visit} per visit. Launching in Texas.",
+                       "clinicians, with treatment sent to your pharmacy. No insurance needed. Launching in Texas.",
         "crumb": "Men's health",
         "h1": ("ED and hair loss treatment,", "handled discreetly."),
         "lead": "A licensed clinician reviews your health and medications, then prescribes treatment for erectile "
                 "dysfunction, hair loss or premature ejaculation when it's right for you.",
         "list_title": "What we treat",
         "list": ["Erectile dysfunction (ED)", "Hair loss", "Premature ejaculation"],
-        "know": ["{visit} per visit. Medication is billed separately by your pharmacy.",
+        "know": ["No insurance needed. Medication is billed separately by your pharmacy.",
                  "Your clinician checks your heart health and current medications before prescribing ED treatment.",
                  "We don't prescribe testosterone. It's a controlled substance."],
         "safety": {"kind": "caution", "title": "ED pills aren't safe with nitrates",
@@ -250,7 +249,7 @@ PAGES = [
             ("Do you treat hair loss?",
              "Yes. A clinician can recommend and prescribe treatment for common hair loss when it's right for you."),
             ("How much does it cost?",
-             "{visit} per visit, with no insurance needed. Medication is billed separately by your pharmacy."),
+             "We'll share our prices before we open. You won't need insurance, and medication is billed separately by your pharmacy."),
             WHEN,
         ],
         "related": ["sexual-health", "skin-care", "weight-loss"],
@@ -259,7 +258,7 @@ PAGES = [
         "slug": "womens-health", "key": "womens",
         "title": "Birth Control Online & Women's Health Care | Jachi Health",
         "description": "Birth control, emergency contraception, menopause care, and yeast infection and BV treatment "
-                       "from licensed clinicians online. {visit} per visit. Launching in Texas.",
+                       "from licensed clinicians online. No insurance needed. Launching in Texas.",
         "crumb": "Women's health",
         "h1": ("Birth control and women's health,", "online."),
         "lead": "A licensed clinician can help with birth control, emergency contraception, menopause symptoms, yeast "
@@ -267,7 +266,7 @@ PAGES = [
         "list_title": "What we help with",
         "list": ["Birth control", "Emergency contraception", "Menopause symptoms", "Yeast infection",
                  "Bacterial vaginosis (BV)", "Hair thinning"],
-        "know": ["{visit} per visit. Medication is billed separately by your pharmacy.",
+        "know": ["No insurance needed. Medication is billed separately by your pharmacy.",
                  "Emergency contraception works best the sooner you take it.",
                  "For adults 18 and older."],
         "safety": {"kind": "inperson", "title": "Get seen in person today if you have",
@@ -282,23 +281,23 @@ PAGES = [
              "Yes. A clinician can talk through symptoms like hot flashes and night sweats and prescribe treatment "
              "when it's right for you."),
             ("How much does it cost?",
-             "{visit} per visit, with no insurance needed. Medication is billed separately by your pharmacy."),
+             "We'll share our prices before we open. You won't need insurance, and medication is billed separately by your pharmacy."),
             WHEN,
         ],
         "related": ["uti-treatment", "sexual-health", "skin-care"],
     },
     {
         "slug": "skin-care", "key": "skin",
-        "title": "Online Acne & Skin Care | {visit} Visits | Jachi Health",
+        "title": "Online Acne & Skin Care | Jachi Health",
         "description": "Treatment plans for acne, rosacea, eczema, psoriasis, cold sores and fungal infections from "
-                       "licensed clinicians online. {visit} per visit. Launching in Texas.",
+                       "licensed clinicians online. No insurance needed. Launching in Texas.",
         "crumb": "Skin care",
         "h1": ("Clearer skin,", "with a real plan."),
         "lead": "A licensed clinician can treat acne, rosacea, eczema, psoriasis, cold sores and fungal infections, and "
                 "send prescriptions to your pharmacy.",
         "list_title": "What we treat",
         "list": ["Acne", "Rosacea", "Eczema", "Psoriasis", "Cold sores", "Fungal infections", "Dandruff"],
-        "know": ["{visit} per visit. Medication is billed separately by your pharmacy.",
+        "know": ["No insurance needed. Medication is billed separately by your pharmacy.",
                  "If you need to be seen in person, your clinician will tell you.",
                  "We don't prescribe isotretinoin (Accutane)."],
         "safety": {"kind": "inperson", "title": "Get seen in person today if",
@@ -312,16 +311,16 @@ PAGES = [
             ("Do you prescribe Accutane?",
              "No. We don't prescribe isotretinoin. Your clinician can recommend other acne treatments."),
             ("How much does it cost?",
-             "{visit} per visit, with no insurance needed. Medication is billed separately by your pharmacy."),
+             "We'll share our prices before we open. You won't need insurance, and medication is billed separately by your pharmacy."),
             WHEN,
         ],
         "related": ["mens-health", "womens-health", "urgent-care"],
     },
     {
         "slug": "weight-loss", "key": "weight",
-        "title": "Medical Weight Loss Online in Texas | {weight}/month | Jachi Health",
+        "title": "Medical Weight Loss Online in Texas | Jachi Health",
         "description": "A clinician-led weight care program with FDA-approved medication, like a GLP-1, when it's right "
-                       "for you. {weight} a month, cancel anytime. Launching in Texas.",
+                       "for you. No insurance needed. Launching in Texas.",
         "crumb": "Weight care",
         "h1": ("Medical weight care,", "led by clinicians."),
         "lead": "A licensed clinician builds a plan around your health and prescribes FDA-approved medication, such as "
@@ -330,8 +329,8 @@ PAGES = [
         "list": [("Adults with a BMI of 30 or higher", ""),
                  ("Adults with a BMI of 27 or higher and a weight-related condition",
                   "Like high blood pressure, type 2 diabetes, high cholesterol or sleep apnea.")],
-        "know": ["{weight} a month for your plan, prescriptions and check-ins. Medication is billed separately by your "
-                 "pharmacy.",
+        "know": ["Your care includes a plan from a clinician, prescriptions when they're right for you, and regular "
+                 "check-ins. Medication is billed separately by your pharmacy.",
                  "Not everyone will be prescribed medication. Your clinician decides what's safe for you.",
                  "We don't prescribe phentermine. It's a controlled substance."],
         "safety": {"kind": "caution", "title": "GLP-1 medications aren't for everyone",
@@ -347,9 +346,9 @@ PAGES = [
              "Yes. The most common side effects of GLP-1 medications affect digestion, like nausea, diarrhea, vomiting "
              "and constipation. Serious risks can include pancreatitis, gallbladder problems and a possible risk of "
              "thyroid tumors. Your clinician will go over the risks with you."),
-            ("What does the membership include?",
+            ("What does weight care include?",
              "A clinician-led plan, prescriptions when they're right for you, and regular check-ins and dose "
-             "adjustments. It's month to month, so you can cancel anytime."),
+             "adjustments. Medication is billed separately by your pharmacy."),
             WHEN,
         ],
         "related": ["prescription-refills", "anxiety-depression-treatment", "mens-health"],

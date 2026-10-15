@@ -1,40 +1,40 @@
 """Spanish versions of everything in content.py, keyed to the English entries.
 
-Prices, order and which service each condition belongs to come from content.py, so only words live here.
+The order and which service each condition belongs to come from content.py, so only words live here.
 Search terms are in Spanish without accents; build.py adds the English terms too, so brand names and
 abbreviations like "UTI" still match on the Spanish page.
 """
-from content import PRICES
+PRICING_NOTE = "Compartiremos los precios antes de abrir."
 
 SERVICES = {
-    "urgent": {"name": "Atención de urgencia", "unit": "por consulta", "tag": "Por consulta",
+    "urgent": {"name": "Atención de urgencia", "tag": "Consulta en línea",
                "desc": "Atención para enfermedades comunes, con cualquier receta enviada a la farmacia que usted elija.",
                "items": ["Resfriados, gripe y sinusitis", "Dolor de garganta, infecciones urinarias y conjuntivitis",
                          "Sarpullidos, picaduras y alergias"]},
-    "refill": {"name": "Resurtido de recetas", "chip": "Resurtidos", "unit": "por resurtido", "tag": "Por resurtido",
+    "refill": {"name": "Resurtido de recetas", "chip": "Resurtidos", "tag": "Resurtido en línea",
                "desc": "Renueve los medicamentos que ya toma, con la revisión de un profesional de la salud con licencia.",
                "items": ["Presión arterial y colesterol", "Tiroides, asma y reflujo ácido", "Diabetes tipo 2"]},
-    "therapy": {"name": "Terapia", "unit": "por sesión", "tag": "Por sesión",
-                "desc": "Sesiones privadas por video con un terapeuta con licencia. Sin suscripción.",
-                "items": ["Estrés, ansiedad y depresión", "Duelo, relaciones y cambios de vida", "Pague sesión por sesión"]},
-    "mental": {"name": "Ansiedad y depresión", "unit": "al mes", "tag": "Membresía",
+    "therapy": {"name": "Terapia", "tag": "Sesiones por video",
+                "desc": "Sesiones privadas por video con un terapeuta con licencia.",
+                "items": ["Estrés, ansiedad y depresión", "Duelo, relaciones y cambios de vida", "Trauma y agotamiento"]},
+    "mental": {"name": "Ansiedad y depresión", "tag": "Atención continua",
                "desc": "Atención con medicamentos de profesionales de la salud con licencia, con seguimiento regular.",
                "items": ["Una evaluación y un plan personal", "Medicamentos cuando sean adecuados para usted",
                          "Seguimiento y ajustes de dosis"]},
-    "sexual": {"name": "Salud sexual", "unit": "por consulta", "tag": "Por consulta",
+    "sexual": {"name": "Salud sexual", "tag": "Consulta en línea",
                "desc": "Atención privada y sin prejuicios. Los análisis de laboratorio se cobran por separado.",
                "items": ["Pruebas y tratamiento de ITS", "Tratamiento del herpes", "Prevención del VIH con PrEP"]},
-    "mens": {"name": "Salud del hombre", "unit": "por consulta", "tag": "Por consulta",
+    "mens": {"name": "Salud del hombre", "tag": "Consulta en línea",
              "desc": "Atención discreta de profesionales de la salud con licencia, con el tratamiento enviado a su farmacia.",
              "items": ["Disfunción eréctil", "Caída del cabello", "Eyaculación precoz"]},
-    "womens": {"name": "Salud de la mujer", "unit": "por consulta", "tag": "Por consulta",
+    "womens": {"name": "Salud de la mujer", "tag": "Consulta en línea",
                "desc": "Atención para cada etapa, desde los anticonceptivos hasta la menopausia.",
                "items": ["Anticonceptivos y anticoncepción de emergencia", "Síntomas de la menopausia",
                          "Infecciones vaginales por hongos y vaginosis bacteriana"]},
-    "skin": {"name": "Cuidado de la piel", "unit": "por consulta", "tag": "Por consulta",
+    "skin": {"name": "Cuidado de la piel", "tag": "Consulta en línea",
              "desc": "Planes de tratamiento para problemas comunes de la piel.",
              "items": ["Acné y rosácea", "Eccema y psoriasis", "Herpes labial e infecciones por hongos"]},
-    "weight": {"name": "Control de peso", "unit": "al mes", "tag": "Membresía",
+    "weight": {"name": "Control de peso", "tag": "Atención continua",
                "desc": "Un programa dirigido por profesionales de la salud, con medicamentos aprobados por la FDA cuando sean adecuados para usted.",
                "items": ["Un plan personal de un profesional de la salud", "Medicamentos GLP-1 cuando sea apropiado",
                          "Seguimiento y ajustes de dosis"]},
@@ -182,8 +182,7 @@ FAQ = [
      "problemas necesitan un examen, una prueba o un procedimiento en persona, y su profesional de la salud le dirá si es "
      "su caso."),
     ("¿Cómo funciona la terapia?",
-     f"Se reúne por video privado con un terapeuta con licencia y paga {PRICES['therapy']} por sesión, sin suscripción. "
-     "Los terapeutas no recetan medicamentos. Si un medicamento puede ayudar, nuestra atención para la ansiedad y la "
+     "Se reúne por video privado con un terapeuta con licencia. Los terapeutas no recetan medicamentos. Si un medicamento puede ayudar, nuestra atención para la ansiedad y la "
      "depresión puede complementar su terapia."),
     ("¿Cómo funcionan las pruebas de ITS?",
      "Su profesional de la salud pide las pruebas adecuadas y usted da una muestra rápida en un laboratorio cercano. Los "
@@ -212,10 +211,9 @@ FAQ = [
      "de tumores de tiroides. Su profesional de la salud le explicará los riesgos y no le recetará si no es seguro para "
      "usted."),
     ("¿Cuánto cuesta?",
-     f"Las consultas cuestan {PRICES['visit']} y los resurtidos {PRICES['refill']}. La terapia cuesta {PRICES['therapy']} "
-     f"por sesión. La atención para la ansiedad y la depresión cuesta {PRICES['mental']} al mes y el control de peso "
-     f"{PRICES['weight']} al mes, y ambas membresías son de mes a mes, así que puede cancelar cuando quiera. Los "
-     "medicamentos y los análisis de laboratorio los cobran por separado su farmacia y el laboratorio."),
+     "Estamos definiendo nuestros precios y los compartiremos antes de abrir, así que sabrá cuánto cuesta su atención "
+     "antes de empezar. Jachi es de pago directo, así que no necesitará seguro médico. Los medicamentos y los análisis "
+     "de laboratorio los cobran por separado su farmacia y el laboratorio."),
     ("¿Necesito seguro médico?",
      "No. Jachi es de pago directo, así que no necesita seguro médico ni una referencia para ver a un profesional de la "
      "salud."),
@@ -257,7 +255,7 @@ BUILD = {
     "check_elig_long": "Revisar si califico",
     "for": " para {x}",
     "for_weight": " para control de peso",
-    "mental_meta": "Terapia: {therapy} por sesión, o atención con medicamentos: {mental} al mes",
+    "mental_meta": "Terapia, o atención con medicamentos de un profesional de la salud",
     "launching_first": "Abrimos primero",
     "all_states": "Todos los demás estados",
     "find_care": "Encuentre la atención adecuada",

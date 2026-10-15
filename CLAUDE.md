@@ -27,6 +27,9 @@ keep replies short and plain, and ask only questions that change what you'll do.
 ## Decisions the owner made (change only when he asks)
 
 - Launching in Texas first. Adults 18+ only. Cash pay, no insurance.
+- No prices anywhere (pages, titles, the assistant) until he has a quote from his medical partner (decided
+  Oct 15, 2026). The site says prices will be shared before opening. Commit 5cb4e08 is the last version with
+  prices; tests/qa.py fails if a price appears.
 - Not offered: controlled substances (ADHD stimulants, benzodiazepines, opioids, testosterone, phentermine,
   sleep medication, Suboxone, ketamine), abortion medication, isotretinoin, peptides, medical marijuana.
 - Jachi isn't open yet. Nothing may say visits can be booked now; buttons collect early-access sign-ups.

@@ -1,52 +1,42 @@
-"""Everything Jachi offers, in one place: prices, services, the condition index and the FAQ.
+"""Everything Jachi offers, in one place: services, the condition index and the FAQ.
 
-Change a price here and it updates the cards, the care finder, the search, the FAQ and the meta tags.
+No prices are shown anywhere on the site until the owner has a quote from the medical partner (decided
+October 15, 2026). The last version with prices is commit 5cb4e08. Each service's "tag" says what kind of care
+it is (an online visit or ongoing care), never what it costs.
 """
 
-PRICES = {
-    "visit": "$49",     # urgent care, sexual health, men's health, women's health, skin care
-    "refill": "$39",    # per refill or renewal
-    "therapy": "$99",   # per therapy session, no subscription
-    "mental": "$89",    # anxiety and depression medication care, per month
-    "weight": "$99",    # weight care, per month
-}
 EMAIL = "support@jachihealth.com"
+PRICING_NOTE = "Prices will be shared before we open."
 
 SERVICES = [
-    {"key": "urgent", "interest": "urgent-care", "icon": "thermo", "name": "Urgent care",
-     "price": PRICES["visit"], "unit": "per visit", "tag": "Per visit",
+    {"key": "urgent", "interest": "urgent-care", "icon": "thermo", "name": "Urgent care", "tag": "Online visit",
      "desc": "Care for everyday illnesses, with any prescription sent to the pharmacy you choose.",
      "items": ["Colds, flu and sinus infections", "Sore throats, UTIs and pink eye", "Rashes, bites and allergies"]},
     {"key": "refill", "interest": "refills", "icon": "pill", "name": "Prescription refills", "chip": "Refills",
-     "price": PRICES["refill"], "unit": "per refill", "tag": "Per refill",
+     "tag": "Online refill",
      "desc": "Renew medications you already take, reviewed by a licensed clinician.",
      "items": ["Blood pressure and cholesterol", "Thyroid, asthma and acid reflux", "Type 2 diabetes"]},
-    {"key": "therapy", "interest": "therapy", "icon": "talk", "name": "Therapy",
-     "price": PRICES["therapy"], "unit": "per session", "tag": "Per session",
-     "desc": "Private video sessions with a licensed therapist. No subscription.",
-     "items": ["Stress, anxiety and depression", "Grief, relationships and life changes", "Pay session by session"]},
+    {"key": "therapy", "interest": "therapy", "icon": "talk", "name": "Therapy", "tag": "Video sessions",
+     "desc": "Private video sessions with a licensed therapist.",
+     "items": ["Stress, anxiety and depression", "Grief, relationships and life changes", "Trauma and burnout"]},
     {"key": "mental", "interest": "anxiety-depression", "icon": "mind", "name": "Anxiety & depression",
-     "price": PRICES["mental"], "unit": "per month", "tag": "Membership",
+     "tag": "Ongoing care", "ongoing": True,
      "desc": "Medication care from licensed clinicians, with regular check-ins.",
      "items": ["An evaluation and personal plan", "Medication when it's right for you", "Check-ins and dose adjustments"]},
-    {"key": "sexual", "interest": "sexual-health", "icon": "heart", "name": "Sexual health",
-     "price": PRICES["visit"], "unit": "per visit", "tag": "Per visit",
+    {"key": "sexual", "interest": "sexual-health", "icon": "heart", "name": "Sexual health", "tag": "Online visit",
      "desc": "Private, judgment-free care. Lab tests are billed separately.",
      "items": ["STI testing and treatment", "Herpes treatment", "HIV prevention with PrEP"]},
-    {"key": "mens", "interest": "mens-health", "icon": "male", "name": "Men's health",
-     "price": PRICES["visit"], "unit": "per visit", "tag": "Per visit",
+    {"key": "mens", "interest": "mens-health", "icon": "male", "name": "Men's health", "tag": "Online visit",
      "desc": "Discreet care from licensed clinicians, with treatment sent to your pharmacy.",
      "items": ["Erectile dysfunction (ED)", "Hair loss", "Premature ejaculation"]},
-    {"key": "womens", "interest": "womens-health", "icon": "female", "name": "Women's health",
-     "price": PRICES["visit"], "unit": "per visit", "tag": "Per visit",
+    {"key": "womens", "interest": "womens-health", "icon": "female", "name": "Women's health", "tag": "Online visit",
      "desc": "Care for every stage, from birth control to menopause.",
      "items": ["Birth control and emergency contraception", "Menopause symptoms", "Yeast infections and BV"]},
-    {"key": "skin", "interest": "skin-care", "icon": "drop", "name": "Skin care",
-     "price": PRICES["visit"], "unit": "per visit", "tag": "Per visit",
+    {"key": "skin", "interest": "skin-care", "icon": "drop", "name": "Skin care", "tag": "Online visit",
      "desc": "Treatment plans for common skin conditions.",
      "items": ["Acne and rosacea", "Eczema and psoriasis", "Cold sores and fungal infections"]},
     {"key": "weight", "interest": "weight-care", "icon": "scale", "name": "Weight care",
-     "price": PRICES["weight"], "unit": "per month", "tag": "Membership",
+     "tag": "Ongoing care", "ongoing": True,
      "desc": "A clinician-led program, with FDA-approved medication when it's right for you.",
      "items": ["A personal plan from a clinician", "GLP-1 medication when appropriate", "Check-ins and dose adjustments"],
      "elig": True},
@@ -177,9 +167,8 @@ FAQ = [
      "health, skin conditions and weight. Search the conditions on this page to check yours. Some problems need an "
      "exam, a test or a procedure in person, and your clinician will tell you if that's the case."),
     ("How does therapy work?",
-     f"You meet with a licensed therapist by private video and pay {PRICES['therapy']} per session, with no "
-     "subscription. Therapists don't prescribe medication. If medication could help, our anxiety and depression care "
-     "can work alongside your therapy."),
+     "You meet with a licensed therapist by private video. Therapists don't prescribe medication. If medication could "
+     "help, our anxiety and depression care can work alongside your therapy."),
     ("How does STI testing work?",
      "Your clinician orders the right tests, and you give a quick sample at a nearby lab. Lab fees are billed "
      "separately. If you test positive for an infection that can be treated with medication, your clinician can "
@@ -204,10 +193,9 @@ FAQ = [
      "constipation. Serious risks can include pancreatitis, gallbladder problems and a possible risk of thyroid tumors. "
      "Your clinician will go over the risks with you and won't prescribe if it isn't safe for you."),
     ("How much does it cost?",
-     f"Visits are {PRICES['visit']} and refills are {PRICES['refill']}. Therapy is {PRICES['therapy']} per session. "
-     f"Anxiety and depression care is {PRICES['mental']} a month and weight care is {PRICES['weight']} a month, and "
-     "both memberships are month to month, so you can cancel anytime. Medication and lab tests are billed separately "
-     "by your pharmacy and lab."),
+     "We're finalizing our prices and will share them before we open, so you'll know what your care costs before you "
+     "start. Jachi is cash-pay, so you won't need insurance. Medication and lab tests are billed separately by your "
+     "pharmacy and lab."),
     ("Do I need insurance?",
      "No. Jachi is cash-pay, so you don't need insurance or a referral to see a clinician."),
     ("Can I use Jachi if I'm under 18?",
@@ -238,7 +226,7 @@ BUILD = {
     "check_elig_long": "Check your eligibility",
     "for": " for {x}",
     "for_weight": " for weight care",
-    "mental_meta": "Therapy {therapy} per session, or medication care {mental} a month",
+    "mental_meta": "Therapy, or medication care from a clinician",
     "launching_first": "Launching first",
     "all_states": "All other states",
     "find_care": "Find the right care",

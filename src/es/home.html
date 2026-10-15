@@ -6,15 +6,15 @@
       <div class="hero__copy">
         <p class="pill" data-rise style="--d:0ms"><span class="pill__dot" aria-hidden="true"></span>Acceso anticipado abierto · Pronto en Texas</p>
         <h1 class="display" id="hero-title" data-rise style="--d:90ms">Atención en línea, arraigada en la <em>medicina real.</em></h1>
-        <p class="lead" data-rise style="--d:180ms">Profesionales de la salud con licencia, en línea, para todo: desde resfriados y resurtidos hasta terapia, salud sexual y control de peso. Un asistente de cuidado le da seguimiento entre consultas, y cada precio es claro desde el principio.</p>
+        <p class="lead" data-rise style="--d:180ms">Profesionales de la salud con licencia, en línea, para todo: desde resfriados y resurtidos hasta terapia, salud sexual y control de peso. Un asistente de cuidado le da seguimiento entre consultas, y sabrá cuánto cuesta su atención antes de empezar.</p>
         <div class="cta-row" data-rise style="--d:270ms">
           <a class="btn btn--lg" href="#care-finder">Encuentre la atención adecuada {{I:arrow:i--arrow}}</a>
-          <a class="btn btn--ghost btn--lg" href="#services">Ver servicios y precios</a>
+          <a class="btn btn--ghost btn--lg" href="#services">Ver nuestros servicios</a>
         </div>
         <ul class="trust" data-rise style="--d:360ms">
           <li><span class="trust__ic">{{I:check}}</span>Profesionales con licencia</li>
-          <li><span class="trust__ic">{{I:check}}</span>Consultas de {{PRICE_VISIT}}</li>
           <li><span class="trust__ic">{{I:check}}</span>Sin seguro médico</li>
+          <li><span class="trust__ic">{{I:check}}</span>En línea, a su ritmo</li>
         </ul>
       </div>
 
@@ -88,8 +88,8 @@
   <section class="section" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Servicios y precios</p>
-        <h2 class="h2" id="services-title">La atención que necesita, <em>con precios claros.</em></h2>
+        <p class="eyebrow">Servicios</p>
+        <h2 class="h2" id="services-title">La atención que necesita, <em>desde casa.</em></h2>
         <p class="lead">Profesionales de la salud con licencia para enfermedades comunes, recetas, salud mental, salud sexual y más. Sin necesidad de seguro médico.</p>
       </div>
 
@@ -120,7 +120,7 @@
 
       <ul class="svc-notes">
         <li>{{I:info}}<span>Los medicamentos y los análisis de laboratorio los cobran por separado su farmacia y el laboratorio.</span></li>
-        <li>{{I:info}}<span>Las membresías son de mes a mes. Cancele cuando quiera.</span></li>
+        <li>{{I:info}}<span>{{PRICING_NOTE}}</span></li>
         <li>{{I:info}}<span>Para adultos de 18 años o más. No recetamos sustancias controladas, como estimulantes para el TDAH, Xanax, opioides o testosterona.</span></li>
       </ul>
     </div>
@@ -133,7 +133,7 @@
         <div class="section-head">
           <p class="eyebrow">Buscador de atención</p>
           <h2 class="h2" id="finder-title">¿No sabe por dónde empezar? <em>Le orientamos.</em></h2>
-          <p class="lead">Responda dos preguntas rápidas para ver qué servicio le conviene, cuánto cuesta y cuándo es mejor buscar ayuda en persona.</p>
+          <p class="lead">Responda dos preguntas rápidas para ver qué servicio le conviene y cuándo es mejor buscar ayuda en persona.</p>
         </div>
         <div class="explain explain--alert">
           <h3><span class="explain__ic" aria-hidden="true">{{I:alert}}</span>Algunas cosas no pueden esperar</h3>
@@ -269,7 +269,7 @@
       <div class="section-head">
         <p class="eyebrow">Por qué Jachi</p>
         <h2 class="h2" id="why-title">Medicina real, <em>sin complicaciones.</em></h2>
-        <p class="lead">Profesionales con licencia, herramientas modernas y precios honestos, pensados para su vida.</p>
+        <p class="lead">Profesionales con licencia y herramientas modernas, pensados para su vida.</p>
       </div>
 
       <div class="bento">
@@ -341,16 +341,14 @@
         </article>
 
         <article class="tile" data-reveal style="--d:180ms">
-          <h3>Precios claros, sin seguro médico</h3>
-          <p>Cada servicio tiene un precio claro desde el inicio. Los medicamentos y los análisis de laboratorio se cobran por separado.</p>
+          <h3>Sin seguro médico</h3>
+          <p>Jachi es de pago directo, así que no necesita seguro médico ni una referencia. Los medicamentos y los análisis de laboratorio se cobran por separado.</p>
           <div class="tile__visual">
             <div class="vis-price" aria-hidden="true">
-              <ul class="price-rows">
-                <li><span>Consultas</span><b>{{PRICE_VISIT}}</b></li>
-                <li><span>Resurtidos</span><b>{{PRICE_REFILL}}</b></li>
-                <li><span>Terapia</span><b>{{PRICE_THERAPY}}<small>/sesión</small></b></li>
-                <li><span>Ansiedad y depresión</span><b>{{PRICE_MENTAL}}<small>/mes</small></b></li>
-                <li><span>Control de peso</span><b>{{PRICE_WEIGHT}}<small>/mes</small></b></li>
+              <ul class="price-rows price-rows--facts">
+                <li><span>Seguro médico</span><b>No es necesario</b></li>
+                <li><span>Referencia</span><b>No es necesaria</b></li>
+                <li><span>Farmacia</span><b>Usted elige</b></li>
               </ul>
             </div>
           </div>
@@ -604,7 +602,7 @@
         <div class="section-head">
           <p class="eyebrow">Preguntas frecuentes</p>
           <h2 class="h2" id="faq-title">Preguntas, <em>respondidas.</em></h2>
-          <p class="lead">Lo que debe saber sobre nuestros profesionales, servicios, precios e IA.</p>
+          <p class="lead">Lo que debe saber sobre nuestros profesionales, servicios e IA.</p>
         </div>
         <div class="faq-more">
           <p>¿Tiene una pregunta que no respondimos? Pregúntele a nuestro asistente de IA o escriba a nuestro equipo y le responderemos. No incluya detalles de salud.</p>

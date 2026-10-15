@@ -4,7 +4,6 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const ICONS = /*ICONS_JSON*/;
-  const PRICES = /*PRICES_JSON*/;
   const SERVICES = /*SERVICES_JSON*/;
   const EMAIL = /*EMAIL_JSON*/;
   const T = /*STRINGS_JSON*/;
@@ -438,7 +437,7 @@
       }
     };
 
-    const chipsFor = key => [SERVICES[key].name, `${SERVICES[key].price} ${SERVICES[key].unit}`];
+    const chipsFor = key => [SERVICES[key].name, SERVICES[key].tag];
     const joinCta = interest => ({ href: '#join', label: T.get_early_access, mode: 'join', interest });
     const inPerson = (title, body) => ({ kind: 'inperson', icon: 'alert', title, body });
     const match = (key, icon, title, body, extra = '') => ({
@@ -479,7 +478,7 @@
           if (flag === 'yes') return CRISIS;
           return {
             kind: 'likely', icon: 'mind', title: T.f_mental_title,
-            chips: [fmt(T.f_mental_chip_therapy, { price: PRICES.therapy }), fmt(T.f_mental_chip_meds, { price: PRICES.mental })],
+            chips: [T.f_mental_chip_therapy, T.f_mental_chip_meds],
             body: T.f_mental_body,
             note: LAUNCH,
             cta: joinCta(`${SERVICES.therapy.interest},${SERVICES.mental.interest}`),
