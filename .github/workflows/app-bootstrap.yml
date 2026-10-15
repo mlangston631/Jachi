@@ -1,0 +1,44 @@
+# Finds the current Expo SDK and the exact library versions it supports, and saves them to app/.ci/
+# so the app's package.json can pin them. Runs only when this file changes on the "app" branch.
+name: app-bootstrap
+on:
+  push:
+    branches: [app]
+    paths: ['.github/workflows/app-bootstrap.yml']
+permissions:
+  contents: write
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Current Expo template and SDK-matched libraries
+        run: |
+          set -x
+          npx --yes create-expo-app@latest tpl --template default --yes > create.log 2>&1 || cat create.log
+          cd tpl
+          npx --yes expo install expo-secure-store expo-sqlite expo-notifications expo-local-authentication \
+            expo-localization expo-haptics expo-blur expo-linear-gradient react-native-svg expo-sharing \
+            expo-file-system expo-crypto expo-device expo-application expo-updates expo-dev-client \
+            expo-build-properties > ../install.log 2>&1 || true
+          npm install --no-audit --no-fund @tanstack/react-query zustand i18next react-i18next zod >> ../install.log 2>&1 || true
+          npm install --no-audit --no-fund -D jest jest-expo @testing-library/react-native @types/jest >> ../install.log 2>&1 || true
+          npx expo --version > ../expo-cli.txt 2>&1 || true
+          npm ls --depth=0 > ../versions.txt 2>&1 || true
+      - name: Save what was found
+        run: |
+          mkdir -p app/.ci
+          cp tpl/package.json app/.ci/template-package.json
+          cp tpl/app.json app/.ci/template-app.json 2>/dev/null || true
+          cp tpl/tsconfig.json app/.ci/template-tsconfig.json 2>/dev/null || true
+          ls -R tpl | grep -v node_modules | head -200 > app/.ci/template-tree.txt || true
+          cp versions.txt expo-cli.txt install.log app/.ci/ 2>/dev/null || true
+          tail -c 20000 create.log > app/.ci/create.log 2>/dev/null || true
+          git config user.name "jachi-ci"
+          git config user.email "ci@jachihealth.com"
+          git add app/.ci
+          git commit -m "CI: current Expo template and library versions [skip ci]" || true
+          git push
