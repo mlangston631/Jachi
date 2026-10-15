@@ -101,7 +101,7 @@ export default function Summary() {
           label={t('summary.range')}
           value={String(days) as '14' | '30' | '90'}
           onChange={v => set({ summaryDays: Number(v) })}
-          options={[{ value: '14', label: t('summary.last', { n: 14 }) }, { value: '30', label: t('summary.last', { n: 30 }) }, { value: '90', label: t('summary.last', { n: 90 }) }]}
+          options={[{ value: '14', label: t('common.days', { n: 14 }) }, { value: '30', label: t('common.days', { n: 30 }) }, { value: '90', label: t('common.days', { n: 90 }) }]}
         />
       </View>
 

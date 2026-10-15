@@ -4,6 +4,7 @@
  */
 import { Platform } from 'react-native';
 
+import { deviceLang } from '@/i18n';
 import { usePrefs } from '@/state/prefs';
 import { addDays, at, dayKey } from './dates';
 import { addQuestion, allMeds, database, logDose, saveCheckin, saveMed, saveVital } from './db';
@@ -29,9 +30,9 @@ export async function seedDemo(): Promise<void> {
       note: '',
     });
   }
-  const lis = await saveMed({ name: 'Lisinopril', dose: '10 mg', times: ['08:00'], supply: 24, perDose: 1, refillDays: 7, notes: 'With breakfast', active: true });
-  const vitD = await saveMed({ name: 'Vitamin D', dose: '1,000 IU', times: ['08:00', '20:00'], supply: null, perDose: 1, refillDays: 7, notes: '', active: true });
-  await saveMed({ name: 'Ibuprofen', dose: '200 mg', times: [], supply: null, perDose: 1, refillDays: 7, notes: 'As needed for headaches', active: true });
+  const lis = await saveMed({ name: 'Lisinopril', dose: '10 mg', times: ['08:00'], supply: 24, perDose: 1, refillDays: 7, notes: deviceLang() === 'es' ? 'Con el desayuno' : 'With breakfast', active: true });
+  const vitD = await saveMed({ name: deviceLang() === 'es' ? 'Vitamina D' : 'Vitamin D', dose: '1,000 IU', times: ['08:00', '20:00'], supply: null, perDose: 1, refillDays: 7, notes: '', active: true });
+  await saveMed({ name: 'Ibuprofen', dose: '200 mg', times: [], supply: null, perDose: 1, refillDays: 7, notes: deviceLang() === 'es' ? 'Si me duele la cabeza' : 'As needed for headaches', active: true });
   const db = await database();
   await db.runAsync('UPDATE meds SET created_at = ?', at(addDays(today, -14), '09:00').getTime());
   const meds = await allMeds();
@@ -46,6 +47,7 @@ export async function seedDemo(): Promise<void> {
   bp.forEach(([sys, dia], i) => void saveVital({ at: at(addDays(today, -(12 - i * 2)), '07:45').getTime(), kind: 'bp', value: sys!, value2: dia!, note: '' }));
   await saveVital({ at: at(addDays(today, -2), '07:30').getTime(), kind: 'weight', value: 84.2, value2: null, note: '' });
   await saveVital({ at: at(addDays(today, -9), '07:30').getTime(), kind: 'weight', value: 85.1, value2: null, note: '' });
-  await addQuestion('Are my morning headaches related to my blood pressure?');
-  await addQuestion('Should I keep taking vitamin D in the summer?');
+  const es = deviceLang() === 'es';
+  await addQuestion(es ? '¿Mis dolores de cabeza por la mañana tienen que ver con mi presión?' : 'Are my morning headaches related to my blood pressure?');
+  await addQuestion(es ? '¿Debo seguir tomando vitamina D en el verano?' : 'Should I keep taking vitamin D in the summer?');
 }

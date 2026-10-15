@@ -14,7 +14,7 @@ import { useT } from '@/i18n';
 import { CONTENT } from '@/lib/content';
 import { clean } from '@/lib/text';
 import { usePrefs } from '@/state/prefs';
-import { radius, space, useTheme } from '@/theme';
+import { font, radius, space, useTheme } from '@/theme';
 
 const STEPS = 4;
 
@@ -82,7 +82,7 @@ export default function Onboarding() {
                 <Txt variant="eyebrow" tone="onHero2">{t('onboarding.welcomeEyebrow')}</Txt>
                 <Txt variant="hero" tone="onHero" heading>
                   {t('onboarding.welcomeTitle')}{'\n'}
-                  <Txt variant="hero" style={styles.italic}>{t('onboarding.welcomeAccent')}</Txt>
+                  <Txt variant="hero" tone="onHero2" style={styles.italic}>{t('onboarding.welcomeAccent')}</Txt>
                 </Txt>
                 <Txt variant="body" tone="onHero2">{t('onboarding.welcomeBody')}</Txt>
               </Animated.View>
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   body: { flexGrow: 1, paddingHorizontal: space.xl, paddingTop: space.lg },
   step: { flex: 1, gap: space.xl, justifyContent: 'center', width: '100%', maxWidth: 560, alignSelf: 'center' },
   leafWrap: { alignSelf: 'flex-start', marginBottom: space.md },
-  italic: { fontFamily: 'Fraunces-DisplayItalic' },
+  italic: { fontFamily: font.displayItalic },
   gapMd: { gap: space.md },
   gapSm: { gap: space.sm },
   promise: { flexDirection: 'row', gap: space.lg, padding: space.lg, borderRadius: radius.lg, borderWidth: StyleSheet.hairlineWidth, alignItems: 'flex-start' },
