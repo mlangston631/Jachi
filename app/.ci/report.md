@@ -1,15 +1,15 @@
 # App checks
 
-Commit: 33f5a35ed0383014f160d2f677c2dc138b23331b  
-Date: 2026-10-15 23:47 UTC
+Commit: b87a2be8fc8645d28eefe29446e5aad440221a34  
+Date: 2026-10-15 23:56 UTC
 
-- pass: versions (0s)
-- pass: typescript (3s)
-- pass: tests (4s)
-- pass: expo doctor (2s)
-- pass: native config (4s)
-- pass: ios and android bundles (52s)
-- pass: web build (23s)
+- pass: versions (1s)
+- pass: typescript (4s)
+- pass: tests (5s)
+- pass: expo doctor (3s)
+- pass: native config (6s)
+- pass: ios and android bundles (63s)
+- pass: web build (31s)
 
 ## versions (exit 0)
 ```
@@ -30,8 +30,8 @@ PASS __tests__/i18n.test.ts
 PASS __tests__/insights.test.ts
 PASS __tests__/summary.test.ts
 PASS __tests__/units.test.ts
-PASS __tests__/dates.test.ts
 PASS __tests__/streak.test.ts
+PASS __tests__/dates.test.ts
 PASS __tests__/csv.test.ts
 PASS __tests__/safety.test.ts
 PASS __tests__/forms.test.ts
@@ -42,7 +42,7 @@ PASS __tests__/content.test.ts
 Test Suites: 14 passed, 14 total
 Tests:       84 passed, 84 total
 Snapshots:   0 total
-Time:        2.668 s
+Time:        3.636 s
 Ran all test suites.
 ```
 
@@ -61,13 +61,13 @@ Running 20 checks on your project...
 - Running prebuild
 ✔ Finished prebuild
 total 36
-drwxr-xr-x 2 runner runner 4096 Oct 15 23:45 .
-drwxr-xr-x 5 runner runner 4096 Oct 15 23:45 ..
--rw-r--r-- 1 runner runner 3580 Oct 15 23:46 AndroidManifest.xml
--rw-r--r-- 1 runner runner 3627 Oct 15 23:46 Info.plist
--rw-r--r-- 1 runner runner  255 Oct 15 23:46 JachiHealth.entitlements
--rw-r--r-- 1 runner runner 4074 Oct 15 23:46 PrivacyInfo.xcprivacy
--rw-r--r-- 1 runner runner 8209 Oct 15 23:46 android-app-build.gradle
+drwxr-xr-x 2 runner runner 4096 Oct 15 23:54 .
+drwxr-xr-x 5 runner runner 4096 Oct 15 23:54 ..
+-rw-r--r-- 1 runner runner 3676 Oct 15 23:54 AndroidManifest.xml
+-rw-r--r-- 1 runner runner 3627 Oct 15 23:54 Info.plist
+-rw-r--r-- 1 runner runner  255 Oct 15 23:54 JachiHealth.entitlements
+-rw-r--r-- 1 runner runner 4074 Oct 15 23:54 PrivacyInfo.xcprivacy
+-rw-r--r-- 1 runner runner 8209 Oct 15 23:54 android-app-build.gradle
 ```
 
 ## ios and android bundles (exit 0)
@@ -76,8 +76,8 @@ Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-iOS Bundled 38057ms node_modules/expo-router/entry.js (2074 modules)
-Android Bundled 50491ms node_modules/expo-router/entry.js (2093 modules)
+iOS Bundled 48175ms node_modules/expo-router/entry.js (2073 modules)
+Android Bundled 61783ms node_modules/expo-router/entry.js (2093 modules)
 
 › Assets (34):
 node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
@@ -117,7 +117,7 @@ Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-Web Bundled 21813ms node_modules/expo-router/entry.js (1672 modules)
+Web Bundled 29414ms node_modules/expo-router/entry.js (1672 modules)
 
 › Assets (25):
 assets/fonts/Fraunces-Display.ce25e218f7888cafe2720ebc7383ae8d.ttf (33KB)
