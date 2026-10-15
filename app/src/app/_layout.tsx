@@ -28,7 +28,10 @@ export default function RootLayout() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    Appearance.setColorScheme(appearance === 'system' ? 'unspecified' : appearance);
+    // Native only: the web preview follows the browser's setting.
+    if (Platform.OS !== 'web' && typeof Appearance.setColorScheme === 'function') {
+      Appearance.setColorScheme(appearance === 'system' ? 'unspecified' : appearance);
+    }
   }, [appearance]);
 
   useEffect(() => {
@@ -42,15 +45,6 @@ export default function RootLayout() {
   }, []);
 
   useBackgroundSync(ready);
-
-  // Tapping a reminder opens the right screen.
-  const response = Notifications.useLastNotificationResponse();
-  useEffect(() => {
-    if (!ready || !onboarded || !response) return;
-    const url = response.notification.request.content.data?.url;
-    if (typeof url === 'string' && url.startsWith('/')) router.push(url);
-    Notifications.clearLastNotificationResponse();
-  }, [ready, onboarded, response]);
 
   if (!ready) return null;
 
@@ -101,6 +95,7 @@ export default function RootLayout() {
             </Stack.Protected>
             <Stack.Screen name="+not-found" options={page('')} />
           </Stack>
+          {Platform.OS !== 'web' && onboarded ? <ReminderTaps /> : null}
           <LockGate />
           <PrivacyCover />
           <ToastHost />
@@ -108,6 +103,18 @@ export default function RootLayout() {
       </ThemeProvider>
     </GestureHandlerRootView>
   );
+}
+
+/** Tapping a reminder opens the right screen (medications or the check-in). Phones only. */
+function ReminderTaps() {
+  const response = Notifications.useLastNotificationResponse();
+  useEffect(() => {
+    if (!response) return;
+    const url = response.notification.request.content.data?.url;
+    if (typeof url === 'string' && url.startsWith('/')) router.push(url);
+    Notifications.clearLastNotificationResponse();
+  }, [response]);
+  return null;
 }
 
 const styles = StyleSheet.create({ root: { flex: 1 } });
