@@ -118,7 +118,7 @@ export default function Guide() {
     <View style={styles.intro}>
       <View style={[styles.introCard, { backgroundColor: c.accentSoft }]}>
         <Leaf size={28} color={c.primary} />
-        <Txt variant="callout">{t('guide.intro')}</Txt>
+        <Txt variant="callout" style={styles.flex}>{t('guide.intro')}</Txt>
       </View>
       {messages.length === 0 ? (
         <Animated.View entering={FadeIn.delay(200)} style={styles.suggestions}>

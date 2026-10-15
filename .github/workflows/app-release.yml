@@ -1,0 +1,48 @@
+# Builds the store versions of the Jachi Health app on Expo's servers (EAS Build) and sends them to Apple TestFlight
+# and Google Play internal testing (EAS Submit). Start it by pushing a tag like app-v1.0.0, or in GitHub:
+# Actions > app-release > Run workflow. The secrets it needs are listed at the top of app/scripts/release.py.
+name: app-release
+on:
+  push:
+    tags: ['app-v*']
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: Which stores
+        type: choice
+        options: [all, ios, android]
+        default: all
+concurrency:
+  group: app-release
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: app
+    env:
+      PLATFORM: ${{ inputs.platform || 'all' }}
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+      ASC_APP_ID: ${{ secrets.ASC_APP_ID }}
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: What can run
+        run: python3 scripts/release.py check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install packages
+        run: |
+          npm ci --no-audit --no-fund
+          python3 -m pip install --quiet --user --break-system-packages pexpect
+      - name: Build and submit
+        run: python3 scripts/release.py run
