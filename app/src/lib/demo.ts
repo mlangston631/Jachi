@@ -13,7 +13,9 @@ export function wantsDemo(): boolean {
 }
 
 export async function seedDemo(): Promise<void> {
-  if (!wantsDemo() || (await allMeds()).length) return;
+  if (!wantsDemo()) return;
+  usePrefs.getState().set({ onboarded: true, adult: true, name: 'Maria', focus: ['urgent', 'refill'], waitlist: { email: 'maria@example.com', state: 'TX', name: 'Maria', interests: ['refills'], at: Date.now(), queued: false } });
+  if ((await allMeds()).length) return;
   const today = dayKey();
   const moods = [3, 4, 4, 3, 5, 4, 2, 3, 4, 4, 5, 4, 3, 4, 4, 5, 4, 4, 3, 4];
   const sleeps = [6.5, 7, 7.5, 6, 8, 7.5, 5.5, 6.5, 7, 7.5, 8, 7, 6.5, 7.5, 7, 8, 7.5, 7, 6, 7.5];
@@ -44,5 +46,4 @@ export async function seedDemo(): Promise<void> {
   await saveVital({ at: at(addDays(today, -9), '07:30').getTime(), kind: 'weight', value: 85.1, value2: null, note: '' });
   await addQuestion('Are my morning headaches related to my blood pressure?');
   await addQuestion('Should I keep taking vitamin D in the summer?');
-  usePrefs.getState().set({ onboarded: true, adult: true, name: 'Maria', focus: ['urgent', 'refill'], waitlist: { email: 'maria@example.com', state: 'TX', name: 'Maria', interests: ['refills'], at: Date.now(), queued: false } });
 }

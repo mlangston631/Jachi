@@ -78,7 +78,7 @@ export const es: Shape<typeof en> = {
     privacyTitle: 'Privado',
     privacyAccent: 'desde el diseño.',
     privacy1Title: 'Su diario se queda en este teléfono',
-    privacy1Body: 'Sus registros diarios, mediciones y medicamentos se guardan solo en este dispositivo. Jachi no puede verlos.',
+    privacy1Body: 'Sus registros diarios, mediciones y medicamentos se guardan solo en este teléfono y en su propia copia de seguridad. Jachi nunca los ve.',
     privacy2Title: 'Sin anuncios. Sin rastreo.',
     privacy2Body: 'Sin analíticas ni redes de anuncios, y nunca vendemos su información.',
     privacy3Title: 'Bloquéelo si lo desea',

@@ -76,7 +76,7 @@ export const en = {
     privacyTitle: 'Private',
     privacyAccent: 'by design.',
     privacy1Title: 'Your journal stays on this phone',
-    privacy1Body: "Check-ins, readings and medications are saved only on this device. Jachi can't see them.",
+    privacy1Body: "Check-ins, readings and medications are saved only on this phone and in your own phone backup. Jachi never sees them.",
     privacy2Title: 'No ads. No tracking.',
     privacy2Body: 'No analytics, no ad networks, and we never sell your information.',
     privacy3Title: 'Lock it if you like',
