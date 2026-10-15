@@ -1,15 +1,15 @@
 # App checks
 
-Commit: 02a00abc4cb1005855a3d61b28c91b3033dddd3e  
-Date: 2026-10-15 23:06 UTC
+Commit: 8766247a3b5600120d5ecfe51098f67631c01902  
+Date: 2026-10-15 23:17 UTC
 
 - pass: versions (0s)
-- pass: typescript (3s)
-- pass: tests (4s)
-- pass: expo doctor (3s)
-- pass: native config (3s)
-- pass: ios and android bundles (56s)
-- pass: web build (24s)
+- pass: typescript (5s)
+- pass: tests (5s)
+- pass: expo doctor (5s)
+- pass: native config (5s)
+- pass: ios and android bundles (65s)
+- pass: web build (34s)
 
 ## versions (exit 0)
 ```
@@ -26,23 +26,23 @@ Dependencies are up to date
 ```
 PASS __tests__/schedule.test.ts
 PASS __tests__/reminders.test.ts
-PASS __tests__/insights.test.ts
 PASS __tests__/summary.test.ts
-PASS __tests__/i18n.test.ts
+PASS __tests__/insights.test.ts
 PASS __tests__/units.test.ts
+PASS __tests__/i18n.test.ts
 PASS __tests__/dates.test.ts
 PASS __tests__/streak.test.ts
+PASS __tests__/forms.test.ts
 PASS __tests__/csv.test.ts
 PASS __tests__/safety.test.ts
 PASS __tests__/finder.test.ts
-PASS __tests__/forms.test.ts
 PASS __tests__/search.test.ts
 PASS __tests__/content.test.ts
 
 Test Suites: 14 passed, 14 total
 Tests:       84 passed, 84 total
 Snapshots:   0 total
-Time:        2.628 s
+Time:        3.839 s
 Ran all test suites.
 ```
 
@@ -61,13 +61,13 @@ Running 20 checks on your project...
 - Running prebuild
 ✔ Finished prebuild
 total 36
-drwxr-xr-x 2 runner runner 4096 Oct 15 23:04 .
-drwxr-xr-x 5 runner runner 4096 Oct 15 23:04 ..
--rw-r--r-- 1 runner runner 3580 Oct 15 23:04 AndroidManifest.xml
--rw-r--r-- 1 runner runner 3627 Oct 15 23:04 Info.plist
--rw-r--r-- 1 runner runner  255 Oct 15 23:04 JachiHealth.entitlements
--rw-r--r-- 1 runner runner 3204 Oct 15 23:04 PrivacyInfo.xcprivacy
--rw-r--r-- 1 runner runner 8209 Oct 15 23:04 android-app-build.gradle
+drwxr-xr-x 2 runner runner 4096 Oct 15 23:14 .
+drwxr-xr-x 5 runner runner 4096 Oct 15 23:15 ..
+-rw-r--r-- 1 runner runner 3580 Oct 15 23:15 AndroidManifest.xml
+-rw-r--r-- 1 runner runner 3627 Oct 15 23:15 Info.plist
+-rw-r--r-- 1 runner runner  255 Oct 15 23:15 JachiHealth.entitlements
+-rw-r--r-- 1 runner runner 3204 Oct 15 23:15 PrivacyInfo.xcprivacy
+-rw-r--r-- 1 runner runner 8209 Oct 15 23:15 android-app-build.gradle
 ```
 
 ## ios and android bundles (exit 0)
@@ -76,8 +76,8 @@ Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-iOS Bundled 41351ms node_modules/expo-router/entry.js (2067 modules)
-Android Bundled 54737ms node_modules/expo-router/entry.js (2093 modules)
+iOS Bundled 50428ms node_modules/expo-router/entry.js (2075 modules)
+Android Bundled 62742ms node_modules/expo-router/entry.js (2093 modules)
 
 › Assets (34):
 node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
@@ -97,17 +97,17 @@ node_modules/expo-router/assets/sitemap.png (465B)
 node_modules/expo-router/assets/unmatched.png (4.8KB)
 
 › ios bundles (1):
-_expo/static/js/ios/entry-6f2fb06f246c7dfdaceb676bbb08d45c.hbc (5.6MB)
+_expo/static/js/ios/entry-715f5005bc960863d69c08b04038dc4f.hbc (5.6MB)
 
 › android bundles (1):
-_expo/static/js/android/entry-420fcebdb209658659c54489c74b741c.hbc (5.7MB)
+_expo/static/js/android/entry-a2a7cb33aa71a18331ce55db4c46f4dd.hbc (5.7MB)
 
 › Files (1):
 metadata.json (3.4KB)
 
 Exported: .ci-dist/native
-5.5M	.ci-dist/native/_expo/static/js/android/entry-420fcebdb209658659c54489c74b741c.hbc
-5.4M	.ci-dist/native/_expo/static/js/ios/entry-6f2fb06f246c7dfdaceb676bbb08d45c.hbc
+5.5M	.ci-dist/native/_expo/static/js/android/entry-a2a7cb33aa71a18331ce55db4c46f4dd.hbc
+5.4M	.ci-dist/native/_expo/static/js/ios/entry-715f5005bc960863d69c08b04038dc4f.hbc
 12M	.ci-dist/native
 ```
 
@@ -117,7 +117,7 @@ Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-Web Bundled 22661ms node_modules/expo-router/entry.js (1672 modules)
+Web Bundled 32855ms node_modules/expo-router/entry.js (1672 modules)
 
 › Assets (25):
 assets/fonts/Fraunces-Display.ce25e218f7888cafe2720ebc7383ae8d.ttf (33KB)
@@ -141,7 +141,7 @@ node_modules/expo-router/assets/unmatched.20e71bdf79e3a97bf55fd9e164041578.png (
 node_modules/expo-sqlite/web/wa-sqlite/wa-sqlite.5e61fe84c4a4f49e0b1a33661b45c791.wasm (641KB)
 
 › web bundles (23):
-_expo/static/js/web/__common-0458177ab35ca64d828f0132e5a44d02.js (1.8MB)
+_expo/static/js/web/__common-606feb880ebb5a24acc969e4ef2e501c.js (1.8MB)
 _expo/static/js/web/__expo-metro-runtime-8c088df87a31e4e6accd81c554ec290d.js (3.8KB)
 _expo/static/js/web/_layout-027e6199c266f027a6e59a26336ac631.js (3.2KB)
 _expo/static/js/web/_layout-998c052f77c025552f9fb257f5b5e65f.js (315KB)
@@ -150,13 +150,13 @@ _expo/static/js/web/+not-found-2cf39a6a5fa072ff5df89859311c760c.js (1.2KB)
 _expo/static/js/web/account-c54fa4f5acd1c2e60a7b4c4a542ad535.js (11KB)
 _expo/static/js/web/care-2251eccac2424a70767462ccc0acadbf.js (15KB)
 _expo/static/js/web/checkin-285c97145a6930e6a463f84d371321b3.js (6.3KB)
-_expo/static/js/web/entry-2f98061e12f92fa00f53ebc8b3e11a0e.js (1.1MB)
+_expo/static/js/web/entry-d0dc45080de64b315df57ac038ec5cd7.js (1.1MB)
 _expo/static/js/web/finder-197d38bc008ff222e7a0e938abc088af.js (9.9KB)
 _expo/static/js/web/guide-a962e185fbc276b8d924a380ca832beb.js (9.7KB)
-_expo/static/js/web/index-89c6d99116614f268c7859fc38e67382.js (15KB)
-_expo/static/js/web/journal-0b5c13d88b3b10c7984a12f3c7cd6d99.js (13KB)
+_expo/static/js/web/index-3bdd5c9fb6945a931d123fe8b40bff42.js (15KB)
+_expo/static/js/web/journal-f104dbea4f40134e3d15ceb912f026e5.js (13KB)
 _expo/static/js/web/med-e42cfa8e972ef232eca537d95c2a6f9e.js (5.8KB)
-_expo/static/js/web/meds-16f2e3a0a2e62fabdff9d6f3d8e4b8e9.js (9.6KB)
+_expo/static/js/web/meds-d13dad1b39dc97c3f8bd5d6da09387d8.js (9.6KB)
 _expo/static/js/web/onboarding-b0e22cab271ba4ddfa0b66422d2b1f74.js (9.8KB)
 _expo/static/js/web/settings-d08f30920ab1e47fa1b244b6f81c553d.js (8.4KB)
 _expo/static/js/web/summary-cc97a7d39cb8a50b9acb7f9123c5e68b.js (18KB)
