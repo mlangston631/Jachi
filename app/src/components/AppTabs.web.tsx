@@ -33,7 +33,7 @@ function GlassBar() {
         styles.bar,
         {
           bottom: insets.bottom + 18,
-          backgroundColor: dark ? 'rgba(29,44,36,0.78)' : 'rgba(255,255,255,0.78)',
+          backgroundColor: dark ? 'rgba(29,44,36,0.95)' : 'rgba(255,255,255,0.95)',
           borderColor: dark ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.9)',
           boxShadow: dark ? '0px 10px 30px rgba(0,0,0,0.45)' : '0px 10px 30px rgba(13,36,28,0.16), 0px 1px 2px rgba(13,36,28,0.08)',
         },
