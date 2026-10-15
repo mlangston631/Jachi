@@ -18,6 +18,7 @@ import { classify } from '@/lib/safety';
 import { linkify } from '@/lib/text';
 import { useGuide, type Message } from '@/state/guide';
 import { radius, space, type, useTheme } from '@/theme';
+import { NO_OUTLINE } from '@/theme/tokens';
 
 function Dot({ delay }: { delay: number }) {
   const c = useTheme();
@@ -176,7 +177,7 @@ export default function Guide() {
               multiline
               maxLength={800}
               accessibilityLabel={t('guide.placeholder')}
-              style={[type.body, styles.input, { color: c.text }]}
+              style={[type.body, NO_OUTLINE, styles.input, { color: c.text }]}
               maxFontSizeMultiplier={1.6}
               submitBehavior="blurAndSubmit"
               returnKeyType="send"

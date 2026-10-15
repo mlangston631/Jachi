@@ -151,5 +151,8 @@ export const type: Record<TypeVariant, TextStyle> = {
   button: { fontFamily: font.semibold, fontSize: 16, lineHeight: 20 },
 };
 
+/** Text fields: no browser focus outline in the web preview (the fields draw their own focus state). */
+export const NO_OUTLINE = { outlineWidth: 0 } as const;
+
 /** Smallest touch target (Apple HIG 44pt, Material 48dp). */
 export const HIT = 48;

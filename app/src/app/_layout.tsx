@@ -6,11 +6,13 @@ import * as SystemUI from 'expo-system-ui';
 import { useEffect, useState } from 'react';
 import { Appearance, Platform, StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import { ErrorView } from '@/components/ErrorView';
 import { ToastHost } from '@/components/feedback';
 import { LockGate, PrivacyCover } from '@/components/Guard';
 import { useT } from '@/i18n';
+import { wantsDemo } from '@/lib/demo';
 import { boot, useBackgroundSync } from '@/lib/sync';
 import { usePrefs } from '@/state/prefs';
 import { font, useTheme } from '@/theme';
@@ -71,7 +73,7 @@ export default function RootLayout() {
     headerBackButtonDisplayMode: 'minimal' as const,
   });
 
-  return (
+  const app = (
     <GestureHandlerRootView style={styles.root}>
       <ThemeProvider value={navTheme}>
         <StatusBar style={c.scheme === 'dark' ? 'light' : 'dark'} />
@@ -103,7 +105,11 @@ export default function RootLayout() {
       </ThemeProvider>
     </GestureHandlerRootView>
   );
+  // Web preview screenshots: lay the screens out with an iPhone's safe areas (status bar and home indicator).
+  return PHONE_INSETS ? <SafeAreaInsetsContext.Provider value={PHONE_INSETS}>{app}</SafeAreaInsetsContext.Provider> : app;
 }
+
+const PHONE_INSETS = wantsDemo() ? { top: 59, bottom: 34, left: 0, right: 0 } : null;
 
 /** Tapping a reminder opens the right screen (medications or the check-in). Phones only. */
 function ReminderTaps() {

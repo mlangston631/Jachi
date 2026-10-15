@@ -42,30 +42,7 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          git config --global user.name "jachi-ci"
-          git config --global user.email "ci@jachihealth.com"
-          remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          publish() {
-            (cd "$2" && git init -q -b "$1" && git add -A && git commit -qm "$3" && git push -qf "$remote" "$1")
-          }
-          if [ -d app/node_modules ]; then
-            T=$(mktemp -d)
-            (cd app/node_modules && {
-              find . -type f \( -name '*.d.ts' -o -name '*.d.mts' -o -name '*.d.cts' -o -name 'package.json' \
-                -o -name 'tsconfig*.json' -o -iname 'license*' \) -not -path './typescript/*' -not -path './.cache/*'
-              cat ../.ci/ts-sources.txt 2>/dev/null
-            } | sort -u | tar -czf "$T/types.tgz" -T -)
-            cp app/package-lock.json "$T/" 2>/dev/null || true
-            du -h "$T/types.tgz"
-            publish app-types "$T" "Type definitions for local checks (${GITHUB_SHA})"
-          fi
-          if [ -f app/.ci-dist/web/index.html ]; then
-            publish app-preview app/.ci-dist/web "Web build for screenshots (${GITHUB_SHA})"
-          fi
-          git add app/.ci/report.md app/.ci/native app/package.json app/package-lock.json
-          git commit -qm "CI: app check results [skip ci]" || exit 0
-          git push -q || { git pull -q --rebase && git push -q; }
+        run: bash app/scripts/ci-publish.sh
       - name: Result
         if: steps.checks.outcome == 'failure'
         run: |

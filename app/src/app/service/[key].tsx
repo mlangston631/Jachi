@@ -33,8 +33,7 @@ export default function ServiceScreen() {
         <View style={[styles.icon, { backgroundColor: c.accentSoft }]}><Icon name={s.icon} size={30} color={c.primary} /></View>
         <Txt variant="largeTitle" heading>{text.name}</Txt>
         <Row gap={space.sm}>
-          <Tag label={text.tag} icon="steth" />
-          {s.ongoing ? <Tag label={t('service.ongoing')} icon="refresh" /> : null}
+          <Tag label={text.tag} icon={s.ongoing ? 'refresh' : 'steth'} />
         </Row>
         <Txt variant="body" tone="text2">{text.desc}</Txt>
       </Animated.View>

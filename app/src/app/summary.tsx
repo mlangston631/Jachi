@@ -20,6 +20,7 @@ import { hasContent, summaryHtml, summaryModel } from '@/lib/summary';
 import { formatVital, unitKey } from '@/lib/units';
 import { usePrefs } from '@/state/prefs';
 import { radius, space, type, useTheme } from '@/theme';
+import { NO_OUTLINE } from '@/theme/tokens';
 
 export default function Summary() {
   const t = useT();
@@ -126,7 +127,7 @@ export default function Summary() {
             onChangeText={setQuestion}
             placeholder={t('summary.questionPlaceholder')}
             placeholderTextColor={c.text3}
-            style={[type.body, styles.flex, styles.addInput, { color: c.text }]}
+            style={[type.body, NO_OUTLINE, styles.flex, styles.addInput, { color: c.text }]}
             accessibilityLabel={t('summary.questionPlaceholder')}
             returnKeyType="done"
             onSubmitEditing={() => void add()}

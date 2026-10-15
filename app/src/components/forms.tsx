@@ -11,6 +11,7 @@ import { useT } from '@/i18n';
 import { clock, minutesOf, timeFromMinutes } from '@/lib/dates';
 import { haptic } from '@/lib/haptics';
 import { HIT, radius, space, type, useTheme } from '@/theme';
+import { NO_OUTLINE } from '@/theme/tokens';
 import { Icon } from './Icon';
 import { Divider, Tap, Txt } from './ui';
 
@@ -71,7 +72,7 @@ export function Field(p: FieldProps) {
           onBlur={() => setFocused(false)}
           accessibilityLabel={p.label}
           accessibilityHint={p.error ?? p.hint}
-          style={[type.body, styles.input, { color: theme.text }, p.multiline ? styles.multiline : null]}
+          style={[type.body, NO_OUTLINE, styles.input, { color: theme.text }, p.multiline ? styles.multiline : null]}
           selectionColor={theme.accent}
           maxFontSizeMultiplier={1.8}
         />
@@ -348,7 +349,7 @@ export function Select({ label, value, options, onChange, placeholder, error }: 
               onChangeText={setQ}
               placeholder={placeholder}
               placeholderTextColor={theme.text3}
-              style={[type.body, styles.input, { color: theme.text }]}
+              style={[type.body, NO_OUTLINE, styles.input, { color: theme.text }]}
               autoCorrect={false}
               accessibilityLabel={placeholder}
             />

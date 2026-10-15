@@ -37,11 +37,11 @@ export async function seedDemo(): Promise<void> {
   await db.runAsync('UPDATE meds SET created_at = ?', at(addDays(today, -14), '09:00').getTime());
   const meds = await allMeds();
   const byId = new Map(meds.map(m => [m.id, m]));
-  for (let i = 6; i >= 1; i--) {
+  for (let i = 14; i >= 1; i--) {
     const day = addDays(today, -i);
-    await logDose(byId.get(lis)!, day, '08:00', 'taken');
+    if (i !== 9) await logDose(byId.get(lis)!, day, '08:00', 'taken');
     await logDose(byId.get(vitD)!, day, '08:00', 'taken');
-    if (i !== 3) await logDose(byId.get(vitD)!, day, '20:00', 'taken');
+    if (i !== 3 && i !== 11) await logDose(byId.get(vitD)!, day, '20:00', 'taken');
   }
   const bp = [[128, 84], [124, 82], [131, 85], [122, 80], [126, 81], [120, 79]];
   bp.forEach(([sys, dia], i) => void saveVital({ at: at(addDays(today, -(12 - i * 2)), '07:45').getTime(), kind: 'bp', value: sys!, value2: dia!, note: '' }));

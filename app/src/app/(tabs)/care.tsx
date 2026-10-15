@@ -13,6 +13,7 @@ import { CONTENT, LINKS, serviceByKey } from '@/lib/content';
 import { openPage } from '@/lib/links';
 import { searchConditions } from '@/lib/search';
 import { radius, space, type, useTheme } from '@/theme';
+import { NO_OUTLINE } from '@/theme/tokens';
 
 const STANDARD_ICONS = ['steth', 'shield', 'user', 'pill', 'alert', 'lock'];
 
@@ -50,7 +51,7 @@ export default function Care() {
             accessibilityLabel={t('care.searchLabel')}
             autoCorrect={false}
             returnKeyType="search"
-            style={[type.body, styles.searchInput, { color: c.text }]}
+            style={[type.body, NO_OUTLINE, styles.searchInput, { color: c.text }]}
             maxFontSizeMultiplier={1.8}
           />
           {q ? (
