@@ -18,10 +18,15 @@ sys.path.insert(0, str(ROOT / "tests"))
 import serve  # noqa: E402
 from common import ensure_fonts, use_brand_fonts  # noqa: E402
 from content import PRICES, EMAIL  # noqa: E402
+import pages as PAGES  # noqa: E402
+import strings  # noqa: E402
+
+ES = strings.ES
 
 PORT = 8765
 BASE = f"http://127.0.0.1:{PORT}"
 URL = f"{BASE}/"
+ES_URL = f"{BASE}/es/"
 OUT = ROOT / "tests" / "out"
 OUT.mkdir(exist_ok=True)
 ensure_fonts()
@@ -41,9 +46,16 @@ def check(name, ok, detail=""):
     print(("PASS " if ok else "FAIL ") + name + (f" :: {detail}" if detail else ""))
 
 
+EXTERNAL = []  # requests that tried to leave the site, from every page the tests open
+
+
 def setup(context, preview=False):
     page = context.new_page()
-    use_brand_fonts(page)
+
+    def outside(route):
+        EXTERNAL.append(route.request.url)
+        route.abort()
+    page.route(lambda url: not url.startswith(BASE) and not url.startswith("data:"), outside)
     if preview:
         page.add_init_script("window.claude = { use: async () => null };")
     logs = []
@@ -313,12 +325,15 @@ with sync_playwright() as p:
     check("faq opens", q.get_attribute("aria-expanded") == "true" and page.locator("#faq-a-1 p").is_visible())
     q.click(); page.wait_for_timeout(600)
     check("faq closes", q.get_attribute("aria-expanded") == "false" and not page.locator("#faq-a-1 p").is_visible())
-    page.locator("footer [data-open='privacy']").click(); page.wait_for_timeout(500)
+    check("footer links to the privacy policy and terms", page.locator("footer a[href='/privacy/']").count() == 1
+          and page.locator("footer a[href='/terms/']").count() == 1 and page.locator("footer a[href='/texas-medical-board/']").count() == 1)
+    page.locator("#join-form [data-open='privacy']").scroll_into_view_if_needed()
+    page.locator("#join-form [data-open='privacy']").click(); page.wait_for_timeout(500)
     check("privacy dialog opens", page.locator("#privacy").evaluate("d => d.open"))
     page.screenshot(path=str(OUT / "privacy-mobile.png"))
     page.keyboard.press("Escape"); page.wait_for_timeout(300)
     check("privacy dialog closes", not page.locator("#privacy").evaluate("d => d.open"))
-    check("focus back on opener", page.evaluate("document.activeElement.matches('footer [data-open=privacy]')"))
+    check("focus back on opener", page.evaluate("document.activeElement.matches('#join-form [data-open=privacy]')"))
     unexpected = [l for l in logs if "501" not in l[1]]  # the 501 comes from the deliberate no-backend test
     check("mobile interactions: no unexpected console errors", not unexpected, json.dumps(unexpected))
     ctx.close()
@@ -788,6 +803,265 @@ with sync_playwright() as p:
         check(f"404 @{w}: every file it uses loads", not bad, json.dumps(bad))
         check(f"404 @{w}: no console errors", not logs, json.dumps(logs))
         ctx.close()
+
+    # 9) Spanish home page: every size, then every tool in Spanish
+    for w, h in VIEWPORTS:
+        ctx = browser.new_context(viewport={"width": w, "height": h}, device_scale_factor=1, has_touch=w < 900, is_mobile=w < 900)
+        page, logs = setup(ctx)
+        page.goto(ES_URL, wait_until="networkidle"); page.wait_for_timeout(1200)
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"es: no horizontal overflow @{w}", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+        tops = page.evaluate("[...document.querySelectorAll('.svc')].map(e => Math.round(e.getBoundingClientRect().top))")
+        expect_rows = 3 if w >= 1060 else (5 if w >= 640 else 9)
+        check(f"es: nine service cards in {expect_rows} rows @{w}", len(tops) == 9 and len(set(tops)) == expect_rows, str(tops))
+        check(f"es: no console errors @{w}", not logs, json.dumps(logs))
+        if w in (390, 1440):
+            page.screenshot(path=str(OUT / f"es-first-{w}.png"))
+            page.screenshot(path=str(OUT / f"es-full-{w}.png"), full_page=True, animations="disabled")
+        if w == 1440:
+            problems = page.evaluate(STATIC_A11Y_JS)
+            check("es: anchors, labels, names, ids all valid", not problems, json.dumps(problems))
+        ctx.close()
+
+    STRUCTURE_JS = """() => ({
+      ids: [...document.querySelectorAll('[id]')].map(e => e.id).sort(),
+      fields: [...document.querySelectorAll('form[name] [name]')].map(e => e.closest('form').getAttribute('name') + ':' + e.name + ':' + e.type).sort(),
+      values: [...document.querySelectorAll('input[name=interest], #join-state option, #ticket-topic option')].map(e => e.value).sort(),
+      hits: document.querySelectorAll('.hit').length, faq: document.querySelectorAll('.faq-item').length,
+    })"""
+    ctx = browser.new_context(viewport={"width": 1280, "height": 900})
+    page, logs = setup(ctx)
+    page.goto(URL, wait_until="networkidle"); en_shape = page.evaluate(STRUCTURE_JS)
+    en_alt = page.evaluate("[...document.querySelectorAll('link[rel=alternate][hreflang]')].map(l => l.hreflang + ' ' + l.href)")
+    page.goto(ES_URL, wait_until="networkidle"); es_shape = page.evaluate(STRUCTURE_JS)
+    es_alt = page.evaluate("[...document.querySelectorAll('link[rel=alternate][hreflang]')].map(l => l.hreflang + ' ' + l.href)")
+    check("es: same ids, form fields and values as the English page", en_shape == es_shape,
+          json.dumps({k: (sorted(set(en_shape[k]) ^ set(es_shape[k])) if isinstance(en_shape[k], list) else (en_shape[k], es_shape[k])) for k in en_shape})[:600])
+    check("both home pages point to each other (hreflang)", en_alt == es_alt and any(a.startswith("es ") and a.endswith("/es/") for a in en_alt)
+          and any(a.startswith("x-default ") for a in en_alt), str(en_alt))
+    check("es: page language is Spanish", page.evaluate("document.documentElement.lang") == "es")
+    page.locator(".lang-switch").click(); page.wait_for_load_state("networkidle")
+    check("es: language switch goes to English", page.url == URL and page.evaluate("document.documentElement.lang") == "en", page.url)
+    page.locator(".lang-switch").click(); page.wait_for_load_state("networkidle")
+    check("en: language switch goes to Spanish", page.url == ES_URL, page.url)
+    ctx.close()
+
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    page.add_init_script("navigator.share = async data => { window.__shared = data; };")
+    page.route("**/api/chat", lambda r: r.fulfill(status=200, content_type="application/json",
+                                                     body=json.dumps({"reply": f"Las consultas cuestan $49. Escriba a {EMAIL}."})))
+    page.goto(ES_URL + "#care-finder", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#finder-next").click(); page.wait_for_timeout(300)
+    check("es finder: empty step shows the Spanish error", page.locator("#err-need").inner_text().strip() == ES["f_need"])
+    page.locator("label.need:has(input[value='urgent'])").click()
+    page.locator("#finder-next").click(); page.wait_for_timeout(500)
+    check("es finder: step counter in Spanish", page.locator("#finder-count").inner_text() == "Paso 2 de 2")
+    page.locator("fieldset[data-field='flag-urgent'] label:has(input[value='yes'])").click()
+    page.locator("#finder-next").click(); page.wait_for_timeout(600)
+    check("es finder: emergency result in Spanish", page.locator("#fres-title").inner_text() == ES["f_urgent_911_title"]
+          and page.locator("#fres-cta").get_attribute("href") == "tel:911" and ES["f_call_911"] in page.locator("#fres-cta").inner_text())
+    page.locator("#fres-restart").click(); page.wait_for_timeout(400)
+    page.locator("label.need:has(input[value='mental'])").click()
+    page.locator("#finder-next").click(); page.wait_for_timeout(400)
+    page.locator("fieldset[data-field='flag-mental'] label:has(input[value='no'])").click()
+    page.locator("#finder-next").click(); page.wait_for_timeout(600)
+    chips = page.locator("#fres-chips").inner_text()
+    check("es finder: therapy and medication result with Spanish prices", page.locator("#fres-title").inner_text() == ES["f_mental_title"]
+          and f"Terapia: {PRICES['therapy']} por sesión" in chips, chips)
+    page.screenshot(path=str(OUT / "es-finder-phone.png"))
+
+    page.goto(ES_URL + "#services", wait_until="networkidle"); page.wait_for_timeout(400)
+    def es_hits():
+        return page.evaluate("[...document.querySelectorAll('#lookup-results .hit')].filter(h => !h.hidden).map(h => h.dataset.name)")
+    page.locator("#lookup-q").fill("infeccion urinaria"); page.wait_for_timeout(400)
+    check("es search: Spanish words find the condition", es_hits()[:1] == ["Infección urinaria (IU)"], str(es_hits()))
+    check("es search: count in Spanish", "resultado" in page.locator("#lookup-count").inner_text(), page.locator("#lookup-count").inner_text())
+    page.locator("#lookup-q").fill("UTI"); page.wait_for_timeout(300)
+    check("es search: English words still work", "Infección urinaria (IU)" in es_hits(), str(es_hits()))
+    page.locator("#lookup-q").fill("dolor de pecho"); page.wait_for_timeout(300)
+    check("es search: emergencies first, with 911", es_hits()[:1] == ["Dolor de pecho"]
+          and page.locator(".hit--911:not([hidden]) a[href='tel:911']").count() >= 1, str(es_hits()))
+    page.locator(".lookup__clear").click(); page.wait_for_timeout(200)
+
+    page.goto(ES_URL + "#join", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#join-submit").click(); page.wait_for_timeout(300)
+    check("es join: errors in Spanish", page.locator("#err-name").inner_text().strip() == ES["j_name"]
+          and ES["fix_many"].split("{n}")[0] in page.locator("#join-status").inner_text(), page.locator("#join-status").inner_text())
+    page.locator("#join-name").fill("Ana"); page.locator("#join-email").fill("ana@example.com")
+    page.select_option("#join-state", "TX")
+    page.locator("#join-form label.check:has(input[value='therapy'])").click()
+    page.locator("label[for=join-consent]").click()
+    es_posted = {}
+    page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
+    page.on("request", lambda req: es_posted.update(body=req.post_data) if req.method == "POST" and req.url.rstrip("/") == BASE else None)
+    page.locator("#join-submit").click(); page.wait_for_timeout(1200)
+    body = es_posted.get("body", "")
+    check("es join: saves to the same form, marked Spanish", all(x in body for x in ("form-name=early-access", "language=es", "first_name=Ana", "interest=therapy")), body)
+    check("es join: success in Spanish", page.locator("#join-success-title").inner_text().startswith("Ya está en la lista, Ana"))
+    page.locator("#join-share").click(); page.wait_for_timeout(300)
+    shared = page.evaluate("window.__shared")
+    check("es share: opens the share sheet with the Spanish page", shared and shared["url"] == "https://www.jachihealth.com/es/" and shared["text"] == ES["share_text"], str(shared))
+    page.screenshot(path=str(OUT / "es-join-success-phone.png"))
+
+    page.goto(ES_URL + "#eligibility", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#elig-next").click(); page.wait_for_timeout(200)
+    check("es check: errors in Spanish", page.locator("#err-state").inner_text().strip() == ES["choose_state"])
+    page.select_option("#elig-state", "TX")
+    page.locator("fieldset[data-field='age'] label:has(input[value='yes'])").click()
+    page.locator("#elig-next").click(); page.wait_for_timeout(400)
+    page.locator("#elig-ft").fill("5"); page.locator("#elig-in").fill("9"); page.locator("#elig-lb").fill("210")
+    page.wait_for_timeout(900)
+    check("es check: BMI computed", page.locator("#bmi-num").inner_text() == "31.0" and page.locator("#bmi-hint").inner_text() == ES["e_gauge_30"])
+    page.screenshot(path=str(OUT / "es-elig-phone.png"))
+    page.locator("#elig-next").click(); page.wait_for_timeout(400)
+    page.locator("#elig-tool label.check:has(input[value='none'])").click()
+    page.locator("fieldset[data-field='mtc'] label:has(input[value='no'])").click()
+    page.locator("fieldset[data-field='preg'] label:has(input[value='no'])").click()
+    page.locator("#elig-next").click(); page.wait_for_timeout(600)
+    check("es check: result in Spanish", page.locator("#res-title").inner_text() == ES["e_likely_title"]
+          and page.locator("#res-note").inner_text() == ES["e_note_tx"])
+
+    page.goto(ES_URL, wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#chat-launcher").click(); page.wait_for_timeout(600)
+    check("es chat: Spanish greeting and labels", "Soy el asistente de IA de Jachi" in page.locator("#chat-log").inner_text()
+          and page.locator("#chat-title").inner_text() == "Ayuda de Jachi")
+    page.locator("#chat-input").fill("Tengo dolor de pecho ahora"); page.locator("#chat-send").click(); page.wait_for_timeout(500)
+    alert = page.locator("#chat-log .msg--alert").last
+    check("es chat: Spanish emergency goes straight to 911", alert.inner_text().startswith(ES["c_emergency"][:30]) and alert.locator("a[href='tel:911']").count() == 1)
+    page.locator("#chat-input").fill("me quiero morir"); page.locator("#chat-send").click(); page.wait_for_timeout(500)
+    alert = page.locator("#chat-log .msg--alert").last
+    check("es chat: Spanish crisis gets 988 in Spanish", "AYUDA" in alert.inner_text() and alert.locator("a[href='tel:988']").count() == 1)
+    page.locator("#chat-input").fill("¿Cuánto cuesta?"); page.locator("#chat-send").click(); page.wait_for_timeout(700)
+    check("es chat: AI reply shown with the email linked", "$49" in page.locator("#chat-log .msg--bot").last.inner_text()
+          and page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
+    page.screenshot(path=str(OUT / "es-chat-phone.png"))
+    page.locator("#chat .chat__fine [data-ticket]").click(); page.wait_for_timeout(300)
+    page.locator("#ticket-submit").click(); page.wait_for_timeout(300)
+    check("es ticket: errors in Spanish", page.locator("#err-tname").inner_text().strip() == ES["t_name"])
+    page.locator("#chat-close").click(); page.wait_for_timeout(400)
+    check("es: no console errors in the flows", not [l for l in logs if "501" not in l[1]], json.dumps(logs))
+    ctx.close()
+
+    # 10) Sharing on a computer: no share sheet, so the link is copied
+    ctx = browser.new_context(viewport={"width": 1280, "height": 900})
+    page, logs = setup(ctx)
+    page.add_init_script("delete Navigator.prototype.share; Object.defineProperty(navigator, 'clipboard', { value: { writeText: async t => { window.__copied = t; } } });")
+    page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
+    page.goto(URL + "#join", wait_until="networkidle"); page.wait_for_timeout(400)
+    page.locator("#join-name").fill("Sam"); page.locator("#join-email").fill("sam@example.com")
+    page.select_option("#join-state", "TX"); page.locator("#join-form label.check:has(input[value='skin-care'])").click()
+    page.locator("label[for=join-consent]").click(); page.locator("#join-submit").click(); page.wait_for_timeout(1000)
+    page.locator("#join-share").click(); page.wait_for_timeout(300)
+    check("share: copies the link when there's no share sheet", page.evaluate("window.__copied") == "https://www.jachihealth.com/"
+          and page.locator("#join-share .btn__label").inner_text() == strings.EN["share_copied_button"]
+          and strings.EN["share_copied"] in page.locator("#join-share-status").inner_text())
+    page.screenshot(path=str(OUT / "share-copied-desktop.png"))
+    page.wait_for_timeout(2700)
+    check("share: button label comes back", page.locator("#join-share .btn__label").inner_text() == strings.EN["share_button"])
+    check("share: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+
+    # 11) Service pages
+    slugs = [p["slug"] for p in PAGES.PAGES]
+    for slug in slugs:
+        for w, h in ((390, 844), (1440, 900)):
+            ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=w < 900, is_mobile=w < 900)
+            page, logs = setup(ctx)
+            page.goto(f"{BASE}/{slug}/", wait_until="networkidle"); page.wait_for_timeout(500)
+            ov = page.evaluate(OVERFLOW_JS)
+            check(f"/{slug}/ @{w}: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+            info = page.evaluate("""() => ({
+              h1: document.querySelectorAll('h1').length,
+              crumbs: document.querySelectorAll('.crumbs li').length,
+              join: [...document.querySelectorAll('a[href*="interest="]')].map(a => a.getAttribute('href')),
+              canonical: (document.querySelector('link[rel=canonical]') || {}).href,
+              related: [...document.querySelectorAll('.related a')].map(a => a.getAttribute('href')),
+              faq: document.querySelectorAll('.faq-item').length,
+              ld: [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => JSON.parse(s.textContent)['@type']),
+            })""")
+            ok = (info["h1"] == 1 and info["crumbs"] == 3 and len(info["join"]) >= 3 and len(set(info["join"])) == 1
+                  and info["canonical"] == f"https://www.jachihealth.com/{slug}/" and len(info["related"]) == 3 and info["faq"] >= 3
+                  and info["ld"] == ["BreadcrumbList", "FAQPage"])
+            check(f"/{slug}/ @{w}: heading, breadcrumb, sign-up links, canonical, related pages, FAQ and schema", ok, json.dumps(info))
+            if w == 1440:
+                problems = page.evaluate(STATIC_A11Y_JS)
+                check(f"/{slug}/: links, labels and ids valid", not problems, json.dumps(problems))
+                for href in info["related"]:
+                    status, _h, _b = get(href)
+                    if status != 200:
+                        check(f"/{slug}/ related link {href} works", False, str(status))
+                page.locator(".faq-q").first.click(); page.wait_for_timeout(500)
+                check(f"/{slug}/: FAQ opens", page.locator(".faq-q").first.get_attribute("aria-expanded") == "true")
+            if slug in ("uti-treatment", "weight-loss", "online-therapy"):
+                page.screenshot(path=str(OUT / f"svc-{slug}-{w}.png"), full_page=True, animations="disabled")
+            check(f"/{slug}/ @{w}: no console errors", not logs, json.dumps(logs))
+            ctx.close()
+
+    # From a service page to the sign-up form with the service chosen
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    page.goto(f"{BASE}/uti-treatment/", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.evaluate("window.scrollTo({top: document.querySelector('.conds').getBoundingClientRect().top + scrollY, behavior: 'instant'})"); page.wait_for_timeout(900)
+    check("service page phone: bottom bar appears after the hero", page.locator("#dock").evaluate("el => el.classList.contains('is-visible')")
+          and page.locator("#dock a").get_attribute("href") == "/?interest=urgent-care"
+          and not page.locator("#chat-launcher").is_visible())
+    page.screenshot(path=str(OUT / "svc-dock-phone.png"))
+    page.locator(".page-hero .btn").first.click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1500)
+    check("service page CTA: lands on the home sign-up with the service ticked",
+          page.locator("input[name='interest'][value='urgent-care']").is_checked() and page.evaluate("location.search") == ""
+          and page.evaluate("location.hash") == "#join", page.url)
+    check("service page CTA: form in view, keyboard not opened", page.evaluate("document.activeElement.id") == "join-form-title"
+          and 0 <= page.evaluate("document.querySelector('.form-card').getBoundingClientRect().top") < 200)
+    check("service page CTA: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+    ctx = browser.new_context(viewport={"width": 1440, "height": 900})
+    page, logs = setup(ctx)
+    page.goto(f"{BASE}/weight-loss/", wait_until="networkidle"); page.wait_for_timeout(300)
+    page.locator(".page-cta .btn").click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1500)
+    check("weight page CTA (desktop): weight care ticked and name field ready", page.locator("input[name='interest'][value='weight-care']").is_checked()
+          and page.evaluate("document.activeElement.id") == "join-name")
+    page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
+    page.locator("#svc-skin .svc__link").click(); page.wait_for_load_state("networkidle")
+    check("home service card title opens its page", page.url == f"{BASE}/skin-care/", page.url)
+    check("service journeys: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+
+    # 12) Legal pages
+    for slug, must in (("privacy", ["What we collect", "Who we share it with", "Netlify", "Anthropic", EMAIL]),
+                       ("terms", ["Not medical advice", "call 911", "Tarrant County"]),
+                       ("texas-medical-board", ["NOTICE CONCERNING COMPLAINTS", "1801 Congress Avenue, Suite 9.200", "P.O. Box 2018",
+                                                "Austin, Texas 78768-2018", "1-800-201-9353", "www.tmb.state.tx.us"])):
+        for w, h in ((390, 844), (1440, 900)):
+            ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=w < 900, is_mobile=w < 900)
+            page, logs = setup(ctx)
+            page.goto(f"{BASE}/{slug}/", wait_until="networkidle"); page.wait_for_timeout(400)
+            ov = page.evaluate(OVERFLOW_JS)
+            text = page.locator("main").inner_text()
+            check(f"/{slug}/ @{w}: no overflow, one heading, key text present", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"]
+                  and page.locator("h1").count() == 1 and all(m in text for m in must), json.dumps([ov["offenders"], [m for m in must if m not in text]]))
+            check(f"/{slug}/ @{w}: no console errors", not logs, json.dumps(logs))
+            if w == 390:
+                page.screenshot(path=str(OUT / f"legal-{slug}-390.png"), full_page=True)
+            ctx.close()
+
+    # 13) Search engine files and fonts
+    status, headers, body = get("/sitemap.xml")
+    sm = body.decode()
+    missing = [u for u in ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs]
+               if f"<loc>https://www.jachihealth.com{u}</loc>" not in sm]
+    check("sitemap lists every page, with the Spanish alternate", not missing and 'hreflang="es"' in sm, str(missing))
+    font_file = next((ROOT / "public" / "fonts").glob("fraunces.*.woff2")).name
+    status, headers, body = get(f"/fonts/{font_file}")
+    check("fonts are served by the site with a long cache", status == 200 and "immutable" in headers.get("Cache-Control", ""), str(dict(headers)))
+    ctx = browser.new_context(viewport={"width": 390, "height": 844})
+    page, logs = setup(ctx)
+    page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(500)
+    fonts_ok = page.evaluate("document.fonts.ready.then(() => [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family + ' ' + f.style))")
+    check("brand fonts load from the site", any("Fraunces" in f for f in fonts_ok) and any("Instrument Sans" in f for f in fonts_ok), str(fonts_ok))
+    ctx.close()
+
+    check("no page asked another website for anything", not EXTERNAL, json.dumps(EXTERNAL[:10]))
 
     browser.close()
 

@@ -1,0 +1,80 @@
+<main id="main">
+  <section class="hero hero--page grain" aria-labelledby="page-title">
+    <div class="wrap page-hero">
+      <div class="page-hero__copy">
+        {{CRUMBS}}
+        <p class="pill"><span class="pill__dot" aria-hidden="true"></span>Early access open · Launching in Texas</p>
+        <h1 class="display display--page" id="page-title">{{SVC_H1}}</h1>
+        <p class="lead">{{SVC_LEAD}}</p>
+        <div class="cta-row">
+          <a class="btn btn--lg" href="{{JOIN_HREF}}">Get early access {{I:arrow:i--arrow}}</a>
+          {{SVC_SECOND_CTA}}
+        </div>
+      </div>
+      {{SVC_CARD}}
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="list-title">
+    <div class="wrap page-split">
+      <div class="section-head section-head--tight">
+        <p class="eyebrow">{{SVC_CRUMB}}</p>
+        <h2 class="h2 h2--sm" id="list-title">{{SVC_LIST_TITLE}}</h2>
+        <p class="lead">{{SVC_LIST_LEAD}}</p>
+      </div>
+      <ul class="conds">{{SVC_LIST}}</ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="how-title">
+    <div class="wrap page-split">
+      <div>
+        <div class="section-head section-head--tight">
+          <p class="eyebrow">How it works</p>
+          <h2 class="h2 h2--sm" id="how-title">Simple, online and <em>clinician-led.</em></h2>
+        </div>
+        <ol class="mini-steps">{{SVC_STEPS}}</ol>
+      </div>
+      <div class="page-aside">
+        <div class="explain">
+          <h3>Good to know</h3>
+          <ul class="know">{{SVC_KNOW}}</ul>
+        </div>
+        {{SVC_SAFETY}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="faq-title">
+    <div class="wrap faq__grid">
+      <div class="faq__intro">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2" id="faq-title">Questions, <em>answered.</em></h2>
+        </div>
+        <div class="faq-more">
+          <p>Have another question? Ask our AI assistant, or email our team and we'll get back to you. Please don't include health details.</p>
+          <div class="faq-more__actions">
+            <button class="btn btn--sm" type="button" data-chat-open aria-controls="chat">{{I:chat}} Ask our assistant</button>
+            <a class="btn btn--ghost btn--sm" href="mailto:{{EMAIL}}">{{I:mail}} {{EMAIL}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="faq-list">{{SVC_FAQ}}</div>
+    </div>
+  </section>
+
+  <section class="section join grain on-dark page-cta" aria-labelledby="cta-title">
+    {{MARK:m-art-cta:outline:join__art}}
+    <div class="wrap page-cta__inner">
+      <p class="eyebrow eyebrow--light">Early access</p>
+      <h2 class="h2 h2--light" id="cta-title">Be first <em>in line.</em></h2>
+      <p class="lead lead--light">We're opening in Texas first. Join the list and we'll email you when Jachi launches in your state.</p>
+      <a class="btn btn--light btn--lg" href="{{JOIN_HREF}}">Get early access {{I:arrow:i--arrow}}</a>
+      <nav class="related" aria-label="More care">
+        <h3 class="related__h">More care from Jachi</h3>
+        <ul>{{SVC_RELATED}}</ul>
+      </nav>
+    </div>
+  </section>
+</main>

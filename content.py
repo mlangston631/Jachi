@@ -224,3 +224,23 @@ FAQ = [
      "Jachi isn't for emergencies. If you think you're having a medical emergency, call 911. If you're in crisis or "
      "thinking about suicide, call or text 988 to reach the Suicide & Crisis Lifeline, open 24/7."),
 ]
+
+# Words build.py uses when it writes the service cards, search rows and lists.
+BUILD = {
+    "not_offered": "Not offered",
+    "emergency": "Emergency",
+    "support_now": "Get support now",
+    "call_911": "Call 911",
+    "call_988": "Call 988",
+    "text_988": "Text 988",
+    "join": "Get early access",
+    "check_elig": "Check eligibility",
+    "check_elig_long": "Check your eligibility",
+    "for": " for {x}",
+    "for_weight": " for weight care",
+    "mental_meta": "Therapy {therapy} per session, or medication care {mental} a month",
+    "launching_first": "Launching first",
+    "all_states": "All other states",
+    "find_care": "Find the right care",
+    "learn_more": "More about {x}",
+}

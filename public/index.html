@@ -6,15 +6,22 @@
 <title>Jachi Health | Online urgent care, therapy, sexual health and more</title>
 <meta name="description" content="See a licensed clinician online for urgent care, refills, therapy, sexual health, men&#x27;s and women&#x27;s health, skin and weight care. $49 visits, no insurance needed. Launching in Texas.">
 <meta name="theme-color" content="#F5F7F2">
+<link rel="preload" href="/fonts/fraunces.75bd1428.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument-sans.a6ddc5cf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-italic.1e9f43f0.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-title" content="Jachi Health">
 <meta name="application-name" content="Jachi Health">
 <link rel="canonical" href="https://www.jachihealth.com/">
+<link rel="alternate" hreflang="en" href="https://www.jachihealth.com/">
+<link rel="alternate" hreflang="es" href="https://www.jachihealth.com/es/">
+<link rel="alternate" hreflang="x-default" href="https://www.jachihealth.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.jachihealth.com/">
 <meta property="og:site_name" content="Jachi Health">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="Jachi Health | Online urgent care, therapy, sexual health and more">
 <meta property="og:description" content="See a licensed clinician online for urgent care, refills, therapy, sexual health, men&#x27;s and women&#x27;s health, skin and weight care. $49 visits, no insurance needed. Launching in Texas.">
 <meta property="og:image" content="https://www.jachihealth.com/og.jpg">
@@ -23,10 +30,10 @@
 <meta property="og:image:alt" content="Jachi Health: online care, rooted in real medicine. Licensed clinicians, no insurance needed.">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Jachi Health", "url": "https://www.jachihealth.com/", "logo": "https://www.jachihealth.com/apple-touch-icon.png", "email": "support@jachihealth.com", "description": "See a licensed clinician online for urgent care, refills, therapy, sexual health, men's and women's health, skin and weight care. $49 visits, no insurance needed. Launching in Texas."}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 <style>
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/fraunces.75bd1428.woff2) format("woff2")}
+@font-face{font-family:"Fraunces";font-style:italic;font-weight:300 700;font-display:swap;src:url(/fonts/fraunces-italic.1e9f43f0.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/instrument-sans.a6ddc5cf.woff2) format("woff2")}
 /* Layout: editorial single page. Mist ground with deep-forest bands; asymmetric hero (copy left, app preview on a leaf right); 1200px container. */
 :root{
   color-scheme:light;
@@ -771,6 +778,109 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sheet h3{margin-top:8px;font-family:var(--font-body);font-size:1rem;font-weight:600;letter-spacing:normal;color:var(--text)}
 .sheet p{color:var(--text-2)}
 
+/* ---------- Language switch ---------- */
+.lang-switch{display:inline-flex;align-items:center;justify-content:center;min-width:46px;min-height:46px;padding:0 12px;border:1px solid var(--line-strong);border-radius:999px;background:rgba(255,255,255,.7);font-size:.86rem;font-weight:600;letter-spacing:.02em;color:var(--forest);text-decoration:none;transition:background-color .2s ease,border-color .2s ease}
+.lang-switch:hover{background:#fff;border-color:var(--forest)}
+.lang-switch__long{display:none}
+@media (min-width:960px){
+  .lang-switch{min-width:0;min-height:44px;padding:0 14px;border-color:transparent;background:none;font-size:.95rem;font-weight:500;letter-spacing:0;color:var(--text-2)}
+  .lang-switch:hover{border-color:transparent;background:rgba(30,74,59,.06);color:var(--forest)}
+  .lang-switch__long{display:inline}
+  .lang-switch__short{display:none}
+}
+
+/* ---------- Service card links ---------- */
+.svc__link{display:inline-flex;align-items:center;gap:6px;padding-block:3px;border-radius:8px;color:inherit;text-decoration:none}
+.svc__go{width:17px;height:17px;flex:none;color:var(--moss);stroke-width:2.2;transition:transform .35s var(--ease)}
+@media (hover:hover){.svc__link:hover{color:var(--forest);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px}.svc__link:hover .svc__go{transform:translateX(3px)}}
+
+/* ---------- Share after signing up ---------- */
+.share{display:grid;gap:12px;width:100%;margin-top:6px;padding-top:18px;border-top:1px solid var(--line)}
+.success .share__lead{font-weight:500;color:var(--text)}
+.share__actions{display:flex;flex-wrap:wrap;gap:10px}
+.share__actions .btn{flex:1 1 auto}
+.success .share__status{font-size:.92rem;font-weight:500;color:var(--forest);overflow-wrap:anywhere}
+.share__status:empty{display:none}
+.sheet__more a{color:var(--forest);font-weight:600;text-underline-offset:3px}
+
+/* ---------- Service pages ---------- */
+.hero--page{padding-bottom:clamp(56px,7vw,100px)}
+.page-hero{display:grid;gap:clamp(36px,5vw,56px);align-items:center}
+.page-hero__copy{display:grid;gap:22px;justify-items:start;min-width:0}
+.display--page{max-width:15ch;font-size:clamp(2.45rem,1.55rem + 3.4vw,4.3rem)}
+.page-hero__copy .lead{max-width:34em}
+@media (min-width:1000px){.page-hero{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr)}}
+.crumbs ol{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0;padding:0;list-style:none;font-size:.88rem;color:var(--text-3)}
+.crumbs li{display:inline-flex;align-items:center;gap:8px}
+.crumbs li + li::before{content:"›";color:var(--text-3)}
+.crumbs a{display:inline-block;padding-block:4px;color:var(--text-2);text-decoration:none;border-radius:6px}
+.crumbs a:hover{color:var(--forest);text-decoration:underline;text-underline-offset:3px}
+.crumbs [aria-current]{font-weight:500;color:var(--forest-ink)}
+.price-card{display:grid;gap:16px;justify-items:start;min-width:0;padding:clamp(22px,3vw,32px);border-radius:var(--r-xl);background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.price-card .svc__ic{grid-area:auto}
+.price-card__name{margin-top:2px;font-family:var(--font-display);font-size:1.45rem;font-weight:500;line-height:1.15;color:var(--forest-ink)}
+.price-card__price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;width:100%;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.price-card__price b{font-family:var(--font-display);font-size:3.1rem;font-weight:500;line-height:1;letter-spacing:-.035em;color:var(--forest-ink)}
+.price-card__price span{font-size:1rem;color:var(--text-3)}
+.price-card ul{display:grid;gap:11px;margin:0;padding:0;list-style:none}
+.price-card li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start;font-size:.97rem;font-weight:500}
+.price-card li .i{width:20px;height:20px;padding:4px;border-radius:50%;background:var(--sage-100);color:var(--forest);stroke-width:3}
+.h2--sm{font-size:clamp(1.85rem,1.35rem + 1.9vw,2.75rem)}
+.page-split{display:grid;gap:clamp(28px,4vw,56px)}
+.page-split .section-head{margin-bottom:0}
+@media (min-width:960px){.page-split{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start}}
+.conds{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+@media (min-width:640px){.conds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.conds li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;align-items:start;padding:16px 18px;border-radius:var(--r-md);background:var(--mist);border:1px solid var(--line)}
+.conds .i{width:26px;height:26px;padding:6px;border-radius:50%;background:var(--forest);color:#fff;stroke-width:2.6}
+.conds b{display:block;padding-top:2px;font-weight:600;line-height:1.35;color:var(--forest-ink)}
+.conds small{display:block;margin-top:4px;font-size:.88rem;line-height:1.45;color:var(--text-3)}
+.mini-steps{display:grid;gap:24px;margin:0;padding:0;list-style:none}
+.section-head + .mini-steps{margin-top:clamp(26px,3.4vw,40px)}
+.mini-steps li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:16px;align-items:start}
+.mini-steps .n{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--forest);color:#fff;font-family:var(--font-display);font-size:1.2rem;font-weight:500}
+.mini-steps h3{padding-top:8px;font-size:1.25rem;line-height:1.25;color:var(--forest-ink)}
+.mini-steps p{margin-top:6px;color:var(--text-2)}
+.page-aside{display:grid;gap:16px;min-width:0}
+.know{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.know li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;align-items:start;font-size:.98rem;color:var(--text-2)}
+.know .i{width:20px;height:20px;margin-top:2px;color:var(--moss)}
+.flags{display:grid;gap:6px;margin:0;padding-left:1.15em;color:var(--text)}
+.flags li::marker{color:var(--danger)}
+.explain.explain--caution{background:var(--warn-bg);border-color:rgba(122,77,0,.18)}
+.explain--caution h3{display:flex;align-items:center;gap:12px}
+.explain--caution .explain__ic{background:#FBE3B6;color:var(--warn)}
+.safety__actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.safety__actions .btn{text-decoration:none}
+.explain--alert .safety__actions .btn{color:var(--fg)}
+.page-cta__inner{position:relative;z-index:1;display:grid;gap:18px;justify-items:start;max-width:880px}
+.related{width:100%;margin-top:20px;padding-top:26px;border-top:1px solid var(--line-dark)}
+.related__h{margin-bottom:14px;font-family:var(--font-body);font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.related ul{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+.related a{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 18px;border:1px solid var(--line-dark);border-radius:999px;color:#fff;font-weight:500;text-decoration:none;transition:background-color .2s ease,border-color .2s ease}
+.related a:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.related small{font-size:.86rem;color:var(--on-dark-2)}
+
+/* ---------- Legal pages ---------- */
+.legal{padding-top:calc(var(--header-h) + env(safe-area-inset-top,0px) + clamp(28px,5vw,64px));padding-bottom:clamp(64px,8vw,112px);background:var(--paper)}
+.legal__wrap{display:grid;gap:14px;max-width:860px}
+.legal h1{margin-top:10px}
+.prose{max-width:70ch;margin-top:clamp(14px,2.4vw,26px);font-size:1.03rem;line-height:1.7;color:var(--text-2)}
+.prose > :first-child{margin-top:0}
+.prose h2{margin:2em 0 .55em;font-size:clamp(1.35rem,1.2rem + .6vw,1.7rem);line-height:1.2;color:var(--forest-ink)}
+.prose h3{margin:1.5em 0 .4em;font-family:var(--font-body);font-size:1.05rem;font-weight:600;letter-spacing:normal;color:var(--text)}
+.prose p,.prose ul{margin:0 0 1em}
+.prose ul{padding-left:1.25em}
+.prose li{margin:.4em 0}
+.prose li::marker{color:var(--moss)}
+.prose a{color:var(--forest);font-weight:600;text-underline-offset:3px;overflow-wrap:anywhere}
+.prose strong{font-weight:600;color:var(--text)}
+.notice{margin:1.6em 0;padding:clamp(20px,3vw,30px);border:2px solid #000;border-radius:var(--r-sm);background:#fff;color:#000;font-size:1rem}
+.notice h2{margin-top:0;font-family:var(--font-body);font-size:1.15rem;font-weight:700;letter-spacing:.02em;color:#000}
+.notice p{margin:0 0 1em}
+.notice address{margin:0 0 1em;font-style:normal;line-height:1.6}
+.notice a{color:#000}
+
 /* ---------- Reveal on scroll ---------- */
 [data-reveal].pre{opacity:0;transform:translateY(26px)}
 [data-reveal].pre.is-in{opacity:1;transform:none;transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0ms)}
@@ -799,6 +909,7 @@ button,input,select,textarea{font:inherit;color:inherit}
   .stage__leaf .veins path{stroke-dashoffset:0}
 }
 
+
 </style>
 </head>
 <body>
@@ -816,6 +927,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       <a href="#approach">Our approach</a>
       <a href="#faq">FAQ</a>
     </nav>
+    <a class="lang-switch" href="/es/" hreflang="es" lang="es" aria-label="Español"><span class="lang-switch__long">Español</span><span class="lang-switch__short">ES</span></a>
     <a class="btn btn--sm header-cta" href="#join">Get early access</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
       <span class="line" aria-hidden="true"></span><span class="line" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
@@ -1023,15 +1135,15 @@ button,input,select,textarea{font:inherit;color:inherit}
       </div>
 
       <div class="services">
-        <article class="svc" id="svc-urgent" data-reveal style="--d:0ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z"/><path d="M12 9.5v6"/></svg></span><h3>Urgent care</h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Care for everyday illnesses, with any prescription sent to the pharmacy you choose.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Colds, flu and sinus infections</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Sore throats, UTIs and pink eye</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Rashes, bites and allergies</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="urgent-care">Get early access<span class="visually-hidden"> for urgent care</span></button></article>
-<article class="svc" id="svc-refill" data-reveal style="--d:80ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="M9.6 9.6l4.8 4.8"/></svg></span><h3>Prescription refills</h3><span class="svc__tag">Per refill</span><p class="svc__price"><b>$39</b><span>per refill</span></p><p class="svc__desc">Renew medications you already take, reviewed by a licensed clinician.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Blood pressure and cholesterol</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Thyroid, asthma and acid reflux</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Type 2 diabetes</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="refills">Get early access<span class="visually-hidden"> for prescription refills</span></button></article>
-<article class="svc" id="svc-therapy" data-reveal style="--d:160ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z"/><path d="M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8"/></svg></span><h3>Therapy</h3><span class="svc__tag">Per session</span><p class="svc__price"><b>$99</b><span>per session</span></p><p class="svc__desc">Private video sessions with a licensed therapist. No subscription.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Stress, anxiety and depression</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Grief, relationships and life changes</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Pay session by session</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="therapy">Get early access<span class="visually-hidden"> for therapy</span></button></article>
-<article class="svc" id="svc-mental" data-reveal style="--d:0ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20"/><path d="M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z"/></svg></span><h3>Anxiety &amp; depression</h3><span class="svc__tag svc__tag--member">Membership</span><p class="svc__price"><b>$89</b><span>per month</span></p><p class="svc__desc">Medication care from licensed clinicians, with regular check-ins.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>An evaluation and personal plan</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Medication when it&#x27;s right for you</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Check-ins and dose adjustments</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="anxiety-depression">Get early access<span class="visually-hidden"> for anxiety &amp; depression</span></button></article>
-<article class="svc" id="svc-sexual" data-reveal style="--d:80ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></span><h3>Sexual health</h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Private, judgment-free care. Lab tests are billed separately.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>STI testing and treatment</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Herpes treatment</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>HIV prevention with PrEP</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="sexual-health">Get early access<span class="visually-hidden"> for sexual health</span></button></article>
-<article class="svc" id="svc-mens" data-reveal style="--d:160ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10" cy="14" r="5.5"/><path d="M14 10l6-6"/><path d="M15 4h5v5"/></svg></span><h3>Men&#x27;s health</h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Discreet care from licensed clinicians, with treatment sent to your pharmacy.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Erectile dysfunction (ED)</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Hair loss</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Premature ejaculation</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="mens-health">Get early access<span class="visually-hidden"> for men&#x27;s health</span></button></article>
-<article class="svc" id="svc-womens" data-reveal style="--d:0ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="5.5"/><path d="M12 14.5V21"/><path d="M9 18h6"/></svg></span><h3>Women&#x27;s health</h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Care for every stage, from birth control to menopause.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Birth control and emergency contraception</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Menopause symptoms</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Yeast infections and BV</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="womens-health">Get early access<span class="visually-hidden"> for women&#x27;s health</span></button></article>
-<article class="svc" id="svc-skin" data-reveal style="--d:80ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z"/><path d="M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6"/></svg></span><h3>Skin care</h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Treatment plans for common skin conditions.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Acne and rosacea</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Eczema and psoriasis</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Cold sores and fungal infections</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="skin-care">Get early access<span class="visually-hidden"> for skin care</span></button></article>
-<article class="svc" id="svc-weight" data-reveal style="--d:160ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8.5 10a5 5 0 0 1 7 0"/><path d="M12 12.6l1.7-2.5"/></svg></span><h3>Weight care</h3><span class="svc__tag svc__tag--member">Membership</span><p class="svc__price"><b>$99</b><span>per month</span></p><p class="svc__desc">A clinician-led program, with FDA-approved medication when it&#x27;s right for you.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>A personal plan from a clinician</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>GLP-1 medication when appropriate</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Check-ins and dose adjustments</span></li></ul><a class="btn btn--ghost btn--block" href="#eligibility" data-elig>Check your eligibility<span class="visually-hidden"> for weight care</span></a></article>
+        <article class="svc" id="svc-urgent" data-reveal style="--d:0ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z"/><path d="M12 9.5v6"/></svg></span><h3><a class="svc__link" href="/urgent-care/">Urgent care<span class="visually-hidden">: More about urgent care</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Care for everyday illnesses, with any prescription sent to the pharmacy you choose.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Colds, flu and sinus infections</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Sore throats, UTIs and pink eye</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Rashes, bites and allergies</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="urgent-care">Get early access<span class="visually-hidden"> for urgent care</span></button></article>
+<article class="svc" id="svc-refill" data-reveal style="--d:80ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="M9.6 9.6l4.8 4.8"/></svg></span><h3><a class="svc__link" href="/prescription-refills/">Prescription refills<span class="visually-hidden">: More about prescription refills</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag">Per refill</span><p class="svc__price"><b>$39</b><span>per refill</span></p><p class="svc__desc">Renew medications you already take, reviewed by a licensed clinician.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Blood pressure and cholesterol</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Thyroid, asthma and acid reflux</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Type 2 diabetes</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="refills">Get early access<span class="visually-hidden"> for prescription refills</span></button></article>
+<article class="svc" id="svc-therapy" data-reveal style="--d:160ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z"/><path d="M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8"/></svg></span><h3><a class="svc__link" href="/online-therapy/">Therapy<span class="visually-hidden">: More about therapy</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag">Per session</span><p class="svc__price"><b>$99</b><span>per session</span></p><p class="svc__desc">Private video sessions with a licensed therapist. No subscription.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Stress, anxiety and depression</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Grief, relationships and life changes</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Pay session by session</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="therapy">Get early access<span class="visually-hidden"> for therapy</span></button></article>
+<article class="svc" id="svc-mental" data-reveal style="--d:0ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20"/><path d="M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z"/></svg></span><h3><a class="svc__link" href="/anxiety-depression-treatment/">Anxiety &amp; depression<span class="visually-hidden">: More about anxiety &amp; depression</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag svc__tag--member">Membership</span><p class="svc__price"><b>$89</b><span>per month</span></p><p class="svc__desc">Medication care from licensed clinicians, with regular check-ins.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>An evaluation and personal plan</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Medication when it&#x27;s right for you</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Check-ins and dose adjustments</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="anxiety-depression">Get early access<span class="visually-hidden"> for anxiety &amp; depression</span></button></article>
+<article class="svc" id="svc-sexual" data-reveal style="--d:80ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/></svg></span><h3><a class="svc__link" href="/sexual-health/">Sexual health<span class="visually-hidden">: More about sexual health</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Private, judgment-free care. Lab tests are billed separately.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>STI testing and treatment</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Herpes treatment</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>HIV prevention with PrEP</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="sexual-health">Get early access<span class="visually-hidden"> for sexual health</span></button></article>
+<article class="svc" id="svc-mens" data-reveal style="--d:160ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10" cy="14" r="5.5"/><path d="M14 10l6-6"/><path d="M15 4h5v5"/></svg></span><h3><a class="svc__link" href="/mens-health/">Men&#x27;s health<span class="visually-hidden">: More about men&#x27;s health</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Discreet care from licensed clinicians, with treatment sent to your pharmacy.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Erectile dysfunction (ED)</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Hair loss</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Premature ejaculation</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="mens-health">Get early access<span class="visually-hidden"> for men&#x27;s health</span></button></article>
+<article class="svc" id="svc-womens" data-reveal style="--d:0ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="5.5"/><path d="M12 14.5V21"/><path d="M9 18h6"/></svg></span><h3><a class="svc__link" href="/womens-health/">Women&#x27;s health<span class="visually-hidden">: More about women&#x27;s health</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Care for every stage, from birth control to menopause.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Birth control and emergency contraception</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Menopause symptoms</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Yeast infections and BV</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="womens-health">Get early access<span class="visually-hidden"> for women&#x27;s health</span></button></article>
+<article class="svc" id="svc-skin" data-reveal style="--d:80ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z"/><path d="M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6"/></svg></span><h3><a class="svc__link" href="/skin-care/">Skin care<span class="visually-hidden">: More about skin care</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag">Per visit</span><p class="svc__price"><b>$49</b><span>per visit</span></p><p class="svc__desc">Treatment plans for common skin conditions.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Acne and rosacea</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Eczema and psoriasis</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Cold sores and fungal infections</span></li></ul><button class="btn btn--ghost btn--block" type="button" data-join="skin-care">Get early access<span class="visually-hidden"> for skin care</span></button></article>
+<article class="svc" id="svc-weight" data-reveal style="--d:160ms"><span class="svc__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8.5 10a5 5 0 0 1 7 0"/><path d="M12 12.6l1.7-2.5"/></svg></span><h3><a class="svc__link" href="/weight-loss/">Weight care<span class="visually-hidden">: More about weight care</span><svg class="i svc__go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></h3><span class="svc__tag svc__tag--member">Membership</span><p class="svc__price"><b>$99</b><span>per month</span></p><p class="svc__desc">A clinician-led program, with FDA-approved medication when it&#x27;s right for you.</p><ul class="svc__list"><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>A personal plan from a clinician</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>GLP-1 medication when appropriate</span></li><li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Check-ins and dose adjustments</span></li></ul><a class="btn btn--ghost btn--block" href="#eligibility" data-elig>Check your eligibility<span class="visually-hidden"> for weight care</span></a></article>
       </div>
 
       <ul class="svc-notes">
@@ -1571,6 +1683,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         <form class="form" id="join-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
           <h3 class="form__title" id="join-form-title" tabindex="-1">Get early access</h3>
           <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <input type="hidden" name="language" value="en">
           <div class="form__row">
             <div class="field">
               <label class="label" for="join-name">First name</label>
@@ -1612,7 +1725,14 @@ button,input,select,textarea{font:inherit;color:inherit}
           <span class="success__icon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
           <h3 id="join-success-title" tabindex="-1">You're on the list<span id="join-success-name"></span>.</h3>
           <p>We'll email <strong id="join-success-email"></strong> when Jachi opens in <strong id="join-success-state"></strong>.</p>
-          <button class="btn btn--ghost" type="button" id="join-again">Add another email</button>
+          <div class="share">
+            <p class="share__lead">Know someone who'd want this? Send them Jachi.</p>
+            <div class="share__actions">
+              <button class="btn" type="button" id="join-share" data-share-url="https://www.jachihealth.com/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/><path d="M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11"/></svg><span class="btn__label">Share Jachi</span></button>
+              <button class="btn btn--ghost" type="button" id="join-again">Add another email</button>
+            </div>
+            <p class="share__status" id="join-share-status" role="status"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -1633,7 +1753,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       </div>
       <nav class="footer__col" aria-label="Care">
         <h2 class="footer__h">Care</h2>
-        <ul><li><a href="#svc-urgent">Urgent care</a></li><li><a href="#svc-refill">Prescription refills</a></li><li><a href="#svc-therapy">Therapy</a></li><li><a href="#svc-mental">Anxiety &amp; depression</a></li><li><a href="#svc-sexual">Sexual health</a></li><li><a href="#svc-mens">Men&#x27;s health</a></li><li><a href="#svc-womens">Women&#x27;s health</a></li><li><a href="#svc-skin">Skin care</a></li><li><a href="#svc-weight">Weight care</a></li><li><a href="#care-finder">Care finder</a></li></ul>
+        <ul><li><a href="/urgent-care/">Urgent care</a></li><li><a href="/prescription-refills/">Prescription refills</a></li><li><a href="/online-therapy/">Therapy</a></li><li><a href="/anxiety-depression-treatment/">Anxiety &amp; depression</a></li><li><a href="/sexual-health/">Sexual health</a></li><li><a href="/mens-health/">Men&#x27;s health</a></li><li><a href="/womens-health/">Women&#x27;s health</a></li><li><a href="/skin-care/">Skin care</a></li><li><a href="/weight-loss/">Weight care</a></li><li><a href="#care-finder">Care finder</a></li></ul>
       </nav>
       <nav class="footer__col" aria-label="Company">
         <h2 class="footer__h">Company</h2>
@@ -1643,13 +1763,16 @@ button,input,select,textarea{font:inherit;color:inherit}
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#join">Early access</a></li>
           <li><button class="linkish" type="button" data-chat-open aria-controls="chat">Help chat</button></li>
+          <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
         </ul>
       </nav>
       <nav class="footer__col" aria-label="Legal">
         <h2 class="footer__h">Legal</h2>
         <ul>
-          <li><button class="linkish" type="button" data-open="privacy">Privacy notice</button></li>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of use</a></li>
           <li><a href="#ai-disclosure">AI disclosure</a></li>
+          <li><a href="/texas-medical-board/">Texas Medical Board notice</a></li>
         </ul>
       </nav>
     </div>
@@ -1736,6 +1859,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         <span>Include my chat with the AI assistant</span>
       </label>
       <input type="hidden" name="chat_transcript" id="ticket-transcript">
+      <input type="hidden" name="language" value="en">
       <button class="btn btn--block" type="submit" id="ticket-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Send ticket</span></button>
       <div class="form-status" id="ticket-status" role="status"></div>
     </form>
@@ -1756,7 +1880,7 @@ button,input,select,textarea{font:inherit;color:inherit}
     <h3>The care finder, condition search and weight care check</h3>
     <p>They run entirely in your browser. What you type or choose, including your height, weight and health details, is never sent to us or stored.</p>
     <h3>Early access sign-ups</h3>
-    <p>If you join early access, we collect your first name, email, state and the services you're interested in. We use them only to email you about our launch. Sign-ups are stored with our website host.</p>
+    <p>If you join early access, we collect your first name, email, state, the services you're interested in and the language of the page you used. We use them only to email you about our launch. Sign-ups are stored with our website host.</p>
     <h3>Help chat and support tickets</h3>
     <p>Messages you send to our AI assistant pass through our website host, Netlify, to our AI provider, Anthropic, so it can write a reply. We don't save chats. If you send a ticket, we collect your name, email, topic, message and, if you choose, your chat, and use them only to answer you. Tickets are stored with our website host and sent to our support inbox.</p>
     <h3>What we don't do</h3>
@@ -1765,6 +1889,7 @@ button,input,select,textarea{font:inherit;color:inherit}
     <p>To leave the list or ask about your information, email <a href="mailto:support@jachihealth.com">support@jachihealth.com</a>, reply to any email from us or use the unsubscribe link in it. Please don't send health details by email.</p>
     <h3>Your medical information</h3>
     <p>When you become a patient, your health information is protected under HIPAA and stored in the United States.</p>
+    <p class="sheet__more"><a href="/privacy/">Read the full privacy policy</a></p>
     <p class="fine">Last updated October 2026.</p>
   </div>
 </dialog>
@@ -1775,10 +1900,12 @@ button,input,select,textarea{font:inherit;color:inherit}
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const ICONS = {"arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "arrow-left": "<path d=\"M19 12H5\"/><path d=\"M11 6l-6 6 6 6\"/>", "check": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "steth": "<path d=\"M6 3.5V9a4 4 0 0 0 8 0V3.5\"/><path d=\"M10 13v1.5a5 5 0 0 0 10 0V12.5\"/><circle cx=\"20\" cy=\"10.5\" r=\"2\"/>", "shield": "<path d=\"M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z\"/><path d=\"M8.8 12.2l2.2 2.2 4.4-4.6\"/>", "spark": "<path d=\"M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z\"/><path d=\"M19 3.5v3M17.5 5h3\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/>", "box": "<path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5\"/><path d=\"M12 12v9\"/>", "home": "<path d=\"M4 11l8-7 8 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>", "pharmacy": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>", "lock": "<rect x=\"5\" y=\"11\" width=\"14\" height=\"9.5\" rx=\"2\"/><path d=\"M8 11V8a4 4 0 0 1 8 0v3\"/>", "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5\"/><path d=\"M12 7.6v.4\"/>", "alert": "<path d=\"M12 4.5l8.5 15h-17z\"/><path d=\"M12 10v4.2\"/><path d=\"M12 16.8v.3\"/>", "msg": "<path d=\"M4 5.5h16v11H10l-4.5 3.5v-3.5H4z\"/>", "clip": "<rect x=\"5.5\" y=\"4.5\" width=\"13\" height=\"16\" rx=\"2\"/><path d=\"M9 4.5v-1h6v1\"/><path d=\"M9 10h6M9 14h4\"/>", "x": "<path d=\"M6 6l12 12M18 6L6 18\"/>", "mail": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"M4.5 7.5l7.5 5.5 7.5-5.5\"/>", "thermo": "<path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9.5v6\"/>", "pill": "<rect x=\"3.5\" y=\"8.5\" width=\"17\" height=\"7\" rx=\"3.5\" transform=\"rotate(-45 12 12)\"/><path d=\"M9.6 9.6l4.8 4.8\"/>", "mind": "<path d=\"M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20\"/><path d=\"M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z\"/>", "scale": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8.5 10a5 5 0 0 1 7 0\"/><path d=\"M12 12.6l1.7-2.5\"/>", "phone": "<path d=\"M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z\"/>", "heart": "<path d=\"M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z\"/>", "talk": "<path d=\"M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z\"/><path d=\"M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8\"/>", "male": "<circle cx=\"10\" cy=\"14\" r=\"5.5\"/><path d=\"M14 10l6-6\"/><path d=\"M15 4h5v5\"/>", "female": "<circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M12 14.5V21\"/><path d=\"M9 18h6\"/>", "drop": "<path d=\"M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z\"/><path d=\"M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6\"/>", "video": "<rect x=\"3\" y=\"6.5\" width=\"12.5\" height=\"11\" rx=\"2.5\"/><path d=\"M15.5 10.5l5-3v9l-5-3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/>", "chat": "<path d=\"M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z\"/><path d=\"M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01\"/>", "send": "<path d=\"M12 19V5\"/><path d=\"M6 11l6-6 6 6\"/>"};
+  const ICONS = {"arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "arrow-left": "<path d=\"M19 12H5\"/><path d=\"M11 6l-6 6 6 6\"/>", "check": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "steth": "<path d=\"M6 3.5V9a4 4 0 0 0 8 0V3.5\"/><path d=\"M10 13v1.5a5 5 0 0 0 10 0V12.5\"/><circle cx=\"20\" cy=\"10.5\" r=\"2\"/>", "shield": "<path d=\"M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z\"/><path d=\"M8.8 12.2l2.2 2.2 4.4-4.6\"/>", "spark": "<path d=\"M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z\"/><path d=\"M19 3.5v3M17.5 5h3\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/>", "box": "<path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5\"/><path d=\"M12 12v9\"/>", "home": "<path d=\"M4 11l8-7 8 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>", "pharmacy": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>", "lock": "<rect x=\"5\" y=\"11\" width=\"14\" height=\"9.5\" rx=\"2\"/><path d=\"M8 11V8a4 4 0 0 1 8 0v3\"/>", "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5\"/><path d=\"M12 7.6v.4\"/>", "alert": "<path d=\"M12 4.5l8.5 15h-17z\"/><path d=\"M12 10v4.2\"/><path d=\"M12 16.8v.3\"/>", "msg": "<path d=\"M4 5.5h16v11H10l-4.5 3.5v-3.5H4z\"/>", "clip": "<rect x=\"5.5\" y=\"4.5\" width=\"13\" height=\"16\" rx=\"2\"/><path d=\"M9 4.5v-1h6v1\"/><path d=\"M9 10h6M9 14h4\"/>", "x": "<path d=\"M6 6l12 12M18 6L6 18\"/>", "mail": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"M4.5 7.5l7.5 5.5 7.5-5.5\"/>", "thermo": "<path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9.5v6\"/>", "pill": "<rect x=\"3.5\" y=\"8.5\" width=\"17\" height=\"7\" rx=\"3.5\" transform=\"rotate(-45 12 12)\"/><path d=\"M9.6 9.6l4.8 4.8\"/>", "mind": "<path d=\"M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20\"/><path d=\"M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z\"/>", "scale": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8.5 10a5 5 0 0 1 7 0\"/><path d=\"M12 12.6l1.7-2.5\"/>", "phone": "<path d=\"M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z\"/>", "heart": "<path d=\"M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z\"/>", "talk": "<path d=\"M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z\"/><path d=\"M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8\"/>", "male": "<circle cx=\"10\" cy=\"14\" r=\"5.5\"/><path d=\"M14 10l6-6\"/><path d=\"M15 4h5v5\"/>", "female": "<circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M12 14.5V21\"/><path d=\"M9 18h6\"/>", "drop": "<path d=\"M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z\"/><path d=\"M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6\"/>", "video": "<rect x=\"3\" y=\"6.5\" width=\"12.5\" height=\"11\" rx=\"2.5\"/><path d=\"M15.5 10.5l5-3v9l-5-3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/>", "chat": "<path d=\"M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z\"/><path d=\"M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01\"/>", "send": "<path d=\"M12 19V5\"/><path d=\"M6 11l6-6 6 6\"/>", "share": "<path d=\"M12 15V4\"/><path d=\"M8 8l4-4 4 4\"/><path d=\"M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11\"/>"};
   const PRICES = {"visit": "$49", "refill": "$39", "therapy": "$99", "mental": "$89", "weight": "$99"};
   const SERVICES = {"urgent": {"name": "Urgent care", "price": "$49", "unit": "per visit", "interest": "urgent-care"}, "refill": {"name": "Prescription refills", "price": "$39", "unit": "per refill", "interest": "refills"}, "therapy": {"name": "Therapy", "price": "$99", "unit": "per session", "interest": "therapy"}, "mental": {"name": "Anxiety & depression", "price": "$89", "unit": "per month", "interest": "anxiety-depression"}, "sexual": {"name": "Sexual health", "price": "$49", "unit": "per visit", "interest": "sexual-health"}, "mens": {"name": "Men's health", "price": "$49", "unit": "per visit", "interest": "mens-health"}, "womens": {"name": "Women's health", "price": "$49", "unit": "per visit", "interest": "womens-health"}, "skin": {"name": "Skin care", "price": "$49", "unit": "per visit", "interest": "skin-care"}, "weight": {"name": "Weight care", "price": "$99", "unit": "per month", "interest": "weight-care"}};
   const EMAIL = "support@jachihealth.com";
+  const T = {"get_early_access": "Get early access", "continue": "Continue", "choose_answer": "Choose an answer.", "choose_state": "Choose your state.", "fix_one": "Please fix the highlighted field.", "fix_many": "Please fix the {n} highlighted fields.", "enter_email": "Enter your email address.", "valid_email": "Enter a valid email, like name@example.com.", "launch_note": "We're launching in Texas first. Join early access and we'll email you when we open in your state.", "e_age": "Choose yes or no.", "e_height": "Enter a height between 4 ft 0 in and 7 ft 11 in.", "e_weight": "Enter a weight between 70 and 700 lb.", "e_cond": "Select any that apply, or choose None of these.", "e_gauge_empty": "Enter your height and weight", "e_gauge_30": "At or above 30", "e_gauge_27": "Between 27 and 30", "e_gauge_low": "Below 27", "e_bmi_live": "Your BMI is {bmi}.", "e_step": "Step {n} of 3", "e_see_results": "See my results", "e_your_results": "Your results", "e_minor_title": "Jachi is for adults 18 and older.", "e_minor_body": "If you're under 18 and want help with your weight, talk with a parent or your doctor about the right next step.", "e_caution_title": "Medication may not be safe for you.", "e_caution_mtc": "GLP-1 medications shouldn't be used by people with a personal or family history of medullary thyroid cancer or MEN2.", "e_caution_preg": "GLP-1 weight-loss medications usually aren't prescribed during pregnancy, while breastfeeding or when you're planning a pregnancy.", "e_caution_end": "A doctor can help you find a safe approach.", "e_likely_title": "You may be a good fit for medical weight care.", "e_likely_30": "Your BMI of {bmi} meets the general guideline for FDA-approved weight-loss medication.", "e_likely_27": "Your BMI of {bmi}, together with a weight-related condition, meets the general guideline for FDA-approved weight-loss medication.", "e_likely_review": " A licensed clinician will review your full health history before recommending any treatment.", "e_likely_mtc": " They will also ask about your family history of thyroid cancer.", "e_unlikely_title": "Medication may not be the right fit right now.", "e_unlikely_body": "FDA-approved weight-loss medications are generally for a BMI of 30 or higher, or 27 or higher with a weight-related condition. Your BMI is {bmi}. We'll share more ways to help as Jachi grows.", "e_chip_bmi": "BMI {bmi}", "e_chip_cond_1": "1 related condition", "e_chip_cond_n": "{n} related conditions", "e_note_tx": "Texas is our first state. Join early access to be first in line when we open.", "e_note_other": "We're launching in Texas first. Join early access and we'll email you when we open in {state}.", "f_need": "Choose what you need help with.", "f_step": "Step {n} of 2", "f_see_options": "See my options", "f_your_options": "Your options", "f_crisis_title": "You don't have to go through this alone.", "f_crisis_body": "Please reach out now. Trained crisis counselors are ready to listen and help, any time of day or night.", "f_urgent_911_title": "Call 911 now.", "f_urgent_911_body": "These can be signs of a medical emergency. Call 911 or go to the nearest emergency room. Don't wait for an online visit.", "f_call_911": "Call 911", "f_urgent_title": "Urgent care is a good place to start.", "f_urgent_body": "A licensed clinician can treat many everyday illnesses online, like colds, flu, sinus infections, UTIs, pink eye and rashes, and send any prescription to your pharmacy. If you need an exam or a test in person, they'll tell you.", "f_refill_controlled_title": "We can't refill controlled substances.", "f_refill_controlled_body": "Medications like Adderall, Xanax, opioid pain medicine and testosterone have special prescribing rules. Please contact the clinician who prescribes yours, and don't stop taking it suddenly without their advice. We can still help with refills of many other medications.", "f_see_services": "See our services", "f_refill_unsure_title": "A refill visit may be a good fit.", "f_refill_unsure_body": "We don't refill controlled substances. If you're not sure whether yours is one, your pharmacist can tell you, and your clinician will check before approving a refill. We can renew many everyday medications, like blood pressure, cholesterol, thyroid and diabetes medicines.", "f_refill_title": "A refill visit is a good fit.", "f_refill_body": "A licensed clinician can renew many medications you already take, like blood pressure, cholesterol, thyroid and diabetes medicines, and send the refill to your pharmacy. They may ask about recent lab work or readings first.", "f_mental_title": "Therapy, medication or both can help.", "f_mental_chip_therapy": "Therapy {price} per session", "f_mental_chip_meds": "Medication care {price} per month", "f_mental_body": "Talk with a licensed therapist by video, get medication care for anxiety and depression from a licensed clinician, or do both. Many people feel better with therapy and medication together. If you ever have thoughts of suicide, call or text 988 any time.", "f_sexual_pep_title": "Get care today. Don't wait.", "f_sexual_pep_body": "If you may have been exposed to HIV in the last 72 hours, medicine called PEP can lower your chance of infection. It works best the sooner you start, so go to an urgent care clinic or emergency room today.", "f_sexual_title": "Sexual health care is a good fit.", "f_sexual_body": "A licensed clinician can order STI tests at a nearby lab, treat common infections, and prescribe herpes treatment or PrEP to help prevent HIV. Lab tests are billed separately.", "f_sexual_unsure": " If there's any chance you were exposed to HIV in the last 72 hours, don't wait: an urgent care clinic or emergency room can start PEP today.", "f_mens_nitrates_title": "ED pills may not be safe for you.", "f_mens_nitrates_body": "ED medications like sildenafil and tadalafil can cause a dangerous drop in blood pressure when taken with nitrates. Talk with the doctor who treats your heart before starting ED treatment. We can still help with hair loss.", "f_mens_title": "Men's health care is a good fit.", "f_mens_body": "A licensed clinician can treat ED, hair loss and premature ejaculation, with medication sent to your pharmacy when it's right for you.", "f_mens_unsure": " Your clinician will check your medications first, because ED pills aren't safe with nitrates.", "f_inperson_title": "Get seen in person today.", "f_womens_inperson_body": "Heavy bleeding, severe pain in your belly or pelvis, or a fever can be signs of a problem that needs an exam right away. Go to an urgent care clinic or emergency room, or call 911 if it's severe.", "f_womens_title": "Women's health care is a good fit.", "f_womens_body": "A licensed clinician can help with birth control, emergency contraception, menopause symptoms, yeast infections and BV, and send prescriptions to your pharmacy.", "f_skin_inperson_body": "A rash or sore that's spreading fast, very painful or comes with a fever can be a serious infection. Go to an urgent care clinic today, or call 911 if you feel very sick.", "f_skin_title": "Skin care is a good fit.", "f_skin_body": "A licensed clinician can treat acne, rosacea, eczema, psoriasis, cold sores and fungal infections, and send prescriptions to your pharmacy. If you need to be seen in person, they'll tell you.", "f_weight_title": "Start with our weight care check.", "f_weight_body": "Weight-loss medication isn't right for everyone. Our three-step check shows whether you may meet the general guidelines for FDA-approved medication.", "f_check_eligibility": "Check your eligibility", "s_one": "1 result for “{q}”", "s_many": "{n} results for “{q}”", "s_none": "No results for “{q}”", "j_name": "Enter your first name.", "j_interest": "Choose at least one service.", "j_consent": "Check this box so we can email you about the launch.", "j_preview": "This is a preview of the site, so sign-ups aren't saved here yet.", "j_saving": "Saving your spot…", "j_failed": "We couldn't save your spot just now. Check your connection and try again.", "j_your_state": "your state", "share_title": "Jachi Health", "share_text": "Online care from licensed clinicians, launching in Texas. Join the early access list:", "share_button": "Share Jachi", "share_copied_button": "Link copied", "share_copied": "Link copied. Paste it into a text or email.", "share_manual": "Copy this link to share: {url}", "c_crisis": "I'm really sorry you're going through this, and you don't have to face it alone. Call or text 988 to reach the Suicide & Crisis Lifeline. It's free, confidential and open 24/7. If you're in immediate danger, call 911.", "c_emergency": "This could be an emergency. Please call 911 now or go to the nearest emergency room. I'm an AI assistant and can't help with emergencies.", "c_typing": "The assistant is typing", "c_busy": "Lots of questions right now. Please try again in a minute, or submit a ticket and our team will reply by email.", "c_off": "AI replies are turned off for this preview. You can still submit a ticket.", "c_down": "I can't answer right now. You can submit a ticket and our team will reply by email.", "c_call_988": "Call 988", "c_text_988": "Text 988", "c_call_911": "Call 911", "c_ticket": "Submit a ticket", "t_name": "Enter your name.", "t_msg": "Tell us a little more (at least 10 characters).", "t_preview": "This is a preview of the site, so tickets aren't sent here. On the live site they go to {email}.", "t_sending": "Sending…", "t_send": "Send ticket", "t_failed": "We couldn't send your ticket. Check your connection and try again, or email {email}."};
+  const fmt = (text, values = {}) => text.replace(/\{(\w+)\}/g, (m, k) => (k in values ? String(values[k]) : m));
   const icon =(name, cls = '') => `<svg class="i${cls ? ` ${cls}` : ''}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name] || ''}</svg>`;
   const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const mqDesktop = window.matchMedia('(min-width: 960px)');
@@ -1975,13 +2102,13 @@ button,input,select,textarea{font:inherit;color:inherit}
     };
 
     const rules = {
-      state: () => (E.state.value ? '' : 'Choose your state.'),
-      age: () => (radioValue(E.form, 'age') ? '' : 'Choose yes or no.'),
-      height: () => (heightOk() ? '' : 'Enter a height between 4 ft 0 in and 7 ft 11 in.'),
-      weight: () => (weightOk() ? '' : 'Enter a weight between 70 and 700 lb.'),
-      cond: () => ($$('input[name="cond"]:checked', E.form).length ? '' : 'Select any that apply, or choose None of these.'),
-      mtc: () => (radioValue(E.form, 'mtc') ? '' : 'Choose an answer.'),
-      preg: () => (radioValue(E.form, 'preg') ? '' : 'Choose an answer.'),
+      state: () => (E.state.value ? '' : T.choose_state),
+      age: () => (radioValue(E.form, 'age') ? '' : T.e_age),
+      height: () => (heightOk() ? '' : T.e_height),
+      weight: () => (weightOk() ? '' : T.e_weight),
+      cond: () => ($$('input[name="cond"]:checked', E.form).length ? '' : T.e_cond),
+      mtc: () => (radioValue(E.form, 'mtc') ? '' : T.choose_answer),
+      preg: () => (radioValue(E.form, 'preg') ? '' : T.choose_answer),
     };
     const focusFor = {
       state: () => E.state,
@@ -2007,7 +2134,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         E.gauge.style.setProperty('--t', '0');
         E.fill.style.strokeDasharray = '0 100';
         E.num.textContent = '–';
-        E.hint.textContent = 'Enter your height and weight';
+        E.hint.textContent = T.e_gauge_empty;
         return null;
       }
       const t = Math.max(0, Math.min(1, (value - 15) / 30));
@@ -2015,9 +2142,9 @@ button,input,select,textarea{font:inherit;color:inherit}
       E.gauge.style.setProperty('--t', t.toFixed(4));
       E.fill.style.strokeDasharray = `${(t * 100).toFixed(2)} 100`;
       E.num.textContent = value.toFixed(1);
-      E.hint.textContent = value >= 30 ? 'At or above 30' : value >= 27 ? 'Between 27 and 30' : 'Below 27';
+      E.hint.textContent = value >= 30 ? T.e_gauge_30 : value >= 27 ? T.e_gauge_27 : T.e_gauge_low;
       window.clearTimeout(liveTimer);
-      liveTimer = window.setTimeout(() => { E.live.textContent = `Your BMI is ${value.toFixed(1)}.`; }, 700);
+      liveTimer = window.setTimeout(() => { E.live.textContent = fmt(T.e_bmi_live, { bmi: value.toFixed(1) }); }, 700);
       return value;
     };
 
@@ -2025,9 +2152,9 @@ button,input,select,textarea{font:inherit;color:inherit}
       step = n;
       E.steps.forEach(s => { s.hidden = Number(s.dataset.step) !== n; });
       E.bars.forEach((b, i) => b.classList.toggle('is-done', i < n));
-      E.count.textContent = `Step ${n} of 3`;
+      E.count.textContent = fmt(T.e_step, { n });
       E.back.hidden = n === 1;
-      E.nextLabel.textContent = n === 3 ? 'See my results' : 'Continue';
+      E.nextLabel.textContent = n === 3 ? T.e_see_results : T.continue;
       if (moveFocus) {
         const title = $('.q-title', E.steps[n - 1]);
         if (title) title.focus({ preventScroll: true });
@@ -2048,28 +2175,26 @@ button,input,select,textarea{font:inherit;color:inherit}
 
       if (age === 'no') {
         kind = 'minor';
-        title = 'Jachi is for adults 18 and older.';
-        body = "If you're under 18 and want help with your weight, talk with a parent or your doctor about the right next step.";
+        title = T.e_minor_title;
+        body = T.e_minor_body;
       } else if (mtc === 'yes' || preg === 'yes') {
         kind = 'caution';
-        title = 'Medication may not be safe for you.';
+        title = T.e_caution_title;
         const parts = [];
-        if (mtc === 'yes') parts.push("GLP-1 medications shouldn't be used by people with a personal or family history of medullary thyroid cancer or MEN2.");
-        if (preg === 'yes') parts.push("GLP-1 weight-loss medications usually aren't prescribed during pregnancy, while breastfeeding or when you're planning a pregnancy.");
-        parts.push('A doctor can help you find a safe approach.');
+        if (mtc === 'yes') parts.push(T.e_caution_mtc);
+        if (preg === 'yes') parts.push(T.e_caution_preg);
+        parts.push(T.e_caution_end);
         body = parts.join(' ');
       } else if (value >= 30 || (value >= 27 && conds.length)) {
         kind = 'likely';
-        title = 'You may be a good fit for medical weight care.';
-        body = value >= 30
-          ? `Your BMI of ${value.toFixed(1)} meets the general guideline for FDA-approved weight-loss medication.`
-          : `Your BMI of ${value.toFixed(1)}, together with a weight-related condition, meets the general guideline for FDA-approved weight-loss medication.`;
-        body += ' A licensed clinician will review your full health history before recommending any treatment.';
-        if (mtc === 'unsure') body += ' They will also ask about your family history of thyroid cancer.';
+        title = T.e_likely_title;
+        body = fmt(value >= 30 ? T.e_likely_30 : T.e_likely_27, { bmi: value.toFixed(1) });
+        body += T.e_likely_review;
+        if (mtc === 'unsure') body += T.e_likely_mtc;
       } else {
         kind = 'unlikely';
-        title = 'Medication may not be the right fit right now.';
-        body = `FDA-approved weight-loss medications are generally for a BMI of 30 or higher, or 27 or higher with a weight-related condition. Your BMI is ${value.toFixed(1)}. We'll share more ways to help as Jachi grows.`;
+        title = T.e_unlikely_title;
+        body = fmt(T.e_unlikely_body, { bmi: value.toFixed(1) });
       }
 
       const icons = { likely: 'check', unlikely: 'info', caution: 'alert', minor: 'info' };
@@ -2080,25 +2205,23 @@ button,input,select,textarea{font:inherit;color:inherit}
 
       R.chips.innerHTML = '';
       const chip = text => { const s = document.createElement('span'); s.textContent = text; R.chips.appendChild(s); };
-      if (value !== null) chip(`BMI ${value.toFixed(1)}`);
+      if (value !== null) chip(fmt(T.e_chip_bmi, { bmi: value.toFixed(1) }));
       if (name && kind !== 'minor') chip(name);
-      if (conds.length && kind !== 'minor') chip(conds.length === 1 ? '1 related condition' : `${conds.length} related conditions`);
+      if (conds.length && kind !== 'minor') chip(conds.length === 1 ? T.e_chip_cond_1 : fmt(T.e_chip_cond_n, { n: conds.length }));
       R.chips.hidden = R.chips.childElementCount === 0;
 
       if (kind === 'minor') {
         R.note.hidden = true;
       } else {
         R.note.hidden = false;
-        R.note.textContent = E.state.value === 'TX'
-          ? 'Texas is our first state. Join early access to be first in line when we open.'
-          : `We're launching in Texas first. Join early access and we'll email you when we open in ${name}.`;
+        R.note.textContent = E.state.value === 'TX' ? T.e_note_tx : fmt(T.e_note_other, { state: name });
       }
       R.join.hidden = kind === 'minor';
       R.join.dataset.state = E.state.value;
 
       E.form.hidden = true;
       E.result.hidden = false;
-      E.count.textContent = 'Your results';
+      E.count.textContent = T.e_your_results;
       E.bars.forEach(b => b.classList.add('is-done'));
       R.title.focus({ preventScroll: true });
       scrollToEl(E.tool);
@@ -2190,11 +2313,11 @@ button,input,select,textarea{font:inherit;color:inherit}
 
   if (F.form) {
     let fstep = 1;
-    const LAUNCH = "We're launching in Texas first. Join early access and we'll email you when we open in your state.";
+    const LAUNCH = T.launch_note;
     const need = () => radioValue(F.form, 'need');
     const flagKey = () => `flag-${need()}`;
     const syncLabel = () => {
-      F.nextLabel.textContent = fstep === 2 || need() === 'weight' ? 'See my options' : 'Continue';
+      F.nextLabel.textContent = fstep === 2 || need() === 'weight' ? T.f_see_options : T.continue;
     };
 
     const showFStep = (n, moveFocus = true) => {
@@ -2202,7 +2325,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       F.steps.forEach(s => { s.hidden = Number(s.dataset.fstep) !== n; });
       if (n === 2) F.paths.forEach(p => { p.hidden = p.dataset.path !== need(); });
       F.bars.forEach((b, i) => b.classList.toggle('is-done', i < n));
-      F.count.textContent = `Step ${n} of 2`;
+      F.count.textContent = fmt(T.f_step, { n });
       F.back.hidden = n === 1;
       syncLabel();
       if (moveFocus) {
@@ -2213,14 +2336,14 @@ button,input,select,textarea{font:inherit;color:inherit}
     };
 
     const chipsFor = key => [SERVICES[key].name, `${SERVICES[key].price} ${SERVICES[key].unit}`];
-    const joinCta = interest => ({ href: '#join', label: 'Get early access', mode: 'join', interest });
+    const joinCta = interest => ({ href: '#join', label: T.get_early_access, mode: 'join', interest });
     const inPerson = (title, body) => ({ kind: 'inperson', icon: 'alert', title, body });
     const match = (key, icon, title, body, extra = '') => ({
       kind: 'likely', icon, title, chips: chipsFor(key), body: body + extra, note: LAUNCH, cta: joinCta(SERVICES[key].interest),
     });
     const CRISIS = {
-      kind: 'crisis', icon: 'heart', title: "You don't have to go through this alone.",
-      body: 'Please reach out now. Trained crisis counselors are ready to listen and help, any time of day or night.',
+      kind: 'crisis', icon: 'heart', title: T.f_crisis_title,
+      body: T.f_crisis_body,
       hotline: true,
     };
 
@@ -2231,75 +2354,63 @@ button,input,select,textarea{font:inherit;color:inherit}
         case 'urgent':
           if (flag === 'yes') {
             return {
-              kind: 'emergency', icon: 'alert', title: 'Call 911 now.',
-              body: "These can be signs of a medical emergency. Call 911 or go to the nearest emergency room. Don't wait for an online visit.",
-              cta: { href: 'tel:911', label: 'Call 911', icon: 'phone', danger: true },
+              kind: 'emergency', icon: 'alert', title: T.f_urgent_911_title,
+              body: T.f_urgent_911_body,
+              cta: { href: 'tel:911', label: T.f_call_911, icon: 'phone', danger: true },
             };
           }
-          return match('urgent', 'thermo', 'Urgent care is a good place to start.',
-            "A licensed clinician can treat many everyday illnesses online, like colds, flu, sinus infections, UTIs, pink eye and rashes, and send any prescription to your pharmacy. If you need an exam or a test in person, they'll tell you.");
+          return match('urgent', 'thermo', T.f_urgent_title, T.f_urgent_body);
         case 'refill':
           if (flag === 'yes') {
             return {
-              kind: 'caution', icon: 'alert', title: "We can't refill controlled substances.",
-              body: "Medications like Adderall, Xanax, opioid pain medicine and testosterone have special prescribing rules. Please contact the clinician who prescribes yours, and don't stop taking it suddenly without their advice. We can still help with refills of many other medications.",
-              cta: { href: '#services', label: 'See our services', mode: 'link' },
+              kind: 'caution', icon: 'alert', title: T.f_refill_controlled_title,
+              body: T.f_refill_controlled_body,
+              cta: { href: '#services', label: T.f_see_services, mode: 'link' },
             };
           }
           if (flag === 'unsure') {
-            return match('refill', 'pill', 'A refill visit may be a good fit.',
-              "We don't refill controlled substances. If you're not sure whether yours is one, your pharmacist can tell you, and your clinician will check before approving a refill. We can renew many everyday medications, like blood pressure, cholesterol, thyroid and diabetes medicines.");
+            return match('refill', 'pill', T.f_refill_unsure_title, T.f_refill_unsure_body);
           }
-          return match('refill', 'pill', 'A refill visit is a good fit.',
-            'A licensed clinician can renew many medications you already take, like blood pressure, cholesterol, thyroid and diabetes medicines, and send the refill to your pharmacy. They may ask about recent lab work or readings first.');
+          return match('refill', 'pill', T.f_refill_title, T.f_refill_body);
         case 'mental':
           if (flag === 'yes') return CRISIS;
           return {
-            kind: 'likely', icon: 'mind', title: 'Therapy, medication or both can help.',
-            chips: [`Therapy ${PRICES.therapy} per session`, `Medication care ${PRICES.mental} per month`],
-            body: "Talk with a licensed therapist by video, get medication care for anxiety and depression from a licensed clinician, or do both. Many people feel better with therapy and medication together. If you ever have thoughts of suicide, call or text 988 any time.",
+            kind: 'likely', icon: 'mind', title: T.f_mental_title,
+            chips: [fmt(T.f_mental_chip_therapy, { price: PRICES.therapy }), fmt(T.f_mental_chip_meds, { price: PRICES.mental })],
+            body: T.f_mental_body,
             note: LAUNCH,
             cta: joinCta(`${SERVICES.therapy.interest},${SERVICES.mental.interest}`),
           };
         case 'sexual':
           if (flag === 'yes') {
-            return inPerson("Get care today. Don't wait.",
-              'If you may have been exposed to HIV in the last 72 hours, medicine called PEP can lower your chance of infection. It works best the sooner you start, so go to an urgent care clinic or emergency room today.');
+            return inPerson(T.f_sexual_pep_title, T.f_sexual_pep_body);
           }
-          return match('sexual', 'heart', 'Sexual health care is a good fit.',
-            'A licensed clinician can order STI tests at a nearby lab, treat common infections, and prescribe herpes treatment or PrEP to help prevent HIV. Lab tests are billed separately.',
-            flag === 'unsure' ? " If there's any chance you were exposed to HIV in the last 72 hours, don't wait: an urgent care clinic or emergency room can start PEP today." : '');
+          return match('sexual', 'heart', T.f_sexual_title, T.f_sexual_body, flag === 'unsure' ? T.f_sexual_unsure : '');
         case 'mens':
           if (flag === 'yes') {
             return {
-              kind: 'caution', icon: 'alert', title: 'ED pills may not be safe for you.',
-              body: 'ED medications like sildenafil and tadalafil can cause a dangerous drop in blood pressure when taken with nitrates. Talk with the doctor who treats your heart before starting ED treatment. We can still help with hair loss.',
+              kind: 'caution', icon: 'alert', title: T.f_mens_nitrates_title,
+              body: T.f_mens_nitrates_body,
               cta: joinCta(SERVICES.mens.interest),
             };
           }
-          return match('mens', 'male', "Men's health care is a good fit.",
-            "A licensed clinician can treat ED, hair loss and premature ejaculation, with medication sent to your pharmacy when it's right for you.",
-            flag === 'unsure' ? " Your clinician will check your medications first, because ED pills aren't safe with nitrates." : '');
+          return match('mens', 'male', T.f_mens_title, T.f_mens_body, flag === 'unsure' ? T.f_mens_unsure : '');
         case 'womens':
           if (flag === 'yes') {
-            return inPerson('Get seen in person today.',
-              "Heavy bleeding, severe pain in your belly or pelvis, or a fever can be signs of a problem that needs an exam right away. Go to an urgent care clinic or emergency room, or call 911 if it's severe.");
+            return inPerson(T.f_inperson_title, T.f_womens_inperson_body);
           }
-          return match('womens', 'female', "Women's health care is a good fit.",
-            'A licensed clinician can help with birth control, emergency contraception, menopause symptoms, yeast infections and BV, and send prescriptions to your pharmacy.');
+          return match('womens', 'female', T.f_womens_title, T.f_womens_body);
         case 'skin':
           if (flag === 'yes') {
-            return inPerson('Get seen in person today.',
-              "A rash or sore that's spreading fast, very painful or comes with a fever can be a serious infection. Go to an urgent care clinic today, or call 911 if you feel very sick.");
+            return inPerson(T.f_inperson_title, T.f_skin_inperson_body);
           }
-          return match('skin', 'drop', 'Skin care is a good fit.',
-            "A licensed clinician can treat acne, rosacea, eczema, psoriasis, cold sores and fungal infections, and send prescriptions to your pharmacy. If you need to be seen in person, they'll tell you.");
+          return match('skin', 'drop', T.f_skin_title, T.f_skin_body);
         default:
           return {
-            kind: 'likely', icon: 'scale', title: 'Start with our weight care check.',
+            kind: 'likely', icon: 'scale', title: T.f_weight_title,
             chips: chipsFor('weight'),
-            body: "Weight-loss medication isn't right for everyone. Our three-step check shows whether you may meet the general guidelines for FDA-approved medication.",
-            cta: { href: '#eligibility', label: 'Check your eligibility', mode: 'elig' },
+            body: T.f_weight_body,
+            cta: { href: '#eligibility', label: T.f_check_eligibility, mode: 'elig' },
           };
       }
     };
@@ -2329,7 +2440,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       }
       F.form.hidden = true;
       F.result.hidden = false;
-      F.count.textContent = 'Your options';
+      F.count.textContent = T.f_your_options;
       F.bars.forEach(b => b.classList.add('is-done'));
       F.title.focus({ preventScroll: true });
       scrollToEl(F.tool);
@@ -2346,7 +2457,7 @@ button,input,select,textarea{font:inherit;color:inherit}
     F.form.addEventListener('submit', e => {
       e.preventDefault();
       if (fstep === 1) {
-        if (!setError('need', need() ? '' : 'Choose what you need help with.')) {
+        if (!setError('need', need() ? '' : T.f_need)) {
           $('input[name="need"]', F.form).focus();
           return;
         }
@@ -2354,7 +2465,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         return;
       }
       const key = flagKey();
-      if (!setError(key, radioValue(F.form, key) ? '' : 'Choose an answer.')) {
+      if (!setError(key, radioValue(F.form, key) ? '' : T.choose_answer)) {
         $(`input[name="${key}"]`, F.form).focus();
         return;
       }
@@ -2418,9 +2529,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       L.list.hidden = hits.length === 0;
       L.empty.hidden = hits.length > 0;
       L.term.textContent = raw;
-      const message = hits.length
-        ? `${hits.length} ${hits.length === 1 ? 'result' : 'results'} for “${raw}”`
-        : `No results for “${raw}”`;
+      const message = fmt(hits.length === 0 ? T.s_none : hits.length === 1 ? T.s_one : T.s_many, { n: hits.length, q: raw });
       announce = window.setTimeout(() => { L.count.textContent = message; }, 250);
     };
     L.input.addEventListener('input', search);
@@ -2456,15 +2565,15 @@ button,input,select,textarea{font:inherit;color:inherit}
     success: $('#join-success'),
   };
   const joinRules = {
-    name: () => { const v = J.name.value.trim(); return v ? '' : 'Enter your first name.'; },
+    name: () => { const v = J.name.value.trim(); return v ? '' : T.j_name; },
     email: () => {
       const v = J.email.value.trim();
-      if (!v) return 'Enter your email address.';
-      return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : 'Enter a valid email, like name@example.com.';
+      if (!v) return T.enter_email;
+      return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : T.valid_email;
     },
-    jstate: () => (J.state.value ? '' : 'Choose your state.'),
-    interest: () => (interests().length ? '' : 'Choose at least one service.'),
-    consent: () => (J.consent.checked ? '' : 'Check this box so we can email you about the launch.'),
+    jstate: () => (J.state.value ? '' : T.choose_state),
+    interest: () => (interests().length ? '' : T.j_interest),
+    consent: () => (J.consent.checked ? '' : T.j_consent),
   };
   function interests() { return $$('input[name="interest"]:checked', J.form).map(c => c.value); }
   const joinFocus = {
@@ -2483,13 +2592,13 @@ button,input,select,textarea{font:inherit;color:inherit}
     J.submit.disabled = busy;
     J.submit.setAttribute('aria-busy', String(busy));
     J.submit.classList.toggle('is-loading', busy);
-    J.label.textContent = busy ? 'Saving your spot…' : 'Get early access';
+    J.label.textContent = busy ? T.j_saving : T.get_early_access;
   };
   const showJoinSuccess = () => {
     const first = J.name.value.trim();
     $('#join-success-name').textContent = first ? `, ${first}` : '';
     $('#join-success-email').textContent = J.email.value.trim();
-    $('#join-success-state').textContent = J.state.selectedOptions[0] ? J.state.selectedOptions[0].textContent.trim() : 'your state';
+    $('#join-success-state').textContent = J.state.selectedOptions[0] ? J.state.selectedOptions[0].textContent.trim() : T.j_your_state;
     J.form.hidden = true;
     J.success.hidden = false;
     $('#join-success-title').focus({ preventScroll: true });
@@ -2521,7 +2630,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       e.preventDefault();
       const bad = Object.keys(joinRules).filter(k => !setError(k, joinRules[k]()));
       if (bad.length) {
-        setStatus('error', bad.length === 1 ? 'Please fix the highlighted field.' : `Please fix the ${bad.length} highlighted fields.`);
+        setStatus('error', bad.length === 1 ? T.fix_one : fmt(T.fix_many, { n: bad.length }));
         joinFocus[bad[0]]().focus();
         return;
       }
@@ -2529,7 +2638,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       const trap = J.form.querySelector('input[name="bot-field"]');
       if (trap && trap.value) { showJoinSuccess(); return; }
       if ('claude' in window) {
-        setStatus('info', "This is a preview of the site, so sign-ups aren't saved here yet.");
+        setStatus('info', T.j_preview);
         return;
       }
       setBusy(true);
@@ -2547,7 +2656,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         showJoinSuccess();
       } catch (err) {
         setBusy(false);
-        setStatus('error', "We couldn't save your spot just now. Check your connection and try again.");
+        setStatus('error', T.j_failed);
       }
     });
     const recheck = e => {
@@ -2568,6 +2677,49 @@ button,input,select,textarea{font:inherit;color:inherit}
     });
   }
   $$('[data-join]').forEach(btn => btn.addEventListener('click', () => goToJoin({ interest: btn.dataset.join })));
+
+  // Links from the service pages carry ?interest=... : tick those services and bring the form into view.
+  // The links have no #fragment, and the address is tidied only after arriving, because a #fragment
+  // present when the page finishes loading makes the browser jump there and drop the focus we set.
+  if (J.form) {
+    const params = new URLSearchParams(window.location.search);
+    const wanted = (params.get('interest') || '').split(',').map(v => v.trim()).filter(v => /^[a-z-]+$/.test(v));
+    if (wanted.length) {
+      const arrive = () => {
+        goToJoin({ interest: wanted.join(',') });
+        window.history.replaceState(null, '', `${window.location.pathname}#join`);
+      };
+      if (document.readyState === 'complete') arrive(); else window.addEventListener('load', arrive, { once: true });
+    }
+  }
+
+  /* ---------- Share after signing up ---------- */
+  const share = $('#join-share');
+  if (share) {
+    const shareStatus = $('#join-share-status');
+    const shareLabel = $('.btn__label', share);
+    const url = share.dataset.shareUrl;
+    let resetTimer = 0;
+    const copied = () => {
+      shareLabel.textContent = T.share_copied_button;
+      shareStatus.textContent = T.share_copied;
+      window.clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => { shareLabel.textContent = T.share_button; }, 2500);
+    };
+    share.addEventListener('click', async () => {
+      shareStatus.textContent = '';
+      if (navigator.share) {
+        try { await navigator.share({ title: T.share_title, text: T.share_text, url }); return; }
+        catch (err) { if (err && err.name === 'AbortError') return; }
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        copied();
+      } catch (err) {
+        shareStatus.textContent = fmt(T.share_manual, { url });
+      }
+    });
+  }
 
   /* ---------- Help chat: AI assistant and support tickets ---------- */
   const C = {
@@ -2606,10 +2758,12 @@ button,input,select,textarea{font:inherit;color:inherit}
     let opener = null;
     let closeTimer = 0;
 
-    const EMERGENCY = /\b(chest pain|chest pressure|heart attack|can'?t breathe|cannot breathe|trouble breathing|difficulty breathing|short(ness)? of breath|stroke|face (is )?drooping|slurred speech|overdos(e|ed|ing)|poisoned|poisoning|severe bleeding|bleeding (heavily|a lot)|won'?t stop bleeding|anaphyla\w*|throat (is )?(closing|swelling)|unconscious|passed out|seizure|seizing)\b/i;
-    const CRISIS = /\b(suicid\w*|kill(ing)? myself|end(ing)? my life|end it all|want(ing)? to die|wanna die|self[- ]?harm\w*|hurt(ing)? myself|cut(ting)? myself|(don'?t|do not) want to (live|be alive)|better off dead)\b/i;
-    const CRISIS_TEXT = "I'm really sorry you're going through this, and you don't have to face it alone. Call or text 988 to reach the Suicide & Crisis Lifeline. It's free, confidential and open 24/7. If you're in immediate danger, call 911.";
-    const EMERGENCY_TEXT = "This could be an emergency. Please call 911 now or go to the nearest emergency room. I'm an AI assistant and can't help with emergencies.";
+    // English and Spanish. Messages are checked without accents, so "daño" and "dano" both match.
+    const plain = t => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const EMERGENCY = /\b(chest pain|chest pressure|heart attack|can'?t breathe|cannot breathe|trouble breathing|difficulty breathing|short(ness)? of breath|stroke|face (is )?drooping|slurred speech|overdos(e|ed|ing)|poisoned|poisoning|severe bleeding|bleeding (heavily|a lot)|won'?t stop bleeding|anaphyla\w*|throat (is )?(closing|swelling)|unconscious|passed out|seizure|seizing|dolor (de|en el) pecho|presion en el pecho|ataque (al|del) corazon|infarto|no puedo respirar|me cuesta respirar|dificultad para respirar|me falta el aire|falta de aire|derrame cerebral|embolia|cara caida|habla arrastrada|sobredosis|envenenad[oa]s?|envenenamiento|sangrado (abundante|fuerte|que no para)|no para de sangrar|hemorragia|se me (cierra|hincha) la garganta|inconsciente|me desmaye|se desmayo|desmayad[oa]|convulsion\w*|convulsionando)\b/;
+    const CRISIS = /\b(suicid\w*|kill(ing)? myself|end(ing)? my life|end it all|want(ing)? to die|wanna die|self[- ]?harm\w*|hurt(ing)? myself|cut(ting)? myself|(don'?t|do not) want to (live|be alive)|better off dead|matarme|me quiero matar|quitarme la vida|acabar con mi vida|quiero morir(me)?|me quiero morir|no quiero vivir|no quiero seguir viviendo|hacerme dano|lastimarme|cortarme|autolesion\w*|mejor muert[oa])\b/;
+    const CRISIS_TEXT = T.c_crisis;
+    const EMERGENCY_TEXT = T.c_emergency;
 
     const isOpen = () => !C.root.hidden;
     const scrollLog = () => { C.log.scrollTop = C.log.scrollHeight; };
@@ -2660,7 +2814,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 
     const typingBubble = () => {
       const el = addMsg('bot', '', 'msg--typing');
-      el.setAttribute('aria-label', 'The assistant is typing');
+      el.setAttribute('aria-label', T.c_typing);
       el.innerHTML = '<span class="typing" aria-hidden="true"><span></span><span></span><span></span></span>';
       return el;
     };
@@ -2700,9 +2854,9 @@ button,input,select,textarea{font:inherit;color:inherit}
     };
 
     const failCopy = code => {
-      if (code === 'rate_limited') return 'Lots of questions right now. Please try again in a minute, or submit a ticket and our team will reply by email.';
-      if (code === 'not_granted') return 'AI replies are turned off for this preview. You can still submit a ticket.';
-      return "I can't answer right now. You can submit a ticket and our team will reply by email.";
+      if (code === 'rate_limited') return T.c_busy;
+      if (code === 'not_granted') return T.c_off;
+      return T.c_down;
     };
 
     const ask = async raw => {
@@ -2711,15 +2865,15 @@ button,input,select,textarea{font:inherit;color:inherit}
       C.quick.hidden = true;
       addMsg('user', text);
       turns.push({ role: 'user', content: text });
-      if (CRISIS.test(text)) {
+      if (CRISIS.test(plain(text))) {
         const el = addMsg('bot', CRISIS_TEXT, 'msg--alert');
-        addActions(el, [{ label: 'Call 988', href: 'tel:988', icon: 'phone' }, { label: 'Text 988', href: 'sms:988', icon: 'msg', ghost: true }]);
+        addActions(el, [{ label: T.c_call_988, href: 'tel:988', icon: 'phone' }, { label: T.c_text_988, href: 'sms:988', icon: 'msg', ghost: true }]);
         turns.push({ role: 'assistant', content: CRISIS_TEXT });
         return;
       }
-      if (EMERGENCY.test(text)) {
+      if (EMERGENCY.test(plain(text))) {
         const el = addMsg('bot', EMERGENCY_TEXT, 'msg--alert');
-        addActions(el, [{ label: 'Call 911', href: 'tel:911', icon: 'phone', danger: true }]);
+        addActions(el, [{ label: T.c_call_911, href: 'tel:911', icon: 'phone', danger: true }]);
         turns.push({ role: 'assistant', content: EMERGENCY_TEXT });
         return;
       }
@@ -2735,7 +2889,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         bubble.classList.remove('msg--typing');
         bubble.removeAttribute('aria-label');
         fillText(bubble, failCopy(err && err.code));
-        addActions(bubble, [{ label: 'Submit a ticket', ticket: true, ghost: true }]);
+        addActions(bubble, [{ label: T.c_ticket, ticket: true, ghost: true }]);
       } finally {
         setBusy(false);
         scrollLog();
@@ -2821,13 +2975,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 
     // Support tickets
     const ticketRules = {
-      tname: () => (C.tName.value.trim() ? '' : 'Enter your name.'),
+      tname: () => (C.tName.value.trim() ? '' : T.t_name),
       temail: () => {
         const v = C.tEmail.value.trim();
-        if (!v) return 'Enter your email address.';
-        return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : 'Enter a valid email, like name@example.com.';
+        if (!v) return T.enter_email;
+        return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : T.valid_email;
       },
-      tmsg: () => (C.tMsg.value.trim().length >= 10 ? '' : 'Tell us a little more (at least 10 characters).'),
+      tmsg: () => (C.tMsg.value.trim().length >= 10 ? '' : T.t_msg),
     };
     const ticketFocus = { tname: () => C.tName, temail: () => C.tEmail, tmsg: () => C.tMsg };
     const ticketStatus = (kind, message) => {
@@ -2839,7 +2993,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       C.tSubmit.disabled = on;
       C.tSubmit.setAttribute('aria-busy', String(on));
       C.tSubmit.classList.toggle('is-loading', on);
-      C.tLabel.textContent = on ? 'Sending…' : 'Send ticket';
+      C.tLabel.textContent = on ? T.t_sending : T.t_send;
     };
     const transcript = () => turns
       .map(t => `${t.role === 'user' ? 'Visitor' : 'Assistant'}: ${t.content}`)
@@ -2850,7 +3004,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       e.preventDefault();
       const bad = Object.keys(ticketRules).filter(k => !setError(k, ticketRules[k]()));
       if (bad.length) {
-        ticketStatus('error', bad.length === 1 ? 'Please fix the highlighted field.' : `Please fix the ${bad.length} highlighted fields.`);
+        ticketStatus('error', bad.length === 1 ? T.fix_one : fmt(T.fix_many, { n: bad.length }));
         ticketFocus[bad[0]]().focus();
         return;
       }
@@ -2864,7 +3018,7 @@ button,input,select,textarea{font:inherit;color:inherit}
       };
       if (trap && trap.value) { done(); return; }
       if (PREVIEW) {
-        ticketStatus('info', `This is a preview of the site, so tickets aren't sent here. On the live site they go to ${EMAIL}.`);
+        ticketStatus('info', fmt(T.t_preview, { email: EMAIL }));
         return;
       }
       C.tTranscript.value = C.tInclude.checked ? transcript() : '';
@@ -2882,7 +3036,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         done();
       } catch (err) {
         ticketBusy(false);
-        ticketStatus('error', `We couldn't send your ticket. Check your connection and try again, or email ${EMAIL}.`);
+        ticketStatus('error', fmt(T.t_failed, { email: EMAIL }));
       }
     });
     const recheckTicket = e => {
@@ -2905,19 +3059,21 @@ button,input,select,textarea{font:inherit;color:inherit}
 
   /* ---------- Privacy notice ---------- */
   const sheet = $('#privacy');
-  let opener = null;
-  $$('[data-open="privacy"]').forEach(btn => btn.addEventListener('click', () => {
-    opener = btn;
-    if (typeof sheet.showModal === 'function') sheet.showModal(); else sheet.setAttribute('open', '');
-  }));
-  $$('[data-close]', sheet).forEach(btn => btn.addEventListener('click', () => sheet.close ? sheet.close() : sheet.removeAttribute('open')));
-  sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); });
-  sheet.addEventListener('close', () => { if (opener) opener.focus({ preventScroll: true }); });
+  if (sheet) {
+    let opener = null;
+    $$('[data-open="privacy"]').forEach(btn => btn.addEventListener('click', () => {
+      opener = btn;
+      if (typeof sheet.showModal === 'function') sheet.showModal(); else sheet.setAttribute('open', '');
+    }));
+    $$('[data-close]', sheet).forEach(btn => btn.addEventListener('click', () => sheet.close ? sheet.close() : sheet.removeAttribute('open')));
+    sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); });
+    sheet.addEventListener('close', () => { if (opener) opener.focus({ preventScroll: true }); });
+  }
 
   /* ---------- Mobile call-to-action dock ---------- */
-  if (dock && hasIO) {
-    const heroCta = $('.hero .cta-row');
-    const blockers = [$('#care-finder'), $('#eligibility'), $('#join'), $('.footer')].filter(Boolean);
+  const heroCta = $('.hero .cta-row');
+  if (dock && hasIO && heroCta) {
+    const blockers = [$('#care-finder'), $('#eligibility'), $('#join'), $('.page-cta'), $('.footer')].filter(Boolean);
     const blocking = new Set();
     let pastHero = false;
     let typing = false;

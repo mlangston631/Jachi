@@ -7,6 +7,8 @@
   const PRICES = /*PRICES_JSON*/;
   const SERVICES = /*SERVICES_JSON*/;
   const EMAIL = /*EMAIL_JSON*/;
+  const T = /*STRINGS_JSON*/;
+  const fmt = (text, values = {}) => text.replace(/\{(\w+)\}/g, (m, k) => (k in values ? String(values[k]) : m));
   const icon =(name, cls = '') => `<svg class="i${cls ? ` ${cls}` : ''}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name] || ''}</svg>`;
   const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const mqDesktop = window.matchMedia('(min-width: 960px)');
@@ -203,13 +205,13 @@
     };
 
     const rules = {
-      state: () => (E.state.value ? '' : 'Choose your state.'),
-      age: () => (radioValue(E.form, 'age') ? '' : 'Choose yes or no.'),
-      height: () => (heightOk() ? '' : 'Enter a height between 4 ft 0 in and 7 ft 11 in.'),
-      weight: () => (weightOk() ? '' : 'Enter a weight between 70 and 700 lb.'),
-      cond: () => ($$('input[name="cond"]:checked', E.form).length ? '' : 'Select any that apply, or choose None of these.'),
-      mtc: () => (radioValue(E.form, 'mtc') ? '' : 'Choose an answer.'),
-      preg: () => (radioValue(E.form, 'preg') ? '' : 'Choose an answer.'),
+      state: () => (E.state.value ? '' : T.choose_state),
+      age: () => (radioValue(E.form, 'age') ? '' : T.e_age),
+      height: () => (heightOk() ? '' : T.e_height),
+      weight: () => (weightOk() ? '' : T.e_weight),
+      cond: () => ($$('input[name="cond"]:checked', E.form).length ? '' : T.e_cond),
+      mtc: () => (radioValue(E.form, 'mtc') ? '' : T.choose_answer),
+      preg: () => (radioValue(E.form, 'preg') ? '' : T.choose_answer),
     };
     const focusFor = {
       state: () => E.state,
@@ -235,7 +237,7 @@
         E.gauge.style.setProperty('--t', '0');
         E.fill.style.strokeDasharray = '0 100';
         E.num.textContent = '–';
-        E.hint.textContent = 'Enter your height and weight';
+        E.hint.textContent = T.e_gauge_empty;
         return null;
       }
       const t = Math.max(0, Math.min(1, (value - 15) / 30));
@@ -243,9 +245,9 @@
       E.gauge.style.setProperty('--t', t.toFixed(4));
       E.fill.style.strokeDasharray = `${(t * 100).toFixed(2)} 100`;
       E.num.textContent = value.toFixed(1);
-      E.hint.textContent = value >= 30 ? 'At or above 30' : value >= 27 ? 'Between 27 and 30' : 'Below 27';
+      E.hint.textContent = value >= 30 ? T.e_gauge_30 : value >= 27 ? T.e_gauge_27 : T.e_gauge_low;
       window.clearTimeout(liveTimer);
-      liveTimer = window.setTimeout(() => { E.live.textContent = `Your BMI is ${value.toFixed(1)}.`; }, 700);
+      liveTimer = window.setTimeout(() => { E.live.textContent = fmt(T.e_bmi_live, { bmi: value.toFixed(1) }); }, 700);
       return value;
     };
 
@@ -253,9 +255,9 @@
       step = n;
       E.steps.forEach(s => { s.hidden = Number(s.dataset.step) !== n; });
       E.bars.forEach((b, i) => b.classList.toggle('is-done', i < n));
-      E.count.textContent = `Step ${n} of 3`;
+      E.count.textContent = fmt(T.e_step, { n });
       E.back.hidden = n === 1;
-      E.nextLabel.textContent = n === 3 ? 'See my results' : 'Continue';
+      E.nextLabel.textContent = n === 3 ? T.e_see_results : T.continue;
       if (moveFocus) {
         const title = $('.q-title', E.steps[n - 1]);
         if (title) title.focus({ preventScroll: true });
@@ -276,28 +278,26 @@
 
       if (age === 'no') {
         kind = 'minor';
-        title = 'Jachi is for adults 18 and older.';
-        body = "If you're under 18 and want help with your weight, talk with a parent or your doctor about the right next step.";
+        title = T.e_minor_title;
+        body = T.e_minor_body;
       } else if (mtc === 'yes' || preg === 'yes') {
         kind = 'caution';
-        title = 'Medication may not be safe for you.';
+        title = T.e_caution_title;
         const parts = [];
-        if (mtc === 'yes') parts.push("GLP-1 medications shouldn't be used by people with a personal or family history of medullary thyroid cancer or MEN2.");
-        if (preg === 'yes') parts.push("GLP-1 weight-loss medications usually aren't prescribed during pregnancy, while breastfeeding or when you're planning a pregnancy.");
-        parts.push('A doctor can help you find a safe approach.');
+        if (mtc === 'yes') parts.push(T.e_caution_mtc);
+        if (preg === 'yes') parts.push(T.e_caution_preg);
+        parts.push(T.e_caution_end);
         body = parts.join(' ');
       } else if (value >= 30 || (value >= 27 && conds.length)) {
         kind = 'likely';
-        title = 'You may be a good fit for medical weight care.';
-        body = value >= 30
-          ? `Your BMI of ${value.toFixed(1)} meets the general guideline for FDA-approved weight-loss medication.`
-          : `Your BMI of ${value.toFixed(1)}, together with a weight-related condition, meets the general guideline for FDA-approved weight-loss medication.`;
-        body += ' A licensed clinician will review your full health history before recommending any treatment.';
-        if (mtc === 'unsure') body += ' They will also ask about your family history of thyroid cancer.';
+        title = T.e_likely_title;
+        body = fmt(value >= 30 ? T.e_likely_30 : T.e_likely_27, { bmi: value.toFixed(1) });
+        body += T.e_likely_review;
+        if (mtc === 'unsure') body += T.e_likely_mtc;
       } else {
         kind = 'unlikely';
-        title = 'Medication may not be the right fit right now.';
-        body = `FDA-approved weight-loss medications are generally for a BMI of 30 or higher, or 27 or higher with a weight-related condition. Your BMI is ${value.toFixed(1)}. We'll share more ways to help as Jachi grows.`;
+        title = T.e_unlikely_title;
+        body = fmt(T.e_unlikely_body, { bmi: value.toFixed(1) });
       }
 
       const icons = { likely: 'check', unlikely: 'info', caution: 'alert', minor: 'info' };
@@ -308,25 +308,23 @@
 
       R.chips.innerHTML = '';
       const chip = text => { const s = document.createElement('span'); s.textContent = text; R.chips.appendChild(s); };
-      if (value !== null) chip(`BMI ${value.toFixed(1)}`);
+      if (value !== null) chip(fmt(T.e_chip_bmi, { bmi: value.toFixed(1) }));
       if (name && kind !== 'minor') chip(name);
-      if (conds.length && kind !== 'minor') chip(conds.length === 1 ? '1 related condition' : `${conds.length} related conditions`);
+      if (conds.length && kind !== 'minor') chip(conds.length === 1 ? T.e_chip_cond_1 : fmt(T.e_chip_cond_n, { n: conds.length }));
       R.chips.hidden = R.chips.childElementCount === 0;
 
       if (kind === 'minor') {
         R.note.hidden = true;
       } else {
         R.note.hidden = false;
-        R.note.textContent = E.state.value === 'TX'
-          ? 'Texas is our first state. Join early access to be first in line when we open.'
-          : `We're launching in Texas first. Join early access and we'll email you when we open in ${name}.`;
+        R.note.textContent = E.state.value === 'TX' ? T.e_note_tx : fmt(T.e_note_other, { state: name });
       }
       R.join.hidden = kind === 'minor';
       R.join.dataset.state = E.state.value;
 
       E.form.hidden = true;
       E.result.hidden = false;
-      E.count.textContent = 'Your results';
+      E.count.textContent = T.e_your_results;
       E.bars.forEach(b => b.classList.add('is-done'));
       R.title.focus({ preventScroll: true });
       scrollToEl(E.tool);
@@ -418,11 +416,11 @@
 
   if (F.form) {
     let fstep = 1;
-    const LAUNCH = "We're launching in Texas first. Join early access and we'll email you when we open in your state.";
+    const LAUNCH = T.launch_note;
     const need = () => radioValue(F.form, 'need');
     const flagKey = () => `flag-${need()}`;
     const syncLabel = () => {
-      F.nextLabel.textContent = fstep === 2 || need() === 'weight' ? 'See my options' : 'Continue';
+      F.nextLabel.textContent = fstep === 2 || need() === 'weight' ? T.f_see_options : T.continue;
     };
 
     const showFStep = (n, moveFocus = true) => {
@@ -430,7 +428,7 @@
       F.steps.forEach(s => { s.hidden = Number(s.dataset.fstep) !== n; });
       if (n === 2) F.paths.forEach(p => { p.hidden = p.dataset.path !== need(); });
       F.bars.forEach((b, i) => b.classList.toggle('is-done', i < n));
-      F.count.textContent = `Step ${n} of 2`;
+      F.count.textContent = fmt(T.f_step, { n });
       F.back.hidden = n === 1;
       syncLabel();
       if (moveFocus) {
@@ -441,14 +439,14 @@
     };
 
     const chipsFor = key => [SERVICES[key].name, `${SERVICES[key].price} ${SERVICES[key].unit}`];
-    const joinCta = interest => ({ href: '#join', label: 'Get early access', mode: 'join', interest });
+    const joinCta = interest => ({ href: '#join', label: T.get_early_access, mode: 'join', interest });
     const inPerson = (title, body) => ({ kind: 'inperson', icon: 'alert', title, body });
     const match = (key, icon, title, body, extra = '') => ({
       kind: 'likely', icon, title, chips: chipsFor(key), body: body + extra, note: LAUNCH, cta: joinCta(SERVICES[key].interest),
     });
     const CRISIS = {
-      kind: 'crisis', icon: 'heart', title: "You don't have to go through this alone.",
-      body: 'Please reach out now. Trained crisis counselors are ready to listen and help, any time of day or night.',
+      kind: 'crisis', icon: 'heart', title: T.f_crisis_title,
+      body: T.f_crisis_body,
       hotline: true,
     };
 
@@ -459,75 +457,63 @@
         case 'urgent':
           if (flag === 'yes') {
             return {
-              kind: 'emergency', icon: 'alert', title: 'Call 911 now.',
-              body: "These can be signs of a medical emergency. Call 911 or go to the nearest emergency room. Don't wait for an online visit.",
-              cta: { href: 'tel:911', label: 'Call 911', icon: 'phone', danger: true },
+              kind: 'emergency', icon: 'alert', title: T.f_urgent_911_title,
+              body: T.f_urgent_911_body,
+              cta: { href: 'tel:911', label: T.f_call_911, icon: 'phone', danger: true },
             };
           }
-          return match('urgent', 'thermo', 'Urgent care is a good place to start.',
-            "A licensed clinician can treat many everyday illnesses online, like colds, flu, sinus infections, UTIs, pink eye and rashes, and send any prescription to your pharmacy. If you need an exam or a test in person, they'll tell you.");
+          return match('urgent', 'thermo', T.f_urgent_title, T.f_urgent_body);
         case 'refill':
           if (flag === 'yes') {
             return {
-              kind: 'caution', icon: 'alert', title: "We can't refill controlled substances.",
-              body: "Medications like Adderall, Xanax, opioid pain medicine and testosterone have special prescribing rules. Please contact the clinician who prescribes yours, and don't stop taking it suddenly without their advice. We can still help with refills of many other medications.",
-              cta: { href: '#services', label: 'See our services', mode: 'link' },
+              kind: 'caution', icon: 'alert', title: T.f_refill_controlled_title,
+              body: T.f_refill_controlled_body,
+              cta: { href: '#services', label: T.f_see_services, mode: 'link' },
             };
           }
           if (flag === 'unsure') {
-            return match('refill', 'pill', 'A refill visit may be a good fit.',
-              "We don't refill controlled substances. If you're not sure whether yours is one, your pharmacist can tell you, and your clinician will check before approving a refill. We can renew many everyday medications, like blood pressure, cholesterol, thyroid and diabetes medicines.");
+            return match('refill', 'pill', T.f_refill_unsure_title, T.f_refill_unsure_body);
           }
-          return match('refill', 'pill', 'A refill visit is a good fit.',
-            'A licensed clinician can renew many medications you already take, like blood pressure, cholesterol, thyroid and diabetes medicines, and send the refill to your pharmacy. They may ask about recent lab work or readings first.');
+          return match('refill', 'pill', T.f_refill_title, T.f_refill_body);
         case 'mental':
           if (flag === 'yes') return CRISIS;
           return {
-            kind: 'likely', icon: 'mind', title: 'Therapy, medication or both can help.',
-            chips: [`Therapy ${PRICES.therapy} per session`, `Medication care ${PRICES.mental} per month`],
-            body: "Talk with a licensed therapist by video, get medication care for anxiety and depression from a licensed clinician, or do both. Many people feel better with therapy and medication together. If you ever have thoughts of suicide, call or text 988 any time.",
+            kind: 'likely', icon: 'mind', title: T.f_mental_title,
+            chips: [fmt(T.f_mental_chip_therapy, { price: PRICES.therapy }), fmt(T.f_mental_chip_meds, { price: PRICES.mental })],
+            body: T.f_mental_body,
             note: LAUNCH,
             cta: joinCta(`${SERVICES.therapy.interest},${SERVICES.mental.interest}`),
           };
         case 'sexual':
           if (flag === 'yes') {
-            return inPerson("Get care today. Don't wait.",
-              'If you may have been exposed to HIV in the last 72 hours, medicine called PEP can lower your chance of infection. It works best the sooner you start, so go to an urgent care clinic or emergency room today.');
+            return inPerson(T.f_sexual_pep_title, T.f_sexual_pep_body);
           }
-          return match('sexual', 'heart', 'Sexual health care is a good fit.',
-            'A licensed clinician can order STI tests at a nearby lab, treat common infections, and prescribe herpes treatment or PrEP to help prevent HIV. Lab tests are billed separately.',
-            flag === 'unsure' ? " If there's any chance you were exposed to HIV in the last 72 hours, don't wait: an urgent care clinic or emergency room can start PEP today." : '');
+          return match('sexual', 'heart', T.f_sexual_title, T.f_sexual_body, flag === 'unsure' ? T.f_sexual_unsure : '');
         case 'mens':
           if (flag === 'yes') {
             return {
-              kind: 'caution', icon: 'alert', title: 'ED pills may not be safe for you.',
-              body: 'ED medications like sildenafil and tadalafil can cause a dangerous drop in blood pressure when taken with nitrates. Talk with the doctor who treats your heart before starting ED treatment. We can still help with hair loss.',
+              kind: 'caution', icon: 'alert', title: T.f_mens_nitrates_title,
+              body: T.f_mens_nitrates_body,
               cta: joinCta(SERVICES.mens.interest),
             };
           }
-          return match('mens', 'male', "Men's health care is a good fit.",
-            "A licensed clinician can treat ED, hair loss and premature ejaculation, with medication sent to your pharmacy when it's right for you.",
-            flag === 'unsure' ? " Your clinician will check your medications first, because ED pills aren't safe with nitrates." : '');
+          return match('mens', 'male', T.f_mens_title, T.f_mens_body, flag === 'unsure' ? T.f_mens_unsure : '');
         case 'womens':
           if (flag === 'yes') {
-            return inPerson('Get seen in person today.',
-              "Heavy bleeding, severe pain in your belly or pelvis, or a fever can be signs of a problem that needs an exam right away. Go to an urgent care clinic or emergency room, or call 911 if it's severe.");
+            return inPerson(T.f_inperson_title, T.f_womens_inperson_body);
           }
-          return match('womens', 'female', "Women's health care is a good fit.",
-            'A licensed clinician can help with birth control, emergency contraception, menopause symptoms, yeast infections and BV, and send prescriptions to your pharmacy.');
+          return match('womens', 'female', T.f_womens_title, T.f_womens_body);
         case 'skin':
           if (flag === 'yes') {
-            return inPerson('Get seen in person today.',
-              "A rash or sore that's spreading fast, very painful or comes with a fever can be a serious infection. Go to an urgent care clinic today, or call 911 if you feel very sick.");
+            return inPerson(T.f_inperson_title, T.f_skin_inperson_body);
           }
-          return match('skin', 'drop', 'Skin care is a good fit.',
-            "A licensed clinician can treat acne, rosacea, eczema, psoriasis, cold sores and fungal infections, and send prescriptions to your pharmacy. If you need to be seen in person, they'll tell you.");
+          return match('skin', 'drop', T.f_skin_title, T.f_skin_body);
         default:
           return {
-            kind: 'likely', icon: 'scale', title: 'Start with our weight care check.',
+            kind: 'likely', icon: 'scale', title: T.f_weight_title,
             chips: chipsFor('weight'),
-            body: "Weight-loss medication isn't right for everyone. Our three-step check shows whether you may meet the general guidelines for FDA-approved medication.",
-            cta: { href: '#eligibility', label: 'Check your eligibility', mode: 'elig' },
+            body: T.f_weight_body,
+            cta: { href: '#eligibility', label: T.f_check_eligibility, mode: 'elig' },
           };
       }
     };
@@ -557,7 +543,7 @@
       }
       F.form.hidden = true;
       F.result.hidden = false;
-      F.count.textContent = 'Your options';
+      F.count.textContent = T.f_your_options;
       F.bars.forEach(b => b.classList.add('is-done'));
       F.title.focus({ preventScroll: true });
       scrollToEl(F.tool);
@@ -574,7 +560,7 @@
     F.form.addEventListener('submit', e => {
       e.preventDefault();
       if (fstep === 1) {
-        if (!setError('need', need() ? '' : 'Choose what you need help with.')) {
+        if (!setError('need', need() ? '' : T.f_need)) {
           $('input[name="need"]', F.form).focus();
           return;
         }
@@ -582,7 +568,7 @@
         return;
       }
       const key = flagKey();
-      if (!setError(key, radioValue(F.form, key) ? '' : 'Choose an answer.')) {
+      if (!setError(key, radioValue(F.form, key) ? '' : T.choose_answer)) {
         $(`input[name="${key}"]`, F.form).focus();
         return;
       }
@@ -646,9 +632,7 @@
       L.list.hidden = hits.length === 0;
       L.empty.hidden = hits.length > 0;
       L.term.textContent = raw;
-      const message = hits.length
-        ? `${hits.length} ${hits.length === 1 ? 'result' : 'results'} for “${raw}”`
-        : `No results for “${raw}”`;
+      const message = fmt(hits.length === 0 ? T.s_none : hits.length === 1 ? T.s_one : T.s_many, { n: hits.length, q: raw });
       announce = window.setTimeout(() => { L.count.textContent = message; }, 250);
     };
     L.input.addEventListener('input', search);
@@ -684,15 +668,15 @@
     success: $('#join-success'),
   };
   const joinRules = {
-    name: () => { const v = J.name.value.trim(); return v ? '' : 'Enter your first name.'; },
+    name: () => { const v = J.name.value.trim(); return v ? '' : T.j_name; },
     email: () => {
       const v = J.email.value.trim();
-      if (!v) return 'Enter your email address.';
-      return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : 'Enter a valid email, like name@example.com.';
+      if (!v) return T.enter_email;
+      return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : T.valid_email;
     },
-    jstate: () => (J.state.value ? '' : 'Choose your state.'),
-    interest: () => (interests().length ? '' : 'Choose at least one service.'),
-    consent: () => (J.consent.checked ? '' : 'Check this box so we can email you about the launch.'),
+    jstate: () => (J.state.value ? '' : T.choose_state),
+    interest: () => (interests().length ? '' : T.j_interest),
+    consent: () => (J.consent.checked ? '' : T.j_consent),
   };
   function interests() { return $$('input[name="interest"]:checked', J.form).map(c => c.value); }
   const joinFocus = {
@@ -711,13 +695,13 @@
     J.submit.disabled = busy;
     J.submit.setAttribute('aria-busy', String(busy));
     J.submit.classList.toggle('is-loading', busy);
-    J.label.textContent = busy ? 'Saving your spot…' : 'Get early access';
+    J.label.textContent = busy ? T.j_saving : T.get_early_access;
   };
   const showJoinSuccess = () => {
     const first = J.name.value.trim();
     $('#join-success-name').textContent = first ? `, ${first}` : '';
     $('#join-success-email').textContent = J.email.value.trim();
-    $('#join-success-state').textContent = J.state.selectedOptions[0] ? J.state.selectedOptions[0].textContent.trim() : 'your state';
+    $('#join-success-state').textContent = J.state.selectedOptions[0] ? J.state.selectedOptions[0].textContent.trim() : T.j_your_state;
     J.form.hidden = true;
     J.success.hidden = false;
     $('#join-success-title').focus({ preventScroll: true });
@@ -749,7 +733,7 @@
       e.preventDefault();
       const bad = Object.keys(joinRules).filter(k => !setError(k, joinRules[k]()));
       if (bad.length) {
-        setStatus('error', bad.length === 1 ? 'Please fix the highlighted field.' : `Please fix the ${bad.length} highlighted fields.`);
+        setStatus('error', bad.length === 1 ? T.fix_one : fmt(T.fix_many, { n: bad.length }));
         joinFocus[bad[0]]().focus();
         return;
       }
@@ -757,7 +741,7 @@
       const trap = J.form.querySelector('input[name="bot-field"]');
       if (trap && trap.value) { showJoinSuccess(); return; }
       if ('claude' in window) {
-        setStatus('info', "This is a preview of the site, so sign-ups aren't saved here yet.");
+        setStatus('info', T.j_preview);
         return;
       }
       setBusy(true);
@@ -775,7 +759,7 @@
         showJoinSuccess();
       } catch (err) {
         setBusy(false);
-        setStatus('error', "We couldn't save your spot just now. Check your connection and try again.");
+        setStatus('error', T.j_failed);
       }
     });
     const recheck = e => {
@@ -796,6 +780,49 @@
     });
   }
   $$('[data-join]').forEach(btn => btn.addEventListener('click', () => goToJoin({ interest: btn.dataset.join })));
+
+  // Links from the service pages carry ?interest=... : tick those services and bring the form into view.
+  // The links have no #fragment, and the address is tidied only after arriving, because a #fragment
+  // present when the page finishes loading makes the browser jump there and drop the focus we set.
+  if (J.form) {
+    const params = new URLSearchParams(window.location.search);
+    const wanted = (params.get('interest') || '').split(',').map(v => v.trim()).filter(v => /^[a-z-]+$/.test(v));
+    if (wanted.length) {
+      const arrive = () => {
+        goToJoin({ interest: wanted.join(',') });
+        window.history.replaceState(null, '', `${window.location.pathname}#join`);
+      };
+      if (document.readyState === 'complete') arrive(); else window.addEventListener('load', arrive, { once: true });
+    }
+  }
+
+  /* ---------- Share after signing up ---------- */
+  const share = $('#join-share');
+  if (share) {
+    const shareStatus = $('#join-share-status');
+    const shareLabel = $('.btn__label', share);
+    const url = share.dataset.shareUrl;
+    let resetTimer = 0;
+    const copied = () => {
+      shareLabel.textContent = T.share_copied_button;
+      shareStatus.textContent = T.share_copied;
+      window.clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => { shareLabel.textContent = T.share_button; }, 2500);
+    };
+    share.addEventListener('click', async () => {
+      shareStatus.textContent = '';
+      if (navigator.share) {
+        try { await navigator.share({ title: T.share_title, text: T.share_text, url }); return; }
+        catch (err) { if (err && err.name === 'AbortError') return; }
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        copied();
+      } catch (err) {
+        shareStatus.textContent = fmt(T.share_manual, { url });
+      }
+    });
+  }
 
   /* ---------- Help chat: AI assistant and support tickets ---------- */
   const C = {
@@ -834,10 +861,12 @@
     let opener = null;
     let closeTimer = 0;
 
-    const EMERGENCY = /\b(chest pain|chest pressure|heart attack|can'?t breathe|cannot breathe|trouble breathing|difficulty breathing|short(ness)? of breath|stroke|face (is )?drooping|slurred speech|overdos(e|ed|ing)|poisoned|poisoning|severe bleeding|bleeding (heavily|a lot)|won'?t stop bleeding|anaphyla\w*|throat (is )?(closing|swelling)|unconscious|passed out|seizure|seizing)\b/i;
-    const CRISIS = /\b(suicid\w*|kill(ing)? myself|end(ing)? my life|end it all|want(ing)? to die|wanna die|self[- ]?harm\w*|hurt(ing)? myself|cut(ting)? myself|(don'?t|do not) want to (live|be alive)|better off dead)\b/i;
-    const CRISIS_TEXT = "I'm really sorry you're going through this, and you don't have to face it alone. Call or text 988 to reach the Suicide & Crisis Lifeline. It's free, confidential and open 24/7. If you're in immediate danger, call 911.";
-    const EMERGENCY_TEXT = "This could be an emergency. Please call 911 now or go to the nearest emergency room. I'm an AI assistant and can't help with emergencies.";
+    // English and Spanish. Messages are checked without accents, so "daño" and "dano" both match.
+    const plain = t => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const EMERGENCY = /\b(chest pain|chest pressure|heart attack|can'?t breathe|cannot breathe|trouble breathing|difficulty breathing|short(ness)? of breath|stroke|face (is )?drooping|slurred speech|overdos(e|ed|ing)|poisoned|poisoning|severe bleeding|bleeding (heavily|a lot)|won'?t stop bleeding|anaphyla\w*|throat (is )?(closing|swelling)|unconscious|passed out|seizure|seizing|dolor (de|en el) pecho|presion en el pecho|ataque (al|del) corazon|infarto|no puedo respirar|me cuesta respirar|dificultad para respirar|me falta el aire|falta de aire|derrame cerebral|embolia|cara caida|habla arrastrada|sobredosis|envenenad[oa]s?|envenenamiento|sangrado (abundante|fuerte|que no para)|no para de sangrar|hemorragia|se me (cierra|hincha) la garganta|inconsciente|me desmaye|se desmayo|desmayad[oa]|convulsion\w*|convulsionando)\b/;
+    const CRISIS = /\b(suicid\w*|kill(ing)? myself|end(ing)? my life|end it all|want(ing)? to die|wanna die|self[- ]?harm\w*|hurt(ing)? myself|cut(ting)? myself|(don'?t|do not) want to (live|be alive)|better off dead|matarme|me quiero matar|quitarme la vida|acabar con mi vida|quiero morir(me)?|me quiero morir|no quiero vivir|no quiero seguir viviendo|hacerme dano|lastimarme|cortarme|autolesion\w*|mejor muert[oa])\b/;
+    const CRISIS_TEXT = T.c_crisis;
+    const EMERGENCY_TEXT = T.c_emergency;
 
     const isOpen = () => !C.root.hidden;
     const scrollLog = () => { C.log.scrollTop = C.log.scrollHeight; };
@@ -888,7 +917,7 @@
 
     const typingBubble = () => {
       const el = addMsg('bot', '', 'msg--typing');
-      el.setAttribute('aria-label', 'The assistant is typing');
+      el.setAttribute('aria-label', T.c_typing);
       el.innerHTML = '<span class="typing" aria-hidden="true"><span></span><span></span><span></span></span>';
       return el;
     };
@@ -928,9 +957,9 @@
     };
 
     const failCopy = code => {
-      if (code === 'rate_limited') return 'Lots of questions right now. Please try again in a minute, or submit a ticket and our team will reply by email.';
-      if (code === 'not_granted') return 'AI replies are turned off for this preview. You can still submit a ticket.';
-      return "I can't answer right now. You can submit a ticket and our team will reply by email.";
+      if (code === 'rate_limited') return T.c_busy;
+      if (code === 'not_granted') return T.c_off;
+      return T.c_down;
     };
 
     const ask = async raw => {
@@ -939,15 +968,15 @@
       C.quick.hidden = true;
       addMsg('user', text);
       turns.push({ role: 'user', content: text });
-      if (CRISIS.test(text)) {
+      if (CRISIS.test(plain(text))) {
         const el = addMsg('bot', CRISIS_TEXT, 'msg--alert');
-        addActions(el, [{ label: 'Call 988', href: 'tel:988', icon: 'phone' }, { label: 'Text 988', href: 'sms:988', icon: 'msg', ghost: true }]);
+        addActions(el, [{ label: T.c_call_988, href: 'tel:988', icon: 'phone' }, { label: T.c_text_988, href: 'sms:988', icon: 'msg', ghost: true }]);
         turns.push({ role: 'assistant', content: CRISIS_TEXT });
         return;
       }
-      if (EMERGENCY.test(text)) {
+      if (EMERGENCY.test(plain(text))) {
         const el = addMsg('bot', EMERGENCY_TEXT, 'msg--alert');
-        addActions(el, [{ label: 'Call 911', href: 'tel:911', icon: 'phone', danger: true }]);
+        addActions(el, [{ label: T.c_call_911, href: 'tel:911', icon: 'phone', danger: true }]);
         turns.push({ role: 'assistant', content: EMERGENCY_TEXT });
         return;
       }
@@ -963,7 +992,7 @@
         bubble.classList.remove('msg--typing');
         bubble.removeAttribute('aria-label');
         fillText(bubble, failCopy(err && err.code));
-        addActions(bubble, [{ label: 'Submit a ticket', ticket: true, ghost: true }]);
+        addActions(bubble, [{ label: T.c_ticket, ticket: true, ghost: true }]);
       } finally {
         setBusy(false);
         scrollLog();
@@ -1049,13 +1078,13 @@
 
     // Support tickets
     const ticketRules = {
-      tname: () => (C.tName.value.trim() ? '' : 'Enter your name.'),
+      tname: () => (C.tName.value.trim() ? '' : T.t_name),
       temail: () => {
         const v = C.tEmail.value.trim();
-        if (!v) return 'Enter your email address.';
-        return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : 'Enter a valid email, like name@example.com.';
+        if (!v) return T.enter_email;
+        return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : T.valid_email;
       },
-      tmsg: () => (C.tMsg.value.trim().length >= 10 ? '' : 'Tell us a little more (at least 10 characters).'),
+      tmsg: () => (C.tMsg.value.trim().length >= 10 ? '' : T.t_msg),
     };
     const ticketFocus = { tname: () => C.tName, temail: () => C.tEmail, tmsg: () => C.tMsg };
     const ticketStatus = (kind, message) => {
@@ -1067,7 +1096,7 @@
       C.tSubmit.disabled = on;
       C.tSubmit.setAttribute('aria-busy', String(on));
       C.tSubmit.classList.toggle('is-loading', on);
-      C.tLabel.textContent = on ? 'Sending…' : 'Send ticket';
+      C.tLabel.textContent = on ? T.t_sending : T.t_send;
     };
     const transcript = () => turns
       .map(t => `${t.role === 'user' ? 'Visitor' : 'Assistant'}: ${t.content}`)
@@ -1078,7 +1107,7 @@
       e.preventDefault();
       const bad = Object.keys(ticketRules).filter(k => !setError(k, ticketRules[k]()));
       if (bad.length) {
-        ticketStatus('error', bad.length === 1 ? 'Please fix the highlighted field.' : `Please fix the ${bad.length} highlighted fields.`);
+        ticketStatus('error', bad.length === 1 ? T.fix_one : fmt(T.fix_many, { n: bad.length }));
         ticketFocus[bad[0]]().focus();
         return;
       }
@@ -1092,7 +1121,7 @@
       };
       if (trap && trap.value) { done(); return; }
       if (PREVIEW) {
-        ticketStatus('info', `This is a preview of the site, so tickets aren't sent here. On the live site they go to ${EMAIL}.`);
+        ticketStatus('info', fmt(T.t_preview, { email: EMAIL }));
         return;
       }
       C.tTranscript.value = C.tInclude.checked ? transcript() : '';
@@ -1110,7 +1139,7 @@
         done();
       } catch (err) {
         ticketBusy(false);
-        ticketStatus('error', `We couldn't send your ticket. Check your connection and try again, or email ${EMAIL}.`);
+        ticketStatus('error', fmt(T.t_failed, { email: EMAIL }));
       }
     });
     const recheckTicket = e => {
@@ -1133,19 +1162,21 @@
 
   /* ---------- Privacy notice ---------- */
   const sheet = $('#privacy');
-  let opener = null;
-  $$('[data-open="privacy"]').forEach(btn => btn.addEventListener('click', () => {
-    opener = btn;
-    if (typeof sheet.showModal === 'function') sheet.showModal(); else sheet.setAttribute('open', '');
-  }));
-  $$('[data-close]', sheet).forEach(btn => btn.addEventListener('click', () => sheet.close ? sheet.close() : sheet.removeAttribute('open')));
-  sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); });
-  sheet.addEventListener('close', () => { if (opener) opener.focus({ preventScroll: true }); });
+  if (sheet) {
+    let opener = null;
+    $$('[data-open="privacy"]').forEach(btn => btn.addEventListener('click', () => {
+      opener = btn;
+      if (typeof sheet.showModal === 'function') sheet.showModal(); else sheet.setAttribute('open', '');
+    }));
+    $$('[data-close]', sheet).forEach(btn => btn.addEventListener('click', () => sheet.close ? sheet.close() : sheet.removeAttribute('open')));
+    sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); });
+    sheet.addEventListener('close', () => { if (opener) opener.focus({ preventScroll: true }); });
+  }
 
   /* ---------- Mobile call-to-action dock ---------- */
-  if (dock && hasIO) {
-    const heroCta = $('.hero .cta-row');
-    const blockers = [$('#care-finder'), $('#eligibility'), $('#join'), $('.footer')].filter(Boolean);
+  const heroCta = $('.hero .cta-row');
+  if (dock && hasIO && heroCta) {
+    const blockers = [$('#care-finder'), $('#eligibility'), $('#join'), $('.page-cta'), $('.footer')].filter(Boolean);
     const blocking = new Set();
     let pastHero = false;
     let typing = false;

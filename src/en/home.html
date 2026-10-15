@@ -1,41 +1,3 @@
-<a class="skip" href="#main">Skip to content</a>
-
-<header class="site-header" id="site-header">
-  <div class="wrap bar">
-    <a class="brand" href="#top" aria-label="Jachi Health home">
-      {{MARK:m-head:full}}
-      <span class="brand__word" aria-hidden="true"><b>Jachi</b> <span>Health</span></span>
-    </a>
-    <nav class="nav" aria-label="Main">
-      <a href="#services">Services</a>
-      <a href="#how">How it works</a>
-      <a href="#approach">Our approach</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a class="btn btn--sm header-cta" href="#join">Get early access</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
-      <span class="line" aria-hidden="true"></span><span class="line" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
-    </button>
-  </div>
-</header>
-
-<div class="mobile-menu" id="mobile-menu">
-  <nav aria-label="Menu">
-    <ul>
-      <li><a href="#services" style="--i:0">Services and pricing {{I:arrow}}</a></li>
-      <li><a href="#care-finder" style="--i:1">Care finder {{I:arrow}}</a></li>
-      <li><a href="#how" style="--i:2">How it works {{I:arrow}}</a></li>
-      <li><a href="#approach" style="--i:3">Our approach {{I:arrow}}</a></li>
-      <li><a href="#eligibility" style="--i:4">Weight care check {{I:arrow}}</a></li>
-      <li><a href="#faq" style="--i:5">FAQ {{I:arrow}}</a></li>
-    </ul>
-  </nav>
-  <div class="mobile-menu__foot">
-    <a class="btn btn--block btn--lg" href="#join">Get early access {{I:arrow:i--arrow}}</a>
-    <p class="fine">Launching in Texas first.</p>
-  </div>
-</div>
-
 <main id="main">
 
   <!-- Hero -->
@@ -677,6 +639,7 @@
         <form class="form" id="join-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
           <h3 class="form__title" id="join-form-title" tabindex="-1">Get early access</h3>
           <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <input type="hidden" name="language" value="en">
           <div class="form__row">
             <div class="field">
               <label class="label" for="join-name">First name</label>
@@ -718,159 +681,16 @@
           <span class="success__icon" aria-hidden="true">{{I:check}}</span>
           <h3 id="join-success-title" tabindex="-1">You're on the list<span id="join-success-name"></span>.</h3>
           <p>We'll email <strong id="join-success-email"></strong> when Jachi opens in <strong id="join-success-state"></strong>.</p>
-          <button class="btn btn--ghost" type="button" id="join-again">Add another email</button>
+          <div class="share">
+            <p class="share__lead">Know someone who'd want this? Send them Jachi.</p>
+            <div class="share__actions">
+              <button class="btn" type="button" id="join-share" data-share-url="{{SHARE_URL}}">{{I:share}}<span class="btn__label">Share Jachi</span></button>
+              <button class="btn btn--ghost" type="button" id="join-again">Add another email</button>
+            </div>
+            <p class="share__status" id="join-share-status" role="status"></p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </main>
-
-<footer class="footer on-dark">
-  <div class="wrap">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <a class="brand brand--light" href="#top" aria-label="Jachi Health home">
-          {{MARK:m-foot:full}}
-          <span class="brand__word" aria-hidden="true"><b>Jachi</b> <span>Health</span></span>
-        </a>
-        <p class="footer__tag">Online care, rooted in real medicine.</p>
-        <a class="footer__mail" href="mailto:{{EMAIL}}">{{I:mail}}{{EMAIL}}</a>
-        <a class="btn btn--light btn--sm" href="#join">Get early access {{I:arrow:i--arrow}}</a>
-      </div>
-      <nav class="footer__col" aria-label="Care">
-        <h2 class="footer__h">Care</h2>
-        <ul>{{FOOTER_CARE}}<li><a href="#care-finder">Care finder</a></li></ul>
-      </nav>
-      <nav class="footer__col" aria-label="Company">
-        <h2 class="footer__h">Company</h2>
-        <ul>
-          <li><a href="#how">How it works</a></li>
-          <li><a href="#approach">Our approach</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#join">Early access</a></li>
-          <li><button class="linkish" type="button" data-chat-open aria-controls="chat">Help chat</button></li>
-        </ul>
-      </nav>
-      <nav class="footer__col" aria-label="Legal">
-        <h2 class="footer__h">Legal</h2>
-        <ul>
-          <li><button class="linkish" type="button" data-open="privacy">Privacy notice</button></li>
-          <li><a href="#ai-disclosure">AI disclosure</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="footer__legal">
-      <p class="emergency">{{I:alert}}<span>Jachi Health is not for emergencies. If you think you're having a medical emergency, call 911. If you're in crisis or thinking about suicide, call or text 988.</span></p>
-      <p>Jachi Health provides technology and administrative services. Medical and mental health care is provided by independent, licensed clinicians and therapists. Our care assistant is an AI tool. It doesn't diagnose, prescribe, provide therapy or replace your clinician. Jachi is for adults 18 and older, and we don't prescribe controlled substances.</p>
-      <p>© 2026 Jachi Health. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
-
-<div class="dock" id="dock">
-  <a class="btn btn--lg" href="#care-finder">Find the right care {{I:arrow:i--arrow}}</a>
-  <button class="dock__chat" type="button" data-chat-open aria-controls="chat" aria-label="Open help chat">{{I:chat}}</button>
-</div>
-
-<button class="chat-launcher" id="chat-launcher" type="button" data-chat-open aria-controls="chat" aria-expanded="false">
-  <span class="chat-launcher__ic">{{I:chat}}</span><span class="chat-launcher__label">Help</span>
-</button>
-
-<section class="chat" id="chat" role="dialog" aria-labelledby="chat-title" aria-describedby="chat-sub" hidden>
-  <header class="chat__head">
-    <span class="chat__avatar" aria-hidden="true">{{MARK:m-chat:solid}}</span>
-    <div class="chat__who">
-      <h2 class="chat__title" id="chat-title" tabindex="-1">Jachi Help</h2>
-      <p class="chat__sub" id="chat-sub"><span class="ai-tag">AI</span>Assistant · No live agents yet</p>
-    </div>
-    <button class="chat__close" type="button" id="chat-close" aria-label="Close help chat">{{I:x}}</button>
-  </header>
-
-  <div class="chat__talk" id="chat-talk">
-    <div class="chat__log" id="chat-log" role="log" aria-live="polite" aria-label="Conversation" tabindex="0">
-      <div class="msg msg--bot">Hi! I'm Jachi's AI assistant. I can answer questions about our services, prices and how Jachi works. I can't give medical advice, so please don't share personal health details here.</div>
-    </div>
-    <div class="chat__quick" id="chat-quick">
-      <button type="button" data-ask="What can Jachi help with?">What can you help with?</button>
-      <button type="button" data-ask="How much does it cost?">Prices</button>
-      <button type="button" data-ask="When and where are you launching?">When do you launch?</button>
-      <button type="button" data-ask="Do I need insurance?">Insurance</button>
-      <button type="button" data-ticket>Submit a ticket</button>
-    </div>
-    <form class="chat__composer" id="chat-form" novalidate>
-      <label class="visually-hidden" for="chat-input">Message Jachi's AI assistant</label>
-      <textarea class="chat__input" id="chat-input" rows="1" maxlength="800" placeholder="Ask a question" enterkeyhint="send"></textarea>
-      <button class="chat__send" type="submit" id="chat-send" aria-label="Send message" disabled>{{I:send}}</button>
-    </form>
-    <p class="chat__fine">AI can make mistakes and isn't medical advice. <button class="linkish" type="button" data-ticket>Submit a ticket</button> to reach our team.</p>
-  </div>
-
-  <div class="chat__ticket" id="chat-ticket" hidden>
-    <form class="ticket" id="ticket-form" name="support-ticket" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-      <button class="chat__back" type="button" id="ticket-back">{{I:arrow-left}} Back to chat</button>
-      <h3 class="ticket__title" id="ticket-title" tabindex="-1">Submit a ticket</h3>
-      <p class="ticket__lead">Live agents aren't available yet. Send a ticket and our team will reply by email.</p>
-      <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-      <div class="field">
-        <label class="label" for="ticket-name">Name</label>
-        <input class="input" id="ticket-name" name="name" type="text" autocomplete="name" maxlength="80" data-field="tname" aria-describedby="err-tname">
-        <p class="err" id="err-tname" hidden>{{I:alert}}<span></span></p>
-      </div>
-      <div class="field">
-        <label class="label" for="ticket-email">Email</label>
-        <input class="input" id="ticket-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" data-field="temail" aria-describedby="err-temail">
-        <p class="err" id="err-temail" hidden>{{I:alert}}<span></span></p>
-      </div>
-      <div class="field">
-        <label class="label" for="ticket-topic">Topic</label>
-        <select class="select" id="ticket-topic" name="topic">
-          <option>General question</option>
-          <option>Early access</option>
-          <option>Services and prices</option>
-          <option>Website problem</option>
-          <option>Partnerships or press</option>
-          <option>Something else</option>
-        </select>
-      </div>
-      <div class="field">
-        <label class="label" for="ticket-message">Message<span class="label__hint">Please don't include health details.</span></label>
-        <textarea class="input ticket__msg" id="ticket-message" name="message" rows="4" maxlength="2000" data-field="tmsg" aria-describedby="err-tmsg"></textarea>
-        <p class="err" id="err-tmsg" hidden>{{I:alert}}<span></span></p>
-      </div>
-      <label class="consent" for="ticket-include" id="ticket-include-row">
-        <input type="checkbox" id="ticket-include" name="include_chat" value="yes">
-        <span>Include my chat with the AI assistant</span>
-      </label>
-      <input type="hidden" name="chat_transcript" id="ticket-transcript">
-      <button class="btn btn--block" type="submit" id="ticket-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Send ticket</span></button>
-      <div class="form-status" id="ticket-status" role="status"></div>
-    </form>
-    <div class="success ticket__done" id="ticket-success" hidden>
-      <span class="success__icon" aria-hidden="true">{{I:check}}</span>
-      <h3 id="ticket-success-title" tabindex="-1">Ticket sent.</h3>
-      <p>We'll reply to <strong id="ticket-success-email"></strong> by email.</p>
-      <button class="btn btn--ghost" type="button" id="ticket-done">Back to chat</button>
-    </div>
-  </div>
-</section>
-
-<dialog class="sheet" id="privacy" aria-labelledby="privacy-title">
-  <div class="sheet__inner">
-    <button class="sheet__close" type="button" data-close aria-label="Close privacy notice">{{I:x}}</button>
-    <p class="eyebrow">Privacy</p>
-    <h2 class="sheet__title" id="privacy-title">Privacy at a glance</h2>
-    <h3>The care finder, condition search and weight care check</h3>
-    <p>They run entirely in your browser. What you type or choose, including your height, weight and health details, is never sent to us or stored.</p>
-    <h3>Early access sign-ups</h3>
-    <p>If you join early access, we collect your first name, email, state and the services you're interested in. We use them only to email you about our launch. Sign-ups are stored with our website host.</p>
-    <h3>Help chat and support tickets</h3>
-    <p>Messages you send to our AI assistant pass through our website host, Netlify, to our AI provider, Anthropic, so it can write a reply. We don't save chats. If you send a ticket, we collect your name, email, topic, message and, if you choose, your chat, and use them only to answer you. Tickets are stored with our website host and sent to our support inbox.</p>
-    <h3>What we don't do</h3>
-    <p>We don't sell your information, and this site doesn't use advertising cookies or tracking.</p>
-    <h3>Your choices</h3>
-    <p>To leave the list or ask about your information, email <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>, reply to any email from us or use the unsubscribe link in it. Please don't send health details by email.</p>
-    <h3>Your medical information</h3>
-    <p>When you become a patient, your health information is protected under HIPAA and stored in the United States.</p>
-    <p class="fine">Last updated October 2026.</p>
-  </div>
-</dialog>

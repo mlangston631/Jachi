@@ -9,6 +9,7 @@ no functions, so form posts get a 501 and /api/chat a 404 (the browser tests sta
 Over plain http the HSTS header and the CSP's upgrade-insecure-requests are left out; on Netlify
 everything is https, where they do nothing to same-site requests.
 """
+import fnmatch
 import sys
 import threading
 import tomllib
@@ -20,11 +21,14 @@ ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
 
 
-def site_headers():
-    config = tomllib.loads((ROOT / "netlify.toml").read_text())
+RULES = tomllib.loads((ROOT / "netlify.toml").read_text()).get("headers", [])
+
+
+def headers_for(path):
+    """The headers netlify.toml gives this path (every matching rule applies, like on Netlify)."""
     headers = {}
-    for rule in config.get("headers", []):
-        if rule.get("for") == "/*":
+    for rule in RULES:
+        if fnmatch.fnmatch(path, rule.get("for", "")):
             headers.update(rule.get("values", {}))
     headers.pop("Strict-Transport-Security", None)
     if "Content-Security-Policy" in headers:
@@ -35,15 +39,15 @@ def site_headers():
 
 
 class Handler(SimpleHTTPRequestHandler):
-    extra_headers = {}
-
     def log_message(self, *args):
         pass
 
     def end_headers(self):
-        for k, v in self.extra_headers.items():
+        headers = headers_for(self.path.split("?")[0])
+        for k, v in headers.items():
             self.send_header(k, v)
-        self.send_header("Cache-Control", "no-store")
+        if "Cache-Control" not in headers:
+            self.send_header("Cache-Control", "no-store")
         super().end_headers()
 
     def send_error(self, code, message=None, explain=None):
@@ -68,8 +72,8 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_error(501, "No form backend or functions in the local server")
 
 
-Handler.extra_headers = site_headers()
-Handler.extensions_map = {**SimpleHTTPRequestHandler.extensions_map, ".mjs": "text/javascript", ".ico": "image/x-icon"}
+Handler.extensions_map = {**SimpleHTTPRequestHandler.extensions_map, ".mjs": "text/javascript", ".ico": "image/x-icon",
+                          ".woff2": "font/woff2"}
 
 
 def start(port=8765):
