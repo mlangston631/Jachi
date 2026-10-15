@@ -1,0 +1,93 @@
+› Installing 17 SDK 58.0.0 compatible native modules using npm
+> npm install
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: react-native-worklets@0.10.4
+npm warn Found: react-native@0.88.0
+npm warn node_modules/react-native
+npm warn   react-native@"0.88.0" from the root project
+npm warn   39 more (@expo/devtools, @expo/dom-webview, @expo/log-box, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react-native@"0.83 - 0.86" from react-native-worklets@0.10.4
+npm warn node_modules/expo/node_modules/react-native-worklets
+npm warn   peerOptional react-native-worklets@"^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0" from expo-modules-core@58.0.19
+npm warn   node_modules/expo/node_modules/expo-modules-core
+npm warn
+npm warn Conflicting peer dependency: react-native@0.86.3
+npm warn node_modules/react-native
+npm warn   peer react-native@"0.83 - 0.86" from react-native-worklets@0.10.4
+npm warn   node_modules/expo/node_modules/react-native-worklets
+npm warn     peerOptional react-native-worklets@"^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0" from expo-modules-core@58.0.19
+npm warn     node_modules/expo/node_modules/expo-modules-core
+
+added 44 packages, and audited 590 packages in 7s
+
+55 packages are looking for funding
+  run `npm fund` for details
+
+28 vulnerabilities (9 moderate, 19 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+› Added config plugins: expo-secure-store, expo-sqlite, expo-localization, expo-sharing, expo-build-properties
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: react-native-worklets@0.10.4
+npm warn Found: react-native@0.88.0
+npm warn node_modules/react-native
+npm warn   peerOptional react-native@"*" from @expo/devtools@58.0.2
+npm warn   node_modules/@expo/devtools
+npm warn     @expo/devtools@"~58.0.2" from expo@58.0.11
+npm warn   39 more (@expo/dom-webview, @expo/log-box, @expo/metro-runtime, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react-native@"0.83 - 0.86" from react-native-worklets@0.10.4
+npm warn node_modules/expo/node_modules/react-native-worklets
+npm warn   peerOptional react-native-worklets@"^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0" from expo-modules-core@58.0.19
+npm warn   node_modules/expo/node_modules/expo-modules-core
+npm warn
+npm warn Conflicting peer dependency: react-native@0.86.3
+npm warn node_modules/react-native
+npm warn   peer react-native@"0.83 - 0.86" from react-native-worklets@0.10.4
+npm warn   node_modules/expo/node_modules/react-native-worklets
+npm warn     peerOptional react-native-worklets@"^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0" from expo-modules-core@58.0.19
+npm warn     node_modules/expo/node_modules/expo-modules-core
+
+added 8 packages, and changed 1 package in 3s
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: react-native-worklets@0.10.4
+npm warn Found: react-native@0.88.0
+npm warn node_modules/react-native
+npm warn   peerOptional react-native@"*" from @expo/devtools@58.0.2
+npm warn   node_modules/@expo/devtools
+npm warn     @expo/devtools@"~58.0.2" from expo@58.0.11
+npm warn   41 more (@expo/dom-webview, @expo/log-box, @expo/metro-runtime, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react-native@"0.83 - 0.86" from react-native-worklets@0.10.4
+npm warn node_modules/expo/node_modules/react-native-worklets
+npm warn   peerOptional react-native-worklets@"^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0" from expo-modules-core@58.0.19
+npm warn   node_modules/expo/node_modules/expo-modules-core
+npm warn
+npm warn Conflicting peer dependency: react-native@0.86.3
+npm warn node_modules/react-native
+npm warn   peer react-native@"0.83 - 0.86" from react-native-worklets@0.10.4
+npm warn   node_modules/expo/node_modules/react-native-worklets
+npm warn     peerOptional react-native-worklets@"^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0" from expo-modules-core@58.0.19
+npm warn     node_modules/expo/node_modules/expo-modules-core
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+added 550 packages in 21s
