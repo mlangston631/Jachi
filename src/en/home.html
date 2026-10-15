@@ -8,14 +8,18 @@
         <h1 class="display" id="hero-title" data-rise style="--d:90ms">Online care, rooted in <em>real medicine.</em></h1>
         <p class="lead" data-rise style="--d:180ms">Licensed clinicians online for everything from colds and refills to therapy, sexual health and weight care. A care assistant checks in between visits, and you'll know what your care costs before you start.</p>
         <div class="cta-row" data-rise style="--d:270ms">
-          <a class="btn btn--lg" href="#care-finder">Find the right care {{I:arrow:i--arrow}}</a>
-          <a class="btn btn--ghost btn--lg" href="#services">See our services</a>
+          <a class="btn btn--lg" href="#join" data-to-join>Get early access {{I:arrow:i--arrow}}</a>
+          <a class="btn btn--ghost btn--lg" href="#care-finder">Find the right care</a>
         </div>
-        <ul class="trust" data-rise style="--d:360ms">
+        <ul class="trust" data-rise style="--d:330ms">
+          <li><span class="trust__ic">{{I:check}}</span>Free to join</li>
           <li><span class="trust__ic">{{I:check}}</span>Licensed clinicians</li>
           <li><span class="trust__ic">{{I:check}}</span>No insurance needed</li>
-          <li><span class="trust__ic">{{I:check}}</span>Online, on your schedule</li>
         </ul>
+        <nav class="picker" aria-labelledby="picker-label" data-rise style="--d:390ms">
+          <p class="picker__label" id="picker-label">Or go straight to</p>
+          <ul class="picker__list">{{PICKER}}</ul>
+        </nav>
       </div>
 
       <div class="hero__visual" data-rise style="--d:220ms">
@@ -118,11 +122,25 @@
         {{SERVICE_CARDS}}
       </div>
 
-      <ul class="svc-notes">
-        <li>{{I:info}}<span>Medication and lab tests are billed separately by your pharmacy and lab.</span></li>
-        <li>{{I:info}}<span>{{PRICING_NOTE}}</span></li>
-        <li>{{I:info}}<span>For adults 18 and older. No controlled substances, such as ADHD stimulants, Xanax, opioids or testosterone.</span></li>
-      </ul>
+      <div class="included" id="included">
+        <div class="included__col">
+          <h3 class="included__title"><span class="included__ic">{{I:check}}</span>What's included</h3>
+          <ul>
+            <li>Your visit or session with a licensed clinician or therapist</li>
+            <li>Your treatment plan, with any prescription sent to the pharmacy you choose</li>
+            <li>With ongoing care, like anxiety and depression or weight care: regular check-ins and dose adjustments</li>
+          </ul>
+        </div>
+        <div class="included__col">
+          <h3 class="included__title"><span class="included__ic included__ic--extra">{{I:plus}}</span>Billed separately</h3>
+          <ul>
+            <li>Medication, by your pharmacy</li>
+            <li>Lab tests, by the lab</li>
+            <li>Any care you get in person, like an exam or a shot, by the clinic that provides it</li>
+          </ul>
+        </div>
+        <p class="included__note">{{I:info}}<span>{{PRICING_NOTE}} For adults 18 and older. No controlled substances, such as ADHD stimulants, Xanax, opioids or testosterone.</span></p>
+      </div>
     </div>
   </section>
 
@@ -259,6 +277,62 @@
         </div>
 
         <p class="tool__privacy">{{I:lock}}<span>For information only, not medical advice. Your answers stay in your browser and aren't saved or sent.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinical standards -->
+  <section class="section section--dark standards-band on-dark" id="standards" aria-labelledby="standards-title">
+    {{MARK:m-art2:outline:standards__art}}
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--light">Clinical standards</p>
+        <h2 class="h2 h2--light" id="standards-title">Who provides <em>your care.</em></h2>
+        <p class="lead lead--light">Your care comes from licensed clinicians who practice through independent medical groups. Jachi Health provides the technology and administrative services.</p>
+      </div>
+      <ul class="standards">
+        <li class="standard" data-reveal>
+          <span class="standard__ic">{{I:steth}}</span>
+          <h3>Licensed in your state</h3>
+          <p>Physicians, nurse practitioners and physician assistants provide medical care, and licensed therapists provide therapy. Each one is licensed in the state where you live.</p>
+        </li>
+        <li class="standard" data-reveal style="--d:80ms">
+          <span class="standard__ic">{{I:shield}}</span>
+          <h3>Physician oversight</h3>
+          <p>Nurse practitioners and physician assistants work with a supervising physician, as Texas law requires.</p>
+        </li>
+        <li class="standard" data-reveal style="--d:160ms">
+          <span class="standard__ic">{{I:user}}</span>
+          <h3>A clinician makes every decision</h3>
+          <p>Only a licensed clinician diagnoses, prescribes or changes your treatment. Our AI assistant never does.</p>
+        </li>
+        <li class="standard" data-reveal>
+          <span class="standard__ic">{{I:pill}}</span>
+          <h3>Careful prescribing</h3>
+          <p>FDA-approved medications, only when they're right for you. We don't prescribe controlled substances.</p>
+        </li>
+        <li class="standard" data-reveal style="--d:80ms">
+          <span class="standard__ic">{{I:alert}}</span>
+          <h3>Safety comes first</h3>
+          <p>If online care isn't right for you, your clinician will tell you where to go in person. For an emergency, call 911. In a crisis, call or text 988.</p>
+        </li>
+        <li class="standard" data-reveal style="--d:160ms">
+          <span class="standard__ic">{{I:lock}}</span>
+          <h3>Your privacy</h3>
+          <p>When you become a patient, your health information is protected under HIPAA. This site doesn't use ads or tracking.</p>
+        </li>
+      </ul>
+      <div class="verify">
+        <div class="verify__text">
+          <h3>Check a license yourself</h3>
+          <p>Licenses are public in Texas. You can look up any physician, physician assistant, nurse practitioner or therapist with the state board that licenses them.</p>
+        </div>
+        <ul class="verify__links">
+          <li><a href="https://www.tmb.texas.gov/resources/for-the-public/look-up-a-license" rel="noopener noreferrer"><span><b>Texas Medical Board</b><small>Physicians and physician assistants</small></span>{{I:arrow}}</a></li>
+          <li><a href="https://www.bon.texas.gov/" rel="noopener noreferrer"><span><b>Texas Board of Nursing</b><small>Nurse practitioners</small></span>{{I:arrow}}</a></li>
+          <li><a href="https://bhec.texas.gov/verify-a-license/" rel="noopener noreferrer"><span><b>Behavioral Health Executive Council</b><small>Counselors, therapists, social workers and psychologists</small></span>{{I:arrow}}</a></li>
+          <li><a href="/texas-medical-board/"><span><b>How to file a complaint</b><small>Texas Medical Board notice</small></span>{{I:arrow}}</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -640,39 +714,30 @@
           <input type="hidden" name="language" value="en">
           <div class="form__row">
             <div class="field">
-              <label class="label" for="join-name">First name</label>
-              <input class="input" id="join-name" name="first_name" type="text" autocomplete="given-name" maxlength="60" required data-field="name" aria-describedby="err-name">
-              <p class="err" id="err-name" hidden>{{I:alert}}<span></span></p>
-            </div>
-            <div class="field">
               <label class="label" for="join-email">Email</label>
               <input class="input" id="join-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required data-field="email" aria-describedby="err-email">
               <p class="err" id="err-email" hidden>{{I:alert}}<span></span></p>
             </div>
+            <div class="field">
+              <label class="label" for="join-state">State</label>
+              <select class="select" id="join-state" name="state" autocomplete="address-level1" required data-field="jstate" aria-describedby="err-jstate">
+                <option value="">Select your state</option>
+                {{STATE_OPTIONS}}
+              </select>
+              <p class="err" id="err-jstate" hidden>{{I:alert}}<span></span></p>
+            </div>
           </div>
           <div class="field">
-            <label class="label" for="join-state">State</label>
-            <select class="select" id="join-state" name="state" autocomplete="address-level1" required data-field="jstate" aria-describedby="err-jstate">
-              <option value="">Select your state</option>
-              {{STATE_OPTIONS}}
-            </select>
-            <p class="err" id="err-jstate" hidden>{{I:alert}}<span></span></p>
+            <label class="label" for="join-name">First name <span class="label__opt">(optional)</span></label>
+            <input class="input" id="join-name" name="first_name" type="text" autocomplete="given-name" maxlength="60">
           </div>
-          <fieldset class="fs" data-field="interest" aria-describedby="err-interest">
-            <legend class="label">I'm interested in<span class="label__hint">Select all that apply.</span></legend>
+          <fieldset class="fs">
+            <legend class="label">I'm interested in <span class="label__opt">(optional)</span></legend>
             <div class="checks checks--chips">{{JOIN_INTERESTS}}</div>
-            <p class="err" id="err-interest" hidden>{{I:alert}}<span></span></p>
           </fieldset>
-          <div class="field">
-            <label class="consent" for="join-consent">
-              <input type="checkbox" id="join-consent" name="consent" value="yes" required data-field="consent" aria-describedby="err-consent">
-              <span>Email me about Jachi Health's launch. I can unsubscribe at any time.</span>
-            </label>
-            <p class="err" id="err-consent" hidden>{{I:alert}}<span></span></p>
-          </div>
           <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Get early access</span></button>
           <div class="form-status" id="join-status" role="status"></div>
-          <p class="fine">We'll never sell your information. Read our <button class="linkish" type="button" data-open="privacy">privacy notice</button>.</p>
+          <p class="fine">By joining, you agree to get emails about our launch. Unsubscribe anytime. We'll never sell your information. Read our <button class="linkish" type="button" data-open="privacy">privacy notice</button>.</p>
         </form>
 
         <div class="success" id="join-success" hidden>
@@ -686,6 +751,10 @@
               <button class="btn btn--ghost" type="button" id="join-again">Add another email</button>
             </div>
             <p class="share__status" id="join-share-status" role="status"></p>
+          </div>
+          <div class="account-offer" id="join-account" hidden>
+            <p><strong>Want to change your details later?</strong> Create a free account to update your state and services, turn emails off or delete your details, anytime.</p>
+            <a class="btn btn--ghost" href="/account/?create" id="join-account-link">{{I:user}}<span>Create an account</span></a>
           </div>
         </div>
       </div>

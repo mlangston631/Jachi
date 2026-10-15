@@ -1,0 +1,48 @@
+/* The account page (/account/ and /es/account/). Uses the site's form, button and status styles. */
+.acct{min-height:100vh;min-height:100svh;padding-top:calc(var(--header-h) + env(safe-area-inset-top,0px) + clamp(28px,5vw,64px));padding-bottom:clamp(64px,8vw,112px);background:radial-gradient(60% 45% at 100% 0%,rgba(155,193,163,.32),rgba(155,193,163,0) 70%),radial-gradient(50% 40% at 0% 100%,rgba(207,227,212,.6),rgba(207,227,212,0) 70%),var(--mist)}
+.acct__grid{display:grid;gap:clamp(28px,4vw,56px);align-items:start}
+@media (min-width:960px){.acct__grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.acct__intro{position:sticky;top:calc(var(--header-h) + 40px)}}
+.acct__intro{display:grid;gap:18px;justify-items:start;min-width:0}
+.acct__intro .lead{max-width:30em}
+.acct__facts{display:grid;gap:10px;margin:4px 0 0;padding:0;list-style:none}
+.acct__facts li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:center;font-weight:500;color:var(--text-2)}
+.acct__facts .i{width:24px;height:24px;padding:4px;border-radius:50%;background:var(--sage-100);color:var(--forest);stroke-width:2.2}
+.acct__card{min-width:0;padding:clamp(22px,3.6vw,40px);border-radius:var(--r-xl);background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.acct__view{display:grid;gap:18px;justify-items:start;min-width:0;animation:stepIn .4s var(--ease)}
+.acct__view > form,.acct__view > .tabs,.acct__view > .tabpanel,.acct__view > .form-status,.acct__view > .acct__block,.acct__view > .acct__head{width:100%}
+.acct__title{font-size:clamp(1.5rem,1.3rem + .8vw,1.9rem);line-height:1.15;color:var(--forest-ink)}
+.acct__title:focus{outline:none}
+.acct__view p{color:var(--text-2)}
+.acct__loading{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:140px;font-weight:500}
+.acct__noscript{width:100%;padding:14px 16px;border-radius:14px;background:var(--warn-bg);color:var(--warn)}
+.spinner--dark{display:inline-block;border-color:rgba(30,74,59,.18);border-top-color:var(--forest)}
+.tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:4px;border-radius:999px;background:var(--mist);border:1px solid var(--line)}
+.tabs:has(.tab[hidden]){grid-template-columns:minmax(0,1fr)}
+.tab{min-height:46px;padding:0 12px;border:0;border-radius:999px;background:none;font:600 .97rem/1.1 var(--font-body);color:var(--text-2);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s ease,color .2s ease,box-shadow .2s ease}
+.tab:hover{color:var(--forest)}
+.tab[aria-selected="true"]{background:#fff;color:var(--forest-ink);box-shadow:var(--shadow-sm)}
+.tabpanel{min-width:0}
+.pw{position:relative}
+.pw .input{padding-right:58px}
+.pw__toggle{position:absolute;right:5px;top:50%;display:grid;place-items:center;width:44px;height:44px;translate:0 -50%;border:0;border-radius:12px;background:none;color:var(--forest);cursor:pointer}
+.pw__toggle:hover{background:var(--mist)}
+.pw__toggle .i{width:20px;height:20px}
+.acct__alt{width:100%;text-align:center;font-size:.95rem}
+.acct__note{text-align:center}
+.acct__note a{color:var(--forest);font-weight:600;text-underline-offset:3px}
+.acct__head{display:grid;gap:4px}
+.acct__who{font-size:.95rem;color:var(--text-3);overflow-wrap:anywhere}
+.acct__block{display:grid;gap:12px;justify-items:start;padding-top:20px;border-top:1px solid var(--line)}
+.acct__block h3{font-family:var(--font-body);font-size:1.02rem;font-weight:600;letter-spacing:normal;color:var(--text)}
+.acct__block > form,.acct__block > .confirm,.acct__block > .form-status{width:100%}
+.acct__block .form-status:empty{margin-top:-12px}
+.acct__actions{display:flex;flex-wrap:wrap;gap:10px}
+.consent__hint{display:block;margin-top:2px;font-size:.88rem;color:var(--text-3)}
+.form-status.is-ok{background:var(--sage-100);color:var(--forest-ink)}
+.btn--warn{--fg:var(--danger);--bd:rgba(179,38,30,.35)}
+@media (hover:hover){.btn--warn:hover{background:var(--danger-bg);border-color:var(--danger)}}
+.confirm{display:grid;gap:12px;padding:16px;border-radius:16px;background:#FFF7F5;border:1px solid rgba(179,38,30,.2)}
+.confirm p{color:var(--text);font-weight:500}
+.confirm p:focus{outline:none}
+.confirm__actions{display:flex;flex-wrap:wrap;gap:10px}
+.confirm .form-status:empty{margin-top:-12px}

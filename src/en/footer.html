@@ -8,7 +8,7 @@
         </a>
         <p class="footer__tag">Online care, rooted in real medicine.</p>
         <a class="footer__mail" href="mailto:{{EMAIL}}">{{I:mail}}{{EMAIL}}</a>
-        <a class="btn btn--light btn--sm" href="{{JOIN_HREF}}">Get early access {{I:arrow:i--arrow}}</a>
+        <a class="btn btn--light btn--sm" href="{{JOIN_HREF}}" data-to-join>Get early access {{I:arrow:i--arrow}}</a>
       </div>
       <nav class="footer__col" aria-label="Care">
         <h2 class="footer__h">Care</h2>
@@ -17,12 +17,14 @@
       <nav class="footer__col" aria-label="Company">
         <h2 class="footer__h">Company</h2>
         <ul>
+          <li><a href="{{HOME}}#standards">Clinical standards</a></li>
           <li><a href="{{HOME}}#how">How it works</a></li>
           <li><a href="{{HOME}}#approach">Our approach</a></li>
           <li><a href="{{HOME}}#faq">FAQ</a></li>
           <li><a href="{{JOIN_HREF}}">Early access</a></li>
+          <li><a href="/account/">Log in</a></li>
           <li><button class="linkish" type="button" data-chat-open aria-controls="chat">Help chat</button></li>
-          <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+          <li><a href="{{ALT_HREF}}" hreflang="es" lang="es">Español</a></li>
         </ul>
       </nav>
       <nav class="footer__col" aria-label="Legal">

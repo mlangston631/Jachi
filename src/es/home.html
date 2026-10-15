@@ -8,14 +8,18 @@
         <h1 class="display" id="hero-title" data-rise style="--d:90ms">Atención en línea, arraigada en la <em>medicina real.</em></h1>
         <p class="lead" data-rise style="--d:180ms">Profesionales de la salud con licencia, en línea, para todo: desde resfriados y resurtidos hasta terapia, salud sexual y control de peso. Un asistente de cuidado le da seguimiento entre consultas, y sabrá cuánto cuesta su atención antes de empezar.</p>
         <div class="cta-row" data-rise style="--d:270ms">
-          <a class="btn btn--lg" href="#care-finder">Encuentre la atención adecuada {{I:arrow:i--arrow}}</a>
-          <a class="btn btn--ghost btn--lg" href="#services">Ver nuestros servicios</a>
+          <a class="btn btn--lg" href="#join" data-to-join>Reciba acceso anticipado {{I:arrow:i--arrow}}</a>
+          <a class="btn btn--ghost btn--lg" href="#care-finder">Encuentre la atención adecuada</a>
         </div>
-        <ul class="trust" data-rise style="--d:360ms">
+        <ul class="trust" data-rise style="--d:330ms">
+          <li><span class="trust__ic">{{I:check}}</span>Unirse es gratis</li>
           <li><span class="trust__ic">{{I:check}}</span>Profesionales con licencia</li>
           <li><span class="trust__ic">{{I:check}}</span>Sin seguro médico</li>
-          <li><span class="trust__ic">{{I:check}}</span>En línea, a su ritmo</li>
         </ul>
+        <nav class="picker" aria-labelledby="picker-label" data-rise style="--d:390ms">
+          <p class="picker__label" id="picker-label">O vaya directo a</p>
+          <ul class="picker__list">{{PICKER}}</ul>
+        </nav>
       </div>
 
       <div class="hero__visual" data-rise style="--d:220ms">
@@ -118,11 +122,25 @@
         {{SERVICE_CARDS}}
       </div>
 
-      <ul class="svc-notes">
-        <li>{{I:info}}<span>Los medicamentos y los análisis de laboratorio los cobran por separado su farmacia y el laboratorio.</span></li>
-        <li>{{I:info}}<span>{{PRICING_NOTE}}</span></li>
-        <li>{{I:info}}<span>Para adultos de 18 años o más. No recetamos sustancias controladas, como estimulantes para el TDAH, Xanax, opioides o testosterona.</span></li>
-      </ul>
+      <div class="included" id="included">
+        <div class="included__col">
+          <h3 class="included__title"><span class="included__ic">{{I:check}}</span>Qué incluye</h3>
+          <ul>
+            <li>Su consulta o sesión con un profesional de la salud o terapeuta con licencia</li>
+            <li>Su plan de tratamiento, con cualquier receta enviada a la farmacia que usted elija</li>
+            <li>Con la atención continua, como la de ansiedad y depresión o la de control de peso: seguimiento regular y ajustes de dosis</li>
+          </ul>
+        </div>
+        <div class="included__col">
+          <h3 class="included__title"><span class="included__ic included__ic--extra">{{I:plus}}</span>Se cobra por separado</h3>
+          <ul>
+            <li>Los medicamentos, que cobra su farmacia</li>
+            <li>Los análisis de laboratorio, que cobra el laboratorio</li>
+            <li>La atención que reciba en persona, como un examen o una inyección, que cobra la clínica que la brinde</li>
+          </ul>
+        </div>
+        <p class="included__note">{{I:info}}<span>{{PRICING_NOTE}} Para adultos de 18 años o más. No recetamos sustancias controladas, como estimulantes para el TDAH, Xanax, opioides o testosterona.</span></p>
+      </div>
     </div>
   </section>
 
@@ -259,6 +277,62 @@
         </div>
 
         <p class="tool__privacy">{{I:lock}}<span>Solo para información, no es consejo médico. Sus respuestas se quedan en su navegador y no se guardan ni se envían.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinical standards -->
+  <section class="section section--dark standards-band on-dark" id="standards" aria-labelledby="standards-title">
+    {{MARK:m-art2:outline:standards__art}}
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--light">Normas clínicas</p>
+        <h2 class="h2 h2--light" id="standards-title">Quiénes le brindan <em>su atención.</em></h2>
+        <p class="lead lead--light">Su atención la brindan profesionales de la salud con licencia que ejercen a través de grupos médicos independientes. Jachi Health ofrece los servicios tecnológicos y administrativos.</p>
+      </div>
+      <ul class="standards">
+        <li class="standard" data-reveal>
+          <span class="standard__ic">{{I:steth}}</span>
+          <h3>Con licencia en su estado</h3>
+          <p>Médicos, enfermeros practicantes y asistentes médicos brindan la atención médica, y terapeutas con licencia brindan la terapia. Cada uno tiene licencia en el estado donde usted vive.</p>
+        </li>
+        <li class="standard" data-reveal style="--d:80ms">
+          <span class="standard__ic">{{I:shield}}</span>
+          <h3>Supervisión médica</h3>
+          <p>Los enfermeros practicantes y los asistentes médicos trabajan con un médico supervisor, como lo exige la ley de Texas.</p>
+        </li>
+        <li class="standard" data-reveal style="--d:160ms">
+          <span class="standard__ic">{{I:user}}</span>
+          <h3>Un profesional de la salud toma cada decisión</h3>
+          <p>Solo un profesional de la salud con licencia diagnostica, receta o cambia su tratamiento. Nuestro asistente de IA nunca lo hace.</p>
+        </li>
+        <li class="standard" data-reveal>
+          <span class="standard__ic">{{I:pill}}</span>
+          <h3>Recetas con cuidado</h3>
+          <p>Medicamentos aprobados por la FDA, solo cuando son adecuados para usted. No recetamos sustancias controladas.</p>
+        </li>
+        <li class="standard" data-reveal style="--d:80ms">
+          <span class="standard__ic">{{I:alert}}</span>
+          <h3>La seguridad es primero</h3>
+          <p>Si la atención en línea no es adecuada para usted, su profesional de la salud le dirá adónde ir en persona. En una emergencia, llame al 911. En una crisis, llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988.</p>
+        </li>
+        <li class="standard" data-reveal style="--d:160ms">
+          <span class="standard__ic">{{I:lock}}</span>
+          <h3>Su privacidad</h3>
+          <p>Cuando sea paciente, su información de salud estará protegida por la ley HIPAA. Este sitio no usa anuncios ni rastreo.</p>
+        </li>
+      </ul>
+      <div class="verify">
+        <div class="verify__text">
+          <h3>Verifique una licencia usted mismo</h3>
+          <p>En Texas, las licencias son públicas. Puede buscar a cualquier médico, asistente médico, enfermero practicante o terapeuta en la junta estatal que le otorga la licencia.</p>
+        </div>
+        <ul class="verify__links">
+          <li><a href="https://www.tmb.texas.gov/resources/for-the-public/look-up-a-license" rel="noopener noreferrer"><span><b>Junta Médica de Texas</b><small>Médicos y asistentes médicos (en inglés)</small></span>{{I:arrow}}</a></li>
+          <li><a href="https://www.bon.texas.gov/" rel="noopener noreferrer"><span><b>Junta de Enfermería de Texas</b><small>Enfermeros practicantes (en inglés)</small></span>{{I:arrow}}</a></li>
+          <li><a href="https://bhec.texas.gov/verify-a-license/" rel="noopener noreferrer"><span><b>Consejo Ejecutivo de Salud Conductual</b><small>Consejeros, terapeutas, trabajadores sociales y psicólogos (en inglés)</small></span>{{I:arrow}}</a></li>
+          <li><a href="/texas-medical-board/" hreflang="en"><span><b>Cómo presentar una queja</b><small>Aviso de la Junta Médica de Texas (en inglés)</small></span>{{I:arrow}}</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -640,39 +714,30 @@
           <input type="hidden" name="language" value="es">
           <div class="form__row">
             <div class="field">
-              <label class="label" for="join-name">Nombre</label>
-              <input class="input" id="join-name" name="first_name" type="text" autocomplete="given-name" maxlength="60" required data-field="name" aria-describedby="err-name">
-              <p class="err" id="err-name" hidden>{{I:alert}}<span></span></p>
-            </div>
-            <div class="field">
               <label class="label" for="join-email">Correo electrónico</label>
               <input class="input" id="join-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required data-field="email" aria-describedby="err-email">
               <p class="err" id="err-email" hidden>{{I:alert}}<span></span></p>
             </div>
+            <div class="field">
+              <label class="label" for="join-state">Estado</label>
+              <select class="select" id="join-state" name="state" autocomplete="address-level1" required data-field="jstate" aria-describedby="err-jstate">
+                <option value="">Elija su estado</option>
+                {{STATE_OPTIONS}}
+              </select>
+              <p class="err" id="err-jstate" hidden>{{I:alert}}<span></span></p>
+            </div>
           </div>
           <div class="field">
-            <label class="label" for="join-state">Estado</label>
-            <select class="select" id="join-state" name="state" autocomplete="address-level1" required data-field="jstate" aria-describedby="err-jstate">
-              <option value="">Elija su estado</option>
-              {{STATE_OPTIONS}}
-            </select>
-            <p class="err" id="err-jstate" hidden>{{I:alert}}<span></span></p>
+            <label class="label" for="join-name">Nombre <span class="label__opt">(opcional)</span></label>
+            <input class="input" id="join-name" name="first_name" type="text" autocomplete="given-name" maxlength="60">
           </div>
-          <fieldset class="fs" data-field="interest" aria-describedby="err-interest">
-            <legend class="label">Me interesa<span class="label__hint">Marque todas las que correspondan.</span></legend>
+          <fieldset class="fs">
+            <legend class="label">Me interesa <span class="label__opt">(opcional)</span></legend>
             <div class="checks checks--chips">{{JOIN_INTERESTS}}</div>
-            <p class="err" id="err-interest" hidden>{{I:alert}}<span></span></p>
           </fieldset>
-          <div class="field">
-            <label class="consent" for="join-consent">
-              <input type="checkbox" id="join-consent" name="consent" value="yes" required data-field="consent" aria-describedby="err-consent">
-              <span>Envíenme correos sobre la apertura de Jachi Health. Puedo cancelar la suscripción cuando quiera.</span>
-            </label>
-            <p class="err" id="err-consent" hidden>{{I:alert}}<span></span></p>
-          </div>
           <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Reciba acceso anticipado</span></button>
           <div class="form-status" id="join-status" role="status"></div>
-          <p class="fine">Nunca venderemos su información. Lea nuestro <button class="linkish" type="button" data-open="privacy">aviso de privacidad</button>.</p>
+          <p class="fine">Al unirse, acepta recibir correos sobre nuestra apertura. Puede cancelar la suscripción cuando quiera. Nunca venderemos su información. Lea nuestro <button class="linkish" type="button" data-open="privacy">aviso de privacidad</button>.</p>
         </form>
 
         <div class="success" id="join-success" hidden>
@@ -686,6 +751,10 @@
               <button class="btn btn--ghost" type="button" id="join-again">Agregar otro correo</button>
             </div>
             <p class="share__status" id="join-share-status" role="status"></p>
+          </div>
+          <div class="account-offer" id="join-account" hidden>
+            <p><strong>¿Quiere cambiar sus datos más adelante?</strong> Cree una cuenta gratuita para actualizar su estado y sus servicios, dejar de recibir correos o borrar sus datos cuando quiera.</p>
+            <a class="btn btn--ghost" href="/es/account/?create" id="join-account-link">{{I:user}}<span>Crear una cuenta</span></a>
           </div>
         </div>
       </div>

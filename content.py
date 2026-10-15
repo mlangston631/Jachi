@@ -43,6 +43,18 @@ SERVICES = [
 ]
 BY_KEY = {s["key"]: s for s in SERVICES}
 
+# The home page's quick picker under the main buttons: (label, service key, service page)
+PICKER = [
+    ("UTI", "urgent", "uti-treatment"),
+    ("Cold & flu", "urgent", "urgent-care"),
+    ("Refills", "refill", "prescription-refills"),
+    ("Therapy", "therapy", "online-therapy"),
+    ("Anxiety", "mental", "anxiety-depression-treatment"),
+    ("Birth control", "womens", "womens-health"),
+    ("ED", "mens", "mens-health"),
+    ("Weight loss", "weight", "weight-loss"),
+]
+
 # Care finder, step 1
 FINDER = [
     ("urgent", "thermo", "I'm sick or hurt", "Colds, flu, infections, rashes"),

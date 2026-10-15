@@ -8,9 +8,18 @@
   const EMAIL = /*EMAIL_JSON*/;
   const T = /*STRINGS_JSON*/;
   const fmt = (text, values = {}) => text.replace(/\{(\w+)\}/g, (m, k) => (k in values ? String(values[k]) : m));
-  const icon =(name, cls = '') => `<svg class="i${cls ? ` ${cls}` : ''}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name] || ''}</svg>`;
+  // Account emails link to the home page with a token after the #. Send the visitor to the account page,
+  // which finishes the job (confirming the email, setting a new password or accepting an invite).
+  const AUTH_LINK = /^#(confirmation|recovery|invite|email_change)_token=/;
+  if (AUTH_LINK.test(window.location.hash) && !document.querySelector('[data-auth-page]')) {
+    let lang = document.documentElement.lang;
+    try { lang = window.localStorage.getItem('jachi.lang') || lang; } catch (err) { /* storage blocked */ }
+    window.location.replace(`${lang === 'es' ? '/es' : ''}/account/${window.location.hash}`);
+    return;
+  }
+  const icon = (name, cls = '') => `<svg class="i${cls ? ` ${cls}` : ''}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name] || ''}</svg>`;
   const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const mqDesktop = window.matchMedia('(min-width: 960px)');
+  const mqDesktop = window.matchMedia('(min-width: 1100px)');
   const mqFine = window.matchMedia('(hover: hover) and (pointer: fine)');
   const reduced = () => mqReduce.matches;
   const behavior = () => (reduced() ? 'auto' : 'smooth');
@@ -660,30 +669,26 @@
     name: $('#join-name'),
     email: $('#join-email'),
     state: $('#join-state'),
-    consent: $('#join-consent'),
     submit: $('#join-submit'),
     label: $('#join-submit .btn__label'),
     status: $('#join-status'),
     success: $('#join-success'),
+    account: $('#join-account'),
+    accountLink: $('#join-account-link'),
   };
+  const EMAIL_RE = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/;
   const joinRules = {
-    name: () => { const v = J.name.value.trim(); return v ? '' : T.j_name; },
     email: () => {
       const v = J.email.value.trim();
       if (!v) return T.enter_email;
-      return /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(v) ? '' : T.valid_email;
+      return EMAIL_RE.test(v) ? '' : T.valid_email;
     },
     jstate: () => (J.state.value ? '' : T.choose_state),
-    interest: () => (interests().length ? '' : T.j_interest),
-    consent: () => (J.consent.checked ? '' : T.j_consent),
   };
   function interests() { return $$('input[name="interest"]:checked', J.form).map(c => c.value); }
   const joinFocus = {
-    name: () => J.name,
     email: () => J.email,
     jstate: () => J.state,
-    interest: () => $('input[name="interest"]', J.form),
-    consent: () => J.consent,
   };
   const setStatus = (kind, message) => {
     J.status.className = `form-status${kind ? ` is-${kind}` : ''}`;
@@ -705,7 +710,27 @@
     J.success.hidden = false;
     $('#join-success-title').focus({ preventScroll: true });
     scrollToEl($('.form-card'));
+    offerAccount();
   };
+
+  // After joining, offer a free account for managing the details, but only if accounts are switched on.
+  const offerAccount = async () => {
+    if (!J.account || 'claude' in window) return;
+    try {
+      const res = await fetch('/.netlify/identity/settings', { headers: { Accept: 'application/json' } });
+      const settings = res.ok ? await res.json() : null;
+      if (settings && settings.external && !settings.disable_signup && !J.success.hidden) J.account.hidden = false;
+    } catch (err) { /* accounts unavailable: leave the offer hidden */ }
+  };
+  if (J.accountLink) {
+    J.accountLink.addEventListener('click', () => {
+      try {
+        window.sessionStorage.setItem('jachi.join', JSON.stringify({
+          email: J.email.value.trim(), state: J.state.value, interests: interests(),
+        }));
+      } catch (err) { /* storage blocked: the account page starts empty */ }
+    });
+  }
 
   function goToJoin({ state, interest } = {}) {
     const card = $('.form-card');
@@ -723,9 +748,16 @@
     }
     // With a mouse, start typing right away. On touch screens, land on the form
     // without popping the keyboard over it.
-    (mqFine.matches ? J.name : $('#join-form-title')).focus({ preventScroll: true });
+    (mqFine.matches ? J.email : $('#join-form-title')).focus({ preventScroll: true });
     scrollToEl(card);
   }
+  // Buttons that say "Get early access" on the home page bring the form into view and ready it.
+  $$('a[data-to-join]').forEach(a => a.addEventListener('click', e => {
+    if (a.getAttribute('href') !== '#join' || !J.form) return;
+    e.preventDefault();
+    if (menuOpen()) setMenu(false, false);
+    goToJoin();
+  }));
 
   if (J.form) {
     J.form.addEventListener('submit', async e => {
@@ -774,8 +806,9 @@
       Object.keys(joinRules).forEach(k => setError(k, ''));
       setStatus('', '');
       J.success.hidden = true;
+      if (J.account) J.account.hidden = true;
       J.form.hidden = false;
-      J.name.focus();
+      J.email.focus();
     });
   }
   $$('[data-join]').forEach(btn => btn.addEventListener('click', () => goToJoin({ interest: btn.dataset.join })));

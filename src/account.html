@@ -1,0 +1,235 @@
+<main id="main" class="acct" data-auth-page>
+  <div class="wrap acct__grid">
+    <div class="acct__intro">
+      <p class="eyebrow">{{T:a_eyebrow}}</p>
+      <h1 class="h2" id="page-title">{{TH:a_h1}}</h1>
+      <p class="lead">{{T:a_lead}}</p>
+      <ul class="acct__facts">
+        <li>{{I:check}}<span>{{T:a_fact_free}}</span></li>
+        <li>{{I:lock}}<span>{{T:a_fact_nohealth}}</span></li>
+        <li>{{I:trash}}<span>{{T:a_fact_delete}}</span></li>
+      </ul>
+    </div>
+
+    <div class="acct__card">
+      <section class="acct__view" data-view="loading">
+        <p class="acct__loading"><span class="spinner spinner--dark" aria-hidden="true"></span><span>{{T:a_loading}}</span></p>
+        <noscript><p class="acct__noscript">{{T:a_noscript}}</p></noscript>
+      </section>
+
+      <section class="acct__view" data-view="off" hidden>
+        <h2 class="acct__title" tabindex="-1">{{T:a_off_title}}</h2>
+        <p>{{T:a_off_body}}</p>
+        <a class="btn" href="{{HOME}}#join">{{T:get_early_access}} {{I:arrow:i--arrow}}</a>
+      </section>
+
+      <section class="acct__view" data-view="auth" hidden>
+        <div class="tabs" role="tablist" aria-label="{{T:a_tabs}}">
+          <button class="tab" type="button" role="tab" id="tab-login" aria-controls="panel-login" aria-selected="true">{{T:a_tab_login}}</button>
+          <button class="tab" type="button" role="tab" id="tab-create" aria-controls="panel-create" aria-selected="false" tabindex="-1">{{T:a_tab_create}}</button>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-login" aria-labelledby="tab-login">
+          <form class="form" id="login-form" novalidate>
+            <div class="field">
+              <label class="label" for="login-email">{{T:a_email}}</label>
+              <input class="input" id="login-email" name="email" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="254" data-field="login-email" aria-describedby="err-login-email">
+              <p class="err" id="err-login-email" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <div class="field">
+              <label class="label" for="login-password">{{T:a_password}}</label>
+              <div class="pw">
+                <input class="input" id="login-password" name="password" type="password" autocomplete="current-password" maxlength="200" data-field="login-password" aria-describedby="err-login-password">
+                <button class="pw__toggle" type="button" aria-controls="login-password" aria-pressed="false" aria-label="{{T:a_show_password}}" data-show="{{T:a_show_password}}" data-hide="{{T:a_hide_password}}">{{I:eye}}</button>
+              </div>
+              <p class="err" id="err-login-password" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <button class="btn btn--block btn--lg" type="submit" id="login-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_login}}</span></button>
+            <div class="form-status" id="login-status" role="status"></div>
+            <p class="acct__alt"><button class="linkish" type="button" data-go="forgot">{{T:a_forgot_link}}</button></p>
+          </form>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-create" aria-labelledby="tab-create" hidden>
+          <form class="form" id="create-form" novalidate>
+            <div class="field">
+              <label class="label" for="create-email">{{T:a_email}}</label>
+              <input class="input" id="create-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" data-field="create-email" aria-describedby="err-create-email">
+              <p class="err" id="err-create-email" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <div class="field">
+              <label class="label" for="create-password">{{T:a_password}}<span class="label__hint" id="create-password-hint">{{T:a_password_hint}}</span></label>
+              <div class="pw">
+                <input class="input" id="create-password" name="password" type="password" autocomplete="new-password" maxlength="200" data-field="create-password" aria-describedby="create-password-hint err-create-password">
+                <button class="pw__toggle" type="button" aria-controls="create-password" aria-pressed="false" aria-label="{{T:a_show_password}}" data-show="{{T:a_show_password}}" data-hide="{{T:a_hide_password}}">{{I:eye}}</button>
+              </div>
+              <p class="err" id="err-create-password" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <div class="field">
+              <label class="label" for="create-state">{{T:a_state}}</label>
+              <select class="select" id="create-state" name="state" autocomplete="address-level1" data-field="create-state" aria-describedby="err-create-state">
+                <option value="">{{T:a_choose_state}}</option>
+                {{STATE_OPTIONS}}
+              </select>
+              <p class="err" id="err-create-state" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <fieldset class="fs">
+              <legend class="label">{{T:a_interests}} <span class="label__opt">{{T:a_optional}}</span></legend>
+              <div class="checks checks--chips">{{ACCOUNT_INTERESTS}}</div>
+            </fieldset>
+            <button class="btn btn--block btn--lg" type="submit" id="create-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_create}}</span></button>
+            <div class="form-status" id="create-status" role="status"></div>
+            <p class="fine acct__note">{{TH:a_create_note}}</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="acct__view" data-view="sent" hidden>
+        <span class="success__icon" aria-hidden="true">{{I:mail}}</span>
+        <h2 class="acct__title" tabindex="-1">{{T:a_sent_title}}</h2>
+        <p id="sent-body"></p>
+        <p class="fine" id="sent-from">{{T:a_sent_from}}</p>
+        <button class="btn btn--ghost" type="button" data-go="login">{{I:arrow-left}} {{T:a_back_login}}</button>
+      </section>
+
+      <section class="acct__view" data-view="forgot" hidden>
+        <h2 class="acct__title" tabindex="-1">{{T:a_forgot_title}}</h2>
+        <p>{{T:a_forgot_lead}}</p>
+        <form class="form" id="forgot-form" novalidate>
+          <div class="field">
+            <label class="label" for="forgot-email">{{T:a_email}}</label>
+            <input class="input" id="forgot-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" data-field="forgot-email" aria-describedby="err-forgot-email">
+            <p class="err" id="err-forgot-email" hidden>{{I:alert}}<span></span></p>
+          </div>
+          <button class="btn btn--block" type="submit" id="forgot-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_send_link}}</span></button>
+          <div class="form-status" id="forgot-status" role="status"></div>
+        </form>
+        <p class="acct__alt"><button class="linkish" type="button" data-go="login">{{T:a_back_login}}</button></p>
+      </section>
+
+      <section class="acct__view" data-view="reset" hidden>
+        <h2 class="acct__title" tabindex="-1">{{T:a_reset_title}}</h2>
+        <form class="form" id="reset-form" novalidate>
+          <div class="field">
+            <label class="label" for="reset-password">{{T:a_new_password}}<span class="label__hint" id="reset-password-hint">{{T:a_password_hint}}</span></label>
+            <div class="pw">
+              <input class="input" id="reset-password" name="password" type="password" autocomplete="new-password" maxlength="200" data-field="reset-password" aria-describedby="reset-password-hint err-reset-password">
+              <button class="pw__toggle" type="button" aria-controls="reset-password" aria-pressed="false" aria-label="{{T:a_show_password}}" data-show="{{T:a_show_password}}" data-hide="{{T:a_hide_password}}">{{I:eye}}</button>
+            </div>
+            <p class="err" id="err-reset-password" hidden>{{I:alert}}<span></span></p>
+          </div>
+          <button class="btn btn--block" type="submit" id="reset-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_save_password}}</span></button>
+          <div class="form-status" id="reset-status" role="status"></div>
+        </form>
+      </section>
+
+      <section class="acct__view" data-view="invite" hidden>
+        <h2 class="acct__title" tabindex="-1">{{T:a_invite_title}}</h2>
+        <p>{{T:a_invite_lead}}</p>
+        <form class="form" id="invite-form" novalidate>
+          <div class="field">
+            <label class="label" for="invite-password">{{T:a_password}}<span class="label__hint" id="invite-password-hint">{{T:a_password_hint}}</span></label>
+            <div class="pw">
+              <input class="input" id="invite-password" name="password" type="password" autocomplete="new-password" maxlength="200" data-field="invite-password" aria-describedby="invite-password-hint err-invite-password">
+              <button class="pw__toggle" type="button" aria-controls="invite-password" aria-pressed="false" aria-label="{{T:a_show_password}}" data-show="{{T:a_show_password}}" data-hide="{{T:a_hide_password}}">{{I:eye}}</button>
+            </div>
+            <p class="err" id="err-invite-password" hidden>{{I:alert}}<span></span></p>
+          </div>
+          <button class="btn btn--block" type="submit" id="invite-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_save_password}}</span></button>
+          <div class="form-status" id="invite-status" role="status"></div>
+        </form>
+      </section>
+
+      <section class="acct__view" data-view="profile" hidden>
+        <div class="acct__head">
+          <h2 class="acct__title" tabindex="-1">{{T:a_profile_title}}</h2>
+          <p class="acct__who" id="who"></p>
+        </div>
+        <div class="form-status" id="profile-status" role="status"></div>
+        <form class="form" id="profile-form" novalidate>
+          <div class="field">
+            <label class="label" for="profile-state">{{T:a_state}}</label>
+            <select class="select" id="profile-state" name="state" autocomplete="address-level1" data-field="profile-state" aria-describedby="err-profile-state">
+              <option value="">{{T:a_choose_state}}</option>
+              {{STATE_OPTIONS}}
+            </select>
+            <p class="err" id="err-profile-state" hidden>{{I:alert}}<span></span></p>
+          </div>
+          <fieldset class="fs">
+            <legend class="label">{{T:a_interests}} <span class="label__opt">{{T:a_optional}}</span></legend>
+            <div class="checks checks--chips">{{ACCOUNT_INTERESTS}}</div>
+          </fieldset>
+          <fieldset class="fs">
+            <legend class="label">{{T:a_language}}</legend>
+            <div class="seg">
+              <label><input type="radio" name="language" value="en"><span lang="en">English</span></label>
+              <label><input type="radio" name="language" value="es"><span lang="es">Español</span></label>
+            </div>
+          </fieldset>
+          <label class="consent" for="profile-updates">
+            <input type="checkbox" id="profile-updates" name="updates" value="yes" aria-describedby="profile-updates-hint">
+            <span>{{T:a_updates}}<small class="consent__hint" id="profile-updates-hint">{{T:a_updates_hint}}</small></span>
+          </label>
+          <button class="btn btn--block" type="submit" id="profile-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_save}}</span></button>
+        </form>
+
+        <div class="acct__block">
+          <h3>{{T:a_password_title}}</h3>
+          <button class="btn btn--ghost btn--sm" type="button" id="password-open" aria-expanded="false" aria-controls="password-form">{{I:lock}} {{T:a_change_password}}</button>
+          <form class="form" id="password-form" hidden novalidate>
+            <div class="field">
+              <label class="label" for="new-password">{{T:a_new_password}}<span class="label__hint" id="new-password-hint">{{T:a_password_hint}}</span></label>
+              <div class="pw">
+                <input class="input" id="new-password" name="password" type="password" autocomplete="new-password" maxlength="200" data-field="new-password" aria-describedby="new-password-hint err-new-password">
+                <button class="pw__toggle" type="button" aria-controls="new-password" aria-pressed="false" aria-label="{{T:a_show_password}}" data-show="{{T:a_show_password}}" data-hide="{{T:a_hide_password}}">{{I:eye}}</button>
+              </div>
+              <p class="err" id="err-new-password" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <button class="btn btn--sm" type="submit" id="password-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_save_password}}</span></button>
+          </form>
+          <div class="form-status" id="password-status" role="status"></div>
+        </div>
+
+        <div class="acct__block">
+          <h3>{{T:a_delete_title}}</h3>
+          <p>{{T:a_delete_body}}</p>
+          <button class="btn btn--ghost btn--sm btn--warn" type="button" id="delete-open" aria-expanded="false" aria-controls="delete-confirm">{{I:trash}} {{T:a_delete}}</button>
+          <div class="confirm" id="delete-confirm" hidden>
+            <p id="delete-warn" tabindex="-1">{{T:a_delete_warn}}</p>
+            <div class="confirm__actions">
+              <button class="btn btn--danger btn--sm" type="button" id="delete-yes"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_delete_confirm}}</span></button>
+              <button class="btn btn--ghost btn--sm" type="button" id="delete-no">{{T:a_cancel}}</button>
+            </div>
+            <div class="form-status" id="delete-status" role="status"></div>
+          </div>
+        </div>
+
+        <div class="acct__block">
+          <button class="btn btn--ghost btn--block" type="button" id="logout">{{I:out}} {{T:a_logout}}</button>
+        </div>
+      </section>
+
+      <section class="acct__view" data-view="deleted" hidden>
+        <span class="success__icon" aria-hidden="true">{{I:check}}</span>
+        <h2 class="acct__title" tabindex="-1">{{T:a_deleted_title}}</h2>
+        <p id="deleted-body"></p>
+        <a class="btn btn--ghost" href="{{HOME}}">{{T:a_home}}</a>
+      </section>
+
+      <section class="acct__view" data-view="link" hidden>
+        <h2 class="acct__title" tabindex="-1">{{T:a_link_title}}</h2>
+        <p>{{T:a_link_body}}</p>
+        <div class="acct__actions">
+          <button class="btn" type="button" data-go="login">{{T:a_login}}</button>
+          <button class="btn btn--ghost" type="button" data-go="forgot">{{T:a_forgot_title}}</button>
+        </div>
+      </section>
+
+      <section class="acct__view" data-view="down" hidden>
+        <h2 class="acct__title" tabindex="-1">{{T:a_down_title}}</h2>
+        <p>{{T:a_down_body}}</p>
+        <button class="btn" type="button" id="retry">{{I:refresh}} {{T:a_try_again}}</button>
+      </section>
+    </div>
+  </div>
+</main>

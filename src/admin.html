@@ -1,0 +1,136 @@
+<a class="skip" href="#adm-main">Skip to content</a>
+<header class="adm-bar">
+  <div class="adm-wrap adm-bar__in">
+    <a class="brand" href="/" aria-label="Jachi Health home">
+      {{MARK:m-adm:full}}
+      <span class="brand__word" aria-hidden="true"><b>Jachi</b> <span>Health</span></span>
+    </a>
+    <span class="adm-badge">Admin</span>
+    <div class="adm-bar__me" id="adm-me" hidden>
+      <span class="adm-bar__email" id="adm-email"></span>
+      <button class="btn btn--ghost btn--sm" type="button" id="adm-logout">{{I:out}}<span>Log out</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="adm-main" class="adm" data-auth-page tabindex="-1">
+  <div class="adm-wrap">
+    <section class="adm-view" data-view="loading">
+      <p class="adm-loading"><span class="spinner spinner--dark" aria-hidden="true"></span><span>Loading the admin console…</span></p>
+      <noscript><p class="adm-note adm-note--warn">The admin console needs JavaScript. Turn it on in your browser's settings, then reload this page.</p></noscript>
+    </section>
+
+    <section class="adm-view adm-view--narrow" data-view="off" hidden>
+      <h1 class="adm-title" tabindex="-1">Turn on accounts first</h1>
+      <p>The admin console uses the site's accounts to know it's you. They aren't switched on yet.</p>
+      <ol class="adm-steps">
+        <li>In Netlify, open the Jachi project, select <b>Identity</b>, then <b>Enable Identity</b>.</li>
+        <li>Under <b>Registration preferences</b>, choose <b>Invite only</b> for now. Leave email confirmation on.</li>
+        <li>In <b>Identity</b>, select <b>Invite users</b> and invite <b>{{EMAIL}}</b>. Open the invitation email and choose a password.</li>
+        <li>Come back here and log in. Then set <b>Registration preferences</b> to <b>Open</b>, so people on your list can make accounts.</li>
+      </ol>
+    </section>
+
+    <section class="adm-view adm-view--narrow" data-view="login" hidden>
+      <h1 class="adm-title" tabindex="-1">Log in to the admin console</h1>
+      <p>Use the account set up as an admin. Sign-up details stay private to admins.</p>
+      <form class="form adm-card" id="adm-login" novalidate>
+        <div class="field">
+          <label class="label" for="adm-login-email">Email</label>
+          <input class="input" id="adm-login-email" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="254" data-field="adm-login-email" aria-describedby="err-adm-login-email">
+          <p class="err" id="err-adm-login-email" hidden>{{I:alert}}<span></span></p>
+        </div>
+        <div class="field">
+          <label class="label" for="adm-login-password">Password</label>
+          <div class="pw">
+            <input class="input" id="adm-login-password" type="password" autocomplete="current-password" maxlength="200" data-field="adm-login-password" aria-describedby="err-adm-login-password">
+            <button class="pw__toggle" type="button" aria-controls="adm-login-password" aria-pressed="false" aria-label="Show password" data-show="Show password" data-hide="Hide password">{{I:eye}}</button>
+          </div>
+          <p class="err" id="err-adm-login-password" hidden>{{I:alert}}<span></span></p>
+        </div>
+        <button class="btn btn--block btn--lg" type="submit" id="adm-login-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Log in</span></button>
+        <div class="form-status" id="adm-login-status" role="status"></div>
+        <p class="adm-alt"><a href="/account/?reset">Forgot your password?</a></p>
+      </form>
+    </section>
+
+    <section class="adm-view adm-view--narrow" data-view="denied" hidden>
+      <h1 class="adm-title" tabindex="-1">No admin access</h1>
+      <p id="adm-denied-text"></p>
+      <button class="btn btn--ghost" type="button" data-logout>{{I:out}} Log out and use another account</button>
+    </section>
+
+    <section class="adm-view adm-view--narrow" data-view="down" hidden>
+      <h1 class="adm-title" tabindex="-1">The admin console didn't load</h1>
+      <p id="adm-down-text">Check your connection and try again.</p>
+      <button class="btn" type="button" id="adm-retry">{{I:refresh}} Try again</button>
+    </section>
+
+    <section class="adm-view" data-view="console" hidden>
+      <div class="adm-head">
+        <h1 class="adm-title" tabindex="-1">Admin console</h1>
+        <p class="adm-updated"><span id="adm-updated"></span><button class="linkish" type="button" id="adm-refresh">Refresh</button></p>
+      </div>
+      <div class="form-status adm-status" id="adm-status" role="status"></div>
+
+      <div class="adm-tabs" role="tablist" aria-label="Admin sections">
+        <button class="adm-tab" type="button" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
+        <button class="adm-tab" type="button" role="tab" id="tab-signups" aria-controls="panel-signups" aria-selected="false" tabindex="-1">Sign-ups <span class="adm-tab__n" id="n-signups"></span></button>
+        <button class="adm-tab" type="button" role="tab" id="tab-tickets" aria-controls="panel-tickets" aria-selected="false" tabindex="-1">Tickets <span class="adm-tab__n" id="n-tickets"></span></button>
+        <button class="adm-tab" type="button" role="tab" id="tab-members" aria-controls="panel-members" aria-selected="false" tabindex="-1">Accounts <span class="adm-tab__n" id="n-members"></span></button>
+        <button class="adm-tab" type="button" role="tab" id="tab-checklist" aria-controls="panel-checklist" aria-selected="false" tabindex="-1">Launch list</button>
+        <button class="adm-tab" type="button" role="tab" id="tab-setup" aria-controls="panel-setup" aria-selected="false" tabindex="-1">Setup <span class="adm-tab__dot" id="setup-dot" hidden></span></button>
+      </div>
+
+      <div class="adm-panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0"></div>
+
+      <div class="adm-panel" role="tabpanel" id="panel-signups" aria-labelledby="tab-signups" tabindex="0" hidden>
+        <div class="adm-note" id="signups-note" hidden></div>
+        <div class="adm-tools">
+          <div class="field adm-tools__q">
+            <label class="label" for="f-q">Search</label>
+            <input class="input" id="f-q" type="search" placeholder="Name or email" autocomplete="off" autocapitalize="off" spellcheck="false">
+          </div>
+          <div class="field"><label class="label" for="f-state">State</label><select class="select" id="f-state"></select></div>
+          <div class="field"><label class="label" for="f-service">Service</label><select class="select" id="f-service"></select></div>
+          <div class="field"><label class="label" for="f-lang">Language</label>
+            <select class="select" id="f-lang"><option value="">Both</option><option value="en">English</option><option value="es">Spanish</option></select></div>
+          <div class="field"><label class="label" for="f-emails">Emails</label>
+            <select class="select" id="f-emails"><option value="">Everyone</option><option value="on">Getting emails</option><option value="off">Emails turned off</option></select></div>
+        </div>
+        <div class="adm-listhead">
+          <p class="adm-count" id="signups-count" role="status"></p>
+          <button class="btn btn--sm" type="button" id="csv">{{I:download}}<span>Download CSV</span></button>
+        </div>
+        <ul class="adm-list" id="signups-list"></ul>
+      </div>
+
+      <div class="adm-panel" role="tabpanel" id="panel-tickets" aria-labelledby="tab-tickets" tabindex="0" hidden>
+        <div class="adm-note" id="tickets-note" hidden></div>
+        <ul class="adm-list" id="tickets-list"></ul>
+      </div>
+
+      <div class="adm-panel" role="tabpanel" id="panel-members" aria-labelledby="tab-members" tabindex="0" hidden>
+        <p class="adm-lead">People who made an account to manage their early-access details. Accounts hold no health information.</p>
+        <div class="adm-note" id="members-note" hidden></div>
+        <ul class="adm-list" id="members-list"></ul>
+      </div>
+
+      <div class="adm-panel" role="tabpanel" id="panel-checklist" aria-labelledby="tab-checklist" tabindex="0" hidden>
+        <div class="adm-progress"><p id="check-progress"></p><span class="adm-meter" aria-hidden="true"><span id="check-meter"></span></span></div>
+        <ul class="adm-checks" id="check-list"></ul>
+        <form class="adm-add" id="check-add" novalidate>
+          <label class="visually-hidden" for="check-new">Add your own item</label>
+          <input class="input" id="check-new" maxlength="140" placeholder="Add your own item" autocomplete="off">
+          <button class="btn btn--sm" type="submit">{{I:plus}}<span>Add</span></button>
+        </form>
+        <div class="form-status" id="check-status" role="status"></div>
+        <p class="fine">Saved to your admin account, so it's the same on your phone and computer.</p>
+      </div>
+
+      <div class="adm-panel" role="tabpanel" id="panel-setup" aria-labelledby="tab-setup" tabindex="0" hidden>
+        <ul class="adm-setup" id="setup-list"></ul>
+      </div>
+    </section>
+  </div>
+</main>

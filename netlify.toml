@@ -6,11 +6,12 @@
   publish = "public"
 
 [functions]
-  # The help chat's server code (served at /api/chat).
+  # Server code: the help chat (/api/chat), account deletion (/api/account/delete) and the admin console (/api/admin/*).
   directory = "netlify/functions"
 
 # Security headers for every page and file.
-# The Content-Security-Policy only allows the site's own files (fonts included) and its own /api/chat,
+# The Content-Security-Policy only allows the site's own files (fonts included) and its own /api/ and
+# /.netlify/identity addresses (accounts),
 # so visitors' browsers never contact another company. If you add an outside service (analytics,
 # video visits, a booking widget), it must be added here or the browser will block it.
 [[headers]]
@@ -28,3 +29,17 @@
   for = "/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# The account and admin pages are private tools: keep them out of search results.
+[[headers]]
+  for = "/account/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+[[headers]]
+  for = "/es/account/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

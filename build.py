@@ -8,14 +8,19 @@ Deployed by Netlify (see netlify.toml), all written into public/:
   es/index.html                   Spanish home page             (src/es/home.html)
   <service>/index.html            one page per service          (src/en/service.html + pages.py)
   privacy/, terms/, texas-medical-board/   legal pages          (src/en/*.html)
+  account/, es/account/           accounts for early access     (src/account.html, account.js, identity.js)
+  admin/                          the admin console              (src/admin.html, admin.js, identity.js)
   404.html, icon.svg, robots.txt, sitemap.xml
   fonts/*.woff2                   made by tools/make_fonts.py (not by this script)
   og.jpg, apple-touch-icon.png, favicon.ico   made by tools/make_images.py
-and netlify/functions/chat.mjs, the help chat's server code (POST /api/chat).
+and the server code in netlify/functions/: chat.mjs (POST /api/chat, from chatbot.py), and account.mjs and
+admin.mjs (from src/functions/lib.mjs plus src/functions/<name>.mjs).
 
 Every page shares src/<lang>/header.html, footer.html and chat.html. Not deployed (ignored by git):
 dist/jachi-health.html, the English home page as a Claude artifact preview, and dist/artifact-sim.html.
 """
+import base64
+import hashlib
 import html
 import json
 import re
@@ -73,6 +78,13 @@ ICONS = {
     "chat": '<path d="M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z"/><path d="M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01"/>',
     "send": '<path d="M12 19V5"/><path d="M6 11l6-6 6 6"/>',
     "share": '<path d="M12 15V4"/><path d="M8 8l4-4 4 4"/><path d="M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11"/>',
+    "plus": '<path d="M12 5.5v13M5.5 12h13"/>',
+    "out": '<path d="M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14"/><path d="M10 16.5L5.5 12 10 7.5"/><path d="M5.5 12H15"/>',
+    "trash": '<path d="M4.5 7h15"/><path d="M9.5 7V4.8h5V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10.2 10.8v5.4M13.8 10.8v5.4"/>',
+    "download": '<path d="M12 4v11"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M5 19.5h14"/>',
+    "refresh": '<path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4.2h-4.2"/>',
+    "eye": '<path d="M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z"/><circle cx="12" cy="12" r="2.8"/>',
+    "eye-off": '<path d="M4 4l16 16"/><path d="M9.9 6A9.8 9.8 0 0 1 12 5.5c5.8 0 9.2 6.5 9.2 6.5a16.6 16.6 0 0 1-3 3.8M14.1 18.2a9.6 9.6 0 0 1-2.1.3c-5.8 0-9.2-6.5-9.2-6.5a16.4 16.4 0 0 1 3.4-4.2"/><path d="M10 10a2.8 2.8 0 0 0 4 4"/>',
 }
 
 
@@ -113,6 +125,7 @@ class Lang:
             self.emergencies = list(c.EMERGENCIES)
             self.crisis = c.CRISIS
             self.popular = list(c.POPULAR)
+            self.picker = [(label, key, f"/{slug}/") for label, key, slug in c.PICKER]
             self.faq = list(c.FAQ)
             self.build = c.BUILD
             self.pricing_note = c.PRICING_NOTE
@@ -132,6 +145,9 @@ class Lang:
                                 for n, terms, _note in EN_CONTENT.EMERGENCIES]
             self.crisis = (es.CRISIS[0], f"{es.CRISIS[1]} {EN_CONTENT.CRISIS[1]}", es.CRISIS[2])
             self.popular = list(es.POPULAR)
+            if len(es.PICKER) != len(EN_CONTENT.PICKER):
+                raise SystemExit("content_es.PICKER must match content.PICKER")
+            self.picker = [(label, key, f"#svc-{key}") for label, (_l, key, _s) in zip(es.PICKER, EN_CONTENT.PICKER)]
             self.faq = list(es.FAQ)
             self.build = es.BUILD
             self.pricing_note = es.PRICING_NOTE
@@ -238,6 +254,8 @@ def render(text, L, tokens):
     for token, value in tokens.items():
         text = text.replace(token, value)
     text = text.replace("{{EMAIL}}", EMAIL).replace("{{PRICING_NOTE}}", esc(L.pricing_note))
+    text = re.sub(r"\{\{T:(\w+)\}\}", lambda m: esc(L.T[m.group(1)]), text)
+    text = re.sub(r"\{\{TH:(\w+)\}\}", lambda m: L.T[m.group(1)], text)  # trusted markup from strings.py
     text = re.sub(r"\{\{MARK:([\w-]+):(\w+)(?::([\w -]+))?\}\}",
                   lambda m: mark(m.group(1), m.group(2), m.group(3) or ""), text)
     text = re.sub(r"\{\{I:([\w-]+)(?::([\w -]+))?\}\}",
@@ -295,7 +313,7 @@ def js_for(lang, rules=False):
     text = ((SRC / "app.js").read_text()
             .replace("/*ICONS_JSON*/", json.dumps(ICONS))
             .replace("/*EMAIL_JSON*/", json.dumps(EMAIL))
-            .replace("/*STRINGS_JSON*/", json.dumps(L.T, ensure_ascii=False))
+            .replace("/*STRINGS_JSON*/", json.dumps({k: v for k, v in L.T.items() if not k.startswith("a_")}, ensure_ascii=False))
             .replace("/*SERVICES_JSON*/", json.dumps({s["key"]: {"name": s["name"], "tag": s["tag"], "interest": s["interest"]}
                                                       for s in L.services}, ensure_ascii=False)))
     if "/*CHAT_RULES*/" not in text:
@@ -348,26 +366,54 @@ def head(page, main_html):
 </style>"""
 
 
+def script_policy(scripts):
+    """A Content-Security-Policy that lets only these exact inline scripts run, by their SHA-256 hashes.
+    The site-wide policy in netlify.toml allows any inline script; pages that handle sign-in tokens
+    (account and admin) add this one too, and browsers enforce both, so injected code couldn't run there."""
+    hashes = " ".join("'sha256-" + base64.b64encode(hashlib.sha256(js.encode("utf-8")).digest()).decode() + "'"
+                      for js in scripts)
+    return f"<meta http-equiv=\"Content-Security-Policy\" content=\"script-src {hashes}; object-src 'none'; base-uri 'self'\">\n"
+
+
 def document(page, body):
+    scripts = ([js_for(page["lang"])] if page.get("site_js", True) else []) + ([page["script"]] if page.get("script") else [])
+    contents = [f"\n{js}\n" for js in scripts]
+    tags = "\n".join(f"<script>{js}</script>" for js in contents)
+    top = head(page, page.get("main", body))
+    if page.get("strict_scripts"):
+        top = top.replace('<meta charset="utf-8">\n', '<meta charset="utf-8">\n' + script_policy(contents), 1)
     return f"""<!doctype html>
 <html lang="{page["lang"]}">
 <head>
-{head(page, page.get("main", body))}
+{top}
 </head>
 <body>
 {body}
-<script>
-{js_for(page["lang"])}
-</script>
+{tags}
 </body>
 </html>
 """
 
 
-def chrome_tokens(L, home, home_top, join_href, share_url=""):
+def page_js(name, L, extra=None):
+    """src/identity.js followed by src/<name>.js, with the words, icons, email and any extra data filled in."""
+    text = (SRC / "identity.js").read_text() + "\n" + (SRC / f"{name}.js").read_text()
+    text = (text.replace("/*STRINGS_JSON*/", json.dumps(L.T, ensure_ascii=False))
+                .replace("/*ICONS_JSON*/", json.dumps(ICONS))
+                .replace("/*EMAIL_JSON*/", json.dumps(EMAIL)))
+    for key, value in (extra or {}).items():
+        text = text.replace(f"/*{key}_JSON*/", json.dumps(value, ensure_ascii=False))
+    if re.search(r"/\*[A-Z_]+_JSON\*/", text):
+        raise SystemExit(f"{name}.js: data not injected: " + re.search(r"/\*[A-Z_]+_JSON\*/", text).group())
+    return text
+
+
+def chrome_tokens(L, home, home_top, join_href, share_url="", alt_href=None):
+    """Tokens for the shared header, footer, dock and chat. alt_href is the same page in the other language."""
     return {
         "{{HOME}}": home, "{{HOME_TOP}}": home_top, "{{JOIN_HREF}}": join_href,
         "{{FOOTER_CARE}}": footer_care(L, home), "{{SHARE_URL}}": share_url,
+        "{{ALT_HREF}}": alt_href or ("/es/" if L.code == "en" else "/"),
     }
 
 
@@ -405,7 +451,9 @@ def home_tokens(L):
         f'<label class="check"><input type="checkbox" name="interest" value="{s["interest"]}"><span>{esc(s.get("chip", s["name"]))}</span></label>'
         for s in L.services)
     popular = "".join(f'<button type="button" data-q="{esc(q)}">{esc(q)}</button>' for q in L.popular)
+    picker = "".join(f'<li><a href="{href}" data-svc="{key}">{esc(label)}</a></li>' for label, key, href in L.picker)
     return {
+        "{{PICKER}}": picker,
         "{{STATE_OPTIONS}}": state_options(L),
         "{{FAQ_ITEMS}}": faq_items(L.faq),
         "{{SERVICE_CARDS}}": "\n".join(service_card(L, s, i) for i, s in enumerate(L.services)),
@@ -421,7 +469,7 @@ def build_home(lang):
     L = Lang(lang)
     path = HOME_ALTERNATES[lang]
     tokens = {**home_tokens(L), **chrome_tokens(L, "", "#top", "#join", SITE_URL + path),
-              "{{DOCK_HREF}}": "#care-finder", "{{DOCK_LABEL}}": esc(L.build["find_care"])}
+              "{{DOCK_HREF}}": "#join", "{{DOCK_LABEL}}": esc(L.T["get_early_access"])}
     main = render(part(lang, "home"), L, tokens)
     body = "\n".join(render(part(lang, n), L, tokens) for n in ("header",)) + "\n" + main + "\n" + "\n".join(
         render(part(lang, n), L, tokens) for n in ("footer", "dock", "chat"))
@@ -550,6 +598,49 @@ for slug, crumb, title, description in LEGAL:
     SITEMAP.append((path, None))
 
 
+# ---------- Account pages (English and Spanish) ----------
+
+ACCOUNT_PATHS = {"en": "/account/", "es": "/es/account/"}
+
+
+def build_account(lang):
+    L = Lang(lang)
+    home = "/" if lang == "en" else "/es/"
+    interests = "".join(
+        f'<label class="check"><input type="checkbox" name="interest" value="{s["interest"]}"><span>{esc(s.get("chip", s["name"]))}</span></label>'
+        for s in L.services)
+    other = "es" if lang == "en" else "en"
+    tokens = {**chrome_tokens(L, home, home, home + "#join", alt_href=ACCOUNT_PATHS[other]),
+              "{{STATE_OPTIONS}}": state_options(L), "{{ACCOUNT_INTERESTS}}": interests}
+    main = render((SRC / "account.html").read_text(), L, tokens)
+    body = render(part(lang, "header"), L, tokens) + "\n" + main + "\n" + render(part(lang, "footer"), L, tokens) + \
+        "\n" + render(part(lang, "chat"), L, tokens)
+    page = {"lang": lang, "path": ACCOUNT_PATHS[lang], "noindex": True, "main": main,
+            "title": L.T["a_meta_title"], "description": L.T["a_meta_desc"],
+            "css": (SRC / "account.css").read_text(), "script": page_js("account", L), "strict_scripts": True}
+    write(ACCOUNT_PATHS[lang], document(page, body))
+
+
+for code in ACCOUNT_PATHS:
+    build_account(code)
+
+
+# ---------- Admin console (English only, not linked from the site) ----------
+
+def build_admin():
+    L = Lang("en")
+    main = render((SRC / "admin.html").read_text(), L, {})
+    page = {"lang": "en", "path": "/admin/", "noindex": True, "main": main, "site_js": False, "strict_scripts": True,
+            "title": "Admin | Jachi Health", "description": "The Jachi Health admin console.",
+            "css": (SRC / "admin.css").read_text(),
+            "script": page_js("admin", L, {"INTERESTS": {s["interest"]: s.get("chip", s["name"]) for s in L.services},
+                                           "STATES": dict(STATES)})}
+    write("/admin/", document(page, main))
+
+
+build_admin()
+
+
 # ---------- Page not found ----------
 
 NOT_FOUND_CSS = """
@@ -596,6 +687,17 @@ for path, alternates in SITEMAP:
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
     + "\n".join(urls) + "\n</urlset>\n")
 (FUNCTIONS / "chat.mjs").write_text(chatbot.function_source())
+SERVER_CODE = {
+    "account": "Jachi Health account deletion. Netlify Function: POST /api/account/delete",
+    "admin": "Jachi Health admin console. Netlify Function: /api/admin/*",
+}
+for name, title in SERVER_CODE.items():
+    (FUNCTIONS / f"{name}.mjs").write_text(
+        f"// {title}\n"
+        f"// GENERATED by build.py from src/functions/lib.mjs and src/functions/{name}.mjs. Edit those, then run\n"
+        f"// `python3 build.py`. Never put a key or token in these files: they live in Netlify's environment variables.\n"
+        f"const SUPPORT_EMAIL = {json.dumps(EMAIL)};\n\n"
+        + (SRC / "functions" / "lib.mjs").read_text() + "\n" + (SRC / "functions" / f"{name}.mjs").read_text())
 
 
 # ---------- Claude artifact preview of the English home page (not deployed) ----------
@@ -619,4 +721,5 @@ artifact = f"""<title>Jachi Health</title>
 missing = [n for n in ("og.jpg", "apple-touch-icon.png", "favicon.ico") if not (PUBLIC / n).exists()]
 if missing:
     print("note: run tools/make_images.py to create", ", ".join(missing))
-print(f"built {len(SITEMAP)} pages + 404 into public/, netlify/functions/chat.mjs and the dist/ preview")
+print(f"built {len(SITEMAP)} pages + account, admin and 404 pages into public/, the functions in netlify/functions/ "
+      f"and the dist/ preview")

@@ -40,6 +40,10 @@ SERVICES = {
                          "Seguimiento y ajustes de dosis"]},
 }
 
+# The quick picker's labels, in the same order as content.PICKER (the Spanish page links to its service cards)
+PICKER = ["Infección urinaria", "Resfriado y gripe", "Resurtidos", "Terapia", "Ansiedad", "Anticonceptivos",
+          "Disfunción eréctil", "Bajar de peso"]
+
 FINDER = {
     "urgent": ("Me siento mal o me lastimé", "Resfriados, gripe, infecciones, sarpullidos"),
     "refill": ("Necesito un resurtido", "Medicamentos que ya toma"),

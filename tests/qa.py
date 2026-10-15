@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tests"))
 import serve  # noqa: E402
 from common import ensure_fonts, use_brand_fonts  # noqa: E402
+from fake_identity import FakeIdentity  # noqa: E402
 from content import EMAIL, PRICING_NOTE  # noqa: E402
 import pages as PAGES  # noqa: E402
 import strings  # noqa: E402
@@ -38,6 +39,15 @@ server = serve.start(PORT)
 results = {"errors": [], "checks": []}
 
 
+def status_of(path):
+    """The HTTP status the local server gives a path (without a browser)."""
+    try:
+        with urllib.request.urlopen(urllib.request.Request(BASE + path, method="HEAD")) as r:
+            return r.status
+    except urllib.error.HTTPError as e:
+        return e.code
+
+
 def check(name, ok, detail=""):
     results["checks"].append({"name": name, "ok": bool(ok), "detail": detail})
     print(("PASS " if ok else "FAIL ") + name + (f" :: {detail}" if detail else ""))
@@ -56,7 +66,16 @@ def setup(context, preview=False):
     if preview:
         page.add_init_script("window.claude = { use: async () => null };")
     logs = []
-    page.on("console", lambda m: logs.append((m.type, m.text)) if m.type in ("error", "warning") else None)
+
+    def on_console(m):
+        if m.type not in ("error", "warning"):
+            return
+        # The site asks /.netlify/identity/settings whether accounts are switched on. The local server, like
+        # Netlify before Identity is enabled, answers 404, which Chrome logs. That one is expected.
+        if "Failed to load resource" in m.text and (m.location or {}).get("url", "").endswith("/.netlify/identity/settings"):
+            return
+        logs.append((m.type, m.text))
+    page.on("console", on_console)
     page.on("pageerror", lambda e: logs.append(("pageerror", str(e))))
     return page, logs
 
@@ -133,6 +152,16 @@ with sync_playwright() as p:
         check(f"nine service cards in {expect_rows} rows @{w}", len(tops) == 9 and rows_seen == expect_rows, str(tops))
         check(f"condition search visible @{w}", page.locator("#lookup").is_visible() and page.locator("#lookup-results").is_hidden())
         page.screenshot(path=str(OUT / f"full-{w}.png"), full_page=True, animations="disabled")
+        header_info = page.evaluate("""() => ({
+          nav: [...document.querySelectorAll('.nav a')].filter(a => a.offsetParent).map(a => Math.round(a.getBoundingClientRect().height)),
+          login: (() => { const a = document.querySelector('.login-link'); return a && a.offsetParent ? a.getAttribute('href') : null; })(),
+          toggle: !!document.querySelector('.menu-toggle').offsetParent,
+        })""")
+        if w >= 1100:
+            check(f"header: full nav on one line, log in link @{w}", len(header_info["nav"]) == 4 and max(header_info["nav"]) < 50
+                  and header_info["login"] == "/account/" and not header_info["toggle"], json.dumps(header_info))
+        elif w >= 960:
+            check(f"header: menu button and log in link @{w}", header_info["toggle"] and header_info["login"] == "/account/", json.dumps(header_info))
         errs = [l for l in logs]
         check(f"no console errors @{w}", not errs, json.dumps(errs))
         if w == 1440:
@@ -151,7 +180,8 @@ with sync_playwright() as p:
     check("menu opens", is_open(page, "#mobile-menu"))
     check("menu toggle aria-expanded", toggle.get_attribute("aria-expanded") == "true")
     check("main is inert while menu open", page.evaluate("document.getElementById('main').inert === true"))
-    check("menu lists six sections", page.locator("#mobile-menu nav a").count() == 6)
+    check("menu lists seven sections", page.locator("#mobile-menu nav a").count() == 7)
+    check("menu offers log in", page.locator("#mobile-menu a[href='/account/']").is_visible())
     page.screenshot(path=str(OUT / "mobile-menu.png"))
     page.keyboard.press("Escape")
     page.wait_for_timeout(500)
@@ -169,7 +199,7 @@ with sync_playwright() as p:
     page.evaluate("window.scrollTo(0, document.getElementById('why').offsetTop + 200)")
     page.wait_for_timeout(900)
     check("mobile dock shows after hero", page.locator("#dock").evaluate("el => el.classList.contains('is-visible')"))
-    check("dock points to the care finder", page.locator("#dock a").get_attribute("href") == "#care-finder")
+    check("dock points to the sign-up form", page.locator("#dock a").get_attribute("href") == "#join")
     page.screenshot(path=str(OUT / "mobile-dock.png"))
     page.evaluate("document.getElementById('care-finder').scrollIntoView()")
     page.wait_for_timeout(900)
@@ -279,24 +309,19 @@ with sync_playwright() as p:
     check("join form focused (touch)", page.evaluate("document.activeElement.id") == "join-form-title")
 
     # join form: errors then failure path (local server has no form backend)
+    check("join form asks only for email and state, the rest optional", page.locator("#join-form [required]").count() == 2
+          and page.locator("#join-form .label__opt").count() == 2 and page.locator("#join-consent").count() == 0)
     page.locator("#join-submit").click(); page.wait_for_timeout(300)
-    check("join errors shown", all(page.locator(f"#err-{k}").is_visible() for k in ("name", "email", "consent")))
-    check("join status lists count", "3 highlighted" in page.locator("#join-status").inner_text(), page.locator("#join-status").inner_text())
+    check("join: missing email caught, state already filled", page.locator("#err-email").is_visible()
+          and not page.locator("#err-jstate").is_visible())
+    check("join status explains", page.locator("#join-status").inner_text().strip() == strings.EN["fix_one"], page.locator("#join-status").inner_text())
+    check("join: focus moves to the email field", page.evaluate("document.activeElement.id") == "join-email")
     page.screenshot(path=str(OUT / "join-errors-mobile.png"))
-    page.locator("#join-name").fill("Maya")
     page.locator("#join-email").fill("maya@example")
     page.locator("#join-submit").click(); page.wait_for_timeout(200)
     check("invalid email caught", "valid email" in page.locator("#err-email").inner_text())
     page.locator("#join-email").fill("maya@example.com")
-    page.locator("label[for=join-consent]").click()
-    for v in ("urgent-care", "weight-care"):
-        page.locator(f"#join-form label.check:has(input[value='{v}'])").click()
-    page.locator("#join-submit").click(); page.wait_for_timeout(300)
-    check("no service chosen is caught", page.locator("#err-interest").is_visible()
-          and "at least one" in page.locator("#err-interest").inner_text())
-    for v in ("urgent-care", "weight-care"):
-        page.locator(f"#join-form label.check:has(input[value='{v}'])").click()
-    check("interest error clears", not page.locator("#err-interest").is_visible())
+    page.locator("#join-name").fill("Maya")
     page.locator("#join-submit").click(); page.wait_for_timeout(1500)
     check("server failure shows honest error", "couldn't save" in page.locator("#join-status").inner_text(), page.locator("#join-status").inner_text())
     check("button restored after failure", page.locator("#join-submit").is_enabled()
@@ -309,7 +334,9 @@ with sync_playwright() as p:
     check("success panel shows", page.locator("#join-success").is_visible())
     check("success names email", "maya@example.com" in page.locator("#join-success").inner_text())
     body = posted.get("body", "")
-    check("post body has form-name and fields", all(s in body for s in ("form-name=early-access", "first_name=Maya", "email=maya%40example.com", "state=TX", "consent=yes")), body)
+    check("post body has form-name and fields", all(s in body for s in ("form-name=early-access", "first_name=Maya", "email=maya%40example.com", "state=TX", "language=en"))
+          and "consent" not in body, body)
+    check("account offer stays hidden while accounts are off", page.locator("#join-account").is_hidden())
     check("interests sent as one value", body.count("interest=") == 1 and "interest=urgent-care%2C+weight-care" in body, body)
     page.screenshot(path=str(OUT / "join-success-mobile.png"))
     page.locator("#join-again").click(); page.wait_for_timeout(300)
@@ -471,8 +498,14 @@ with sync_playwright() as p:
     page.screenshot(path=str(OUT / "ticket-sent-desktop.png"))
     page.locator("#ticket-done").click(); page.wait_for_timeout(300)
     check("ticket: back to chat", page.locator("#chat-talk").is_visible() and page.locator("#ticket-form").is_visible() is False)
-    page.keyboard.press("Escape"); page.wait_for_timeout(500)
-    check("chat: Escape closes and returns focus", page.locator("#chat").is_hidden() and page.evaluate("document.activeElement.id") == "chat-launcher")
+    page.keyboard.press("Escape")
+    closed = "document.getElementById('chat').hidden && document.activeElement && document.activeElement.id === 'chat-launcher'"
+    for _ in range(30):  # the panel hides after its closing animation (wait_for_function can't run under the site's CSP)
+        if page.evaluate(closed):
+            break
+        page.wait_for_timeout(100)
+    check("chat: Escape closes and returns focus", page.evaluate(closed),
+          json.dumps(page.evaluate("[document.activeElement.id || document.activeElement.tagName, document.getElementById('chat').hidden, document.documentElement.className]")))
     page.locator("#faq [data-chat-open]").click(); page.wait_for_timeout(400)
     check("chat: FAQ button opens the chat", page.locator("#chat").is_visible())
     page.locator("#chat-close").click(); page.wait_for_timeout(400)
@@ -504,6 +537,56 @@ with sync_playwright() as p:
     page.locator("#chat-close").click(); page.wait_for_timeout(500)
     check("phone chat: closing restores the page", page.evaluate("document.getElementById('main').inert === false") and page.locator("#chat").is_hidden())
     check("phone chat: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+
+    # 2e) Home page: early access first, the quick picker, what's included and clinical standards
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(600)
+    hero_btns = page.locator(".hero .cta-row .btn")
+    check("hero: early access is the main button, care finder second", hero_btns.first.get_attribute("href") == "#join"
+          and "Get early access" in hero_btns.first.inner_text() and hero_btns.nth(1).get_attribute("href") == "#care-finder")
+    check("hero: says it's free to join", "Free to join" in page.locator(".hero .trust").inner_text())
+    picks = page.evaluate("[...document.querySelectorAll('.picker a')].map(a => a.getAttribute('href'))")
+    bad_picks = [h for h in picks if status_of(h) != 200]
+    check("hero: quick picker goes straight to service pages", len(picks) == 8 and not bad_picks and len(set(picks)) == 8, str(picks))
+    hero_btns.first.click(); page.wait_for_timeout(1200)
+    check("hero button: form in view, keyboard not opened", page.evaluate("document.activeElement.id") == "join-form-title"
+          and 0 <= page.evaluate("document.querySelector('.form-card').getBoundingClientRect().top") < 200)
+    page.evaluate("document.getElementById('services').scrollIntoView()"); page.wait_for_timeout(400)
+    inc = page.locator("#included").inner_text()
+    check("services: what's included and what's billed separately", page.locator(".included__col").count() == 2
+          and "What's included" in inc and "Billed separately" in inc and "Lab tests, by the lab" in inc and PRICING_NOTE in inc, inc[:200])
+    page.evaluate("document.getElementById('standards').scrollIntoView()"); page.wait_for_timeout(400)
+    links = page.evaluate("[...document.querySelectorAll('.verify__links a')].map(a => a.getAttribute('href'))")
+    check("clinical standards: six standards and where to check a license", page.locator(".standard").count() == 6
+          and any("tmb.texas.gov" in l for l in links) and any("bon.texas.gov" in l for l in links)
+          and any("bhec.texas.gov" in l for l in links) and "/texas-medical-board/" in links, str(links))
+    check("clinical standards: outside links don't pass on where you came from",
+          page.evaluate("[...document.querySelectorAll('.verify__links a[href^=http]')].every(a => a.relList.contains('noreferrer'))"))
+    page.screenshot(path=str(OUT / "standards-phone.png"))
+    ov = page.evaluate(OVERFLOW_JS)
+    check("home additions: no overflow on a phone", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+    page.evaluate("window.scrollTo(0, 0)"); page.wait_for_timeout(300)
+    page.locator(".menu-toggle").click(); page.wait_for_timeout(600)
+    page.locator("#mobile-menu [data-to-join]").click(); page.wait_for_timeout(1300)
+    check("menu's early access button closes the menu and brings up the form", not is_open(page, "#mobile-menu")
+          and page.evaluate("document.activeElement.id") == "join-form-title")
+    check("home additions: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+    ctx = browser.new_context(viewport={"width": 1440, "height": 900})
+    page, logs = setup(ctx)
+    page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator(".header-cta").click(); page.wait_for_timeout(1300)
+    check("header early access (desktop): email field ready", page.evaluate("document.activeElement.id") == "join-email")
+    page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(300)
+    page.locator(".picker a[href='/uti-treatment/']").click(); page.wait_for_load_state("networkidle")
+    check("quick picker: UTI opens the UTI page", page.url == f"{BASE}/uti-treatment/", page.url)
+    page.goto(ES_URL, wait_until="networkidle"); page.wait_for_timeout(300)
+    es_picks = page.evaluate("[...document.querySelectorAll('.picker a')].map(a => a.getAttribute('href'))")
+    check("es quick picker: links to the service cards on the Spanish page", len(es_picks) == 8
+          and all(page.locator(h).count() == 1 for h in es_picks), str(es_picks))
+    check("quick picker pages: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
     # 3) Every care finder outcome
@@ -679,7 +762,7 @@ with sync_playwright() as p:
     # service card buttons
     page.locator("#svc-sexual [data-join]").click(); page.wait_for_timeout(1200)
     check("sexual health card preselects its interest", page.locator("input[name='interest'][value='sexual-health']").is_checked())
-    check("desktop: name field focused for typing", page.evaluate("document.activeElement.id") == "join-name")
+    check("desktop: email field focused for typing", page.evaluate("document.activeElement.id") == "join-email")
     card_top = page.evaluate("document.querySelector('.form-card').getBoundingClientRect().top")
     check("desktop: form card in view", 60 <= card_top <= 400, f"top={card_top}")
     page.locator("#svc-therapy [data-join]").click(); page.wait_for_timeout(1200)
@@ -705,7 +788,6 @@ with sync_playwright() as p:
     page.locator("#join-name").fill("Sam"); page.locator("#join-email").fill("sam@example.com")
     page.select_option("#join-state", "TX")
     page.locator("#join-form label.check:has(input[value='anxiety-depression'])").click()
-    page.locator("label[for=join-consent]").click()
     page.locator("#join-submit").click(); page.wait_for_timeout(600)
     check("preview mode shows preview notice", "preview" in page.locator("#join-status").inner_text().lower())
     check("preview mode sends nothing", not sent, str(sent))
@@ -812,6 +894,9 @@ with sync_playwright() as p:
         tops = page.evaluate("[...document.querySelectorAll('.svc')].map(e => Math.round(e.getBoundingClientRect().top))")
         expect_rows = 3 if w >= 1060 else (5 if w >= 640 else 9)
         check(f"es: nine service cards in {expect_rows} rows @{w}", len(tops) == 9 and len(set(tops)) == expect_rows, str(tops))
+        es_nav = page.evaluate("[...document.querySelectorAll('.nav a')].filter(a => a.offsetParent).map(a => Math.round(a.getBoundingClientRect().height))")
+        if w >= 1100:
+            check(f"es: header nav on one line @{w}", len(es_nav) == 4 and max(es_nav) < 50, str(es_nav))
         check(f"es: no console errors @{w}", not logs, json.dumps(logs))
         if w in (390, 1440):
             page.screenshot(path=str(OUT / f"es-first-{w}.png"))
@@ -884,12 +969,12 @@ with sync_playwright() as p:
 
     page.goto(ES_URL + "#join", wait_until="networkidle"); page.wait_for_timeout(500)
     page.locator("#join-submit").click(); page.wait_for_timeout(300)
-    check("es join: errors in Spanish", page.locator("#err-name").inner_text().strip() == ES["j_name"]
+    check("es join: errors in Spanish", page.locator("#err-email").inner_text().strip() == ES["enter_email"]
+          and page.locator("#err-jstate").inner_text().strip() == ES["choose_state"]
           and ES["fix_many"].split("{n}")[0] in page.locator("#join-status").inner_text(), page.locator("#join-status").inner_text())
     page.locator("#join-name").fill("Ana"); page.locator("#join-email").fill("ana@example.com")
     page.select_option("#join-state", "TX")
     page.locator("#join-form label.check:has(input[value='therapy'])").click()
-    page.locator("label[for=join-consent]").click()
     es_posted = {}
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
     page.on("request", lambda req: es_posted.update(body=req.post_data) if req.method == "POST" and req.url.rstrip("/") == BASE else None)
@@ -947,9 +1032,10 @@ with sync_playwright() as p:
     page.add_init_script("delete Navigator.prototype.share; Object.defineProperty(navigator, 'clipboard', { value: { writeText: async t => { window.__copied = t; } } });")
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
     page.goto(URL + "#join", wait_until="networkidle"); page.wait_for_timeout(400)
-    page.locator("#join-name").fill("Sam"); page.locator("#join-email").fill("sam@example.com")
-    page.select_option("#join-state", "TX"); page.locator("#join-form label.check:has(input[value='skin-care'])").click()
-    page.locator("label[for=join-consent]").click(); page.locator("#join-submit").click(); page.wait_for_timeout(1000)
+    page.locator("#join-email").fill("sam@example.com"); page.select_option("#join-state", "TX")
+    page.locator("#join-submit").click(); page.wait_for_timeout(1000)
+    check("sign-up with only email and state works", page.locator("#join-success").is_visible()
+          and page.locator("#join-success-title").inner_text().startswith("You're on the list."))
     page.locator("#join-share").click(); page.wait_for_timeout(300)
     check("share: copies the link when there's no share sheet", page.evaluate("window.__copied") == "https://www.jachihealth.com/"
           and page.locator("#join-share .btn__label").inner_text() == strings.EN["share_copied_button"]
@@ -1017,8 +1103,8 @@ with sync_playwright() as p:
     page, logs = setup(ctx)
     page.goto(f"{BASE}/weight-loss/", wait_until="networkidle"); page.wait_for_timeout(300)
     page.locator(".page-cta .btn").click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1500)
-    check("weight page CTA (desktop): weight care ticked and name field ready", page.locator("input[name='interest'][value='weight-care']").is_checked()
-          and page.evaluate("document.activeElement.id") == "join-name")
+    check("weight page CTA (desktop): weight care ticked and email field ready", page.locator("input[name='interest'][value='weight-care']").is_checked()
+          and page.evaluate("document.activeElement.id") == "join-email")
     page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
     page.locator("#svc-skin .svc__link").click(); page.wait_for_load_state("networkidle")
     check("home service card title opens its page", page.url == f"{BASE}/skin-care/", page.url)
@@ -1058,7 +1144,7 @@ with sync_playwright() as p:
     ctx = browser.new_context(viewport={"width": 1280, "height": 900})
     page, logs = setup(ctx)
     page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
-    check("service notes say prices come before opening", PRICING_NOTE in page.locator(".svc-notes").inner_text())
+    check("services say prices come before opening", PRICING_NOTE in page.locator("#included").inner_text())
     page.goto(f"{BASE}/weight-loss/", wait_until="networkidle"); page.wait_for_timeout(300)
     glance = page.locator(".glance").inner_text()
     check("service page summary: service, kind of care, no price", "Weight care" in glance and "Ongoing care" in glance
@@ -1081,6 +1167,351 @@ with sync_playwright() as p:
     fonts_ok = page.evaluate("document.fonts.ready.then(() => [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family + ' ' + f.style))")
     check("brand fonts load from the site", any("Fraunces" in f for f in fonts_ok) and any("Instrument Sans" in f for f in fonts_ok), str(fonts_ok))
     ctx.close()
+
+    # 14) Accounts: from the early-access form to a confirmed account, then update, password, log out, reset, delete
+    A = strings.EN
+    def view(page):
+        return page.evaluate("[...document.querySelectorAll('[data-view]')].filter(v => !v.hidden).map(v => v.dataset.view).join()")
+    def expected_http_errors(logs):
+        # Wrong passwords (400), unknown emails (404), refused admin access (403) and an invited account confirming
+        # before choosing a password (422) are answers the pages handle; Chrome logs them anyway.
+        return [l for l in logs if not any(f"status of {c}" in l[1] for c in (400, 401, 403, 404, 422))]
+
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(500)
+    check("account page: says accounts aren't open yet while Identity is off", view(page) == "off"
+          and page.locator("[data-view=off] a[href='/#join']").count() == 1)
+    page.goto(f"{BASE}/admin/", wait_until="networkidle"); page.wait_for_timeout(500)
+    check("admin: explains how to turn accounts on while Identity is off", view(page) == "off" and "Enable Identity" in page.locator("[data-view=off]").inner_text())
+    check("accounts off: no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
+    ctx.close()
+
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    fake = FakeIdentity()
+    fake.attach(page)
+    page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
+    page.goto(URL + "#join", wait_until="networkidle"); page.wait_for_timeout(400)
+    page.locator("#join-email").fill("maya@example.com"); page.select_option("#join-state", "TX")
+    page.locator("#join-form label.check:has(input[value='therapy'])").click()
+    page.locator("#join-submit").click(); page.wait_for_timeout(1200)
+    check("join success offers an account once accounts are on", page.locator("#join-account").is_visible())
+    page.screenshot(path=str(OUT / "join-account-offer-phone.png"))
+    page.locator("#join-account-link").click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(600)
+    check("account offer opens Create account, filled in from the form", page.url == f"{BASE}/account/?create" and view(page) == "auth"
+          and page.locator("#tab-create").get_attribute("aria-selected") == "true" and page.locator("#create-email").input_value() == "maya@example.com"
+          and page.locator("#create-state").input_value() == "TX" and page.locator("#create-form input[value='therapy']").is_checked())
+    check("account page is in English and not indexed", page.evaluate("document.documentElement.lang") == "en"
+          and page.locator("meta[name=robots][content=noindex]").count() == 1 and page.locator("link[rel=canonical]").count() == 0)
+    page.locator("#create-submit").click(); page.wait_for_timeout(300)
+    check("create account: asks for a password", page.locator("#err-create-password").is_visible()
+          and page.evaluate("document.activeElement.id") == "create-password")
+    page.locator("#create-password").fill("short"); page.locator("#create-submit").click(); page.wait_for_timeout(300)
+    check("create account: password needs 8 characters", page.locator("#err-create-password").inner_text().strip() == A["a_err_password_short"])
+    page.locator("#create-form .pw__toggle").click()
+    check("password can be shown", page.locator("#create-password").get_attribute("type") == "text"
+          and page.locator("#create-form .pw__toggle").get_attribute("aria-pressed") == "true")
+    page.locator("#create-password").fill("garden-path-42"); page.locator("#create-submit").click(); page.wait_for_timeout(800)
+    user = fake.users.get("maya@example.com")
+    check("create account: check-your-email screen", view(page) == "sent" and "maya@example.com" in page.locator("#sent-body").inner_text()
+          and "no-reply@netlify.com" in page.locator("#sent-from").inner_text())
+    check("create account: saved unconfirmed, with state, services, language and emails on", user and user["confirmed_at"] is None
+          and user["user_metadata"] == {"state": "TX", "interests": ["therapy"], "language": "en", "updates": True}, json.dumps(user and user["user_metadata"]))
+    page.screenshot(path=str(OUT / "account-sent-phone.png"))
+    page.locator("[data-view=sent] [data-go=login]").click(); page.wait_for_timeout(300)
+    page.locator("#login-email").fill("maya@example.com"); page.locator("#login-password").fill("garden-path-42")
+    page.locator("#login-submit").click(); page.wait_for_timeout(600)
+    check("log in before confirming: explains what to do", A["a_e_unconfirmed"] in page.locator("#login-status").inner_text())
+
+    token = fake.last_link("confirmation")
+    page.goto(f"{BASE}/#confirmation_token={token}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1200)
+    check("confirmation link on the home page lands on the account, confirmed and logged in", page.url == f"{BASE}/account/"
+          and view(page) == "profile" and A["a_confirmed"] in page.locator("#profile-status").inner_text()
+          and "maya@example.com" in page.locator("#who").inner_text(), page.url)
+    check("profile shows the saved details", page.locator("#profile-state").input_value() == "TX"
+          and page.locator("#profile-form input[value='therapy']").is_checked() and page.locator("#profile-form input[name=language][value=en]").is_checked()
+          and page.locator("#profile-updates").is_checked())
+    page.screenshot(path=str(OUT / "account-profile-phone.png"), full_page=True)
+    page.select_option("#profile-state", "CA")
+    page.locator("#profile-form label:has(input[value='therapy'])").click()
+    page.locator("#profile-form label:has(input[value='anxiety-depression'])").click()
+    page.locator("#profile-form .seg label:has(input[value=es])").click()
+    page.locator("label[for=profile-updates]").click()
+    page.locator("#profile-submit").click(); page.wait_for_timeout(600)
+    check("profile: changes saved, including turning emails off", A["a_saved"] in page.locator("#profile-status").inner_text()
+          and fake.users["maya@example.com"]["user_metadata"] == {"state": "CA", "interests": ["anxiety-depression"], "language": "es", "updates": False},
+          json.dumps(fake.users["maya@example.com"]["user_metadata"]))
+    page.locator("#password-open").click(); page.wait_for_timeout(200)
+    check("change password: form opens with the field ready", page.locator("#password-form").is_visible() and page.evaluate("document.activeElement.id") == "new-password")
+    page.locator("#new-password").fill("new-garden-77"); page.locator("#password-submit").click(); page.wait_for_timeout(600)
+    check("change password: saved", A["a_password_saved"] in page.locator("#password-status").inner_text()
+          and fake.users["maya@example.com"]["_password"] == "new-garden-77" and page.locator("#password-form").is_hidden())
+    page.locator("#logout").click(); page.wait_for_timeout(600)
+    check("log out: back to log in, session gone", view(page) == "auth" and A["a_logged_out"] in page.locator("#login-status").inner_text()
+          and page.evaluate("localStorage.getItem('jachi.session')") is None)
+    page.locator("#login-email").fill("maya@example.com"); page.locator("#login-password").fill("garden-path-42")
+    page.locator("#login-submit").click(); page.wait_for_timeout(600)
+    check("log in: old password refused", A["a_e_invalid_login"] in page.locator("#login-status").inner_text() and view(page) == "auth")
+    page.locator("#login-password").fill("new-garden-77"); page.locator("#login-submit").click(); page.wait_for_timeout(700)
+    check("log in: new password works", view(page) == "profile")
+    page.locator("#logout").click(); page.wait_for_timeout(500)
+
+    page.locator("#login-email").fill("maya@example.com")
+    page.locator("[data-view=auth] [data-go=forgot]").click(); page.wait_for_timeout(300)
+    check("forgot password: email carried over", view(page) == "forgot" and page.locator("#forgot-email").input_value() == "maya@example.com")
+    page.locator("#forgot-email").fill("nobody@example.com"); page.locator("#forgot-submit").click(); page.wait_for_timeout(600)
+    unknown_text = page.locator("#sent-body").inner_text()
+    check("forgot password: same answer for an unknown email", view(page) == "sent" and "nobody@example.com" in unknown_text and not fake.last_link("recovery"))
+    page.locator("[data-view=sent] [data-go=login]").click(); page.locator("[data-view=auth] [data-go=forgot]").click()
+    page.locator("#forgot-email").fill("maya@example.com"); page.locator("#forgot-submit").click(); page.wait_for_timeout(600)
+    check("forgot password: reset email sent", view(page) == "sent" and fake.last_link("recovery") is not None)
+    page.goto(f"{BASE}/#recovery_token={fake.last_link('recovery')}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1200)
+    check("reset link lands on choose-a-new-password", page.url == f"{BASE}/account/" and view(page) == "reset")
+    page.locator("#reset-password").fill("third-garden-55"); page.locator("#reset-submit").click(); page.wait_for_timeout(700)
+    check("reset: new password saved and logged in", view(page) == "profile" and A["a_password_saved"] in page.locator("#profile-status").inner_text()
+          and fake.users["maya@example.com"]["_password"] == "third-garden-55")
+    page.goto(f"{BASE}/account/?from=email#confirmation_token=used-or-made-up"); page.wait_for_timeout(1200)
+    check("an expired or used link explains itself, token cleared from the address", view(page) == "link" and "#" not in page.url, page.url)
+    page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(700)
+    check("returning to the account page keeps you logged in", view(page) == "profile")
+    page.locator("#delete-open").click(); page.wait_for_timeout(200)
+    check("delete: asks first", page.locator("#delete-confirm").is_visible() and page.evaluate("document.activeElement.id") == "delete-warn")
+    page.locator("#delete-no").click(); page.wait_for_timeout(200)
+    check("delete: cancel keeps everything", page.locator("#delete-confirm").is_hidden() and page.evaluate("document.activeElement.id") == "delete-open"
+          and "maya@example.com" in fake.users)
+    page.locator("#delete-open").click(); page.locator("#delete-yes").click(); page.wait_for_timeout(900)
+    check("delete: account and sign-ups gone, session cleared", view(page) == "deleted" and fake.deleted == ["maya@example.com"]
+          and A["a_deleted_done"] in page.locator("#deleted-body").inner_text() and page.evaluate("localStorage.getItem('jachi.session')") is None)
+    page.screenshot(path=str(OUT / "account-deleted-phone.png"))
+    ov = page.evaluate(OVERFLOW_JS)
+    check("account page: no overflow on a phone", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+    check("accounts (phone): no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
+    ctx.close()
+
+    # The account page in Spanish, at every size
+    for w, h in ((360, 740), (768, 1024), (1440, 900)):
+        ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=w < 900, is_mobile=w < 900)
+        page, logs = setup(ctx)
+        fake = FakeIdentity()
+        fake.attach(page)
+        page.goto(f"{BASE}/es/account/?create", wait_until="networkidle"); page.wait_for_timeout(600)
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"es account @{w}: Spanish, no overflow", page.evaluate("document.documentElement.lang") == "es"
+              and page.locator("#tab-create").inner_text() == ES["a_tab_create"] and ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+        if w == 1440:
+            problems = page.evaluate(STATIC_A11Y_JS)
+            check("es account: labels, names and ids valid", not problems, json.dumps(problems))
+            check("es account: language switch stays on the account page", page.locator(".lang-switch").get_attribute("href") == "/account/")
+            page.locator("#create-email").fill("ana@example.com"); page.locator("#create-password").fill("jardin-123")
+            page.select_option("#create-state", "TX"); page.locator("#create-submit").click(); page.wait_for_timeout(700)
+            check("es account: created in Spanish, check-your-email in Spanish", view(page) == "sent"
+                  and fake.users["ana@example.com"]["user_metadata"]["language"] == "es" and "Enviamos un enlace" in page.locator("#sent-body").inner_text())
+            page.goto(f"{BASE}/#confirmation_token={fake.last_link('confirmation')}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1300)
+            check("es account: the confirmation link comes back to the Spanish page", page.url == f"{BASE}/es/account/"
+                  and view(page) == "profile" and ES["a_confirmed"] in page.locator("#profile-status").inner_text(), page.url)
+            page.screenshot(path=str(OUT / "es-account-desktop.png"), full_page=True)
+        check(f"es account @{w}: no console errors", not expected_http_errors(logs), json.dumps(logs))
+        ctx.close()
+
+    # Desktop account page: tabs by keyboard, a11y and invite-only mode
+    ctx = browser.new_context(viewport={"width": 1440, "height": 900})
+    page, logs = setup(ctx)
+    fake = FakeIdentity(disable_signup=True)
+    fake.attach(page)
+    page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(600)
+    problems = page.evaluate(STATIC_A11Y_JS)
+    check("account page: labels, names and ids valid", not problems, json.dumps(problems))
+    check("invite-only: no Create account tab", page.locator("#tab-create").is_hidden() and view(page) == "auth")
+    page.screenshot(path=str(OUT / "account-desktop.png"))
+    ctx.close()
+    ctx = browser.new_context(viewport={"width": 1440, "height": 900})
+    page, logs = setup(ctx)
+    fake = FakeIdentity()
+    fake.attach(page)
+    page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(600)
+    page.locator("#tab-login").focus(); page.keyboard.press("ArrowRight")
+    check("tabs: arrow keys switch to Create account", page.locator("#tab-create").get_attribute("aria-selected") == "true"
+          and page.evaluate("document.activeElement.id") == "tab-create" and page.locator("#panel-create").is_visible() and page.locator("#panel-login").is_hidden())
+    invite = fake.invite("lee@example.com")
+    page.goto(f"{BASE}/#invite_token={invite}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1000)
+    check("invite link: choose a password", view(page) == "invite")
+    page.locator("#invite-password").fill("lee-password-1"); page.locator("#invite-submit").click(); page.wait_for_timeout(700)
+    check("invite: accepted and logged in", view(page) == "profile" and fake.users["lee@example.com"]["confirmed_at"] is not None
+          and fake.users["lee@example.com"]["_password"] == "lee-password-1")
+    change = fake.email_change("lee@example.com", "lee.new@example.com")
+    page.locator("#logout").click(); page.wait_for_timeout(500)
+    page.goto(f"{BASE}/#email_change_token={change}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1000)
+    check("email-change link while logged out: asks to log in first", view(page) == "auth"
+          and A["a_email_change_login"] in page.locator("#login-status").inner_text() and "#" not in page.url, page.url)
+    page.locator("#login-email").fill("lee@example.com"); page.locator("#login-password").fill("lee-password-1")
+    page.locator("#login-submit").click(); page.wait_for_timeout(700)
+    page.goto(f"{BASE}/#email_change_token={change}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1000)
+    check("email-change link once logged in: email updated", view(page) == "profile"
+          and A["a_email_changed"] in page.locator("#profile-status").inner_text() and "lee.new@example.com" in page.locator("#who").inner_text())
+    page.locator("#logout").click(); page.wait_for_timeout(500)
+    invite = fake.invite("kim@example.com")
+    page.goto(f"{BASE}/account/?create", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#create-email").fill("kim@example.com"); page.locator("#create-password").fill("kim-own-pass-1")
+    page.select_option("#create-state", "TX"); page.locator("#create-submit").click(); page.wait_for_timeout(700)
+    check("invited, then signed up again: still no password, the invitation link replaced", view(page) == "sent"
+          and fake.users["kim@example.com"]["_password"] is None and invite not in fake.links)
+    page.goto(f"{BASE}/#confirmation_token={fake.last_link('confirmation')}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1000)
+    check("its confirmation link asks for a password, like the invitation", view(page) == "invite")
+    page.locator("#invite-password").fill("kim-password-1"); page.locator("#invite-submit").click(); page.wait_for_timeout(700)
+    check("password chosen: confirmed and logged in", view(page) == "profile" and fake.users["kim@example.com"]["confirmed_at"] is not None
+          and fake.users["kim@example.com"]["_password"] == "kim-password-1")
+    check("account desktop: no console errors", not expected_http_errors(logs), json.dumps(logs))
+    ran = page.evaluate("""() => { window.__injected = 0; const s = document.createElement('script'); s.textContent = 'window.__injected = 1';
+        document.body.appendChild(s); return window.__injected; }""")
+    check("account page: only its own scripts can run (injected ones are blocked)", ran == 0
+          and page.locator("meta[http-equiv=Content-Security-Policy]").count() == 1)
+    ctx.close()
+
+    # 15) Admin console
+    def admin_fake(page):
+        f = FakeIdentity()
+        f.attach(page)
+        f.add_user("support@jachihealth.com", "admin-pass-1", confirmed=True, invited=True)
+        f.add_user("maya@example.com", "maya-pass-1", confirmed=True,
+                   metadata={"state": "TX", "interests": ["therapy"], "language": "es", "updates": False})
+        f.add_signup("maya@example.com", name="Maya", state="TX", interest="therapy", language="es", created_at="2026-10-13T10:00:00Z")
+        f.add_signup("sam@example.com", name="Sam", state="CA", interest="urgent-care, skin-care", created_at="2026-10-14T10:00:00Z")
+        f.add_signup("=cmd@evil.example", name='=HYPERLINK("http://x")', state="TX", created_at="2026-10-15T10:00:00Z")
+        f.add_ticket("ana@example.com", name="Ana <b>bold</b>", topic="Early access", message="When will you open in Dallas?",
+                     transcript="Visitor: hi\n\nAssistant: hello")
+        f.add_ticket("sam@example.com", name="Sam", topic="Website problem", message="The form didn't load.")
+        f.add_ticket("x@y.com?cc=z%40evil.example&subject=hi.com", name="Odd", message="hello", created_at="2026-10-12T09:00:00Z")
+        return f
+
+    for w, h in ((390, 844), (1440, 900)):
+        ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=w < 900, is_mobile=w < 900, accept_downloads=True)
+        page, logs = setup(ctx)
+        fake = admin_fake(page)
+        page.goto(f"{BASE}/admin/", wait_until="networkidle"); page.wait_for_timeout(500)
+        check(f"admin @{w}: asks to log in, not indexed", view(page) == "login" and page.locator("meta[name=robots][content=noindex]").count() == 1)
+        page.locator("#adm-login-email").fill("maya@example.com"); page.locator("#adm-login-password").fill("maya-pass-1")
+        page.locator("#adm-login-submit").click(); page.wait_for_timeout(1000)
+        check(f"admin @{w}: an ordinary account is turned away", view(page) == "denied" and "isn't an admin" in page.locator("#adm-denied-text").inner_text())
+        page.locator("[data-view=denied] [data-logout]").click(); page.wait_for_timeout(500)
+        page.locator("#adm-login-email").fill("support@jachihealth.com"); page.locator("#adm-login-password").fill("admin-pass-1")
+        page.locator("#adm-login-submit").click(); page.wait_for_timeout(1200)
+        check(f"admin @{w}: console opens for the admin", view(page) == "console" and page.locator("#adm-email").inner_text() == "support@jachihealth.com"
+              and page.locator("#n-signups").inner_text() == "3" and page.locator("#n-tickets").inner_text() == "3" and page.locator("#n-members").inner_text() == "2")
+        check(f"admin @{w}: overview counts people still getting emails", page.locator(".ov__num").inner_text() == "2"
+              and page.locator(".bars li").count() == 12, page.locator(".ov__num").inner_text())
+        page.screenshot(path=str(OUT / f"admin-overview-{w}.png"), full_page=True)
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"admin @{w}: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+        if w == 1440:
+            problems = page.evaluate(STATIC_A11Y_JS.replace("if (h1 !== 1) problems.push('h1 count ' + h1);", ""))
+            check("admin: labels, names and ids valid", not problems, json.dumps(problems))
+        page.locator("#tab-signups").click(); page.wait_for_timeout(300)
+        rows = page.locator("#signups-list .row")
+        check(f"admin @{w}: one row per person, admins left out", rows.count() == 3 and "support@jachihealth.com" not in page.locator("#signups-list").inner_text())
+        check(f"admin @{w}: account and emails-off badges", page.locator("#signups-list .row[data-email='maya@example.com'] .badge--off").count() == 1)
+        page.locator("#f-q").fill("sam"); page.wait_for_timeout(200)
+        check(f"admin @{w}: search", rows.count() == 1 and "Showing 1 of 3" in page.locator("#signups-count").inner_text())
+        page.locator("#f-q").fill(""); page.select_option("#f-emails", "off"); page.wait_for_timeout(200)
+        check(f"admin @{w}: filter by emails off", rows.count() == 1 and page.locator("#signups-list .row").first.get_attribute("data-email") == "maya@example.com")
+        page.select_option("#f-emails", ""); page.select_option("#f-service", "skin-care"); page.wait_for_timeout(200)
+        check(f"admin @{w}: filter by service", rows.count() == 1 and page.locator("#signups-list .row").first.get_attribute("data-email") == "sam@example.com")
+        page.select_option("#f-service", "")
+        with page.expect_download() as dl:
+            page.locator("#csv").click()
+        csv_text = Path(dl.value.path()).read_text(encoding="utf-8-sig")
+        check(f"admin @{w}: CSV download, safe from spreadsheet formulas", csv_text.startswith('"email","first_name","state","services","language","joined","account","emails"')
+              and all(line.startswith('"') and line.endswith('"') for line in csv_text.strip().split("\r\n"))
+              and "'=cmd@evil.example" in csv_text and '"\'=HYPERLINK(""http://x"")"' in csv_text and "maya@example.com" in csv_text
+              and dl.value.suggested_filename.startswith("jachi-early-access-"), csv_text[:400])
+        page.locator("#tab-tickets").click(); page.wait_for_timeout(300)
+        check(f"admin @{w}: tickets show what people typed, never as page code", page.locator("#tickets-list b").count() == 0
+              and "Ana <b>bold</b>" in page.locator("#tickets-list").inner_text())
+        check(f"admin @{w}: reply by email", page.locator("#tickets-list a[href^='mailto:ana@example.com?subject=Re%3A%20Early%20access']").count() == 1)
+        check(f"admin @{w}: no reply link for an address that could add cc or subject", page.locator("#tickets-list a[href*='evil']").count() == 0
+              and "x@y.com?cc=" in page.locator("#tickets-list").inner_text() and page.locator("#tickets-list a[href^='mailto:']").count() == 2)
+        page.locator("#tickets-list .row").first.locator("[data-delete-ticket]").click(); page.wait_for_timeout(200)
+        page.locator("#tickets-list .row").first.locator("[data-yes]").click(); page.wait_for_timeout(600)
+        check(f"admin @{w}: delete a ticket", len(fake.tickets) == 2 and page.locator("#tickets-list .row").count() == 2
+              and "Ticket deleted" in page.locator("#adm-status").inner_text() and page.locator("#n-tickets").inner_text() == "2")
+        page.locator("#tab-signups").click(); page.wait_for_timeout(200)
+        page.locator("#signups-list .row[data-email='maya@example.com'] [data-erase]").click(); page.wait_for_timeout(200)
+        page.locator("#signups-list .row[data-email='maya@example.com'] [data-no]").click(); page.wait_for_timeout(200)
+        check(f"admin @{w}: erase can be cancelled", "maya@example.com" in fake.users and page.locator("#signups-list .row").count() == 3)
+        page.locator("#signups-list .row[data-email='maya@example.com'] [data-erase]").click(); page.wait_for_timeout(200)
+        page.locator("#signups-list .row[data-email='maya@example.com'] [data-yes]").click(); page.wait_for_timeout(700)
+        check(f"admin @{w}: erase removes the person's sign-ups and account", "maya@example.com" not in fake.users
+              and not [x for x in fake.signups if x["email"] == "maya@example.com"] and page.locator("#signups-list .row").count() == 2
+              and "Erased everything for maya@example.com" in page.locator("#adm-status").inner_text())
+        page.locator("#tab-members").click(); page.wait_for_timeout(200)
+        check(f"admin @{w}: your own account can't be deleted here", page.locator("#members-list .row").count() == 1
+              and page.locator("#members-list [data-delete-member]").count() == 0 and "You" in page.locator("#members-list .badge").first.inner_text())
+        page.locator("#tab-checklist").click(); page.wait_for_timeout(200)
+        page.locator("#check-list label:has(input[data-item='quote'])").click(); page.wait_for_timeout(900)
+        saved = fake.users["support@jachihealth.com"]["user_metadata"].get("checklist", {})
+        check(f"admin @{w}: launch checklist saves to the admin account", saved.get("done", {}).get("quote") is True
+              and "1 of 10 done" in page.locator("#check-progress").inner_text(), json.dumps(saved))
+        page.locator("#check-new").fill("Order business cards"); page.locator("#check-add button").click(); page.wait_for_timeout(900)
+        saved = fake.users["support@jachihealth.com"]["user_metadata"].get("checklist", {})
+        check(f"admin @{w}: add your own checklist item", any(c["text"] == "Order business cards" for c in saved.get("custom", [])))
+        page.locator("#tab-setup").click(); page.wait_for_timeout(200)
+        check(f"admin @{w}: setup flags email alerts as a to-do", page.locator("#setup-dot").is_visible() and page.locator("#alerts-on").is_visible())
+        page.locator("#alerts-on").click(); page.wait_for_timeout(600)
+        check(f"admin @{w}: turn on email alerts", fake.alerts == ["support@jachihealth.com"] and page.locator("#alerts-on").count() == 0
+              and "Email alerts are on" in page.locator("#setup-list").inner_text())
+        page.screenshot(path=str(OUT / f"admin-setup-{w}.png"), full_page=True)
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(1000)
+        check(f"admin @{w}: stays logged in, remembers the tab and the checklist", view(page) == "console"
+              and page.locator("#tab-setup").get_attribute("aria-selected") == "true"
+              and page.locator("#check-list input[data-item='quote']").is_checked())
+        page.locator("#tab-setup").focus(); page.keyboard.press("Home")
+        check(f"admin @{w}: tabs work with the keyboard", page.locator("#tab-overview").get_attribute("aria-selected") == "true"
+              and page.evaluate("document.activeElement.id") == "tab-overview")
+        fake.autoconfirm = True
+        page.locator("#adm-refresh").click(); page.wait_for_timeout(900)
+        check(f"admin @{w}: access pauses if email confirmation is switched off", view(page) == "denied"
+              and "confirm their email" in page.locator("#adm-denied-text").inner_text())
+        check(f"admin @{w}: no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
+        if w == 1440:
+            ran = page.evaluate("""() => { window.__injected = 0; const s = document.createElement('script'); s.textContent = 'window.__injected = 1';
+                document.body.appendChild(s); return window.__injected; }""")
+            check("admin: only the console's own script can run (injected ones are blocked)", ran == 0
+                  and page.locator("meta[http-equiv=Content-Security-Policy]").count() == 1)
+        ctx.close()
+
+    # Someone who signs up first with the admin's address can't get in, even after the owner confirms it
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    fake = FakeIdentity()
+    fake.attach(page)
+    fake.add_user("support@jachihealth.com", "stranger-pass-1", confirmed=False)  # their sign-up, never confirmed
+    page.goto(f"{BASE}/account/?create", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#create-email").fill("support@jachihealth.com"); page.locator("#create-password").fill("owner-pass-123")
+    page.select_option("#create-state", "TX"); page.locator("#create-submit").click(); page.wait_for_timeout(700)
+    page.goto(f"{BASE}/#confirmation_token={fake.last_link('confirmation')}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1200)
+    confirmed = view(page) == "profile" and fake.users["support@jachihealth.com"]["_password"] == "stranger-pass-1"
+    page.goto(f"{BASE}/admin/", wait_until="networkidle"); page.wait_for_timeout(900)
+    check("admin: an account someone else signed up first is refused, with the fix", confirmed and view(page) == "denied"
+          and "Invite users" in page.locator("#adm-denied-text").inner_text())
+    page.locator("[data-view=denied] [data-logout]").click(); page.wait_for_timeout(500)
+    page.locator("#adm-login-email").fill("support@jachihealth.com"); page.locator("#adm-login-password").fill("stranger-pass-1")
+    page.locator("#adm-login-submit").click(); page.wait_for_timeout(1000)
+    check("admin: the person who chose that password is refused too", view(page) == "denied")
+    page.locator("[data-view=denied] [data-logout]").click(); page.wait_for_timeout(500)
+    del fake.users["support@jachihealth.com"]
+    invite = fake.invite("support@jachihealth.com")
+    page.goto(f"{BASE}/#invite_token={invite}"); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1000)
+    page.locator("#invite-password").fill("owner-pass-456"); page.locator("#invite-submit").click(); page.wait_for_timeout(700)
+    page.goto(f"{BASE}/admin/", wait_until="networkidle"); page.wait_for_timeout(900)
+    check("admin: once the address is deleted and invited, the owner gets in", view(page) == "console")
+    check("admin takeover test: no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
+    ctx.close()
+
+    status, headers, _b = get("/admin/")
+    check("admin and account pages send noindex headers", headers.get("X-Robots-Tag") == "noindex"
+          and get("/account/")[1].get("X-Robots-Tag") == "noindex" and get("/es/account/")[1].get("X-Robots-Tag") == "noindex")
+    sm = get("/sitemap.xml")[2].decode()
+    check("admin and account pages stay out of the sitemap", "/admin/" not in sm and "/account/" not in sm)
 
     check("no page asked another website for anything", not EXTERNAL, json.dumps(EXTERNAL[:10]))
 

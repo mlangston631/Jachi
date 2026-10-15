@@ -5,13 +5,15 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Making a change
 
-1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `strings.py`, `src/`, `chatbot.py`, `brand.py`,
-   `netlify.toml`). Never hand-edit anything in `public/` or `netlify/functions/chat.mjs`; `build.py` generates them.
+1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `strings.py`, `src/`, `src/functions/`,
+   `chatbot.py`, `brand.py`, `netlify.toml`). Never hand-edit anything in `public/` or `netlify/functions/`;
+   `build.py` generates them.
 2. Keep English and Spanish in step:
    - After changing `src/en/home.html`, run `python3 tools/es_home.py`. It stops on any English sentence it
      can't find, which means a translation in that file needs adding or updating.
    - `src/en/header.html`, `footer.html`, `chat.html` and `dock.html` have Spanish copies in `src/es/`; change both.
-   - New text shown by `src/app.js` goes in `strings.py` under both `EN` and `ES`.
+   - New text shown by `src/app.js` or the account page goes in `strings.py` under both `EN` and `ES`
+     (account page keys start with `a_`). The admin console is English only.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.
 3. `python3 build.py`
 4. `node tests/function.test.mjs` and `python3 tests/qa.py`. Every check must pass. Fix the cause rather than
@@ -43,12 +45,33 @@ keep replies short and plain, and ask only questions that change what you'll do.
 - Privacy: no analytics, ad pixels or trackers (it's a health site). Don't collect health details in forms or chat.
   Patient accounts with health records must live on HIPAA-compliant systems with a BAA (his medical partner's
   portal); Netlify's plan can't hold health data.
+- Accounts (`/account/`, Netlify Identity) are for early-access details only: state, services, language, emails
+  on or off. Never add health fields. Deleting an account also deletes that email's sign-ups and tickets, but only
+  when the person proved the email by a link we sent (`provedEmail`) and Identity's autoconfirm is off.
+- Admin console (`/admin/`): admins are accounts with the "admin" role in Netlify's Identity tab, or accounts
+  whose email is in `ADMIN_EMAILS` (default: the support email) that were created from an invitation sent in
+  Netlify (`invited_at`). Without the invitation rule, a stranger could sign up with the admin address first;
+  Identity keeps that first password when the owner signs up again and confirms. Email-based admin access is
+  also refused while Identity's autoconfirm is on. Sign-ups and tickets come from Netlify Forms through
+  `NETLIFY_API_TOKEN`; the console only deletes ids that belong to the site's two forms.
+- The clinical standards section states only facts: who provides care, Texas supervision rules, licenses
+  anyone can look up. Clinician names and credentials go there only when his medical partner provides them.
 
 ## Security
 
-- The repository is public. Never commit keys or passwords. Secrets live only in Netlify's environment variables.
-- `netlify.toml` sends a Content-Security-Policy that allows only the site's own files and `/api/chat`; the fonts
-  are served by the site itself (`tools/make_fonts.py`). Any outside service (video visits, booking, analytics)
+- The repository is public. Never commit keys or passwords. Secrets live only in Netlify's environment variables:
+  `NETLIFY_API_TOKEN` (a personal access token with access to his whole Netlify account, used only inside
+  `netlify/functions/admin.mjs` and `account.mjs`, never sent to a browser; set for the Production deploy
+  context only, so Deploy Previews built from pull requests never get it), optional `ADMIN_EMAILS`, and
+  optional `ANTHROPIC_API_KEY`. Environment variable changes need a redeploy. Keep Netlify's sensitive variable
+  policy on "Require approval" so pull requests from strangers don't deploy with secrets.
+- The admin and account functions check the person's sign-in with Identity on every request. Everything the
+  admin console shows was typed by the public: keep escaping it, keep every CSV cell quoted with the formula
+  guard, and keep reply links to addresses that pass the strict `MAILTO_RE`. The account and admin pages also
+  carry their own script policy (`script_policy` in `build.py`) that lets only their exact inline scripts run;
+  it updates itself on every build.
+- `netlify.toml` sends a Content-Security-Policy that allows only the site's own files and addresses (`/api/*`,
+  `/.netlify/identity`); the fonts are served by the site itself (`tools/make_fonts.py`). Any outside service (video visits, booking, analytics)
   needs a CSP change and an update to the privacy policy (`src/en/privacy.html`) and privacy summary (`chat.html`).
 - The Texas Medical Board notice must stay word for word as the Board publishes it.
 
