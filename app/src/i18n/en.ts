@@ -429,7 +429,7 @@ export const en = {
     name: 'Name',
     email: 'Email',
     topic: 'Topic',
-    topics: ['General question', 'Early access', 'Services and prices', 'Website problem', 'Partnerships or press', 'Something else'],
+    topics: ['General question', 'Waitlist', 'Services and prices', 'Website problem', 'Partnerships or press', 'Something else'],
     message: 'Message',
     messageHint: "Please don't include health details.",
     includeChat: 'Include my chat with the AI guide',

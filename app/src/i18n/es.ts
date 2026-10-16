@@ -431,7 +431,7 @@ export const es: Shape<typeof en> = {
     name: 'Nombre',
     email: 'Correo electrónico',
     topic: 'Tema',
-    topics: ['Pregunta general', 'Acceso anticipado', 'Servicios y precios', 'Problema con el sitio web', 'Alianzas o prensa', 'Otra cosa'],
+    topics: ['Pregunta general', 'Lista de espera', 'Servicios y precios', 'Problema con el sitio web', 'Alianzas o prensa', 'Otra cosa'],
     message: 'Mensaje',
     messageHint: 'Por favor, no incluya datos de salud.',
     includeChat: 'Incluir mi conversación con la guía de IA',

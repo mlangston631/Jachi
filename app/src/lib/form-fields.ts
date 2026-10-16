@@ -14,7 +14,7 @@ export function waitlistFields(w: WaitlistInput): Record<string, string> {
   };
 }
 
-export const TICKET_TOPICS = ['General question', 'Early access', 'Services and prices', 'Website problem', 'Partnerships or press', 'Something else'] as const;
+export const TICKET_TOPICS = ['General question', 'Waitlist', 'Services and prices', 'Website problem', 'Partnerships or press', 'Something else'] as const;
 
 export type TicketInput = {
   name: string;
