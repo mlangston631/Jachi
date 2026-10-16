@@ -37,7 +37,7 @@ with sync_playwright() as p:
             # Hide the fixed header and bars, and show scroll-in blocks, so the element is pictured whole.
             page.add_style_tag(content=".site-header,.dock,.skip,.chat-launcher{visibility:hidden!important}"
                                "[data-reveal].pre{opacity:1!important;transform:none!important}"
-                               ".steps-wrap.pre .step::before{transform:none!important}")
+                               ".journey.pre .step::before{transform:none!important}")
         el = page.locator(sel).first
         el.scroll_into_view_if_needed()
         page.wait_for_timeout(300)

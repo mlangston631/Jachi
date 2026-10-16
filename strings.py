@@ -7,6 +7,8 @@ Keep both languages in step: the tests fail if a key exists in one and not the o
 EN = {
     # Shared
     "get_early_access": "Join the waitlist",
+    # Text 988 (Spanish adds AYUDA, the word that reaches Spanish-speaking counselors)
+    "sms_988": "sms:988",
     "continue": "Continue",
     "choose_answer": "Choose an answer.",
     "choose_state": "Choose your state.",
@@ -33,7 +35,7 @@ EN = {
     "e_minor_body": "If you're under 18 and want help with your weight, talk with a parent or your doctor about the right next step.",
     "e_caution_title": "Medication may not be safe for you.",
     "e_caution_mtc": "GLP-1 medications shouldn't be used by people with a personal or family history of medullary thyroid cancer or MEN2.",
-    "e_caution_preg": "GLP-1 weight-loss medications usually aren't prescribed during pregnancy, while breastfeeding or when you're planning a pregnancy.",
+    "e_caution_preg": "GLP-1 weight-loss medications shouldn't be taken during pregnancy, while breastfeeding or if you're planning a pregnancy.",
     "e_caution_end": "A doctor can help you find a safe approach.",
     "e_likely_title": "You may be a good fit for medical weight care.",
     "e_likely_30": "Your BMI of {bmi} meets the general guideline for FDA-approved weight-loss medication.",
@@ -219,6 +221,7 @@ EN = {
 ES = {
     # Shared
     "get_early_access": "Únase a la lista de espera",
+    "sms_988": "sms:988?&body=AYUDA",
     "continue": "Continuar",
     "choose_answer": "Elija una respuesta.",
     "choose_state": "Elija su estado.",
@@ -245,7 +248,7 @@ ES = {
     "e_minor_body": "Si tiene menos de 18 años y quiere ayuda con su peso, hable con su madre, su padre o su médico sobre el mejor siguiente paso.",
     "e_caution_title": "Es posible que el medicamento no sea seguro para usted.",
     "e_caution_mtc": "Las personas con antecedentes personales o familiares de cáncer medular de tiroides o MEN2 no deben usar medicamentos GLP-1.",
-    "e_caution_preg": "Los medicamentos GLP-1 para bajar de peso normalmente no se recetan durante el embarazo, la lactancia ni cuando se planea un embarazo.",
+    "e_caution_preg": "Los medicamentos GLP-1 para bajar de peso no se deben tomar durante el embarazo, la lactancia ni si planea un embarazo.",
     "e_caution_end": "Un médico puede ayudarle a encontrar una opción segura.",
     "e_likely_title": "Es posible que el control de peso médico sea adecuado para usted.",
     "e_likely_30": "Su IMC de {bmi} cumple la pauta general para los medicamentos para bajar de peso aprobados por la FDA.",

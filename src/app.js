@@ -1005,7 +1005,7 @@
       turns.push({ role: 'user', content: text });
       if (CRISIS.test(plain(text))) {
         const el = addMsg('bot', CRISIS_TEXT, 'msg--alert');
-        addActions(el, [{ label: T.c_call_988, href: 'tel:988', icon: 'phone' }, { label: T.c_text_988, href: 'sms:988', icon: 'msg', ghost: true }]);
+        addActions(el, [{ label: T.c_call_988, href: 'tel:988', icon: 'phone' }, { label: T.c_text_988, href: T.sms_988, icon: 'msg', ghost: true }]);
         turns.push({ role: 'assistant', content: CRISIS_TEXT });
         return;
       }

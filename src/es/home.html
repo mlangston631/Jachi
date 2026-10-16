@@ -1,89 +1,46 @@
 <main id="main">
 
   <!-- Hero -->
-  <section class="hero grain" id="top" aria-labelledby="hero-title">
+  <section class="hero" id="top" aria-labelledby="hero-title">
     <div class="wrap hero__grid">
-      <div class="hero__copy">
-        <p class="pill" data-rise style="--d:0ms"><span class="pill__dot" aria-hidden="true"></span>Lista de espera abierta · Pronto en Texas</p>
-        <h1 class="display" id="hero-title" data-rise style="--d:90ms">Atención en línea, arraigada en la <em>medicina real.</em></h1>
-        <p class="lead" data-rise style="--d:180ms">Profesionales de la salud con licencia, en línea, para todo: desde resfriados y resurtidos hasta terapia, salud sexual y control de peso. Un asistente de cuidado le da seguimiento entre consultas, y sabrá cuánto cuesta su atención antes de empezar.</p>
-        <div class="cta-row" data-rise style="--d:270ms">
+      <div class="hero__head">
+        <p class="status" data-rise style="--d:0ms"><span class="status__dot" aria-hidden="true"></span><span>Lista de espera abierta</span><span class="status__rule" aria-hidden="true"></span><span>Abrimos primero en Texas</span></p>
+        <h1 class="display" id="hero-title" data-rise style="--d:80ms">Atención en línea, arraigada en la medicina real.</h1>
+        <a class="hero__alt" href="/" hreflang="en" lang="en" data-rise style="--d:160ms"><span class="hero__alt-tag">In English</span><span class="hero__alt-line">Online care, rooted in real medicine.</span></a>
+      </div>
+      <div class="hero__copy" data-rise style="--d:240ms">
+        <p class="lead">Profesionales de la salud con licencia, en línea, para la atención de todos los días: desde resfriados y resurtidos hasta terapia, salud sexual y control de peso. Sabrá cuánto cuesta su atención antes de empezar.</p>
+        <div class="cta-row">
           <a class="btn btn--lg" href="#join" data-to-join>Únase a la lista de espera {{I:arrow:i--arrow}}</a>
           <a class="btn btn--ghost btn--lg" href="#care-finder">Encuentre la atención adecuada</a>
         </div>
-        <ul class="trust" data-rise style="--d:330ms">
+        <ul class="trust">
           <li><span class="trust__ic">{{I:check}}</span>Unirse es gratis</li>
           <li><span class="trust__ic">{{I:check}}</span>Profesionales con licencia</li>
           <li><span class="trust__ic">{{I:check}}</span>Sin seguro médico</li>
         </ul>
-        <nav class="picker" aria-labelledby="picker-label" data-rise style="--d:390ms">
+      </div>
+      <div class="map">
+        <svg class="map__art" viewBox="0 0 800 540" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="map-blade" x1="0.25" y1="0" x2="0.75" y2="1">
+              <stop offset="0" stop-color="#EDF4EE"/>
+              <stop offset="0.55" stop-color="#C6DDCB"/>
+              <stop offset="1" stop-color="#9BC1A3"/>
+            </linearGradient>
+          </defs>
+          <path class="map__blade" d="M400 34C456 84 508 180 502 266C496 350 446 416 400 448C354 416 304 350 298 266C292 180 344 84 400 34Z" fill="url(#map-blade)"/>
+          <path class="map__stem" pathLength="1" d="M400 448C400 480 392 506 374 524"/>
+          <g class="map__veins">
+            <path class="map__rib" pathLength="1" d="M400 446C398 340 402 160 400 52"/>
+            <path class="map__vein map__v1" pathLength="1" d="M400 150Q376.5 144 353 104"/><path class="map__vein map__v2" pathLength="1" d="M400 150Q423.5 144 447 104"/><path class="map__vein map__v3" pathLength="1" d="M400 225Q360 219 320 179"/><path class="map__vein map__v4" pathLength="1" d="M400 225Q440 219 480 179"/><path class="map__vein map__v5" pathLength="1" d="M400 300Q354 294 308 254"/><path class="map__vein map__v6" pathLength="1" d="M400 300Q446 294 492 254"/><path class="map__vein map__v7" pathLength="1" d="M400 375Q360 369 320 329"/><path class="map__vein map__v8" pathLength="1" d="M400 375Q440 369 480 329"/>
+          </g>
+          <g class="map__leads"><g class="map__lead map__l1"><path pathLength="1" d="M347 104H252"/><circle cx="252" cy="104" r="3.5"/></g><g class="map__lead map__l2"><path pathLength="1" d="M453 104H548"/><circle cx="548" cy="104" r="3.5"/></g><g class="map__lead map__l3"><path pathLength="1" d="M314 179H252"/><circle cx="252" cy="179" r="3.5"/></g><g class="map__lead map__l4"><path pathLength="1" d="M486 179H548"/><circle cx="548" cy="179" r="3.5"/></g><g class="map__lead map__l5"><path pathLength="1" d="M302 254H252"/><circle cx="252" cy="254" r="3.5"/></g><g class="map__lead map__l6"><path pathLength="1" d="M498 254H548"/><circle cx="548" cy="254" r="3.5"/></g><g class="map__lead map__l7"><path pathLength="1" d="M314 329H252"/><circle cx="252" cy="329" r="3.5"/></g><g class="map__lead map__l8"><path pathLength="1" d="M486 329H548"/><circle cx="548" cy="329" r="3.5"/></g></g>
+        </svg>
+        <nav class="picker" aria-labelledby="picker-label">
           <p class="picker__label" id="picker-label">O vaya directo a</p>
           <ul class="picker__list">{{PICKER}}</ul>
         </nav>
-      </div>
-
-      <div class="hero__visual" data-rise style="--d:220ms">
-        <div class="stage" id="stage" role="img" aria-label="Vista previa de la app de Jachi: un seguimiento, una próxima sesión de terapia y un resurtido enviado a su farmacia">
-          <svg class="stage__leaf" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="leaf-fill" x1="0.15" y1="0" x2="0.85" y2="1">
-                <stop offset="0" stop-color="#E3EFE6"/>
-                <stop offset="0.55" stop-color="#BBD7C2"/>
-                <stop offset="1" stop-color="#8FB89A"/>
-              </linearGradient>
-            </defs>
-            <path d="M32 4C40 16 58 34 32 52C6 34 24 16 32 4Z" fill="url(#leaf-fill)"/>
-            <g class="veins" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-opacity=".75">
-              <path pathLength="100" stroke-width=".55" d="M32 9V50"/>
-              <path pathLength="100" stroke-width=".42" d="M32 22Q35.5 21 37.5 16.5"/>
-              <path pathLength="100" stroke-width=".42" d="M32 30Q37 28.5 40 23"/>
-              <path pathLength="100" stroke-width=".42" d="M32 37Q37.5 35.5 40.5 30"/>
-              <path pathLength="100" stroke-width=".42" d="M32 22Q28.5 21 26.5 16.5"/>
-              <path pathLength="100" stroke-width=".42" d="M32 30Q27 28.5 24 23"/>
-              <path pathLength="100" stroke-width=".42" d="M32 37Q26.5 35.5 23.5 30"/>
-            </g>
-            <path d="M32 52C32 56 31.5 58.5 29.5 61" fill="none" stroke="#8FB89A" stroke-width="1.4" stroke-linecap="round"/>
-          </svg>
-          <div class="stage__orbit" aria-hidden="true"></div>
-          <div class="stage__glow" aria-hidden="true"></div>
-
-          <div class="phone" aria-hidden="true">
-            <div class="phone__screen">
-              <div class="app">
-                <span class="app__notch"></span>
-                <div class="app__top">
-                  <span class="app__brand">{{MARK:m-app:solid}}<span>Jachi</span></span>
-                  <span class="app__avatar">{{I:user}}</span>
-                </div>
-                <div>
-                  <p class="app__hello">Buenos días</p>
-                  <p class="app__sub">Su atención de hoy.</p>
-                </div>
-                <div class="app__card">
-                  <p class="k">Seguimiento</p>
-                  <p class="t">¿Cómo se siente desde su consulta?</p>
-                  <div class="app__chips"><span class="on">Mejor</span><span>Igual</span><span>Peor</span></div>
-                </div>
-                <div class="app__prog">
-                  <div class="app__prog-top"><b>Esta semana</b><span>3 de 4</span></div>
-                  <div class="app__bar"><span></span></div>
-                </div>
-                <div class="app__row"><span class="ic">{{I:video}}</span><div><b>Sesión de terapia</b><small>Jueves, 6:00 p. m.</small></div></div>
-                <div class="app__row"><span class="ic">{{I:pill}}</span><div><b>Resurtido aprobado</b><small>Enviado a su farmacia.</small></div></div>
-                <div class="app__tabs"><span class="on">{{I:home}}</span><span>{{I:clip}}</span><span>{{I:msg}}</span><span>{{I:user}}</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="float float--a" aria-hidden="true">
-            <span class="float__ic float__ic--solid">{{I:check}}</span>
-            <span><b>Consulta completa</b><small>Su plan de atención está listo.</small></span>
-          </div>
-          <div class="float float--b" aria-hidden="true">
-            <span class="float__ic">{{I:spark}}</span>
-            <span><b>Asistente de cuidado <em class="ai-tag">IA</em></b><small>Su seguimiento está listo.</small></span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -92,8 +49,7 @@
   <section class="section" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Servicios</p>
-        <h2 class="h2" id="services-title">La atención que necesita, <em>desde casa.</em></h2>
+        <h2 class="h2" id="services-title">La atención que necesita, desde casa.</h2>
         <p class="lead">Profesionales de la salud con licencia para enfermedades comunes, recetas, salud mental, salud sexual y más. Sin necesidad de seguro médico.</p>
       </div>
 
@@ -149,8 +105,7 @@
     <div class="wrap finder__grid">
       <div class="finder__intro">
         <div class="section-head">
-          <p class="eyebrow">Buscador de atención</p>
-          <h2 class="h2" id="finder-title">¿No sabe por dónde empezar? <em>Le orientamos.</em></h2>
+          <h2 class="h2" id="finder-title">¿No sabe por dónde empezar? Le orientamos.</h2>
           <p class="lead">Responda dos preguntas rápidas para ver qué servicio le conviene y cuándo es mejor buscar ayuda en persona.</p>
         </div>
         <div class="explain explain--alert">
@@ -267,7 +222,7 @@
           <div class="hotline" id="fres-hotline" hidden>
             <p class="hotline__num">988</p>
             <p class="hotline__text">Llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la Línea 988 de Prevención del Suicidio y Crisis. Es gratuita, confidencial y atiende las 24 horas. Si usted u otra persona está en peligro inmediato, llame al 911.</p>
-            <p class="hotline__links"><a class="btn btn--sm" href="tel:988">{{I:phone}} Llamar al 988</a><a class="btn btn--ghost btn--sm" href="sms:988">{{I:msg}} Enviar texto al 988</a></p>
+            <p class="hotline__links"><a class="btn btn--sm" href="tel:988">{{I:phone}} Llamar al 988</a><a class="btn btn--ghost btn--sm" href="sms:988?&amp;body=AYUDA">{{I:msg}} Enviar texto al 988</a></p>
           </div>
           <p class="result__note" id="fres-note" hidden></p>
           <div class="result__actions">
@@ -286,37 +241,36 @@
     {{MARK:m-art2:outline:standards__art}}
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow eyebrow--light">Normas clínicas</p>
-        <h2 class="h2 h2--light" id="standards-title">Quiénes le brindan <em>su atención.</em></h2>
+        <h2 class="h2 h2--light" id="standards-title">Quiénes le brindan su atención.</h2>
         <p class="lead lead--light">Su atención la brindan profesionales de la salud con licencia que ejercen a través de grupos médicos independientes. Jachi Health ofrece los servicios tecnológicos y administrativos. Antes de abrir, publicaremos aquí el nombre del grupo médico y de sus profesionales.</p>
       </div>
       <ul class="standards">
-        <li class="standard" data-reveal>
+        <li class="standard">
           <span class="standard__ic">{{I:steth}}</span>
           <h3>Con licencia en su estado</h3>
           <p>Médicos, enfermeros practicantes y asistentes médicos brindan la atención médica, y terapeutas con licencia brindan la terapia. Cada uno tiene licencia en el estado donde usted vive.</p>
         </li>
-        <li class="standard" data-reveal style="--d:80ms">
+        <li class="standard">
           <span class="standard__ic">{{I:shield}}</span>
           <h3>Supervisión médica</h3>
           <p>Los enfermeros practicantes y los asistentes médicos trabajan con un médico supervisor, como lo exige la ley de Texas.</p>
         </li>
-        <li class="standard" data-reveal style="--d:160ms">
+        <li class="standard">
           <span class="standard__ic">{{I:user}}</span>
           <h3>Un profesional de la salud toma cada decisión</h3>
           <p>Solo un profesional de la salud con licencia diagnostica, receta o cambia su tratamiento. Nuestro asistente de IA nunca lo hace.</p>
         </li>
-        <li class="standard" data-reveal>
+        <li class="standard">
           <span class="standard__ic">{{I:pill}}</span>
           <h3>Recetas con cuidado</h3>
           <p>Medicamentos aprobados por la FDA, solo cuando son adecuados para usted. No recetamos sustancias controladas.</p>
         </li>
-        <li class="standard" data-reveal style="--d:80ms">
+        <li class="standard">
           <span class="standard__ic">{{I:alert}}</span>
           <h3>La seguridad es primero</h3>
           <p>Si la atención en línea no es adecuada para usted, su profesional de la salud le dirá adónde ir en persona. En una emergencia, llame al 911. En una crisis, llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988.</p>
         </li>
-        <li class="standard" data-reveal style="--d:160ms">
+        <li class="standard">
           <span class="standard__ic">{{I:lock}}</span>
           <h3>Su privacidad</h3>
           <p>Cuando sea paciente, su información de salud estará protegida por la ley HIPAA. Este sitio no usa anuncios ni rastreo.</p>
@@ -341,8 +295,7 @@
   <section class="section" id="why" aria-labelledby="why-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Por qué Jachi</p>
-        <h2 class="h2" id="why-title">Medicina real, <em>sin complicaciones.</em></h2>
+        <h2 class="h2" id="why-title">Medicina real, sin complicaciones.</h2>
         <p class="lead">Profesionales con licencia y herramientas modernas, pensados para su vida.</p>
       </div>
 
@@ -385,10 +338,10 @@
 
         <article class="tile" data-reveal>
           <h3>Un asistente que le da seguimiento</h3>
-          <p>Nuestro asistente de IA se encarga del seguimiento, los recordatorios y las preguntas cotidianas, y envía todo lo médico a su profesional de la salud.</p>
+          <p>Cuando abramos, nuestro asistente de IA ayudará con el seguimiento, los recordatorios y las preguntas cotidianas, y enviará todo lo médico a su profesional de la salud.</p>
           <div class="tile__visual">
             <div class="vis-chat" aria-hidden="true">
-              <div class="bubble bubble--ai" style="--i:0"><span class="who">{{I:spark}} Asistente de cuidado · IA</span>¿Cómo se siente desde su consulta?</div>
+              <div class="bubble bubble--ai" style="--i:0"><span class="who">{{I:spark}} Asistente de cuidado <em class="ai-tag">IA</em></span>¿Cómo se siente desde su consulta?</div>
               <div class="bubble bubble--me" style="--i:1">Mejor, pero todavía tengo tos.</div>
               <div class="bubble bubble--ai" style="--i:2">Gracias por contarme. Se lo envié a su profesional de la salud para que lo revise.</div>
             </div>
@@ -434,47 +387,48 @@
   <!-- How it works -->
   <section class="section section--paper" id="how" aria-labelledby="how-title">
     <div class="wrap">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">Cómo funciona</p>
-        <h2 class="h2" id="how-title">De la primera pregunta <em>a sentirse mejor.</em></h2>
-        <p class="lead">Todo sucede en línea, y un profesional de la salud con licencia participa en cada paso importante.</p>
+      <div class="section-head">
+        <h2 class="h2" id="how-title">De la primera pregunta a sentirse mejor.</h2>
+        <p class="lead">Usted empieza en Jachi. Su atención la brindan profesionales de la salud con licencia de un grupo médico independiente, que daremos a conocer antes de abrir.</p>
       </div>
-      <div class="steps-wrap" data-reveal>
+      <div class="journey" data-reveal>
+        <p class="journey__key" aria-hidden="true"><span class="journey__key-jachi">En Jachi</span><span class="journey__key-care">Con el grupo médico</span></p>
         <ol class="steps">
-          <li class="step" style="--i:0">
+          <li class="step step--jachi" style="--i:0">
             <span class="step__num" aria-hidden="true">1</span>
             <div class="step__body">
-              <h3>Díganos qué necesita</h3>
-              <p>Elija un servicio y responda algunas preguntas. Nuestro asistente de cuidado le guía y le explica lo que no esté claro.</p>
-              <span class="tag">{{I:clip}} En línea, a su ritmo</span>
+              <h3>Elija su atención</h3>
+              <p>Elija un servicio y vea qué incluye antes de empezar. Nuestro asistente de IA puede responder preguntas generales.</p>
+              <span class="tag">{{I:home}} En Jachi</span>
             </div>
           </li>
           <li class="step" style="--i:1">
             <span class="step__num" aria-hidden="true">2</span>
             <div class="step__body">
-              <h3>Un profesional revisa</h3>
-              <p>Un profesional de la salud con licencia revisa sus respuestas y su historial. Puede enviarle un mensaje o iniciar una consulta por video.</p>
-              <span class="tag">{{I:steth}} Con licencia en su estado</span>
+              <h3>Comparta sus antecedentes de salud</h3>
+              <p>Responda algunas preguntas en el portal seguro de pacientes del grupo médico, a su ritmo.</p>
+              <span class="tag">{{I:lock}} Grupo médico</span>
             </div>
           </li>
           <li class="step" style="--i:2">
             <span class="step__num" aria-hidden="true">3</span>
             <div class="step__body">
-              <h3>Reciba tratamiento</h3>
-              <p>Si necesita medicamentos o pruebas, su profesional de la salud envía la receta a su farmacia o pide las pruebas en un laboratorio cercano.</p>
-              <span class="tag">{{I:pharmacy}} Enviado a su farmacia</span>
+              <h3>Un profesional revisa</h3>
+              <p>Un profesional de la salud con licencia revisa sus respuestas y su historial. Puede enviarle un mensaje o iniciar una videoconsulta.</p>
+              <span class="tag">{{I:steth}} Grupo médico</span>
             </div>
           </li>
           <li class="step" style="--i:3">
             <span class="step__num" aria-hidden="true">4</span>
             <div class="step__body">
-              <h3>Siga en buen camino</h3>
-              <p>Escriba a su equipo de atención, reciba seguimiento entre consultas y pida resurtidos cuando los necesite.</p>
-              <span class="tag">{{I:msg}} Atención continua</span>
+              <h3>Reciba tratamiento y siga en buen camino</h3>
+              <p>Si necesita medicamentos o pruebas, su profesional de la salud envía la receta a su farmacia o pide las pruebas en un laboratorio cercano, y luego le da seguimiento.</p>
+              <span class="tag">{{I:pharmacy}} Grupo médico</span>
             </div>
           </li>
         </ol>
       </div>
+      <p class="journey__more"><a class="textlink" href="/es/como-funciona/">Vea cómo funciona Jachi, paso a paso{{I:arrow:i--arrow}}</a></p>
     </div>
   </section>
 
@@ -483,8 +437,7 @@
     {{MARK:m-art1:outline:approach__art}}
     <div class="wrap approach__grid">
       <div class="section-head">
-        <p class="eyebrow eyebrow--light">Nuestro enfoque</p>
-        <h2 class="h2 h2--light" id="approach-title">Tecnología que escucha. <em>Profesionales que deciden.</em></h2>
+        <h2 class="h2 h2--light" id="approach-title">Tecnología que escucha. Profesionales que deciden.</h2>
         <p class="lead lead--light">Jachi usa IA para que la atención sea más rápida y personal. Nunca diagnostica, receta ni da terapia. Cada decisión médica la toma un profesional de la salud con licencia.</p>
       </div>
       <div>
@@ -526,8 +479,7 @@
     <div class="wrap elig__grid">
       <div class="elig__intro">
         <div class="section-head">
-          <p class="eyebrow">Evaluación de control de peso</p>
-          <h2 class="h2" id="elig-title">Vea si un medicamento para bajar de peso <em>podría ser para usted.</em></h2>
+          <h2 class="h2" id="elig-title">Vea si un medicamento para bajar de peso podría ser para usted.</h2>
           <p class="lead">Tres pasos rápidos. Sus respuestas se quedan en este dispositivo y nunca se guardan.</p>
         </div>
         <div class="explain">
@@ -537,7 +489,7 @@
             <div><b>30+</b><span>IMC por sí solo</span></div>
             <div><b>27+</b><span>IMC con una afección relacionada con el peso</span></div>
           </div>
-          <p>El IMC es una cifra de referencia, no una medida de su salud. Un profesional de la salud con licencia revisa su salud completa antes de recomendar cualquier tratamiento.</p>
+          <p>El IMC es una cifra de detección, no una medida de su salud. Un profesional de la salud con licencia revisa su salud completa antes de recomendar cualquier tratamiento.</p>
         </div>
       </div>
 
@@ -684,8 +636,7 @@
     <div class="wrap faq__grid">
       <div class="faq__intro">
         <div class="section-head">
-          <p class="eyebrow">Preguntas frecuentes</p>
-          <h2 class="h2" id="faq-title">Preguntas, <em>respondidas.</em></h2>
+          <h2 class="h2" id="faq-title">Preguntas, respondidas.</h2>
           <p class="lead">Lo que debe saber sobre los profesionales, nuestros servicios y la IA.</p>
         </div>
         <div class="faq-more">
@@ -702,13 +653,28 @@
     </div>
   </section>
 
+  <!-- Learn -->
+  <section class="section" id="learn" aria-labelledby="learn-title">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <h2 class="h2" id="learn-title">Aprenda antes de su consulta.</h2>
+          <p class="lead">Guías en lenguaje sencillo sobre preguntas comunes, para que sepa qué esperar.</p>
+        </div>
+        <a class="btn btn--ghost" href="/es/guias/">Todas las guías</a>
+      </div>
+      <ul class="guides">
+        {{LEARN_CARDS}}
+      </ul>
+    </div>
+  </section>
+
   <!-- Waitlist -->
   <section class="section join grain on-dark" id="join" aria-labelledby="join-title">
     {{MARK:m-art4:outline:join__art}}
     <div class="wrap join__grid">
       <div class="join__copy">
-        <p class="eyebrow eyebrow--light">Lista de espera</p>
-        <h2 class="h2 h2--light" id="join-title">Sea de los <em>primeros.</em></h2>
+        <h2 class="h2 h2--light" id="join-title">Sea de los primeros.</h2>
         <p class="lead lead--light">Abriremos primero en Texas. Únase a la lista de espera y le avisaremos por correo cuando Jachi llegue a su estado. Unirse no reserva una consulta y no cuesta nada.</p>
         <h3 class="join__next">Qué pasa después de unirse</h3>
         <ol class="perks perks--steps">
@@ -756,7 +722,7 @@
               <option value="friend">Un amigo o familiar</option>
               <option value="clinician">Un médico o una clínica</option>
               <option value="news">Noticias o un artículo</option>
-              <option value="app-store">App Store or Google Play</option>
+              <option value="app-store">App Store o Google Play</option>
               <option value="other">Otro</option>
             </select>
           </div>
