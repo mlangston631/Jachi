@@ -145,7 +145,7 @@ export const type: Record<TypeVariant, TextStyle> = {
   subhead: { fontFamily: font.medium, fontSize: 14, lineHeight: 19 },
   footnote: { fontFamily: font.body, fontSize: 13, lineHeight: 18 },
   caption: { fontFamily: font.medium, fontSize: 12, lineHeight: 16, letterSpacing: 0.2 },
-  eyebrow: { fontFamily: font.semibold, fontSize: 11.5, lineHeight: 15, letterSpacing: 1.5, textTransform: 'uppercase' },
+  eyebrow: { fontFamily: font.semibold, fontSize: 13, lineHeight: 17 },
   number: { fontFamily: font.display, fontSize: 40, lineHeight: 44, letterSpacing: -1, fontVariant: ['tabular-nums', 'lining-nums'] },
   numberSmall: { fontFamily: font.heading, fontSize: 26, lineHeight: 30, letterSpacing: -0.5, fontVariant: ['tabular-nums', 'lining-nums'] },
   button: { fontFamily: font.semibold, fontSize: 16, lineHeight: 20 },

@@ -94,6 +94,7 @@ export default function RootLayout() {
               <Stack.Screen name="settings" options={page(t('settings.title'))} />
               <Stack.Screen name="account" options={page(t('account.title'))} />
               <Stack.Screen name="service/[key]" options={page('')} />
+              <Stack.Screen name="learn/[key]" options={page('')} />
             </Stack.Protected>
             <Stack.Screen name="+not-found" options={page('')} />
           </Stack>

@@ -10,7 +10,9 @@ and every check passes, so it can be picked up as is.
   in SQLite on the device and never sent to Jachi.
 - Medication and check-in reminders, scheduled on the phone (no push notifications).
 - A one-page visit summary PDF, journal export and erase.
-- The services Jachi plans to offer, condition search, the care finder and the waitlist. Visits can't be booked.
+- The services Jachi plans to offer, each with what to expect from the visit, tests and follow-up; condition
+  search, the care finder, how Jachi works (the same seven steps as the website), the website's health guides and
+  the waitlist. Visits can't be booked.
 - The AI guide (labelled AI). Emergencies (911) and crisis messages (988) are answered on the phone before
   anything is sent.
 - English and Spanish, light and dark, optional Face ID lock, an optional waitlist account.
@@ -18,8 +20,9 @@ and every check passes, so it can be picked up as is.
 ## How it's built
 
 Expo SDK 58 and React Native 0.88 with Expo Router; the source is in `src/`. Words and facts shared with the
-website (services, conditions, FAQ, form messages) come from the site's `content.py`, `content_es.py` and
-`strings.py` through `python3 tools/app_content.py`; run it after changing those files.
+website (services and what to expect, conditions, FAQ, how Jachi works, the health guides, form messages) come from
+the site's `content.py`, `content_es.py`, `pages.py`, `learn.py` and `strings.py` through
+`python3 tools/app_content.py`; run it after changing those files.
 
 Every push to the `app` branch runs `.github/workflows/app-ci.yml`: TypeScript, tests, Expo Doctor, the native
 configuration, iOS and Android bundles and a web build. Results are written to `.ci/report.md`.

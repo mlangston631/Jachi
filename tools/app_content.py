@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Write the mobile app's content files (app/src/content/content.json and icons.json) from the website.
 
-The app and the website then say exactly the same thing about services, conditions, safety and what
-isn't offered, in English and Spanish. Run after changing content.py, content_es.py or pages.py:
+The app and the website then say exactly the same thing about services (with what to expect from each),
+conditions, safety, what isn't offered, how Jachi works and the health guides, in English and Spanish. Run after
+changing content.py, content_es.py, pages.py or learn.py:
 
   python3 tools/app_content.py
 """
@@ -17,6 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 import content as EN  # noqa: E402
 import content_es as ES  # noqa: E402
+import learn as LEARN  # noqa: E402
 import pages as PAGES  # noqa: E402
 import brand as BRAND  # noqa: E402
 import strings as STRINGS  # noqa: E402
@@ -31,7 +33,7 @@ STRING_KEYS = {"choose_state", "choose_answer", "fix_one", "fix_many", "enter_em
                "continue"}
 STRING_SKIP = {"a_meta_title", "a_meta_desc", "a_h1", "a_noscript", "a_create_note", "a_tabs", "c_off", "t_preview",
                "j_preview", "a_home"}
-SITE_URL = "https://www.jachihealth.com"
+SITE_URL = "https://jachihealth.com"
 
 
 def from_build(name):
@@ -79,6 +81,20 @@ def plain(text):
     return html.unescape(text)
 
 
+def expect(key):
+    """What to expect from a service: its main page's visit, tests and follow-up (pages.py), in both languages."""
+    page = PAGES.BY_SLUG[PAGES.SERVICE_SLUG[key]]
+    es_title, es_lead, es_items = ES.EXPECT[page["slug"]]
+    if len(es_items) != len(page["expect"]):
+        raise SystemExit(f"content_es.EXPECT[{page['slug']!r}] needs one item for each in pages.py")
+    return {
+        "en": {"title": page["expect_title"], "lead": page.get("expect_lead", PAGES.EXPECT_LEAD),
+               "items": [{"icon": ic, "title": t, "text": d} for ic, t, d in page["expect"]]},
+        "es": {"title": es_title, "lead": es_lead or ES.EXPECT_LEAD,
+               "items": [{"icon": ic, "title": t, "text": d} for (ic, _t, _d), (t, d) in zip(page["expect"], es_items)]},
+    }
+
+
 def services():
     out = []
     for s in EN.SERVICES:
@@ -91,8 +107,65 @@ def services():
                    "items": s["items"]},
             "es": {"name": es["name"], "chip": es.get("chip", es["name"]), "tag": es["tag"], "desc": es["desc"],
                    "items": es["items"]},
+            "expect": expect(s["key"]),
         })
     return out
+
+
+def how():
+    """How Jachi works: the steps on Jachi, the handoff, then the steps with the medical group (as on the website)."""
+    def one(H):
+        return {"lanes": [{"who": lane["who"], "title": lane["title"],
+                           "steps": [{"title": t, "text": d} for t, d in lane["steps"]]} for lane in H["lanes"]],
+                "handoff": {"title": H["handoff"][0], "text": H["handoff"][1]}}
+    return {"en": one(EN.HOW), "es": one(ES.HOW)}
+
+
+def guide_block(b):
+    kind = b[0]
+    if kind in ("p", "h2"):
+        return {"kind": kind, "text": plain(b[1])}
+    if kind in ("ul", "ol"):
+        return {"kind": kind, "items": [plain(x) for x in b[1]]}
+    if kind == "callout":
+        _kind, tone, title, parts, actions = b
+        return {"kind": "callout", "tone": tone, "title": title,
+                "parts": [{"kind": "p", "text": plain(x)} if isinstance(x, str) else {"kind": "ul", "items": [plain(y) for y in x[1]]}
+                          for x in parts],
+                "actions": [{"label": label, "href": href, "style": style} for label, href, style in actions]}
+    raise SystemExit(f"learn.py: the app doesn't show {kind!r} blocks")
+
+
+def interest_of(href):
+    """The service a guide's waitlist link picks (/?interest=weight-care → weight-care), or None."""
+    return href.split("interest=", 1)[1] if "interest=" in href else None
+
+
+def guides():
+    """The health guides (learn.py). Text may hold <b>; links in the box beside each guide stay website paths."""
+    out = []
+    for a in LEARN.ARTICLES:
+        item = {"key": a["key"], "services": a["services"], "date": LEARN.UPDATED}
+        for lang in ("en", "es"):
+            t = a[lang]
+            item[lang] = {
+                "title": t["h1"].rstrip("."), "topic": t["topic"], "summary": t["summary"], "minutes": t["minutes"], "lead": t["lead"],
+                "body": [guide_block(b) for b in t["body"]],
+                "sources": [{"name": name, "url": url} for name, url in t["sources"]],
+                "cta": {"title": t["cta"]["title"], "text": t["cta"]["text"],
+                        "page": {"label": t["cta"]["page"][0], "href": t["cta"]["page"][1]},
+                        "interest": interest_of(t["cta"]["join"])},
+                "url": SITE_URL + LEARN.path(a, lang), "updated": LEARN.UPDATED_LABEL[lang],
+            }
+        out.append(item)
+    return out
+
+
+def learn_words():
+    keys = ("minutes", "sources", "sources_lead", "note_title", "note", "more")
+    # The app's section titles don't end with a full stop; the website's headings do.
+    return {lang: {"title": LEARN.HUB[lang]["h1"].rstrip("."), "lead": LEARN.HUB[lang]["lead"],
+                   **{k: LEARN.LABELS[lang][k] for k in keys}} for lang in ("en", "es")}
 
 
 def conditions():
@@ -138,6 +211,9 @@ def main():
                    "es": {"name": crisis_es[0], "words": crisis_es[1], "text": plain(crisis_es[2])}},
         "notOffered": keyed(EN.NOT_OFFERED, ES.NOT_OFFERED),
         "faq": faq(),
+        "how": how(),
+        "guides": guides(),
+        "learn": learn_words(),
         "states": states(),
         "statesEs": dict(ES.STATES),
     }
@@ -148,7 +224,8 @@ def main():
     ICONS_OUT.write_text(json.dumps(icons, ensure_ascii=False, separators=(",", ":")) + "\n")
     strings = site_strings()
     STRINGS_OUT.write_text(json.dumps(strings, ensure_ascii=False, indent=1) + "\n")
-    print(f"wrote {OUT.relative_to(ROOT)}: {len(data['services'])} services, {len(data['conditions'])} conditions; "
+    print(f"wrote {OUT.relative_to(ROOT)}: {len(data['services'])} services, {len(data['conditions'])} conditions, "
+          f"{len(data['guides'])} guides; "
           f"{ICONS_OUT.relative_to(ROOT)}: {len(icons) - 1} icons; {STRINGS_OUT.relative_to(ROOT)}: {len(strings['en'])} strings")
 
 

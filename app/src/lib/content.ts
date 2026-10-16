@@ -5,11 +5,44 @@ import type { Lang } from '@/i18n/core';
 type Localized<T> = { en: T; es: T };
 
 export type ServiceText = { name: string; chip: string; tag: string; desc: string; items: string[] };
-export type Service = { key: string; interest: string; icon: string; ongoing: boolean; page: string } & Localized<ServiceText>;
+/** What to expect from a service: the visit, tests and follow-up, in order. */
+export type Expect = { title: string; lead: string; items: { icon: string; title: string; text: string }[] };
+export type Service = { key: string; interest: string; icon: string; ongoing: boolean; page: string; expect: Localized<Expect> } & Localized<ServiceText>;
 export type Condition = { key: string } & Localized<{ name: string; words: string; note: string }>;
 export type FinderOption = { key: string; icon: string } & Localized<{ title: string; sub: string }>;
 export type Notice = Localized<{ name: string; words: string; text: string }>;
 export type Faq = { q: string; a: string };
+
+/** How Jachi works: the steps on Jachi, the move to the medical group's portal, then the steps with the medical group. */
+export type How = {
+  lanes: { who: string; title: string; steps: { title: string; text: string }[] }[];
+  handoff: { title: string; text: string };
+};
+
+/** A health guide's body. Text may hold <b>…</b> for bold words. */
+export type GuideBlock =
+  | { kind: 'p'; text: string }
+  | { kind: 'h2'; text: string }
+  | { kind: 'ul'; items: string[] }
+  | { kind: 'ol'; items: string[] }
+  | {
+      kind: 'callout';
+      tone: 'alert' | 'note';
+      title: string;
+      parts: ({ kind: 'p'; text: string } | { kind: 'ul'; items: string[] })[];
+      actions: { label: string; href: string; style: 'danger' | 'solid' | 'ghost' }[];
+    };
+export type GuideText = {
+  title: string; topic: string; summary: string; minutes: number; lead: string; body: GuideBlock[];
+  sources: { name: string; url: string }[];
+  /** The box after the guide: a website page (a path like /uti-treatment/) and the service its waitlist link picks. */
+  cta: { title: string; text: string; page: { label: string; href: string }; interest: string | null };
+  url: string; updated: string;
+};
+export type Guide = { key: string; services: string[]; date: string } & Localized<GuideText>;
+export type LearnWords = {
+  title: string; lead: string; minutes: string; sources: string; sources_lead: string; note_title: string; note: string; more: string;
+};
 
 export type Content = {
   site: string;
@@ -22,6 +55,9 @@ export type Content = {
   crisis: Notice;
   notOffered: Notice[];
   faq: Localized<Faq[]>;
+  how: Localized<How>;
+  guides: Guide[];
+  learn: Localized<LearnWords>;
   states: [string, string][];
   statesEs: Record<string, string>;
 };
@@ -59,6 +95,21 @@ export function statesFor(lang: Lang): { code: string; name: string }[] {
   return CONTENT.states
     .map(([code]) => ({ code, name: stateName(code, lang) }))
     .sort((a, b) => a.name.localeCompare(b.name, lang === 'es' ? 'es' : 'en'));
+}
+
+export function guideByKey(key: string): Guide | undefined {
+  return CONTENT.guides.find(g => g.key === key);
+}
+
+/** The guides that belong to a service (learn.py lists each guide's services). */
+export function guidesFor(serviceKey: string): Guide[] {
+  return CONTENT.guides.filter(g => g.services.includes(serviceKey));
+}
+
+/** Splits guide text into plain and bold runs: "<b>Face.</b> Ask them to smile." → [["Face.", true], [" Ask…", false]]. */
+export function boldRuns(text: string): [string, boolean][] {
+  return text.split(/(<b>.*?<\/b>)/).filter(Boolean).map((part): [string, boolean] =>
+    part.startsWith('<b>') ? [part.slice(3, -4), true] : [part, false]);
 }
 
 /** Services whose conditions include this key ("mental+therapy" belongs to both). */

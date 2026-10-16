@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
+import { GuideList, HowLanes } from '@/components/care';
 import { Accordion, SafetyCard, StatusCard } from '@/components/feedback';
 import { ListRow } from '@/components/forms';
 import { Icon } from '@/components/Icon';
@@ -24,7 +25,6 @@ export default function Care() {
   const hits = searchConditions(q, t.lang);
   const standards = t.list('care.standards');
   const boards = t.list('care.boards');
-  const how = t.list('care.how');
 
   return (
     <TabScreen title={t('care.title')}>
@@ -110,27 +110,10 @@ export default function Care() {
       <View style={styles.gapMd}>
         <Txt variant="title3" heading>{t('care.howTitle')}</Txt>
         <Txt variant="callout" tone="text2">{t('care.howLead')}</Txt>
-        <Card padded={false}>
-          {how.map(([title, body, status], i) => {
-            const now = i === 0;
-            return (
-              <View key={title} style={[styles.howRow, i ? { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: c.line } : null]}>
-                <View style={[styles.howNum, { backgroundColor: now ? c.primary : c.surface2 }]}>
-                  <Txt variant="subhead" style={{ color: now ? c.onPrimary : c.text2 }}>{i + 1}</Txt>
-                </View>
-                <View style={[styles.flex, styles.gapXs]}>
-                  <Txt variant="headline">{title}</Txt>
-                  <Txt variant="footnote" tone="text2">{body}</Txt>
-                  <Tag label={status} tone={now ? 'accent' : i === 4 ? 'accent' : 'warn'} icon={now ? 'check' : 'clock'} />
-                </View>
-              </View>
-            );
-          })}
-        </Card>
+        <HowLanes how={CONTENT.how[t.lang]} />
       </View>
 
       <Card tone="hero" style={styles.gapMd}>
-        <Txt variant="eyebrow" tone="onHero2">{t('care.standardsEyebrow')}</Txt>
         <Txt variant="title2" tone="onHero" heading>{t('care.standardsTitle')}</Txt>
         <Txt variant="callout" tone="onHero2">{t('care.standardsLead')}</Txt>
         {standards.map(([title, body], i) => (
@@ -154,6 +137,12 @@ export default function Care() {
             </View>
           ))}
         </Card>
+      </View>
+
+      <View style={styles.gapSm}>
+        <Txt variant="title3" heading>{CONTENT.learn[t.lang].title}</Txt>
+        <Txt variant="callout" tone="text2">{CONTENT.learn[t.lang].lead}</Txt>
+        <GuideList guides={CONTENT.guides} />
       </View>
 
       <View style={styles.gapSm}>
@@ -196,8 +185,6 @@ const styles = StyleSheet.create({
   cell: { width: '47.5%', flexGrow: 1 },
   service: { gap: space.sm, minHeight: 150 },
   serviceIcon: { width: 44, height: 44, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
-  howRow: { flexDirection: 'row', gap: space.md, padding: space.lg },
-  howNum: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center' },
   standard: { flexDirection: 'row', gap: space.md, alignItems: 'flex-start', paddingTop: space.xs },
   standardIcon: { width: 34, height: 34, borderRadius: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.12)' },
 });

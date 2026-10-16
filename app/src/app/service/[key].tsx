@@ -2,13 +2,14 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
+import { ExpectRail, GuideList } from '@/components/care';
 import { StatusCard } from '@/components/feedback';
 import { ChipGroup } from '@/components/forms';
 import { Icon } from '@/components/Icon';
 import { Page } from '@/components/Screen';
 import { Button, Card, Row, Tag, Txt } from '@/components/ui';
 import { useT } from '@/i18n';
-import { CONTENT, conditionsFor, serviceByKey } from '@/lib/content';
+import { CONTENT, conditionsFor, guidesFor, serviceByKey } from '@/lib/content';
 import { openPage } from '@/lib/links';
 import { radius, space, useTheme } from '@/theme';
 
@@ -26,6 +27,8 @@ export default function ServiceScreen() {
   }
   const text = s[t.lang];
   const conditions = conditionsFor(s.key);
+  const expect = s.expect[t.lang];
+  const guides = guidesFor(s.key);
   return (
     <Page>
       <Stack.Screen options={{ title: text.name }} />
@@ -58,6 +61,19 @@ export default function ServiceScreen() {
               </View>
             ))}
           </ChipGroup>
+        </View>
+      ) : null}
+
+      <View style={styles.gapMd}>
+        <Txt variant="title2" heading>{expect.title}</Txt>
+        <Txt variant="callout" tone="text2">{expect.lead}</Txt>
+        <ExpectRail expect={expect} />
+      </View>
+
+      {guides.length ? (
+        <View style={styles.gapSm}>
+          <Txt variant="title3" heading>{t('service.guides')}</Txt>
+          <GuideList guides={guides} />
         </View>
       ) : null}
 
