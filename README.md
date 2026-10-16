@@ -1,6 +1,6 @@
 # Jachi Health website
 
-The website for [jachihealth.com](https://www.jachihealth.com): services, a care finder, condition search,
+The website for [jachihealth.com](https://jachihealth.com): services, a care finder, condition search,
 a weight care check, a waitlist sign-up, an AI help chat with support tickets, a page for each service, a Spanish
 home page, accounts for people on the waitlist, an admin console, and the privacy policy, terms of use
 and Texas Medical Board notice.

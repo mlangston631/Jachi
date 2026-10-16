@@ -44,7 +44,9 @@ DIST = ROOT / "dist"
 for d in (PUBLIC, FUNCTIONS, DIST):
     d.mkdir(parents=True, exist_ok=True)
 
-SITE_URL = "https://www.jachihealth.com"
+# The address the site is served from. Netlify's primary domain is the bare domain (www redirects to it), so canonical
+# links, the sitemap and structured data use it too.
+SITE_URL = "https://jachihealth.com"
 EMAIL = EN_CONTENT.EMAIL
 esc = html.escape
 
