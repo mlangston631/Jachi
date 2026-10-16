@@ -141,7 +141,7 @@ NOT_OFFERED = [
     ("Ketamine", "ketamine spravato", "We don't offer ketamine treatment."),
     ("Medical marijuana", "marijuana cannabis thc weed", "We don't offer medical marijuana."),
     ("Isotretinoin (Accutane)", "isotretinoin accutane absorica",
-     "We don't prescribe isotretinoin. Our skin care can help with other acne treatments."),
+     "We don't prescribe isotretinoin. A clinician can suggest other acne treatments."),
 ]
 
 EMERGENCIES = [
@@ -166,29 +166,34 @@ CRISIS = ("Thoughts of suicide or self-harm",
 POPULAR = ["UTI", "Sinus infection", "Acne", "ED", "Birth control", "STI testing", "Anxiety", "Hair loss"]
 
 FAQ = [
+    ("Is Jachi accepting patients yet?",
+     "Not yet. We're getting ready to open in Texas. Visits can't be booked yet, and nothing is charged. Join the "
+     "waitlist and we'll email you before we open."),
     ("Who are the clinicians?",
      "Physicians, nurse practitioners and physician assistants for medical care, and licensed therapists for therapy. "
      "Everyone is licensed in your state, practices through independent medical groups and makes every clinical "
-     "decision about your care."),
+     "decision about your care. Before we open, we'll name the medical group and its clinicians on this site, so "
+     "you can check their licenses."),
     ("Is the care assistant a doctor?",
-     "No. The care assistant is AI. It helps with intake, check-ins, reminders and everyday questions about your care. "
+     "No. The care assistant is AI. When we open, it will help with intake, check-ins, reminders and everyday "
+     "questions about your care. "
      "It never diagnoses, prescribes, provides therapy or changes your treatment. A clinician reviews what it prepares, "
      "and we'll always tell you when you're talking with AI."),
-    ("What can you treat online?",
+    ("What can clinicians treat online?",
      "Everyday illnesses, prescription refills, therapy, anxiety and depression, sexual health, men's and women's "
      "health, skin conditions and weight. Search the conditions on this page to check yours. Some problems need an "
      "exam, a test or a procedure in person, and your clinician will tell you if that's the case."),
     ("How does therapy work?",
      "You meet with a licensed therapist by private video. Therapists don't prescribe medication. If medication could "
-     "help, our anxiety and depression care can work alongside your therapy."),
+     "help, anxiety and depression care from a licensed clinician can work alongside your therapy."),
     ("How does STI testing work?",
      "Your clinician orders the right tests, and you give a quick sample at a nearby lab. Lab fees are billed "
      "separately. If you test positive for an infection that can be treated with medication, your clinician can "
      "prescribe it. Some infections, like gonorrhea, are treated with a shot given in person."),
-    ("Do you offer PrEP?",
-     "Yes. PrEP is medication that greatly lowers your chance of getting HIV. You'll need an HIV test and other lab "
+    ("Will PrEP be available?",
+     "Yes, once we open. PrEP is medication that greatly lowers your chance of getting HIV. You'll need an HIV test and other lab "
      "work before you start and every 3 months, which your clinician will order."),
-    ("What men's and women's health care do you offer?",
+    ("What men's and women's health care is available?",
      "For men: erectile dysfunction, hair loss and premature ejaculation. For women: birth control, emergency "
      "contraception, menopause symptoms, yeast infections, BV and hair thinning. ED medications aren't safe with "
      "nitrate heart medicines, so your clinician reviews your health and medications first."),
@@ -196,8 +201,8 @@ FAQ = [
      "No. We don't prescribe or refill controlled substances, such as ADHD stimulants, benzodiazepines like Xanax, "
      "opioids, testosterone, phentermine or sleep medicines like Ambien. If you take one, keep working with the "
      "clinician who prescribes it."),
-    ("Which weight-loss medications do you prescribe?",
-     "We focus on FDA-approved medications. That can include GLP-1 medications such as semaglutide (Wegovy®) and "
+    ("Which weight-loss medications do clinicians prescribe?",
+     "FDA-approved medications. That can include GLP-1 medications such as semaglutide (Wegovy®) and "
      "tirzepatide (Zepbound®) when your clinician decides they're right for you. Not everyone will be prescribed "
      "medication."),
     ("Does weight-loss medication have side effects?",
@@ -213,17 +218,73 @@ FAQ = [
     ("Can I use Jachi if I'm under 18?",
      "No. Jachi is for adults 18 and older."),
     ("Where is Jachi available?",
-     "We're launching in Texas first and will expand state by state. Join early access to hear when we open near you."),
+     "We're launching in Texas first and will expand state by state. Join the waitlist to hear when we open near you."),
     ("How is my information protected?",
-     "Your medical information is protected under HIPAA and stored in the United States. The care finder, condition "
-     "search and weight care check on this page run only in your browser, and nothing you enter there is saved."),
+     "Today, this site collects only what you send in its forms and chat, and it has no ads or tracking. When you "
+     "become a patient, your medical records will be kept by the medical group that treats you and protected under "
+     "HIPAA. The care finder, condition search and weight care check on this page run only in your browser, and "
+     "nothing you enter there is saved."),
     ("Can I talk to a person?",
-     "Live agents aren't available yet. Our AI assistant in the help chat can answer common questions, and you can "
-     "submit a ticket there or email our team, and we'll reply by email."),
+     "Yes, by email. Submit a ticket in the help chat or email our team, and a person will reply. We don't have "
+     "live chat or phone support yet. Before we open, we'll add a faster way to reach our team about appointments, "
+     "billing and prescriptions."),
     ("What if it's an emergency?",
      "Jachi isn't for emergencies. If you think you're having a medical emergency, call 911. If you're in crisis or "
      "thinking about suicide, call or text 988 to reach the Suicide & Crisis Lifeline, open 24/7."),
 ]
+
+# The "How Jachi works" page (/how-it-works/), laid out by src/en/how.html. The app shows the same steps.
+HOW = {
+    "path": "/how-it-works/",
+    "lanes": [
+        {"who": "On Jachi", "title": "Find the right care", "steps": [
+            ("Visit Jachi", "Read about each service: the conditions clinicians treat, what's included and how it "
+                            "works."),
+            ("Choose a service", "Pick the care you need. Not sure? The care finder points the way, and our AI assistant "
+                                 "answers general questions."),
+            ("See prices and what's included", "Before you start, you'll see the price and what it covers. We'll share "
+                                               "prices before we open."),
+        ]},
+        {"who": "With the medical group", "title": "Get care from licensed clinicians", "steps": [
+            ("Complete your intake", "Answer questions about your health, your medicines and your history."),
+            ("A clinician evaluates", "A licensed clinician reviews your answers. They may message you or start a video "
+                                      "visit."),
+            ("Your treatment plan", "If treatment is right for you, your clinician makes a plan with you. Not everyone "
+                                    "needs medication."),
+            ("Prescriptions, tests and follow-up", "Prescriptions go to your pharmacy and lab orders to a nearby lab. Your "
+                                                   "clinician tells you what follow-up you need and, with your "
+                                                   "permission, can send a summary to your primary care doctor."),
+        ]},
+    ],
+    "handoff": ("Then you move to the medical group's patient portal.",
+                "Your health information goes into the medical group's secure patient system, not Jachi's website, and "
+                "you'll always see which medical group is providing your care."),
+    "title": "How Jachi Works: Online Care, Step by Step | Jachi Health",
+    "description": "How online care on Jachi works, from choosing a service to care from licensed clinicians at an "
+                   "independent medical group.",
+    "crumb": "How Jachi works",
+    "faq": [
+        ("Is Jachi a medical practice?",
+         "No. Jachi Health LLC provides the website, the app and support. Licensed clinicians at an independent medical "
+         "group provide your care and make every medical decision."),
+        ("When will you name the medical group?",
+         "Before we open. We'll name the medical group and its clinicians on this site, so you can check their licenses "
+         "before your first visit."),
+        ("Where does my health information go?",
+         "Into the medical group's secure patient system, which keeps your medical records private. Jachi's "
+         "waitlist and help chat never ask for health details, and the care finder and weight care check run only in "
+         "your browser and save nothing."),
+        ("Can I book a visit now?",
+         "Not yet. Jachi isn't open. Join the waitlist and we'll email you before we open in your state, with prices and "
+         "how visits will work."),
+        ("Do I need insurance?",
+         "No. Jachi is cash-pay, so you don't need insurance or a referral. Medication and lab tests are billed "
+         "separately by your pharmacy and lab."),
+        ("What does the AI assistant do?",
+         "It answers general questions about Jachi and how care works, and it always says it's AI. It never diagnoses, "
+         "prescribes or provides therapy."),
+    ],
+}
 
 # Words build.py uses when it writes the service cards, search rows and lists.
 BUILD = {
@@ -233,7 +294,7 @@ BUILD = {
     "call_911": "Call 911",
     "call_988": "Call 988",
     "text_988": "Text 988",
-    "join": "Get early access",
+    "join": "Join the waitlist",
     "check_elig": "Check eligibility",
     "check_elig_long": "Check your eligibility",
     "for": " for {x}",

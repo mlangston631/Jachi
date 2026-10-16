@@ -6,6 +6,9 @@
 const ALLOWED_HOSTS = /(^|\.)jachihealth\.com$|^localhost$|^127\.0\.0\.1$/;
 const NETLIFY_API = 'https://api.netlify.com/api/v1';
 const FORMS = { signups: 'early-access', tickets: 'support-ticket' };
+// Where a sign-up or ticket was sent from, and the answers to "How did you hear about us?". Anything else is dropped.
+const SOURCES = new Set(['website', 'app-ios', 'app-android']);
+const HEARD = new Set(['search', 'social', 'friend', 'clinician', 'news', 'app-store', 'other']);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const SUBMISSION_ID = /^[A-Za-z0-9_-]{6,64}$/; // Netlify's ids; this also keeps paths like ../ out
 const EMAIL_RE = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/;
@@ -215,6 +218,8 @@ function cleanSubmission(s, form) {
     state: text('state', 2),
     interest: text('interest', 300),
     language: text('language', 5) === 'es' ? 'es' : 'en',
+    source: SOURCES.has(text('source', 20)) ? text('source', 20) : '',
+    heard: HEARD.has(text('heard', 20)) ? text('heard', 20) : '',
     topic: text('topic', 80),
     message: text('message', 2000),
     include_chat: text('include_chat', 5) === 'yes',

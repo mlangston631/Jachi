@@ -35,7 +35,7 @@
     <form class="ticket" id="ticket-form" name="support-ticket" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
       <button class="chat__back" type="button" id="ticket-back">{{I:arrow-left}} Volver al chat</button>
       <h3 class="ticket__title" id="ticket-title" tabindex="-1">Enviar una solicitud</h3>
-      <p class="ticket__lead">Aún no hay agentes en vivo. Envíe una solicitud y nuestro equipo le responderá por correo.</p>
+      <p class="ticket__lead">Una persona de nuestro equipo lee cada solicitud y responde por correo. Aún no hay chat en vivo.</p>
       <p class="hp" aria-hidden="true"><label>Deje este campo vacío <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <div class="field">
         <label class="label" for="ticket-name">Nombre</label>
@@ -51,7 +51,7 @@
         <label class="label" for="ticket-topic">Tema</label>
         <select class="select" id="ticket-topic" name="topic">
           <option value="General question">Pregunta general</option>
-          <option value="Early access">Acceso anticipado</option>
+          <option value="Waitlist">Lista de espera</option>
           <option value="Services and prices">Servicios y precios</option>
           <option value="Website problem">Problema con el sitio web</option>
           <option value="Partnerships or press">Alianzas o prensa</option>
@@ -69,6 +69,7 @@
       </label>
       <input type="hidden" name="chat_transcript" id="ticket-transcript">
       <input type="hidden" name="language" value="es">
+      <input type="hidden" name="source" value="website">
       <button class="btn btn--block" type="submit" id="ticket-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Enviar solicitud</span></button>
       <div class="form-status" id="ticket-status" role="status"></div>
     </form>
@@ -88,8 +89,8 @@
     <h2 class="sheet__title" id="privacy-title">Su privacidad, en resumen</h2>
     <h3>El buscador de atención, la búsqueda de afecciones y la evaluación de peso</h3>
     <p>Funcionan por completo en su navegador. Lo que escriba o elija, incluidos su estatura, su peso y sus detalles de salud, nunca se nos envía ni se guarda.</p>
-    <h3>Registros de acceso anticipado</h3>
-    <p>Si se une al acceso anticipado, recopilamos su correo electrónico y su estado y, si nos los da, su nombre y los servicios que le interesan, además del idioma de la página que usó. Los usamos solo para escribirle sobre nuestra apertura. Los registros se guardan con el proveedor que aloja nuestro sitio web.</p>
+    <h3>Registros en la lista de espera</h3>
+    <p>Si se une a la lista de espera, recopilamos su correo electrónico y su estado y, si nos los da, su nombre y los servicios que le interesan, además del idioma de la página que usó. Los usamos solo para escribirle sobre nuestra apertura. Los registros se guardan con el proveedor que aloja nuestro sitio web.</p>
     <h3>Cuentas</h3>
     <p>Si crea una cuenta, guardamos su correo, su contraseña cifrada y los datos que guarde ahí. Su navegador conserva un código de inicio de sesión hasta que cierre la sesión. Puede actualizar o borrar su cuenta cuando quiera en la <a href="/es/account/">página de su cuenta</a>.</p>
     <h3>Chat de ayuda y solicitudes de soporte</h3>

@@ -186,6 +186,7 @@
     note: $('#res-note'),
     join: $('#res-join'),
     restart: $('#res-restart'),
+    next: $('#res-next'),
   };
 
   if (E.form) {
@@ -329,6 +330,8 @@
       }
       R.join.hidden = kind === 'minor';
       R.join.dataset.state = E.state.value;
+      // What a clinical evaluation involves: only for people who may be a fit.
+      if (R.next) R.next.hidden = kind !== 'likely';
 
       E.form.hidden = true;
       E.result.hidden = false;
@@ -1002,7 +1005,7 @@
       turns.push({ role: 'user', content: text });
       if (CRISIS.test(plain(text))) {
         const el = addMsg('bot', CRISIS_TEXT, 'msg--alert');
-        addActions(el, [{ label: T.c_call_988, href: 'tel:988', icon: 'phone' }, { label: T.c_text_988, href: 'sms:988', icon: 'msg', ghost: true }]);
+        addActions(el, [{ label: T.c_call_988, href: 'tel:988', icon: 'phone' }, { label: T.c_text_988, href: T.sms_988, icon: 'msg', ghost: true }]);
         turns.push({ role: 'assistant', content: CRISIS_TEXT });
         return;
       }

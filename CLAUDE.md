@@ -5,13 +5,14 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Making a change
 
-1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `strings.py`, `src/`, `src/functions/`,
+1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `learn.py`, `strings.py`, `src/`, `src/functions/`,
    `chatbot.py`, `brand.py`, `netlify.toml`). Never hand-edit anything in `public/` or `netlify/functions/`;
    `build.py` generates them.
 2. Keep English and Spanish in step:
    - After changing `src/en/home.html`, run `python3 tools/es_home.py`. It stops on any English sentence it
      can't find, which means a translation in that file needs adding or updating.
-   - `src/en/header.html`, `footer.html`, `chat.html` and `dock.html` have Spanish copies in `src/es/`; change both.
+   - `src/en/header.html`, `footer.html`, `chat.html`, `dock.html` and `how.html` have Spanish copies in `src/es/`;
+     change both. The health guides (`learn.py`) and `HOW` hold both languages; Spanish guides live at `/es/guias/`.
    - New text shown by `src/app.js` or the account page goes in `strings.py` under both `EN` and `ES`
      (account page keys start with `a_`). The admin console is English only.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.
@@ -34,9 +35,15 @@ keep replies short and plain, and ask only questions that change what you'll do.
   prices; tests/qa.py fails if a price appears.
 - Not offered: controlled substances (ADHD stimulants, benzodiazepines, opioids, testosterone, phentermine,
   sleep medication, Suboxone, ketamine), abortion medication, isotretinoin, peptides, medical marijuana.
-- Jachi isn't open yet. Nothing may say visits can be booked now; buttons collect early-access sign-ups.
+- Jachi isn't open yet. Nothing may say visits can be booked now; buttons collect waitlist sign-ups (the Netlify
+  form is still named `early-access`).
 - Everything on the page must really work. No placeholder buttons, invented testimonials, ratings, statistics,
   badges, partner logos, clinician names or credentials.
+- The site promises (approved Oct 15, 2026) to name the medical group and its clinicians before opening, and to add
+  a faster way to reach the team about appointments, billing and prescriptions before opening. Keep both promises.
+- Credit care to clinicians, never to Jachi Health LLC: "Clinicians prescribe…", "What clinicians treat", not "we
+  prescribe" or "we treat". Texas Occupations Code §165.156 bars an unlicensed company from advertising as if it
+  practices medicine. Lines about what isn't offered ("We don't prescribe controlled substances") are fine.
 - The assistant is labelled AI, never claims to be a person, and there are no live agents yet; tickets go to
   the support email in `content.py`.
 - Safety: emergencies get 911 and crisis messages get 988 (in Spanish: press 2, or text AYUDA), handled in the
@@ -45,7 +52,7 @@ keep replies short and plain, and ask only questions that change what you'll do.
 - Privacy: no analytics, ad pixels or trackers (it's a health site). Don't collect health details in forms or chat.
   Patient accounts with health records must live on HIPAA-compliant systems with a BAA (his medical partner's
   portal); Netlify's plan can't hold health data.
-- Accounts (`/account/`, Netlify Identity) are for early-access details only: state, services, language, emails
+- Accounts (`/account/`, Netlify Identity) are for waitlist details only: state, services, language, emails
   on or off. Never add health fields. Deleting an account also deletes that email's sign-ups and tickets, but only
   when the person proved the email by a link we sent (`provedEmail`) and Identity's autoconfirm is off.
 - Admin console (`/admin/`): admins are accounts with the "admin" role in Netlify's Identity tab, or accounts

@@ -6,19 +6,19 @@ is medical advice, and no prices are shown until the owner has a quote (see cont
 
 "about" (conditions, or treatments as {"@type": "MedicalTherapy"}) and "specialty" (a schema.org MedicalSpecialty)
 only feed the page's structured data for search engines; nothing about them shows on the page.
-"how_title" and "faq_title" name the page's topic in its section headings (the last word is set in italics).
+"faq_title" names the page's topic in the FAQ heading. "expect_title" heads the "What to expect" section, and
+"expect" fills it: what happens at the visit, whether tests are needed, and how follow-up works, each as
+(icon, title, text) with an icon from build.py's ICONS; "expect_lead" can replace the section's usual first line. Credit care to clinicians ("Clinicians treat..."), never to
+Jachi ("we treat").
 """
 
-WHEN = ("When will Jachi open?",
-        "We're launching in Texas first and expanding state by state. Join early access and we'll email you when we "
-        "open in your state.")
+# The first line of the "What to expect" section, unless a page has its own "expect_lead".
+EXPECT_LEAD = ("A licensed clinician leads your care. Here's what happens at your visit, whether you'll need tests, and "
+               "how follow-up works.")
 
-STEPS = [
-    ("Answer a few questions", "Tell us what's going on and share your health history online, on your schedule."),
-    ("A clinician reviews", "A licensed clinician reviews your answers and may message you or start a video visit."),
-    ("Get treated", "If you need medication or tests, your clinician sends the prescription to your pharmacy or "
-                    "orders tests at a nearby lab."),
-]
+WHEN = ("When will Jachi open?",
+        "We're launching in Texas first and expanding state by state. Join the waitlist and we'll email you when we "
+        "open in your state.")
 
 CALL_911 = ["Chest pain or pressure", "Trouble breathing", "Face drooping, arm weakness or trouble speaking",
             "Severe bleeding or a serious injury", "Fainting or a severe allergic reaction"]
@@ -33,8 +33,16 @@ PAGES = [
         "about": ["Common cold", "Flu", "COVID-19", "Sinus infection", "Sore throat", "Bronchitis",
                   "Urinary tract infection", "Pink eye", "Seasonal allergies", "Hives", "Stomach bug", "Migraine"],
         "specialty": "PrimaryCare",
-        "how_title": "How online urgent care works",
         "faq_title": "Urgent care questions, answered",
+        "expect_title": "What to expect from an online urgent care visit",
+        "expect": [
+            ("clip", "Your visit", "You answer questions about your symptoms online. A licensed clinician reviews "
+                                   "them and may message you or start a video visit."),
+            ("drop", "Tests", "Some illnesses, like strep throat, need a quick test. Your clinician will tell you if "
+                              "you need one and where to go."),
+            ("refresh", "Follow-up", "If you aren't getting better, or you feel worse, contact your clinician or get "
+                                     "seen in person."),
+        ],
         "h1": ("Online urgent care,", "without the waiting room."),
         "lead": "A licensed clinician can treat many everyday illnesses online, from colds and sinus infections to UTIs "
                 "and rashes, and send any prescription to the pharmacy you choose.",
@@ -70,8 +78,16 @@ PAGES = [
         "crumb": "UTI treatment",
         "about": [{"@type": "MedicalCondition", "name": "Urinary tract infection", "alternateName": "UTI"}],
         "specialty": "PrimaryCare",
-        "how_title": "How online UTI treatment works",
         "faq_title": "UTI treatment questions, answered",
+        "expect_title": "What to expect from online UTI treatment",
+        "expect": [
+            ("clip", "Your visit", "You answer questions about your symptoms and health history. A licensed "
+                                   "clinician reviews them and may message you or start a video visit."),
+            ("drop", "Tests", "Your clinician may ask for a urine test at a nearby lab, to confirm the infection or "
+                              "choose the right antibiotic."),
+            ("refresh", "Follow-up", "Take every dose as prescribed. Contact your clinician if you don't improve, "
+                                     "and get seen in person if you get a fever or pain in your back or side."),
+        ],
         "h1": ("UTI treatment online,", "without the wait."),
         "lead": "Burning when you urinate, a strong urge to go or needing to go often? A licensed clinician can review "
                 "your symptoms online and, if antibiotics are right for you, send them to your pharmacy.",
@@ -108,12 +124,19 @@ PAGES = [
         "about": ["High blood pressure", "High cholesterol", "Hypothyroidism", "Asthma", "Acid reflux (GERD)",
                   "Type 2 diabetes"],
         "specialty": "PrimaryCare",
-        "how_title": "How online prescription refills work",
         "faq_title": "Refill questions, answered",
+        "expect_title": "What to expect from an online refill",
+        "expect": [
+            ("clip", "Your visit", "You share the medication, its dose, your pharmacy and how it's working for you. "
+                                   "A licensed clinician reviews your history."),
+            ("drop", "Tests", "Some medicines need recent lab work or readings, like a blood pressure log, before "
+                              "they can be renewed. Your clinician will tell you."),
+            ("refresh", "Follow-up", "Your clinician tells you when your medication is due for its next review."),
+        ],
         "h1": ("Prescription refills,", "without the runaround."),
         "lead": "Running low on a medication you already take? A licensed clinician can review your history, renew many "
                 "everyday prescriptions and send them to your pharmacy.",
-        "list_title": "Medications we can often renew",
+        "list_title": "Medications clinicians can often renew",
         "list": ["High blood pressure", "High cholesterol", "Hypothyroidism", "Asthma", "Acid reflux (GERD)",
                  "Type 2 diabetes"],
         "know": ["No insurance needed. The medication is billed separately by your pharmacy.",
@@ -125,7 +148,7 @@ PAGES = [
                            "taking it suddenly without their advice.",
                    "items": []},
         "faq": [
-            ("Which medications can you refill?",
+            ("Which medications can clinicians refill?",
              "Many everyday medications, including those for blood pressure, cholesterol, thyroid, asthma, acid reflux "
              "and type 2 diabetes. Your clinician decides whether a refill is safe and right for you."),
             ("How much does a refill cost?",
@@ -144,21 +167,26 @@ PAGES = [
                        "relationships and more. No insurance needed. Launching in Texas.",
         "crumb": "Therapy",
         "about": ["Anxiety", "Depression", "Panic attacks", "Stress", "Grief", "Trauma"],
-        "how_title": "How online therapy works",
         "faq_title": "Therapy questions, answered",
+        "expect_title": "What to expect from online therapy",
+        "expect_lead": "A licensed therapist leads every session. Here's what to expect, from your first session to how "
+                       "often you meet.",
+        "expect": [
+            ("video", "Your sessions", "You meet a licensed therapist by private video, from wherever you're "
+                                       "comfortable."),
+            ("clip", "Questionnaires", "There are no lab tests. Your therapist may ask you to fill out short "
+                                       "questionnaires to see how you're doing over time."),
+            ("refresh", "Over time", "You and your therapist decide how often to meet, and change it as your needs "
+                                     "change."),
+        ],
         "h1": ("Online therapy,", "on your schedule."),
         "lead": "Meet with a licensed therapist by private video, from wherever you're comfortable.",
         "list_title": "What therapy can help with",
         "list": ["Anxiety", "Depression", "Panic attacks", "Stress and burnout", "Grief and loss",
                  "Relationship issues", "Trauma", "Life changes"],
-        "steps": [
-            ("Tell us what's going on", "Answer a few questions about what you'd like help with."),
-            ("Meet your therapist", "Talk with a licensed therapist by private video."),
-            ("Keep going", "Keep meeting with your therapist as you work toward what matters to you."),
-        ],
         "know": ["No insurance needed. Sessions are by private video, from wherever you're comfortable.",
-                 "Therapists don't prescribe medication. If medication could help, our anxiety and depression care "
-                 "can work alongside your therapy.",
+                 "Therapists don't prescribe medication. If medication could help, anxiety and depression care from a "
+                 "licensed clinician can work alongside your therapy.",
                  "For adults 18 and older."],
         "safety": {"kind": "988", "title": "If you're in crisis, reach out now",
                    "text": "Call or text 988 to reach the Suicide & Crisis Lifeline. It's free, confidential and open "
@@ -184,12 +212,20 @@ PAGES = [
         "crumb": "Anxiety & depression",
         "about": ["Anxiety", "Depression", "Panic attacks"],
         "specialty": "Psychiatric",
-        "how_title": "How online anxiety and depression care works",
         "faq_title": "Anxiety and depression questions, answered",
+        "expect_title": "What to expect from anxiety and depression care",
+        "expect": [
+            ("clip", "Your evaluation", "A licensed clinician asks how you've been feeling and builds a plan with "
+                                        "you. They may message you or start a video visit."),
+            ("drop", "Tests", "You'll answer short questionnaires about your mood. Your clinician will tell you if "
+                              "you need any lab tests."),
+            ("refresh", "Follow-up", "Regular check-ins to see how you're doing, watch for side effects and adjust "
+                                     "your treatment."),
+        ],
         "h1": ("Anxiety and depression care,", "with real follow-up."),
         "lead": "A licensed clinician evaluates how you're feeling, builds a plan with you and prescribes medication "
                 "when it's right for you, then checks in as you go.",
-        "list_title": "What we treat",
+        "list_title": "What clinicians treat",
         "list": ["Anxiety", "Depression", "Panic attacks"],
         "know": ["Your care includes an evaluation, prescriptions when they're right for you, and regular check-ins. "
                  "Medication is billed separately by your pharmacy.",
@@ -219,12 +255,20 @@ PAGES = [
         "crumb": "Sexual health",
         "about": ["Chlamydia", "Gonorrhea", "Genital herpes", "HIV", "Trichomoniasis", "Genital warts"],
         "specialty": "Infectious",
-        "how_title": "How online sexual health care works",
         "faq_title": "Sexual health questions, answered",
+        "expect_title": "What to expect from sexual health care",
+        "expect": [
+            ("clip", "Your visit", "You answer private questions online. A licensed clinician reviews them and may "
+                                   "message you or start a video visit."),
+            ("drop", "Tests", "STI tests are done at a nearby lab. PrEP needs an HIV test before you start and "
+                              "regularly after."),
+            ("refresh", "Follow-up", "Your clinician shares your results, treats infections that can be treated with "
+                                     "medication and tells you when to test again."),
+        ],
         "h1": ("Sexual health care,", "private and judgment-free."),
         "lead": "A licensed clinician can order STI tests at a nearby lab, treat common infections and prescribe herpes "
                 "treatment or PrEP to help prevent HIV.",
-        "list_title": "What we help with",
+        "list_title": "What clinicians help with",
         "list": ["STI testing", "Chlamydia", "Gonorrhea", "Genital herpes", "HIV prevention (PrEP)", "Doxy-PEP",
                  "Trichomoniasis", "Genital warts"],
         "know": ["No insurance needed. Lab tests are billed separately by the lab, and medication by your pharmacy.",
@@ -240,8 +284,8 @@ PAGES = [
              "Your clinician orders the right tests, and you give a quick sample at a nearby lab. Lab fees are billed "
              "separately. If you test positive for an infection that can be treated with medication, your clinician "
              "can prescribe it."),
-            ("Do you offer PrEP?",
-             "Yes. PrEP is medication that greatly lowers your chance of getting HIV. You'll need an HIV test and other "
+            ("Can I get PrEP?",
+             "Yes, once we open. PrEP is medication that greatly lowers your chance of getting HIV. You'll need an HIV test and other "
              "lab work before you start and every 3 months, which your clinician will order."),
             ("Is my visit private?",
              "Yes. Your visit is private, and your health information is protected under HIPAA."),
@@ -256,12 +300,20 @@ PAGES = [
         "crumb": "Men's health",
         "about": ["Erectile dysfunction", "Hair loss", "Premature ejaculation"],
         "specialty": "Urologic",
-        "how_title": "How online ED and hair loss treatment works",
         "faq_title": "ED and hair loss questions, answered",
+        "expect_title": "What to expect from ED and hair loss treatment",
+        "expect": [
+            ("clip", "Your visit", "You answer questions about your health, your heart and the medicines you take. A "
+                                   "licensed clinician reviews them and may message you or start a video visit."),
+            ("drop", "Tests", "Your clinician may ask for a recent blood pressure reading before prescribing ED "
+                              "treatment."),
+            ("refresh", "Follow-up", "Refills and check-ins as you need them. Tell your clinician about any side "
+                                     "effects."),
+        ],
         "h1": ("ED and hair loss treatment,", "handled discreetly."),
         "lead": "A licensed clinician reviews your health and medications, then prescribes treatment for erectile "
                 "dysfunction, hair loss or premature ejaculation when it's right for you.",
-        "list_title": "What we treat",
+        "list_title": "What clinicians treat",
         "list": ["Erectile dysfunction (ED)", "Hair loss", "Premature ejaculation"],
         "know": ["No insurance needed. Medication is billed separately by your pharmacy.",
                  "Your clinician checks your heart health and current medications before prescribing ED treatment.",
@@ -272,10 +324,10 @@ PAGES = [
                            "with the doctor who treats your heart first.",
                    "items": []},
         "faq": [
-            ("What ED treatments do you offer?",
+            ("What ED treatments are available?",
              "Your clinician decides what's right for you, which may include FDA-approved medications such as "
              "sildenafil or tadalafil, sent to the pharmacy you choose."),
-            ("Do you treat hair loss?",
+            ("Can I get treatment for hair loss?",
              "Yes. A clinician can recommend and prescribe treatment for common hair loss when it's right for you."),
             ("How much does it cost?",
              "We'll share our prices before we open. You won't need insurance, and medication is billed separately by your pharmacy."),
@@ -292,12 +344,19 @@ PAGES = [
                   {"@type": "MedicalTherapy", "name": "Emergency contraception"}, "Menopause", "Yeast infection",
                   "Bacterial vaginosis", "Hair thinning"],
         "specialty": "Gynecologic",
-        "how_title": "How birth control online works",
         "faq_title": "Women's health questions, answered",
+        "expect_title": "What to expect from birth control and women's health care",
+        "expect": [
+            ("clip", "Your visit", "You answer questions about your health history. A licensed clinician reviews "
+                                   "them and may message you or start a video visit."),
+            ("drop", "Tests", "Some birth control needs a recent blood pressure reading, and some symptoms need a "
+                              "lab test. Your clinician will tell you."),
+            ("refresh", "Follow-up", "Refills and check-ins as you need them, and a new plan if anything changes."),
+        ],
         "h1": ("Birth control and women's health,", "online."),
         "lead": "A licensed clinician can help with birth control, emergency contraception, menopause symptoms, yeast "
                 "infections and BV, and send prescriptions to your pharmacy.",
-        "list_title": "What we help with",
+        "list_title": "What clinicians help with",
         "list": ["Birth control", "Emergency contraception", "Menopause symptoms", "Yeast infection",
                  "Bacterial vaginosis (BV)", "Hair thinning"],
         "know": ["No insurance needed. Medication is billed separately by your pharmacy.",
@@ -311,7 +370,7 @@ PAGES = [
             ("Can I get birth control online?",
              "Yes. A licensed clinician reviews your health history and, if it's safe for you, prescribes birth "
              "control like the pill, patch or ring and sends it to your pharmacy."),
-            ("Do you treat menopause symptoms?",
+            ("Can I get help with menopause symptoms?",
              "Yes. A clinician can talk through symptoms like hot flashes and night sweats and prescribe treatment "
              "when it's right for you."),
             ("How much does it cost?",
@@ -327,12 +386,19 @@ PAGES = [
         "crumb": "Skin care",
         "about": ["Acne", "Rosacea", "Eczema", "Psoriasis", "Cold sores", "Fungal skin infection", "Dandruff"],
         "specialty": "Dermatology",
-        "how_title": "How online skin care works",
         "faq_title": "Skin care questions, answered",
+        "expect_title": "What to expect from online skin care",
+        "expect": [
+            ("clip", "Your visit", "You answer questions and may be asked for clear photos of your skin. A licensed "
+                                   "clinician reviews them."),
+            ("drop", "Tests", "Your clinician will tell you if a treatment needs blood work before you start."),
+            ("refresh", "Follow-up", "Skin treatments take time to work. Check-ins help your clinician adjust your "
+                                     "plan."),
+        ],
         "h1": ("Clearer skin,", "with a real plan."),
         "lead": "A licensed clinician can treat acne, rosacea, eczema, psoriasis, cold sores and fungal infections, and "
                 "send prescriptions to your pharmacy.",
-        "list_title": "What we treat",
+        "list_title": "What clinicians treat",
         "list": ["Acne", "Rosacea", "Eczema", "Psoriasis", "Cold sores", "Fungal infections", "Dandruff"],
         "know": ["No insurance needed. Medication is billed separately by your pharmacy.",
                  "If you need to be seen in person, your clinician will tell you.",
@@ -342,7 +408,7 @@ PAGES = [
                            "if you feel very sick.",
                    "items": ["A rash or sore is spreading fast", "It's very painful", "You have a fever"]},
         "faq": [
-            ("What skin conditions can you treat online?",
+            ("Which skin conditions can be treated online?",
              "Acne, rosacea, eczema, psoriasis, cold sores, fungal infections like athlete's foot and ringworm, and "
              "dandruff. If something needs a closer look in person, your clinician will tell you."),
             ("Do you prescribe Accutane?",
@@ -360,8 +426,16 @@ PAGES = [
                        "for you. No insurance needed. Launching in Texas.",
         "crumb": "Weight care",
         "about": ["Obesity", "Overweight"],
-        "how_title": "How online medical weight loss works",
         "faq_title": "Weight loss questions, answered",
+        "expect_title": "What to expect from medical weight care",
+        "expect": [
+            ("clip", "Your visit", "You share your health history, your current weight and your goals. A licensed "
+                                   "clinician reviews them and may message you or start a video visit."),
+            ("drop", "Tests", "Some people need blood work before starting or during treatment. Your clinician will "
+                              "tell you."),
+            ("refresh", "Follow-up", "Regular check-ins to track your progress and any side effects, and to adjust "
+                                     "your dose."),
+        ],
         "h1": ("Medical weight care,", "led by clinicians."),
         "lead": "A licensed clinician builds a plan around your health and prescribes FDA-approved medication, such as "
                 "a GLP-1, when it's right for you.",
@@ -375,12 +449,12 @@ PAGES = [
                  "We don't prescribe phentermine. It's a controlled substance."],
         "safety": {"kind": "caution", "title": "GLP-1 medications aren't for everyone",
                    "text": "They shouldn't be used if you or a family member has had medullary thyroid cancer or MEN2, "
-                           "and they usually aren't prescribed during pregnancy, while breastfeeding or when you're "
-                           "planning a pregnancy.",
+                           "and they shouldn't be taken during pregnancy, while breastfeeding or if you're planning a "
+                           "pregnancy.",
                    "items": []},
         "faq": [
-            ("Which weight-loss medications do you prescribe?",
-             "We focus on FDA-approved medications. That can include GLP-1 medications such as semaglutide (Wegovy®) "
+            ("Which weight-loss medications do clinicians prescribe?",
+             "FDA-approved medications. That can include GLP-1 medications such as semaglutide (Wegovy®) "
              "and tirzepatide (Zepbound®) when your clinician decides they're right for you."),
             ("Does weight-loss medication have side effects?",
              "Yes. The most common side effects of GLP-1 medications affect digestion, like nausea, diarrhea, vomiting "

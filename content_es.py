@@ -144,7 +144,7 @@ NOT_OFFERED = {
     "Ketamine": ("Ketamina", "ketamina spravato", "No ofrecemos tratamiento con ketamina."),
     "Medical marijuana": ("Marihuana medicinal", "marihuana cannabis thc mota", "No ofrecemos marihuana medicinal."),
     "Isotretinoin (Accutane)": ("Isotretinoína (Accutane)", "isotretinoina accutane roacutan",
-                                "No recetamos isotretinoína. Nuestro cuidado de la piel puede ayudar con otros tratamientos para el acné."),
+                                "No recetamos isotretinoína. Un profesional de la salud puede sugerirle otros tratamientos para el acné."),
 }
 
 EMERGENCIES = {
@@ -172,31 +172,35 @@ POPULAR = ["Infección urinaria", "Sinusitis", "Acné", "Disfunción eréctil", 
            "Ansiedad", "Caída del cabello"]
 
 FAQ = [
+    ("¿Jachi ya atiende pacientes?",
+     "Todavía no. Nos estamos preparando para abrir en Texas. Aún no se pueden reservar consultas y no se cobra nada. "
+     "Únase a la lista de espera y le avisaremos por correo antes de abrir."),
     ("¿Quiénes son los profesionales de la salud?",
      "Médicos, enfermeros practicantes y asistentes médicos para la atención médica, y terapeutas con licencia para la "
      "terapia. Todos tienen licencia en su estado, ejercen a través de grupos médicos independientes y toman todas las "
-     "decisiones clínicas sobre su atención."),
+     "decisiones clínicas sobre su atención. Antes de abrir, publicaremos en este sitio el nombre del grupo médico y "
+     "de sus profesionales, para que pueda verificar sus licencias."),
     ("¿El asistente de cuidado es un médico?",
-     "No. El asistente de cuidado es IA. Ayuda con el registro inicial, el seguimiento, los recordatorios y las preguntas "
-     "cotidianas sobre su atención. Nunca diagnostica, receta, da terapia ni cambia su tratamiento. Un profesional de la "
+     "No. El asistente de cuidado es IA. Cuando abramos, ayudará con el registro inicial, el seguimiento, los "
+     "recordatorios y las preguntas cotidianas sobre su atención. Nunca diagnostica, receta, da terapia ni cambia su tratamiento. Un profesional de la "
      "salud revisa lo que prepara, y siempre le diremos cuando esté hablando con IA."),
-    ("¿Qué pueden tratar en línea?",
+    ("¿Qué pueden tratar en línea los profesionales de la salud?",
      "Enfermedades comunes, resurtidos de recetas, terapia, ansiedad y depresión, salud sexual, salud del hombre y de la "
      "mujer, problemas de la piel y control de peso. Busque su afección en esta página para comprobarlo. Algunos "
      "problemas necesitan un examen, una prueba o un procedimiento en persona, y su profesional de la salud le dirá si es "
      "su caso."),
     ("¿Cómo funciona la terapia?",
-     "Se reúne por video privado con un terapeuta con licencia. Los terapeutas no recetan medicamentos. Si un medicamento puede ayudar, nuestra atención para la ansiedad y la "
-     "depresión puede complementar su terapia."),
+     "Se reúne por video privado con un terapeuta con licencia. Los terapeutas no recetan medicamentos. Si un medicamento puede ayudar, la atención para la ansiedad y la "
+     "depresión de un profesional de la salud con licencia puede complementar su terapia."),
     ("¿Cómo funcionan las pruebas de ITS?",
      "Su profesional de la salud pide las pruebas adecuadas y usted da una muestra rápida en un laboratorio cercano. Los "
      "costos del laboratorio se cobran por separado. Si sale positivo para una infección que se trata con medicamentos, "
      "su profesional de la salud se los puede recetar. Algunas infecciones, como la gonorrea, se tratan con una inyección "
      "que se pone en persona."),
-    ("¿Ofrecen PrEP?",
-     "Sí. La PrEP es un medicamento que reduce mucho la probabilidad de contraer el VIH. Necesitará una prueba de VIH y "
+    ("¿Habrá PrEP?",
+     "Sí, cuando abramos. La PrEP es un medicamento que reduce mucho la probabilidad de contraer el VIH. Necesitará una prueba de VIH y "
      "otros análisis de laboratorio antes de empezar y cada 3 meses, que su profesional de la salud pedirá."),
-    ("¿Qué atención ofrecen para hombres y para mujeres?",
+    ("¿Qué atención hay para hombres y para mujeres?",
      "Para hombres: disfunción eréctil, caída del cabello y eyaculación precoz. Para mujeres: anticonceptivos, "
      "anticoncepción de emergencia, síntomas de la menopausia, infecciones vaginales por hongos, vaginosis bacteriana y "
      "adelgazamiento del cabello. Los medicamentos para la disfunción eréctil no son seguros con los nitratos para el "
@@ -205,8 +209,8 @@ FAQ = [
      "No. No recetamos ni resurtimos sustancias controladas, como estimulantes para el TDAH, benzodiazepinas como Xanax, "
      "opioides, testosterona, fentermina o medicamentos para dormir como Ambien. Si toma alguno, siga con el profesional "
      "que se lo receta."),
-    ("¿Qué medicamentos para bajar de peso recetan?",
-     "Nos enfocamos en medicamentos aprobados por la FDA. Eso puede incluir medicamentos GLP-1 como la semaglutida "
+    ("¿Qué medicamentos para bajar de peso recetan los profesionales de la salud?",
+     "Medicamentos aprobados por la FDA. Eso puede incluir medicamentos GLP-1 como la semaglutida "
      "(Wegovy®) y la tirzepatida (Zepbound®) cuando su profesional de la salud decida que son adecuados para usted. No a "
      "todas las personas se les recetará un medicamento."),
     ("¿Los medicamentos para bajar de peso tienen efectos secundarios?",
@@ -224,15 +228,17 @@ FAQ = [
     ("¿Puedo usar Jachi si tengo menos de 18 años?",
      "No. Jachi es para adultos de 18 años o más."),
     ("¿Dónde está disponible Jachi?",
-     "Abriremos primero en Texas y luego estado por estado. Únase al acceso anticipado para saber cuándo abrimos cerca de "
+     "Abriremos primero en Texas y luego estado por estado. Únase a la lista de espera para saber cuándo abrimos cerca de "
      "usted."),
     ("¿Cómo se protege mi información?",
-     "Su información médica está protegida por la ley HIPAA y se guarda en los Estados Unidos. El buscador de atención, "
-     "la búsqueda de afecciones y la evaluación de control de peso de esta página funcionan solo en su navegador, y nada "
-     "de lo que escriba allí se guarda."),
+     "Hoy, este sitio solo recibe lo que usted envía en sus formularios y en el chat, y no tiene anuncios ni rastreo. "
+     "Cuando sea paciente, el grupo médico que lo atienda guardará su expediente médico, protegido por la ley HIPAA. "
+     "El buscador de atención, la búsqueda de afecciones y la evaluación de control de peso de esta página funcionan "
+     "solo en su navegador, y nada de lo que escriba allí se guarda."),
     ("¿Puedo hablar con una persona?",
-     "Por ahora no hay agentes en vivo. Nuestro asistente de IA en el chat de ayuda puede responder preguntas comunes, y "
-     "usted puede enviar una solicitud desde ahí o escribir a nuestro equipo, y le responderemos por correo."),
+     "Sí, por correo. Envíe una solicitud desde el chat de ayuda o escriba a nuestro equipo, y una persona le responderá. "
+     "Aún no tenemos chat en vivo ni atención por teléfono. Antes de abrir, agregaremos una forma más rápida de "
+     "comunicarse con nuestro equipo sobre citas, pagos y recetas."),
     ("¿Y si es una emergencia?",
      "Jachi no es para emergencias. Si cree que tiene una emergencia médica, llame al 911. Si está en crisis o piensa en "
      "el suicidio, llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la "
@@ -246,6 +252,141 @@ STATES = {
     "SC": "Carolina del Sur", "SD": "Dakota del Sur", "WV": "Virginia Occidental",
 }
 
+# La página "Cómo funciona Jachi" (/es/como-funciona/), con el diseño de src/es/how.html. La app muestra los mismos pasos.
+HOW = {
+    "path": "/es/como-funciona/",
+    "lanes": [
+        {"who": "En Jachi", "title": "Encuentre la atención adecuada", "steps": [
+            ("Visite Jachi", "Lea sobre cada servicio: qué tratan los profesionales de la salud, qué incluye y cómo "
+                             "funciona."),
+            ("Elija un servicio", "Elija la atención que necesita. ¿No está seguro? El buscador de atención le orienta y "
+                                  "nuestro asistente de IA responde preguntas generales."),
+            ("Vea los precios y lo que incluyen", "Antes de empezar, verá el precio y lo que cubre. Daremos a conocer los "
+                                                  "precios antes de abrir."),
+        ]},
+        {"who": "Con el grupo médico", "title": "Reciba atención de profesionales con licencia", "steps": [
+            ("Complete su cuestionario de salud", "Responda preguntas sobre su salud, sus medicamentos y sus "
+                                                  "antecedentes."),
+            ("Un profesional evalúa su caso", "Un profesional de la salud con licencia revisa sus respuestas. Puede "
+                                              "enviarle un mensaje o iniciar una videoconsulta."),
+            ("Su plan de tratamiento", "Si un tratamiento es adecuado para usted, su profesional de la salud hace un plan "
+                                       "con usted. No todas las personas necesitan medicamentos."),
+            ("Recetas, análisis y seguimiento", "Las recetas van a su farmacia y las órdenes de análisis a un laboratorio "
+                                                "cercano. Su profesional de la salud le indica qué seguimiento necesita y, "
+                                                "con su permiso, puede enviar un resumen a su médico de cabecera."),
+        ]},
+    ],
+    "handoff": ("Después pasa al portal de pacientes del grupo médico.",
+                "Su información de salud va al sistema seguro de pacientes del grupo médico, no al sitio web de Jachi, y "
+                "siempre sabrá qué grupo médico le brinda la atención."),
+    "title": "Cómo funciona Jachi: su atención paso a paso | Jachi Health",
+    "description": "Cómo funciona Jachi, desde elegir un servicio en línea hasta la atención de profesionales con "
+                   "licencia de un grupo médico independiente.",
+    "crumb": "Cómo funciona Jachi",
+    "faq": [
+        ("¿Jachi es un consultorio o un grupo médico?",
+         "No. Jachi Health LLC ofrece el sitio web, la app y el servicio al cliente. Profesionales de la salud con licencia de un "
+         "grupo médico independiente le brindan la atención y toman todas las decisiones médicas."),
+        ("¿Cuándo darán a conocer el grupo médico?",
+         "Antes de abrir. Publicaremos en este sitio el nombre del grupo médico y de sus profesionales, para que pueda "
+         "verificar sus licencias antes de su primera consulta."),
+        ("¿A dónde va mi información de salud?",
+         "Al sistema seguro de pacientes del grupo médico, que guarda su expediente médico de forma privada. La lista "
+         "de espera y el chat de ayuda de Jachi nunca le piden detalles de salud, y el buscador de atención y la "
+         "evaluación de control de peso funcionan solo en su navegador y no guardan nada."),
+        ("¿Puedo reservar una consulta ahora?",
+         "Todavía no. Jachi aún no está abierto. Únase a la lista de espera y le enviaremos un correo antes de abrir en "
+         "su estado, con los precios y cómo funcionarán las consultas."),
+        ("¿Necesito seguro médico?",
+         "No. Jachi es de pago directo, así que no necesita seguro médico ni una referencia. Los medicamentos y los "
+         "análisis de laboratorio los cobran por separado su farmacia y el laboratorio."),
+        ("¿Qué hace el asistente de IA?",
+         "Responde preguntas generales sobre Jachi y cómo funciona la atención, y siempre dice que es IA. Nunca "
+         "diagnostica, receta ni da terapia."),
+    ],
+}
+
+# "Qué esperar" de cada servicio, en el orden de pages.py (consulta, análisis, seguimiento). La app los muestra; el sitio
+# web los usará cuando tenga páginas de servicios en español. Los íconos están en pages.py.
+EXPECT_LEAD = ("Un profesional de la salud con licencia dirige su atención. Esto es lo que pasa en su consulta, si "
+               "necesitará análisis y cómo funciona el seguimiento.")
+_VISITA = "Un profesional de la salud con licencia revisa sus respuestas y puede enviarle un mensaje o iniciar una videoconsulta."
+EXPECT = {
+    "urgent-care": ("Qué esperar de una consulta de urgencia en línea", None, [
+        ("Su consulta", "Usted responde preguntas sobre sus síntomas en línea. " + _VISITA),
+        ("Análisis", "Algunas enfermedades, como la faringitis estreptocócica, necesitan una prueba rápida. Su profesional "
+                     "de la salud le dirá si la necesita y a dónde ir."),
+        ("Seguimiento", "Si no mejora, o se siente peor, comuníquese con su profesional de la salud o busque atención en "
+                        "persona."),
+    ]),
+    "uti-treatment": ("Qué esperar del tratamiento en línea para infecciones urinarias", None, [
+        ("Su consulta", "Usted responde preguntas sobre sus síntomas y sus antecedentes de salud. " + _VISITA),
+        ("Análisis", "Su profesional de la salud puede pedirle un análisis de orina en un laboratorio cercano, para confirmar "
+                     "la infección o elegir el antibiótico adecuado."),
+        ("Seguimiento", "Tome todas las dosis como se le indicaron. Comuníquese con su profesional de la salud si no mejora, "
+                        "y busque atención en persona si tiene fiebre o dolor en la espalda o en el costado."),
+    ]),
+    "prescription-refills": ("Qué esperar de un resurtido en línea", None, [
+        ("Su consulta", "Usted comparte el medicamento, la dosis, su farmacia y cómo le está funcionando. Un profesional de "
+                        "la salud con licencia revisa sus antecedentes."),
+        ("Análisis", "Algunos medicamentos necesitan análisis o mediciones recientes, como un registro de su presión "
+                     "arterial, antes de renovarse. Su profesional de la salud le dirá."),
+        ("Seguimiento", "Su profesional de la salud le dirá cuándo toca la próxima revisión de su medicamento."),
+    ]),
+    "online-therapy": ("Qué esperar de la terapia en línea",
+                       "Un terapeuta con licencia dirige cada sesión. Esto es lo que puede esperar, desde su primera sesión "
+                       "hasta con qué frecuencia se reúnen.", [
+        ("Sus sesiones", "Usted se reúne con un terapeuta con licencia por video privado, desde el lugar donde se sienta a "
+                         "gusto."),
+        ("Cuestionarios", "No hay análisis de laboratorio. Su terapeuta puede pedirle que llene cuestionarios breves para "
+                          "ver cómo va con el tiempo."),
+        ("Con el tiempo", "Usted y su terapeuta deciden con qué frecuencia reunirse, y lo cambian según cambien sus "
+                          "necesidades."),
+    ]),
+    "anxiety-depression-treatment": ("Qué esperar de la atención para la ansiedad y la depresión", None, [
+        ("Su evaluación", "Un profesional de la salud con licencia le pregunta cómo se ha sentido y prepara un plan con "
+                          "usted. Puede enviarle un mensaje o iniciar una videoconsulta."),
+        ("Análisis", "Usted responderá cuestionarios breves sobre su estado de ánimo. Su profesional de la salud le dirá si "
+                     "necesita algún análisis de laboratorio."),
+        ("Seguimiento", "Consultas regulares para ver cómo está, vigilar los efectos secundarios y ajustar su tratamiento."),
+    ]),
+    "sexual-health": ("Qué esperar de la atención de salud sexual", None, [
+        ("Su consulta", "Usted responde preguntas privadas en línea. " + _VISITA),
+        ("Análisis", "Las pruebas de ITS se hacen en un laboratorio cercano. La PrEP necesita una prueba de VIH antes de "
+                     "empezar y con regularidad después."),
+        ("Seguimiento", "Su profesional de la salud le comparte sus resultados, trata las infecciones que se tratan con "
+                        "medicamentos y le dice cuándo volver a hacerse la prueba."),
+    ]),
+    "mens-health": ("Qué esperar del tratamiento para la disfunción eréctil y la caída del cabello", None, [
+        ("Su consulta", "Usted responde preguntas sobre su salud, su corazón y los medicamentos que toma. " + _VISITA),
+        ("Análisis", "Su profesional de la salud puede pedirle una medición reciente de su presión arterial antes de "
+                     "recetarle un tratamiento para la disfunción eréctil."),
+        ("Seguimiento", "Resurtidos y consultas de seguimiento cuando los necesite. Informe a su profesional de la salud "
+                        "sobre cualquier efecto secundario."),
+    ]),
+    "womens-health": ("Qué esperar de la atención de anticonceptivos y salud de la mujer", None, [
+        ("Su consulta", "Usted responde preguntas sobre sus antecedentes de salud. " + _VISITA),
+        ("Análisis", "Algunos anticonceptivos necesitan una medición reciente de la presión arterial, y algunos síntomas "
+                     "necesitan un análisis de laboratorio. Su profesional de la salud le dirá."),
+        ("Seguimiento", "Resurtidos y consultas de seguimiento cuando los necesite, y un nuevo plan si algo cambia."),
+    ]),
+    "skin-care": ("Qué esperar del cuidado de la piel en línea", None, [
+        ("Su consulta", "Usted responde preguntas y puede que le pidan fotos claras de su piel. Un profesional de la salud "
+                        "con licencia revisa sus respuestas y sus fotos."),
+        ("Análisis", "Su profesional de la salud le dirá si un tratamiento necesita análisis de sangre antes de empezar."),
+        ("Seguimiento", "Los tratamientos para la piel tardan en hacer efecto. Las consultas de seguimiento ayudan a su "
+                        "profesional de la salud a ajustar su plan."),
+    ]),
+    "weight-loss": ("Qué esperar de la atención médica para bajar de peso", None, [
+        ("Su consulta", "Usted comparte sus antecedentes de salud, su peso actual y sus metas. Un profesional de la salud "
+                        "con licencia revisa esta información y puede enviarle un mensaje o iniciar una videoconsulta."),
+        ("Análisis", "Algunas personas necesitan análisis de sangre antes de empezar o durante el tratamiento. Su "
+                     "profesional de la salud le dirá."),
+        ("Seguimiento", "Consultas regulares para revisar su progreso y cualquier efecto secundario, y para ajustar su "
+                        "dosis."),
+    ]),
+}
+
 # Words build.py uses when it writes the service cards, search rows and lists.
 BUILD = {
     "not_offered": "No disponible",
@@ -254,7 +395,7 @@ BUILD = {
     "call_911": "Llamar al 911",
     "call_988": "Llamar al 988",
     "text_988": "Enviar texto al 988",
-    "join": "Reciba acceso anticipado",
+    "join": "Únase a la lista de espera",
     "check_elig": "Revisar si califico",
     "check_elig_long": "Revisar si califico",
     "for": " para {x}",

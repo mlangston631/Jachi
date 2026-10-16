@@ -35,7 +35,7 @@
     <form class="ticket" id="ticket-form" name="support-ticket" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
       <button class="chat__back" type="button" id="ticket-back">{{I:arrow-left}} Back to chat</button>
       <h3 class="ticket__title" id="ticket-title" tabindex="-1">Submit a ticket</h3>
-      <p class="ticket__lead">Live agents aren't available yet. Send a ticket and our team will reply by email.</p>
+      <p class="ticket__lead">A person on our team reads every ticket and replies by email. Live chat isn't available yet.</p>
       <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <div class="field">
         <label class="label" for="ticket-name">Name</label>
@@ -51,7 +51,7 @@
         <label class="label" for="ticket-topic">Topic</label>
         <select class="select" id="ticket-topic" name="topic">
           <option>General question</option>
-          <option>Early access</option>
+          <option>Waitlist</option>
           <option>Services and prices</option>
           <option>Website problem</option>
           <option>Partnerships or press</option>
@@ -69,6 +69,7 @@
       </label>
       <input type="hidden" name="chat_transcript" id="ticket-transcript">
       <input type="hidden" name="language" value="en">
+      <input type="hidden" name="source" value="website">
       <button class="btn btn--block" type="submit" id="ticket-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Send ticket</span></button>
       <div class="form-status" id="ticket-status" role="status"></div>
     </form>
@@ -88,8 +89,8 @@
     <h2 class="sheet__title" id="privacy-title">Privacy at a glance</h2>
     <h3>The care finder, condition search and weight care check</h3>
     <p>They run entirely in your browser. What you type or choose, including your height, weight and health details, is never sent to us or stored.</p>
-    <h3>Early access sign-ups</h3>
-    <p>If you join early access, we collect your email and state and, if you give them, your first name and the services you're interested in, plus the language of the page you used. We use them only to email you about our launch. Sign-ups are stored with our website host.</p>
+    <h3>Waitlist sign-ups</h3>
+    <p>If you join the waitlist, we collect your email and state and, if you give them, your first name and the services you're interested in, plus the language of the page you used. We use them only to email you about our launch. Sign-ups are stored with our website host.</p>
     <h3>Accounts</h3>
     <p>If you create an account, we keep your email, your password in scrambled form, and the details you save there. Your browser keeps a sign-in token until you log out. You can update or delete your account at any time on the <a href="/account/">account page</a>.</p>
     <h3>Help chat and support tickets</h3>

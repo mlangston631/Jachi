@@ -1,13 +1,13 @@
 <main id="main">
-  <section class="hero hero--page grain" aria-labelledby="page-title">
+  <section class="hero hero--page" aria-labelledby="page-title">
     <div class="wrap page-hero">
       <div class="page-hero__copy">
         {{CRUMBS}}
-        <p class="pill"><span class="pill__dot" aria-hidden="true"></span>Early access open · Launching in Texas</p>
+        <p class="status"><span class="status__dot" aria-hidden="true"></span><span>Waitlist open</span><span class="status__rule" aria-hidden="true"></span><span>Launching in Texas first</span></p>
         <h1 class="display display--page" id="page-title">{{SVC_H1}}</h1>
         <p class="lead">{{SVC_LEAD}}</p>
         <div class="cta-row">
-          <a class="btn btn--lg" href="{{JOIN_HREF}}">Get early access {{I:arrow:i--arrow}}</a>
+          <a class="btn btn--lg" href="{{JOIN_HREF}}">Join the waitlist {{I:arrow:i--arrow}}</a>
           {{SVC_SECOND_CTA}}
         </div>
       </div>
@@ -18,7 +18,6 @@
   <section class="section section--paper" aria-labelledby="list-title">
     <div class="wrap page-split">
       <div class="section-head section-head--tight">
-        <p class="eyebrow">{{SVC_CRUMB}}</p>
         <h2 class="h2 h2--sm" id="list-title">{{SVC_LIST_TITLE}}</h2>
         <p class="lead">{{SVC_LIST_LEAD}}</p>
       </div>
@@ -26,22 +25,21 @@
     </div>
   </section>
 
-  <section class="section" aria-labelledby="how-title">
-    <div class="wrap page-split">
-      <div>
-        <div class="section-head section-head--tight">
-          <p class="eyebrow">How it works</p>
-          <h2 class="h2 h2--sm" id="how-title">{{SVC_HOW_TITLE}}</h2>
-        </div>
-        <ol class="mini-steps">{{SVC_STEPS}}</ol>
+  <section class="section" id="expect" aria-labelledby="expect-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2 h2--sm" id="expect-title">{{SVC_EXPECT_TITLE}}</h2>
+        <p class="lead">{{SVC_EXPECT_LEAD}}</p>
       </div>
-      <div class="page-aside">
+      <ol class="expect">{{SVC_EXPECT}}</ol>
+      <div class="expect__more">
         <div class="explain">
           <h3>Good to know</h3>
           <ul class="know">{{SVC_KNOW}}</ul>
         </div>
         {{SVC_SAFETY}}
       </div>
+      <ul class="expect__links">{{SVC_LINKS}}</ul>
     </div>
   </section>
 
@@ -49,7 +47,6 @@
     <div class="wrap faq__grid">
       <div class="faq__intro">
         <div class="section-head">
-          <p class="eyebrow">FAQ</p>
           <h2 class="h2" id="faq-title">{{SVC_FAQ_TITLE}}</h2>
         </div>
         <div class="faq-more">
@@ -67,12 +64,11 @@
   <section class="section join grain on-dark page-cta" aria-labelledby="cta-title">
     {{MARK:m-art-cta:outline:join__art}}
     <div class="wrap page-cta__inner">
-      <p class="eyebrow eyebrow--light">Early access</p>
-      <h2 class="h2 h2--light" id="cta-title">Be first <em>in line.</em></h2>
+      <h2 class="h2 h2--light" id="cta-title">Be first in line.</h2>
       <p class="lead lead--light">We're opening in Texas first. Join the list and we'll email you when Jachi launches in your state.</p>
-      <a class="btn btn--light btn--lg" href="{{JOIN_HREF}}">Get early access {{I:arrow:i--arrow}}</a>
-      <nav class="related" aria-label="More care">
-        <h3 class="related__h">More care from Jachi</h3>
+      <a class="btn btn--light btn--lg" href="{{JOIN_HREF}}">Join the waitlist {{I:arrow:i--arrow}}</a>
+      <nav class="related" aria-label="Related services">
+        <h3 class="related__h">Related services</h3>
         <ul>{{SVC_RELATED}}</ul>
       </nav>
     </div>
