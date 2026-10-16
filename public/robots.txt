@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.jachihealth.com/sitemap.xml
+Sitemap: https://jachihealth.com/sitemap.xml

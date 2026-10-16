@@ -874,7 +874,7 @@ with sync_playwright() as p:
         status, headers, body = get(path)
         check(f"{path} is served", status == 200 and kind in headers.get("Content-Type", "") and len(body) > 50, f"{status} {headers.get('Content-Type')}")
     html_text = html_bytes.decode()
-    for tag in ('property="og:image" content="https://www.jachihealth.com/og.jpg"', 'name="twitter:card" content="summary_large_image"',
+    for tag in ('property="og:image" content="https://jachihealth.com/og.jpg"', 'name="twitter:card" content="summary_large_image"',
                 'rel="apple-touch-icon" href="/apple-touch-icon.png"', 'rel="icon" href="/icon.svg"', 'rel="canonical"'):
         check(f"head has {tag.split('=')[1].split()[0]}", tag in html_text, tag)
     status, headers, body = get("/no-such-page")
@@ -999,7 +999,7 @@ with sync_playwright() as p:
     check("es join: success in Spanish", page.locator("#join-success-title").inner_text().startswith("Ya está en la lista, Ana"))
     page.locator("#join-share").click(); page.wait_for_timeout(300)
     shared = page.evaluate("window.__shared")
-    check("es share: opens the share sheet with the Spanish page", shared and shared["url"] == "https://www.jachihealth.com/es/" and shared["text"] == ES["share_text"], str(shared))
+    check("es share: opens the share sheet with the Spanish page", shared and shared["url"] == "https://jachihealth.com/es/" and shared["text"] == ES["share_text"], str(shared))
     page.screenshot(path=str(OUT / "es-join-success-phone.png"))
 
     page.goto(ES_URL + "#eligibility", wait_until="networkidle"); page.wait_for_timeout(500)
@@ -1054,7 +1054,7 @@ with sync_playwright() as p:
     check("sign-up with only email and state works", page.locator("#join-success").is_visible()
           and page.locator("#join-success-title").inner_text().startswith("You're on the list."))
     page.locator("#join-share").click(); page.wait_for_timeout(300)
-    check("share: copies the link when there's no share sheet", page.evaluate("window.__copied") == "https://www.jachihealth.com/"
+    check("share: copies the link when there's no share sheet", page.evaluate("window.__copied") == "https://jachihealth.com/"
           and page.locator("#join-share .btn__label").inner_text() == strings.EN["share_copied_button"]
           and strings.EN["share_copied"] in page.locator("#join-share-status").inner_text())
     page.screenshot(path=str(OUT / "share-copied-desktop.png"))
@@ -1083,7 +1083,7 @@ with sync_playwright() as p:
                 .flatMap(s => { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); }),
             })""")
             ok = (info["h1"] == 1 and info["crumbs"] == 3 and len(info["join"]) >= 3 and len(set(info["join"])) == 1
-                  and info["canonical"] == f"https://www.jachihealth.com/{slug}/" and len(info["related"]) == 3 and info["faq"] >= 3
+                  and info["canonical"] == f"https://jachihealth.com/{slug}/" and len(info["related"]) == 3 and info["faq"] >= 3
                   and info["ld"] == ["Organization", "MedicalWebPage", "BreadcrumbList", "FAQPage"])
             check(f"/{slug}/ @{w}: heading, breadcrumb, sign-up links, canonical, related pages, FAQ and schema", ok, json.dumps(info))
             if w == 1440:
@@ -1176,7 +1176,7 @@ with sync_playwright() as p:
                 .flatMap(s => { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); }),
             })""")
             other = pairs[path]
-            ok = (info["lang"] == lang and info["h1"] == 1 and info["canonical"] == f"https://www.jachihealth.com{path}"
+            ok = (info["lang"] == lang and info["h1"] == 1 and info["canonical"] == f"https://jachihealth.com{path}"
                   and f"{lang} {path}" in info["alt"] and any(a.endswith(" " + other) for a in info["alt"])
                   and any(a.startswith("x-default ") for a in info["alt"]) and info["swap"] == other
                   and info["crumbs"] == (3 if path in guide_pages else 2)
@@ -1309,7 +1309,7 @@ with sync_playwright() as p:
     status, headers, body = get("/sitemap.xml")
     sm = body.decode()
     missing = [u for u in ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs] + content_pages
-               if f"<loc>https://www.jachihealth.com{u}</loc>" not in sm]
+               if f"<loc>https://jachihealth.com{u}</loc>" not in sm]
     check("sitemap lists every page, with the Spanish alternate", not missing and 'hreflang="es"' in sm, str(missing))
     # Structured data, titles and descriptions on every page search engines see
     indexable = ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs] + content_pages
