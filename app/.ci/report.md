@@ -1,15 +1,15 @@
 # App checks
 
-Commit: 4b2fbd488e2ddc6967366f7c9dea2a807e0b4de2  
-Date: 2026-10-16 18:41 UTC
+Commit: dc5d6903b5c665e6e22ba526e1bc58e34e0f4759  
+Date: 2026-10-16 18:46 UTC
 
 - pass: versions (1s)
 - pass: typescript (5s)
-- FAIL: tests (exit 1, 5s)
-- pass: expo doctor (4s)
+- pass: tests (4s)
+- pass: expo doctor (5s)
 - pass: native config (6s)
-- pass: ios and android bundles (69s)
-- pass: web build (37s)
+- pass: ios and android bundles (66s)
+- pass: web build (34s)
 
 ## versions (exit 0)
 ```
@@ -22,44 +22,27 @@ Dependencies are up to date
 
 ```
 
-## tests (exit 1)
+## tests (exit 0)
 ```
 PASS __tests__/schedule.test.ts
-FAIL __tests__/content.test.ts
-  ● content from the website › every service and finder option has both languages and a known icon
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: true
-    Received: false
-
-    [0m [90m 12 |[39m       expect(s[33m.[39men[33m.[39mname [33m&&[39m s[33m.[39mes[33m.[39mname)[33m.[39mtoBeTruthy()[33m;[39m
-     [90m 13 |[39m       expect(has(s[33m.[39micon))[33m.[39mtoBe([36mtrue[39m)[33m;[39m
-    [31m[1m>[22m[39m[90m 14 |[39m       expect(s[33m.[39mpage[33m.[39mstartsWith([32m'https://www.jachihealth.com/'[39m))[33m.[39mtoBe([36mtrue[39m)[33m;[39m
-     [90m    |[39m                                                                 [31m[1m^[22m[39m
-     [90m 15 |[39m     }
-     [90m 16 |[39m     [36mfor[39m ([36mconst[39m f [36mof[39m [33mCONTENT[39m[33m.[39mfinder) expect(has(f[33m.[39micon))[33m.[39mtoBe([36mtrue[39m)[33m;[39m
-     [90m 17 |[39m   })[33m;[39m[0m
-
-      at Object.toBe (__tests__/content.test.ts:14:65)
-
+PASS __tests__/content.test.ts
 PASS __tests__/reminders.test.ts
+PASS __tests__/insights.test.ts
+PASS __tests__/summary.test.ts
 PASS __tests__/i18n.test.ts
 PASS __tests__/units.test.ts
-PASS __tests__/summary.test.ts
-PASS __tests__/insights.test.ts
 PASS __tests__/dates.test.ts
 PASS __tests__/streak.test.ts
 PASS __tests__/csv.test.ts
 PASS __tests__/safety.test.ts
-PASS __tests__/forms.test.ts
 PASS __tests__/finder.test.ts
+PASS __tests__/forms.test.ts
 PASS __tests__/search.test.ts
 
-Test Suites: 1 failed, 13 passed, 14 total
-Tests:       1 failed, 87 passed, 88 total
+Test Suites: 14 passed, 14 total
+Tests:       88 passed, 88 total
 Snapshots:   0 total
-Time:        3.989 s
+Time:        3.686 s
 Ran all test suites.
 ```
 
@@ -78,13 +61,13 @@ Running 20 checks on your project...
 - Running prebuild
 ✔ Finished prebuild
 total 36
-drwxr-xr-x 2 runner runner 4096 Oct 16 18:38 .
-drwxr-xr-x 5 runner runner 4096 Oct 16 18:39 ..
--rw-r--r-- 1 runner runner 3676 Oct 16 18:40 AndroidManifest.xml
--rw-r--r-- 1 runner runner 3627 Oct 16 18:40 Info.plist
--rw-r--r-- 1 runner runner  255 Oct 16 18:40 JachiHealth.entitlements
--rw-r--r-- 1 runner runner 4074 Oct 16 18:40 PrivacyInfo.xcprivacy
--rw-r--r-- 1 runner runner 8209 Oct 16 18:40 android-app-build.gradle
+drwxr-xr-x 2 runner runner 4096 Oct 16 18:44 .
+drwxr-xr-x 5 runner runner 4096 Oct 16 18:44 ..
+-rw-r--r-- 1 runner runner 3676 Oct 16 18:45 AndroidManifest.xml
+-rw-r--r-- 1 runner runner 3627 Oct 16 18:45 Info.plist
+-rw-r--r-- 1 runner runner  255 Oct 16 18:45 JachiHealth.entitlements
+-rw-r--r-- 1 runner runner 4074 Oct 16 18:45 PrivacyInfo.xcprivacy
+-rw-r--r-- 1 runner runner 8209 Oct 16 18:45 android-app-build.gradle
 ```
 
 ## ios and android bundles (exit 0)
@@ -93,8 +76,8 @@ Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-iOS Bundled 54207ms node_modules/expo-router/entry.js (2055 modules)
-Android Bundled 67125ms node_modules/expo-router/entry.js (2095 modules)
+iOS Bundled 51168ms node_modules/expo-router/entry.js (2062 modules)
+Android Bundled 64932ms node_modules/expo-router/entry.js (2095 modules)
 
 › Assets (34):
 node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
@@ -134,7 +117,7 @@ Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-Web Bundled 35299ms node_modules/expo-router/entry.js (1674 modules)
+Web Bundled 32010ms node_modules/expo-router/entry.js (1674 modules)
 
 › Assets (25):
 assets/fonts/Fraunces-Display.ce25e218f7888cafe2720ebc7383ae8d.ttf (33KB)
