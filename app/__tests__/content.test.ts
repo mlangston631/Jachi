@@ -11,7 +11,7 @@ describe('content from the website', () => {
     for (const s of CONTENT.services) {
       expect(s.en.name && s.es.name).toBeTruthy();
       expect(has(s.icon)).toBe(true);
-      expect(s.page.startsWith('https://www.jachihealth.com/')).toBe(true);
+      expect(s.page.startsWith('https://jachihealth.com/')).toBe(true);
     }
     for (const f of CONTENT.finder) expect(has(f.icon)).toBe(true);
   });
