@@ -172,13 +172,17 @@ POPULAR = ["Infección urinaria", "Sinusitis", "Acné", "Disfunción eréctil", 
            "Ansiedad", "Caída del cabello"]
 
 FAQ = [
+    ("¿Jachi ya atiende pacientes?",
+     "Todavía no. Nos estamos preparando para abrir en Texas. Aún no se pueden reservar consultas y no se cobra nada. "
+     "Únase a la lista de espera y le avisaremos por correo antes de abrir."),
     ("¿Quiénes son los profesionales de la salud?",
      "Médicos, enfermeros practicantes y asistentes médicos para la atención médica, y terapeutas con licencia para la "
      "terapia. Todos tienen licencia en su estado, ejercen a través de grupos médicos independientes y toman todas las "
-     "decisiones clínicas sobre su atención."),
+     "decisiones clínicas sobre su atención. Antes de abrir, publicaremos en este sitio el nombre del grupo médico y "
+     "de sus profesionales, para que pueda verificar sus licencias."),
     ("¿El asistente de cuidado es un médico?",
-     "No. El asistente de cuidado es IA. Ayuda con el registro inicial, el seguimiento, los recordatorios y las preguntas "
-     "cotidianas sobre su atención. Nunca diagnostica, receta, da terapia ni cambia su tratamiento. Un profesional de la "
+     "No. El asistente de cuidado es IA. Cuando abramos, ayudará con el registro inicial, el seguimiento, los "
+     "recordatorios y las preguntas cotidianas sobre su atención. Nunca diagnostica, receta, da terapia ni cambia su tratamiento. Un profesional de la "
      "salud revisa lo que prepara, y siempre le diremos cuando esté hablando con IA."),
     ("¿Qué pueden tratar en línea?",
      "Enfermedades comunes, resurtidos de recetas, terapia, ansiedad y depresión, salud sexual, salud del hombre y de la "
@@ -194,7 +198,7 @@ FAQ = [
      "su profesional de la salud se los puede recetar. Algunas infecciones, como la gonorrea, se tratan con una inyección "
      "que se pone en persona."),
     ("¿Ofrecen PrEP?",
-     "Sí. La PrEP es un medicamento que reduce mucho la probabilidad de contraer el VIH. Necesitará una prueba de VIH y "
+     "Sí, cuando abramos. La PrEP es un medicamento que reduce mucho la probabilidad de contraer el VIH. Necesitará una prueba de VIH y "
      "otros análisis de laboratorio antes de empezar y cada 3 meses, que su profesional de la salud pedirá."),
     ("¿Qué atención ofrecen para hombres y para mujeres?",
      "Para hombres: disfunción eréctil, caída del cabello y eyaculación precoz. Para mujeres: anticonceptivos, "
@@ -227,12 +231,14 @@ FAQ = [
      "Abriremos primero en Texas y luego estado por estado. Únase a la lista de espera para saber cuándo abrimos cerca de "
      "usted."),
     ("¿Cómo se protege mi información?",
-     "Su información médica está protegida por la ley HIPAA y se guarda en los Estados Unidos. El buscador de atención, "
-     "la búsqueda de afecciones y la evaluación de control de peso de esta página funcionan solo en su navegador, y nada "
-     "de lo que escriba allí se guarda."),
+     "Hoy, este sitio solo recibe lo que usted envía en sus formularios y en el chat, y no tiene anuncios ni rastreo. "
+     "Cuando sea paciente, el grupo médico que lo atienda guardará su expediente médico, protegido por la ley HIPAA. "
+     "El buscador de atención, la búsqueda de afecciones y la evaluación de control de peso de esta página funcionan "
+     "solo en su navegador, y nada de lo que escriba allí se guarda."),
     ("¿Puedo hablar con una persona?",
-     "Por ahora no hay agentes en vivo. Nuestro asistente de IA en el chat de ayuda puede responder preguntas comunes, y "
-     "usted puede enviar una solicitud desde ahí o escribir a nuestro equipo, y le responderemos por correo."),
+     "Sí, por correo. Envíe una solicitud desde el chat de ayuda o escriba a nuestro equipo, y una persona le responderá. "
+     "Aún no tenemos chat en vivo ni atención por teléfono. Antes de abrir, agregaremos una forma más rápida de "
+     "comunicarse con nuestro equipo sobre citas, pagos y recetas."),
     ("¿Y si es una emergencia?",
      "Jachi no es para emergencias. Si cree que tiene una emergencia médica, llame al 911. Si está en crisis o piensa en "
      "el suicidio, llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la "

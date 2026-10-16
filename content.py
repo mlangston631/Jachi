@@ -166,12 +166,17 @@ CRISIS = ("Thoughts of suicide or self-harm",
 POPULAR = ["UTI", "Sinus infection", "Acne", "ED", "Birth control", "STI testing", "Anxiety", "Hair loss"]
 
 FAQ = [
+    ("Is Jachi accepting patients yet?",
+     "Not yet. We're getting ready to open in Texas. Visits can't be booked yet, and nothing is charged. Join the "
+     "waitlist and we'll email you before we open."),
     ("Who are the clinicians?",
      "Physicians, nurse practitioners and physician assistants for medical care, and licensed therapists for therapy. "
      "Everyone is licensed in your state, practices through independent medical groups and makes every clinical "
-     "decision about your care."),
+     "decision about your care. Before we open, we'll name the medical group and its clinicians on this site, so "
+     "you can check their licenses."),
     ("Is the care assistant a doctor?",
-     "No. The care assistant is AI. It helps with intake, check-ins, reminders and everyday questions about your care. "
+     "No. The care assistant is AI. When we open, it will help with intake, check-ins, reminders and everyday "
+     "questions about your care. "
      "It never diagnoses, prescribes, provides therapy or changes your treatment. A clinician reviews what it prepares, "
      "and we'll always tell you when you're talking with AI."),
     ("What can you treat online?",
@@ -186,7 +191,7 @@ FAQ = [
      "separately. If you test positive for an infection that can be treated with medication, your clinician can "
      "prescribe it. Some infections, like gonorrhea, are treated with a shot given in person."),
     ("Do you offer PrEP?",
-     "Yes. PrEP is medication that greatly lowers your chance of getting HIV. You'll need an HIV test and other lab "
+     "Yes, once we open. PrEP is medication that greatly lowers your chance of getting HIV. You'll need an HIV test and other lab "
      "work before you start and every 3 months, which your clinician will order."),
     ("What men's and women's health care do you offer?",
      "For men: erectile dysfunction, hair loss and premature ejaculation. For women: birth control, emergency "
@@ -215,11 +220,14 @@ FAQ = [
     ("Where is Jachi available?",
      "We're launching in Texas first and will expand state by state. Join the waitlist to hear when we open near you."),
     ("How is my information protected?",
-     "Your medical information is protected under HIPAA and stored in the United States. The care finder, condition "
-     "search and weight care check on this page run only in your browser, and nothing you enter there is saved."),
+     "Today, this site collects only what you send in its forms and chat, and it has no ads or tracking. When you "
+     "become a patient, your medical records will be kept by the medical group that treats you and protected under "
+     "HIPAA. The care finder, condition search and weight care check on this page run only in your browser, and "
+     "nothing you enter there is saved."),
     ("Can I talk to a person?",
-     "Live agents aren't available yet. Our AI assistant in the help chat can answer common questions, and you can "
-     "submit a ticket there or email our team, and we'll reply by email."),
+     "Yes, by email. Submit a ticket in the help chat or email our team, and a person will reply. We don't have "
+     "live chat or phone support yet. Before we open, we'll add a faster way to reach our team about appointments, "
+     "billing and prescriptions."),
     ("What if it's an emergency?",
      "Jachi isn't for emergencies. If you think you're having a medical emergency, call 911. If you're in crisis or "
      "thinking about suicide, call or text 988 to reach the Suicide & Crisis Lifeline, open 24/7."),

@@ -54,7 +54,7 @@ ON THE WEBSITE
 - A condition search in the Services section.
 - "Weight care check": a three-step eligibility check for weight-loss medication.
 - "Join the waitlist": the sign-up form at the bottom of the page.
-- Support: live agents aren't available yet. Visitors can tap "Submit a ticket" in this chat and the team replies by email, or email {EMAIL}.
+- Support: a person on Jachi's team reads every ticket and email and replies by email. There's no live chat or phone support yet. Visitors can tap "Submit a ticket" in this chat or email {EMAIL}.
 - A Spanish version of the home page at jachihealth.com/es/.
 - A page for each service, such as jachihealth.com/urgent-care/, /uti-treatment/, /online-therapy/ and /weight-loss/.
 - The privacy policy, terms of use and Texas Medical Board notice, linked at the bottom of every page.
