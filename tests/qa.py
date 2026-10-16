@@ -352,6 +352,8 @@ with sync_playwright() as p:
     q = page.locator(".faq-q").first
     q.click(); page.wait_for_timeout(600)
     check("faq opens", q.get_attribute("aria-expanded") == "true" and page.locator("#faq-a-1 p").is_visible())
+    check("faq: the first answer says Jachi isn't accepting patients yet", "accepting patients" in q.inner_text()
+          and page.locator("#faq-a-1 p").inner_text().startswith("Not yet."), q.inner_text())
     q.click(); page.wait_for_timeout(600)
     check("faq closes", q.get_attribute("aria-expanded") == "false" and not page.locator("#faq-a-1 p").is_visible())
     check("footer links to the privacy policy and terms", page.locator("footer a[href='/privacy/']").count() == 1
@@ -480,6 +482,7 @@ with sync_playwright() as p:
           and page.locator("#chat-log .msg--bot").last.locator("[data-ticket]").count() == 1)
     page.locator("#chat-log .msg--bot").last.locator("[data-ticket]").click(); page.wait_for_timeout(300)
     check("ticket: opens with focus on its title", page.locator("#chat-ticket").is_visible() and page.evaluate("document.activeElement.id") == "ticket-title")
+    check("ticket: says a person reads it", "A person on our team reads every ticket" in page.locator(".ticket__lead").inner_text())
     check("ticket: offers to include the chat", page.locator("#ticket-include-row").is_visible())
     page.locator("#ticket-submit").click(); page.wait_for_timeout(300)
     check("ticket: validation shows all three errors", all(page.locator(f"#err-{k}").is_visible() for k in ("tname", "temail", "tmsg")))
@@ -706,7 +709,8 @@ with sync_playwright() as p:
             page.locator(f"fieldset[data-field='preg'] label:has(input[value='{preg}'])").click()
             page.locator("#elig-next").click()
         page.wait_for_timeout(700)
-        out = (page.locator("#res-title").inner_text(), page.locator("#res-body").inner_text(),
+        nxt = page.locator("#res-next").inner_text() if page.locator("#res-next").is_visible() else ""
+        out = (page.locator("#res-title").inner_text(), page.locator("#res-body").inner_text() + ("\n" + nxt if nxt else ""),
                page.locator("#res-note").inner_text() if page.locator("#res-note").is_visible() else "",
                page.locator("#res-join").is_visible())
         page.screenshot(path=str(OUT / f"elig-{state}-{age}-{lb}-{mtc}-{preg}.png"))
@@ -717,11 +721,15 @@ with sync_playwright() as p:
     check("minor result", "18 and older" in t and not j, t)
     (t, b, n, j), lg = run_elig("CA", "yes", "5", "6", "175", ["bp"], "no", "no")
     check("BMI 28.2 + condition → likely", "good fit" in t and "28.2" in b, b)
+    check("likely result: only a first step, and what a clinical evaluation involves", "not a diagnosis or a promise of a prescription" in b
+          and "What a clinical evaluation involves" in b and "Lab tests." in b and "Not everyone is prescribed medication." in b, b)
     check("non-Texas note names state", "California" in n, n)
     (t, b, n, j), lg = run_elig("TX", "yes", "5", "10", "160", ["none"], "no", "no")
     check("BMI 23 → unlikely", "may not be the right fit" in t and "23.0" in b, b)
+    check("unlikely result: no evaluation steps", "What a clinical evaluation involves" not in b, b)
     (t, b, n, j), lg = run_elig("TX", "yes", "5", "4", "220", ["none"], "yes", "no")
     check("MTC history → caution", "may not be safe" in t and "medullary" in b, b)
+    check("caution result: no evaluation steps", "What a clinical evaluation involves" not in b, b)
     (t, b, n, j), lg = run_elig("TX", "yes", "5", "4", "220", ["none"], "unsure", "no")
     check("MTC unsure → likely + note", "good fit" in t and "family history" in b, b)
     (t, b, n, j), lg = run_elig("NY", "yes", "5", "6", "175", ["none"], "no", "no")

@@ -38,6 +38,11 @@ keep replies short and plain, and ask only questions that change what you'll do.
   form is still named `early-access`).
 - Everything on the page must really work. No placeholder buttons, invented testimonials, ratings, statistics,
   badges, partner logos, clinician names or credentials.
+- The site promises (approved Oct 15, 2026) to name the medical group and its clinicians before opening, and to add
+  a faster way to reach the team about appointments, billing and prescriptions before opening. Keep both promises.
+- Credit care to clinicians, never to Jachi Health LLC: "Clinicians prescribe…", "What clinicians treat", not "we
+  prescribe" or "we treat". Texas Occupations Code §165.156 bars an unlicensed company from advertising as if it
+  practices medicine. Lines about what isn't offered ("We don't prescribe controlled substances") are fine.
 - The assistant is labelled AI, never claims to be a person, and there are no live agents yet; tickets go to
   the support email in `content.py`.
 - Safety: emergencies get 911 and crisis messages get 988 (in Spanish: press 2, or text AYUDA), handled in the

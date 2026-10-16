@@ -186,6 +186,7 @@
     note: $('#res-note'),
     join: $('#res-join'),
     restart: $('#res-restart'),
+    next: $('#res-next'),
   };
 
   if (E.form) {
@@ -329,6 +330,8 @@
       }
       R.join.hidden = kind === 'minor';
       R.join.dataset.state = E.state.value;
+      // What a clinical evaluation involves: only for people who may be a fit.
+      if (R.next) R.next.hidden = kind !== 'likely';
 
       E.form.hidden = true;
       E.result.hidden = false;
