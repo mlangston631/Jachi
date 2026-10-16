@@ -10,6 +10,7 @@ changing content.py, content_es.py, pages.py or learn.py:
 import ast
 import html
 import json
+import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -77,8 +78,10 @@ def states():
     return [list(pair) for pair in from_build("STATES")]
 
 
-def plain(text):
-    return html.unescape(text)
+def plain(text, bold=False):
+    """Website text for the app: entities decoded and links dropped, since the app can't show HTML (phone numbers stay
+    as text). Guides keep <b> for their bold words."""
+    return re.sub(r"<(?!/?b>)[^>]+>" if bold else r"<[^>]+>", "", html.unescape(text))
 
 
 def expect(key):
@@ -124,14 +127,14 @@ def how():
 def guide_block(b):
     kind = b[0]
     if kind in ("p", "h2"):
-        return {"kind": kind, "text": plain(b[1])}
+        return {"kind": kind, "text": plain(b[1], bold=True)}
     if kind in ("ul", "ol"):
-        return {"kind": kind, "items": [plain(x) for x in b[1]]}
+        return {"kind": kind, "items": [plain(x, bold=True) for x in b[1]]}
     if kind == "callout":
         _kind, tone, title, parts, actions = b
         return {"kind": "callout", "tone": tone, "title": title,
-                "parts": [{"kind": "p", "text": plain(x)} if isinstance(x, str) else {"kind": "ul", "items": [plain(y) for y in x[1]]}
-                          for x in parts],
+                "parts": [{"kind": "p", "text": plain(x, bold=True)} if isinstance(x, str)
+                          else {"kind": "ul", "items": [plain(y, bold=True) for y in x[1]]} for x in parts],
                 "actions": [{"label": label, "href": href, "style": style} for label, href, style in actions]}
     raise SystemExit(f"learn.py: the app doesn't show {kind!r} blocks")
 

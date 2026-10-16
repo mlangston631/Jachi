@@ -20,6 +20,10 @@ describe('content from the website', () => {
     expect(JSON.stringify(CONTENT)).not.toMatch(/\$\s?\d/);
   });
 
+  test('no website markup the app would show as text (only the guides\' <b> for bold words)', () => {
+    expect(JSON.stringify(CONTENT)).not.toMatch(/<(?!\/?b>)[a-z/]/i);
+  });
+
   test('states', () => {
     expect(stateName('TX', 'en')).toBe('Texas');
     expect(statesFor('es').length).toBe(CONTENT.states.length);

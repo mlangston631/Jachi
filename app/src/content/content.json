@@ -1480,12 +1480,12 @@
    "en": {
     "name": "Overdose or poisoning",
     "words": "overdose poisoning poison",
-    "text": "Call 911 now. For a possible poisoning, you can also call Poison Help at <a href=\"tel:18002221222\">1-800-222-1222</a>."
+    "text": "Call 911 now. For a possible poisoning, you can also call Poison Help at 1-800-222-1222."
    },
    "es": {
     "name": "Sobredosis o envenenamiento",
     "words": "sobredosis envenenamiento veneno intoxicacion",
-    "text": "Llame al 911 ahora. Si puede ser un envenenamiento, también puede llamar a la Línea de Ayuda para Envenenamientos al <a href=\"tel:18002221222\">1-800-222-1222</a>."
+    "text": "Llame al 911 ahora. Si puede ser un envenenamiento, también puede llamar a la Línea de Ayuda para Envenenamientos al 1-800-222-1222."
    }
   }
  ],
@@ -1578,12 +1578,12 @@
    "en": {
     "name": "Suboxone",
     "words": "suboxone buprenorphine subutex",
-    "text": "We don't prescribe buprenorphine. For free, confidential help with substance use, call the SAMHSA helpline at <a href=\"tel:18006624357\">1-800-662-4357</a>, any time."
+    "text": "We don't prescribe buprenorphine. For free, confidential help with substance use, call the SAMHSA helpline at 1-800-662-4357, any time."
    },
    "es": {
     "name": "Suboxone",
     "words": "suboxone buprenorfina subutex",
-    "text": "No recetamos buprenorfina. Para recibir ayuda gratuita y confidencial con el consumo de sustancias, llame a la Línea Nacional de Ayuda de SAMHSA al <a href=\"tel:18006624357\">1-800-662-4357</a>, a cualquier hora. Atienden en español."
+    "text": "No recetamos buprenorfina. Para recibir ayuda gratuita y confidencial con el consumo de sustancias, llame a la Línea Nacional de Ayuda de SAMHSA al 1-800-662-4357, a cualquier hora. Atienden en español."
    }
   },
   {
