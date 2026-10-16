@@ -6,7 +6,7 @@ Keep both languages in step: the tests fail if a key exists in one and not the o
 
 EN = {
     # Shared
-    "get_early_access": "Get early access",
+    "get_early_access": "Join the waitlist",
     "continue": "Continue",
     "choose_answer": "Choose an answer.",
     "choose_state": "Choose your state.",
@@ -14,7 +14,7 @@ EN = {
     "fix_many": "Please fix the {n} highlighted fields.",
     "enter_email": "Enter your email address.",
     "valid_email": "Enter a valid email, like name@example.com.",
-    "launch_note": "We're launching in Texas first. Join early access and we'll email you when we open in your state.",
+    "launch_note": "We're launching in Texas first. Join the waitlist and we'll email you when we open in your state.",
 
     # Weight care check
     "e_age": "Choose yes or no.",
@@ -45,8 +45,8 @@ EN = {
     "e_chip_bmi": "BMI {bmi}",
     "e_chip_cond_1": "1 related condition",
     "e_chip_cond_n": "{n} related conditions",
-    "e_note_tx": "Texas is our first state. Join early access to be first in line when we open.",
-    "e_note_other": "We're launching in Texas first. Join early access and we'll email you when we open in {state}.",
+    "e_note_tx": "Texas is our first state. Join the waitlist to be first in line when we open.",
+    "e_note_other": "We're launching in Texas first. Join the waitlist and we'll email you when we open in {state}.",
 
     # Care finder
     "f_need": "Choose what you need help with.",
@@ -97,7 +97,7 @@ EN = {
     "s_many": "{n} results for “{q}”",
     "s_none": "No results for “{q}”",
 
-    # Early access form
+    # Waitlist form
     "j_preview": "This is a preview of the site, so sign-ups aren't saved here yet.",
     "j_saving": "Saving your spot…",
     "j_failed": "We couldn't save your spot just now. Check your connection and try again.",
@@ -105,7 +105,7 @@ EN = {
 
     # Sharing
     "share_title": "Jachi Health",
-    "share_text": "Online care from licensed clinicians, launching in Texas. Join the early access list:",
+    "share_text": "Online care from licensed clinicians, launching in Texas. Join the waitlist:",
     "share_button": "Share Jachi",
     "share_copied_button": "Link copied",
     "share_copied": "Link copied. Paste it into a text or email.",
@@ -131,9 +131,9 @@ EN = {
 
     # Account page (account.js and src/account.html). Keys starting with a_ only go to the account page.
     "a_meta_title": "Your account | Jachi Health",
-    "a_meta_desc": "Log in to update your Jachi Health early-access details, turn emails off or delete your account.",
+    "a_meta_desc": "Log in to update your Jachi Health waitlist details, turn emails off or delete your account.",
     "a_eyebrow": "Your account",
-    "a_h1": "Your early-access <em>account.</em>",
+    "a_h1": "Your waitlist <em>account.</em>",
     "a_lead": "Update your details, turn our emails off or delete your account, anytime. There's no health information here: visits and medical records aren't part of this account.",
     "a_fact_free": "Free, with no payment details",
     "a_fact_nohealth": "No health information stored",
@@ -141,7 +141,7 @@ EN = {
     "a_loading": "Loading your account…",
     "a_noscript": "Your account needs JavaScript. Turn it on in your browser's settings, then reload this page.",
     "a_off_title": "Accounts aren't open yet",
-    "a_off_body": "You can still join the early-access list, and we'll email you when we open in your state.",
+    "a_off_body": "You can still join the waitlist, and we'll email you when we open in your state.",
     "a_tabs": "Log in or create an account",
     "a_tab_login": "Log in",
     "a_tab_create": "Create account",
@@ -180,15 +180,15 @@ EN = {
     "a_password_title": "Password",
     "a_change_password": "Change password",
     "a_delete_title": "Delete your account",
-    "a_delete_body": "This deletes your account and removes this email from our early-access list and support records.",
+    "a_delete_body": "This deletes your account and removes this email from our waitlist and support records.",
     "a_delete": "Delete my account",
     "a_delete_warn": "This can't be undone. Delete your account and everything we have for this email?",
     "a_delete_confirm": "Yes, delete everything",
     "a_cancel": "Cancel",
     "a_logout": "Log out",
     "a_deleted_title": "Your account is deleted",
-    "a_deleted_done": "We've also removed this email from our early-access list and support records.",
-    "a_deleted_partial": "To remove this email from our early-access list too, email {email} and we'll take care of it.",
+    "a_deleted_done": "We've also removed this email from our waitlist and support records.",
+    "a_deleted_partial": "To remove this email from our waitlist too, email {email} and we'll take care of it.",
     "a_home": "Back to the home page",
     "a_link_title": "This link has expired",
     "a_link_body": "Links in our emails work once and expire after a while. Log in, or reset your password to get a new link.",
@@ -218,7 +218,7 @@ EN = {
 
 ES = {
     # Shared
-    "get_early_access": "Reciba acceso anticipado",
+    "get_early_access": "Únase a la lista de espera",
     "continue": "Continuar",
     "choose_answer": "Elija una respuesta.",
     "choose_state": "Elija su estado.",
@@ -226,7 +226,7 @@ ES = {
     "fix_many": "Corrija los {n} campos marcados.",
     "enter_email": "Escriba su correo electrónico.",
     "valid_email": "Escriba un correo válido, como nombre@ejemplo.com.",
-    "launch_note": "Abriremos primero en Texas. Únase al acceso anticipado y le avisaremos por correo cuando abramos en su estado.",
+    "launch_note": "Abriremos primero en Texas. Únase a la lista de espera y le avisaremos por correo cuando abramos en su estado.",
 
     # Weight care check
     "e_age": "Elija sí o no.",
@@ -257,8 +257,8 @@ ES = {
     "e_chip_bmi": "IMC {bmi}",
     "e_chip_cond_1": "1 afección relacionada",
     "e_chip_cond_n": "{n} afecciones relacionadas",
-    "e_note_tx": "Texas es nuestro primer estado. Únase al acceso anticipado para ser de los primeros cuando abramos.",
-    "e_note_other": "Abriremos primero en Texas. Únase al acceso anticipado y le avisaremos por correo cuando abramos en {state}.",
+    "e_note_tx": "Texas es nuestro primer estado. Únase a la lista de espera para ser de los primeros cuando abramos.",
+    "e_note_other": "Abriremos primero en Texas. Únase a la lista de espera y le avisaremos por correo cuando abramos en {state}.",
 
     # Care finder
     "f_need": "Elija con qué necesita ayuda.",
@@ -309,7 +309,7 @@ ES = {
     "s_many": "{n} resultados para “{q}”",
     "s_none": "No hay resultados para “{q}”",
 
-    # Early access form
+    # Waitlist form
     "j_preview": "Esta es una vista previa del sitio, así que aquí no se guardan los registros.",
     "j_saving": "Guardando su lugar…",
     "j_failed": "No pudimos guardar su lugar en este momento. Revise su conexión e inténtelo de nuevo.",
@@ -317,7 +317,7 @@ ES = {
 
     # Sharing
     "share_title": "Jachi Health",
-    "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en Texas. Únase a la lista de acceso anticipado:",
+    "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en Texas. Únase a la lista de espera:",
     "share_button": "Compartir Jachi",
     "share_copied_button": "Enlace copiado",
     "share_copied": "Enlace copiado. Péguelo en un mensaje de texto o un correo.",
@@ -343,9 +343,9 @@ ES = {
 
     # Account page
     "a_meta_title": "Su cuenta | Jachi Health",
-    "a_meta_desc": "Inicie sesión para actualizar sus datos de acceso anticipado en Jachi Health, dejar de recibir correos o borrar su cuenta.",
+    "a_meta_desc": "Inicie sesión para actualizar sus datos de la lista de espera de Jachi Health, dejar de recibir correos o borrar su cuenta.",
     "a_eyebrow": "Su cuenta",
-    "a_h1": "Su cuenta de <em>acceso anticipado.</em>",
+    "a_h1": "Su cuenta de la <em>lista de espera.</em>",
     "a_lead": "Actualice sus datos, deje de recibir nuestros correos o borre su cuenta cuando quiera. Aquí no hay información de salud: las consultas y los expedientes médicos no forman parte de esta cuenta.",
     "a_fact_free": "Gratis y sin datos de pago",
     "a_fact_nohealth": "No guarda información de salud",
@@ -353,7 +353,7 @@ ES = {
     "a_loading": "Cargando su cuenta…",
     "a_noscript": "Su cuenta necesita JavaScript. Actívelo en la configuración de su navegador y vuelva a cargar esta página.",
     "a_off_title": "Las cuentas aún no están disponibles",
-    "a_off_body": "Aún puede unirse a la lista de acceso anticipado, y le avisaremos por correo cuando abramos en su estado.",
+    "a_off_body": "Aún puede unirse a la lista de espera, y le avisaremos por correo cuando abramos en su estado.",
     "a_tabs": "Inicie sesión o cree una cuenta",
     "a_tab_login": "Iniciar sesión",
     "a_tab_create": "Crear cuenta",
@@ -392,15 +392,15 @@ ES = {
     "a_password_title": "Contraseña",
     "a_change_password": "Cambiar contraseña",
     "a_delete_title": "Borrar su cuenta",
-    "a_delete_body": "Esto borra su cuenta y quita este correo de nuestra lista de acceso anticipado y de nuestros registros de soporte.",
+    "a_delete_body": "Esto borra su cuenta y quita este correo de nuestra lista de espera y de nuestros registros de soporte.",
     "a_delete": "Borrar mi cuenta",
     "a_delete_warn": "Esto no se puede deshacer. ¿Quiere borrar su cuenta y todo lo que tenemos de este correo?",
     "a_delete_confirm": "Sí, borrar todo",
     "a_cancel": "Cancelar",
     "a_logout": "Cerrar sesión",
     "a_deleted_title": "Su cuenta se borró",
-    "a_deleted_done": "También quitamos este correo de nuestra lista de acceso anticipado y de nuestros registros de soporte.",
-    "a_deleted_partial": "Para quitar este correo también de nuestra lista de acceso anticipado, escriba a {email} y nos encargaremos.",
+    "a_deleted_done": "También quitamos este correo de nuestra lista de espera y de nuestros registros de soporte.",
+    "a_deleted_partial": "Para quitar este correo también de nuestra lista de espera, escriba a {email} y nos encargaremos.",
     "a_home": "Volver al inicio",
     "a_link_title": "Este enlace venció",
     "a_link_body": "Los enlaces de nuestros correos funcionan una sola vez y vencen después de un tiempo. Inicie sesión, o restablezca su contraseña para recibir un enlace nuevo.",

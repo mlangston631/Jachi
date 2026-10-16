@@ -224,7 +224,7 @@ FAQ = [
     ("¿Puedo usar Jachi si tengo menos de 18 años?",
      "No. Jachi es para adultos de 18 años o más."),
     ("¿Dónde está disponible Jachi?",
-     "Abriremos primero en Texas y luego estado por estado. Únase al acceso anticipado para saber cuándo abrimos cerca de "
+     "Abriremos primero en Texas y luego estado por estado. Únase a la lista de espera para saber cuándo abrimos cerca de "
      "usted."),
     ("¿Cómo se protege mi información?",
      "Su información médica está protegida por la ley HIPAA y se guarda en los Estados Unidos. El buscador de atención, "
@@ -254,7 +254,7 @@ BUILD = {
     "call_911": "Llamar al 911",
     "call_988": "Llamar al 988",
     "text_988": "Enviar texto al 988",
-    "join": "Reciba acceso anticipado",
+    "join": "Únase a la lista de espera",
     "check_elig": "Revisar si califico",
     "check_elig_long": "Revisar si califico",
     "for": " para {x}",

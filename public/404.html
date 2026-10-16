@@ -632,6 +632,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .perks{display:grid;gap:14px;margin:8px 0 0;padding:0;list-style:none}
 .perks li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:12px;align-items:start;color:var(--on-dark-2)}
 .perks .i{width:24px;height:24px;padding:5px;border-radius:50%;background:rgba(155,193,163,.2);color:var(--sage);stroke-width:2.8}
+.join__next{margin:6px 0 -4px;font:600 1.05rem/1.35 var(--font-body);letter-spacing:0;color:var(--on-dark)}
+.perks--steps{counter-reset:step}
+.perks--steps li{counter-increment:step}
+.perks--steps li::before{content:counter(step);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(155,193,163,.2);color:var(--sage);font:700 .8rem/1 var(--font-body)}
 .form-card{position:relative;min-width:0;padding:clamp(22px,3.6vw,40px);border-radius:var(--r-xl);background:var(--paper);color:var(--text);box-shadow:0 40px 90px -40px rgba(0,0,0,.6)}
 .form{display:grid;gap:18px}
 .form__title{font-size:1.5rem;line-height:1.2;color:var(--forest-ink)}

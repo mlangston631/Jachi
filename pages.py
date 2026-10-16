@@ -10,7 +10,7 @@ only feed the page's structured data for search engines; nothing about them show
 """
 
 WHEN = ("When will Jachi open?",
-        "We're launching in Texas first and expanding state by state. Join early access and we'll email you when we "
+        "We're launching in Texas first and expanding state by state. Join the waitlist and we'll email you when we "
         "open in your state.")
 
 STEPS = [
