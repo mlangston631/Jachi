@@ -5,13 +5,14 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Making a change
 
-1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `strings.py`, `src/`, `src/functions/`,
+1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `learn.py`, `strings.py`, `src/`, `src/functions/`,
    `chatbot.py`, `brand.py`, `netlify.toml`). Never hand-edit anything in `public/` or `netlify/functions/`;
    `build.py` generates them.
 2. Keep English and Spanish in step:
    - After changing `src/en/home.html`, run `python3 tools/es_home.py`. It stops on any English sentence it
      can't find, which means a translation in that file needs adding or updating.
-   - `src/en/header.html`, `footer.html`, `chat.html` and `dock.html` have Spanish copies in `src/es/`; change both.
+   - `src/en/header.html`, `footer.html`, `chat.html`, `dock.html` and `how.html` have Spanish copies in `src/es/`;
+     change both. The health guides (`learn.py`) and `HOW` hold both languages; Spanish guides live at `/es/guias/`.
    - New text shown by `src/app.js` or the account page goes in `strings.py` under both `EN` and `ES`
      (account page keys start with `a_`). The admin console is English only.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.

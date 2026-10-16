@@ -22,6 +22,9 @@ from common import ensure_fonts, use_brand_fonts  # noqa: E402
 from fake_identity import FakeIdentity  # noqa: E402
 from content import EMAIL, PRICING_NOTE  # noqa: E402
 import pages as PAGES  # noqa: E402
+import learn as LEARN  # noqa: E402
+import content as CONTENT  # noqa: E402
+import content_es as CONTENT_ES  # noqa: E402
 import strings  # noqa: E402
 
 ES = strings.ES
@@ -1026,7 +1029,9 @@ with sync_playwright() as p:
     check("es chat: Spanish emergency goes straight to 911", alert.inner_text().startswith(ES["c_emergency"][:30]) and alert.locator("a[href='tel:911']").count() == 1)
     page.locator("#chat-input").fill("me quiero morir"); page.locator("#chat-send").click(); page.wait_for_timeout(500)
     alert = page.locator("#chat-log .msg--alert").last
-    check("es chat: Spanish crisis gets 988 in Spanish", "AYUDA" in alert.inner_text() and alert.locator("a[href='tel:988']").count() == 1)
+    check("es chat: Spanish crisis gets 988 in Spanish, and the text button starts the message with AYUDA",
+          "AYUDA" in alert.inner_text() and alert.locator("a[href='tel:988']").count() == 1
+          and alert.locator("a[href='sms:988?&body=AYUDA']").count() == 1)
     page.locator("#chat-input").fill("¿Cuánto cuesta?"); page.locator("#chat-send").click(); page.wait_for_timeout(700)
     check("es chat: AI reply shown with the email linked", "antes de abrir" in page.locator("#chat-log .msg--bot").last.inner_text()
           and page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
@@ -1079,7 +1084,7 @@ with sync_playwright() as p:
             })""")
             ok = (info["h1"] == 1 and info["crumbs"] == 3 and len(info["join"]) >= 3 and len(set(info["join"])) == 1
                   and info["canonical"] == f"https://www.jachihealth.com/{slug}/" and len(info["related"]) == 3 and info["faq"] >= 3
-                  and info["ld"] == ["MedicalOrganization", "MedicalWebPage", "BreadcrumbList", "FAQPage"])
+                  and info["ld"] == ["Organization", "MedicalWebPage", "BreadcrumbList", "FAQPage"])
             check(f"/{slug}/ @{w}: heading, breadcrumb, sign-up links, canonical, related pages, FAQ and schema", ok, json.dumps(info))
             if w == 1440:
                 problems = page.evaluate(STATIC_A11Y_JS)
@@ -1122,6 +1127,141 @@ with sync_playwright() as p:
     page.locator("#svc-skin .svc__link").click(); page.wait_for_load_state("networkidle")
     check("home service card title opens its page", page.url == f"{BASE}/skin-care/", page.url)
     check("service journeys: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+
+    # 11b) What to expect on every service page
+    ctx = browser.new_context(viewport={"width": 1440, "height": 900})
+    page, logs = setup(ctx)
+    for slug in slugs:
+        page.goto(f"{BASE}/{slug}/", wait_until="domcontentloaded")
+        exp = page.evaluate("""() => ({
+          title: (document.querySelector('#expect-title') || {}).textContent || '',
+          items: [...document.querySelectorAll('#expect .expect li h3')].map(h => h.textContent),
+          how: !!document.querySelector('#expect a[href="/how-it-works/"]'),
+          tops: [...document.querySelectorAll('#expect .expect li h3')].map(h => Math.round(h.getBoundingClientRect().top)),
+        })""")
+        check(f"/{slug}/: what to expect (visit, tests, follow-up) lines up, with a link to how Jachi works",
+              exp["title"].startswith("What to expect") and len(exp["items"]) == 3 and exp["how"]
+              and len(set(exp["tops"])) == 1, json.dumps(exp))
+    check("what to expect: no console errors", not logs, json.dumps(logs))
+    check("what to expect: the Spanish wording (for the app) covers every service page, item for item",
+          set(CONTENT_ES.EXPECT) == set(slugs) and all(len(CONTENT_ES.EXPECT[p["slug"]][2]) == len(p["expect"]) for p in PAGES.PAGES))
+    ctx.close()
+
+    # 11c) How Jachi works and the Learn guides, in English and Spanish
+    content_pages = [CONTENT.HOW["path"], CONTENT_ES.HOW["path"], LEARN.HUB["en"]["path"], LEARN.HUB["es"]["path"]]
+    guide_pages = [LEARN.path(a, lang) for lang in ("en", "es") for a in LEARN.ARTICLES]
+    content_pages += guide_pages
+    pairs = {CONTENT.HOW["path"]: CONTENT_ES.HOW["path"], LEARN.HUB["en"]["path"]: LEARN.HUB["es"]["path"]}
+    pairs.update({LEARN.path(a, "en"): LEARN.path(a, "es") for a in LEARN.ARTICLES})
+    pairs.update({v: k for k, v in list(pairs.items())})
+    LINKS_JS = """() => [...new Set([...document.querySelectorAll('a[href^="/"]')].map(a => a.getAttribute('href').split('#')[0])
+                      .filter(h => h && !h.startsWith('/api/')))]"""
+    for path in content_pages:
+        lang = "es" if path.startswith("/es/") else "en"
+        for w, h in ((390, 844), (1440, 900)):
+            ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=w < 900, is_mobile=w < 900)
+            page, logs = setup(ctx)
+            page.goto(f"{BASE}{path}", wait_until="networkidle"); page.wait_for_timeout(500)
+            ov = page.evaluate(OVERFLOW_JS)
+            check(f"{path} @{w}: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+            info = page.evaluate("""() => ({
+              lang: document.documentElement.lang,
+              h1: document.querySelectorAll('h1').length,
+              crumbs: document.querySelectorAll('.crumbs li').length,
+              canonical: (document.querySelector('link[rel=canonical]') || {}).href,
+              alt: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map(l => l.hreflang + ' ' + new URL(l.href).pathname),
+              swap: (document.querySelector('.lang-switch') || {}).getAttribute ? document.querySelector('.lang-switch').getAttribute('href') : null,
+              ld: [...document.querySelectorAll('script[type="application/ld+json"]')]
+                .flatMap(s => { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); }),
+            })""")
+            other = pairs[path]
+            ok = (info["lang"] == lang and info["h1"] == 1 and info["canonical"] == f"https://www.jachihealth.com{path}"
+                  and f"{lang} {path}" in info["alt"] and any(a.endswith(" " + other) for a in info["alt"])
+                  and any(a.startswith("x-default ") for a in info["alt"]) and info["swap"] == other
+                  and info["crumbs"] == (3 if path in guide_pages else 2)
+                  and "BreadcrumbList" in info["ld"] and "Organization" in info["ld"])
+            check(f"{path} @{w}: language, one heading, breadcrumb, canonical, both languages linked, schema", ok, json.dumps(info))
+            if w == 1440:
+                problems = page.evaluate(STATIC_A11Y_JS)
+                check(f"{path}: links, labels and ids valid", not problems, json.dumps(problems))
+                bad = [href for href in page.evaluate(LINKS_JS) if status_of(href) != 200]
+                check(f"{path}: every link on the page works", not bad, str(bad))
+                if page.locator(".faq-q").count():
+                    page.locator(".faq-q").first.click(); page.wait_for_timeout(500)
+                    check(f"{path}: FAQ opens", page.locator(".faq-q").first.get_attribute("aria-expanded") == "true")
+                out = page.evaluate("[...document.querySelectorAll('a[href^=http]')].filter(a => !a.closest('footer')).map(a => [a.href, a.relList.contains('noreferrer')])")
+                check(f"{path}: outside links are https and don't pass on where you came from",
+                      all(u.startswith("https://") and r for u, r in out), json.dumps(out[:6]))
+            if w == 390:
+                page.screenshot(path=str(OUT / f"content{path.strip('/').replace('/', '-')}-390.png"), full_page=True)
+            check(f"{path} @{w}: no console errors", not logs, json.dumps(logs))
+            ctx.close()
+
+    # How Jachi works: seven steps in two lanes, who does what, and the phone bar after the hero
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    page.goto(f"{BASE}/how-it-works/", wait_until="networkidle"); page.wait_for_timeout(500)
+    how = page.evaluate("""() => ({
+      steps: [...document.querySelectorAll('.lane__steps li h4')].map(h => h.textContent),
+      lanes: [...document.querySelectorAll('.lane .lane__who')].map(p => p.textContent),
+      roles: [...document.querySelectorAll('.role .role__who')].map(p => p.textContent),
+      join: [...document.querySelectorAll('main a.btn')].filter(a => /waitlist/i.test(a.textContent)).map(a => a.getAttribute('href')),
+      notOpen: (document.querySelector('.note-box') || {}).textContent || '',
+    })""")
+    check("how it works: seven steps, on Jachi then with the medical group", len(how["steps"]) == 7
+          and how["lanes"] == ["On Jachi", "With the medical group"] and how["roles"] == ["Jachi Health LLC", "The medical group"], json.dumps(how))
+    check("how it works: says Jachi isn't open yet, and every waitlist button goes to the sign-up", "isn't open yet" in how["notOpen"]
+          and how["join"] and set(how["join"]) == {"/#join"}, json.dumps(how))
+    page.evaluate("window.scrollTo({top: document.querySelector('.lanes').getBoundingClientRect().top + scrollY, behavior: 'instant'})"); page.wait_for_timeout(900)
+    check("how it works (phone): bottom bar appears after the hero", page.locator("#dock").evaluate("el => el.classList.contains('is-visible')")
+          and page.locator("#dock a").get_attribute("href") == "/#join")
+    page.locator(".page-top .cta-row .btn").first.click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1300)
+    check("how it works: waitlist button lands on the home page form", page.evaluate("location.pathname") == "/"
+          and page.evaluate("location.hash") == "#join", page.url)
+    page.goto(f"{BASE}/es/como-funciona/", wait_until="networkidle"); page.wait_for_timeout(300)
+    es_how = page.evaluate("[...document.querySelectorAll('main a.btn')].filter(a => /lista de espera/i.test(a.textContent)).map(a => a.getAttribute('href'))")
+    check("cómo funciona: the Spanish page's waitlist buttons go to the Spanish sign-up", es_how and set(es_how) == {"/es/#join"}, str(es_how))
+    check("how it works pages: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+
+    # Learn: the hub lists every guide, guides cite their sources, and the home pages link to them
+    ctx = browser.new_context(viewport={"width": 1440, "height": 900})
+    page, logs = setup(ctx)
+    for lang in ("en", "es"):
+        hub = LEARN.HUB[lang]["path"]
+        page.goto(f"{BASE}{hub}", wait_until="domcontentloaded")
+        listed = page.evaluate("[...document.querySelectorAll('.guide__link')].map(a => a.getAttribute('href'))")
+        check(f"{hub}: lists every guide", listed == [LEARN.path(a, lang) for a in LEARN.ARTICLES], str(listed))
+        for a in LEARN.ARTICLES:
+            path = LEARN.path(a, lang)
+            page.goto(f"{BASE}{path}", wait_until="domcontentloaded")
+            g = page.evaluate("""() => ({
+              sources: [...document.querySelectorAll('.sources a')].map(x => x.href),
+              join: (document.querySelector('.article__aside .btn') || {}).getAttribute ? document.querySelector('.article__aside .btn').getAttribute('href') : '',
+              more: [...document.querySelectorAll('.guides .guide__link')].map(x => x.getAttribute('href')),
+              tel: [...document.querySelectorAll('.article__aside a[href^="tel:"]')].map(x => x.getAttribute('href')),
+              time: (document.querySelector('.meta time') || {}).getAttribute ? document.querySelector('.meta time').getAttribute('datetime') : '',
+            })""")
+            check(f"{path}: sources, waitlist box, 911 and 988, two more guides, date", len(g["sources"]) >= 2
+                  and g["join"] == a[lang]["cta"]["join"] and g["tel"] == ["tel:911", "tel:988"] and len(g["more"]) == 2
+                  and path not in g["more"] and g["time"] == LEARN.UPDATED, json.dumps(g))
+        where = LEARN.path(next(x for x in LEARN.ARTICLES if x["key"] == "where"), lang)
+        page.goto(f"{BASE}{where}", wait_until="domcontentloaded")
+        calls = page.evaluate("[...document.querySelectorAll('.prose .callout a')].map(a => a.getAttribute('href'))")
+        text_988 = "sms:988" if lang == "en" else "sms:988?&body=AYUDA"
+        check(f"{where}: the warning signs offer 911, and the crisis box 988 by call and text", calls == ["tel:911", "tel:988", text_988], str(calls))
+    page.goto(URL, wait_until="domcontentloaded")
+    home_guides = page.evaluate("[...document.querySelectorAll('#learn .guide__link')].map(a => a.getAttribute('href'))")
+    check("home: the Learn section links to every guide", home_guides == [LEARN.path(a, "en") for a in LEARN.ARTICLES], str(home_guides))
+    check("footer links to how Jachi works and the guides", page.locator("footer a[href='/how-it-works/']").count() == 1
+          and page.locator("footer a[href='/learn/']").count() == 1)
+    page.goto(ES_URL, wait_until="domcontentloaded")
+    es_guides = page.evaluate("[...document.querySelectorAll('#learn .guide__link')].map(a => a.getAttribute('href'))")
+    check("es home: the Learn section links to the Spanish guides", es_guides == [LEARN.path(a, "es") for a in LEARN.ARTICLES], str(es_guides))
+    check("es footer links to cómo funciona and the Spanish guides", page.locator("footer a[href='/es/como-funciona/']").count() == 1
+          and page.locator("footer a[href='/es/guias/']").count() == 1)
+    check("learn pages: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
     # 12) Legal pages
@@ -1168,11 +1308,11 @@ with sync_playwright() as p:
     # 13) Search engine files and fonts
     status, headers, body = get("/sitemap.xml")
     sm = body.decode()
-    missing = [u for u in ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs]
+    missing = [u for u in ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs] + content_pages
                if f"<loc>https://www.jachihealth.com{u}</loc>" not in sm]
     check("sitemap lists every page, with the Spanish alternate", not missing and 'hreflang="es"' in sm, str(missing))
     # Structured data, titles and descriptions on every page search engines see
-    indexable = ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs]
+    indexable = ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs] + content_pages
     nodes_by_page, sd_problems, meta_problems = {}, [], []
     for u in indexable:
         h = (ROOT / "public" / u.strip("/") / "index.html").read_text()
@@ -1199,7 +1339,7 @@ with sync_playwright() as p:
     home_types = [[n.get("@type") for n in nodes_by_page.get(u, [])] for u in ("/", "/es/")]
     service_ok = all(any(n.get("@type") == "MedicalWebPage" and n.get("about") for n in nodes_by_page[f"/{s}/"]) for s in slugs)
     check("structured data: valid, connected, organization and website on both home pages, conditions on service pages",
-          not sd_problems and all(t == ["MedicalOrganization", "WebSite", "WebPage"] for t in home_types) and service_ok,
+          not sd_problems and all(t == ["Organization", "WebSite", "WebPage"] for t in home_types) and service_ok,
           json.dumps(sd_problems[:6] + home_types))
     check("search titles fit (65 characters) and descriptions fit (50 to 160)", not meta_problems, json.dumps(meta_problems))
     home_html = (ROOT / "public" / "index.html").read_text()

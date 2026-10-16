@@ -27,7 +27,9 @@ Netlify → Project configuration → Notifications → Form submission notifica
 | --- | --- |
 | `/` | `src/en/home.html` |
 | `/es/` | `src/es/home.html`, written by `tools/es_home.py` from the English page |
-| `/urgent-care/`, `/uti-treatment/` and the other service pages | `src/en/service.html` filled in from `pages.py` |
+| `/urgent-care/`, `/uti-treatment/` and the other service pages | `src/en/service.html` filled in from `pages.py` (with what to expect from the visit, tests and follow-up) |
+| `/how-it-works/`, `/es/como-funciona/` | `src/en/how.html` and `src/es/how.html`, steps and questions in `content.py` and `content_es.py` (`HOW`) |
+| `/learn/` and its guides, `/es/guias/` and the Spanish guides | `src/learn.html` and `src/article.html`, words in `learn.py` (both languages) |
 | `/privacy/`, `/terms/`, `/texas-medical-board/` | `src/en/<name>.html` |
 | `/account/`, `/es/account/` | `src/account.html`, `account.css`, `account.js` and `identity.js`, words in `strings.py` |
 | `/admin/` (not linked, not indexed) | `src/admin.html`, `admin.css`, `admin.js` and `identity.js` |
@@ -79,7 +81,9 @@ The published files are generated. Edit the source, then rebuild:
 | Home page layout and wording | `src/en/home.html`, then `python3 tools/es_home.py` for Spanish |
 | Header, footer, help chat | `src/en/*.html` and the Spanish copies in `src/es/` |
 | Words the page script shows (results, errors, chat) | `strings.py` (both languages) |
-| Service pages | `pages.py` and `src/en/service.html` |
+| Service pages | `pages.py` and `src/en/service.html` (Spanish "what to expect" for the app: `content_es.EXPECT`) |
+| How Jachi works | `HOW` in `content.py` and `content_es.py`, layout in `src/en/how.html` and `src/es/how.html` |
+| Health guides | `learn.py` (both languages, with their sources) |
 | Legal pages | `src/en/privacy.html`, `terms.html`, `texas-medical-board.html` |
 | Styles | `src/style.css` |
 | Interactive behaviour | `src/app.js` |

@@ -1,89 +1,46 @@
 <main id="main">
 
   <!-- Hero -->
-  <section class="hero grain" id="top" aria-labelledby="hero-title">
+  <section class="hero" id="top" aria-labelledby="hero-title">
     <div class="wrap hero__grid">
-      <div class="hero__copy">
-        <p class="pill" data-rise style="--d:0ms"><span class="pill__dot" aria-hidden="true"></span>Waitlist open · Launching in Texas</p>
-        <h1 class="display" id="hero-title" data-rise style="--d:90ms">Online care, rooted in <em>real medicine.</em></h1>
-        <p class="lead" data-rise style="--d:180ms">Licensed clinicians online for everything from colds and refills to therapy, sexual health and weight care. A care assistant checks in between visits, and you'll know what your care costs before you start.</p>
-        <div class="cta-row" data-rise style="--d:270ms">
+      <div class="hero__head">
+        <p class="status" data-rise style="--d:0ms"><span class="status__dot" aria-hidden="true"></span><span>Waitlist open</span><span class="status__rule" aria-hidden="true"></span><span>Launching in Texas first</span></p>
+        <h1 class="display" id="hero-title" data-rise style="--d:80ms">Online care, rooted in real medicine.</h1>
+        <a class="hero__alt" href="/es/" hreflang="es" lang="es" data-rise style="--d:160ms"><span class="hero__alt-tag">En español</span><span class="hero__alt-line">Atención en línea, arraigada en la medicina real.</span></a>
+      </div>
+      <div class="hero__copy" data-rise style="--d:240ms">
+        <p class="lead">Licensed clinicians online for everyday care, from colds and refills to therapy, sexual health and weight care. You'll know what your care costs before you start.</p>
+        <div class="cta-row">
           <a class="btn btn--lg" href="#join" data-to-join>Join the waitlist {{I:arrow:i--arrow}}</a>
           <a class="btn btn--ghost btn--lg" href="#care-finder">Find the right care</a>
         </div>
-        <ul class="trust" data-rise style="--d:330ms">
+        <ul class="trust">
           <li><span class="trust__ic">{{I:check}}</span>Free to join</li>
           <li><span class="trust__ic">{{I:check}}</span>Licensed clinicians</li>
           <li><span class="trust__ic">{{I:check}}</span>No insurance needed</li>
         </ul>
-        <nav class="picker" aria-labelledby="picker-label" data-rise style="--d:390ms">
+      </div>
+      <div class="map">
+        <svg class="map__art" viewBox="0 0 800 540" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="map-blade" x1="0.25" y1="0" x2="0.75" y2="1">
+              <stop offset="0" stop-color="#EDF4EE"/>
+              <stop offset="0.55" stop-color="#C6DDCB"/>
+              <stop offset="1" stop-color="#9BC1A3"/>
+            </linearGradient>
+          </defs>
+          <path class="map__blade" d="M400 34C456 84 508 180 502 266C496 350 446 416 400 448C354 416 304 350 298 266C292 180 344 84 400 34Z" fill="url(#map-blade)"/>
+          <path class="map__stem" pathLength="1" d="M400 448C400 480 392 506 374 524"/>
+          <g class="map__veins">
+            <path class="map__rib" pathLength="1" d="M400 446C398 340 402 160 400 52"/>
+            <path class="map__vein map__v1" pathLength="1" d="M400 150Q376.5 144 353 104"/><path class="map__vein map__v2" pathLength="1" d="M400 150Q423.5 144 447 104"/><path class="map__vein map__v3" pathLength="1" d="M400 225Q360 219 320 179"/><path class="map__vein map__v4" pathLength="1" d="M400 225Q440 219 480 179"/><path class="map__vein map__v5" pathLength="1" d="M400 300Q354 294 308 254"/><path class="map__vein map__v6" pathLength="1" d="M400 300Q446 294 492 254"/><path class="map__vein map__v7" pathLength="1" d="M400 375Q360 369 320 329"/><path class="map__vein map__v8" pathLength="1" d="M400 375Q440 369 480 329"/>
+          </g>
+          <g class="map__leads"><g class="map__lead map__l1"><path pathLength="1" d="M347 104H252"/><circle cx="252" cy="104" r="3.5"/></g><g class="map__lead map__l2"><path pathLength="1" d="M453 104H548"/><circle cx="548" cy="104" r="3.5"/></g><g class="map__lead map__l3"><path pathLength="1" d="M314 179H252"/><circle cx="252" cy="179" r="3.5"/></g><g class="map__lead map__l4"><path pathLength="1" d="M486 179H548"/><circle cx="548" cy="179" r="3.5"/></g><g class="map__lead map__l5"><path pathLength="1" d="M302 254H252"/><circle cx="252" cy="254" r="3.5"/></g><g class="map__lead map__l6"><path pathLength="1" d="M498 254H548"/><circle cx="548" cy="254" r="3.5"/></g><g class="map__lead map__l7"><path pathLength="1" d="M314 329H252"/><circle cx="252" cy="329" r="3.5"/></g><g class="map__lead map__l8"><path pathLength="1" d="M486 329H548"/><circle cx="548" cy="329" r="3.5"/></g></g>
+        </svg>
+        <nav class="picker" aria-labelledby="picker-label">
           <p class="picker__label" id="picker-label">Or go straight to</p>
           <ul class="picker__list">{{PICKER}}</ul>
         </nav>
-      </div>
-
-      <div class="hero__visual" data-rise style="--d:220ms">
-        <div class="stage" id="stage" role="img" aria-label="Preview of the Jachi app: a check-in, an upcoming therapy session and a refill sent to your pharmacy">
-          <svg class="stage__leaf" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="leaf-fill" x1="0.15" y1="0" x2="0.85" y2="1">
-                <stop offset="0" stop-color="#E3EFE6"/>
-                <stop offset="0.55" stop-color="#BBD7C2"/>
-                <stop offset="1" stop-color="#8FB89A"/>
-              </linearGradient>
-            </defs>
-            <path d="M32 4C40 16 58 34 32 52C6 34 24 16 32 4Z" fill="url(#leaf-fill)"/>
-            <g class="veins" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-opacity=".75">
-              <path pathLength="100" stroke-width=".55" d="M32 9V50"/>
-              <path pathLength="100" stroke-width=".42" d="M32 22Q35.5 21 37.5 16.5"/>
-              <path pathLength="100" stroke-width=".42" d="M32 30Q37 28.5 40 23"/>
-              <path pathLength="100" stroke-width=".42" d="M32 37Q37.5 35.5 40.5 30"/>
-              <path pathLength="100" stroke-width=".42" d="M32 22Q28.5 21 26.5 16.5"/>
-              <path pathLength="100" stroke-width=".42" d="M32 30Q27 28.5 24 23"/>
-              <path pathLength="100" stroke-width=".42" d="M32 37Q26.5 35.5 23.5 30"/>
-            </g>
-            <path d="M32 52C32 56 31.5 58.5 29.5 61" fill="none" stroke="#8FB89A" stroke-width="1.4" stroke-linecap="round"/>
-          </svg>
-          <div class="stage__orbit" aria-hidden="true"></div>
-          <div class="stage__glow" aria-hidden="true"></div>
-
-          <div class="phone" aria-hidden="true">
-            <div class="phone__screen">
-              <div class="app">
-                <span class="app__notch"></span>
-                <div class="app__top">
-                  <span class="app__brand">{{MARK:m-app:solid}}<span>Jachi</span></span>
-                  <span class="app__avatar">{{I:user}}</span>
-                </div>
-                <div>
-                  <p class="app__hello">Good morning</p>
-                  <p class="app__sub">Here's your care for today.</p>
-                </div>
-                <div class="app__card">
-                  <p class="k">Check-in</p>
-                  <p class="t">How are you feeling since your visit?</p>
-                  <div class="app__chips"><span class="on">Better</span><span>Same</span><span>Worse</span></div>
-                </div>
-                <div class="app__prog">
-                  <div class="app__prog-top"><b>This week</b><span>3 of 4 check-ins</span></div>
-                  <div class="app__bar"><span></span></div>
-                </div>
-                <div class="app__row"><span class="ic">{{I:video}}</span><div><b>Therapy session</b><small>Thursday at 6:00 PM</small></div></div>
-                <div class="app__row"><span class="ic">{{I:pill}}</span><div><b>Refill approved</b><small>Sent to your pharmacy.</small></div></div>
-                <div class="app__tabs"><span class="on">{{I:home}}</span><span>{{I:clip}}</span><span>{{I:msg}}</span><span>{{I:user}}</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="float float--a" aria-hidden="true">
-            <span class="float__ic float__ic--solid">{{I:check}}</span>
-            <span><b>Visit complete</b><small>Your care plan is ready.</small></span>
-          </div>
-          <div class="float float--b" aria-hidden="true">
-            <span class="float__ic">{{I:spark}}</span>
-            <span><b>Care assistant <em class="ai-tag">AI</em></b><small>Your check-in is ready.</small></span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -92,8 +49,7 @@
   <section class="section" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Services</p>
-        <h2 class="h2" id="services-title">The care you need, <em>from home.</em></h2>
+        <h2 class="h2" id="services-title">The care you need, from home.</h2>
         <p class="lead">Licensed clinicians for everyday illness, prescriptions, mental health, sexual health and more. No insurance needed.</p>
       </div>
 
@@ -149,8 +105,7 @@
     <div class="wrap finder__grid">
       <div class="finder__intro">
         <div class="section-head">
-          <p class="eyebrow">Care finder</p>
-          <h2 class="h2" id="finder-title">Not sure where to start? <em>We'll point the way.</em></h2>
+          <h2 class="h2" id="finder-title">Not sure where to start? We'll point the way.</h2>
           <p class="lead">Answer two quick questions to see which service fits and when to get help in person instead.</p>
         </div>
         <div class="explain explain--alert">
@@ -286,37 +241,36 @@
     {{MARK:m-art2:outline:standards__art}}
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow eyebrow--light">Clinical standards</p>
-        <h2 class="h2 h2--light" id="standards-title">Who provides <em>your care.</em></h2>
+        <h2 class="h2 h2--light" id="standards-title">Who provides your care.</h2>
         <p class="lead lead--light">Your care comes from licensed clinicians who practice through independent medical groups. Jachi Health provides the technology and administrative services. Before we open, we'll name the medical group and its clinicians here.</p>
       </div>
       <ul class="standards">
-        <li class="standard" data-reveal>
+        <li class="standard">
           <span class="standard__ic">{{I:steth}}</span>
           <h3>Licensed in your state</h3>
           <p>Physicians, nurse practitioners and physician assistants provide medical care, and licensed therapists provide therapy. Each one is licensed in the state where you live.</p>
         </li>
-        <li class="standard" data-reveal style="--d:80ms">
+        <li class="standard">
           <span class="standard__ic">{{I:shield}}</span>
           <h3>Physician oversight</h3>
           <p>Nurse practitioners and physician assistants work with a supervising physician, as Texas law requires.</p>
         </li>
-        <li class="standard" data-reveal style="--d:160ms">
+        <li class="standard">
           <span class="standard__ic">{{I:user}}</span>
           <h3>A clinician makes every decision</h3>
           <p>Only a licensed clinician diagnoses, prescribes or changes your treatment. Our AI assistant never does.</p>
         </li>
-        <li class="standard" data-reveal>
+        <li class="standard">
           <span class="standard__ic">{{I:pill}}</span>
           <h3>Careful prescribing</h3>
           <p>FDA-approved medications, only when they're right for you. We don't prescribe controlled substances.</p>
         </li>
-        <li class="standard" data-reveal style="--d:80ms">
+        <li class="standard">
           <span class="standard__ic">{{I:alert}}</span>
           <h3>Safety comes first</h3>
           <p>If online care isn't right for you, your clinician will tell you where to go in person. For an emergency, call 911. In a crisis, call or text 988.</p>
         </li>
-        <li class="standard" data-reveal style="--d:160ms">
+        <li class="standard">
           <span class="standard__ic">{{I:lock}}</span>
           <h3>Your privacy</h3>
           <p>When you become a patient, your health information is protected under HIPAA. This site doesn't use ads or tracking.</p>
@@ -341,8 +295,7 @@
   <section class="section" id="why" aria-labelledby="why-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Why Jachi</p>
-        <h2 class="h2" id="why-title">Real medicine, <em>made simple.</em></h2>
+        <h2 class="h2" id="why-title">Real medicine, made simple.</h2>
         <p class="lead">Licensed clinicians and modern tools, built around your life.</p>
       </div>
 
@@ -385,10 +338,10 @@
 
         <article class="tile" data-reveal>
           <h3>A care assistant that checks in</h3>
-          <p>Our AI assistant handles check-ins, reminders and everyday questions, and sends anything medical to your clinician.</p>
+          <p>When we open, our AI assistant will help with check-ins, reminders and everyday questions, and send anything medical to your clinician.</p>
           <div class="tile__visual">
             <div class="vis-chat" aria-hidden="true">
-              <div class="bubble bubble--ai" style="--i:0"><span class="who">{{I:spark}} Care assistant · AI</span>How are you feeling since your visit?</div>
+              <div class="bubble bubble--ai" style="--i:0"><span class="who">{{I:spark}} Care assistant <em class="ai-tag">AI</em></span>How are you feeling since your visit?</div>
               <div class="bubble bubble--me" style="--i:1">Better, but the cough is still there.</div>
               <div class="bubble bubble--ai" style="--i:2">Thanks for telling me. I've sent this to your clinician to review.</div>
             </div>
@@ -434,47 +387,48 @@
   <!-- How it works -->
   <section class="section section--paper" id="how" aria-labelledby="how-title">
     <div class="wrap">
-      <div class="section-head section-head--center">
-        <p class="eyebrow">How it works</p>
-        <h2 class="h2" id="how-title">From first question <em>to feeling better.</em></h2>
-        <p class="lead">Everything happens online, and a licensed clinician is part of every step that matters.</p>
+      <div class="section-head">
+        <h2 class="h2" id="how-title">From first question to feeling better.</h2>
+        <p class="lead">You start on Jachi. Your care comes from licensed clinicians at an independent medical group, which we'll name before we open.</p>
       </div>
-      <div class="steps-wrap" data-reveal>
+      <div class="journey" data-reveal>
+        <p class="journey__key" aria-hidden="true"><span class="journey__key-jachi">On Jachi</span><span class="journey__key-care">With the medical group</span></p>
         <ol class="steps">
-          <li class="step" style="--i:0">
+          <li class="step step--jachi" style="--i:0">
             <span class="step__num" aria-hidden="true">1</span>
             <div class="step__body">
-              <h3>Tell us what you need</h3>
-              <p>Pick a service and answer a few questions. Our care assistant guides you and explains anything that's unclear.</p>
-              <span class="tag">{{I:clip}} Online, on your schedule</span>
+              <h3>Choose your care</h3>
+              <p>Pick a service and see what's included before you start. Our AI assistant can answer general questions.</p>
+              <span class="tag">{{I:home}} On Jachi</span>
             </div>
           </li>
           <li class="step" style="--i:1">
             <span class="step__num" aria-hidden="true">2</span>
             <div class="step__body">
-              <h3>A clinician reviews</h3>
-              <p>A licensed clinician reviews your answers and history. They may message you or start a video visit.</p>
-              <span class="tag">{{I:steth}} Licensed in your state</span>
+              <h3>Share your health history</h3>
+              <p>Answer a few questions in the medical group's secure patient portal, on your schedule.</p>
+              <span class="tag">{{I:lock}} Medical group</span>
             </div>
           </li>
           <li class="step" style="--i:2">
             <span class="step__num" aria-hidden="true">3</span>
             <div class="step__body">
-              <h3>Get treated</h3>
-              <p>If you need medication or tests, your clinician sends the prescription to your pharmacy or orders tests at a nearby lab.</p>
-              <span class="tag">{{I:pharmacy}} Sent to your pharmacy</span>
+              <h3>A clinician reviews</h3>
+              <p>A licensed clinician reviews your answers and history. They may message you or start a video visit.</p>
+              <span class="tag">{{I:steth}} Medical group</span>
             </div>
           </li>
           <li class="step" style="--i:3">
             <span class="step__num" aria-hidden="true">4</span>
             <div class="step__body">
-              <h3>Stay on track</h3>
-              <p>Message your care team, check in between visits and request refills when you need them.</p>
-              <span class="tag">{{I:msg}} Ongoing care</span>
+              <h3>Get treated and stay on track</h3>
+              <p>If you need medication or tests, your clinician sends the prescription to your pharmacy or orders tests at a nearby lab, then follows up.</p>
+              <span class="tag">{{I:pharmacy}} Medical group</span>
             </div>
           </li>
         </ol>
       </div>
+      <p class="journey__more"><a class="textlink" href="/how-it-works/">See how Jachi works, step by step{{I:arrow:i--arrow}}</a></p>
     </div>
   </section>
 
@@ -483,8 +437,7 @@
     {{MARK:m-art1:outline:approach__art}}
     <div class="wrap approach__grid">
       <div class="section-head">
-        <p class="eyebrow eyebrow--light">Our approach</p>
-        <h2 class="h2 h2--light" id="approach-title">Technology that listens. <em>Clinicians who decide.</em></h2>
+        <h2 class="h2 h2--light" id="approach-title">Technology that listens. Clinicians who decide.</h2>
         <p class="lead lead--light">Jachi uses AI to make care faster and more personal. It never diagnoses, prescribes or provides therapy. Every medical decision is made by a licensed clinician.</p>
       </div>
       <div>
@@ -526,8 +479,7 @@
     <div class="wrap elig__grid">
       <div class="elig__intro">
         <div class="section-head">
-          <p class="eyebrow">Weight care check</p>
-          <h2 class="h2" id="elig-title">See if weight-loss medication <em>could be right for you.</em></h2>
+          <h2 class="h2" id="elig-title">See if weight-loss medication could be right for you.</h2>
           <p class="lead">Three quick steps. Your answers stay on this device and are never saved.</p>
         </div>
         <div class="explain">
@@ -684,8 +636,7 @@
     <div class="wrap faq__grid">
       <div class="faq__intro">
         <div class="section-head">
-          <p class="eyebrow">FAQ</p>
-          <h2 class="h2" id="faq-title">Questions, <em>answered.</em></h2>
+          <h2 class="h2" id="faq-title">Questions, answered.</h2>
           <p class="lead">What to know about the clinicians, our services and AI.</p>
         </div>
         <div class="faq-more">
@@ -702,13 +653,28 @@
     </div>
   </section>
 
+  <!-- Learn -->
+  <section class="section" id="learn" aria-labelledby="learn-title">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <h2 class="h2" id="learn-title">Learn before your visit.</h2>
+          <p class="lead">Plain-language guides to common questions, so you know what to expect.</p>
+        </div>
+        <a class="btn btn--ghost" href="/learn/">All guides</a>
+      </div>
+      <ul class="guides">
+        {{LEARN_CARDS}}
+      </ul>
+    </div>
+  </section>
+
   <!-- Waitlist -->
   <section class="section join grain on-dark" id="join" aria-labelledby="join-title">
     {{MARK:m-art4:outline:join__art}}
     <div class="wrap join__grid">
       <div class="join__copy">
-        <p class="eyebrow eyebrow--light">Waitlist</p>
-        <h2 class="h2 h2--light" id="join-title">Be first <em>in line.</em></h2>
+        <h2 class="h2 h2--light" id="join-title">Be first in line.</h2>
         <p class="lead lead--light">We're opening in Texas first. Join the waitlist and we'll email you when Jachi launches in your state. Joining doesn't book a visit and costs nothing.</p>
         <h3 class="join__next">What happens after you join</h3>
         <ol class="perks perks--steps">

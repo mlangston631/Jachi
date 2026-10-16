@@ -7,6 +7,8 @@ Deployed by Netlify (see netlify.toml), all written into public/:
   index.html                      English home page             (src/en/home.html)
   es/index.html                   Spanish home page             (src/es/home.html)
   <service>/index.html            one page per service          (src/en/service.html + pages.py)
+  how-it-works/, es/como-funciona/ the "How Jachi works" page     (src/<lang>/how.html + content.HOW, content_es.HOW)
+  learn/, es/guias/ and their guides                            (src/learn.html, src/article.html + learn.py)
   privacy/, terms/, texas-medical-board/   legal pages          (src/en/*.html)
   account/, es/account/           accounts for the waitlist    (src/account.html, account.js, identity.js)
   admin/                          the admin console              (src/admin.html, admin.js, identity.js)
@@ -29,6 +31,7 @@ from pathlib import Path
 import chatbot
 import content as EN_CONTENT
 import content_es as ES_CONTENT
+import learn as LEARN
 import pages as PAGES
 import strings
 from brand import mark, icon_svg_file
@@ -191,8 +194,7 @@ def service_card(L, svc, i):
                f'<span class="visually-hidden">{B["for"].format(x=name_lower)}</span></button>')
     if L.code == "en":
         title = (f'<h3><a class="svc__link" href="/{PAGES.SERVICE_SLUG[svc["key"]]}/">{esc(svc["name"])}'
-                 f'<span class="visually-hidden">: {esc(B["learn_more"].format(x=svc["name"].lower()))}</span>'
-                 f'{icon_svg("arrow", "svc__go")}</a></h3>')
+                 f'<span class="visually-hidden">: {esc(B["learn_more"].format(x=svc["name"].lower()))}</span></a></h3>')
     else:
         title = f'<h3>{esc(svc["name"])}</h3>'
     return (f'<article class="svc" id="svc-{svc["key"]}" data-reveal style="--d:{(i % 3) * 80}ms">'
@@ -235,7 +237,7 @@ def condition_rows(L):
         rows.append(hit_row("911", name, terms, esc(B["emergency"]), note, "alert", call911))
     name, terms, note = L.crisis
     ctas = (f'<div class="hit__ctas"><a class="btn btn--sm" href="tel:988">{icon_svg("phone")}{esc(B["call_988"])}</a>'
-            f'<a class="btn btn--ghost btn--sm" href="sms:988">{icon_svg("msg")}{esc(B["text_988"])}</a></div>')
+            f'<a class="btn btn--ghost btn--sm" href="{esc(L.T["sms_988"])}">{icon_svg("msg")}{esc(B["text_988"])}</a></div>')
     rows.append(hit_row("988", name, terms, esc(B["support_now"]), note, "heart", ctas))
     return "\n".join(rows)
 
@@ -270,10 +272,29 @@ def part(lang, name):
     return (SRC / lang / f"{name}.html").read_text()
 
 
-def accent_last(text):
-    """A heading with its last word in italics, the site's heading style: 'How online therapy <em>works.</em>'"""
-    head, last = text.rsplit(" ", 1)
-    return f"{esc(head)} <em>{esc(last)}.</em>"
+def heading(text):
+    """A section heading from data: the site's headings end with a full stop. 'Therapy questions, answered.'"""
+    return esc(text) + "."
+
+
+def nw(escaped):
+    """Keep hyphenated words like GLP-1 and follow-up on one line (escaped text in, markup out)."""
+    return re.sub(r"\b(\w+(?:-\w+)+)\b", r'<span class="nw">\1</span>', escaped)
+
+
+def guide_cards(lang, skip=None, level="h3"):
+    """The Learn guides as a list of rows, each linking to its article. skip leaves one guide out."""
+    W = LEARN.LABELS[lang]
+    rows = []
+    for a in LEARN.ARTICLES:
+        if a["key"] == skip:
+            continue
+        t = a[lang]
+        rows.append(f'<li class="guide"><p class="guide__topic">{esc(t["topic"])}</p>'
+                    f'<{level} class="guide__title"><a class="guide__link" href="{LEARN.path(a, lang)}">{nw(esc(t["h1"]))}</a></{level}>'
+                    f'<p class="guide__sum">{nw(esc(t["summary"]))}</p>'
+                    f'<p class="guide__meta"><span>{esc(W["minutes"].format(n=t["minutes"]))}</span>{icon_svg("arrow")}</p></li>')
+    return "\n".join(rows)
 
 
 def crumbs(trail):
@@ -426,6 +447,8 @@ def chrome_tokens(L, home, home_top, join_href, share_url="", alt_href=None):
         "{{HOME}}": home, "{{HOME_TOP}}": home_top, "{{JOIN_HREF}}": join_href,
         "{{FOOTER_CARE}}": footer_care(L, home), "{{SHARE_URL}}": share_url,
         "{{ALT_HREF}}": alt_href or ("/es/" if L.code == "en" else "/"),
+        # The home page's "How it works" links go to its own section; every other page links to the full page.
+        "{{HOW_HREF}}": "#how" if home == "" else ("/how-it-works/" if L.code == "en" else "/es/como-funciona/"),
     }
 
 
@@ -454,16 +477,14 @@ SHARE_ALT_ES = "Jachi Health: atención en línea, arraigada en la medicina real
 # Only facts that are true today: no clinician names, reviews, ratings or prices until they exist.
 ORG_ID, SITE_ID = f"{SITE_URL}/#organization", f"{SITE_URL}/#website"
 ORG_NODE = {
-    "@type": "MedicalOrganization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/",
+    "@type": "Organization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/",
     "logo": {"@type": "ImageObject", "url": f"{SITE_URL}/apple-touch-icon.png", "width": 180, "height": 180},
     "image": f"{SITE_URL}/og.jpg", "email": EMAIL, "description": ORG_DESCRIPTION,
     "areaServed": {"@type": "State", "name": "Texas"}, "knowsLanguage": ["en", "es"],
-    "medicalSpecialty": [f"https://schema.org/{x}" for x in
-                         ("PrimaryCare", "Psychiatric", "Dermatology", "Gynecologic", "Urologic")],
     "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": EMAIL,
                      "availableLanguage": ["English", "Spanish"]},
 }
-ORG_REF = {"@type": "MedicalOrganization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/"}
+ORG_REF = {"@type": "Organization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/"}
 SITE_NODE = {"@type": "WebSite", "@id": SITE_ID, "url": f"{SITE_URL}/", "name": "Jachi Health",
              "inLanguage": ["en", "es"], "publisher": {"@id": ORG_ID}}
 
@@ -500,6 +521,7 @@ def home_tokens(L):
         "{{CONDITION_ROWS}}": condition_rows(L),
         "{{POPULAR}}": popular,
         "{{CONDITION_COUNT}}": str(len(L.treated)),
+        "{{LEARN_CARDS}}": guide_cards(L.code),
     }
 
 
@@ -546,8 +568,8 @@ def service_page(p):
             title, note = entry, treated[entry]
         note_html = f"<small>{esc(note)}</small>" if note else ""
         items.append(f"<li>{icon_svg('check')}<span><b>{esc(title)}</b>{note_html}</span></li>")
-    steps = "".join(f'<li><span class="n" aria-hidden="true">{i}</span><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></li>'
-                    for i, (t, d) in enumerate(p.get("steps", PAGES.STEPS), 1))
+    expect = "".join(f'<li><span class="expect__ic">{icon_svg(ic)}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>'
+                     for ic, t, d in p["expect"])
     know = "".join(f"<li>{icon_svg('info')}<span>{esc(k)}</span></li>" for k in p["know"])
     s = p["safety"]
     flags = "".join(f"<li>{esc(x)}</li>" for x in s["items"])
@@ -579,26 +601,31 @@ def service_page(p):
             f'<ul>{perk_items}</ul>'
             f'<p class="fine">{esc(L.pricing_note)} Medication and lab tests are billed separately.</p></aside>')
     related = "".join(f'<li><a href="/{r}/">{esc(PAGES.BY_SLUG[r]["crumb"])}</a></li>' for r in p["related"])
+    links = [("See how Jachi works, step by step", "/how-it-works/")] + [
+        (a["en"]["h1"].rstrip("."), LEARN.path(a, "en")) for a in LEARN.ARTICLES if p["key"] in a["services"]]
+    svc_links = "".join(f'<li><a class="textlink" href="{href}">{nw(esc(label))}{icon_svg("arrow", "i--arrow")}</a></li>'
+                        for label, href in links)
     faq = list(p["faq"])
     tokens = {
         **chrome_tokens(L, "/", "/", join_href),
         "{{CRUMBS}}": crumbs(trail),
-        "{{SVC_H1}}": f'{esc(p["h1"][0])} <em>{esc(p["h1"][1])}</em>',
+        "{{SVC_H1}}": f'{esc(p["h1"][0])} {esc(p["h1"][1])}',
         "{{SVC_LEAD}}": esc(p["lead"]) + " No insurance needed.",
         "{{SVC_SECOND_CTA}}": second,
         "{{SVC_CARD}}": card,
-        "{{SVC_CRUMB}}": esc(p["crumb"]),
         "{{SVC_LIST_TITLE}}": esc(p["list_title"]),
         "{{SVC_LIST_LEAD}}": esc(p.get("list_lead", "A licensed clinician reviews every request and tells you if "
                                                    "you need to be seen in person instead.")),
         "{{SVC_LIST}}": "".join(items),
-        "{{SVC_STEPS}}": steps,
+        "{{SVC_EXPECT}}": expect,
+        "{{SVC_EXPECT_TITLE}}": heading(p["expect_title"]),
+        "{{SVC_EXPECT_LEAD}}": esc(p.get("expect_lead", PAGES.EXPECT_LEAD)),
         "{{SVC_KNOW}}": know,
         "{{SVC_SAFETY}}": safety,
         "{{SVC_FAQ}}": faq_items(faq),
-        "{{SVC_HOW_TITLE}}": accent_last(p["how_title"]),
-        "{{SVC_FAQ_TITLE}}": accent_last(p["faq_title"]),
+        "{{SVC_FAQ_TITLE}}": heading(p["faq_title"]),
         "{{SVC_RELATED}}": related,
+        "{{SVC_LINKS}}": svc_links,
     }
     main = render(part("en", "service"), L, tokens)
     tokens.update({"{{DOCK_HREF}}": join_href, "{{DOCK_LABEL}}": "Join the waitlist"})
@@ -642,6 +669,176 @@ for slug, crumb, title, description in LEGAL:
             "ld": [breadcrumb_ld(trail, path)]}
     write(path, document(page, body))
     SITEMAP.append((path, None))
+
+
+# ---------- How Jachi works (English and Spanish) ----------
+
+HOME_PATH = {"en": "/", "es": "/es/"}
+OTHER = {"en": "es", "es": "en"}
+HOW_PAGES = {"en": EN_CONTENT.HOW, "es": ES_CONTENT.HOW}
+HOW_ALTERNATES = {code: h["path"] for code, h in HOW_PAGES.items()}
+
+
+def faq_ld(items, lang):
+    return {"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": lang, "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in items]}
+
+
+def assemble(lang, main, tokens, parts=("footer", "dock", "chat")):
+    """The page body: the shared header, the page's main content, then the shared footer, dock and chat."""
+    L = Lang(lang)
+    return render(part(lang, "header"), L, tokens) + "\n" + main + "\n" + "\n".join(
+        render(part(lang, n), L, tokens) for n in parts)
+
+
+def how_lanes(H):
+    """The two lanes of the How page: the steps on Jachi, the handoff to the medical group, then the steps with it."""
+    (jachi, care), (h_title, h_text) = H["lanes"], H["handoff"]
+
+    def lane(data, cls, before):
+        steps = "".join(f"<li><div><h4>{esc(title)}</h4><p>{esc(text)}</p></div></li>" for title, text in data["steps"])
+        start = f' start="{before + 1}"' if before else ""
+        return (f'<div class="lane {cls}"><div class="lane__head"><p class="lane__who">{esc(data["who"])}</p>'
+                f'<h3 class="lane__title">{esc(data["title"])}</h3></div>'
+                f'<ol class="lane__steps"{start} style="counter-reset:lane {before}">{steps}</ol></div>')
+    handoff = (f'<div class="handoff"><span class="handoff__ic">{icon_svg("lock")}</span>'
+               f'<div><h3>{esc(h_title)}</h3><p>{esc(h_text)}</p></div></div>')
+    return lane(jachi, "lane--jachi", 0) + handoff + lane(care, "lane--care", len(jachi["steps"]))
+
+
+def build_how(lang):
+    L = Lang(lang)
+    H = HOW_PAGES[lang]
+    home, path = HOME_PATH[lang], H["path"]
+    join_href = home + "#join"
+    trail = [(LEARN.LABELS[lang]["home"], home), (H["crumb"], None)]
+    tokens = {**chrome_tokens(L, home, home, join_href, alt_href=HOW_ALTERNATES[OTHER[lang]]),
+              "{{CRUMBS}}": crumbs(trail), "{{HOW_FAQ}}": faq_items(H["faq"]), "{{HOW_LANES}}": how_lanes(H),
+              "{{DOCK_HREF}}": join_href, "{{DOCK_LABEL}}": esc(L.T["get_early_access"])}
+    main = render(part(lang, "how"), L, tokens)
+    web = page_node("WebPage", path, H["title"], H["description"], lang, about={"@id": ORG_ID},
+                    breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"})
+    page = {"lang": lang, "path": path, "alternates": HOW_ALTERNATES, "main": main,
+            "title": H["title"], "description": H["description"],
+            "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path)), faq_ld(H["faq"], lang)]}
+    write(path, document(page, assemble(lang, main, tokens)))
+    SITEMAP.append((path, HOW_ALTERNATES))
+
+
+for code in HOW_PAGES:
+    build_how(code)
+
+
+# ---------- Learn: the guides hub and each guide (English and Spanish) ----------
+
+LEARN_ALTERNATES = {code: LEARN.HUB[code]["path"] for code in LEARN.HUB}
+
+
+def guide_text(text):
+    """Guide text is escaped; the only markup it may use is <b>."""
+    return nw(esc(text)).replace("&lt;b&gt;", "<b>").replace("&lt;/b&gt;", "</b>")
+
+
+def guide_action(label, href, style):
+    cls = {"danger": "btn btn--danger btn--sm", "solid": "btn btn--sm", "ghost": "btn btn--ghost btn--sm"}[style]
+    ic = "phone" if href.startswith("tel:") else "msg" if href.startswith("sms:") else "arrow"
+    return f'<a class="{cls}" href="{esc(href)}">{icon_svg(ic)}{esc(label)}</a>'
+
+
+def guide_body(blocks):
+    out, seen_h2 = [], False
+    for b in blocks:
+        kind = b[0]
+        if kind == "p":
+            out.append(f"<p>{guide_text(b[1])}</p>")
+        elif kind == "h2":
+            seen_h2 = True
+            out.append(f"<h2>{esc(b[1])}</h2>")
+        elif kind in ("ul", "ol"):
+            out.append(f"<{kind}>" + "".join(f"<li>{guide_text(x)}</li>" for x in b[1]) + f"</{kind}>")
+        elif kind == "callout":
+            _kind, tone, title, parts, actions = b
+            level = "h3" if seen_h2 else "h2"
+            inner = "".join(f"<p>{guide_text(x)}</p>" if isinstance(x, str) else
+                            "<ul>" + "".join(f"<li>{guide_text(y)}</li>" for y in x[1]) + "</ul>" for x in parts)
+            acts = f'<div class="actions">{"".join(guide_action(*a) for a in actions)}</div>' if actions else ""
+            ic = "alert" if tone == "alert" else "heart"
+            out.append(f'<div class="callout callout--{tone}"><{level} class="callout__title">'
+                       f'<span class="callout__ic" aria-hidden="true">{icon_svg(ic)}</span>{esc(title)}</{level}>'
+                       f'{inner}{acts}</div>')
+        else:
+            raise SystemExit(f"learn.py: unknown block {kind!r}")
+    return "\n".join(out)
+
+
+def learn_tokens(lang):
+    W = LEARN.LABELS[lang]
+    return {"{{CTA_TITLE}}": esc(W["cta_title"]), "{{CTA_LEAD}}": esc(W["cta_lead"]), "{{CTA_JOIN}}": esc(W["cta_join"])}
+
+
+def build_learn_hub(lang):
+    L = Lang(lang)
+    Hb, W = LEARN.HUB[lang], LEARN.LABELS[lang]
+    home, path = HOME_PATH[lang], Hb["path"]
+    trail = [(W["home"], home), (Hb["crumb"], None)]
+    tokens = {**chrome_tokens(L, home, home, home + "#join", alt_href=LEARN_ALTERNATES[OTHER[lang]]), **learn_tokens(lang),
+              "{{CRUMBS}}": crumbs(trail), "{{HUB_H1}}": esc(Hb["h1"]), "{{HUB_LEAD}}": nw(esc(Hb["lead"])),
+              "{{HUB_NOTE}}": esc(Hb["note"]), "{{HUB_LIST_LABEL}}": esc(W["list_label"]),
+              "{{HUB_CARDS}}": guide_cards(lang, level="h2")}
+    main = render((SRC / "learn.html").read_text(), L, tokens)
+    items = [{"@type": "ListItem", "position": i, "url": SITE_URL + LEARN.path(a, lang), "name": a[lang]["h1"]}
+             for i, a in enumerate(LEARN.ARTICLES, 1)]
+    web = page_node("CollectionPage", path, Hb["title"], Hb["description"], lang,
+                    breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"},
+                    mainEntity={"@type": "ItemList", "itemListElement": items})
+    page = {"lang": lang, "path": path, "alternates": LEARN_ALTERNATES, "main": main,
+            "title": Hb["title"], "description": Hb["description"],
+            "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path))]}
+    write(path, document(page, assemble(lang, main, tokens, ("footer", "chat"))))
+    SITEMAP.append((path, LEARN_ALTERNATES))
+
+
+def build_guide(article, lang):
+    L = Lang(lang)
+    t, Hb, W = article[lang], LEARN.HUB[lang], LEARN.LABELS[lang]
+    home, path = HOME_PATH[lang], LEARN.path(article, lang)
+    alternates = {code: LEARN.path(article, code) for code in LEARN.HUB}
+    trail = [(W["home"], home), (Hb["crumb"], Hb["path"]), (t["crumb"], None)]
+    cta = t["cta"]
+    english = ' hreflang="en"'
+    sources = "".join(
+        f'<li><a href="{url}" rel="noopener noreferrer"{english if "(en inglés)" in name else ""}>{esc(name)}</a></li>'
+        for name, url in t["sources"])
+    aside = (f'<aside class="article__aside" aria-label="{esc(W["aside_label"])}">'
+             f'<div class="aside-card aside-card--dark on-dark"><h2>{esc(cta["title"])}</h2><p>{esc(cta["text"])}</p>'
+             f'<a class="btn btn--light btn--block" href="{cta["join"]}">{esc(W["cta_join"])} {icon_svg("arrow", "i--arrow")}</a>'
+             f'<a class="textlink" href="{cta["page"][1]}">{esc(cta["page"][0])}{icon_svg("arrow", "i--arrow")}</a></div>'
+             f'<div class="aside-card"><h2>{esc(W["note_title"])}</h2><p>{esc(W["note"])}</p>'
+             f'<p class="aside-card__urgent">{icon_svg("alert")}<span>{W["urgent"]}</span></p></div></aside>')
+    tokens = {**chrome_tokens(L, home, home, cta["join"], alt_href=alternates[OTHER[lang]]), **learn_tokens(lang),
+              "{{CRUMBS}}": crumbs(trail), "{{ART_TOPIC}}": esc(t["topic"]),
+              "{{ART_MINUTES}}": esc(W["minutes"].format(n=t["minutes"])), "{{ART_DATE}}": LEARN.UPDATED,
+              "{{ART_UPDATED}}": esc(LEARN.UPDATED_LABEL[lang]), "{{ART_H1}}": nw(esc(t["h1"])), "{{ART_LEAD}}": nw(esc(t["lead"])),
+              "{{ART_BODY}}": guide_body(t["body"]), "{{ART_SOURCES_TITLE}}": esc(W["sources"]),
+              "{{ART_SOURCES_LEAD}}": esc(W["sources_lead"]), "{{ART_SOURCES}}": sources, "{{ART_ASIDE}}": aside,
+              "{{ART_MORE_TITLE}}": esc(W["more"]), "{{ART_ALL}}": esc(W["all"]), "{{HUB_PATH}}": Hb["path"],
+              "{{ART_MORE}}": guide_cards(lang, skip=article["key"])}
+    main = render((SRC / "article.html").read_text(), L, tokens)
+    web = page_node("MedicalWebPage", path, t["title"], t["description"], lang, publisher={"@id": ORG_ID},
+                    breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"}, medicalAudience={"@type": "Patient"},
+                    datePublished=LEARN.UPDATED, dateModified=LEARN.UPDATED,
+                    citation=[{"@type": "CreativeWork", "name": n, "url": u} for n, u in t["sources"]])
+    page = {"lang": lang, "path": path, "alternates": alternates, "main": main,
+            "title": t["title"], "description": t["description"],
+            "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path))]}
+    write(path, document(page, assemble(lang, main, tokens, ("footer", "chat"))))
+    SITEMAP.append((path, alternates))
+
+
+for code in LEARN.HUB:
+    build_learn_hub(code)
+    for art in LEARN.ARTICLES:
+        build_guide(art, code)
 
 
 # ---------- Account pages (English and Spanish) ----------

@@ -1,0 +1,42 @@
+<main id="main">
+  <article aria-labelledby="page-title">
+    <header class="page-top page-top--article">
+      {{MARK:m-art-learn:outline:page-top__art}}
+      <div class="wrap page-top__inner">
+        {{CRUMBS}}
+        <ul class="meta">
+          <li>{{ART_TOPIC}}</li>
+          <li>{{ART_MINUTES}}</li>
+          <li><time datetime="{{ART_DATE}}">{{ART_UPDATED}}</time></li>
+        </ul>
+        <h1 class="display display--page display--article" id="page-title">{{ART_H1}}</h1>
+        <p class="lead">{{ART_LEAD}}</p>
+      </div>
+    </header>
+    <div class="article">
+      <div class="wrap article__grid">
+        <div class="prose">
+          {{ART_BODY}}
+          <section class="sources" aria-labelledby="sources-title">
+            <h2 id="sources-title">{{ART_SOURCES_TITLE}}</h2>
+            <p>{{ART_SOURCES_LEAD}}</p>
+            <ol>{{ART_SOURCES}}</ol>
+          </section>
+        </div>
+        {{ART_ASIDE}}
+      </div>
+    </div>
+  </article>
+
+  <section class="section" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <h2 class="h2 h2--sm" id="more-title">{{ART_MORE_TITLE}}</h2>
+        </div>
+        <a class="btn btn--ghost" href="{{HUB_PATH}}">{{ART_ALL}}</a>
+      </div>
+      <ul class="guides">{{ART_MORE}}</ul>
+    </div>
+  </section>
+</main>
