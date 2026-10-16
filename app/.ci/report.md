@@ -1,15 +1,15 @@
 # App checks
 
-Commit: f1be542fdc16f95439597dbf20a635d724096703  
-Date: 2026-10-16 00:03 UTC
+Commit: 3ee3c400947a6acb1470f4e62eaf3ffd04ba2d2d  
+Date: 2026-10-16 02:09 UTC
 
-- pass: versions (1s)
+- pass: versions (0s)
 - pass: typescript (4s)
-- pass: tests (5s)
-- pass: expo doctor (5s)
-- pass: native config (6s)
-- pass: ios and android bundles (62s)
-- pass: web build (34s)
+- pass: tests (4s)
+- pass: expo doctor (4s)
+- pass: native config (4s)
+- pass: ios and android bundles (60s)
+- pass: web build (27s)
 
 ## versions (exit 0)
 ```
@@ -26,8 +26,8 @@ Dependencies are up to date
 ```
 PASS __tests__/schedule.test.ts
 PASS __tests__/reminders.test.ts
-PASS __tests__/insights.test.ts
 PASS __tests__/i18n.test.ts
+PASS __tests__/insights.test.ts
 PASS __tests__/summary.test.ts
 PASS __tests__/units.test.ts
 PASS __tests__/dates.test.ts
@@ -36,13 +36,13 @@ PASS __tests__/csv.test.ts
 PASS __tests__/forms.test.ts
 PASS __tests__/safety.test.ts
 PASS __tests__/finder.test.ts
-PASS __tests__/content.test.ts
 PASS __tests__/search.test.ts
+PASS __tests__/content.test.ts
 
 Test Suites: 14 passed, 14 total
 Tests:       84 passed, 84 total
 Snapshots:   0 total
-Time:        3.789 s
+Time:        3.054 s
 Ran all test suites.
 ```
 
@@ -61,13 +61,13 @@ Running 20 checks on your project...
 - Running prebuild
 ✔ Finished prebuild
 total 36
-drwxr-xr-x 2 runner runner 4096 Oct 16 00:01 .
-drwxr-xr-x 5 runner runner 4096 Oct 16 00:01 ..
--rw-r--r-- 1 runner runner 3676 Oct 16 00:01 AndroidManifest.xml
--rw-r--r-- 1 runner runner 3627 Oct 16 00:01 Info.plist
--rw-r--r-- 1 runner runner  255 Oct 16 00:01 JachiHealth.entitlements
--rw-r--r-- 1 runner runner 4074 Oct 16 00:01 PrivacyInfo.xcprivacy
--rw-r--r-- 1 runner runner 8209 Oct 16 00:01 android-app-build.gradle
+drwxr-xr-x 2 runner runner 4096 Oct 16 02:07 .
+drwxr-xr-x 5 runner runner 4096 Oct 16 02:07 ..
+-rw-r--r-- 1 runner runner 3676 Oct 16 02:08 AndroidManifest.xml
+-rw-r--r-- 1 runner runner 3627 Oct 16 02:08 Info.plist
+-rw-r--r-- 1 runner runner  255 Oct 16 02:08 JachiHealth.entitlements
+-rw-r--r-- 1 runner runner 4074 Oct 16 02:08 PrivacyInfo.xcprivacy
+-rw-r--r-- 1 runner runner 8209 Oct 16 02:08 android-app-build.gradle
 ```
 
 ## ios and android bundles (exit 0)
@@ -76,8 +76,8 @@ Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-Android Bundled 49432ms node_modules/expo-router/entry.js (2091 modules)
-iOS Bundled 60876ms node_modules/expo-router/entry.js (2075 modules)
+iOS Bundled 44482ms node_modules/expo-router/entry.js (2075 modules)
+Android Bundled 58743ms node_modules/expo-router/entry.js (2093 modules)
 
 › Assets (34):
 node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
@@ -96,18 +96,18 @@ node_modules/expo-router/assets/react-navigation/elements/search-icon.png (7 var
 node_modules/expo-router/assets/sitemap.png (465B)
 node_modules/expo-router/assets/unmatched.png (4.8KB)
 
-› android bundles (1):
-_expo/static/js/android/entry-5df30419de2d98d17ea1ccd4123996a8.hbc (5.7MB)
-
 › ios bundles (1):
-_expo/static/js/ios/entry-823f6408d0b8d806d740fde401eaeeed.hbc (5.6MB)
+_expo/static/js/ios/entry-80c7d9fe1aa535114d1260c3b763a465.hbc (5.6MB)
+
+› android bundles (1):
+_expo/static/js/android/entry-fc1779d73dfda6f1782c28e704b880f9.hbc (5.7MB)
 
 › Files (1):
 metadata.json (3.4KB)
 
 Exported: .ci-dist/native
-5.5M	.ci-dist/native/_expo/static/js/android/entry-5df30419de2d98d17ea1ccd4123996a8.hbc
-5.4M	.ci-dist/native/_expo/static/js/ios/entry-823f6408d0b8d806d740fde401eaeeed.hbc
+5.5M	.ci-dist/native/_expo/static/js/android/entry-fc1779d73dfda6f1782c28e704b880f9.hbc
+5.4M	.ci-dist/native/_expo/static/js/ios/entry-80c7d9fe1aa535114d1260c3b763a465.hbc
 12M	.ci-dist/native
 ```
 
@@ -117,7 +117,7 @@ Using src/app as the root directory for Expo Router.
 React Compiler enabled
 Starting Metro Bundler
 
-Web Bundled 32592ms node_modules/expo-router/entry.js (1672 modules)
+Web Bundled 25343ms node_modules/expo-router/entry.js (1672 modules)
 
 › Assets (25):
 assets/fonts/Fraunces-Display.ce25e218f7888cafe2720ebc7383ae8d.ttf (33KB)
