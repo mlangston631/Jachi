@@ -113,7 +113,7 @@ PAGES = [
         "h1": ("Prescription refills,", "without the runaround."),
         "lead": "Running low on a medication you already take? A licensed clinician can review your history, renew many "
                 "everyday prescriptions and send them to your pharmacy.",
-        "list_title": "Medications we can often renew",
+        "list_title": "Medications clinicians can often renew",
         "list": ["High blood pressure", "High cholesterol", "Hypothyroidism", "Asthma", "Acid reflux (GERD)",
                  "Type 2 diabetes"],
         "know": ["No insurance needed. The medication is billed separately by your pharmacy.",
@@ -189,7 +189,7 @@ PAGES = [
         "h1": ("Anxiety and depression care,", "with real follow-up."),
         "lead": "A licensed clinician evaluates how you're feeling, builds a plan with you and prescribes medication "
                 "when it's right for you, then checks in as you go.",
-        "list_title": "What we treat",
+        "list_title": "What clinicians treat",
         "list": ["Anxiety", "Depression", "Panic attacks"],
         "know": ["Your care includes an evaluation, prescriptions when they're right for you, and regular check-ins. "
                  "Medication is billed separately by your pharmacy.",
@@ -261,7 +261,7 @@ PAGES = [
         "h1": ("ED and hair loss treatment,", "handled discreetly."),
         "lead": "A licensed clinician reviews your health and medications, then prescribes treatment for erectile "
                 "dysfunction, hair loss or premature ejaculation when it's right for you.",
-        "list_title": "What we treat",
+        "list_title": "What clinicians treat",
         "list": ["Erectile dysfunction (ED)", "Hair loss", "Premature ejaculation"],
         "know": ["No insurance needed. Medication is billed separately by your pharmacy.",
                  "Your clinician checks your heart health and current medications before prescribing ED treatment.",
@@ -332,7 +332,7 @@ PAGES = [
         "h1": ("Clearer skin,", "with a real plan."),
         "lead": "A licensed clinician can treat acne, rosacea, eczema, psoriasis, cold sores and fungal infections, and "
                 "send prescriptions to your pharmacy.",
-        "list_title": "What we treat",
+        "list_title": "What clinicians treat",
         "list": ["Acne", "Rosacea", "Eczema", "Psoriasis", "Cold sores", "Fungal infections", "Dandruff"],
         "know": ["No insurance needed. Medication is billed separately by your pharmacy.",
                  "If you need to be seen in person, your clinician will tell you.",

@@ -144,7 +144,7 @@ NOT_OFFERED = {
     "Ketamine": ("Ketamina", "ketamina spravato", "No ofrecemos tratamiento con ketamina."),
     "Medical marijuana": ("Marihuana medicinal", "marihuana cannabis thc mota", "No ofrecemos marihuana medicinal."),
     "Isotretinoin (Accutane)": ("Isotretinoína (Accutane)", "isotretinoina accutane roacutan",
-                                "No recetamos isotretinoína. Nuestro cuidado de la piel puede ayudar con otros tratamientos para el acné."),
+                                "No recetamos isotretinoína. Un profesional de la salud puede sugerirle otros tratamientos para el acné."),
 }
 
 EMERGENCIES = {

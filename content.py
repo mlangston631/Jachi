@@ -141,7 +141,7 @@ NOT_OFFERED = [
     ("Ketamine", "ketamine spravato", "We don't offer ketamine treatment."),
     ("Medical marijuana", "marijuana cannabis thc weed", "We don't offer medical marijuana."),
     ("Isotretinoin (Accutane)", "isotretinoin accutane absorica",
-     "We don't prescribe isotretinoin. Our skin care can help with other acne treatments."),
+     "We don't prescribe isotretinoin. A clinician can suggest other acne treatments."),
 ]
 
 EMERGENCIES = [
