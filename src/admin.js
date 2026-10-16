@@ -1,4 +1,4 @@
-/* The admin console: early-access sign-ups, support tickets, accounts, a launch checklist and setup status.
+/* The admin console: waitlist sign-ups, support tickets, accounts, a launch checklist and setup status.
    Data comes from /api/admin/* (src/functions/admin.mjs), which only answers signed-in admins.
    Everything shown here was typed by the public, so it's always escaped before it's put on the page.
    Uses Identity (src/identity.js), which is loaded first. */
@@ -26,6 +26,11 @@
   const stateName = code => STATES[code] || code || 'No state';
   const serviceName = value => SERVICES[value] || value;
   const languageName = code => (code === 'es' ? 'Spanish' : 'English');
+  const SOURCE_NAMES = { website: 'Website', 'app-ios': 'iPhone app', 'app-android': 'Android app' };
+  const HEARD_NAMES = { search: 'Search engine', social: 'Social media', friend: 'Friend or family', clinician: 'Doctor or clinic',
+                        news: 'News or article', 'app-store': 'App Store or Google Play', other: 'Other' };
+  const sourceName = code => SOURCE_NAMES[code] || '';
+  const heardName = code => HEARD_NAMES[code] || '';
   const count = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
   /* ---------- Views and status ---------- */
@@ -213,7 +218,9 @@
       if (p) { p.account = m; p.joined = earliest(p.joined, m.created_at); }
     });
     return [...byEmail.values()].map(p => {
-      const latest = p.signups.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+      const newest = p.signups.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      const latest = newest[0];
+      const first = newest[newest.length - 1];
       const fromForms = new Set();
       p.signups.forEach(s => s.interest.split(',').map(x => x.trim()).filter(Boolean).forEach(x => fromForms.add(x)));
       // An account's details are the person's latest choices, so they win over older sign-ups.
@@ -224,6 +231,8 @@
         interests: a && a.interests.length ? a.interests : [...fromForms],
         language: (a && a.language) || (latest && latest.language) || 'en',
         emailsOn: !a || a.updates !== false,
+        source: (first && first.source) || '',
+        heard: (newest.find(s => s.heard) || {}).heard || '',
       };
     }).sort((x, y) => new Date(y.joined || 0) - new Date(x.joined || 0));
   };
@@ -271,12 +280,14 @@
     const states = tally(onList, p => stateName(p.state)).slice(0, 6);
     const wants = tally(onList, p => p.interests.map(serviceName)).slice(0, 9);
     const spanish = onList.filter(p => p.language === 'es').length;
+    const heard = tally(onList, p => heardName(p.heard));
+    const sources = tally(onList, p => sourceName(p.source));
     const off = list.length - onList.length;
     $('#panel-overview').innerHTML = `
       <div class="ov">
         <div class="ov__hero">
           <p class="ov__num">${onList.length}</p>
-          <p class="ov__label">${onList.length === 1 ? 'person' : 'people'} on the early-access list</p>
+          <p class="ov__label">${onList.length === 1 ? 'person' : 'people'} on the waitlist</p>
           <ul class="ov__facts">
             <li><b>${texas}</b> in Texas</li>
             <li><b>${week}</b> joined in the last 7 days</li>
@@ -295,6 +306,14 @@
         <section class="ov__card" aria-labelledby="ov-wants">
           <h2 id="ov-wants">What they want</h2>
           ${hbars(wants, 'Nobody has picked a service yet.')}
+        </section>
+        <section class="ov__card" aria-labelledby="ov-heard">
+          <h2 id="ov-heard">How they heard about Jachi</h2>
+          ${hbars(heard, 'Nobody has answered yet.')}
+        </section>
+        <section class="ov__card" aria-labelledby="ov-source">
+          <h2 id="ov-source">Where they signed up</h2>
+          ${hbars(sources, 'No sign-ups yet.')}
         </section>
         <section class="ov__card" aria-labelledby="ov-more">
           <h2 id="ov-more">At a glance</h2>
@@ -340,13 +359,13 @@
     $('#signups-count').textContent = shown.length === list.length ? count(list.length, 'person', 'people') : `Showing ${shown.length} of ${list.length} people`;
     $('#csv').disabled = shown.length === 0;
     const ul = $('#signups-list');
-    if (!list.length) { ul.innerHTML = '<li class="adm-empty">No sign-ups yet. When people join the early-access list, they\'ll show up here.</li>'; return; }
+    if (!list.length) { ul.innerHTML = '<li class="adm-empty">No sign-ups yet. When people join the waitlist, they\'ll show up here.</li>'; return; }
     if (!shown.length) { ul.innerHTML = '<li class="adm-empty">No one matches these filters. <button class="linkish" type="button" data-clear>Clear the filters</button></li>'; return; }
     ul.innerHTML = shown.map((p, i) => `
       <li class="row" data-email="${esc(p.email)}">
         <div class="row__main">
           <p class="row__title">${esc(p.email)}</p>
-          <p class="row__meta">${p.name ? `<span>${esc(p.name)}</span>` : ''}<span>${esc(stateName(p.state))}</span><span>${languageName(p.language)}</span><span>Joined ${esc(dateText(p.joined))}</span></p>
+          <p class="row__meta">${p.name ? `<span>${esc(p.name)}</span>` : ''}<span>${esc(stateName(p.state))}</span><span>${languageName(p.language)}</span>${p.source ? `<span>${esc(sourceName(p.source))}</span>` : ''}<span>Joined ${esc(dateText(p.joined))}</span></p>
           ${chips(p.interests)}
         </div>
         <p class="row__badges">${p.account ? '<span class="badge">Account</span>' : ''}${p.emailsOn ? '' : '<span class="badge badge--off">Emails off</span>'}</p>
@@ -365,14 +384,14 @@
   };
   $('#csv').addEventListener('click', () => {
     const rows = filtered(people());
-    const lines = [['email', 'first_name', 'state', 'services', 'language', 'joined', 'account', 'emails']]
+    const lines = [['email', 'first_name', 'state', 'services', 'language', 'joined', 'account', 'emails', 'signed_up_from', 'heard_about_us']]
       .concat(rows.map(p => [p.email, p.name, p.state, p.interests.map(serviceName).join('; '), languageName(p.language),
-        p.joined ? new Date(p.joined).toISOString().slice(0, 10) : '', p.account ? 'yes' : 'no', p.emailsOn ? 'on' : 'off']));
+        p.joined ? new Date(p.joined).toISOString().slice(0, 10) : '', p.account ? 'yes' : 'no', p.emailsOn ? 'on' : 'off', sourceName(p.source), heardName(p.heard)]));
     const csv = '﻿' + lines.map(r => r.map(csvCell).join(',')).join('\r\n') + '\r\n';
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
     const a = document.createElement('a');
     a.href = url;
-    a.download = `jachi-early-access-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `jachi-waitlist-${new Date().toISOString().slice(0, 10)}.csv`;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -413,7 +432,7 @@
     note.textContent = 'Netlify didn\'t share the accounts just now. Try Refresh.';
     const list = data.members.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     const ul = $('#members-list');
-    if (!list.length) { ul.innerHTML = '<li class="adm-empty">No accounts yet. People can make one after joining the early-access list.</li>'; return; }
+    if (!list.length) { ul.innerHTML = '<li class="adm-empty">No accounts yet. People can make one after joining the waitlist.</li>'; return; }
     ul.innerHTML = list.map(m => {
       const self = m.id === data.me.id;
       const badges = (self ? '<span class="badge">You</span>' : '') + (m.admin ? '<span class="badge">Admin</span>' : '')
@@ -429,7 +448,7 @@
         </div>
         <p class="row__badges">${badges}</p>
         <div class="row__actions">${action}</div>
-        ${self ? '' : confirmBox(`mem-${esc(m.id)}`, `Delete the account for ${m.email}? Their early-access sign-up stays on the list. This can't be undone.`, 'Delete account')}
+        ${self ? '' : confirmBox(`mem-${esc(m.id)}`, `Delete the account for ${m.email}? Their waitlist sign-up stays on the list. This can't be undone.`, 'Delete account')}
       </li>`;
     }).join('');
   };
@@ -502,7 +521,7 @@
     ['legal', 'Have a lawyer review the privacy policy, terms and Notice of Privacy Practices'],
     ['alerts', 'Turn on email alerts for new sign-ups and tickets (see Setup)'],
     ['inbox', `Check ${EMAIL} every day`],
-    ['launch-email', 'Write the launch email for your early-access list'],
+    ['launch-email', 'Write the launch email for your waitlist'],
   ];
   let checklist = { done: {}, custom: [] };
   let saving = false;

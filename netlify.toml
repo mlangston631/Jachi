@@ -4,6 +4,9 @@
   # The site is built locally with `python3 build.py` and the output is committed,
   # so Netlify has nothing to build. It just publishes this folder.
   publish = "public"
+  # Skip the deploy when a commit only changes the mobile app (app/) or GitHub workflow files, since each
+  # production deploy uses 15 credits. git exits 0 (skip) when nothing else changed since the last deploy.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)app' ':(exclude).github'"
 
 [functions]
   # Server code: the help chat (/api/chat), account deletion (/api/account/delete) and the admin console (/api/admin/*).

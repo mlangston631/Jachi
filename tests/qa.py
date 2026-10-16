@@ -312,7 +312,7 @@ with sync_playwright() as p:
 
     # join form: errors then failure path (local server has no form backend)
     check("join form asks only for email and state, the rest optional", page.locator("#join-form [required]").count() == 2
-          and page.locator("#join-form .label__opt").count() == 2 and page.locator("#join-consent").count() == 0)
+          and page.locator("#join-form .label__opt").count() == 3 and page.locator("#join-consent").count() == 0)
     page.locator("#join-submit").click(); page.wait_for_timeout(300)
     check("join: missing email caught, state already filled", page.locator("#err-email").is_visible()
           and not page.locator("#err-jstate").is_visible())
@@ -324,10 +324,11 @@ with sync_playwright() as p:
     check("invalid email caught", "valid email" in page.locator("#err-email").inner_text())
     page.locator("#join-email").fill("maya@example.com")
     page.locator("#join-name").fill("Maya")
+    page.select_option("#join-heard", "social")
     page.locator("#join-submit").click(); page.wait_for_timeout(1500)
     check("server failure shows honest error", "couldn't save" in page.locator("#join-status").inner_text(), page.locator("#join-status").inner_text())
     check("button restored after failure", page.locator("#join-submit").is_enabled()
-          and page.locator("#join-submit .btn__label").inner_text() == "Get early access")
+          and page.locator("#join-submit .btn__label").inner_text() == "Join the waitlist")
     # success path: pretend the host accepts the form
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
     posted = {}
@@ -338,6 +339,7 @@ with sync_playwright() as p:
     body = posted.get("body", "")
     check("post body has form-name and fields", all(s in body for s in ("form-name=early-access", "first_name=Maya", "email=maya%40example.com", "state=TX", "language=en"))
           and "consent" not in body, body)
+    check("post body says where it came from and how they heard", "source=website" in body and "heard=social" in body, body)
     check("account offer stays hidden while accounts are off", page.locator("#join-account").is_hidden())
     check("interests sent as one value", body.count("interest=") == 1 and "interest=urgent-care%2C+weight-care" in body, body)
     page.screenshot(path=str(OUT / "join-success-mobile.png"))
@@ -484,7 +486,7 @@ with sync_playwright() as p:
     page.screenshot(path=str(OUT / "ticket-errors-desktop.png"))
     page.locator("#ticket-name").fill("Ana"); page.locator("#ticket-email").fill("ana@example.com")
     page.locator("#ticket-message").fill("When will you open in Dallas?")
-    page.select_option("#ticket-topic", "Early access")
+    page.select_option("#ticket-topic", "Waitlist")
     page.locator("label[for='ticket-include']").click()
     page.locator("#ticket-submit").click(); page.wait_for_timeout(1200)
     check("ticket: failure shows an honest error with the email", "couldn't send" in page.locator("#ticket-status").inner_text()
@@ -496,7 +498,7 @@ with sync_playwright() as p:
     tb = tposted.get("body", "")
     check("ticket: success screen names the email", page.locator("#ticket-success").is_visible() and "ana@example.com" in page.locator("#ticket-success").inner_text())
     check("ticket: posts to the support-ticket form with all fields",
-          all(x in tb for x in ("form-name=support-ticket", "name=Ana", "email=ana%40example.com", "topic=Early+access", "include_chat=yes", "chat_transcript=Visitor")), tb[:300])
+          all(x in tb for x in ("form-name=support-ticket", "name=Ana", "email=ana%40example.com", "topic=Waitlist", "include_chat=yes", "chat_transcript=Visitor", "source=website")), tb[:300])
     page.screenshot(path=str(OUT / "ticket-sent-desktop.png"))
     page.locator("#ticket-done").click(); page.wait_for_timeout(300)
     check("ticket: back to chat", page.locator("#chat-talk").is_visible() and page.locator("#ticket-form").is_visible() is False)
@@ -541,13 +543,13 @@ with sync_playwright() as p:
     check("phone chat: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
-    # 2e) Home page: early access first, the quick picker, what's included and clinical standards
+    # 2e) Home page: the waitlist first, the quick picker, what's included and clinical standards
     ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
     page, logs = setup(ctx)
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(600)
     hero_btns = page.locator(".hero .cta-row .btn")
-    check("hero: early access is the main button, care finder second", hero_btns.first.get_attribute("href") == "#join"
-          and "Get early access" in hero_btns.first.inner_text() and hero_btns.nth(1).get_attribute("href") == "#care-finder")
+    check("hero: the waitlist is the main button, care finder second", hero_btns.first.get_attribute("href") == "#join"
+          and "Join the waitlist" in hero_btns.first.inner_text() and hero_btns.nth(1).get_attribute("href") == "#care-finder")
     check("hero: says it's free to join", "Free to join" in page.locator(".hero .trust").inner_text())
     picks = page.evaluate("[...document.querySelectorAll('.picker a')].map(a => a.getAttribute('href'))")
     bad_picks = [h for h in picks if status_of(h) != 200]
@@ -572,7 +574,7 @@ with sync_playwright() as p:
     page.evaluate("window.scrollTo(0, 0)"); page.wait_for_timeout(300)
     page.locator(".menu-toggle").click(); page.wait_for_timeout(600)
     page.locator("#mobile-menu [data-to-join]").click(); page.wait_for_timeout(1300)
-    check("menu's early access button closes the menu and brings up the form", not is_open(page, "#mobile-menu")
+    check("menu's waitlist button closes the menu and brings up the form", not is_open(page, "#mobile-menu")
           and page.evaluate("document.activeElement.id") == "join-form-title")
     check("home additions: no console errors", not logs, json.dumps(logs))
     ctx.close()
@@ -580,7 +582,7 @@ with sync_playwright() as p:
     page, logs = setup(ctx)
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(500)
     page.locator(".header-cta").click(); page.wait_for_timeout(1300)
-    check("header early access (desktop): email field ready", page.evaluate("document.activeElement.id") == "join-email")
+    check("header waitlist button (desktop): email field ready", page.evaluate("document.activeElement.id") == "join-email")
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(300)
     page.locator(".picker a[href='/uti-treatment/']").click(); page.wait_for_load_state("networkidle")
     check("quick picker: UTI opens the UTI page", page.url == f"{BASE}/uti-treatment/", page.url)
@@ -629,7 +631,7 @@ with sync_playwright() as p:
           and "Online refill" in o["chips"], json.dumps(o))
     ctx.close()
     page, ctx, o, lg = run_finder("refill", "no", "refill")
-    check("refill no → good fit", o["title"] == "A refill visit is a good fit." and o["label"] == "Get early access", json.dumps(o))
+    check("refill no → good fit", o["title"] == "A refill visit is a good fit." and o["label"] == "Join the waitlist", json.dumps(o))
     page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
     check("refill CTA preselects refills", page.locator("input[name='interest'][value='refills']").is_checked())
     ctx.close()
@@ -1206,7 +1208,7 @@ with sync_playwright() as p:
     check("brand fonts load from the site", any("Fraunces" in f for f in fonts_ok) and any("Instrument Sans" in f for f in fonts_ok), str(fonts_ok))
     ctx.close()
 
-    # 14) Accounts: from the early-access form to a confirmed account, then update, password, log out, reset, delete
+    # 14) Accounts: from the waitlist form to a confirmed account, then update, password, log out, reset, delete
     A = strings.EN
     def view(page):
         return page.evaluate("[...document.querySelectorAll('[data-view]')].filter(v => !v.hidden).map(v => v.dataset.view).join()")
@@ -1416,7 +1418,7 @@ with sync_playwright() as p:
         f.add_signup("maya@example.com", name="Maya", state="TX", interest="therapy", language="es", created_at="2026-10-13T10:00:00Z")
         f.add_signup("sam@example.com", name="Sam", state="CA", interest="urgent-care, skin-care", created_at="2026-10-14T10:00:00Z")
         f.add_signup("=cmd@evil.example", name='=HYPERLINK("http://x")', state="TX", created_at="2026-10-15T10:00:00Z")
-        f.add_ticket("ana@example.com", name="Ana <b>bold</b>", topic="Early access", message="When will you open in Dallas?",
+        f.add_ticket("ana@example.com", name="Ana <b>bold</b>", topic="Waitlist", message="When will you open in Dallas?",
                      transcript="Visitor: hi\n\nAssistant: hello")
         f.add_ticket("sam@example.com", name="Sam", topic="Website problem", message="The form didn't load.")
         f.add_ticket("x@y.com?cc=z%40evil.example&subject=hi.com", name="Odd", message="hello", created_at="2026-10-12T09:00:00Z")
@@ -1461,11 +1463,11 @@ with sync_playwright() as p:
         check(f"admin @{w}: CSV download, safe from spreadsheet formulas", csv_text.startswith('"email","first_name","state","services","language","joined","account","emails"')
               and all(line.startswith('"') and line.endswith('"') for line in csv_text.strip().split("\r\n"))
               and "'=cmd@evil.example" in csv_text and '"\'=HYPERLINK(""http://x"")"' in csv_text and "maya@example.com" in csv_text
-              and dl.value.suggested_filename.startswith("jachi-early-access-"), csv_text[:400])
+              and dl.value.suggested_filename.startswith("jachi-waitlist-"), csv_text[:400])
         page.locator("#tab-tickets").click(); page.wait_for_timeout(300)
         check(f"admin @{w}: tickets show what people typed, never as page code", page.locator("#tickets-list b").count() == 0
               and "Ana <b>bold</b>" in page.locator("#tickets-list").inner_text())
-        check(f"admin @{w}: reply by email", page.locator("#tickets-list a[href^='mailto:ana@example.com?subject=Re%3A%20Early%20access']").count() == 1)
+        check(f"admin @{w}: reply by email", page.locator("#tickets-list a[href^='mailto:ana@example.com?subject=Re%3A%20Waitlist']").count() == 1)
         check(f"admin @{w}: no reply link for an address that could add cc or subject", page.locator("#tickets-list a[href*='evil']").count() == 0
               and "x@y.com?cc=" in page.locator("#tickets-list").inner_text() and page.locator("#tickets-list a[href^='mailto:']").count() == 2)
         page.locator("#tickets-list .row").first.locator("[data-delete-ticket]").click(); page.wait_for_timeout(200)

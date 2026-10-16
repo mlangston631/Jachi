@@ -1,8 +1,8 @@
 # Jachi Health website
 
 The website for [jachihealth.com](https://www.jachihealth.com): services, a care finder, condition search,
-a weight care check, early-access sign-up, an AI help chat with support tickets, a page for each service, a Spanish
-home page, accounts for people on the early-access list, an admin console, and the privacy policy, terms of use
+a weight care check, a waitlist sign-up, an AI help chat with support tickets, a page for each service, a Spanish
+home page, accounts for people on the waitlist, an admin console, and the privacy policy, terms of use
 and Texas Medical Board notice.
 
 ## How it goes live
@@ -16,8 +16,10 @@ Netlify publishes this repository every time `main` changes (settings in `netlif
 Each production deploy uses 15 of the Netlify plan's monthly credits (the Free plan has 300, and Netlify pauses
 the site if they run out). Pull requests get a free Deploy Preview, so changes can be checked before they go live.
 
-Sign-ups and support tickets are saved by Netlify Forms (forms `early-access` and `support-ticket`, each with a
-`language` field). To get them by email: Netlify → Project configuration → Notifications → Form submission notifications.
+Sign-ups and support tickets are saved by Netlify Forms (forms `early-access`, the waitlist, and `support-ticket`).
+Both have `language` and `source` fields; `source` is `website`, `app-ios` or `app-android`. The waitlist form also
+asks the optional "How did you hear about us?" (`heard`), which the admin console counts. To get them by email:
+Netlify → Project configuration → Notifications → Form submission notifications.
 
 ## Pages
 
@@ -45,7 +47,7 @@ sent to the AI. Netlify limits each visitor to 12 chat messages a minute.
 
 ## Accounts and the admin console
 
-Accounts use Netlify Identity on this site. People who joined early access can create one at `/account/` to
+Accounts use Netlify Identity on this site. People on the waitlist can create one at `/account/` to
 update their state, services and language, turn emails off, or delete their account. Deleting it also deletes the
 sign-ups and tickets sent with that email, if they confirmed the email from our message (not while Identity's
 Autoconfirm is on). Accounts hold no health information. Netlify sends the confirmation and

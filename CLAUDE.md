@@ -34,7 +34,8 @@ keep replies short and plain, and ask only questions that change what you'll do.
   prices; tests/qa.py fails if a price appears.
 - Not offered: controlled substances (ADHD stimulants, benzodiazepines, opioids, testosterone, phentermine,
   sleep medication, Suboxone, ketamine), abortion medication, isotretinoin, peptides, medical marijuana.
-- Jachi isn't open yet. Nothing may say visits can be booked now; buttons collect early-access sign-ups.
+- Jachi isn't open yet. Nothing may say visits can be booked now; buttons collect waitlist sign-ups (the Netlify
+  form is still named `early-access`).
 - Everything on the page must really work. No placeholder buttons, invented testimonials, ratings, statistics,
   badges, partner logos, clinician names or credentials.
 - The assistant is labelled AI, never claims to be a person, and there are no live agents yet; tickets go to
@@ -45,7 +46,7 @@ keep replies short and plain, and ask only questions that change what you'll do.
 - Privacy: no analytics, ad pixels or trackers (it's a health site). Don't collect health details in forms or chat.
   Patient accounts with health records must live on HIPAA-compliant systems with a BAA (his medical partner's
   portal); Netlify's plan can't hold health data.
-- Accounts (`/account/`, Netlify Identity) are for early-access details only: state, services, language, emails
+- Accounts (`/account/`, Netlify Identity) are for waitlist details only: state, services, language, emails
   on or off. Never add health fields. Deleting an account also deletes that email's sign-ups and tickets, but only
   when the person proved the email by a link we sent (`provedEmail`) and Identity's autoconfirm is off.
 - Admin console (`/admin/`): admins are accounts with the "admin" role in Netlify's Identity tab, or accounts

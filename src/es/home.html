@@ -4,11 +4,11 @@
   <section class="hero grain" id="top" aria-labelledby="hero-title">
     <div class="wrap hero__grid">
       <div class="hero__copy">
-        <p class="pill" data-rise style="--d:0ms"><span class="pill__dot" aria-hidden="true"></span>Acceso anticipado abierto · Pronto en Texas</p>
+        <p class="pill" data-rise style="--d:0ms"><span class="pill__dot" aria-hidden="true"></span>Lista de espera abierta · Pronto en Texas</p>
         <h1 class="display" id="hero-title" data-rise style="--d:90ms">Atención en línea, arraigada en la <em>medicina real.</em></h1>
         <p class="lead" data-rise style="--d:180ms">Profesionales de la salud con licencia, en línea, para todo: desde resfriados y resurtidos hasta terapia, salud sexual y control de peso. Un asistente de cuidado le da seguimiento entre consultas, y sabrá cuánto cuesta su atención antes de empezar.</p>
         <div class="cta-row" data-rise style="--d:270ms">
-          <a class="btn btn--lg" href="#join" data-to-join>Reciba acceso anticipado {{I:arrow:i--arrow}}</a>
+          <a class="btn btn--lg" href="#join" data-to-join>Únase a la lista de espera {{I:arrow:i--arrow}}</a>
           <a class="btn btn--ghost btn--lg" href="#care-finder">Encuentre la atención adecuada</a>
         </div>
         <ul class="trust" data-rise style="--d:330ms">
@@ -271,7 +271,7 @@
           </div>
           <p class="result__note" id="fres-note" hidden></p>
           <div class="result__actions">
-            <a class="btn" href="#join" id="fres-cta">Reciba acceso anticipado {{I:arrow:i--arrow}}</a>
+            <a class="btn" href="#join" id="fres-cta">Únase a la lista de espera {{I:arrow:i--arrow}}</a>
             <button class="btn btn--ghost" type="button" id="fres-restart">Empezar de nuevo</button>
           </div>
         </div>
@@ -659,7 +659,7 @@
           <p class="result__body" id="res-body"></p>
           <p class="result__note" id="res-note" hidden></p>
           <div class="result__actions">
-            <a class="btn" href="#join" id="res-join">Reciba acceso anticipado {{I:arrow:i--arrow}}</a>
+            <a class="btn" href="#join" id="res-join">Únase a la lista de espera {{I:arrow:i--arrow}}</a>
             <button class="btn btn--ghost" type="button" id="res-restart">Empezar de nuevo</button>
           </div>
         </div>
@@ -692,26 +692,28 @@
     </div>
   </section>
 
-  <!-- Early access -->
+  <!-- Waitlist -->
   <section class="section join grain on-dark" id="join" aria-labelledby="join-title">
     {{MARK:m-art4:outline:join__art}}
     <div class="wrap join__grid">
       <div class="join__copy">
-        <p class="eyebrow eyebrow--light">Acceso anticipado</p>
+        <p class="eyebrow eyebrow--light">Lista de espera</p>
         <h2 class="h2 h2--light" id="join-title">Sea de los <em>primeros.</em></h2>
-        <p class="lead lead--light">Abriremos primero en Texas. Únase a la lista y le avisaremos por correo cuando Jachi llegue a su estado.</p>
-        <ul class="perks">
-          <li>{{I:check}}Noticias de la apertura en su estado</li>
-          <li>{{I:check}}Acceso prioritario a citas cuando abramos</li>
-          <li>{{I:check}}Solo unos cuantos correos. Cancele la suscripción cuando quiera.</li>
-        </ul>
+        <p class="lead lead--light">Abriremos primero en Texas. Únase a la lista de espera y le avisaremos por correo cuando Jachi llegue a su estado. Unirse no reserva una consulta y no cuesta nada.</p>
+        <h3 class="join__next">Qué pasa después de unirse</h3>
+        <ol class="perks perks--steps">
+          <li>Guardamos su correo y su estado, y también su nombre y sus servicios si los agrega.</li>
+          <li>Antes de abrir en su estado, le enviaremos por correo los precios y cómo funcionarán las consultas.</li>
+          <li>Usted decide entonces. No se reserva ni se cobra nada a menos que elija una consulta.</li>
+        </ol>
       </div>
 
       <div class="form-card">
         <form class="form" id="join-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-          <h3 class="form__title" id="join-form-title" tabindex="-1">Reciba acceso anticipado</h3>
+          <h3 class="form__title" id="join-form-title" tabindex="-1">Únase a la lista de espera</h3>
           <p class="hp" aria-hidden="true"><label>Deje este campo vacío <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <input type="hidden" name="language" value="es">
+          <input type="hidden" name="source" value="website">
           <div class="form__row">
             <div class="field">
               <label class="label" for="join-email">Correo electrónico</label>
@@ -735,7 +737,20 @@
             <legend class="label">Me interesa <span class="label__opt">(opcional)</span></legend>
             <div class="checks checks--chips">{{JOIN_INTERESTS}}</div>
           </fieldset>
-          <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Reciba acceso anticipado</span></button>
+          <div class="field">
+            <label class="label" for="join-heard">¿Cómo supo de nosotros? <span class="label__opt">(opcional)</span></label>
+            <select class="select" id="join-heard" name="heard">
+              <option value="">Elija una</option>
+              <option value="search">Buscador de internet</option>
+              <option value="social">Redes sociales</option>
+              <option value="friend">Un amigo o familiar</option>
+              <option value="clinician">Un médico o una clínica</option>
+              <option value="news">Noticias o un artículo</option>
+              <option value="app-store">App Store or Google Play</option>
+              <option value="other">Otro</option>
+            </select>
+          </div>
+          <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Únase a la lista de espera</span></button>
           <div class="form-status" id="join-status" role="status"></div>
           <p class="fine">Al unirse, acepta recibir correos sobre nuestra apertura. Puede cancelar la suscripción cuando quiera. Nunca venderemos su información. Lea nuestro <button class="linkish" type="button" data-open="privacy">aviso de privacidad</button>.</p>
         </form>

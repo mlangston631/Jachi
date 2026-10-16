@@ -4,11 +4,11 @@
   <section class="hero grain" id="top" aria-labelledby="hero-title">
     <div class="wrap hero__grid">
       <div class="hero__copy">
-        <p class="pill" data-rise style="--d:0ms"><span class="pill__dot" aria-hidden="true"></span>Early access open · Launching in Texas</p>
+        <p class="pill" data-rise style="--d:0ms"><span class="pill__dot" aria-hidden="true"></span>Waitlist open · Launching in Texas</p>
         <h1 class="display" id="hero-title" data-rise style="--d:90ms">Online care, rooted in <em>real medicine.</em></h1>
         <p class="lead" data-rise style="--d:180ms">Licensed clinicians online for everything from colds and refills to therapy, sexual health and weight care. A care assistant checks in between visits, and you'll know what your care costs before you start.</p>
         <div class="cta-row" data-rise style="--d:270ms">
-          <a class="btn btn--lg" href="#join" data-to-join>Get early access {{I:arrow:i--arrow}}</a>
+          <a class="btn btn--lg" href="#join" data-to-join>Join the waitlist {{I:arrow:i--arrow}}</a>
           <a class="btn btn--ghost btn--lg" href="#care-finder">Find the right care</a>
         </div>
         <ul class="trust" data-rise style="--d:330ms">
@@ -271,7 +271,7 @@
           </div>
           <p class="result__note" id="fres-note" hidden></p>
           <div class="result__actions">
-            <a class="btn" href="#join" id="fres-cta">Get early access {{I:arrow:i--arrow}}</a>
+            <a class="btn" href="#join" id="fres-cta">Join the waitlist {{I:arrow:i--arrow}}</a>
             <button class="btn btn--ghost" type="button" id="fres-restart">Start over</button>
           </div>
         </div>
@@ -659,7 +659,7 @@
           <p class="result__body" id="res-body"></p>
           <p class="result__note" id="res-note" hidden></p>
           <div class="result__actions">
-            <a class="btn" href="#join" id="res-join">Get early access {{I:arrow:i--arrow}}</a>
+            <a class="btn" href="#join" id="res-join">Join the waitlist {{I:arrow:i--arrow}}</a>
             <button class="btn btn--ghost" type="button" id="res-restart">Start over</button>
           </div>
         </div>
@@ -692,26 +692,28 @@
     </div>
   </section>
 
-  <!-- Early access -->
+  <!-- Waitlist -->
   <section class="section join grain on-dark" id="join" aria-labelledby="join-title">
     {{MARK:m-art4:outline:join__art}}
     <div class="wrap join__grid">
       <div class="join__copy">
-        <p class="eyebrow eyebrow--light">Early access</p>
+        <p class="eyebrow eyebrow--light">Waitlist</p>
         <h2 class="h2 h2--light" id="join-title">Be first <em>in line.</em></h2>
-        <p class="lead lead--light">We're opening in Texas first. Join the list and we'll email you when Jachi launches in your state.</p>
-        <ul class="perks">
-          <li>{{I:check}}Launch news for your state</li>
-          <li>{{I:check}}First access to appointments when we open</li>
-          <li>{{I:check}}Only a few emails. Unsubscribe anytime.</li>
-        </ul>
+        <p class="lead lead--light">We're opening in Texas first. Join the waitlist and we'll email you when Jachi launches in your state. Joining doesn't book a visit and costs nothing.</p>
+        <h3 class="join__next">What happens after you join</h3>
+        <ol class="perks perks--steps">
+          <li>We save your email and state, plus your first name and services if you add them.</li>
+          <li>Before we open in your state, we email you the prices and how visits will work.</li>
+          <li>You decide then. Nothing is booked or charged unless you choose a visit.</li>
+        </ol>
       </div>
 
       <div class="form-card">
         <form class="form" id="join-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-          <h3 class="form__title" id="join-form-title" tabindex="-1">Get early access</h3>
+          <h3 class="form__title" id="join-form-title" tabindex="-1">Join the waitlist</h3>
           <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <input type="hidden" name="language" value="en">
+          <input type="hidden" name="source" value="website">
           <div class="form__row">
             <div class="field">
               <label class="label" for="join-email">Email</label>
@@ -735,7 +737,20 @@
             <legend class="label">I'm interested in <span class="label__opt">(optional)</span></legend>
             <div class="checks checks--chips">{{JOIN_INTERESTS}}</div>
           </fieldset>
-          <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Get early access</span></button>
+          <div class="field">
+            <label class="label" for="join-heard">How did you hear about us? <span class="label__opt">(optional)</span></label>
+            <select class="select" id="join-heard" name="heard">
+              <option value="">Choose one</option>
+              <option value="search">Search engine</option>
+              <option value="social">Social media</option>
+              <option value="friend">Friend or family</option>
+              <option value="clinician">Doctor or clinic</option>
+              <option value="news">News or article</option>
+              <option value="app-store">App Store or Google Play</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Join the waitlist</span></button>
           <div class="form-status" id="join-status" role="status"></div>
           <p class="fine">By joining, you agree to get emails about our launch. Unsubscribe anytime. We'll never sell your information. Read our <button class="linkish" type="button" data-open="privacy">privacy notice</button>.</p>
         </form>

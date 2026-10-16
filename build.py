@@ -8,7 +8,7 @@ Deployed by Netlify (see netlify.toml), all written into public/:
   es/index.html                   Spanish home page             (src/es/home.html)
   <service>/index.html            one page per service          (src/en/service.html + pages.py)
   privacy/, terms/, texas-medical-board/   legal pages          (src/en/*.html)
-  account/, es/account/           accounts for early access     (src/account.html, account.js, identity.js)
+  account/, es/account/           accounts for the waitlist    (src/account.html, account.js, identity.js)
   admin/                          the admin console              (src/admin.html, admin.js, identity.js)
   404.html, icon.svg, robots.txt, sitemap.xml
   fonts/*.woff2                   made by tools/make_fonts.py (not by this script)
@@ -601,7 +601,7 @@ def service_page(p):
         "{{SVC_RELATED}}": related,
     }
     main = render(part("en", "service"), L, tokens)
-    tokens.update({"{{DOCK_HREF}}": join_href, "{{DOCK_LABEL}}": "Get early access"})
+    tokens.update({"{{DOCK_HREF}}": join_href, "{{DOCK_LABEL}}": "Join the waitlist"})
     body = "\n".join(render(part("en", n), L, tokens) for n in ("header",)) + "\n" + main + "\n" + "\n".join(
         render(part("en", n), L, tokens) for n in ("footer", "dock", "chat"))
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
@@ -626,7 +626,7 @@ LEGAL = [
     ("privacy", "Privacy policy", "Privacy policy | Jachi Health",
      "How Jachi Health collects, uses and protects information on jachihealth.com, and the choices you have."),
     ("terms", "Terms of use", "Terms of use | Jachi Health",
-     "The terms for using jachihealth.com, including our care finder, help chat and early access list."),
+     "The terms for using jachihealth.com, including our care finder, help chat and waitlist."),
     ("texas-medical-board", "Texas Medical Board notice", "Texas Medical Board notice | Jachi Health",
      "How to file a complaint with the Texas Medical Board."),
 ]

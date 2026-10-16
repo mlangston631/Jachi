@@ -79,7 +79,7 @@ li svg{{width:30px;height:30px;padding:6px;border-radius:50%;background:{FOREST}
 <path d="{STEM}" fill="none" stroke="#8FB89A" stroke-width="1.4" stroke-linecap="round"/></svg>
 <div class="copy">
   <div class="brand">{mark("m", "full")}<span class="word"><b>Jachi</b> <span>Health</span></span></div>
-  <p class="pill"><i></i>Early access open · Launching in Texas</p>
+  <p class="pill"><i></i>Waitlist open · Launching in Texas</p>
   <h1>Online care, rooted in <em>real medicine.</em></h1>
   <ul><li>{CHECK}Licensed clinicians</li><li>{CHECK}No insurance needed</li></ul>
 </div>
