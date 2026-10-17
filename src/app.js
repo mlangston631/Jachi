@@ -31,7 +31,7 @@
   let headerTick = false;
   const syncHeader = () => {
     headerTick = false;
-    header.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
   };
   window.addEventListener('scroll', () => {
     if (!headerTick) { headerTick = true; requestAnimationFrame(syncHeader); }
@@ -44,8 +44,10 @@
   const dock = $('#dock');
   const outside = [$('#main'), $('.footer'), dock];
   let updateDock = () => {};
-  const menuOpen = () => menu.classList.contains('is-open');
+  // Ad landing pages have a plain header with no menu, so everything here checks the menu exists.
+  const menuOpen = () => !!menu && menu.classList.contains('is-open');
   const setMenu = (open, restoreFocus = true) => {
+    if (!toggle || !menu) return;
     toggle.setAttribute('aria-expanded', String(open));
     menu.classList.toggle('is-open', open);
     header.classList.toggle('menu-open', open);
@@ -59,8 +61,10 @@
     }
     updateDock();
   };
-  toggle.addEventListener('click', () => setMenu(!menuOpen()));
-  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false, false); });
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => setMenu(!menuOpen()));
+    menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false, false); });
+  }
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen()) setMenu(false); });
   onMedia(mqDesktop, e => { if (e.matches && menuOpen()) setMenu(false, false); });
 
@@ -150,7 +154,7 @@
   const hasError = key => { const box = document.getElementById(`err-${key}`); return !!box && !box.hidden; };
   const radioValue = (form, name) => { const r = form.querySelector(`input[name="${name}"]:checked`); return r ? r.value : ''; };
   const scrollToEl = el => {
-    const headerH = header.getBoundingClientRect().height;
+    const headerH = header ? header.getBoundingClientRect().height : 0;
     const top = el.getBoundingClientRect().top;
     if (top < headerH + 8 || top > window.innerHeight * 0.6) {
       window.scrollTo({ top: window.scrollY + top - headerH - 16, behavior: behavior() });
@@ -762,6 +766,31 @@
     goToJoin();
   }));
 
+  /* ---------- Which ad brought someone here ----------
+     Ad links carry utm_* tags: the campaign, ad set and ad names. They're kept for this visit only (this tab's
+     session storage) and sent with the waitlist form, so the admin console can show which ads bring sign-ups.
+     Nothing is sent to Meta or any other ad company. */
+  const AD_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  const adTag = v => String(v || '').replace(/[^\w .:|\/+-]/g, '').trim().slice(0, 100);
+  const adTags = (() => {
+    let tags = {};
+    try { tags = JSON.parse(window.sessionStorage.getItem('jachi.ad') || '{}') || {}; } catch (err) { tags = {}; }
+    const params = new URLSearchParams(window.location.search);
+    const fresh = {};
+    AD_KEYS.forEach(k => { const v = adTag(params.get(k)); if (v) fresh[k] = v; });
+    if (Object.keys(fresh).length) {
+      tags = fresh;
+      try { window.sessionStorage.setItem('jachi.ad', JSON.stringify(tags)); } catch (err) { /* storage blocked: this page only */ }
+    }
+    // Tidy the address bar, so a link someone copies doesn't carry the ad's tags or Meta's click id.
+    if ([...params.keys()].some(k => AD_KEYS.includes(k) || k === 'fbclid')) {
+      AD_KEYS.concat('fbclid').forEach(k => params.delete(k));
+      const q = params.toString();
+      window.history.replaceState(null, '', window.location.pathname + (q ? `?${q}` : '') + window.location.hash);
+    }
+    return tags;
+  })();
+
   if (J.form) {
     J.form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -783,6 +812,7 @@
         const data = new FormData(J.form);
         if (!data.has('form-name')) data.set('form-name', J.form.getAttribute('name'));
         data.set('interest', interests().join(', '));
+        AD_KEYS.forEach(k => data.set(k, adTag(adTags[k])));
         const res = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

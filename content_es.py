@@ -177,8 +177,8 @@ FAQ = [
      "Únase a la lista de espera y le avisaremos por correo antes de abrir."),
     ("¿Quiénes son los profesionales de la salud?",
      "Médicos, enfermeros practicantes y asistentes médicos para la atención médica, y terapeutas con licencia para la "
-     "terapia. Todos tienen licencia en su estado, ejercen a través de grupos médicos independientes y toman todas las "
-     "decisiones clínicas sobre su atención. Antes de abrir, publicaremos en este sitio el nombre del grupo médico y "
+     "terapia. Todos tendrán licencia en su estado, ejercerán a través de un grupo médico independiente y tomarán "
+     "todas las decisiones clínicas sobre su atención. Antes de abrir, publicaremos en este sitio el nombre del grupo médico y "
      "de sus profesionales, para que pueda verificar sus licencias."),
     ("¿El asistente de cuidado es un médico?",
      "No. El asistente de cuidado es IA. Cuando abramos, ayudará con el registro inicial, el seguimiento, los "

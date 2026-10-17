@@ -205,6 +205,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .status__dot{position:relative;width:8px;height:8px;flex:none;border-radius:50%;background:var(--moss)}
 .status__dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--sage);animation:ping 2.4s var(--ease) infinite}
 .status__rule{width:1px;height:14px;background:var(--line-strong)}
+/* In Spanish the status is too long for one line on a phone: the second part goes on its own line, under the first */
+@media (max-width:479px){:lang(es) .status__rule{display:none}:lang(es) .status>span:last-child{flex-basis:100%;padding-left:20px}}
 .hero__alt{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 14px;max-width:100%;color:var(--moss);text-decoration:none;border-radius:10px}
 .hero__alt-tag{flex:none;padding:5px 10px;border:1px solid var(--line-strong);border-radius:999px;font:600 .8rem/1.2 var(--font-body);color:var(--text-2);background:rgba(255,255,255,.6)}
 .hero__alt-line{font-family:var(--font-display);font-style:italic;font-weight:320;font-size:clamp(1.2rem,.95rem + 1.05vw,1.85rem);line-height:1.25;letter-spacing:-.01em;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:transparent;text-underline-offset:6px;transition:text-decoration-color .2s ease}
@@ -1149,6 +1151,35 @@ button,input,select,textarea{font:inherit;color:inherit}
   .map__leads circle,.picker__list li{opacity:1}
 }
 
+/* Ad landing pages (/join/, /es/unase/): the form near the top, the ad's headline, nothing else to click past */
+.lp-head{position:relative;z-index:2;background:var(--forest-deep);color:var(--on-dark);padding-top:env(safe-area-inset-top,0px)}
+.lp-head__bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.lp-head .lang-switch{background:rgba(255,255,255,.06);border-color:var(--line-dark);color:#fff}
+.lp-head .lang-switch:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
+.lp-hero{padding-block:clamp(28px,5vw,72px) clamp(56px,7vw,104px)}
+.lp-hero__grid{position:relative;z-index:1;display:grid;gap:28px;grid-template-areas:"head" "form" "more"}
+.lp-hero__head{grid-area:head;display:grid;gap:18px;justify-items:start;min-width:0}
+.lp-hero__grid>.form-card{grid-area:form}
+.lp-hero__more{grid-area:more;display:grid;gap:18px;align-content:start;min-width:0}
+@media (min-width:1040px){.lp-hero__grid{grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);grid-template-areas:"head form" "more form";gap:36px 72px;align-items:start}}
+.display--lp{max-width:14ch;font-size:clamp(2.5rem,1.55rem + 3.7vw,4.5rem);color:#fff}
+.status--light{color:var(--on-dark-2)}
+.status--light .status__rule{background:var(--line-dark)}
+.lp-points{margin:0}
+.lp-points li{color:var(--on-dark)}
+.lp-helps__grid{display:grid;gap:36px}
+@media (min-width:960px){.lp-helps__grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:64px;align-items:start}}
+.lp-helps__main{min-width:0}
+.lp-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px 24px;margin:24px 0 0;padding:0;list-style:none}
+.lp-list li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;align-items:start;font-weight:500;line-height:1.45}
+.lp-list .i{width:26px;height:26px;padding:6px;border-radius:50%;background:var(--sage-100);color:var(--forest);stroke-width:2.8}
+.lp-safety{margin:0}
+.lp-faq{max-width:880px}
+.lp-faq .faq-list{margin-top:28px}
+/* The landing footer keeps only the legal links, so they take the room the other link lists had */
+.footer--lp .footer__top{grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.footer--lp .footer__top{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.footer--lp .footer__brand{grid-column:auto}}
+
 
 </style>
 </head>
@@ -1297,7 +1328,7 @@ button,input,select,textarea{font:inherit;color:inherit}
     </div>
     <div class="footer__legal">
       <p class="emergency"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.3"/></svg><span>Jachi Health is not for emergencies. If you think you're having a medical emergency, call 911. If you're in crisis or thinking about suicide, call or text 988.</span></p>
-      <p>Jachi Health provides technology and administrative services. Medical and mental health care is provided by independent, licensed clinicians and therapists. Our care assistant is an AI tool. It doesn't diagnose, prescribe, provide therapy or replace your clinician. Jachi is for adults 18 and older, and we don't prescribe controlled substances.</p>
+      <p>Jachi Health provides technology and administrative services. Medical and mental health care will be provided by independent, licensed clinicians and therapists. Our care assistant is an AI tool. It doesn't diagnose, prescribe, provide therapy or replace your clinician. Jachi is for adults 18 and older, and we don't prescribe controlled substances.</p>
       <p>© 2026 Jachi Health. All rights reserved.</p>
     </div>
   </div>
@@ -1395,13 +1426,13 @@ button,input,select,textarea{font:inherit;color:inherit}
     <h3>The care finder, condition search and weight care check</h3>
     <p>They run entirely in your browser. What you type or choose, including your height, weight and health details, is never sent to us or stored.</p>
     <h3>Waitlist sign-ups</h3>
-    <p>If you join the waitlist, we collect your email and state and, if you give them, your first name and the services you're interested in, plus the language of the page you used. We use them only to email you about our launch. Sign-ups are stored with our website host.</p>
+    <p>If you join the waitlist, we collect your email and state and, if you give them, your first name and the services you're interested in, plus the language of the page you used. If you came from one of our ads, we also note the ad's name. We use them only to email you about our launch. Sign-ups are stored with our website host. If you join through a form in one of our Facebook or Instagram ads, Meta collects what you enter and passes it to us.</p>
     <h3>Accounts</h3>
     <p>If you create an account, we keep your email, your password in scrambled form, and the details you save there. Your browser keeps a sign-in token until you log out. You can update or delete your account at any time on the <a href="/account/">account page</a>.</p>
     <h3>Help chat and support tickets</h3>
     <p>Messages you send to our AI assistant pass through our website host, Netlify, to our AI provider, Anthropic, so it can write a reply. We don't save chats. If you send a ticket, we collect your name, email, topic, message and, if you choose, your chat, and use them only to answer you. Tickets are stored with our website host and sent to our support inbox.</p>
     <h3>What we don't do</h3>
-    <p>We don't sell your information, and this site doesn't use advertising cookies or tracking.</p>
+    <p>We don't sell your information, and this site doesn't use advertising cookies, pixels or tracking. We never send your sign-up to Meta or any other ad company.</p>
     <h3>Your choices</h3>
     <p>To leave the list or ask about your information, use your account or email <a href="mailto:support@jachihealth.com">support@jachihealth.com</a>, reply to any email from us or use the unsubscribe link in it. Please don't send health details by email.</p>
     <h3>Your medical information</h3>
@@ -1445,7 +1476,7 @@ button,input,select,textarea{font:inherit;color:inherit}
   let headerTick = false;
   const syncHeader = () => {
     headerTick = false;
-    header.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
   };
   window.addEventListener('scroll', () => {
     if (!headerTick) { headerTick = true; requestAnimationFrame(syncHeader); }
@@ -1458,8 +1489,10 @@ button,input,select,textarea{font:inherit;color:inherit}
   const dock = $('#dock');
   const outside = [$('#main'), $('.footer'), dock];
   let updateDock = () => {};
-  const menuOpen = () => menu.classList.contains('is-open');
+  // Ad landing pages have a plain header with no menu, so everything here checks the menu exists.
+  const menuOpen = () => !!menu && menu.classList.contains('is-open');
   const setMenu = (open, restoreFocus = true) => {
+    if (!toggle || !menu) return;
     toggle.setAttribute('aria-expanded', String(open));
     menu.classList.toggle('is-open', open);
     header.classList.toggle('menu-open', open);
@@ -1473,8 +1506,10 @@ button,input,select,textarea{font:inherit;color:inherit}
     }
     updateDock();
   };
-  toggle.addEventListener('click', () => setMenu(!menuOpen()));
-  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false, false); });
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => setMenu(!menuOpen()));
+    menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false, false); });
+  }
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen()) setMenu(false); });
   onMedia(mqDesktop, e => { if (e.matches && menuOpen()) setMenu(false, false); });
 
@@ -1564,7 +1599,7 @@ button,input,select,textarea{font:inherit;color:inherit}
   const hasError = key => { const box = document.getElementById(`err-${key}`); return !!box && !box.hidden; };
   const radioValue = (form, name) => { const r = form.querySelector(`input[name="${name}"]:checked`); return r ? r.value : ''; };
   const scrollToEl = el => {
-    const headerH = header.getBoundingClientRect().height;
+    const headerH = header ? header.getBoundingClientRect().height : 0;
     const top = el.getBoundingClientRect().top;
     if (top < headerH + 8 || top > window.innerHeight * 0.6) {
       window.scrollTo({ top: window.scrollY + top - headerH - 16, behavior: behavior() });
@@ -2176,6 +2211,31 @@ button,input,select,textarea{font:inherit;color:inherit}
     goToJoin();
   }));
 
+  /* ---------- Which ad brought someone here ----------
+     Ad links carry utm_* tags: the campaign, ad set and ad names. They're kept for this visit only (this tab's
+     session storage) and sent with the waitlist form, so the admin console can show which ads bring sign-ups.
+     Nothing is sent to Meta or any other ad company. */
+  const AD_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  const adTag = v => String(v || '').replace(/[^\w .:|\/+-]/g, '').trim().slice(0, 100);
+  const adTags = (() => {
+    let tags = {};
+    try { tags = JSON.parse(window.sessionStorage.getItem('jachi.ad') || '{}') || {}; } catch (err) { tags = {}; }
+    const params = new URLSearchParams(window.location.search);
+    const fresh = {};
+    AD_KEYS.forEach(k => { const v = adTag(params.get(k)); if (v) fresh[k] = v; });
+    if (Object.keys(fresh).length) {
+      tags = fresh;
+      try { window.sessionStorage.setItem('jachi.ad', JSON.stringify(tags)); } catch (err) { /* storage blocked: this page only */ }
+    }
+    // Tidy the address bar, so a link someone copies doesn't carry the ad's tags or Meta's click id.
+    if ([...params.keys()].some(k => AD_KEYS.includes(k) || k === 'fbclid')) {
+      AD_KEYS.concat('fbclid').forEach(k => params.delete(k));
+      const q = params.toString();
+      window.history.replaceState(null, '', window.location.pathname + (q ? `?${q}` : '') + window.location.hash);
+    }
+    return tags;
+  })();
+
   if (J.form) {
     J.form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -2197,6 +2257,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         const data = new FormData(J.form);
         if (!data.has('form-name')) data.set('form-name', J.form.getAttribute('name'));
         data.set('interest', interests().join(', '));
+        AD_KEYS.forEach(k => data.set(k, adTag(adTags[k])));
         const res = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://jachihealth.com/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Jachi Health: atención en línea, arraigada en la medicina real. Profesionales con licencia, sin seguro médico.">
+<meta property="og:image:alt" content="Jachi Health: atención en línea, con bases médicas sólidas. Profesionales con licencia, sin necesidad de seguro médico.">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://jachihealth.com/#organization", "name": "Jachi Health", "url": "https://jachihealth.com/"}, {"@type": "CollectionPage", "@id": "https://jachihealth.com/es/guias/#webpage", "url": "https://jachihealth.com/es/guias/", "name": "Guías de salud: infecciones, peso y más | Jachi Health", "description": "Guías en lenguaje sencillo de Jachi Health: consultas en línea por infección urinaria, control de peso con GLP-1 y cuándo ir a urgencias.", "inLanguage": "es", "isPartOf": {"@id": "https://jachihealth.com/#website"}, "breadcrumb": {"@id": "https://jachihealth.com/es/guias/#breadcrumb"}, "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "url": "https://jachihealth.com/es/guias/consulta-infeccion-urinaria-en-linea/", "name": "Qué esperar de una consulta en línea por infección urinaria."}, {"@type": "ListItem", "position": 2, "url": "https://jachihealth.com/es/guias/atencion-medica-para-bajar-de-peso/", "name": "Cómo funciona la atención médica para bajar de peso."}, {"@type": "ListItem", "position": 3, "url": "https://jachihealth.com/es/guias/atencion-en-linea-o-emergencias/", "name": "¿Atención en línea, clínica de urgencias o sala de emergencias?"}]}}, {"@type": "BreadcrumbList", "@id": "https://jachihealth.com/es/guias/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://jachihealth.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Guías", "item": "https://jachihealth.com/es/guias/"}]}]}</script>
 <style>
@@ -205,6 +205,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .status__dot{position:relative;width:8px;height:8px;flex:none;border-radius:50%;background:var(--moss)}
 .status__dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--sage);animation:ping 2.4s var(--ease) infinite}
 .status__rule{width:1px;height:14px;background:var(--line-strong)}
+/* In Spanish the status is too long for one line on a phone: the second part goes on its own line, under the first */
+@media (max-width:479px){:lang(es) .status__rule{display:none}:lang(es) .status>span:last-child{flex-basis:100%;padding-left:20px}}
 .hero__alt{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 14px;max-width:100%;color:var(--moss);text-decoration:none;border-radius:10px}
 .hero__alt-tag{flex:none;padding:5px 10px;border:1px solid var(--line-strong);border-radius:999px;font:600 .8rem/1.2 var(--font-body);color:var(--text-2);background:rgba(255,255,255,.6)}
 .hero__alt-line{font-family:var(--font-display);font-style:italic;font-weight:320;font-size:clamp(1.2rem,.95rem + 1.05vw,1.85rem);line-height:1.25;letter-spacing:-.01em;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:transparent;text-underline-offset:6px;transition:text-decoration-color .2s ease}
@@ -1149,6 +1151,35 @@ button,input,select,textarea{font:inherit;color:inherit}
   .map__leads circle,.picker__list li{opacity:1}
 }
 
+/* Ad landing pages (/join/, /es/unase/): the form near the top, the ad's headline, nothing else to click past */
+.lp-head{position:relative;z-index:2;background:var(--forest-deep);color:var(--on-dark);padding-top:env(safe-area-inset-top,0px)}
+.lp-head__bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.lp-head .lang-switch{background:rgba(255,255,255,.06);border-color:var(--line-dark);color:#fff}
+.lp-head .lang-switch:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
+.lp-hero{padding-block:clamp(28px,5vw,72px) clamp(56px,7vw,104px)}
+.lp-hero__grid{position:relative;z-index:1;display:grid;gap:28px;grid-template-areas:"head" "form" "more"}
+.lp-hero__head{grid-area:head;display:grid;gap:18px;justify-items:start;min-width:0}
+.lp-hero__grid>.form-card{grid-area:form}
+.lp-hero__more{grid-area:more;display:grid;gap:18px;align-content:start;min-width:0}
+@media (min-width:1040px){.lp-hero__grid{grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);grid-template-areas:"head form" "more form";gap:36px 72px;align-items:start}}
+.display--lp{max-width:14ch;font-size:clamp(2.5rem,1.55rem + 3.7vw,4.5rem);color:#fff}
+.status--light{color:var(--on-dark-2)}
+.status--light .status__rule{background:var(--line-dark)}
+.lp-points{margin:0}
+.lp-points li{color:var(--on-dark)}
+.lp-helps__grid{display:grid;gap:36px}
+@media (min-width:960px){.lp-helps__grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:64px;align-items:start}}
+.lp-helps__main{min-width:0}
+.lp-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px 24px;margin:24px 0 0;padding:0;list-style:none}
+.lp-list li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;align-items:start;font-weight:500;line-height:1.45}
+.lp-list .i{width:26px;height:26px;padding:6px;border-radius:50%;background:var(--sage-100);color:var(--forest);stroke-width:2.8}
+.lp-safety{margin:0}
+.lp-faq{max-width:880px}
+.lp-faq .faq-list{margin-top:28px}
+/* The landing footer keeps only the legal links, so they take the room the other link lists had */
+.footer--lp .footer__top{grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.footer--lp .footer__top{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.footer--lp .footer__brand{grid-column:auto}}
+
 
 </style>
 </head>
@@ -1232,7 +1263,7 @@ button,input,select,textarea{font:inherit;color:inherit}
           <svg class="mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><defs><mask id="m-foot" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="#fff"/><path d="M32 13V38C32 43.5 28.5 45 26.5 42" fill="none" stroke="#000" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 22Q35.5 21 37.5 16.5M32 30Q37 28.5 40 23M32 37Q37.5 35.5 40.5 30M32 22Q28.5 21 26.5 16.5M32 30Q27 28.5 24 23M32 37Q26.5 35.5 23.5 30" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></mask></defs><path d="M32 4C40 16 58 34 32 52C6 34 24 16 32 4Z" fill="currentColor" mask="url(#m-foot)"/><path d="M32 52C32 56 31.5 58.5 29.5 61" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
           <span class="brand__word" aria-hidden="true"><b>Jachi</b> <span>Health</span></span>
         </a>
-        <p class="footer__tag">Atención en línea, arraigada en la medicina real.</p>
+        <p class="footer__tag">Atención en línea, con bases médicas sólidas.</p>
         <a class="footer__mail" href="mailto:support@jachihealth.com"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="M4.5 7.5l7.5 5.5 7.5-5.5"/></svg>support@jachihealth.com</a>
         <a class="btn btn--light btn--sm" href="/es/#join" data-to-join>Únase a la lista de espera <svg class="i i--arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
       </div>
@@ -1267,7 +1298,7 @@ button,input,select,textarea{font:inherit;color:inherit}
     </div>
     <div class="footer__legal">
       <p class="emergency"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.3"/></svg><span>Jachi Health no es para emergencias. Si cree que tiene una emergencia médica, llame al 911. Si está en crisis o piensa en el suicidio, llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988.</span></p>
-      <p>Jachi Health ofrece servicios tecnológicos y administrativos. La atención médica y de salud mental la brindan profesionales de la salud y terapeutas independientes con licencia. Nuestro asistente de cuidado es una herramienta de IA. No diagnostica, no receta, no da terapia ni reemplaza a su profesional de la salud. Jachi es para adultos de 18 años o más, y no recetamos sustancias controladas.</p>
+      <p>Jachi Health ofrece servicios tecnológicos y administrativos. La atención médica y de salud mental la brindarán profesionales de la salud y terapeutas independientes con licencia. Nuestro asistente de cuidado es una herramienta de IA. No diagnostica, no receta, no da terapia ni reemplaza a su profesional de la salud. Jachi es para adultos de 18 años o más, y no recetamos sustancias controladas.</p>
       <p>© 2026 Jachi Health. Todos los derechos reservados.</p>
     </div>
   </div>
@@ -1365,13 +1396,13 @@ button,input,select,textarea{font:inherit;color:inherit}
     <h3>El buscador de atención, la búsqueda de afecciones y la evaluación de peso</h3>
     <p>Funcionan por completo en su navegador. Lo que escriba o elija, incluidos su estatura, su peso y sus detalles de salud, nunca se nos envía ni se guarda.</p>
     <h3>Registros en la lista de espera</h3>
-    <p>Si se une a la lista de espera, recopilamos su correo electrónico y su estado y, si nos los da, su nombre y los servicios que le interesan, además del idioma de la página que usó. Los usamos solo para escribirle sobre nuestra apertura. Los registros se guardan con el proveedor que aloja nuestro sitio web.</p>
+    <p>Si se une a la lista de espera, recopilamos su correo electrónico y su estado y, si nos los da, su nombre y los servicios que le interesan, además del idioma de la página que usó. Si llegó desde uno de nuestros anuncios, también anotamos el nombre del anuncio. Los usamos solo para escribirle sobre nuestra apertura. Los registros se guardan con el proveedor que aloja nuestro sitio web. Si se une con un formulario de uno de nuestros anuncios en Facebook o Instagram, Meta recopila lo que usted escribe y nos lo envía.</p>
     <h3>Cuentas</h3>
     <p>Si crea una cuenta, guardamos su correo, su contraseña cifrada y los datos que guarde ahí. Su navegador conserva un código de inicio de sesión hasta que cierre la sesión. Puede actualizar o borrar su cuenta cuando quiera en la <a href="/es/account/">página de su cuenta</a>.</p>
     <h3>Chat de ayuda y solicitudes de soporte</h3>
     <p>Los mensajes que envía a nuestro asistente de IA pasan por el proveedor que aloja nuestro sitio, Netlify, hasta nuestro proveedor de IA, Anthropic, para que pueda escribir una respuesta. No guardamos los chats. Si envía una solicitud, recopilamos su nombre, correo, tema, mensaje y, si usted lo elige, su chat, y los usamos solo para responderle. Las solicitudes se guardan con el proveedor que aloja nuestro sitio y llegan a nuestro buzón de soporte.</p>
     <h3>Lo que no hacemos</h3>
-    <p>No vendemos su información, y este sitio no usa cookies publicitarias ni rastreo.</p>
+    <p>No vendemos su información, y este sitio no usa cookies publicitarias, píxeles ni rastreo. Nunca enviamos su registro a Meta ni a ninguna otra empresa de publicidad.</p>
     <h3>Sus opciones</h3>
     <p>Para salir de la lista o preguntar por su información, use su cuenta o escriba a <a href="mailto:support@jachihealth.com">support@jachihealth.com</a>, responda a cualquiera de nuestros correos o use el enlace para cancelar la suscripción. No envíe detalles de salud por correo.</p>
     <h3>Su información médica</h3>
@@ -1415,7 +1446,7 @@ button,input,select,textarea{font:inherit;color:inherit}
   let headerTick = false;
   const syncHeader = () => {
     headerTick = false;
-    header.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
   };
   window.addEventListener('scroll', () => {
     if (!headerTick) { headerTick = true; requestAnimationFrame(syncHeader); }
@@ -1428,8 +1459,10 @@ button,input,select,textarea{font:inherit;color:inherit}
   const dock = $('#dock');
   const outside = [$('#main'), $('.footer'), dock];
   let updateDock = () => {};
-  const menuOpen = () => menu.classList.contains('is-open');
+  // Ad landing pages have a plain header with no menu, so everything here checks the menu exists.
+  const menuOpen = () => !!menu && menu.classList.contains('is-open');
   const setMenu = (open, restoreFocus = true) => {
+    if (!toggle || !menu) return;
     toggle.setAttribute('aria-expanded', String(open));
     menu.classList.toggle('is-open', open);
     header.classList.toggle('menu-open', open);
@@ -1443,8 +1476,10 @@ button,input,select,textarea{font:inherit;color:inherit}
     }
     updateDock();
   };
-  toggle.addEventListener('click', () => setMenu(!menuOpen()));
-  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false, false); });
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => setMenu(!menuOpen()));
+    menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false, false); });
+  }
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen()) setMenu(false); });
   onMedia(mqDesktop, e => { if (e.matches && menuOpen()) setMenu(false, false); });
 
@@ -1534,7 +1569,7 @@ button,input,select,textarea{font:inherit;color:inherit}
   const hasError = key => { const box = document.getElementById(`err-${key}`); return !!box && !box.hidden; };
   const radioValue = (form, name) => { const r = form.querySelector(`input[name="${name}"]:checked`); return r ? r.value : ''; };
   const scrollToEl = el => {
-    const headerH = header.getBoundingClientRect().height;
+    const headerH = header ? header.getBoundingClientRect().height : 0;
     const top = el.getBoundingClientRect().top;
     if (top < headerH + 8 || top > window.innerHeight * 0.6) {
       window.scrollTo({ top: window.scrollY + top - headerH - 16, behavior: behavior() });
@@ -2146,6 +2181,31 @@ button,input,select,textarea{font:inherit;color:inherit}
     goToJoin();
   }));
 
+  /* ---------- Which ad brought someone here ----------
+     Ad links carry utm_* tags: the campaign, ad set and ad names. They're kept for this visit only (this tab's
+     session storage) and sent with the waitlist form, so the admin console can show which ads bring sign-ups.
+     Nothing is sent to Meta or any other ad company. */
+  const AD_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  const adTag = v => String(v || '').replace(/[^\w .:|\/+-]/g, '').trim().slice(0, 100);
+  const adTags = (() => {
+    let tags = {};
+    try { tags = JSON.parse(window.sessionStorage.getItem('jachi.ad') || '{}') || {}; } catch (err) { tags = {}; }
+    const params = new URLSearchParams(window.location.search);
+    const fresh = {};
+    AD_KEYS.forEach(k => { const v = adTag(params.get(k)); if (v) fresh[k] = v; });
+    if (Object.keys(fresh).length) {
+      tags = fresh;
+      try { window.sessionStorage.setItem('jachi.ad', JSON.stringify(tags)); } catch (err) { /* storage blocked: this page only */ }
+    }
+    // Tidy the address bar, so a link someone copies doesn't carry the ad's tags or Meta's click id.
+    if ([...params.keys()].some(k => AD_KEYS.includes(k) || k === 'fbclid')) {
+      AD_KEYS.concat('fbclid').forEach(k => params.delete(k));
+      const q = params.toString();
+      window.history.replaceState(null, '', window.location.pathname + (q ? `?${q}` : '') + window.location.hash);
+    }
+    return tags;
+  })();
+
   if (J.form) {
     J.form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -2167,6 +2227,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         const data = new FormData(J.form);
         if (!data.has('form-name')) data.set('form-name', J.form.getAttribute('name'));
         data.set('interest', interests().join(', '));
+        AD_KEYS.forEach(k => data.set(k, adTag(adTags[k])));
         const res = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

@@ -5,8 +5,8 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Making a change
 
-1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `learn.py`, `strings.py`, `src/`, `src/functions/`,
-   `chatbot.py`, `brand.py`, `netlify.toml`). Never hand-edit anything in `public/` or `netlify/functions/`;
+1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `learn.py`, `landing.py`, `strings.py`, `src/`,
+   `src/functions/`, `chatbot.py`, `brand.py`, `netlify.toml`). Never hand-edit anything in `public/` or `netlify/functions/`;
    `build.py` generates them.
 2. Keep English and Spanish in step:
    - After changing `src/en/home.html`, run `python3 tools/es_home.py`. It stops on any English sentence it
@@ -52,6 +52,11 @@ keep replies short and plain, and ask only questions that change what you'll do.
 - Privacy: no analytics, ad pixels or trackers (it's a health site). Don't collect health details in forms or chat.
   Patient accounts with health records must live on HIPAA-compliant systems with a BAA (his medical partner's
   portal); Netlify's plan can't hold health data.
+- Meta ads (Oct 17, 2026) send people only to Meta's Instant Forms or the waitlist pages in `landing.py` (`/join/…`,
+  `/es/unase/…`). Until LegitScript certification and Meta's authorization, those pages name no medicines, drug
+  classes, refills, prescriptions or prices (`BANNED`, checked by tests/qa.py), and their footer links only to the
+  legal pages. No Meta pixel or Conversions API: an ad's `utm_*` tags are saved with the sign-up and shown in the
+  admin console, and sign-ups are never sent to Meta or used for ad audiences.
 - Accounts (`/account/`, Netlify Identity) are for waitlist details only: state, services, language, emails
   on or off. Never add health fields. Deleting an account also deletes that email's sign-ups and tickets, but only
   when the person proved the email by a link we sent (`provedEmail`) and Identity's autoconfirm is off.

@@ -18,8 +18,10 @@ the site if they run out). Pull requests get a free Deploy Preview, so changes c
 
 Sign-ups and support tickets are saved by Netlify Forms (forms `early-access`, the waitlist, and `support-ticket`).
 Both have `language` and `source` fields; `source` is `website`, `app-ios` or `app-android`. The waitlist form also
-asks the optional "How did you hear about us?" (`heard`), which the admin console counts. To get them by email:
-Netlify → Project configuration → Notifications → Form submission notifications.
+asks the optional "How did you hear about us?" (`heard`), which the admin console counts. Sign-ups that come from
+an ad link also carry its `utm_*` tags, which the admin console counts by campaign and ad. Every copy of the waitlist
+form must have the same fields, because Netlify keeps only one copy's fields for each form name (`tests/qa.py`
+checks). To get them by email: Netlify → Project configuration → Notifications → Form submission notifications.
 
 ## Pages
 
@@ -30,6 +32,7 @@ Netlify → Project configuration → Notifications → Form submission notifica
 | `/urgent-care/`, `/uti-treatment/` and the other service pages | `src/en/service.html` filled in from `pages.py` (with what to expect from the visit, tests and follow-up) |
 | `/how-it-works/`, `/es/como-funciona/` | `src/en/how.html` and `src/es/how.html`, steps and questions in `content.py` and `content_es.py` (`HOW`) |
 | `/learn/` and its guides, `/es/guias/` and the Spanish guides | `src/learn.html` and `src/article.html`, words in `learn.py` (both languages) |
+| `/join/`, `/es/unase/` and their pages: waitlist pages for Meta ads (not indexed, not in the sitemap) | `src/landing.html`, words in `landing.py` (both languages), the form copied from the home page |
 | `/privacy/`, `/terms/`, `/texas-medical-board/` | `src/en/<name>.html` |
 | `/account/`, `/es/account/` | `src/account.html`, `account.css`, `account.js` and `identity.js`, words in `strings.py` |
 | `/admin/` (not linked, not indexed) | `src/admin.html`, `admin.css`, `admin.js` and `identity.js` |
@@ -84,6 +87,7 @@ The published files are generated. Edit the source, then rebuild:
 | Service pages | `pages.py` and `src/en/service.html` (Spanish "what to expect" for the app: `content_es.EXPECT`) |
 | How Jachi works | `HOW` in `content.py` and `content_es.py`, layout in `src/en/how.html` and `src/es/how.html` |
 | Health guides | `learn.py` (both languages, with their sources) |
+| Ad landing pages | `landing.py` (both languages, and the words they must never use) and `src/landing.html` |
 | Legal pages | `src/en/privacy.html`, `terms.html`, `texas-medical-board.html` |
 | Styles | `src/style.css` |
 | Interactive behaviour | `src/app.js` |

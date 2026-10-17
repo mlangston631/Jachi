@@ -171,8 +171,8 @@ FAQ = [
      "waitlist and we'll email you before we open."),
     ("Who are the clinicians?",
      "Physicians, nurse practitioners and physician assistants for medical care, and licensed therapists for therapy. "
-     "Everyone is licensed in your state, practices through independent medical groups and makes every clinical "
-     "decision about your care. Before we open, we'll name the medical group and its clinicians on this site, so "
+     "Everyone will be licensed in your state, will practice through an independent medical group and will make "
+     "every clinical decision about your care. Before we open, we'll name the medical group and its clinicians on this site, so "
      "you can check their licenses."),
     ("Is the care assistant a doctor?",
      "No. The care assistant is AI. When we open, it will help with intake, check-ins, reminders and everyday "

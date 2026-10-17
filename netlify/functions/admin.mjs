@@ -225,6 +225,9 @@ function cleanSubmission(s, form) {
     language: text('language', 5) === 'es' ? 'es' : 'en',
     source: SOURCES.has(text('source', 20)) ? text('source', 20) : '',
     heard: HEARD.has(text('heard', 20)) ? text('heard', 20) : '',
+    // The ad that brought the sign-up (utm tags from the ad's link), letters, digits and a few separators only.
+    ad: Object.fromEntries(['source', 'medium', 'campaign', 'term', 'content']
+      .map(k => [k, text(`utm_${k}`, 100).replace(/[^\w .:|/+-]/g, '').trim()]).filter(([, v]) => v)),
     topic: text('topic', 80),
     message: text('message', 2000),
     include_chat: text('include_chat', 5) === 'yes',

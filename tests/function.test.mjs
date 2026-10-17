@@ -107,7 +107,7 @@ const resetNet = () => {
     forms: [{ id: 'form-signups', name: 'early-access' }, { id: 'form-tickets', name: 'support-ticket' }],
     subs: {
       'form-signups': [
-        { id: 'aaaaaaaaaaaaaaaaaaaaaaaa', created_at: '2026-10-03T00:00:00Z', data: { email: 'maya@example.com', first_name: 'Maya', state: 'TX', interest: 'therapy', language: 'es', source: 'app-ios', heard: 'social', ip: '203.0.113.9', user_agent: 'Phone', referrer: 'x' } },
+        { id: 'aaaaaaaaaaaaaaaaaaaaaaaa', created_at: '2026-10-03T00:00:00Z', data: { email: 'maya@example.com', first_name: 'Maya', state: 'TX', interest: 'therapy', language: 'es', source: 'app-ios', heard: 'social', utm_source: 'ig', utm_medium: 'paid_social', utm_campaign: 'jh-tx-waitlist-es', utm_term: 'es-tx-18plus-broad', utm_content: 'es-mind-v1<script>', ip: '203.0.113.9', user_agent: 'Phone', referrer: 'x' } },
         { id: 'bbbbbbbbbbbbbbbbbbbbbbbb', created_at: '2026-10-04T00:00:00Z', data: { email: 'sam@example.com', state: 'CA', interest: '', language: 'en', source: 'https://evil.example', heard: '<b>tv</b>', ip: '203.0.113.10' } },
       ],
       'form-tickets': [
@@ -260,6 +260,8 @@ check('admin data: sign-ups, tickets and accounts', r.status === 200 && body.sig
 check('admin data: no IP addresses or browser details', !raw.includes('203.0.113') && !raw.includes('user_agent') && !raw.includes('Phone'));
 const maya = body.signups.find(x => x.email === 'maya@example.com');
 check('admin data: sign-up fields cleaned up', maya && maya.name === 'Maya' && maya.state === 'TX' && maya.language === 'es' && maya.form === 'signups');
+check('admin data: the ad that brought a sign-up, cleaned of anything but plain names', maya.ad.source === 'ig' && maya.ad.campaign === 'jh-tx-waitlist-es'
+  && maya.ad.term === 'es-tx-18plus-broad' && maya.ad.content === 'es-mind-v1script' && Object.keys(body.signups.find(x => x.email === 'sam@example.com').ad).length === 0);
 check('admin data: where a sign-up came from and how they heard, from known answers only', maya.source === 'app-ios' && maya.heard === 'social'
   && body.signups.find(x => x.email === 'sam@example.com').source === '' && body.signups.find(x => x.email === 'sam@example.com').heard === '');
 const member = body.members.find(x => x.id === MEMBER_ID);
