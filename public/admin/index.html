@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="script-src 'sha256-EJhWA7fhCGMd9y59o0QK7Dh8IeJOxAp4H2ZfhLqHh3Q='; object-src 'none'; base-uri 'self'">
+<meta http-equiv="Content-Security-Policy" content="script-src 'sha256-leqc6QVQHKLCyvHp1u8L6c9IiJ4/i7/p3+fXHi600kM='; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Admin | Jachi Health</title>
 <meta name="description" content="The Jachi Health admin console.">
@@ -191,6 +191,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .status__dot{position:relative;width:8px;height:8px;flex:none;border-radius:50%;background:var(--moss)}
 .status__dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--sage);animation:ping 2.4s var(--ease) infinite}
 .status__rule{width:1px;height:14px;background:var(--line-strong)}
+/* In Spanish the status is too long for one line on a phone: the second part goes on its own line, under the first */
+@media (max-width:479px){:lang(es) .status__rule{display:none}:lang(es) .status>span:last-child{flex-basis:100%;padding-left:20px}}
 .hero__alt{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 14px;max-width:100%;color:var(--moss);text-decoration:none;border-radius:10px}
 .hero__alt-tag{flex:none;padding:5px 10px;border:1px solid var(--line-strong);border-radius:999px;font:600 .8rem/1.2 var(--font-body);color:var(--text-2);background:rgba(255,255,255,.6)}
 .hero__alt-line{font-family:var(--font-display);font-style:italic;font-weight:320;font-size:clamp(1.2rem,.95rem + 1.05vw,1.85rem);line-height:1.25;letter-spacing:-.01em;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:transparent;text-underline-offset:6px;transition:text-decoration-color .2s ease}
@@ -1135,6 +1137,35 @@ button,input,select,textarea{font:inherit;color:inherit}
   .map__leads circle,.picker__list li{opacity:1}
 }
 
+/* Ad landing pages (/join/, /es/unase/): the form near the top, the ad's headline, nothing else to click past */
+.lp-head{position:relative;z-index:2;background:var(--forest-deep);color:var(--on-dark);padding-top:env(safe-area-inset-top,0px)}
+.lp-head__bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.lp-head .lang-switch{background:rgba(255,255,255,.06);border-color:var(--line-dark);color:#fff}
+.lp-head .lang-switch:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
+.lp-hero{padding-block:clamp(28px,5vw,72px) clamp(56px,7vw,104px)}
+.lp-hero__grid{position:relative;z-index:1;display:grid;gap:28px;grid-template-areas:"head" "form" "more"}
+.lp-hero__head{grid-area:head;display:grid;gap:18px;justify-items:start;min-width:0}
+.lp-hero__grid>.form-card{grid-area:form}
+.lp-hero__more{grid-area:more;display:grid;gap:18px;align-content:start;min-width:0}
+@media (min-width:1040px){.lp-hero__grid{grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);grid-template-areas:"head form" "more form";gap:36px 72px;align-items:start}}
+.display--lp{max-width:14ch;font-size:clamp(2.5rem,1.55rem + 3.7vw,4.5rem);color:#fff}
+.status--light{color:var(--on-dark-2)}
+.status--light .status__rule{background:var(--line-dark)}
+.lp-points{margin:0}
+.lp-points li{color:var(--on-dark)}
+.lp-helps__grid{display:grid;gap:36px}
+@media (min-width:960px){.lp-helps__grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:64px;align-items:start}}
+.lp-helps__main{min-width:0}
+.lp-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px 24px;margin:24px 0 0;padding:0;list-style:none}
+.lp-list li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;align-items:start;font-weight:500;line-height:1.45}
+.lp-list .i{width:26px;height:26px;padding:6px;border-radius:50%;background:var(--sage-100);color:var(--forest);stroke-width:2.8}
+.lp-safety{margin:0}
+.lp-faq{max-width:880px}
+.lp-faq .faq-list{margin-top:28px}
+/* The landing footer keeps only the legal links, so they take the room the other link lists had */
+.footer--lp .footer__top{grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.footer--lp .footer__top{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.footer--lp .footer__brand{grid-column:auto}}
+
 /* The admin console (/admin/). A quiet working tool in the brand's colours: one big number on the overview,
    everything else plain lists that read well on a phone. Uses the site's buttons, fields and status styles. */
 body{background:var(--mist)}
@@ -1835,6 +1866,8 @@ const Identity = (() => {
         emailsOn: !a || a.updates !== false,
         source: (first && first.source) || '',
         heard: (newest.find(s => s.heard) || {}).heard || '',
+        // The first ad that brought this person, if any.
+        ad: (p.signups.slice().reverse().find(s => s.ad && (s.ad.campaign || s.ad.content)) || {}).ad || {},
       };
     }).sort((x, y) => new Date(y.joined || 0) - new Date(x.joined || 0));
   };
@@ -1884,6 +1917,8 @@ const Identity = (() => {
     const spanish = onList.filter(p => p.language === 'es').length;
     const heard = tally(onList, p => heardName(p.heard));
     const sources = tally(onList, p => sourceName(p.source));
+    const adName = p => [p.ad.campaign, p.ad.content].filter(Boolean).join(' / ');
+    const ads = tally(onList.filter(p => adName(p)), p => adName(p)).slice(0, 8);
     const off = list.length - onList.length;
     $('#panel-overview').innerHTML = `
       <div class="ov">
@@ -1916,6 +1951,11 @@ const Identity = (() => {
         <section class="ov__card" aria-labelledby="ov-source">
           <h2 id="ov-source">Where they signed up</h2>
           ${hbars(sources, 'No sign-ups yet.')}
+        </section>
+        <section class="ov__card" aria-labelledby="ov-ads">
+          <h2 id="ov-ads">Sign-ups from ads</h2>
+          <p class="ov__sub">Website sign-ups by campaign and ad, from the ad's link. Leads from Facebook and Instagram forms are counted in Meta's Ads Manager.</p>
+          ${hbars(ads, 'No sign-ups from ads yet.')}
         </section>
         <section class="ov__card" aria-labelledby="ov-more">
           <h2 id="ov-more">At a glance</h2>
@@ -1967,7 +2007,7 @@ const Identity = (() => {
       <li class="row" data-email="${esc(p.email)}">
         <div class="row__main">
           <p class="row__title">${esc(p.email)}</p>
-          <p class="row__meta">${p.name ? `<span>${esc(p.name)}</span>` : ''}<span>${esc(stateName(p.state))}</span><span>${languageName(p.language)}</span>${p.source ? `<span>${esc(sourceName(p.source))}</span>` : ''}<span>Joined ${esc(dateText(p.joined))}</span></p>
+          <p class="row__meta">${p.name ? `<span>${esc(p.name)}</span>` : ''}<span>${esc(stateName(p.state))}</span><span>${languageName(p.language)}</span>${p.source ? `<span>${esc(sourceName(p.source))}</span>` : ''}${p.ad.content || p.ad.campaign ? `<span>Ad: ${esc(p.ad.content || p.ad.campaign)}</span>` : ''}<span>Joined ${esc(dateText(p.joined))}</span></p>
           ${chips(p.interests)}
         </div>
         <p class="row__badges">${p.account ? '<span class="badge">Account</span>' : ''}${p.emailsOn ? '' : '<span class="badge badge--off">Emails off</span>'}</p>
@@ -1986,9 +2026,10 @@ const Identity = (() => {
   };
   $('#csv').addEventListener('click', () => {
     const rows = filtered(people());
-    const lines = [['email', 'first_name', 'state', 'services', 'language', 'joined', 'account', 'emails', 'signed_up_from', 'heard_about_us']]
+    const lines = [['email', 'first_name', 'state', 'services', 'language', 'joined', 'account', 'emails', 'signed_up_from', 'heard_about_us', 'ad_campaign', 'ad_set', 'ad']]
       .concat(rows.map(p => [p.email, p.name, p.state, p.interests.map(serviceName).join('; '), languageName(p.language),
-        p.joined ? new Date(p.joined).toISOString().slice(0, 10) : '', p.account ? 'yes' : 'no', p.emailsOn ? 'on' : 'off', sourceName(p.source), heardName(p.heard)]));
+        p.joined ? new Date(p.joined).toISOString().slice(0, 10) : '', p.account ? 'yes' : 'no', p.emailsOn ? 'on' : 'off', sourceName(p.source), heardName(p.heard),
+        p.ad.campaign || '', p.ad.term || '', p.ad.content || '']));
     const csv = '﻿' + lines.map(r => r.map(csvCell).join(',')).join('\r\n') + '\r\n';
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
     const a = document.createElement('a');

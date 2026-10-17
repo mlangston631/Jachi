@@ -46,3 +46,12 @@
   for = "/admin/*"
   [headers.values]
     X-Robots-Tag = "noindex"
+# Ad landing pages: for ad traffic only. The service pages are the ones search engines should show.
+[[headers]]
+  for = "/join/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+[[headers]]
+  for = "/es/unase/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

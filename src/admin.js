@@ -233,6 +233,8 @@
         emailsOn: !a || a.updates !== false,
         source: (first && first.source) || '',
         heard: (newest.find(s => s.heard) || {}).heard || '',
+        // The first ad that brought this person, if any.
+        ad: (p.signups.slice().reverse().find(s => s.ad && (s.ad.campaign || s.ad.content)) || {}).ad || {},
       };
     }).sort((x, y) => new Date(y.joined || 0) - new Date(x.joined || 0));
   };
@@ -282,6 +284,8 @@
     const spanish = onList.filter(p => p.language === 'es').length;
     const heard = tally(onList, p => heardName(p.heard));
     const sources = tally(onList, p => sourceName(p.source));
+    const adName = p => [p.ad.campaign, p.ad.content].filter(Boolean).join(' / ');
+    const ads = tally(onList.filter(p => adName(p)), p => adName(p)).slice(0, 8);
     const off = list.length - onList.length;
     $('#panel-overview').innerHTML = `
       <div class="ov">
@@ -314,6 +318,11 @@
         <section class="ov__card" aria-labelledby="ov-source">
           <h2 id="ov-source">Where they signed up</h2>
           ${hbars(sources, 'No sign-ups yet.')}
+        </section>
+        <section class="ov__card" aria-labelledby="ov-ads">
+          <h2 id="ov-ads">Sign-ups from ads</h2>
+          <p class="ov__sub">Website sign-ups by campaign and ad, from the ad's link. Leads from Facebook and Instagram forms are counted in Meta's Ads Manager.</p>
+          ${hbars(ads, 'No sign-ups from ads yet.')}
         </section>
         <section class="ov__card" aria-labelledby="ov-more">
           <h2 id="ov-more">At a glance</h2>
@@ -365,7 +374,7 @@
       <li class="row" data-email="${esc(p.email)}">
         <div class="row__main">
           <p class="row__title">${esc(p.email)}</p>
-          <p class="row__meta">${p.name ? `<span>${esc(p.name)}</span>` : ''}<span>${esc(stateName(p.state))}</span><span>${languageName(p.language)}</span>${p.source ? `<span>${esc(sourceName(p.source))}</span>` : ''}<span>Joined ${esc(dateText(p.joined))}</span></p>
+          <p class="row__meta">${p.name ? `<span>${esc(p.name)}</span>` : ''}<span>${esc(stateName(p.state))}</span><span>${languageName(p.language)}</span>${p.source ? `<span>${esc(sourceName(p.source))}</span>` : ''}${p.ad.content || p.ad.campaign ? `<span>Ad: ${esc(p.ad.content || p.ad.campaign)}</span>` : ''}<span>Joined ${esc(dateText(p.joined))}</span></p>
           ${chips(p.interests)}
         </div>
         <p class="row__badges">${p.account ? '<span class="badge">Account</span>' : ''}${p.emailsOn ? '' : '<span class="badge badge--off">Emails off</span>'}</p>
@@ -384,9 +393,10 @@
   };
   $('#csv').addEventListener('click', () => {
     const rows = filtered(people());
-    const lines = [['email', 'first_name', 'state', 'services', 'language', 'joined', 'account', 'emails', 'signed_up_from', 'heard_about_us']]
+    const lines = [['email', 'first_name', 'state', 'services', 'language', 'joined', 'account', 'emails', 'signed_up_from', 'heard_about_us', 'ad_campaign', 'ad_set', 'ad']]
       .concat(rows.map(p => [p.email, p.name, p.state, p.interests.map(serviceName).join('; '), languageName(p.language),
-        p.joined ? new Date(p.joined).toISOString().slice(0, 10) : '', p.account ? 'yes' : 'no', p.emailsOn ? 'on' : 'off', sourceName(p.source), heardName(p.heard)]));
+        p.joined ? new Date(p.joined).toISOString().slice(0, 10) : '', p.account ? 'yes' : 'no', p.emailsOn ? 'on' : 'off', sourceName(p.source), heardName(p.heard),
+        p.ad.campaign || '', p.ad.term || '', p.ad.content || '']));
     const csv = '﻿' + lines.map(r => r.map(csvCell).join(',')).join('\r\n') + '\r\n';
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
     const a = document.createElement('a');

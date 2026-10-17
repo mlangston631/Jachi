@@ -23,6 +23,7 @@ from fake_identity import FakeIdentity  # noqa: E402
 from content import EMAIL, PRICING_NOTE  # noqa: E402
 import pages as PAGES  # noqa: E402
 import learn as LEARN  # noqa: E402
+import landing as LANDING  # noqa: E402
 import content as CONTENT  # noqa: E402
 import content_es as CONTENT_ES  # noqa: E402
 import strings  # noqa: E402
@@ -1262,6 +1263,114 @@ with sync_playwright() as p:
     check("es footer links to cómo funciona and the Spanish guides", page.locator("footer a[href='/es/como-funciona/']").count() == 1
           and page.locator("footer a[href='/es/guias/']").count() == 1)
     check("learn pages: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+
+    # 11d) Ad landing pages: the ad's headline and the waitlist form up top, no drug names or prices, out of search
+    # Netlify stores only the fields of one copy of each form name, so every copy of the waitlist form needs the same fields.
+    form_fields = {}
+    for f in sorted((ROOT / "public").rglob("*.html")):
+        for form in re.findall(r'<form[^>]*\bname="early-access".*?</form>', f.read_text(encoding="utf-8"), flags=re.S):
+            names = tuple(sorted(set(re.findall(r'<(?:input|select|textarea)\b[^>]*\bname="([^"]+)"', form))))
+            form_fields.setdefault(names, []).append(str(f.relative_to(ROOT / "public")))
+    check("every copy of the waitlist form has the same fields, so Netlify keeps them all",
+          len(form_fields) == 1 and sum(len(v) for v in form_fields.values()) == 2 + 2 * len(LANDING.PAGES),
+          json.dumps({", ".join(k): v for k, v in form_fields.items()}))
+    lp_pairs = {}
+    for entry in LANDING.PAGES:
+        lp_pairs[LANDING.path(entry, "en")] = LANDING.path(entry, "es")
+        lp_pairs[LANDING.path(entry, "es")] = LANDING.path(entry, "en")
+    banned = [re.compile(b, re.I) for b in LANDING.BANNED]
+    for entry in LANDING.PAGES:
+        for lang in ("en", "es"):
+            path = LANDING.path(entry, lang)
+            for w, h in ((360, 740), (390, 844), (1440, 900)):
+                ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=w < 900, is_mobile=w < 900)
+                page, logs = setup(ctx)
+                page.goto(f"{BASE}{path}", wait_until="networkidle"); page.wait_for_timeout(400)
+                ov = page.evaluate(OVERFLOW_JS)
+                check(f"{path} @{w}: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+                info = page.evaluate("""() => ({
+                  lang: document.documentElement.lang,
+                  h1: [...document.querySelectorAll('h1')].map(x => x.textContent.trim()),
+                  robots: (document.querySelector('meta[name=robots]') || {}).content,
+                  canonical: !!document.querySelector('link[rel=canonical]'),
+                  swap: document.querySelector('.lang-switch').getAttribute('href'),
+                  checked: [...document.querySelectorAll('#join-form input[name=interest]:checked')].map(x => x.value),
+                  state: document.querySelector('#join-state').value,
+                  heard: !!document.querySelector('#join-heard'),
+                  tags: [...document.querySelectorAll('#join-form input[type=hidden][name^=utm_]')].map(x => x.name),
+                  language: document.querySelector('#join-form input[name=language]').value,
+                  formTop: Math.round(document.querySelector('#join-form').getBoundingClientRect().top + scrollY),
+                  text: document.body.innerText,
+                })""")
+                ok = (info["lang"] == lang and info["h1"] == [entry[lang]["h1"]] and info["robots"] == "noindex"
+                      and not info["canonical"] and info["swap"] == lp_pairs[path] and sorted(info["checked"]) == sorted(entry["interests"])
+                      and info["state"] == "TX" and not info["heard"] and info["language"] == lang
+                      and info["tags"] == ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"])
+                check(f"{path} @{w}: the ad's headline, noindex, other language linked, form set up for this ad", ok,
+                      json.dumps({k: v for k, v in info.items() if k != "text"}))
+                if w == 390:
+                    check(f"{path} @390: the form starts within the first two screens", info["formTop"] < 2 * 844, str(info["formTop"]))
+                    page.screenshot(path=str(OUT / f"landing{path.strip('/').replace('/', '-')}-390.png"), full_page=True)
+                if w == 1440:
+                    hits = sorted({m.group(0) for b in banned for m in b.finditer(info["text"])})
+                    check(f"{path}: no drug names, prescriptions, refills, booking or prices in the page", not hits, str(hits))
+                    problems = page.evaluate(STATIC_A11Y_JS)
+                    check(f"{path}: links, labels and ids valid", not problems, json.dumps(problems))
+                    bad = [href for href in page.evaluate(LINKS_JS) if status_of(href) != 200]
+                    check(f"{path}: every link on the page works", not bad, str(bad))
+                    cols = page.locator("footer .footer__col").count()
+                    check(f"{path}: footer keeps the legal links and notes, without the lists of other services and pages",
+                          cols == 1 and page.locator("footer .emergency").count() == 1 and page.locator("footer a[href='/texas-medical-board/']").count() == 1
+                          and page.locator("footer a[href='/privacy/']").count() == 1)
+                    page.screenshot(path=str(OUT / f"landing{path.strip('/').replace('/', '-')}-1440.png"), full_page=False)
+                check(f"{path} @{w}: no console errors", not logs, json.dumps(logs))
+                ctx.close()
+    status, headers, body = get("/sitemap.xml")
+    check("ad landing pages stay out of the sitemap", "/join/" not in body.decode() and "/es/unase/" not in body.decode())
+
+    # A sign-up from an ad: the ad's tags ride along with the form, and the address bar is tidied
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
+    lposted = {}
+    page.on("request", lambda req: lposted.update(body=req.post_data) if req.method == "POST" and req.url.rstrip("/") == BASE else None)
+    page.goto(f"{BASE}/join/weight-care/?utm_source=ig&utm_medium=paid_social&utm_campaign=jh-tx-waitlist-en"
+              "&utm_term=en-tx-18plus-broad&utm_content=en-weight-v1%3Cb%3E&fbclid=abc123", wait_until="networkidle")
+    check("ad landing: tags and Meta's click id are tidied from the address", page.evaluate("location.search") == "", page.evaluate("location.href"))
+    page.locator("#join-email").fill("lena@example.com")
+    check("ad landing: no service is ticked for the visitor", page.locator("#join-form input[name=interest]:checked").count() == 0)
+    page.locator("#join-form input[name=interest][value=weight-care]").check(force=True)
+    page.locator("#join-submit").click()
+    page.wait_for_selector("#join-success:not([hidden])", timeout=5000)
+    lb = lposted.get("body", "")
+    check("ad landing: the sign-up carries the ad's tags, cleaned, with Texas and the service the visitor chose",
+          all(x in lb for x in ("form-name=early-access", "email=lena%40example.com", "state=TX", "interest=weight-care",
+                                "utm_source=ig", "utm_campaign=jh-tx-waitlist-en", "utm_term=en-tx-18plus-broad",
+                                "utm_content=en-weight-v1b", "source=website", "language=en")) and "fbclid" not in lb and "%3C" not in lb, lb[:400])
+    page.goto(f"{BASE}/", wait_until="networkidle")
+    page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
+    lposted.clear()
+    page.evaluate("document.querySelector('#join').scrollIntoView()")
+    page.locator("#join-email").fill("lena2@example.com")
+    page.locator("#join-state").select_option("TX")
+    page.locator("#join-submit").click()
+    page.wait_for_selector("#join-success:not([hidden])", timeout=5000)
+    check("ad landing: the tags stay with a sign-up later in the same visit", "utm_content=en-weight-v1b" in lposted.get("body", ""), lposted.get("body", "")[:300])
+    check("ad landing: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+    ctx = browser.new_context(viewport={"width": 390, "height": 844})
+    page, logs = setup(ctx)
+    page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
+    lposted.clear()
+    page.on("request", lambda req: lposted.update(body=req.post_data) if req.method == "POST" and req.url.rstrip("/") == BASE else None)
+    page.goto(f"{BASE}/", wait_until="networkidle")
+    page.locator("#join-email").fill("noad@example.com")
+    page.locator("#join-state").select_option("TX")
+    page.locator("#join-submit").click()
+    page.wait_for_selector("#join-success:not([hidden])", timeout=5000)
+    nb = lposted.get("body", "")
+    check("a sign-up without an ad sends the tag fields empty", "utm_campaign=&" in nb and "utm_content=" in nb and "utm_content=e" not in nb, nb[:300])
     ctx.close()
 
     # 12) Legal pages

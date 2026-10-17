@@ -31,6 +31,7 @@ from pathlib import Path
 import chatbot
 import content as EN_CONTENT
 import content_es as ES_CONTENT
+import landing as LANDING
 import learn as LEARN
 import pages as PAGES
 import strings
@@ -473,7 +474,7 @@ ES_DESCRIPTION = ("Profesionales de la salud con licencia, en línea: atención 
                   "sexual y más. Sin seguro médico. Abrimos pronto en Texas.")
 ES_TITLE = "Doctor en línea en Texas, sin seguro médico | Jachi Health"
 SHARE_ALT = "Jachi Health: online care, rooted in real medicine. Licensed clinicians, no insurance needed."
-SHARE_ALT_ES = "Jachi Health: atención en línea, arraigada en la medicina real. Profesionales con licencia, sin seguro médico."
+SHARE_ALT_ES = "Jachi Health: atención en línea, con bases médicas sólidas. Profesionales con licencia, sin necesidad de seguro médico."
 # ---------- Structured data (schema.org JSON-LD) ----------
 # One connected graph per page: the organization and website are defined once (by @id) and every page points at them.
 # Only facts that are true today: no clinician names, reviews, ratings or prices until they exist.
@@ -546,9 +547,10 @@ def build_home(lang):
     return body
 
 
-home_body_en = build_home("en")
+HOME_BODIES = {"en": build_home("en")}
+home_body_en = HOME_BODIES["en"]
 if (SRC / "es" / "home.html").exists():
-    build_home("es")
+    HOME_BODIES["es"] = build_home("es")
 
 
 # ---------- Service pages (English) ----------
@@ -841,6 +843,119 @@ for code in LEARN.HUB:
     build_learn_hub(code)
     for art in LEARN.ARTICLES:
         build_guide(art, code)
+
+
+# ---------- Ad landing pages (English /join/..., Spanish /es/unase/...) ----------
+
+def landing_form(lang, interests):
+    """The home page's waitlist form, word for word in each language, set up for one ad: its services ticked,
+    Texas chosen, and no "how did you hear" question (the ad's tags already say).
+    Netlify keeps one copy's fields for each form name, so every copy must have the same fields: the question
+    becomes an empty hidden field rather than disappearing (tests/qa.py checks every page)."""
+    body = HOME_BODIES[lang]
+    m = re.search(r"<!-- form-card -->(.*?)<!-- /form-card -->", body, re.S)
+    if not m:
+        raise SystemExit("home page form markers missing")
+    form = m.group(1).strip()
+    for value in interests:
+        tag = f'<input type="checkbox" name="interest" value="{value}">'
+        if tag not in form:
+            raise SystemExit(f"landing.py: unknown interest {value!r}")
+        form = form.replace(tag, tag[:-1] + " checked>")
+    form = form.replace('<option value="TX">Texas</option>', '<option value="TX" selected>Texas</option>', 1)
+    # Refills mean prescriptions, which an ad's page can't offer until LegitScript certification.
+    form, n = re.subn(r'<label class="check"><input type="checkbox" name="interest" value="refills"><span>[^<]*</span></label>',
+                      "", form, count=1)
+    if n != 1:
+        raise SystemExit("landing: couldn't drop the refills choice")
+    form, n = re.subn(r'\s*<div class="field">\s*<label class="label" for="join-heard">.*?</select>\s*</div>',
+                      '\n<input type="hidden" name="heard" value="">', form, count=1, flags=re.S)
+    if n != 1:
+        raise SystemExit("landing: couldn't drop the 'how did you hear' field")
+    return form
+
+
+LANDING_FOOTER_WORDS = {
+    # An ad's page names no medicine at all, so the footer's notes say the same things without the word "prescribe".
+    "en": [("It doesn't diagnose, prescribe, provide therapy or replace your clinician.",
+            "It doesn't diagnose, provide therapy or replace your clinician."),
+           ("and we don't prescribe controlled substances.", "and controlled substances aren't offered.")],
+    "es": [("No diagnostica, no receta, no da terapia ni reemplaza a su profesional de la salud.",
+            "No diagnostica, no da terapia ni reemplaza a su profesional de la salud."),
+           ("y no recetamos sustancias controladas.", "y no se ofrecen sustancias controladas.")],
+}
+
+
+def landing_footer(lang, tokens):
+    """The site footer with its legal links and notes, but without the care and company link lists: an ad's page
+    links only to the legal pages, so nothing one click away offers other services or names medicines."""
+    L = Lang(lang)
+    foot = render(part(lang, "footer"), L, tokens)
+    foot, n = re.subn(r'<footer class="footer on-dark">', '<footer class="footer footer--lp on-dark">', foot)
+    if n != 1:
+        raise SystemExit(f"landing: expected one footer tag, found {n}")
+    foot, n = re.subn(r'<nav class="footer__col" aria-label="(?:Care|Atención|Company|Empresa)">.*?</nav>\s*', "", foot,
+                      flags=re.S)
+    if n != 2:
+        raise SystemExit(f"landing: expected the care and company footer columns, found {n}")
+    for old, new in LANDING_FOOTER_WORDS[lang]:
+        if old not in foot:
+            raise SystemExit(f"landing: footer note changed: {old!r}")
+        foot = foot.replace(old, new)
+    return foot
+
+
+def build_landing(entry, lang):
+    L = Lang(lang)
+    W = LANDING.WORDS[lang]
+    c = entry[lang]
+    path = LANDING.path(entry, lang)
+    alts = LANDING.alternates(entry)
+    home = HOME_PATH[lang]
+    tokens = chrome_tokens(L, home, home, "#join", alt_href=alts[OTHER[lang]])
+    faq = dict(L.faq)
+    missing = [q for q in W["faq"] if q not in faq]
+    if missing:
+        raise SystemExit(f"landing.py: FAQ questions not on the home page: {missing}")
+    safety = ""
+    if entry["safety"]:
+        title, text = (LANDING.SAFETY_911 if entry["safety"] == "911" else LANDING.SAFETY_988)[lang]
+        if entry["safety"] == "911":
+            actions = f'<a class="btn btn--danger btn--sm" href="tel:911">{icon_svg("phone")}{"Call 911" if lang == "en" else "Llamar al 911"}</a>'
+            tone, ic = "explain--alert", "alert"
+        else:
+            actions = (f'<a class="btn btn--sm" href="tel:988">{icon_svg("phone")}{"Call 988" if lang == "en" else "Llamar al 988"}</a>'
+                       f'<a class="btn btn--ghost btn--sm" href="{esc(L.T["sms_988"])}">{icon_svg("msg")}'
+                       f'{"Text 988" if lang == "en" else "Enviar AYUDA al 988"}</a>')
+            tone, ic = "explain--caution", "heart"
+        safety = (f'<aside class="explain {tone} safety lp-safety" aria-labelledby="lp-safety-title"><h3 id="lp-safety-title">'
+                  f'<span class="explain__ic" aria-hidden="true">{icon_svg(ic)}</span>{esc(title)}</h3><p>{esc(text)}</p>'
+                  f'<div class="safety__actions">{actions}</div></aside>')
+    tokens.update({
+        "{{LP_SKIP}}": esc(W["skip"]), "{{LP_HOME}}": home, "{{LP_HOME_LABEL}}": esc(W["home_label"]),
+        "{{LP_ALT}}": alts[OTHER[lang]], "{{LP_ALT_LANG}}": W["alt_lang"], "{{LP_ALT_LABEL}}": esc(W["alt_label"]),
+        "{{LP_OPEN}}": esc(W["open"]), "{{LP_TEXAS}}": esc(W["texas"]),
+        "{{LP_H1}}": esc(c["h1"]), "{{LP_LEAD}}": esc(c["lead"] + " " + LANDING.LEAD_END[lang]),
+        "{{LP_FORM}}": landing_form(lang, entry["interests"]),
+        "{{LP_POINTS}}": "".join(f"<li>{icon_svg('check')}<span>{esc(x)}</span></li>" for x in W["points"]),
+        "{{LP_NEXT_TITLE}}": esc(W["next_title"]),
+        "{{LP_NEXT}}": re.search(r'<ol class="perks perks--steps">.*?</ol>', HOME_BODIES[lang], re.S).group(0),
+        "{{LP_HELPS_TITLE}}": esc(c["helps_title"]),
+        "{{LP_HELPS}}": "".join(f"<li>{icon_svg('check')}<span>{esc(x)}</span></li>" for x in c["helps"]),
+        "{{LP_SAFETY}}": safety,
+        "{{LP_FAQ_TITLE}}": esc(W["faq_title"]),
+        "{{LP_FAQ}}": faq_items([(q, faq[q]) for q in W["faq"]]),
+    })
+    main = render((SRC / "landing.html").read_text(), L, tokens)
+    body = main + "\n" + landing_footer(lang, tokens) + "\n" + render(part(lang, "chat"), L, tokens)
+    page = {"lang": lang, "path": path, "main": main, "title": c["title"], "description": c["description"],
+            "noindex": True}
+    write(path, document(page, body))
+
+
+for entry in LANDING.PAGES:
+    for code in ("en", "es"):
+        build_landing(entry, code)
 
 
 # ---------- Account pages (English and Spanish) ----------
