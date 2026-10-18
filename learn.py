@@ -59,7 +59,7 @@ LABELS = {
         "urgent": "For an emergency, call <a href=\"tel:911\">911</a>. In a crisis, call or text <a href=\"tel:988\">988</a>.",
         "cta_join": "Join the waitlist",
         "cta_title": "Be first in line.",
-        "cta_lead": "We're opening in Texas first. Join the list and we'll email you when Jachi launches in your state.",
+        "cta_lead": "We're launching nationwide. Join the list and we'll email you when Jachi opens in your state.",
         "list_label": "Guides",
     },
     "es": {
@@ -78,7 +78,7 @@ LABELS = {
                   "<a href=\"tel:988\">988</a> y oprima 2, o envíe AYUDA por mensaje de texto al 988.",
         "cta_join": "Únase a la lista de espera",
         "cta_title": "Sea de los primeros.",
-        "cta_lead": "Abrimos primero en Texas. Únase a la lista y le enviaremos un correo cuando Jachi abra en su estado.",
+        "cta_lead": "Próximamente en todo EE. UU. Únase a la lista y le enviaremos un correo cuando Jachi abra en su estado.",
         "list_label": "Guías",
     },
 }

@@ -10,7 +10,7 @@ const req = (body, { method = 'POST', origin = 'https://www.jachihealth.com' } =
   method, headers: { 'content-type': 'application/json', ...(origin ? { origin } : {}) }, body: method === 'POST' ? (typeof body === 'string' ? body : JSON.stringify(body)) : undefined,
 });
 let calls = [];
-let upstream = { status: 200, body: { content: [{ type: 'text', text: 'We launch in Texas first.' }] } };
+let upstream = { status: 200, body: { content: [{ type: 'text', text: 'We launch nationwide.' }] } };
 globalThis.fetch = async (url, init) => { calls.push({ url, init }); return new Response(JSON.stringify(upstream.body), { status: upstream.status }); };
 
 delete process.env.ANTHROPIC_API_KEY;
@@ -36,7 +36,7 @@ r = await handler(req({ messages: [
   { role: 'user', content: 'x'.repeat(5000) },
 ] }), { ip: '1.1.1.6' });
 const out = await r.json();
-check('valid → 200 with reply', r.status === 200 && out.reply === 'We launch in Texas first.', JSON.stringify(out));
+check('valid → 200 with reply', r.status === 200 && out.reply === 'We launch nationwide.', JSON.stringify(out));
 const sent = calls[0] && JSON.parse(calls[0].init.body);
 check('calls the Messages API', calls[0] && calls[0].url === 'https://api.anthropic.com/v1/messages');
 check('sends key and version headers', calls[0].init.headers['x-api-key'] === 'test-key' && calls[0].init.headers['anthropic-version'] === '2023-06-01');

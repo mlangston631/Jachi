@@ -168,12 +168,9 @@ def lower_first(name):
 
 
 def state_options(L):
-    first = L.build["launching_first"]
-    rest = L.build["all_states"]
-    others = sorted(((c, L.state_name[c]) for c, _n in STATES if c != "TX"), key=lambda x: x[1])
-    return (f'<optgroup label="{esc(first)}"><option value="TX">Texas</option></optgroup>'
-            f'<optgroup label="{esc(rest)}">' + "".join(f'<option value="{c}">{esc(n)}</option>' for c, n in others)
-            + "</optgroup>")
+    """Every state in alphabetical order for the page's language. Jachi launches nationwide."""
+    states = sorted(((c, L.state_name[c]) for c, _n in STATES), key=lambda x: x[1])
+    return "".join(f'<option value="{c}">{esc(n)}</option>' for c, n in states)
 
 
 def faq_items(items):
@@ -466,13 +463,13 @@ def write(path, text):
 
 # Search titles and descriptions: under about 60 and 160 characters so Google shows them whole.
 ORG_DESCRIPTION = ("See a licensed clinician online for urgent care, refills, therapy, sexual health, men's and women's "
-                   "health, skin and weight care. No insurance needed. Launching in Texas.")
+                   "health, skin and weight care. No insurance needed. Launching nationwide.")
 DESCRIPTION = ("Licensed clinicians online for urgent care, UTIs, refills, therapy, birth control, ED and weight care. "
-               "No insurance needed. Launching in Texas.")
-TITLE = "Online Doctor in Texas, No Insurance Needed | Jachi Health"
+               "No insurance needed. Launching nationwide.")
+TITLE = "Online Doctor, No Insurance Needed | Jachi Health"
 ES_DESCRIPTION = ("Profesionales de la salud con licencia, en línea: atención de urgencia, resurtidos, terapia, salud "
-                  "sexual y más. Sin seguro médico. Abrimos pronto en Texas.")
-ES_TITLE = "Doctor en línea en Texas, sin seguro médico | Jachi Health"
+                  "sexual y más. Sin seguro médico. Pronto en todo EE. UU.")
+ES_TITLE = "Doctor en línea, sin seguro médico | Jachi Health"
 SHARE_ALT = "Jachi Health: online care, rooted in real medicine. Licensed clinicians, no insurance needed."
 SHARE_ALT_ES = "Jachi Health: atención en línea, con bases médicas sólidas. Profesionales con licencia, sin necesidad de seguro médico."
 # ---------- Structured data (schema.org JSON-LD) ----------
@@ -483,7 +480,7 @@ ORG_NODE = {
     "@type": "Organization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/",
     "logo": {"@type": "ImageObject", "url": f"{SITE_URL}/apple-touch-icon.png", "width": 180, "height": 180},
     "image": f"{SITE_URL}/og.jpg", "email": EMAIL, "description": ORG_DESCRIPTION,
-    "areaServed": {"@type": "State", "name": "Texas"}, "knowsLanguage": ["en", "es"],
+    "areaServed": {"@type": "Country", "name": "United States"}, "knowsLanguage": ["en", "es"],
     "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": EMAIL,
                      "availableLanguage": ["English", "Spanish"]},
 }
@@ -849,7 +846,7 @@ for code in LEARN.HUB:
 
 def landing_form(lang, interests):
     """The home page's waitlist form, word for word in each language, set up for one ad: its services ticked,
-    Texas chosen, and no "how did you hear" question (the ad's tags already say).
+    and no "how did you hear" question (the ad's tags already say).
     Netlify keeps one copy's fields for each form name, so every copy must have the same fields: the question
     becomes an empty hidden field rather than disappearing (tests/qa.py checks every page)."""
     body = HOME_BODIES[lang]
@@ -862,7 +859,6 @@ def landing_form(lang, interests):
         if tag not in form:
             raise SystemExit(f"landing.py: unknown interest {value!r}")
         form = form.replace(tag, tag[:-1] + " checked>")
-    form = form.replace('<option value="TX">Texas</option>', '<option value="TX" selected>Texas</option>', 1)
     # Refills mean prescriptions, which an ad's page can't offer until LegitScript certification.
     form, n = re.subn(r'<label class="check"><input type="checkbox" name="interest" value="refills"><span>[^<]*</span></label>',
                       "", form, count=1)

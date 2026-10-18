@@ -252,7 +252,7 @@ with sync_playwright() as p:
     chips = page.locator("#fres-chips").inner_text()
     check("finder: urgent result names the service, no price", "Urgent care" in page.locator("#fres-title").inner_text()
           and "Online visit" in chips and "$" not in chips, chips)
-    check("finder: launch note shown", "Texas" in page.locator("#fres-note").inner_text())
+    check("finder: launch note shown", "nationwide" in page.locator("#fres-note").inner_text())
     check("finder: CTA arrow restored", page.locator("#fres-cta .i--arrow").count() == 1 and "btn--danger" not in page.locator("#fres-cta").get_attribute("class"))
     page.screenshot(path=str(OUT / "finder-urgent-mobile.png"))
     page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
@@ -306,7 +306,7 @@ with sync_playwright() as p:
     title = page.locator("#res-title").inner_text()
     check("likely result for BMI 31", "good fit" in title, title)
     check("result title focused", page.evaluate("document.activeElement.id") == "res-title")
-    check("Texas note", "Texas is our first state" in page.locator("#res-note").inner_text())
+    check("result note names the state", "when Jachi opens in Texas" in page.locator("#res-note").inner_text())
     page.screenshot(path=str(OUT / "elig-result-mobile.png"))
     page.locator("#res-join").click(); page.wait_for_timeout(1200)
     check("join prefilled state", page.locator("#join-state").input_value() == "TX")
@@ -527,7 +527,7 @@ with sync_playwright() as p:
     # 2d) Help chat on a phone
     ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
     page, logs = setup(ctx)
-    page.route("**/api/chat", lambda r: r.fulfill(status=200, content_type="application/json", body='{"reply":"We launch in Texas first."}'))
+    page.route("**/api/chat", lambda r: r.fulfill(status=200, content_type="application/json", body='{"reply":"We\'re launching nationwide."}'))
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(600)
     check("phone chat: launcher shows at the top", page.locator("#chat-launcher").is_visible())
     page.evaluate("window.scrollTo({top: document.getElementById('why').offsetTop + 200, behavior: 'instant'})"); page.wait_for_timeout(1000)
@@ -539,7 +539,7 @@ with sync_playwright() as p:
     check("phone chat: page behind is inert", page.evaluate("document.getElementById('main').inert === true"))
     check("phone chat: no keyboard pop on open", page.evaluate("document.activeElement.id") == "chat-title")
     page.locator("#chat-input").fill("When do you launch?"); page.locator("#chat-send").click(); page.wait_for_timeout(700)
-    check("phone chat: reply arrives", "Texas" in page.locator("#chat-log .msg--bot").last.inner_text())
+    check("phone chat: reply arrives", "nationwide" in page.locator("#chat-log .msg--bot").last.inner_text())
     page.screenshot(path=str(OUT / "chat-open-phone.png"))
     page.locator("#chat .chat__fine [data-ticket]").click(); page.wait_for_timeout(300)
     page.screenshot(path=str(OUT / "ticket-phone.png"))
@@ -571,8 +571,8 @@ with sync_playwright() as p:
     page.evaluate("document.getElementById('standards').scrollIntoView()"); page.wait_for_timeout(400)
     links = page.evaluate("[...document.querySelectorAll('.verify__links a')].map(a => a.getAttribute('href'))")
     check("clinical standards: six standards and where to check a license", page.locator(".standard").count() == 6
-          and any("tmb.texas.gov" in l for l in links) and any("bon.texas.gov" in l for l in links)
-          and any("bhec.texas.gov" in l for l in links) and "/texas-medical-board/" in links, str(links))
+          and any("docinfo.org" in l for l in links) and any("nursys.com" in l for l in links)
+          and "/texas-medical-board/" in links, str(links))
     check("clinical standards: outside links don't pass on where you came from",
           page.evaluate("[...document.querySelectorAll('.verify__links a[href^=http]')].every(a => a.relList.contains('noreferrer'))"))
     page.screenshot(path=str(OUT / "standards-phone.png"))
@@ -727,7 +727,7 @@ with sync_playwright() as p:
     check("BMI 28.2 + condition → likely", "good fit" in t and "28.2" in b, b)
     check("likely result: only a first step, and what a clinical evaluation involves", "not a diagnosis or a promise of a prescription" in b
           and "What a clinical evaluation involves" in b and "Lab tests." in b and "Not everyone is prescribed medication." in b, b)
-    check("non-Texas note names state", "California" in n, n)
+    check("result note names the state chosen", "California" in n, n)
     (t, b, n, j), lg = run_elig("TX", "yes", "5", "10", "160", ["none"], "no", "no")
     check("BMI 23 → unlikely", "may not be the right fit" in t and "23.0" in b, b)
     check("unlikely result: no evaluation steps", "What a clinical evaluation involves" not in b, b)
@@ -828,8 +828,8 @@ with sync_playwright() as p:
         await new Promise(r => setTimeout(r, 150));
         opts.onText({ text: 'We launch', delta: 'We launch' });
         await new Promise(r => setTimeout(r, 150));
-        opts.onText({ text: 'We launch in Texas first.', delta: ' in Texas first.' });
-        return { text: 'We launch in Texas first.', truncated: false, modelTierApplied: 'quick' };
+        opts.onText({ text: 'We launch nationwide.', delta: ' nationwide.' });
+        return { text: 'We launch nationwide.', truncated: false, modelTierApplied: 'quick' };
       };
       window.claude = { use: async (name) => (name === 'sample' ? fakeSample : null) };
     """)
@@ -841,7 +841,7 @@ with sync_playwright() as p:
     mid = page.locator("#chat-log .msg--bot").last.inner_text()
     page.wait_for_timeout(600)
     calls = page.evaluate("window.__sampleCalls")
-    check("preview AI: answer streams in", "Texas" in page.locator("#chat-log .msg--bot").last.inner_text(), mid)
+    check("preview AI: answer streams in", "nationwide" in page.locator("#chat-log .msg--bot").last.inner_text(), mid)
     check("preview AI: rules sent as the first turn", calls and calls[0][0]["role"] == "user" and "RULES" in calls[0][0]["content"]
           and calls[0][-1] == {"role": "user", "content": "When do you launch?"})
     check("preview AI: no page errors", not plogs, json.dumps(plogs))
@@ -1019,7 +1019,7 @@ with sync_playwright() as p:
     page.locator("fieldset[data-field='preg'] label:has(input[value='no'])").click()
     page.locator("#elig-next").click(); page.wait_for_timeout(600)
     check("es check: result in Spanish", page.locator("#res-title").inner_text() == ES["e_likely_title"]
-          and page.locator("#res-note").inner_text() == ES["e_note_tx"])
+          and page.locator("#res-note").inner_text() == ES["e_note"].replace("{state}", "Texas"))
 
     page.goto(ES_URL, wait_until="networkidle"); page.wait_for_timeout(500)
     page.locator("#chat-launcher").click(); page.wait_for_timeout(600)
@@ -1305,9 +1305,9 @@ with sync_playwright() as p:
                 })""")
                 ok = (info["lang"] == lang and info["h1"] == [entry[lang]["h1"]] and info["robots"] == "noindex"
                       and not info["canonical"] and info["swap"] == lp_pairs[path] and sorted(info["checked"]) == sorted(entry["interests"])
-                      and info["state"] == "TX" and not info["heard"] and info["language"] == lang
+                      and info["state"] == "" and not info["heard"] and info["language"] == lang
                       and info["tags"] == ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"])
-                check(f"{path} @{w}: the ad's headline, noindex, other language linked, form set up for this ad", ok,
+                check(f"{path} @{w}: the ad's headline, noindex, other language linked, no state picked in advance", ok,
                       json.dumps({k: v for k, v in info.items() if k != "text"}))
                 if w == 390:
                     check(f"{path} @390: the form starts within the first two screens", info["formTop"] < 2 * 844, str(info["formTop"]))
@@ -1335,18 +1335,24 @@ with sync_playwright() as p:
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
     lposted = {}
     page.on("request", lambda req: lposted.update(body=req.post_data) if req.method == "POST" and req.url.rstrip("/") == BASE else None)
-    page.goto(f"{BASE}/join/weight-care/?utm_source=ig&utm_medium=paid_social&utm_campaign=jh-tx-waitlist-en"
-              "&utm_term=en-tx-18plus-broad&utm_content=en-weight-v1%3Cb%3E&fbclid=abc123", wait_until="networkidle")
+    page.goto(f"{BASE}/join/weight-care/?utm_source=ig&utm_medium=paid_social&utm_campaign=jh-us-waitlist-en"
+              "&utm_term=en-us-18plus-broad&utm_content=en-weight-v1%3Cb%3E&fbclid=abc123", wait_until="networkidle")
     check("ad landing: tags and Meta's click id are tidied from the address", page.evaluate("location.search") == "", page.evaluate("location.href"))
     page.locator("#join-email").fill("lena@example.com")
     check("ad landing: no service is ticked for the visitor", page.locator("#join-form input[name=interest]:checked").count() == 0)
     page.locator("#join-form input[name=interest][value=weight-care]").check(force=True)
     page.locator("#join-submit").click()
+    page.wait_for_timeout(400)
+    check("ad landing: the form asks for a state before sending", lposted.get("body") is None
+          and page.locator("#join-success").is_hidden() and page.evaluate("document.activeElement.id") == "join-state",
+          page.evaluate("document.activeElement.id"))
+    page.locator("#join-state").select_option("FL")
+    page.locator("#join-submit").click()
     page.wait_for_selector("#join-success:not([hidden])", timeout=5000)
     lb = lposted.get("body", "")
-    check("ad landing: the sign-up carries the ad's tags, cleaned, with Texas and the service the visitor chose",
-          all(x in lb for x in ("form-name=early-access", "email=lena%40example.com", "state=TX", "interest=weight-care",
-                                "utm_source=ig", "utm_campaign=jh-tx-waitlist-en", "utm_term=en-tx-18plus-broad",
+    check("ad landing: the sign-up carries the ad's tags, cleaned, with the state and the service the visitor chose",
+          all(x in lb for x in ("form-name=early-access", "email=lena%40example.com", "state=FL", "interest=weight-care",
+                                "utm_source=ig", "utm_campaign=jh-us-waitlist-en", "utm_term=en-us-18plus-broad",
                                 "utm_content=en-weight-v1b", "source=website", "language=en")) and "fbclid" not in lb and "%3C" not in lb, lb[:400])
     page.goto(f"{BASE}/", wait_until="networkidle")
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())

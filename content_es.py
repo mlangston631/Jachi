@@ -173,7 +173,7 @@ POPULAR = ["Infección urinaria", "Sinusitis", "Acné", "Disfunción eréctil", 
 
 FAQ = [
     ("¿Jachi ya atiende pacientes?",
-     "Todavía no. Nos estamos preparando para abrir en Texas. Aún no se pueden reservar consultas y no se cobra nada. "
+     "Todavía no. Nos estamos preparando para abrir. Aún no se pueden reservar consultas y no se cobra nada. "
      "Únase a la lista de espera y le avisaremos por correo antes de abrir."),
     ("¿Quiénes son los profesionales de la salud?",
      "Médicos, enfermeros practicantes y asistentes médicos para la atención médica, y terapeutas con licencia para la "
@@ -228,8 +228,8 @@ FAQ = [
     ("¿Puedo usar Jachi si tengo menos de 18 años?",
      "No. Jachi es para adultos de 18 años o más."),
     ("¿Dónde está disponible Jachi?",
-     "Abriremos primero en Texas y luego estado por estado. Únase a la lista de espera para saber cuándo abrimos cerca de "
-     "usted."),
+     "Próximamente en todo EE. UU. Únase a la lista de espera y le avisaremos por correo cuando Jachi abra en su "
+     "estado."),
     ("¿Cómo se protege mi información?",
      "Hoy, este sitio solo recibe lo que usted envía en sus formularios y en el chat, y no tiene anuncios ni rastreo. "
      "Cuando sea paciente, el grupo médico que lo atienda guardará su expediente médico, protegido por la ley HIPAA. "

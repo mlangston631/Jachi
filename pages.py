@@ -17,8 +17,7 @@ EXPECT_LEAD = ("A licensed clinician leads your care. Here's what happens at you
                "how follow-up works.")
 
 WHEN = ("When will Jachi open?",
-        "We're launching in Texas first and expanding state by state. Join the waitlist and we'll email you when we "
-        "open in your state.")
+        "We're launching nationwide. Join the waitlist and we'll email you when we open in your state.")
 
 CALL_911 = ["Chest pain or pressure", "Trouble breathing", "Face drooping, arm weakness or trouble speaking",
             "Severe bleeding or a serious injury", "Fainting or a severe allergic reaction"]
@@ -26,9 +25,9 @@ CALL_911 = ["Chest pain or pressure", "Trouble breathing", "Face drooping, arm w
 PAGES = [
     {
         "slug": "urgent-care", "key": "urgent",
-        "title": "Online Urgent Care in Texas | Jachi Health",
+        "title": "Online Urgent Care | Jachi Health",
         "description": "See a licensed clinician online for colds, flu, sinus infections, UTIs, pink eye, rashes and more. "
-                       "No insurance needed. Launching in Texas.",
+                       "No insurance needed. Launching nationwide.",
         "crumb": "Urgent care",
         "about": ["Common cold", "Flu", "COVID-19", "Sinus infection", "Sore throat", "Bronchitis",
                   "Urinary tract infection", "Pink eye", "Seasonal allergies", "Hives", "Stomach bug", "Migraine"],
@@ -73,8 +72,8 @@ PAGES = [
     },
     {
         "slug": "uti-treatment", "key": "urgent",
-        "title": "UTI Treatment Online in Texas | Jachi Health",
-        "description": "A licensed clinician can treat a UTI online and send antibiotics to your pharmacy if they're right for you. No insurance needed. Launching in Texas.",
+        "title": "UTI Treatment Online | Jachi Health",
+        "description": "A licensed clinician can treat a UTI online and send antibiotics to your pharmacy if they're right for you. No insurance needed. Launching nationwide.",
         "crumb": "UTI treatment",
         "about": [{"@type": "MedicalCondition", "name": "Urinary tract infection", "alternateName": "UTI"}],
         "specialty": "PrimaryCare",
@@ -118,8 +117,8 @@ PAGES = [
     },
     {
         "slug": "prescription-refills", "key": "refill",
-        "title": "Online Prescription Refills in Texas | Jachi Health",
-        "description": "Renew blood pressure, cholesterol, thyroid and diabetes medicines you already take, online with a licensed clinician. No insurance needed. Launching in Texas.",
+        "title": "Online Prescription Refills | Jachi Health",
+        "description": "Renew blood pressure, cholesterol, thyroid and diabetes medicines you already take, online with a licensed clinician. No insurance needed. Launching nationwide.",
         "crumb": "Prescription refills",
         "about": ["High blood pressure", "High cholesterol", "Hypothyroidism", "Asthma", "Acid reflux (GERD)",
                   "Type 2 diabetes"],
@@ -162,9 +161,9 @@ PAGES = [
     },
     {
         "slug": "online-therapy", "key": "therapy",
-        "title": "Online Therapy in Texas, Licensed Therapists | Jachi Health",
+        "title": "Online Therapy, Licensed Therapists | Jachi Health",
         "description": "Private video sessions with a licensed therapist for stress, anxiety, depression, grief, "
-                       "relationships and more. No insurance needed. Launching in Texas.",
+                       "relationships and more. No insurance needed. Launching nationwide.",
         "crumb": "Therapy",
         "about": ["Anxiety", "Depression", "Panic attacks", "Stress", "Grief", "Trauma"],
         "faq_title": "Therapy questions, answered",
@@ -206,9 +205,9 @@ PAGES = [
     },
     {
         "slug": "anxiety-depression-treatment", "key": "mental",
-        "title": "Online Anxiety & Depression Treatment in Texas | Jachi Health",
+        "title": "Online Anxiety & Depression Treatment | Jachi Health",
         "description": "Medication care for anxiety and depression from licensed clinicians online, with regular "
-                       "check-ins. No insurance needed. Launching in Texas.",
+                       "check-ins. No insurance needed. Launching nationwide.",
         "crumb": "Anxiety & depression",
         "about": ["Anxiety", "Depression", "Panic attacks"],
         "specialty": "Psychiatric",
@@ -250,8 +249,8 @@ PAGES = [
     },
     {
         "slug": "sexual-health", "key": "sexual",
-        "title": "STI Testing, Herpes & PrEP Online in Texas | Jachi Health",
-        "description": "Private sexual health care online: STI testing at a nearby lab, treatment, herpes care and PrEP for HIV prevention. No insurance needed. Launching in Texas.",
+        "title": "STI Testing, Herpes & PrEP Online | Jachi Health",
+        "description": "Private sexual health care online: STI testing at a nearby lab, treatment, herpes care and PrEP for HIV prevention. No insurance needed. Launching nationwide.",
         "crumb": "Sexual health",
         "about": ["Chlamydia", "Gonorrhea", "Genital herpes", "HIV", "Trichomoniasis", "Genital warts"],
         "specialty": "Infectious",
@@ -295,8 +294,8 @@ PAGES = [
     },
     {
         "slug": "mens-health", "key": "mens",
-        "title": "ED & Hair Loss Treatment Online in Texas | Jachi Health",
-        "description": "Discreet online care for erectile dysfunction, hair loss and premature ejaculation from licensed clinicians. No insurance needed. Launching in Texas.",
+        "title": "ED & Hair Loss Treatment Online | Jachi Health",
+        "description": "Discreet online care for erectile dysfunction, hair loss and premature ejaculation from licensed clinicians. No insurance needed. Launching nationwide.",
         "crumb": "Men's health",
         "about": ["Erectile dysfunction", "Hair loss", "Premature ejaculation"],
         "specialty": "Urologic",
@@ -337,8 +336,8 @@ PAGES = [
     },
     {
         "slug": "womens-health", "key": "womens",
-        "title": "Birth Control Online in Texas & Women's Health | Jachi Health",
-        "description": "Birth control, emergency contraception, menopause care, and yeast infection and BV treatment online. No insurance needed. Launching in Texas.",
+        "title": "Birth Control Online & Women's Health | Jachi Health",
+        "description": "Birth control, emergency contraception, menopause care, and yeast infection and BV treatment online. No insurance needed. Launching nationwide.",
         "crumb": "Women's health",
         "about": [{"@type": "MedicalTherapy", "name": "Birth control"},
                   {"@type": "MedicalTherapy", "name": "Emergency contraception"}, "Menopause", "Yeast infection",
@@ -381,8 +380,8 @@ PAGES = [
     },
     {
         "slug": "skin-care", "key": "skin",
-        "title": "Acne & Skin Care Online in Texas | Jachi Health",
-        "description": "Treatment plans for acne, rosacea, eczema, psoriasis and cold sores from licensed clinicians online. No insurance needed. Launching in Texas.",
+        "title": "Acne & Skin Care Online | Jachi Health",
+        "description": "Treatment plans for acne, rosacea, eczema, psoriasis and cold sores from licensed clinicians online. No insurance needed. Launching nationwide.",
         "crumb": "Skin care",
         "about": ["Acne", "Rosacea", "Eczema", "Psoriasis", "Cold sores", "Fungal skin infection", "Dandruff"],
         "specialty": "Dermatology",
@@ -421,9 +420,9 @@ PAGES = [
     },
     {
         "slug": "weight-loss", "key": "weight",
-        "title": "Medical Weight Loss Online in Texas | Jachi Health",
+        "title": "Medical Weight Loss Online | Jachi Health",
         "description": "A clinician-led weight care program with FDA-approved medication, like a GLP-1, when it's right "
-                       "for you. No insurance needed. Launching in Texas.",
+                       "for you. No insurance needed. Launching nationwide.",
         "crumb": "Weight care",
         "about": ["Obesity", "Overweight"],
         "faq_title": "Weight loss questions, answered",
