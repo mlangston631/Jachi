@@ -34,6 +34,7 @@ checks). To get them by email: Netlify → Project configuration → Notificatio
 | `/learn/` and its guides, `/es/guias/` and the Spanish guides | `src/learn.html` and `src/article.html`, words in `learn.py` (both languages) |
 | `/join/`, `/es/unase/` and their pages: waitlist pages for Meta ads (not indexed, not in the sitemap) | `src/landing.html`, words in `landing.py` (both languages), the form copied from the home page |
 | `/privacy/`, `/terms/`, `/texas-medical-board/` | `src/en/<name>.html` |
+| `/consumer-health-data/`, `/es/datos-de-salud/`: the consumer health data privacy policy (Washington's My Health My Data Act) | `src/en/health-data.html` and `src/es/health-data.html` |
 | `/account/`, `/es/account/` | `src/account.html`, `account.css`, `account.js` and `identity.js`, words in `strings.py` |
 | `/admin/` (not linked, not indexed) | `src/admin.html`, `admin.css`, `admin.js` and `identity.js` |
 | `404.html` | `src/en/404.html` |
@@ -88,7 +89,7 @@ The published files are generated. Edit the source, then rebuild:
 | How Jachi works | `HOW` in `content.py` and `content_es.py`, layout in `src/en/how.html` and `src/es/how.html` |
 | Health guides | `learn.py` (both languages, with their sources) |
 | Ad landing pages | `landing.py` (both languages, and the words they must never use) and `src/landing.html` |
-| Legal pages | `src/en/privacy.html`, `terms.html`, `texas-medical-board.html` |
+| Legal pages | `src/en/privacy.html`, `terms.html`, `texas-medical-board.html`; the health data policy in `src/<lang>/health-data.html` |
 | Styles | `src/style.css` |
 | Interactive behaviour | `src/app.js` |
 | Chat assistant's instructions and server code | `chatbot.py` |

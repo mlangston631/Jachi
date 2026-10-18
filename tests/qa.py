@@ -34,6 +34,8 @@ PORT = 8765
 BASE = f"http://127.0.0.1:{PORT}"
 URL = f"{BASE}/"
 ES_URL = f"{BASE}/es/"
+# The consumer health data privacy policy (Washington's My Health My Data Act), in each language
+HEALTH_EN, HEALTH_ES = "/consumer-health-data/", "/es/datos-de-salud/"
 OUT = ROOT / "tests" / "out"
 OUT.mkdir(exist_ok=True)
 ensure_fonts()
@@ -360,7 +362,8 @@ with sync_playwright() as p:
           and page.locator("#faq-a-1 p").inner_text().startswith("Not yet."), q.inner_text())
     q.click(); page.wait_for_timeout(600)
     check("faq closes", q.get_attribute("aria-expanded") == "false" and not page.locator("#faq-a-1 p").is_visible())
-    check("footer links to the privacy policy and terms", page.locator("footer a[href='/privacy/']").count() == 1
+    check("footer links to the privacy policy, health data policy and terms", page.locator("footer a[href='/privacy/']").count() == 1
+          and page.locator(f"footer a[href='{HEALTH_EN}']").count() == 1
           and page.locator("footer a[href='/terms/']").count() == 1 and page.locator("footer a[href='/texas-medical-board/']").count() == 1)
     page.locator("#join-form [data-open='privacy']").scroll_into_view_if_needed()
     page.locator("#join-form [data-open='privacy']").click(); page.wait_for_timeout(500)
@@ -576,6 +579,14 @@ with sync_playwright() as p:
     check("clinical standards: outside links don't pass on where you came from",
           page.evaluate("[...document.querySelectorAll('.verify__links a[href^=http]')].every(a => a.relList.contains('noreferrer'))"))
     page.screenshot(path=str(OUT / "standards-phone.png"))
+    page.evaluate("document.getElementById('privacy-promise').scrollIntoView()"); page.wait_for_timeout(400)
+    promise = page.locator("#privacy-promise")
+    check("privacy promise: three zeros, the on-device tools, and links to both privacy policies",
+          promise.locator(".ledger__row").count() == 3 and promise.locator(".ledger__n").all_inner_texts() == ["0", "0", "0"]
+          and "never leaves it" in promise.inner_text() and promise.locator(f"a[href='{HEALTH_EN}']").count() == 1
+          and promise.locator("a[href='/privacy/']").count() == 1, promise.inner_text()[:300])
+    check("privacy promise: screen readers hear each row as none", promise.locator(".ledger__row .visually-hidden").all_inner_texts() == [": none."] * 3)
+    page.screenshot(path=str(OUT / "privacy-promise-phone.png"))
     ov = page.evaluate(OVERFLOW_JS)
     check("home additions: no overflow on a phone", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
     page.evaluate("window.scrollTo(0, 0)"); page.wait_for_timeout(300)
@@ -1150,10 +1161,11 @@ with sync_playwright() as p:
     ctx.close()
 
     # 11c) How Jachi works and the Learn guides, in English and Spanish
-    content_pages = [CONTENT.HOW["path"], CONTENT_ES.HOW["path"], LEARN.HUB["en"]["path"], LEARN.HUB["es"]["path"]]
+    content_pages = [CONTENT.HOW["path"], CONTENT_ES.HOW["path"], LEARN.HUB["en"]["path"], LEARN.HUB["es"]["path"],
+                     HEALTH_EN, HEALTH_ES]
     guide_pages = [LEARN.path(a, lang) for lang in ("en", "es") for a in LEARN.ARTICLES]
     content_pages += guide_pages
-    pairs = {CONTENT.HOW["path"]: CONTENT_ES.HOW["path"], LEARN.HUB["en"]["path"]: LEARN.HUB["es"]["path"]}
+    pairs = {CONTENT.HOW["path"]: CONTENT_ES.HOW["path"], LEARN.HUB["en"]["path"]: LEARN.HUB["es"]["path"], HEALTH_EN: HEALTH_ES}
     pairs.update({LEARN.path(a, "en"): LEARN.path(a, "es") for a in LEARN.ARTICLES})
     pairs.update({v: k for k, v in list(pairs.items())})
     LINKS_JS = """() => [...new Set([...document.querySelectorAll('a[href^="/"]')].map(a => a.getAttribute('href').split('#')[0])
@@ -1322,7 +1334,8 @@ with sync_playwright() as p:
                     cols = page.locator("footer .footer__col").count()
                     check(f"{path}: footer keeps the legal links and notes, without the lists of other services and pages",
                           cols == 1 and page.locator("footer .emergency").count() == 1 and page.locator("footer a[href='/texas-medical-board/']").count() == 1
-                          and page.locator("footer a[href='/privacy/']").count() == 1)
+                          and page.locator("footer a[href='/privacy/']").count() == 1
+                          and page.locator(f"footer a[href='{HEALTH_EN}'], footer a[href='{HEALTH_ES}']").count() == 1)
                     page.screenshot(path=str(OUT / f"landing{path.strip('/').replace('/', '-')}-1440.png"), full_page=False)
                 check(f"{path} @{w}: no console errors", not logs, json.dumps(logs))
                 ctx.close()
@@ -1396,6 +1409,28 @@ with sync_playwright() as p:
             if w == 390:
                 page.screenshot(path=str(OUT / f"legal-{slug}-390.png"), full_page=True)
             ctx.close()
+
+    # 12a) Consumer health data privacy policy: what Washington's My Health My Data Act asks it to say, in both
+    # languages, and a link to it from both home pages (RCW 19.373.020), the waitlist form's note and the privacy policy
+    for path, must in ((HEALTH_EN, ["My Health My Data Act", "What we collect", "Where it comes from", "How we use it",
+                                    "Who handles it", "Netlify", "Anthropic", "Meta", "Confirm and access", "Withdraw consent",
+                                    "Delete it", "45 days", "Appeals", "Washington State Attorney General", EMAIL]),
+                       (HEALTH_ES, ["My Health My Data", "Qué recopilamos", "De dónde vienen", "Cómo los usamos",
+                                    "Quién los maneja", "Netlify", "Anthropic", "Meta", "Confirmar y acceder",
+                                    "Retirar su consentimiento", "Borrarlos", "45 días", "Apelaciones", "Procurador General", EMAIL])):
+        text = html.unescape(re.sub(r"<[^>]+>", " ", (ROOT / "public" / path.strip("/") / "index.html").read_text()))
+        text = re.sub(r"\s+", " ", text)
+        missing = [m for m in must if m not in text]
+        check(f"{path}: says what's collected, from where, why, who handles it, the rights, deadlines and appeals", not missing, str(missing))
+    for home, policy in (("index.html", HEALTH_EN), ("es/index.html", HEALTH_ES)):
+        h = (ROOT / "public" / home).read_text()
+        promise = h[h.index('id="privacy-promise"'):h.index("</section>", h.index('id="privacy-promise"'))]
+        foot = h[h.index("<footer"):h.index("</footer>")]
+        note = re.search(r'<form class="form" id="join-form".*?</form>', h, re.S).group(0)
+        check(f"/{home.replace('index.html', '')}: links the health data policy from the privacy promise, the footer and the waitlist form",
+              f'href="{policy}"' in promise and f'href="{policy}"' in foot and f'href="{policy}"' in note)
+    check("the privacy policy links the health data policy",
+          f'href="{HEALTH_EN}"' in (ROOT / "public" / "privacy" / "index.html").read_text().split("<footer")[0])
 
     # 12b) No prices anywhere until the owner has a quote (terms keep their $100 liability cap)
     import re as _re
