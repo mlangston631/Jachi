@@ -14,8 +14,8 @@ ROOT = Path(__file__).resolve().parent.parent
 # (English, Spanish, how many times the English appears)
 R = [
     # Hero
-    ('<span>Waitlist open</span><span class="status__rule" aria-hidden="true"></span><span>Launching in Texas first</span>',
-     '<span>Lista de espera abierta</span><span class="status__rule" aria-hidden="true"></span><span>Abrimos primero en Texas</span>', 1),
+    ('<span>Waitlist open</span><span class="status__rule" aria-hidden="true"></span><span>Launching nationwide</span>',
+     '<span>Lista de espera abierta</span><span class="status__rule" aria-hidden="true"></span><span>Próximamente en todo EE. UU.</span>', 1),
     ('id="hero-title" data-rise style="--d:80ms">Online care, rooted in real medicine.</h1>',
      'id="hero-title" data-rise style="--d:80ms">Atención en línea, con bases médicas sólidas.</h1>', 1),
     ('<a class="hero__alt" href="/es/" hreflang="es" lang="es" data-rise style="--d:160ms"><span class="hero__alt-tag">En español</span><span class="hero__alt-line">Atención en línea, con bases médicas sólidas.</span></a>',
@@ -78,8 +78,8 @@ R = [
     ('<p>Physicians, nurse practitioners and physician assistants provide medical care, and licensed therapists provide therapy. Each one is licensed in the state where you live.</p>',
      '<p>Médicos, enfermeros practicantes y asistentes médicos brindan la atención médica, y terapeutas con licencia brindan la terapia. Cada uno tiene licencia en el estado donde usted vive.</p>', 1),
     ('<h3>Physician oversight</h3>', '<h3>Supervisión médica</h3>', 1),
-    ('<p>Nurse practitioners and physician assistants work with a supervising physician, as Texas law requires.</p>',
-     '<p>Los enfermeros practicantes y los asistentes médicos trabajan con un médico supervisor, como lo exige la ley de Texas.</p>', 1),
+    ('<p>Nurse practitioners and physician assistants work with a supervising or collaborating physician wherever state law requires it.</p>',
+     '<p>Los enfermeros practicantes y los asistentes médicos trabajan con un médico supervisor o colaborador cuando la ley estatal lo exige.</p>', 1),
     ('<h3>A clinician makes every decision</h3>', '<h3>Un profesional de la salud toma cada decisión</h3>', 1),
     ('<p>Only a licensed clinician diagnoses, prescribes or changes your treatment. Our AI assistant never does.</p>',
      '<p>Solo un profesional de la salud con licencia diagnostica, receta o cambia su tratamiento. Nuestro asistente de IA nunca lo hace.</p>', 1),
@@ -93,14 +93,12 @@ R = [
     ("<p>When you become a patient, your health information is protected under HIPAA. This site doesn't use ads or tracking.</p>",
      '<p>Cuando sea paciente, su información de salud estará protegida por la ley HIPAA. Este sitio no usa anuncios ni rastreo.</p>', 1),
     ('<h3>Check a license yourself</h3>', '<h3>Verifique una licencia usted mismo</h3>', 1),
-    ('<p>Licenses are public in Texas. You can look up any physician, physician assistant, nurse practitioner or therapist with the state board that licenses them.</p>',
-     '<p>En Texas, las licencias son públicas. Puede buscar a cualquier médico, asistente médico, enfermero practicante o terapeuta en la junta estatal que le otorga la licencia.</p>', 1),
-    ('<b>Texas Medical Board</b><small>Physicians and physician assistants</small>',
-     '<b>Junta Médica de Texas</b><small>Médicos y asistentes médicos (en inglés)</small>', 1),
-    ('<b>Texas Board of Nursing</b><small>Nurse practitioners</small>',
-     '<b>Junta de Enfermería de Texas</b><small>Enfermeros practicantes (en inglés)</small>', 1),
-    ('<b>Behavioral Health Executive Council</b><small>Counselors, therapists, social workers and psychologists</small>',
-     '<b>Consejo Ejecutivo de Salud Conductual</b><small>Consejeros, terapeutas, trabajadores sociales y psicólogos (en inglés)</small>', 1),
+    ('<p>Licenses are public. You can look up physicians, physician assistants and nurse practitioners in any state, and therapists with the board in their state.</p>',
+     '<p>Las licencias son públicas. Puede buscar médicos, asistentes médicos y enfermeros practicantes de cualquier estado, y terapeutas en la junta de su estado.</p>', 1),
+    ('<b>DocInfo</b><small>Physicians and physician assistants, every state</small>',
+     '<b>DocInfo</b><small>Médicos y asistentes médicos, todos los estados (en inglés)</small>', 1),
+    ('<b>Nursys</b><small>Nurses and nurse practitioners, most states</small>',
+     '<b>Nursys</b><small>Enfermeros y enfermeros practicantes, la mayoría de los estados (en inglés)</small>', 1),
     ('<a href="/texas-medical-board/"><span><b>How to file a complaint</b><small>Texas Medical Board notice</small>',
      '<a href="/texas-medical-board/" hreflang="en"><span><b>Cómo presentar una queja</b><small>Aviso de la Junta Médica de Texas (en inglés)</small>', 1),
 
@@ -291,8 +289,8 @@ R = [
 
     # Waitlist
     ('id="join-title">Be first in line.</h2>', 'id="join-title">Sea de los primeros.</h2>', 1),
-    ("<p class=\"lead lead--light\">We're opening in Texas first. Join the waitlist and we'll email you when Jachi launches in your state. Joining doesn't book a visit and costs nothing.</p>",
-     '<p class="lead lead--light">Abriremos primero en Texas. Únase a la lista de espera y le avisaremos por correo cuando Jachi llegue a su estado. Unirse no reserva una consulta y no cuesta nada.</p>', 1),
+    ("<p class=\"lead lead--light\">We're launching nationwide. Join the waitlist and we'll email you when Jachi opens in your state. Joining doesn't book a visit and costs nothing.</p>",
+     '<p class="lead lead--light">Próximamente en todo EE. UU. Únase a la lista de espera y le avisaremos por correo cuando Jachi abra en su estado. Unirse no reserva una consulta y no cuesta nada.</p>', 1),
     ('<h3 class="join__next">What happens after you join</h3>', '<h3 class="join__next">Qué pasa después de unirse</h3>', 1),
     ('<li>We save your email and state, plus your first name and services if you add them.</li>',
      '<li>Guardamos su correo y su estado, y también su nombre y sus servicios si los agrega.</li>', 1),

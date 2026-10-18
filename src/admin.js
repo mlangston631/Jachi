@@ -267,7 +267,7 @@
 
   const renderOverview = list => {
     const onList = list.filter(p => p.emailsOn);
-    const texas = onList.filter(p => p.state === 'TX').length;
+    const stateCount = new Set(onList.map(p => p.state).filter(Boolean)).size;
     const week = list.filter(p => p.joined && Date.now() - new Date(p.joined).getTime() < 7 * DAY).length;
     const w = weeks(list);
     const max = Math.max(1, ...w.map(x => x.n));
@@ -293,7 +293,7 @@
           <p class="ov__num">${onList.length}</p>
           <p class="ov__label">${onList.length === 1 ? 'person' : 'people'} on the waitlist</p>
           <ul class="ov__facts">
-            <li><b>${texas}</b> in Texas</li>
+            <li><b>${stateCount}</b> ${stateCount === 1 ? 'state' : 'states'}</li>
             <li><b>${week}</b> joined in the last 7 days</li>
             <li><b>${data.tickets.length}</b> ${data.tickets.length === 1 ? 'ticket' : 'tickets'}</li>
           </ul>

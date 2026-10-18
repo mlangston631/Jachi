@@ -167,7 +167,7 @@ POPULAR = ["UTI", "Sinus infection", "Acne", "ED", "Birth control", "STI testing
 
 FAQ = [
     ("Is Jachi accepting patients yet?",
-     "Not yet. We're getting ready to open in Texas. Visits can't be booked yet, and nothing is charged. Join the "
+     "Not yet. We're getting ready to open. Visits can't be booked yet, and nothing is charged. Join the "
      "waitlist and we'll email you before we open."),
     ("Who are the clinicians?",
      "Physicians, nurse practitioners and physician assistants for medical care, and licensed therapists for therapy. "
@@ -218,7 +218,7 @@ FAQ = [
     ("Can I use Jachi if I'm under 18?",
      "No. Jachi is for adults 18 and older."),
     ("Where is Jachi available?",
-     "We're launching in Texas first and will expand state by state. Join the waitlist to hear when we open near you."),
+     "We're launching nationwide. Join the waitlist and we'll email you when Jachi opens in your state."),
     ("How is my information protected?",
      "Today, this site collects only what you send in its forms and chat, and it has no ads or tracking. When you "
      "become a patient, your medical records will be kept by the medical group that treats you and protected under "

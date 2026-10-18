@@ -16,7 +16,7 @@ EN = {
     "fix_many": "Please fix the {n} highlighted fields.",
     "enter_email": "Enter your email address.",
     "valid_email": "Enter a valid email, like name@example.com.",
-    "launch_note": "We're launching in Texas first. Join the waitlist and we'll email you when we open in your state.",
+    "launch_note": "We're launching nationwide. Join the waitlist and we'll email you when we open in your state.",
 
     # Weight care check
     "e_age": "Choose yes or no.",
@@ -47,8 +47,7 @@ EN = {
     "e_chip_bmi": "BMI {bmi}",
     "e_chip_cond_1": "1 related condition",
     "e_chip_cond_n": "{n} related conditions",
-    "e_note_tx": "Texas is our first state. Join the waitlist to be first in line when we open.",
-    "e_note_other": "We're launching in Texas first. Join the waitlist and we'll email you when we open in {state}.",
+    "e_note": "Join the waitlist and we'll email you when Jachi opens in {state}.",
 
     # Care finder
     "f_need": "Choose what you need help with.",
@@ -107,7 +106,7 @@ EN = {
 
     # Sharing
     "share_title": "Jachi Health",
-    "share_text": "Online care from licensed clinicians, launching in Texas. Join the waitlist:",
+    "share_text": "Online care from licensed clinicians, launching nationwide. Join the waitlist:",
     "share_button": "Share Jachi",
     "share_copied_button": "Link copied",
     "share_copied": "Link copied. Paste it into a text or email.",
@@ -229,7 +228,7 @@ ES = {
     "fix_many": "Corrija los {n} campos marcados.",
     "enter_email": "Escriba su correo electrónico.",
     "valid_email": "Escriba un correo válido, como nombre@ejemplo.com.",
-    "launch_note": "Abriremos primero en Texas. Únase a la lista de espera y le avisaremos por correo cuando abramos en su estado.",
+    "launch_note": "Próximamente en todo EE. UU. Únase a la lista de espera y le avisaremos por correo cuando abramos en su estado.",
 
     # Weight care check
     "e_age": "Elija sí o no.",
@@ -260,8 +259,7 @@ ES = {
     "e_chip_bmi": "IMC {bmi}",
     "e_chip_cond_1": "1 afección relacionada",
     "e_chip_cond_n": "{n} afecciones relacionadas",
-    "e_note_tx": "Texas es nuestro primer estado. Únase a la lista de espera para ser de los primeros cuando abramos.",
-    "e_note_other": "Abriremos primero en Texas. Únase a la lista de espera y le avisaremos por correo cuando abramos en {state}.",
+    "e_note": "Únase a la lista de espera y le avisaremos por correo cuando Jachi abra en {state}.",
 
     # Care finder
     "f_need": "Elija con qué necesita ayuda.",
@@ -320,7 +318,7 @@ ES = {
 
     # Sharing
     "share_title": "Jachi Health",
-    "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en Texas. Únase a la lista de espera:",
+    "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en todo EE. UU. Únase a la lista de espera:",
     "share_button": "Compartir Jachi",
     "share_copied_button": "Enlace copiado",
     "share_copied": "Enlace copiado. Péguelo en un mensaje de texto o un correo.",

@@ -330,7 +330,7 @@
         R.note.hidden = true;
       } else {
         R.note.hidden = false;
-        R.note.textContent = E.state.value === 'TX' ? T.e_note_tx : fmt(T.e_note_other, { state: name });
+        R.note.textContent = fmt(T.e_note, { state: name });
       }
       R.join.hidden = kind === 'minor';
       R.join.dataset.state = E.state.value;

@@ -13,7 +13,7 @@ HUB = {"en": "/join/", "es": "/es/unase/"}
 WORDS = {
     "en": {
         "skip": "Skip to content", "home_label": "Jachi Health home", "alt_label": "Español", "alt_lang": "es",
-        "open": "Waitlist open", "texas": "Launching in Texas first",
+        "open": "Waitlist open", "texas": "Launching nationwide",
         "points": ["Licensed clinicians", "No insurance needed", "Price shown before you start"],
         "next_title": "What happens after you join",
         "faq_title": "Questions, answered.",
@@ -21,7 +21,7 @@ WORDS = {
     },
     "es": {
         "skip": "Saltar al contenido", "home_label": "Inicio de Jachi Health", "alt_label": "English", "alt_lang": "en",
-        "open": "Lista de espera abierta", "texas": "Abrimos primero en Texas",
+        "open": "Lista de espera abierta", "texas": "Próximamente en todo EE. UU.",
         "points": ["Profesionales con licencia", "No necesita seguro médico", "El precio, antes de empezar"],
         "next_title": "Qué pasa después de unirse",
         "faq_title": "Preguntas y respuestas.",
@@ -30,8 +30,8 @@ WORDS = {
 }
 
 LEAD_END = {
-    "en": "No insurance needed. Join the waitlist and we'll email you when Jachi opens in Texas.",
-    "es": "No necesita seguro médico. Únase a la lista de espera y le avisaremos por correo cuando Jachi abra en Texas, "
+    "en": "No insurance needed. Join the waitlist and we'll email you when Jachi opens in your state.",
+    "es": "No necesita seguro médico. Únase a la lista de espera y le avisaremos por correo cuando Jachi abra en su estado, "
           "y si las consultas podrán ser en español.",
 }
 
@@ -56,18 +56,18 @@ SAFETY_988 = {
 PAGES = [
     {
         "key": "start", "interests": [], "safety": None,
-        "en": {"slug": "", "title": "Join the Jachi Health Waitlist | Online Care in Texas",
-               "description": "Online care from licensed clinicians, launching in Texas first. Join the waitlist and we'll "
-                              "email you when Jachi opens.",
+        "en": {"slug": "", "title": "Join the Jachi Health Waitlist | Online Care",
+               "description": "Online care from licensed clinicians, launching nationwide. Join the waitlist and we'll email "
+                              "you when Jachi opens in your state.",
                "h1": "Online care, rooted in real medicine.",
                "lead": "Licensed clinicians online for everyday care, therapy, weight care and more.",
                "helps_title": "What clinicians will help with",
                "helps": ["Everyday illness, like colds, UTIs and rashes", "Anxiety and depression care, and therapy",
                          "Medical weight care", "Women's health and men's health", "Sexual health and STI testing",
                          "Skin care"]},
-        "es": {"slug": "", "title": "Únase a la lista de espera de Jachi Health | Atención en línea en Texas",
-               "description": "Atención en línea con profesionales de la salud con licencia, primero en Texas. Únase a la "
-                              "lista de espera y le avisaremos cuando Jachi abra.",
+        "es": {"slug": "", "title": "Únase a la lista de espera de Jachi Health | Atención en línea",
+               "description": "Atención en línea con profesionales de la salud con licencia, pronto en todo EE. UU. Únase "
+                              "a la lista de espera y le avisaremos cuando Jachi abra en su estado.",
                "h1": "Atención en línea, con bases médicas sólidas.",
                "lead": "Profesionales de la salud con licencia, en línea, para la atención diaria, terapia, control de "
                        "peso y más.",
@@ -78,17 +78,17 @@ PAGES = [
     },
     {
         "key": "everyday", "interests": [], "safety": "911",
-        "en": {"slug": "everyday-care", "title": "Everyday Care Online in Texas: Join the Waitlist | Jachi Health",
+        "en": {"slug": "everyday-care", "title": "Everyday Care Online: Join the Waitlist | Jachi Health",
                "description": "Online visits with licensed clinicians for colds, UTIs, sinus infections and more. "
-                              "Launching in Texas first. Join the waitlist.",
+                              "Launching nationwide. Join the waitlist.",
                "h1": "Everyday care, without the waiting room.",
                "lead": "Online visits with licensed clinicians, from home.",
                "helps_title": "What clinicians will help with",
                "helps": ["Cold and flu", "Urinary tract infections (UTIs)", "Sinus infections", "Sore throat",
                          "Pink eye", "Rashes, hives and bites", "Seasonal allergies", "Stomach bugs"]},
-        "es": {"slug": "atencion-diaria", "title": "Atención diaria en línea en Texas: únase a la lista | Jachi Health",
+        "es": {"slug": "atencion-diaria", "title": "Atención diaria en línea: únase a la lista | Jachi Health",
                "description": "Consultas en línea con profesionales de la salud con licencia para resfriados, infecciones "
-                              "urinarias, sinusitis y más. Primero en Texas.",
+                              "urinarias, sinusitis y más. Pronto en todo EE. UU.",
                "h1": "Atención de todos los días, sin sala de espera.",
                "lead": "Consultas en línea con profesionales de la salud con licencia, desde casa.",
                "helps_title": "En qué le ayudarán los profesionales de la salud",
@@ -97,17 +97,17 @@ PAGES = [
     },
     {
         "key": "weight", "interests": [], "safety": None,
-        "en": {"slug": "weight-care", "title": "Medical Weight Care in Texas: Join the Waitlist | Jachi Health",
+        "en": {"slug": "weight-care", "title": "Medical Weight Care Online: Join the Waitlist | Jachi Health",
                "description": "Medical weight care led by licensed clinicians, with a plan built around your health and "
-                              "regular check-ins. Launching in Texas first.",
+                              "regular check-ins. Launching nationwide.",
                "h1": "Medical weight care, led by licensed clinicians.",
                "lead": "A plan built around your health, with regular check-ins.",
                "helps_title": "What weight care will include",
                "helps": ["A visit with a licensed clinician who reviews your health", "A plan your clinician makes with you",
                          "Lab work, if your clinician needs it", "Regular check-ins and plan updates"]},
-        "es": {"slug": "control-de-peso", "title": "Control médico del peso en Texas: únase a la lista | Jachi Health",
+        "es": {"slug": "control-de-peso", "title": "Control médico del peso en línea: únase a la lista | Jachi Health",
                "description": "Control médico del peso con profesionales de la salud con licencia, con un plan pensado "
-                              "para su salud y seguimiento regular. Primero en Texas.",
+                              "para su salud y seguimiento regular. Pronto en todo EE. UU.",
                "h1": "Control médico del peso, con profesionales de la salud.",
                "lead": "Un plan pensado para su salud, con seguimiento regular.",
                "helps_title": "Qué incluirá el control médico del peso",
@@ -117,17 +117,17 @@ PAGES = [
     },
     {
         "key": "mind", "interests": [], "safety": "988",
-        "en": {"slug": "mental-health", "title": "Anxiety & Depression Care in Texas: Join the Waitlist | Jachi Health",
+        "en": {"slug": "mental-health", "title": "Anxiety & Depression Care Online: Join the Waitlist | Jachi Health",
                "description": "Anxiety and depression care with real follow-up, from licensed clinicians and therapists "
-                              "by video. Launching in Texas first.",
+                              "by video. Launching nationwide.",
                "h1": "Anxiety and depression care, with real follow-up.",
                "lead": "Licensed clinicians and therapists, by video, from home.",
                "helps_title": "What clinicians and therapists will help with",
                "helps": ["Anxiety", "Depression", "Panic attacks", "Stress and burnout", "Grief and loss",
                          "Relationship issues"]},
-        "es": {"slug": "salud-mental", "title": "Ansiedad y depresión en Texas: únase a la lista | Jachi Health",
+        "es": {"slug": "salud-mental", "title": "Ansiedad y depresión en línea: únase a la lista | Jachi Health",
                "description": "Atención para la ansiedad y la depresión, con seguimiento real, de profesionales de la "
-                              "salud y terapeutas con licencia por video. Primero en Texas.",
+                              "salud y terapeutas con licencia por video. Pronto en todo EE. UU.",
                "h1": "Atención para la ansiedad y la depresión, con seguimiento real.",
                "lead": "Profesionales de la salud y terapeutas con licencia, por video, desde casa.",
                "helps_title": "En qué le ayudarán los profesionales y terapeutas",
@@ -136,17 +136,17 @@ PAGES = [
     },
     {
         "key": "women", "interests": [], "safety": None,
-        "en": {"slug": "womens-health", "title": "Women's Health Care Online in Texas: Join the Waitlist | Jachi Health",
-               "description": "Private women's health care from licensed clinicians, online from home. Launching in "
-                              "Texas first. Join the waitlist.",
+        "en": {"slug": "womens-health", "title": "Women's Health Care Online: Join the Waitlist | Jachi Health",
+               "description": "Private women's health care from licensed clinicians, online from home. Launching "
+                              "nationwide. Join the waitlist.",
                "h1": "Women's health care, online.",
                "lead": "Private care from licensed clinicians, from home.",
                "helps_title": "What clinicians will help with",
                "helps": ["Urinary tract infections (UTIs)", "Menopause symptoms", "Yeast infections",
                          "Bacterial vaginosis (BV)", "STI testing"]},
-        "es": {"slug": "salud-de-la-mujer", "title": "Salud de la mujer en línea en Texas: únase a la lista | Jachi Health",
+        "es": {"slug": "salud-de-la-mujer", "title": "Salud de la mujer en línea: únase a la lista | Jachi Health",
                "description": "Atención privada para la salud de la mujer, con profesionales de la salud con licencia, "
-                              "en línea desde casa. Primero en Texas.",
+                              "en línea desde casa. Pronto en todo EE. UU.",
                "h1": "Salud de la mujer, en línea.",
                "lead": "Atención privada con profesionales de la salud con licencia, desde casa.",
                "helps_title": "En qué le ayudarán los profesionales de la salud",
@@ -155,16 +155,16 @@ PAGES = [
     },
     {
         "key": "men", "interests": [], "safety": None,
-        "en": {"slug": "mens-health", "title": "Men's Health Online in Texas: Join the Waitlist | Jachi Health",
+        "en": {"slug": "mens-health", "title": "Men's Health Online: Join the Waitlist | Jachi Health",
                "description": "Private online visits with licensed clinicians for hair loss, STI testing and more. "
-                              "Launching in Texas first.",
+                              "Launching nationwide.",
                "h1": "Men's health, handled discreetly.",
                "lead": "Private online visits with licensed clinicians.",
                "helps_title": "What clinicians will help with",
                "helps": ["Hair loss", "STI testing", "Skin care"]},
-        "es": {"slug": "salud-del-hombre", "title": "Salud del hombre en línea en Texas: únase a la lista | Jachi Health",
+        "es": {"slug": "salud-del-hombre", "title": "Salud del hombre en línea: únase a la lista | Jachi Health",
                "description": "Consultas privadas en línea con profesionales de la salud con licencia para la caída del "
-                              "cabello, las pruebas de ITS y más. Primero en Texas.",
+                              "cabello, las pruebas de ITS y más. Pronto en todo EE. UU.",
                "h1": "Salud del hombre, con discreción.",
                "lead": "Consultas privadas en línea con profesionales de la salud con licencia.",
                "helps_title": "En qué le ayudarán los profesionales de la salud",

@@ -29,7 +29,8 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Decisions the owner made (change only when he asks)
 
-- Launching in Texas first. Adults 18+ only. Cash pay, no insurance.
+- Launching nationwide (decided Oct 17, 2026; the site used to say "Texas first"). Adults 18+ only. Cash pay, no
+  insurance. Keep the Texas Medical Board notice for Texas patients.
 - No prices anywhere (pages, titles, the assistant) until he has a quote from his medical partner (decided
   Oct 15, 2026). The site says prices will be shared before opening. Commit 5cb4e08 is the last version with
   prices; tests/qa.py fails if a price appears.
@@ -66,7 +67,7 @@ keep replies short and plain, and ask only questions that change what you'll do.
   Identity keeps that first password when the owner signs up again and confirms. Email-based admin access is
   also refused while Identity's autoconfirm is on. Sign-ups and tickets come from Netlify Forms through
   `NETLIFY_API_TOKEN`; the console only deletes ids that belong to the site's two forms.
-- The clinical standards section states only facts: who provides care, Texas supervision rules, licenses
+- The clinical standards section states only facts: who provides care, physician supervision where state law requires it, licenses
   anyone can look up. Clinician names and credentials go there only when his medical partner provides them.
 
 ## Security
