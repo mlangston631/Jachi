@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Jachi Health website from src/, content.py, content_es.py, pages.py, strings.py and chatbot.py.
+"""Build the Jachi Health website from src/, content.py, content_es.py, pages.py, pages_es.py, strings.py and chatbot.py.
 
 Run `python3 build.py` after any change, then commit the output with the source.
 
@@ -7,13 +7,14 @@ Deployed by Netlify (see netlify.toml), all written into public/:
   index.html                      English home page             (src/en/home.html)
   es/index.html                   Spanish home page             (src/es/home.html)
   <service>/index.html            one page per service          (src/en/service.html + pages.py)
+  es/<servicio>/index.html        the same pages in Spanish     (src/es/service.html + pages_es.py)
   how-it-works/, es/como-funciona/ the "How Jachi works" page     (src/<lang>/how.html + content.HOW, content_es.HOW)
   learn/, es/guias/ and their guides                            (src/learn.html, src/article.html + learn.py)
   privacy/, terms/, texas-medical-board/   legal pages          (src/en/*.html)
   consumer-health-data/, es/datos-de-salud/ health data policy  (src/<lang>/health-data.html)
   account/, es/account/           accounts for the waitlist    (src/account.html, account.js, identity.js)
   admin/                          the admin console              (src/admin.html, admin.js, identity.js)
-  404.html, icon.svg, robots.txt, sitemap.xml
+  404.html, icon.svg, robots.txt, sitemap.xml (its dates kept in sitemap_dates.json), the IndexNow key file
   fonts/*.woff2                   made by tools/make_fonts.py (not by this script)
   og.jpg, apple-touch-icon.png, favicon.ico   made by tools/make_images.py
 and the server code in netlify/functions/: chat.mjs (POST /api/chat, from chatbot.py), and account.mjs and
@@ -23,6 +24,7 @@ Every page shares src/<lang>/header.html, footer.html and chat.html. Not deploye
 dist/jachi-health.html, the English home page as a Claude artifact preview, and dist/artifact-sim.html.
 """
 import base64
+import datetime
 import hashlib
 import html
 import json
@@ -35,6 +37,7 @@ import content_es as ES_CONTENT
 import landing as LANDING
 import learn as LEARN
 import pages as PAGES
+import pages_es as PAGES_ES
 import strings
 from brand import mark, icon_svg_file
 
@@ -51,6 +54,12 @@ for d in (PUBLIC, FUNCTIONS, DIST):
 SITE_URL = "https://jachihealth.com"
 EMAIL = EN_CONTENT.EMAIL
 esc = html.escape
+
+# Each service page's address in each language, keyed by its English slug in pages.py.
+if set(PAGES_ES.PAGES) != set(PAGES.BY_SLUG):
+    raise SystemExit("pages_es.PAGES must have a Spanish page for every page in pages.py, and no others")
+SERVICE_PATH = {"en": {slug: f"/{slug}/" for slug in PAGES.BY_SLUG},
+                "es": {slug: f"/es/{t['slug']}/" for slug, t in PAGES_ES.PAGES.items()}}
 
 ICONS = {
     "arrow": '<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>',
@@ -132,7 +141,7 @@ class Lang:
             self.emergencies = list(c.EMERGENCIES)
             self.crisis = c.CRISIS
             self.popular = list(c.POPULAR)
-            self.picker = [(label, key, f"/{slug}/") for label, key, slug in c.PICKER]
+            self.picker = [(label, key, SERVICE_PATH["en"][slug]) for label, key, slug in c.PICKER]
             self.faq = list(c.FAQ)
             self.build = c.BUILD
             self.pricing_note = c.PRICING_NOTE
@@ -154,7 +163,7 @@ class Lang:
             self.popular = list(es.POPULAR)
             if len(es.PICKER) != len(EN_CONTENT.PICKER):
                 raise SystemExit("content_es.PICKER must match content.PICKER")
-            self.picker = [(label, key, f"#svc-{key}") for label, (_l, key, _s) in zip(es.PICKER, EN_CONTENT.PICKER)]
+            self.picker = [(label, key, SERVICE_PATH["es"][slug]) for label, (_l, key, slug) in zip(es.PICKER, EN_CONTENT.PICKER)]
             self.faq = list(es.FAQ)
             self.build = es.BUILD
             self.pricing_note = es.PRICING_NOTE
@@ -193,11 +202,8 @@ def service_card(L, svc, i):
     else:
         cta = (f'<button class="btn btn--ghost btn--block" type="button" data-join="{svc["interest"]}">{esc(B["join"])}'
                f'<span class="visually-hidden">{B["for"].format(x=name_lower)}</span></button>')
-    if L.code == "en":
-        title = (f'<h3><a class="svc__link" href="/{PAGES.SERVICE_SLUG[svc["key"]]}/">{esc(svc["name"])}'
-                 f'<span class="visually-hidden">: {esc(B["learn_more"].format(x=svc["name"].lower()))}</span></a></h3>')
-    else:
-        title = f'<h3>{esc(svc["name"])}</h3>'
+    title = (f'<h3><a class="svc__link" href="{SERVICE_PATH[L.code][PAGES.SERVICE_SLUG[svc["key"]]]}">{esc(svc["name"])}'
+             f'<span class="visually-hidden">: {esc(B["learn_more"].format(x=svc["name"].lower()))}</span></a></h3>')
     return (f'<article class="svc" id="svc-{svc["key"]}" data-reveal style="--d:{(i % 3) * 80}ms">'
             f'<span class="svc__ic">{icon_svg(svc["icon"])}</span>{title}'
             f'<span class="{tag_cls}">{esc(svc["tag"])}</span>'
@@ -243,12 +249,10 @@ def condition_rows(L):
     return "\n".join(rows)
 
 
-def footer_care(L, home):
-    """The footer's Care links: English pages link to the service pages; the Spanish page (which has no
-    Spanish service pages yet) links to its own service cards."""
-    if L.code == "en":
-        return "".join(f'<li><a href="/{PAGES.SERVICE_SLUG[s["key"]]}/">{esc(s["name"])}</a></li>' for s in L.services)
-    return "".join(f'<li><a href="{home}#svc-{s["key"]}">{esc(s["name"])}</a></li>' for s in L.services)
+def footer_care(L):
+    """The footer's Care links: each service's page in the footer's language."""
+    return "".join(f'<li><a href="{SERVICE_PATH[L.code][PAGES.SERVICE_SLUG[s["key"]]]}">{esc(s["name"])}</a></li>'
+                   for s in L.services)
 
 
 # ---------- Rendering ----------
@@ -446,7 +450,7 @@ def chrome_tokens(L, home, home_top, join_href, share_url="", alt_href=None):
     """Tokens for the shared header, footer, dock and chat. alt_href is the same page in the other language."""
     return {
         "{{HOME}}": home, "{{HOME_TOP}}": home_top, "{{JOIN_HREF}}": join_href,
-        "{{FOOTER_CARE}}": footer_care(L, home), "{{SHARE_URL}}": share_url,
+        "{{FOOTER_CARE}}": footer_care(L), "{{SHARE_URL}}": share_url,
         "{{ALT_HREF}}": alt_href or ("/es/" if L.code == "en" else "/"),
         # The home page's "How it works" links go to its own section; every other page links to the full page.
         "{{HOW_HREF}}": "#how" if home == "" else ("/how-it-works/" if L.code == "en" else "/es/como-funciona/"),
@@ -551,102 +555,161 @@ if (SRC / "es" / "home.html").exists():
     HOME_BODIES["es"] = build_home("es")
 
 
-# ---------- Service pages (English) ----------
+# ---------- Shared by the pages in both languages ----------
 
-def service_page(p):
-    L = Lang("en")
-    svc = L.by_key[p["key"]]
-    path = f'/{p["slug"]}/'
-    join_href = f'/?interest={svc["interest"]}'
-    trail = [("Home", "/"), ("Services", "/#services"), (p["crumb"], None)]
-    treated = {name: note for name, _cat, _terms, note in L.treated}
-    items = []
-    for entry in p["list"]:
+HOME_PATH = {"en": "/", "es": "/es/"}
+OTHER = {"en": "es", "es": "en"}
+HOW_PAGES = {"en": EN_CONTENT.HOW, "es": ES_CONTENT.HOW}
+HOW_ALTERNATES = {code: h["path"] for code, h in HOW_PAGES.items()}
+
+
+def faq_ld(items, lang):
+    return {"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": lang, "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in items]}
+
+
+def assemble(lang, main, tokens, parts=("footer", "dock", "chat")):
+    """The page body: the shared header, the page's main content, then the shared footer, dock and chat."""
+    L = Lang(lang)
+    return render(part(lang, "header"), L, tokens) + "\n" + main + "\n" + "\n".join(
+        render(part(lang, n), L, tokens) for n in parts)
+
+
+# ---------- Service pages (English from pages.py, Spanish from pages_es.py) ----------
+
+SERVICE_WORDS = {
+    "en": {"services": "Services", "no_insurance": "No insurance needed",
+           "therapists": "Licensed therapists in your state", "clinicians": "Licensed clinicians in your state",
+           "check_ins": "Regular check-ins", "video": "Private video sessions",
+           "pharmacy": "Prescriptions sent to your pharmacy", "glance": "{x} at a glance",
+           "billed": "Medication and lab tests are billed separately.", "how": "See how Jachi works, step by step",
+           "lead_end": "No insurance needed."},
+    "es": {"services": "Servicios", "no_insurance": "No necesita seguro médico",
+           "therapists": "Terapeutas con licencia en su estado",
+           "clinicians": "Profesionales de la salud con licencia en su estado", "check_ins": "Seguimiento regular",
+           "video": "Sesiones privadas por video", "pharmacy": "Recetas enviadas a su farmacia",
+           "glance": "{x} en resumen", "billed": "Los medicamentos y los análisis de laboratorio se cobran por separado.",
+           "how": "Vea cómo funciona Jachi, paso a paso", "lead_end": "No necesita seguro médico."},
+}
+
+
+def service_rows(entries, treated, slug):
+    """The page's list as (title, note) rows: a condition named from content.TREATED brings its note."""
+    rows = []
+    for entry in entries:
         if isinstance(entry, tuple):
-            title, note = entry
+            rows.append(entry)
+        elif entry in treated:
+            rows.append(treated[entry])
         else:
-            if entry not in treated:
-                raise SystemExit(f"pages.py: {p['slug']} lists unknown condition {entry!r}")
-            title, note = entry, treated[entry]
-        note_html = f"<small>{esc(note)}</small>" if note else ""
-        items.append(f"<li>{icon_svg('check')}<span><b>{esc(title)}</b>{note_html}</span></li>")
+            raise SystemExit(f"pages.py: {slug} lists unknown condition {entry!r}")
+    return rows
+
+
+def service_words(p, lang):
+    """A service page's words in one language: pages.py itself, or pages_es.py laid over it."""
+    if lang == "en":
+        treated = {name: (name, note) for name, _cat, _terms, note in EN_CONTENT.TREATED}
+        return {**p, "rows": service_rows(p["list"], treated, p["slug"]),
+                "list_lead": p.get("list_lead", PAGES.LIST_LEAD), "expect_lead": p.get("expect_lead", PAGES.EXPECT_LEAD)}
+    t = PAGES_ES.PAGES[p["slug"]]
+    treated = {name: (es_name, note) for name, (es_name, _terms, note) in ES_CONTENT.TREATED.items()}
+    e_title, e_lead, e_items = ES_CONTENT.EXPECT[p["slug"]]
+    if len(e_items) != len(p["expect"]):
+        raise SystemExit(f"content_es.EXPECT: {p['slug']} needs {len(p['expect'])} items")
+    return {**p, **{k: v for k, v in t.items() if k != "slug"},
+            "rows": service_rows(t.get("list", p["list"]), treated, p["slug"]),
+            "list_lead": t.get("list_lead", PAGES_ES.LIST_LEAD),
+            "expect_title": e_title, "expect_lead": e_lead or ES_CONTENT.EXPECT_LEAD,
+            "expect": [(ic, title, text) for (ic, _t, _d), (title, text) in zip(p["expect"], e_items)],
+            "safety": {**p["safety"], **t["safety"]}}
+
+
+def service_page(p, lang):
+    L = Lang(lang)
+    W, B = SERVICE_WORDS[lang], L.build
+    v = service_words(p, lang)
+    svc = L.by_key[p["key"]]
+    home, slug = HOME_PATH[lang], p["slug"]
+    path = SERVICE_PATH[lang][slug]
+    alternates = {code: SERVICE_PATH[code][slug] for code in ("en", "es")}
+    join_href = f'{home}?interest={svc["interest"]}'
+    trail = [(LEARN.LABELS[lang]["home"], home), (W["services"], home + "#services"), (v["crumb"], None)]
+    items = "".join(f"<li>{icon_svg('check')}<span><b>{esc(title)}</b>{f'<small>{esc(note)}</small>' if note else ''}"
+                    f"</span></li>" for title, note in v["rows"])
     expect = "".join(f'<li><span class="expect__ic">{icon_svg(ic)}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>'
-                     for ic, t, d in p["expect"])
-    know = "".join(f"<li>{icon_svg('info')}<span>{esc(k)}</span></li>" for k in p["know"])
-    s = p["safety"]
+                     for ic, t, d in v["expect"])
+    know = "".join(f"<li>{icon_svg('info')}<span>{esc(k)}</span></li>" for k in v["know"])
+    s = v["safety"]
     flags = "".join(f"<li>{esc(x)}</li>" for x in s["items"])
     flags_html = f'<ul class="flags">{flags}</ul>' if flags else ""
     actions = ""
     if s["kind"] == "911":
-        actions = f'<div class="safety__actions"><a class="btn btn--danger btn--sm" href="tel:911">{icon_svg("phone")}Call 911</a></div>'
+        actions = (f'<div class="safety__actions"><a class="btn btn--danger btn--sm" href="tel:911">{icon_svg("phone")}'
+                   f'{esc(B["call_911"])}</a></div>')
     elif s["kind"] == "988":
-        actions = (f'<div class="safety__actions"><a class="btn btn--sm" href="tel:988">{icon_svg("phone")}Call 988</a>'
-                   f'<a class="btn btn--ghost btn--sm" href="sms:988">{icon_svg("msg")}Text 988</a></div>')
+        actions = (f'<div class="safety__actions"><a class="btn btn--sm" href="tel:988">{icon_svg("phone")}{esc(B["call_988"])}</a>'
+                   f'<a class="btn btn--ghost btn--sm" href="{esc(L.T["sms_988"])}">{icon_svg("msg")}{esc(B["text_988"])}</a></div>')
     tone = "explain--caution" if s["kind"] == "caution" else "explain--alert"
     ic = "heart" if s["kind"] == "988" else "alert"
     safety = (f'<div class="explain {tone} safety"><h3><span class="explain__ic" aria-hidden="true">{icon_svg(ic)}</span>'
               f'{esc(s["title"])}</h3><p>{esc(s["text"])}</p>{flags_html}{actions}</div>')
     if p.get("elig"):
-        second = '<a class="btn btn--ghost btn--lg" href="/#eligibility">Check your eligibility</a>'
+        second = f'<a class="btn btn--ghost btn--lg" href="{home}#eligibility">{esc(B["check_elig_long"])}</a>'
     else:
-        second = '<a class="btn btn--ghost btn--lg" href="/#care-finder">Find the right care</a>'
-    perks = ["No insurance needed",
-             "Licensed therapists in your state" if p["key"] == "therapy" else "Licensed clinicians in your state",
-             "Regular check-ins" if svc["ongoing"] else
-             ("Private video sessions" if p["key"] == "therapy" else "Prescriptions sent to your pharmacy")]
+        second = f'<a class="btn btn--ghost btn--lg" href="{home}#care-finder">{esc(B["find_care"])}</a>'
+    perks = [W["no_insurance"], W["therapists"] if p["key"] == "therapy" else W["clinicians"],
+             W["check_ins"] if svc["ongoing"] else (W["video"] if p["key"] == "therapy" else W["pharmacy"])]
     perk_items = "".join(f"<li>{icon_svg('check')}<span>{esc(x)}</span></li>" for x in perks)
     tag_cls = "svc__tag svc__tag--ongoing" if svc["ongoing"] else "svc__tag"
-    card = (f'<aside class="glance" aria-label="{esc(svc["name"])} at a glance">'
+    card = (f'<aside class="glance" aria-label="{esc(W["glance"].format(x=svc["name"]))}">'
             f'<span class="svc__ic">{icon_svg(svc["icon"])}</span>'
             f'<p class="glance__name">{esc(svc["name"])}</p>'
             f'<span class="{tag_cls}">{esc(svc["tag"])}</span>'
             f'<ul>{perk_items}</ul>'
-            f'<p class="fine">{esc(L.pricing_note)} Medication and lab tests are billed separately.</p></aside>')
-    related = "".join(f'<li><a href="/{r}/">{esc(PAGES.BY_SLUG[r]["crumb"])}</a></li>' for r in p["related"])
-    links = [("See how Jachi works, step by step", "/how-it-works/")] + [
-        (a["en"]["h1"].rstrip("."), LEARN.path(a, "en")) for a in LEARN.ARTICLES if p["key"] in a["services"]]
+            f'<p class="fine">{esc(L.pricing_note)} {esc(W["billed"])}</p></aside>')
+    crumb_of = (lambda r: PAGES.BY_SLUG[r]["crumb"]) if lang == "en" else (lambda r: PAGES_ES.PAGES[r]["crumb"])
+    related = "".join(f'<li><a href="{SERVICE_PATH[lang][r]}">{esc(crumb_of(r))}</a></li>' for r in p["related"])
+    links = [(W["how"], HOW_PAGES[lang]["path"])] + [
+        (a[lang]["h1"].rstrip("."), LEARN.path(a, lang)) for a in LEARN.ARTICLES if p["key"] in a["services"]]
     svc_links = "".join(f'<li><a class="textlink" href="{href}">{nw(esc(label))}{icon_svg("arrow", "i--arrow")}</a></li>'
                         for label, href in links)
-    faq = list(p["faq"])
     tokens = {
-        **chrome_tokens(L, "/", "/", join_href),
+        **chrome_tokens(L, home, home, join_href, alt_href=alternates[OTHER[lang]]),
         "{{CRUMBS}}": crumbs(trail),
-        "{{SVC_H1}}": f'{esc(p["h1"][0])} {esc(p["h1"][1])}',
-        "{{SVC_LEAD}}": esc(p["lead"]) + " No insurance needed.",
+        "{{SVC_H1}}": f'{esc(v["h1"][0])} {esc(v["h1"][1])}',
+        "{{SVC_LEAD}}": esc(v["lead"]) + " " + esc(W["lead_end"]),
         "{{SVC_SECOND_CTA}}": second,
         "{{SVC_CARD}}": card,
-        "{{SVC_LIST_TITLE}}": esc(p["list_title"]),
-        "{{SVC_LIST_LEAD}}": esc(p.get("list_lead", "A licensed clinician reviews every request and tells you if "
-                                                   "you need to be seen in person instead.")),
-        "{{SVC_LIST}}": "".join(items),
+        "{{SVC_LIST_TITLE}}": esc(v["list_title"]),
+        "{{SVC_LIST_LEAD}}": esc(v["list_lead"]),
+        "{{SVC_LIST}}": items,
         "{{SVC_EXPECT}}": expect,
-        "{{SVC_EXPECT_TITLE}}": heading(p["expect_title"]),
-        "{{SVC_EXPECT_LEAD}}": esc(p.get("expect_lead", PAGES.EXPECT_LEAD)),
+        "{{SVC_EXPECT_TITLE}}": heading(v["expect_title"]),
+        "{{SVC_EXPECT_LEAD}}": esc(v["expect_lead"]),
         "{{SVC_KNOW}}": know,
         "{{SVC_SAFETY}}": safety,
-        "{{SVC_FAQ}}": faq_items(faq),
-        "{{SVC_FAQ_TITLE}}": heading(p["faq_title"]),
+        "{{SVC_FAQ}}": faq_items(v["faq"]),
+        "{{SVC_FAQ_TITLE}}": heading(v["faq_title"]),
         "{{SVC_RELATED}}": related,
         "{{SVC_LINKS}}": svc_links,
+        "{{DOCK_HREF}}": join_href, "{{DOCK_LABEL}}": esc(L.T["get_early_access"]),
     }
-    main = render(part("en", "service"), L, tokens)
-    tokens.update({"{{DOCK_HREF}}": join_href, "{{DOCK_LABEL}}": "Join the waitlist"})
-    body = "\n".join(render(part("en", n), L, tokens) for n in ("header",)) + "\n" + main + "\n" + "\n".join(
-        render(part("en", n), L, tokens) for n in ("footer", "dock", "chat"))
-    faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]}
-    about = [{"@type": "MedicalCondition", "name": a} if isinstance(a, str) else a for a in p["about"]]
-    web = page_node("MedicalWebPage", path, p["title"], p["description"], "en", publisher={"@id": ORG_ID},
+    main = render(part(lang, "service"), L, tokens)
+    about = [{"@type": "MedicalCondition", "name": a} if isinstance(a, str) else a for a in v["about"]]
+    web = page_node("MedicalWebPage", path, v["title"], v["description"], lang, publisher={"@id": ORG_ID},
                     breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"}, medicalAudience={"@type": "Patient"},
                     about=about, **({"specialty": f"https://schema.org/{p['specialty']}"} if p.get("specialty") else {}))
-    page = {"lang": "en", "path": path, "main": main, "title": p["title"], "description": p["description"],
-            "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path)), faq_ld]}
-    write(path, document(page, body))
-    SITEMAP.append((path, None))
+    page = {"lang": lang, "path": path, "alternates": alternates, "main": main, "title": v["title"],
+            "description": v["description"],
+            "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path)), faq_ld(v["faq"], lang)]}
+    write(path, document(page, assemble(lang, main, tokens)))
+    SITEMAP.append((path, alternates))
 
 
 for p in PAGES.PAGES:
-    service_page(p)
+    for code in ("en", "es"):
+        service_page(p, code)
 
 
 # ---------- Legal pages (English) ----------
@@ -674,24 +737,6 @@ for slug, crumb, title, description in LEGAL:
 
 
 # ---------- How Jachi works (English and Spanish) ----------
-
-HOME_PATH = {"en": "/", "es": "/es/"}
-OTHER = {"en": "es", "es": "en"}
-HOW_PAGES = {"en": EN_CONTENT.HOW, "es": ES_CONTENT.HOW}
-HOW_ALTERNATES = {code: h["path"] for code, h in HOW_PAGES.items()}
-
-
-def faq_ld(items, lang):
-    return {"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": lang, "mainEntity": [
-        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in items]}
-
-
-def assemble(lang, main, tokens, parts=("footer", "dock", "chat")):
-    """The page body: the shared header, the page's main content, then the shared footer, dock and chat."""
-    L = Lang(lang)
-    return render(part(lang, "header"), L, tokens) + "\n" + main + "\n" + "\n".join(
-        render(part(lang, n), L, tokens) for n in parts)
-
 
 def how_lanes(H):
     """The two lanes of the How page: the steps on Jachi, the handoff to the medical group, then the steps with it."""
@@ -1070,13 +1115,44 @@ nf_html = f"""<!doctype html>
 
 (PUBLIC / "icon.svg").write_text(icon_svg_file())
 (PUBLIC / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n")
+# IndexNow (Bing, Yandex, Seznam, Naver, Yep): this file proves the site is ours when tools/indexnow.py tells them which
+# pages changed. The key isn't a secret; anyone can read it here, and all it allows is asking for a recrawl.
+INDEXNOW_KEY = "b818056deffdc4b7d3b029c77ff5c4e7"
+for old_key in PUBLIC.glob("*.txt"):
+    if re.fullmatch(r"[0-9a-f]{32}\.txt", old_key.name) and old_key.stem != INDEXNOW_KEY:
+        old_key.unlink()
+(PUBLIC / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY + "\n")
+
+
+def page_fingerprint(path):
+    """What search engines read on a page: its title, description, structured data and main content."""
+    text = (PUBLIC / path.lstrip("/") / "index.html").read_text()
+    parts = [re.search(r"<title>.*?</title>", text, re.S), re.search(r'<meta name="description"[^>]*>', text),
+             re.search(r"<main\b.*?</main>", text, re.S)]
+    if not all(parts):
+        raise SystemExit(f"sitemap: can't read {path}")
+    kept = [m.group(0) for m in parts] + re.findall(r'<script type="application/ld\+json">.*?</script>', text, re.S)
+    return hashlib.sha256("\n".join(kept).encode("utf-8")).hexdigest()[:16]
+
+
+# <lastmod> for each page is the day what search engines read on it last changed, so they know what to recrawl.
+# sitemap_dates.json keeps each page's fingerprint and date between builds; commit it with the rest.
+DATES_FILE = ROOT / "sitemap_dates.json"
+today = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+old_dates = json.loads(DATES_FILE.read_text()) if DATES_FILE.exists() else {}
+dates = {}
+for path, _alternates in SITEMAP:
+    fingerprint = page_fingerprint(path)
+    kept = old_dates.get(path)
+    dates[path] = kept if kept and kept["hash"] == fingerprint else {"hash": fingerprint, "date": today}
+DATES_FILE.write_text(json.dumps(dates, indent=1, sort_keys=True) + "\n")
 urls = []
 for path, alternates in SITEMAP:
     links = ""
     if alternates:
         links = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{c}" href="{SITE_URL}{p}"/>' for c, p in alternates.items())
         links += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_URL}{alternates["en"]}"/>'
-    urls.append(f"  <url>\n    <loc>{SITE_URL}{path}</loc>{links}\n  </url>")
+    urls.append(f"  <url>\n    <loc>{SITE_URL}{path}</loc>\n    <lastmod>{dates[path]['date']}</lastmod>{links}\n  </url>")
 (PUBLIC / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n'
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'

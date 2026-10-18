@@ -2,123 +2,250 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://jachihealth.com/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/es/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/urgent-care/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/urgent-care/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/atencion-de-urgencia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/urgent-care/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/atencion-de-urgencia/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/urgent-care/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/atencion-de-urgencia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/urgent-care/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/uti-treatment/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/uti-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/tratamiento-infeccion-urinaria/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/uti-treatment/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/tratamiento-infeccion-urinaria/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/uti-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/tratamiento-infeccion-urinaria/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/uti-treatment/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/prescription-refills/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/prescription-refills/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/resurtido-de-recetas/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/prescription-refills/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/resurtido-de-recetas/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/prescription-refills/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/resurtido-de-recetas/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/prescription-refills/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/online-therapy/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/online-therapy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/terapia-en-linea/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/online-therapy/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/terapia-en-linea/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/online-therapy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/terapia-en-linea/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/online-therapy/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/anxiety-depression-treatment/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/anxiety-depression-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/tratamiento-ansiedad-depresion/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/anxiety-depression-treatment/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/tratamiento-ansiedad-depresion/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/anxiety-depression-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/tratamiento-ansiedad-depresion/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/anxiety-depression-treatment/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/sexual-health/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/sexual-health/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/salud-sexual/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/sexual-health/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/salud-sexual/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/sexual-health/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/salud-sexual/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/sexual-health/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/mens-health/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/mens-health/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/salud-del-hombre/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/mens-health/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/salud-del-hombre/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/mens-health/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/salud-del-hombre/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/mens-health/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/womens-health/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/womens-health/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/salud-de-la-mujer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/womens-health/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/salud-de-la-mujer/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/womens-health/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/salud-de-la-mujer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/womens-health/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/skin-care/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/skin-care/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/cuidado-de-la-piel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/skin-care/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/cuidado-de-la-piel/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/skin-care/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/cuidado-de-la-piel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/skin-care/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/weight-loss/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/weight-loss/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/bajar-de-peso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/weight-loss/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/bajar-de-peso/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/weight-loss/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/bajar-de-peso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/weight-loss/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/privacy/</loc>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <url>
     <loc>https://jachihealth.com/terms/</loc>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <url>
     <loc>https://jachihealth.com/texas-medical-board/</loc>
+    <lastmod>2026-10-18</lastmod>
   </url>
   <url>
     <loc>https://jachihealth.com/how-it-works/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/how-it-works/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/how-it-works/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/es/como-funciona/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/how-it-works/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/how-it-works/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/consumer-health-data/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/consumer-health-data/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/datos-de-salud/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/consumer-health-data/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/es/datos-de-salud/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/consumer-health-data/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/datos-de-salud/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/consumer-health-data/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/learn/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/learn/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/guias/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/learn/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/learn/online-uti-visit/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/learn/online-uti-visit/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/guias/consulta-infeccion-urinaria-en-linea/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/learn/online-uti-visit/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/learn/medical-weight-care/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/learn/medical-weight-care/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/guias/atencion-medica-para-bajar-de-peso/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/learn/medical-weight-care/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/learn/online-care-or-the-er/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/learn/online-care-or-the-er/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/guias/atencion-en-linea-o-emergencias/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/learn/online-care-or-the-er/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/es/guias/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/learn/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/guias/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/learn/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/es/guias/consulta-infeccion-urinaria-en-linea/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/learn/online-uti-visit/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/guias/consulta-infeccion-urinaria-en-linea/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/learn/online-uti-visit/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/es/guias/atencion-medica-para-bajar-de-peso/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/learn/medical-weight-care/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/guias/atencion-medica-para-bajar-de-peso/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/learn/medical-weight-care/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/es/guias/atencion-en-linea-o-emergencias/</loc>
+    <lastmod>2026-10-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/learn/online-care-or-the-er/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/guias/atencion-en-linea-o-emergencias/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/learn/online-care-or-the-er/"/>

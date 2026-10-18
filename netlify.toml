@@ -12,6 +12,14 @@
   # Server code: the help chat (/api/chat), account deletion (/api/account/delete) and the admin console (/api/admin/*).
   directory = "netlify/functions"
 
+# The Netlify address shows the same site, so send it to the real one: search engines then list only jachihealth.com.
+# Deploy Previews (deploy-preview-<number>--sweet-axolotl-25d33d.netlify.app) have their own addresses and still work.
+[[redirects]]
+  from = "https://sweet-axolotl-25d33d.netlify.app/*"
+  to = "https://jachihealth.com/:splat"
+  status = 301
+  force = true
+
 # Security headers for every page and file.
 # The Content-Security-Policy only allows the site's own files (fonts included) and its own /api/ and
 # /.netlify/identity addresses (accounts),

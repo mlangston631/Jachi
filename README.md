@@ -1,8 +1,8 @@
 # Jachi Health website
 
 The website for [jachihealth.com](https://jachihealth.com): services, a care finder, condition search,
-a weight care check, a waitlist sign-up, an AI help chat with support tickets, a page for each service, a Spanish
-home page, accounts for people on the waitlist, an admin console, and the privacy policy, terms of use
+a weight care check, a waitlist sign-up, an AI help chat with support tickets, a page for each service in English and
+Spanish, a Spanish home page, accounts for people on the waitlist, an admin console, and the privacy policy, terms of use
 and Texas Medical Board notice.
 
 ## How it goes live
@@ -30,6 +30,7 @@ checks). To get them by email: Netlify → Project configuration → Notificatio
 | `/` | `src/en/home.html` |
 | `/es/` | `src/es/home.html`, written by `tools/es_home.py` from the English page |
 | `/urgent-care/`, `/uti-treatment/` and the other service pages | `src/en/service.html` filled in from `pages.py` (with what to expect from the visit, tests and follow-up) |
+| `/es/atencion-de-urgencia/`, `/es/tratamiento-infeccion-urinaria/` and the other Spanish service pages | `src/es/service.html` filled in from `pages_es.py` laid over `pages.py` ("what to expect" from `content_es.EXPECT`) |
 | `/how-it-works/`, `/es/como-funciona/` | `src/en/how.html` and `src/es/how.html`, steps and questions in `content.py` and `content_es.py` (`HOW`) |
 | `/learn/` and its guides, `/es/guias/` and the Spanish guides | `src/learn.html` and `src/article.html`, words in `learn.py` (both languages) |
 | `/join/`, `/es/unase/` and their pages: waitlist pages for Meta ads (not indexed, not in the sitemap) | `src/landing.html`, words in `landing.py` (both languages), the form copied from the home page |
@@ -40,6 +41,22 @@ checks). To get them by email: Netlify → Project configuration → Notificatio
 | `404.html` | `src/en/404.html` |
 
 Every page shares the header, footer, help chat and phone call-to-action bar in `src/en/` (English) and `src/es/` (Spanish).
+
+## Search engines
+
+- `sitemap.xml` lists every page search engines should show, with the day its words last changed (`<lastmod>`,
+  kept between builds in `sitemap_dates.json`) and its version in the other language. `robots.txt` points to it.
+- Every page with an English and a Spanish version names both (`hreflang`), so Google shows each person their
+  language. English is the default (`x-default`). `tests/qa.py` checks every pair names the other.
+- Ad landing pages, accounts and the admin console are kept out (`noindex`), and the Netlify address
+  (sweet-axolotl-25d33d.netlify.app) redirects to jachihealth.com, so only one copy of the site gets listed.
+- Google: the owner adds jachihealth.com to [Google Search Console](https://search.google.com/search-console) as a
+  Domain property (verified by a DNS TXT record at GoDaddy, where the domain is) and submits
+  `https://jachihealth.com/sitemap.xml` there once. Google then rereads the sitemap by itself.
+- Bing, Yahoo, DuckDuckGo and ChatGPT search: Bing Webmaster Tools, set up by importing from Search Console. After a
+  production deploy, `python3 tools/indexnow.py` (or with the changed paths) tells Bing and the other IndexNow
+  engines to recrawl right away. It needs internet access; the key it uses is published at
+  `/b818056deffdc4b7d3b029c77ff5c4e7.txt` on purpose and isn't a secret.
 
 ## The help chat
 
@@ -85,7 +102,7 @@ The published files are generated. Edit the source, then rebuild:
 | Home page layout and wording | `src/en/home.html`, then `python3 tools/es_home.py` for Spanish |
 | Header, footer, help chat | `src/en/*.html` and the Spanish copies in `src/es/` |
 | Words the page script shows (results, errors, chat) | `strings.py` (both languages) |
-| Service pages | `pages.py` and `src/en/service.html` (Spanish "what to expect" for the app: `content_es.EXPECT`) |
+| Service pages | `pages.py` and `src/en/service.html`; the Spanish pages in `pages_es.py` and `src/es/service.html` (their "what to expect", shared with the app: `content_es.EXPECT`) |
 | How Jachi works | `HOW` in `content.py` and `content_es.py`, layout in `src/en/how.html` and `src/es/how.html` |
 | Health guides | `learn.py` (both languages, with their sources) |
 | Ad landing pages | `landing.py` (both languages, and the words they must never use) and `src/landing.html` |
@@ -95,7 +112,7 @@ The published files are generated. Edit the source, then rebuild:
 | Chat assistant's instructions and server code | `chatbot.py` |
 | Account and admin server code | `src/functions/lib.mjs` (shared), `account.mjs`, `admin.mjs` |
 | Logo and brand colours | `brand.py` |
-| Security headers, publish settings | `netlify.toml` |
+| Security headers, redirects, publish settings | `netlify.toml` |
 
 ```sh
 python3 build.py               # writes public/ and netlify/functions/
