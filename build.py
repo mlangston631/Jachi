@@ -10,6 +10,7 @@ Deployed by Netlify (see netlify.toml), all written into public/:
   how-it-works/, es/como-funciona/ the "How Jachi works" page     (src/<lang>/how.html + content.HOW, content_es.HOW)
   learn/, es/guias/ and their guides                            (src/learn.html, src/article.html + learn.py)
   privacy/, terms/, texas-medical-board/   legal pages          (src/en/*.html)
+  consumer-health-data/, es/datos-de-salud/ health data policy  (src/<lang>/health-data.html)
   account/, es/account/           accounts for the waitlist    (src/account.html, account.js, identity.js)
   admin/                          the admin console              (src/admin.html, admin.js, identity.js)
   404.html, icon.svg, robots.txt, sitemap.xml
@@ -728,6 +729,44 @@ def build_how(lang):
 
 for code in HOW_PAGES:
     build_how(code)
+
+
+# ---------- Consumer health data privacy policy (English and Spanish) ----------
+# Washington's My Health My Data Act (RCW 19.373.020) asks for this policy and a link to it on the home page:
+# the home page's privacy promise, every footer and the waitlist form's note link here.
+
+HEALTH_DATA = {
+    "en": {"path": "/consumer-health-data/", "crumb": "Consumer health data",
+           "title": "Consumer health data privacy policy | Jachi Health",
+           "description": "What consumer health data Jachi Health collects, why, who handles it, and how to see it, "
+                          "delete it or appeal a decision."},
+    "es": {"path": "/es/datos-de-salud/", "crumb": "Datos de salud del consumidor",
+           "title": "Privacidad de datos de salud del consumidor | Jachi Health",
+           "description": "Qué datos de salud del consumidor recopila Jachi Health, para qué, quién los maneja y cómo verlos, "
+                          "borrarlos o apelar."},
+}
+HEALTH_DATA_ALTERNATES = {code: h["path"] for code, h in HEALTH_DATA.items()}
+
+
+def build_health_data(lang):
+    L = Lang(lang)
+    H = HEALTH_DATA[lang]
+    home, path = HOME_PATH[lang], H["path"]
+    trail = [(LEARN.LABELS[lang]["home"], home), (H["crumb"], None)]
+    tokens = {**chrome_tokens(L, home, home, home + "#join", alt_href=HEALTH_DATA_ALTERNATES[OTHER[lang]]),
+              "{{CRUMBS}}": crumbs(trail)}
+    main = render(part(lang, "health-data"), L, tokens)
+    web = page_node("WebPage", path, H["title"], H["description"], lang, about={"@id": ORG_ID},
+                    breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"})
+    page = {"lang": lang, "path": path, "alternates": HEALTH_DATA_ALTERNATES, "main": main,
+            "title": H["title"], "description": H["description"],
+            "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path))]}
+    write(path, document(page, assemble(lang, main, tokens, parts=("footer", "chat"))))
+    SITEMAP.append((path, HEALTH_DATA_ALTERNATES))
+
+
+for code in HEALTH_DATA:
+    build_health_data(code)
 
 
 # ---------- Learn: the guides hub and each guide (English and Spanish) ----------

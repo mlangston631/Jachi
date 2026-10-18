@@ -52,7 +52,13 @@ keep replies short and plain, and ask only questions that change what you'll do.
   assistant's rules (`chatbot.py`).
 - Privacy: no analytics, ad pixels or trackers (it's a health site). Don't collect health details in forms or chat.
   Patient accounts with health records must live on HIPAA-compliant systems with a BAA (his medical partner's
-  portal); Netlify's plan can't hold health data.
+  portal); Netlify's plan can't hold health data. The home page's privacy promise ("Your health is not for sale.",
+  decided Oct 18, 2026) states only what is true: no trackers on the site, no sign-ups sent to Meta or any ad
+  company, nothing sold.
+- The waitlist's service choices count as consumer health data under Washington's My Health My Data Act, so the
+  site keeps a consumer health data privacy policy (`/consumer-health-data/`, `/es/datos-de-salud/`) linked from
+  both home pages (the privacy promise and the footer) and the waitlist form; tests/qa.py checks the links. Update
+  it, and the privacy policy, whenever what the site collects or who handles it changes.
 - Meta ads (Oct 17, 2026) send people only to Meta's Instant Forms or the waitlist pages in `landing.py` (`/join/…`,
   `/es/unase/…`). Until LegitScript certification and Meta's authorization, those pages name no medicines, drug
   classes, refills, prescriptions or prices (`BANNED`, checked by tests/qa.py), and their footer links only to the

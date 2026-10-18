@@ -273,7 +273,7 @@
         <li class="standard">
           <span class="standard__ic">{{I:lock}}</span>
           <h3>Su privacidad</h3>
-          <p>Cuando sea paciente, su información de salud estará protegida por la ley HIPAA. Este sitio no usa anuncios ni rastreo.</p>
+          <p>Cuando sea paciente, su información de salud estará protegida por la ley HIPAA. Este sitio no tiene anuncios ni rastreadores.</p>
         </li>
       </ul>
       <div class="verify">
@@ -469,6 +469,26 @@
           </article>
         </div>
         <p class="disclosure" id="ai-disclosure">{{I:info}}<span><strong>Aviso sobre IA</strong>Siempre le diremos cuando esté hablando con IA. Un profesional de la salud con licencia revisa todo lo que prepara para su atención.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy promise -->
+  <section class="section section--paper" id="privacy-promise" aria-labelledby="promise-title">
+    <div class="wrap promise">
+      <div class="section-head">
+        <h2 class="h2" id="promise-title">Su salud no está a la venta.</h2>
+        <p class="lead">Usamos lo que usted comparte para guardar su lugar en la lista de espera, manejar su cuenta y responder sus preguntas. Nunca lo usamos para dirigirle anuncios.</p>
+      </div>
+      <div class="promise__body">
+        <ul class="ledger">
+          <li class="ledger__row"><span class="ledger__what">Rastreadores de anuncios, píxeles o analíticas en este sitio</span><span class="ledger__n" aria-hidden="true">0</span><span class="visually-hidden">: ninguno.</span></li>
+          <li class="ledger__row"><span class="ledger__what">Registros que enviamos a Meta o a otra empresa de publicidad</span><span class="ledger__n" aria-hidden="true">0</span><span class="visually-hidden">: ninguno.</span></li>
+          <li class="ledger__row"><span class="ledger__what">Información personal que vendemos</span><span class="ledger__n" aria-hidden="true">0</span><span class="visually-hidden">: ninguna.</span></li>
+        </ul>
+        <p class="promise__note">El buscador de atención, la búsqueda de afecciones y la evaluación de peso funcionan en su teléfono o computadora, así que lo que escriba ahí nunca sale de su dispositivo.</p>
+        <p class="promise__check">{{I:shield}}<span><strong>Compruébelo usted mismo.</strong> Este sitio no carga nada de los servidores de otras empresas. Un bloqueador de rastreadores o el informe de privacidad de su navegador no encontrará ningún rastreador aquí.</span></p>
+        <p class="promise__links"><a class="textlink" href="/es/datos-de-salud/">Política de privacidad de datos de salud del consumidor{{I:arrow:i--arrow}}</a><a class="textlink" href="/privacy/" hreflang="en">Política de privacidad (en inglés){{I:arrow:i--arrow}}</a></p>
       </div>
     </div>
   </section>
@@ -729,7 +749,7 @@
           </div>
           <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Únase a la lista de espera</span></button>
           <div class="form-status" id="join-status" role="status"></div>
-          <p class="fine">Al unirse, acepta recibir correos sobre nuestra apertura. Puede cancelar la suscripción cuando quiera. Nunca venderemos su información. Lea nuestro <button class="linkish" type="button" data-open="privacy">aviso de privacidad</button>.</p>
+          <p class="fine">Al unirse, acepta recibir correos sobre nuestra apertura. Puede cancelar la suscripción cuando quiera. Nunca venderemos su información. Lea nuestro <button class="linkish" type="button" data-open="privacy">aviso de privacidad</button> y nuestra <a href="/es/datos-de-salud/">política de datos de salud del consumidor</a>.</p>
         </form>
 
         <div class="success" id="join-success" hidden>

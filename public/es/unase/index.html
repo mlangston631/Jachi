@@ -415,6 +415,20 @@ button,input,select,textarea{font:inherit;color:inherit}
 .disclosure .i{width:22px;height:22px;color:var(--sage)}
 .disclosure strong{display:block;margin-bottom:2px;color:#fff}
 
+/* ---------- Privacy promise: a ledger of zeros ---------- */
+.promise{display:grid;gap:clamp(28px,4vw,44px)}
+.promise .section-head{margin-bottom:0}
+@media (min-width:1040px){.promise{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:start}}
+.ledger{margin:0;padding:0;list-style:none;border-top:1px solid var(--line-strong)}
+.ledger__row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(14px,2vw,20px) 0;border-bottom:1px solid var(--line)}
+.ledger__what{min-width:0;max-width:24em;font-size:clamp(1.02rem,.98rem + .2vw,1.14rem);font-weight:500;line-height:1.4;color:var(--text)}
+.ledger__n{flex:none;font-family:var(--font-display);font-weight:300;font-size:clamp(2.7rem,2.2rem + 2vw,3.7rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:lining-nums;color:var(--moss)}
+.promise__note{margin-top:20px;max-width:36em;color:var(--text-2)}
+.promise__check{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px;margin-top:20px;padding:18px 20px;border-radius:var(--r-md);background:var(--sage-50);border:1px solid var(--sage-200);font-size:.97rem;color:var(--text-2)}
+.promise__check .i{width:22px;height:22px;color:var(--moss)}
+.promise__check strong{color:var(--text)}
+.promise__links{display:flex;flex-wrap:wrap;gap:2px 28px;margin-top:14px}
+
 /* ---------- Eligibility ---------- */
 .elig__grid{display:grid;gap:36px}
 .elig__intro{display:grid;gap:24px;min-width:0}
@@ -1223,7 +1237,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 <input type="hidden" name="heard" value="">
           <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Únase a la lista de espera</span></button>
           <div class="form-status" id="join-status" role="status"></div>
-          <p class="fine">Al unirse, acepta recibir correos sobre nuestra apertura. Puede cancelar la suscripción cuando quiera. Nunca venderemos su información. Lea nuestro <button class="linkish" type="button" data-open="privacy">aviso de privacidad</button>.</p>
+          <p class="fine">Al unirse, acepta recibir correos sobre nuestra apertura. Puede cancelar la suscripción cuando quiera. Nunca venderemos su información. Lea nuestro <button class="linkish" type="button" data-open="privacy">aviso de privacidad</button> y nuestra <a href="/es/datos-de-salud/">política de datos de salud del consumidor</a>.</p>
         </form>
 
         <div class="success" id="join-success" hidden>
@@ -1292,6 +1306,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         <h2 class="footer__h">Legal</h2>
         <ul>
           <li><button class="linkish" type="button" data-open="privacy">Aviso de privacidad</button></li>
+          <li><a href="/es/datos-de-salud/">Política de privacidad de datos de salud del consumidor</a></li>
           <li><a href="/privacy/" hreflang="en">Política de privacidad (en inglés)</a></li>
           <li><a href="/terms/" hreflang="en">Términos de uso (en inglés)</a></li>
           <li><a href="/es/#ai-disclosure">Aviso sobre IA</a></li>
@@ -1411,6 +1426,7 @@ button,input,select,textarea{font:inherit;color:inherit}
     <h3>Su información médica</h3>
     <p>Cuando sea paciente, su información médica estará protegida por la ley HIPAA y se guardará en los Estados Unidos.</p>
     <p class="sheet__more"><a href="/privacy/" hreflang="en">Lea la política de privacidad completa (en inglés)</a></p>
+    <p class="sheet__more"><a href="/es/datos-de-salud/">Lea la política de privacidad de datos de salud del consumidor</a></p>
     <p class="fine">Última actualización: octubre de 2026.</p>
   </div>
 </dialog>

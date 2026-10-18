@@ -427,6 +427,20 @@ button,input,select,textarea{font:inherit;color:inherit}
 .disclosure .i{width:22px;height:22px;color:var(--sage)}
 .disclosure strong{display:block;margin-bottom:2px;color:#fff}
 
+/* ---------- Privacy promise: a ledger of zeros ---------- */
+.promise{display:grid;gap:clamp(28px,4vw,44px)}
+.promise .section-head{margin-bottom:0}
+@media (min-width:1040px){.promise{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:start}}
+.ledger{margin:0;padding:0;list-style:none;border-top:1px solid var(--line-strong)}
+.ledger__row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(14px,2vw,20px) 0;border-bottom:1px solid var(--line)}
+.ledger__what{min-width:0;max-width:24em;font-size:clamp(1.02rem,.98rem + .2vw,1.14rem);font-weight:500;line-height:1.4;color:var(--text)}
+.ledger__n{flex:none;font-family:var(--font-display);font-weight:300;font-size:clamp(2.7rem,2.2rem + 2vw,3.7rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:lining-nums;color:var(--moss)}
+.promise__note{margin-top:20px;max-width:36em;color:var(--text-2)}
+.promise__check{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px;margin-top:20px;padding:18px 20px;border-radius:var(--r-md);background:var(--sage-50);border:1px solid var(--sage-200);font-size:.97rem;color:var(--text-2)}
+.promise__check .i{width:22px;height:22px;color:var(--moss)}
+.promise__check strong{color:var(--text)}
+.promise__links{display:flex;flex-wrap:wrap;gap:2px 28px;margin-top:14px}
+
 /* ---------- Eligibility ---------- */
 .elig__grid{display:grid;gap:36px}
 .elig__intro{display:grid;gap:24px;min-width:0}
@@ -1227,7 +1241,7 @@ button,input,select,textarea{font:inherit;color:inherit}
   <div class="wrap legal__wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Privacy policy</li></ol></nav>
     <h1 class="h2" id="page-title">Privacy policy</h1>
-    <p class="fine legal__date">Effective October 17, 2026</p>
+    <p class="fine legal__date">Effective October 18, 2026</p>
     <div class="prose">
       <p>This policy explains what information Jachi Health ("Jachi," "we," "us") collects through jachihealth.com and the Jachi Health app, how we use it and the choices you have. Jachi isn't open for care yet. When we launch, the care you receive will also be covered by a HIPAA Notice of Privacy Practices, which you'll get before your first visit.</p>
 
@@ -1277,6 +1291,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 
       <h2 id="health">Health information</h2>
       <p>Please don't send health details through the chat, tickets or email. They aren't meant for medical questions. The health journal in our app stays on your phone, as described above. When Jachi opens and you become a patient, your health information will be protected under HIPAA and handled as described in the Notice of Privacy Practices you'll receive then.</p>
+      <p>Some of what we collect, like the services you choose, can show that you're looking for health care. Our <a href="/consumer-health-data/">consumer health data privacy policy</a> explains how we handle it under Washington's My Health My Data Act and similar state laws, and how to see it, delete it or appeal a decision.</p>
 
       <h2 id="keep">How long we keep it</h2>
       <ul>
@@ -1290,7 +1305,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 
       <h2 id="choices">Your choices and rights</h2>
       <p>If you have an account, you can update your details, turn our emails off or delete your account and the information tied to it at any time at <a href="/account/">jachihealth.com/account</a>. You can also unsubscribe from our emails with the link in any email or by emailing us. You can also ask us to tell you what personal information we have about you, or to correct or delete it, by emailing <a href="mailto:support@jachihealth.com">support@jachihealth.com</a>. We'll respond within 45 days, and we won't treat you differently for asking. If we can't do what you ask, we'll explain why, and you can appeal by replying to our answer.</p>
-      <p>Depending on where you live, state laws such as the Texas Data Privacy and Security Act may give you these rights. We honor these requests no matter where you live. Because we don't track visitors across websites or sell personal information, browser signals like Global Privacy Control have nothing to switch off here, but we respect them.</p>
+      <p>Depending on where you live, state laws such as the Texas Data Privacy and Security Act and Washington's My Health My Data Act may give you these rights. We honor these requests no matter where you live. Because we don't track visitors across websites or sell personal information, browser signals like Global Privacy Control have nothing to switch off here, but we respect them.</p>
 
       <h2 id="children">Children</h2>
       <p>Jachi is for adults 18 and older. We don't knowingly collect information from anyone under 18. If you believe someone under 18 has given us information, email us and we'll delete it.</p>
@@ -1341,6 +1356,7 @@ button,input,select,textarea{font:inherit;color:inherit}
         <h2 class="footer__h">Legal</h2>
         <ul>
           <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/consumer-health-data/">Consumer health data privacy policy</a></li>
           <li><a href="/terms/">Terms of use</a></li>
           <li><a href="/#ai-disclosure">AI disclosure</a></li>
           <li><a href="/texas-medical-board/">Texas Medical Board notice</a></li>
@@ -1459,6 +1475,7 @@ button,input,select,textarea{font:inherit;color:inherit}
     <h3>Your medical information</h3>
     <p>When you become a patient, your health information is protected under HIPAA and stored in the United States.</p>
     <p class="sheet__more"><a href="/privacy/">Read the full privacy policy</a></p>
+    <p class="sheet__more"><a href="/consumer-health-data/">Read the consumer health data privacy policy</a></p>
     <p class="fine">Last updated October 2026.</p>
   </div>
 </dialog>
