@@ -22,6 +22,7 @@ from common import ensure_fonts, use_brand_fonts  # noqa: E402
 from fake_identity import FakeIdentity  # noqa: E402
 from content import EMAIL, PRICING_NOTE  # noqa: E402
 import pages as PAGES  # noqa: E402
+import pages_es as PAGES_ES  # noqa: E402
 import learn as LEARN  # noqa: E402
 import landing as LANDING  # noqa: E402
 import content as CONTENT  # noqa: E402
@@ -36,6 +37,11 @@ URL = f"{BASE}/"
 ES_URL = f"{BASE}/es/"
 # The consumer health data privacy policy (Washington's My Health My Data Act), in each language
 HEALTH_EN, HEALTH_ES = "/consumer-health-data/", "/es/datos-de-salud/"
+# Each service page in each language, keyed by its English slug (pages.py, pages_es.py)
+SVC_PATH = {"en": {p["slug"]: f"/{p['slug']}/" for p in PAGES.PAGES},
+            "es": {slug: f"/es/{t['slug']}/" for slug, t in PAGES_ES.PAGES.items()}}
+LINKS_JS = """() => [...new Set([...document.querySelectorAll('a[href^="/"]')].map(a => a.getAttribute('href').split('#')[0])
+                  .filter(h => h && !h.startsWith('/api/')))]"""
 OUT = ROOT / "tests" / "out"
 OUT.mkdir(exist_ok=True)
 ensure_fonts()
@@ -606,8 +612,10 @@ with sync_playwright() as p:
     check("quick picker: UTI opens the UTI page", page.url == f"{BASE}/uti-treatment/", page.url)
     page.goto(ES_URL, wait_until="networkidle"); page.wait_for_timeout(300)
     es_picks = page.evaluate("[...document.querySelectorAll('.picker a')].map(a => a.getAttribute('href'))")
-    check("es quick picker: links to the service cards on the Spanish page", len(es_picks) == 8
-          and all(page.locator(h).count() == 1 for h in es_picks), str(es_picks))
+    check("es quick picker: goes straight to the Spanish service pages", len(es_picks) == 8 and len(set(es_picks)) == 8
+          and all(h in SVC_PATH["es"].values() and status_of(h) == 200 for h in es_picks), str(es_picks))
+    page.locator(f".picker a[href='{SVC_PATH['es']['uti-treatment']}']").click(); page.wait_for_load_state("networkidle")
+    check("es quick picker: infección urinaria opens the Spanish UTI page", page.url == BASE + SVC_PATH["es"]["uti-treatment"], page.url)
     check("quick picker pages: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
@@ -1075,42 +1083,69 @@ with sync_playwright() as p:
     check("share: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
-    # 11) Service pages
+    # 11) Service pages, in English and Spanish
     slugs = [p["slug"] for p in PAGES.PAGES]
-    for slug in slugs:
+    svc_pages = [(lang, slug, SVC_PATH[lang][slug]) for slug in slugs for lang in ("en", "es")]
+    for lang, slug, path in svc_pages:
+        home, twin = ("/" if lang == "en" else "/es/"), SVC_PATH["es" if lang == "en" else "en"][slug]
         for w, h in ((390, 844), (1440, 900)):
             ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=w < 900, is_mobile=w < 900)
             page, logs = setup(ctx)
-            page.goto(f"{BASE}/{slug}/", wait_until="networkidle"); page.wait_for_timeout(500)
+            page.goto(f"{BASE}{path}", wait_until="networkidle"); page.wait_for_timeout(500)
             ov = page.evaluate(OVERFLOW_JS)
-            check(f"/{slug}/ @{w}: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+            check(f"{path} @{w}: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
             info = page.evaluate("""() => ({
+              lang: document.documentElement.lang,
               h1: document.querySelectorAll('h1').length,
               crumbs: document.querySelectorAll('.crumbs li').length,
               join: [...document.querySelectorAll('a[href*="interest="]')].map(a => a.getAttribute('href')),
               canonical: (document.querySelector('link[rel=canonical]') || {}).href,
+              alt: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map(l => l.hreflang + ' ' + new URL(l.href).pathname),
+              swap: document.querySelector('.lang-switch').getAttribute('href'),
               related: [...document.querySelectorAll('.related a')].map(a => a.getAttribute('href')),
               faq: document.querySelectorAll('.faq-item').length,
               ld: [...document.querySelectorAll('script[type="application/ld+json"]')]
                 .flatMap(s => { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); }),
             })""")
-            ok = (info["h1"] == 1 and info["crumbs"] == 3 and len(info["join"]) >= 3 and len(set(info["join"])) == 1
-                  and info["canonical"] == f"https://jachihealth.com/{slug}/" and len(info["related"]) == 3 and info["faq"] >= 3
+            ok = (info["lang"] == lang and info["h1"] == 1 and info["crumbs"] == 3 and len(info["join"]) >= 3
+                  and len(set(info["join"])) == 1 and info["join"][0].startswith(home + "?interest=")
+                  and info["canonical"] == f"https://jachihealth.com{path}" and len(info["related"]) == 3
+                  and all(r in SVC_PATH[lang].values() for r in info["related"]) and info["faq"] >= 3
                   and info["ld"] == ["Organization", "MedicalWebPage", "BreadcrumbList", "FAQPage"])
-            check(f"/{slug}/ @{w}: heading, breadcrumb, sign-up links, canonical, related pages, FAQ and schema", ok, json.dumps(info))
+            check(f"{path} @{w}: language, heading, breadcrumb, sign-up links, canonical, related pages, FAQ and schema", ok, json.dumps(info))
+            check(f"{path} @{w}: points to its {'Spanish' if lang == 'en' else 'English'} twin (hreflang and language switch)",
+                  sorted(info["alt"]) == sorted([f"en {SVC_PATH['en'][slug]}", f"es {SVC_PATH['es'][slug]}", f"x-default {SVC_PATH['en'][slug]}"])
+                  and info["swap"] == twin, json.dumps(info["alt"] + [info["swap"]]))
             if w == 1440:
                 problems = page.evaluate(STATIC_A11Y_JS)
-                check(f"/{slug}/: links, labels and ids valid", not problems, json.dumps(problems))
-                for href in info["related"]:
-                    status, _h, _b = get(href)
-                    if status != 200:
-                        check(f"/{slug}/ related link {href} works", False, str(status))
+                check(f"{path}: links, labels and ids valid", not problems, json.dumps(problems))
+                bad = [href for href in page.evaluate(LINKS_JS) if status_of(href) != 200]
+                check(f"{path}: every link on the page works", not bad, str(bad))
                 page.locator(".faq-q").first.click(); page.wait_for_timeout(500)
-                check(f"/{slug}/: FAQ opens", page.locator(".faq-q").first.get_attribute("aria-expanded") == "true")
+                check(f"{path}: FAQ opens", page.locator(".faq-q").first.get_attribute("aria-expanded") == "true")
             if slug in ("uti-treatment", "weight-loss", "online-therapy"):
-                page.screenshot(path=str(OUT / f"svc-{slug}-{w}.png"), full_page=True, animations="disabled")
-            check(f"/{slug}/ @{w}: no console errors", not logs, json.dumps(logs))
+                page.screenshot(path=str(OUT / f"svc-{lang + '-' if lang == 'es' else ''}{slug}-{w}.png"), full_page=True, animations="disabled")
+            check(f"{path} @{w}: no console errors", not logs, json.dumps(logs))
             ctx.close()
+
+    # The Spanish pages are all Spanish: none of the English page's words are left in them
+    english_words = ["Join the waitlist", "Good to know", "Related services", "No insurance needed", "Waitlist open",
+                     "Launching nationwide", "Ask our assistant", "Have another question", "Be first in line",
+                     "What to expect", "at a glance", "billed separately", "Licensed clinicians", "Find the right care",
+                     "Check your eligibility", "Call 911", "Text 988", "questions, answered", "See how Jachi works"]
+    leftovers = {}
+    for slug in slugs:
+        path = SVC_PATH["es"][slug]
+        doc = (ROOT / "public" / path.strip("/") / "index.html").read_text()
+        words = re.sub(r"<[^>]+>", " ", re.search(r"<main\b.*?</main>", doc, re.S).group(0))
+        found = [w for w in english_words if w.lower() in words.lower()]
+        if found:
+            leftovers[path] = found
+    check("es service pages: no English left on the page", not leftovers, json.dumps(leftovers))
+    usted = [path for path in SVC_PATH["es"].values()
+             if re.search(r"\b(tú|tienes|puedes|necesitas|quieres|eres|estás|tu salud|tus )\b",
+                          (ROOT / "public" / path.strip("/") / "index.html").read_text(), re.I)]
+    check("es service pages: speak to the visitor as usted", not usted, str(usted))
 
     # From a service page to the sign-up form with the service chosen
     ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
@@ -1128,6 +1163,13 @@ with sync_playwright() as p:
     check("service page CTA: form in view, keyboard not opened", page.evaluate("document.activeElement.id") == "join-form-title"
           and 0 <= page.evaluate("document.querySelector('.form-card').getBoundingClientRect().top") < 200)
     check("service page CTA: no console errors", not logs, json.dumps(logs))
+    page.goto(f"{BASE}{SVC_PATH['es']['uti-treatment']}", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator(".page-hero .btn").first.click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1500)
+    check("es service page CTA: lands on the Spanish sign-up with the service ticked",
+          page.evaluate("location.pathname") == "/es/" and page.evaluate("location.hash") == "#join"
+          and page.locator("input[name='interest'][value='urgent-care']").is_checked()
+          and page.evaluate("document.documentElement.lang") == "es", page.url)
+    check("es service page CTA: no console errors", not logs, json.dumps(logs))
     ctx.close()
     ctx = browser.new_context(viewport={"width": 1440, "height": 900})
     page, logs = setup(ctx)
@@ -1138,23 +1180,31 @@ with sync_playwright() as p:
     page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
     page.locator("#svc-skin .svc__link").click(); page.wait_for_load_state("networkidle")
     check("home service card title opens its page", page.url == f"{BASE}/skin-care/", page.url)
+    page.goto(ES_URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
+    page.locator("#svc-skin .svc__link").click(); page.wait_for_load_state("networkidle")
+    check("es home service card title opens the Spanish page", page.url == BASE + SVC_PATH["es"]["skin-care"], page.url)
+    es_care = page.evaluate("[...document.querySelectorAll('footer nav[aria-label=\\'Atención\\'] a')].map(a => a.getAttribute('href'))")
+    check("es footer: care links go to the Spanish service pages",
+          [h for h in es_care if h.startswith("/es/") and "#" not in h] == [SVC_PATH["es"][PAGES.SERVICE_SLUG[k]] for k in
+          ("urgent", "refill", "therapy", "mental", "sexual", "mens", "womens", "skin", "weight")], str(es_care))
     check("service journeys: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
     # 11b) What to expect on every service page
     ctx = browser.new_context(viewport={"width": 1440, "height": 900})
     page, logs = setup(ctx)
-    for slug in slugs:
-        page.goto(f"{BASE}/{slug}/", wait_until="domcontentloaded")
-        exp = page.evaluate("""() => ({
+    for lang, slug, path in svc_pages:
+        page.goto(f"{BASE}{path}", wait_until="domcontentloaded")
+        how_path = CONTENT.HOW["path"] if lang == "en" else CONTENT_ES.HOW["path"]
+        exp = page.evaluate("""how => ({
           title: (document.querySelector('#expect-title') || {}).textContent || '',
           items: [...document.querySelectorAll('#expect .expect li h3')].map(h => h.textContent),
-          how: !!document.querySelector('#expect a[href="/how-it-works/"]'),
+          how: !!document.querySelector(`#expect a[href="${how}"]`),
           tops: [...document.querySelectorAll('#expect .expect li h3')].map(h => Math.round(h.getBoundingClientRect().top)),
-        })""")
-        check(f"/{slug}/: what to expect (visit, tests, follow-up) lines up, with a link to how Jachi works",
-              exp["title"].startswith("What to expect") and len(exp["items"]) == 3 and exp["how"]
-              and len(set(exp["tops"])) == 1, json.dumps(exp))
+        })""", how_path)
+        check(f"{path}: what to expect (visit, tests, follow-up) lines up, with a link to how Jachi works",
+              exp["title"].startswith("What to expect" if lang == "en" else "Qué esperar") and len(exp["items"]) == 3
+              and exp["how"] and len(set(exp["tops"])) == 1, json.dumps(exp))
     check("what to expect: no console errors", not logs, json.dumps(logs))
     check("what to expect: the Spanish wording (for the app) covers every service page, item for item",
           set(CONTENT_ES.EXPECT) == set(slugs) and all(len(CONTENT_ES.EXPECT[p["slug"]][2]) == len(p["expect"]) for p in PAGES.PAGES))
@@ -1168,8 +1218,6 @@ with sync_playwright() as p:
     pairs = {CONTENT.HOW["path"]: CONTENT_ES.HOW["path"], LEARN.HUB["en"]["path"]: LEARN.HUB["es"]["path"], HEALTH_EN: HEALTH_ES}
     pairs.update({LEARN.path(a, "en"): LEARN.path(a, "es") for a in LEARN.ARTICLES})
     pairs.update({v: k for k, v in list(pairs.items())})
-    LINKS_JS = """() => [...new Set([...document.querySelectorAll('a[href^="/"]')].map(a => a.getAttribute('href').split('#')[0])
-                      .filter(h => h && !h.startsWith('/api/')))]"""
     for path in content_pages:
         lang = "es" if path.startswith("/es/") else "en"
         for w, h in ((390, 844), (1440, 900)):
@@ -1458,11 +1506,12 @@ with sync_playwright() as p:
     # 13) Search engine files and fonts
     status, headers, body = get("/sitemap.xml")
     sm = body.decode()
-    missing = [u for u in ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs] + content_pages
+    all_svc = [path for _lang, _slug, path in svc_pages]
+    missing = [u for u in ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + all_svc + content_pages
                if f"<loc>https://jachihealth.com{u}</loc>" not in sm]
     check("sitemap lists every page, with the Spanish alternate", not missing and 'hreflang="es"' in sm, str(missing))
     # Structured data, titles and descriptions on every page search engines see
-    indexable = ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + [f"/{s}/" for s in slugs] + content_pages
+    indexable = ["/", "/es/", "/privacy/", "/terms/", "/texas-medical-board/"] + all_svc + content_pages
     nodes_by_page, sd_problems, meta_problems = {}, [], []
     for u in indexable:
         h = (ROOT / "public" / u.strip("/") / "index.html").read_text()
@@ -1487,11 +1536,57 @@ with sync_playwright() as p:
         refs = re.findall(r'\{"@id": "([^"]+)"\}', json.dumps(nodes))
         sd_problems += [f"{u}: {r} isn't defined" for r in refs if r not in known]
     home_types = [[n.get("@type") for n in nodes_by_page.get(u, [])] for u in ("/", "/es/")]
-    service_ok = all(any(n.get("@type") == "MedicalWebPage" and n.get("about") for n in nodes_by_page[f"/{s}/"]) for s in slugs)
+    service_ok = all(any(n.get("@type") == "MedicalWebPage" and n.get("about") for n in nodes_by_page[u]) for u in all_svc)
     check("structured data: valid, connected, organization and website on both home pages, conditions on service pages",
           not sd_problems and all(t == ["Organization", "WebSite", "WebPage"] for t in home_types) and service_ok,
           json.dumps(sd_problems[:6] + home_types))
     check("search titles fit (65 characters) and descriptions fit (50 to 160)", not meta_problems, json.dumps(meta_problems))
+    titles = {}
+    for u in indexable:
+        h = (ROOT / "public" / u.strip("/") / "index.html").read_text()
+        titles.setdefault(re.search(r"<title>(.*?)</title>", h).group(1), []).append(u)
+    check("every page search engines see has its own title", all(len(v) == 1 for v in titles.values()),
+          json.dumps({k: v for k, v in titles.items() if len(v) > 1}))
+    # hreflang: every page that names a version in another language is named back by it, with the same set
+    alt_sets, alt_problems = {}, []
+    for u in indexable:
+        h = (ROOT / "public" / u.strip("/") / "index.html").read_text()
+        alt_sets[u] = dict(re.findall(r'<link rel="alternate" hreflang="([^"]+)" href="https://jachihealth\.com([^"]+)">', h))
+    for u, alts in alt_sets.items():
+        if not alts:
+            continue
+        if alts.get("en" if not u.startswith("/es/") else "es") != u or "x-default" not in alts:
+            alt_problems.append(f"{u}: doesn't name itself or x-default")
+        for code, other in alts.items():
+            if alt_sets.get(other) != alts:
+                alt_problems.append(f"{u} → {code} {other}: not reciprocal")
+    check("hreflang: every page and its other-language twin name each other, with x-default",
+          not alt_problems and all(alt_sets[u] for u in all_svc), json.dumps(alt_problems[:6]))
+    # Sitemap dates: each page lists the day its words last changed, kept between builds in sitemap_dates.json
+    entries = re.findall(r"<url>\s*<loc>https://jachihealth\.com([^<]+)</loc>\s*<lastmod>(\d{4}-\d{2}-\d{2})</lastmod>", sm)
+    dates = json.loads((ROOT / "sitemap_dates.json").read_text())
+    check("sitemap: every page has a last-changed date that matches sitemap_dates.json",
+          len(entries) == sm.count("<url>") and all(dates.get(u, {}).get("date") == d for u, d in entries)
+          and set(dates) == {u for u, _d in entries}, f"{len(entries)} of {sm.count('<url>')}")
+    # IndexNow: the key file Bing checks before it accepts a list of changed pages
+    key_files = [f for f in (ROOT / "public").glob("*.txt") if re.fullmatch(r"[0-9a-f]{32}", f.stem)]
+    if len(key_files) == 1:
+        status, headers, body = get(f"/{key_files[0].name}")
+        check("IndexNow key file is served as plain text and holds its own key", status == 200
+              and "text/plain" in headers.get("Content-Type", "") and body.decode().strip() == key_files[0].stem
+              and key_files[0].name not in sm, f"{status} {headers.get('Content-Type')}")
+    else:
+        check("IndexNow key file is served as plain text and holds its own key", False, f"{len(key_files)} key files")
+    # Care is credited to clinicians, never to Jachi ("Clinicians treat...", not "we treat")
+    credited = []
+    for f in sorted((ROOT / "public").rglob("*.html")):
+        text = re.sub(r"<(script|style)\b.*?</\1>", " ", f.read_text(), flags=re.S)
+        text = html.unescape(re.sub(r"<[^>]+>", " ", text))
+        hits = re.findall(r"\bwe(?:'ll)? (?:treat|prescribe|diagnose|refill)\b(?! them as)", text, re.I)
+        hits += re.findall(r"(?<!No )(?<!no )(?<!ni )(?<!los )\b(?:tratamos|recetamos|diagnosticamos|resurtimos|trataremos|recetaremos)\b", text)
+        if hits:
+            credited.append(f"{f.relative_to(ROOT / 'public')}: {hits[:3]}")
+    check("care is credited to clinicians, not to Jachi, in both languages", not credited, json.dumps(credited[:6]))
     home_html = (ROOT / "public" / "index.html").read_text()
     check("only the two main fonts are preloaded (the italic waits, so the page paints sooner)",
           len(re.findall(r'rel="preload"[^>]*as="font"', home_html)) == 2 and "fraunces-italic" not in

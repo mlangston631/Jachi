@@ -1,0 +1,76 @@
+<main id="main">
+  <section class="hero hero--page" aria-labelledby="page-title">
+    <div class="wrap page-hero">
+      <div class="page-hero__copy">
+        {{CRUMBS}}
+        <p class="status"><span class="status__dot" aria-hidden="true"></span><span>Lista de espera abierta</span><span class="status__rule" aria-hidden="true"></span><span>Próximamente en todo EE. UU.</span></p>
+        <h1 class="display display--page" id="page-title">{{SVC_H1}}</h1>
+        <p class="lead">{{SVC_LEAD}}</p>
+        <div class="cta-row">
+          <a class="btn btn--lg" href="{{JOIN_HREF}}">Únase a la lista de espera {{I:arrow:i--arrow}}</a>
+          {{SVC_SECOND_CTA}}
+        </div>
+      </div>
+      {{SVC_CARD}}
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="list-title">
+    <div class="wrap page-split">
+      <div class="section-head section-head--tight">
+        <h2 class="h2 h2--sm" id="list-title">{{SVC_LIST_TITLE}}</h2>
+        <p class="lead">{{SVC_LIST_LEAD}}</p>
+      </div>
+      <ul class="conds">{{SVC_LIST}}</ul>
+    </div>
+  </section>
+
+  <section class="section" id="expect" aria-labelledby="expect-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2 h2--sm" id="expect-title">{{SVC_EXPECT_TITLE}}</h2>
+        <p class="lead">{{SVC_EXPECT_LEAD}}</p>
+      </div>
+      <ol class="expect">{{SVC_EXPECT}}</ol>
+      <div class="expect__more">
+        <div class="explain">
+          <h3>Para tener en cuenta</h3>
+          <ul class="know">{{SVC_KNOW}}</ul>
+        </div>
+        {{SVC_SAFETY}}
+      </div>
+      <ul class="expect__links">{{SVC_LINKS}}</ul>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="faq-title">
+    <div class="wrap faq__grid">
+      <div class="faq__intro">
+        <div class="section-head">
+          <h2 class="h2" id="faq-title">{{SVC_FAQ_TITLE}}</h2>
+        </div>
+        <div class="faq-more">
+          <p>¿Tiene otra pregunta? Pregúntele a nuestro asistente de IA o escriba a nuestro equipo y le responderemos. No incluya detalles de salud.</p>
+          <div class="faq-more__actions">
+            <button class="btn btn--sm" type="button" data-chat-open aria-controls="chat">{{I:chat}} Pregúntele al asistente</button>
+            <a class="btn btn--ghost btn--sm" href="mailto:{{EMAIL}}">{{I:mail}} {{EMAIL}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="faq-list">{{SVC_FAQ}}</div>
+    </div>
+  </section>
+
+  <section class="section join grain on-dark page-cta" aria-labelledby="cta-title">
+    {{MARK:m-art-cta:outline:join__art}}
+    <div class="wrap page-cta__inner">
+      <h2 class="h2 h2--light" id="cta-title">Sea de los primeros.</h2>
+      <p class="lead lead--light">Próximamente en todo EE. UU. Únase a la lista y le enviaremos un correo cuando Jachi abra en su estado.</p>
+      <a class="btn btn--light btn--lg" href="{{JOIN_HREF}}">Únase a la lista de espera {{I:arrow:i--arrow}}</a>
+      <nav class="related" aria-label="Servicios relacionados">
+        <h3 class="related__h">Servicios relacionados</h3>
+        <ul>{{SVC_RELATED}}</ul>
+      </nav>
+    </div>
+  </section>
+</main>

@@ -6,6 +6,8 @@ The same instructions drive the live site (through the function) and the artifac
 import json
 
 from content import EMAIL, SERVICES, BY_KEY, TREATED, NOT_OFFERED, FAQ
+import pages as PAGES
+import pages_es as PAGES_ES
 
 MODEL = "claude-haiku-5-5"
 
@@ -26,6 +28,8 @@ def system_prompt():
     treated = "\n".join(f"- {label}: {', '.join(items)}" for label, items in by_service.items())
     not_offered = "\n".join(f"- {name}: {_plain(note)}" for name, _terms, note in NOT_OFFERED)
     faq = "\n".join(f"Q: {q}\nA: {a}" for q, a in FAQ)
+    service_pages = "\n".join(f"  - {p['crumb']}: jachihealth.com/{p['slug']}/ (in Spanish: /es/{PAGES_ES.PAGES[p['slug']]['slug']}/)"
+                              for p in PAGES.PAGES)
     return f"""You are the AI help assistant on jachihealth.com, the website of Jachi Health. You are an AI, not a person, a clinician or a live agent, and you say so if asked.
 
 ABOUT JACHI HEALTH
@@ -56,7 +60,8 @@ ON THE WEBSITE
 - "Join the waitlist": the sign-up form at the bottom of the page.
 - Support: a person on Jachi's team reads every ticket and email and replies by email. There's no live chat or phone support yet. Visitors can tap "Submit a ticket" in this chat or email {EMAIL}.
 - A Spanish version of the home page at jachihealth.com/es/.
-- A page for each service, such as jachihealth.com/urgent-care/, /uti-treatment/, /online-therapy/ and /weight-loss/, each with what to expect from the visit, tests and follow-up.
+- A page for each service, in English and Spanish, each with what to expect from the visit, tests and follow-up:
+{service_pages}
 - "How Jachi works" at jachihealth.com/how-it-works/ (in Spanish: /es/como-funciona/): the seven steps from choosing a service to care from the medical group, and who does what.
 - Health guides at jachihealth.com/learn/ (in Spanish: /es/guias/): what to expect from an online UTI visit, how medical weight care works, and when to choose online care, urgent care or the ER. They're general information from public health sources, not medical advice.
 - The privacy policy, the consumer health data privacy policy (jachihealth.com/consumer-health-data/, in Spanish: /es/datos-de-salud/), terms of use and Texas Medical Board notice, linked at the bottom of every page. The consumer health data policy explains how people can see or delete the care choices they gave Jachi, or appeal a decision.

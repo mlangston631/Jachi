@@ -1,4 +1,5 @@
 """The service pages (one per service, plus UTI treatment), built by build.py from src/en/service.html.
+Each has a Spanish twin in pages_es.py (built from src/es/service.html); change both.
 
 Each page targets what people search for. "list" items name rows from content.TREATED (their notes are shown
 too), or are given as (title, note) pairs. Keep every claim true for launch: no visits can be booked yet, nothing here
@@ -11,6 +12,9 @@ only feed the page's structured data for search engines; nothing about them show
 (icon, title, text) with an icon from build.py's ICONS; "expect_lead" can replace the section's usual first line. Credit care to clinicians ("Clinicians treat..."), never to
 Jachi ("we treat").
 """
+
+# The first line of the list section, unless a page has its own "list_lead".
+LIST_LEAD = "A licensed clinician reviews every request and tells you if you need to be seen in person instead."
 
 # The first line of the "What to expect" section, unless a page has its own "expect_lead".
 EXPECT_LEAD = ("A licensed clinician leads your care. Here's what happens at your visit, whether you'll need tests, and "

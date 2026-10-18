@@ -5,14 +5,18 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Making a change
 
-1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `learn.py`, `landing.py`, `strings.py`, `src/`,
+1. Edit the source (`content.py`, `content_es.py`, `pages.py`, `pages_es.py`, `learn.py`, `landing.py`, `strings.py`, `src/`,
    `src/functions/`, `chatbot.py`, `brand.py`, `netlify.toml`). Never hand-edit anything in `public/` or `netlify/functions/`;
    `build.py` generates them.
 2. Keep English and Spanish in step:
    - After changing `src/en/home.html`, run `python3 tools/es_home.py`. It stops on any English sentence it
      can't find, which means a translation in that file needs adding or updating.
-   - `src/en/header.html`, `footer.html`, `chat.html`, `dock.html` and `how.html` have Spanish copies in `src/es/`;
-     change both. The health guides (`learn.py`) and `HOW` hold both languages; Spanish guides live at `/es/guias/`.
+   - `src/en/header.html`, `footer.html`, `chat.html`, `dock.html`, `how.html` and `service.html` have Spanish copies
+     in `src/es/`; change both. The health guides (`learn.py`) and `HOW` hold both languages; Spanish guides live at
+     `/es/guias/`.
+   - Every service page in `pages.py` has a Spanish twin in `pages_es.py` (`/es/<slug>/`, its "what to expect" in
+     `content_es.EXPECT`); change both. Pages in both languages name each other (`hreflang`), and tests/qa.py
+     checks every pair.
    - New text shown by `src/app.js` or the account page goes in `strings.py` under both `EN` and `ES`
      (account page keys start with `a_`). The admin console is English only.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.
@@ -26,6 +30,9 @@ keep replies short and plain, and ask only questions that change what you'll do.
    When he should see a change first, push a branch and open a pull request: Netlify builds a free Deploy Preview
    (`deploy-preview-<number>--sweet-axolotl-25d33d.netlify.app`). Merge after he approves.
 7. `git fetch origin main` before pushing, in case he edited on GitHub.
+8. After a production deploy that changed pages, run `python3 tools/indexnow.py <changed paths>` from somewhere
+   with internet access, so Bing (which also feeds Yahoo, DuckDuckGo and ChatGPT search) recrawls them right away.
+   Google rereads the sitemap by itself; `sitemap_dates.json` keeps each page's last-changed date, so commit it.
 
 ## Decisions the owner made (change only when he asks)
 
@@ -78,8 +85,10 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Security
 
-- The repository is public. Never commit keys or passwords. Secrets live only in Netlify's environment variables:
-  `NETLIFY_API_TOKEN` (a personal access token with access to his whole Netlify account, used only inside
+- The repository is public. Never commit keys or passwords. (The IndexNow key in `build.py` is the exception: it
+  is published at `/<key>.txt` on purpose and only lets someone ask search engines to recrawl the site.)
+  Secrets live only in Netlify's environment variables: `NETLIFY_API_TOKEN` (a personal access token with access
+  to his whole Netlify account, used only inside
   `netlify/functions/admin.mjs` and `account.mjs`, never sent to a browser; set for the Production deploy
   context only, so Deploy Previews built from pull requests never get it), optional `ADMIN_EMAILS`, and
   optional `ANTHROPIC_API_KEY`. Environment variable changes need a redeploy. Keep Netlify's sensitive variable

@@ -201,8 +201,8 @@ ARTICLES = [
             "cta": {"title": "Atención en línea para infecciones urinarias",
                     "text": "Únase a la lista de espera y le avisaremos cuando abramos. Profesionales con licencia "
                             "tratarán infecciones urinarias en línea.",
-                    "page": ("Ver nuestros servicios", "/es/#svc-urgent"),
-                    "join": "/es/#join"},
+                    "page": ("Sobre el tratamiento de la infección urinaria", "/es/tratamiento-infeccion-urinaria/"),
+                    "join": "/es/?interest=urgent-care"},
         },
     },
     {
@@ -339,7 +339,7 @@ ARTICLES = [
                     "text": "Vea si un medicamento para bajar de peso podría ser adecuado para usted con nuestra "
                             "evaluación rápida y únase a la lista de espera.",
                     "page": ("Hacer la evaluación", "/es/#eligibility"),
-                    "join": "/es/#join"},
+                    "join": "/es/?interest=weight-care"},
         },
     },
     {
