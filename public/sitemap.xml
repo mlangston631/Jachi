@@ -156,11 +156,11 @@
   </url>
   <url>
     <loc>https://jachihealth.com/privacy/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-12</lastmod>
   </url>
   <url>
     <loc>https://jachihealth.com/terms/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-12</lastmod>
   </url>
   <url>
     <loc>https://jachihealth.com/texas-medical-board/</loc>
@@ -179,6 +179,20 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/how-it-works/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/how-it-works/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/plans/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/plans/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/planes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/plans/"/>
+  </url>
+  <url>
+    <loc>https://jachihealth.com/es/planes/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jachihealth.com/plans/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jachihealth.com/es/planes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jachihealth.com/plans/"/>
   </url>
   <url>
     <loc>https://jachihealth.com/consumer-health-data/</loc>

@@ -172,7 +172,7 @@ with sync_playwright() as p:
           toggle: !!document.querySelector('.menu-toggle').offsetParent,
         })""")
         if w >= 1100:
-            check(f"header: full nav on one line, log in link @{w}", len(header_info["nav"]) == 4 and max(header_info["nav"]) < 50
+            check(f"header: full nav on one line, log in link @{w}", len(header_info["nav"]) == 5 and max(header_info["nav"]) < 50
                   and header_info["login"] == "/account/" and not header_info["toggle"], json.dumps(header_info))
         elif w >= 960:
             check(f"header: menu button and log in link @{w}", header_info["toggle"] and header_info["login"] == "/account/", json.dumps(header_info))
@@ -194,7 +194,8 @@ with sync_playwright() as p:
     check("menu opens", is_open(page, "#mobile-menu"))
     check("menu toggle aria-expanded", toggle.get_attribute("aria-expanded") == "true")
     check("main is inert while menu open", page.evaluate("document.getElementById('main').inert === true"))
-    check("menu lists seven sections", page.locator("#mobile-menu nav a").count() == 7)
+    check("menu lists eight sections (Plans first)", page.locator("#mobile-menu nav a").count() == 8
+          and page.locator("#mobile-menu nav a").first.get_attribute("href") == "/plans/")
     check("menu offers log in", page.locator("#mobile-menu a[href='/account/']").is_visible())
     page.screenshot(path=str(OUT / "mobile-menu.png"))
     page.keyboard.press("Escape")
@@ -931,7 +932,7 @@ with sync_playwright() as p:
         check(f"es: nine service cards in {expect_rows} rows @{w}", len(tops) == 9 and len(set(tops)) == expect_rows, str(tops))
         es_nav = page.evaluate("[...document.querySelectorAll('.nav a')].filter(a => a.offsetParent).map(a => Math.round(a.getBoundingClientRect().height))")
         if w >= 1100:
-            check(f"es: header nav on one line @{w}", len(es_nav) == 4 and max(es_nav) < 50, str(es_nav))
+            check(f"es: header nav on one line @{w}", len(es_nav) == 5 and max(es_nav) < 50, str(es_nav))
         check(f"es: no console errors @{w}", not logs, json.dumps(logs))
         if w in (390, 1440):
             page.screenshot(path=str(OUT / f"es-first-{w}.png"))
@@ -1485,7 +1486,9 @@ with sync_playwright() as p:
     priced = []
     for f in sorted((ROOT / "public").rglob("*.html")):
         rel = "/" + str(f.relative_to(ROOT / "public"))
-        if rel == "/terms/index.html":
+        # Terms keep their $100 liability cap; the plans and checkout pages show the membership prices (decided Nov 12, 2026).
+        if rel in ("/terms/index.html", "/plans/index.html", "/es/planes/index.html", "/membership/index.html",
+                   "/es/membresia/index.html"):
             continue
         if _re.search(r"\$\s?\d", f.read_text()):
             priced.append(rel)
@@ -1502,6 +1505,59 @@ with sync_playwright() as p:
           and PRICING_NOTE in glance and "$" not in glance, glance)
     check("no prices: no console errors", not logs, json.dumps(logs))
     ctx.close()
+
+    # 12c) Membership: the plans pages and the checkout (Stripe is never called: the page's API answers are stood in)
+    sm_text = get("/sitemap.xml")[2].decode()
+    check("plans pages are in the sitemap, checkout pages are not", "/plans/" in sm_text and "/es/planes/" in sm_text
+          and "/membership/" not in sm_text and "/es/membresia/" not in sm_text)
+    for lang, plans_path, checkout_path, per in (("en", "/plans/", "/membership/", "/month"), ("es", "/es/planes/", "/es/membresia/", "/mes")):
+        ctx = browser.new_context(viewport={"width": 390, "height": 844})
+        page, logs = setup(ctx)
+        page.goto(BASE + plans_path, wait_until="networkidle"); page.wait_for_timeout(300)
+        prices = page.locator(".m-plan__price").all_inner_texts()
+        links = page.evaluate("[...document.querySelectorAll('.m-plan .btn')].map(a => a.getAttribute('href'))")
+        check(f"{plans_path}: three plans at $49, $99 and $250 a month, each starting checkout",
+              ["".join(x.split()) for x in prices] == [f"$49{per}", f"$99{per}", f"$250{per}"]
+              and links == [f"{checkout_path}?plan={k}" for k in ("concierge", "plus", "signature")], f"{prices} {links}")
+        check(f"{plans_path}: founding price and the not-insurance note", "$39" in page.locator(".m-plan--featured").inner_text()
+              and page.locator(".note-box").count() >= 1)
+        check(f"{plans_path}: no sideways scrolling at 390px", page.evaluate("document.documentElement.scrollWidth") <= 390)
+        sent = []
+        page.route("**/api/membership/plans", lambda route: route.fulfill(status=200, content_type="application/json", body=json.dumps(
+            {"ok": True, "daysUntilDue": 3, "plans": {"concierge": {"monthly": 4900, "yearly": 49000, "founding": {"amount": 3900, "open": True, "limit": 100, "remaining": 12}, "extraAdult": {"monthly": 2500, "max": 3}},
+                                                     "plus": {"monthly": 9900, "yearly": 99000}, "signature": {"monthly": 25000, "yearly": 250000}}})))
+
+        def start(route):
+            sent.append(json.loads(route.request.post_data))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(
+                {"ok": True, "status": "invoice_sent", "email": "m\u2022\u2022\u2022\u2022@example.com", "amountDue": 8900,
+                 "invoiceNumber": "JH-0001", "dueDate": 1795000000}))
+        page.route("**/api/membership/start", start)
+        page.goto(BASE + checkout_path + "?plan=concierge", wait_until="networkidle"); page.wait_for_timeout(300)
+        check(f"{checkout_path}: live founding spots shown", "12" in page.locator("#m-founding-note").inner_text())
+        page.locator("#m-plus").click(); page.locator("#m-plus").click()
+        check(f"{checkout_path}: two added adults make $89.00", page.locator("#m-total").inner_text() == "$89.00")
+        page.locator("label:has(input[name='billing'][value='yearly'])").click()
+        check(f"{checkout_path}: yearly hides the monthly-only adults and shows $490.00",
+              page.locator("#m-adults").is_hidden() and page.locator("#m-total").inner_text() == "$490.00")
+        page.locator("label:has(input[name='billing'][value='monthly'])").click()
+        page.locator("#m-plus").click(); page.locator("#m-plus").click()
+        page.locator("#m-submit").click(); page.wait_for_timeout(200)
+        shown = page.evaluate("[...document.querySelectorAll('.m-checkout .err:not([hidden])')].length")
+        check(f"{checkout_path}: an empty form shows five field errors and sends nothing", shown == 5 and not sent, str(shown))
+        page.locator("#m-name").fill("Maria Lopez"); page.locator("#m-email").fill("maria@example.com")
+        page.locator("#m-phone").fill("(214) 555-0142")
+        page.locator("#m-check-nonclinical").click(); page.locator("#m-check-terms").click()
+        page.locator("#m-submit").click(); page.wait_for_timeout(500)
+        check(f"{checkout_path}: sends the plan, card-by-invoice and both agreements", len(sent) == 1
+              and sent[0]["plan"] == "concierge" and sent[0]["extraAdults"] == 2 and sent[0]["payment"] == "card_invoice"
+              and sent[0]["agreeTerms"] is True and sent[0]["agreeNonclinical"] is True and sent[0]["language"] == lang, json.dumps(sent))
+        check(f"{checkout_path}: confirmation says the invoice was emailed", page.locator("#m-done").is_visible()
+              and "$89.00" in page.locator("#m-done-text").inner_text() and page.locator("#m-form").is_hidden())
+        check(f"{checkout_path}: no sideways scrolling, no console errors", page.evaluate("document.documentElement.scrollWidth") <= 390
+              and not logs, json.dumps(logs))
+        page.screenshot(path=str(OUT / f"membership-{lang}-done.png"))
+        ctx.close()
 
     # 13) Search engine files and fonts
     status, headers, body = get("/sitemap.xml")

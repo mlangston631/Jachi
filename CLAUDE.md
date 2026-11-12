@@ -21,7 +21,7 @@ keep replies short and plain, and ask only questions that change what you'll do.
      (account page keys start with `a_`). The admin console is English only.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.
 3. `python3 build.py`
-4. `node tests/function.test.mjs` and `python3 tests/qa.py`. Every check must pass. Fix the cause rather than
+4. `node tests/function.test.mjs`, `node tests/membership.test.mjs` and `python3 tests/qa.py`. Every check must pass. Fix the cause rather than
    loosening a check; add or update checks when behaviour changes. Look at the screenshots in `tests/out/`
    for anything visual, at phone and desktop sizes.
 5. Commit source and built files together.
@@ -35,6 +35,20 @@ keep replies short and plain, and ask only questions that change what you'll do.
    Google rereads the sitemap by itself; `sitemap_dates.json` keeps each page's last-changed date, so commit it.
 
 ## Decisions the owner made (change only when he asks)
+
+- **Switching to the membership model (decided Nov 12, 2026), in steps on the `membership-switch` branch and one
+  pull request; merge only when every step is done and he approves the Deploy Preview.** Jachi Health LLC sells
+  care coordination, not care: a coordinator finds care, confirms the self-pay price in writing, books every visit,
+  sends reminders and handles paperwork. Independent licensed practices provide and bill the care. Jachi takes no
+  money from providers and offers no discounts; plans aren't insurance. Plans (membership.py, Stripe lookup keys in
+  `src/functions/billing.mjs`): Concierge $49/month or $490/year (founding $39/month for the first 100, for as long
+  as they stay), Concierge Plus $99/$990 (second adult included), Signature $250/$2,500 (up to 4 adults); add an
+  adult to monthly Concierge for $25/month. Payment is by debit or credit card through Stripe invoices sent by email
+  (`collection_method: send_invoice`); nothing is charged automatically. Steps: 1) plans, checkout, billing
+  functions, member emails, terms and privacy (done); 2) home page, How it works, service pages and the help chat
+  rewritten for the membership; 3) Find care, Book a visit and For providers, only with real partner practices;
+  4) ad landing pages and accounts. Until step 2 is done, the older decisions below about the telehealth waitlist
+  still describe the rest of the site; prices are allowed only on the plans and checkout pages.
 
 - Launching nationwide (decided Oct 17, 2026; the site used to say "Texas first"). Adults 18+ only. Cash pay, no
   insurance. Keep the Texas Medical Board notice for Texas patients.
@@ -87,7 +101,9 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 - The repository is public. Never commit keys or passwords. (The IndexNow key in `build.py` is the exception: it
   is published at `/<key>.txt` on purpose and only lets someone ask search engines to recrawl the site.)
-  Secrets live only in Netlify's environment variables: `NETLIFY_API_TOKEN` (a personal access token with access
+  Secrets live only in Netlify's environment variables (the membership ones: `STRIPE_SECRET_KEY`, a restricted key;
+  `STRIPE_WEBHOOK_SECRET`; `EMAIL_API_KEY`; optional `TEAM_NOTIFY_WEBHOOK_URL`, `TURNSTILE_SECRET_KEY`; set them for
+  the Production context only): `NETLIFY_API_TOKEN` (a personal access token with access
   to his whole Netlify account, used only inside
   `netlify/functions/admin.mjs` and `account.mjs`, never sent to a browser; set for the Production deploy
   context only, so Deploy Previews built from pull requests never get it), optional `ADMIN_EMAILS`, and
@@ -109,3 +125,15 @@ keep replies short and plain, and ask only questions that change what you'll do.
   Instrument Sans for text. Leaf logo in `brand.py`.
 - Mobile first, no sideways scrolling at 360px wide, calm motion that stops under reduced-motion settings,
   full keyboard and screen-reader support. The QA covers 9 screen sizes in both languages.
+
+## Membership billing
+
+- `src/functions/billing.mjs` is shared by `membership.mjs` (`/api/membership/plans`, `/api/membership/start`),
+  `stripe-webhook.mjs` (`/api/stripe/webhook`) and `daily-emails.mjs` (scheduled daily at 15:00 UTC). It calls
+  Stripe's REST API directly (pinned API version) and sends member emails through `EMAIL_PROVIDER` (Resend, Postmark
+  or SendGrid). Never put health details in Stripe, invoices, member emails or team alerts: none of those services
+  signs a HIPAA agreement.
+- Member emails (English and Spanish, wording in `billing.mjs`): one step left (with the Pay button), a payment nudge
+  a day later if unpaid, welcome when the first invoice is paid, a heads-up two weeks before a yearly renewal,
+  cancellation confirmed (with the 30-day refund note), cancellation undone, membership ended. Each is sent once.
+- `node tests/membership.test.mjs` runs the billing tests against an in-memory fake of Stripe (`tests/fake-stripe.mjs`).

@@ -11,7 +11,9 @@ Netlify publishes this repository every time `main` changes (settings in `netlif
 
 - `public/` is the website.
 - `netlify/functions/` is the server code: `chat.mjs` (the help chat, `/api/chat`), `account.mjs` (deleting an
-  account, `/api/account/delete`) and `admin.mjs` (the admin console, `/api/admin/*`).
+  account, `/api/account/delete`), `admin.mjs` (the admin console, `/api/admin/*`), and the membership billing:
+  `membership.mjs` (`/api/membership/plans` and `/api/membership/start`), `stripe-webhook.mjs` (`/api/stripe/webhook`)
+  and `daily-emails.mjs` (runs every day on Netlify's scheduler).
 
 Each production deploy uses 15 of the Netlify plan's monthly credits (the Free plan has 300, and Netlify pauses
 the site if they run out). Pull requests get a free Deploy Preview, so changes can be checked before they go live.
@@ -34,6 +36,8 @@ checks). To get them by email: Netlify → Project configuration → Notificatio
 | `/how-it-works/`, `/es/como-funciona/` | `src/en/how.html` and `src/es/how.html`, steps and questions in `content.py` and `content_es.py` (`HOW`) |
 | `/learn/` and its guides, `/es/guias/` and the Spanish guides | `src/learn.html` and `src/article.html`, words in `learn.py` (both languages) |
 | `/join/`, `/es/unase/` and their pages: waitlist pages for Meta ads (not indexed, not in the sitemap) | `src/landing.html`, words in `landing.py` (both languages), the form copied from the home page |
+| `/plans/`, `/es/planes/`: plans and prices | `src/plans.html`, words, plans and printed prices in `membership.py` |
+| `/membership/`, `/es/membresia/`: the checkout (not indexed, not in the sitemap) | `src/membership.html`, `src/membership.js`, `src/membership.css`, words in `membership.py` |
 | `/privacy/`, `/terms/`, `/texas-medical-board/` | `src/en/<name>.html` |
 | `/consumer-health-data/`, `/es/datos-de-salud/`: the consumer health data privacy policy (Washington's My Health My Data Act) | `src/en/health-data.html` and `src/es/health-data.html` |
 | `/account/`, `/es/account/` | `src/account.html`, `account.css`, `account.js` and `identity.js`, words in `strings.py` |
@@ -111,12 +115,15 @@ The published files are generated. Edit the source, then rebuild:
 | Interactive behaviour | `src/app.js` |
 | Chat assistant's instructions and server code | `chatbot.py` |
 | Account and admin server code | `src/functions/lib.mjs` (shared), `account.mjs`, `admin.mjs` |
+| Plans, prices and checkout wording | `membership.py` (prices must match Stripe) |
+| Membership billing and member emails | `src/functions/billing.mjs` (shared), `membership.mjs`, `stripe-webhook.mjs`, `daily-emails.mjs` |
 | Logo and brand colours | `brand.py` |
 | Security headers, redirects, publish settings | `netlify.toml` |
 
 ```sh
 python3 build.py               # writes public/ and netlify/functions/
 node tests/function.test.mjs   # server code tests: chat, account deletion, admin console
+node tests/membership.test.mjs # membership billing: checkout, Stripe events, member emails (fake Stripe)
 python3 tests/qa.py            # browser tests: both languages, every page, 9 screen sizes, accounts, admin
 python3 tools/make_images.py   # only when the logo or headline changes: share image and icons
 python3 tools/make_fonts.py    # only when the fonts change: the site's own font files
@@ -124,3 +131,36 @@ python3 tools/make_fonts.py    # only when the fonts change: the site's own font
 
 Commit the source and the rebuilt files together. `python3 tests/serve.py` serves the site locally with the
 same headers Netlify sends, and `python3 tests/shots.py` takes screenshots of any page.
+
+## Memberships and payments
+
+Members pick a plan at `/plans/` and check out at `/membership/`. They choose **debit or credit card**; Stripe emails
+them an invoice right away and they pay on Stripe's own page, so no card number ever reaches this site. Renewals
+come the same way, as a new invoice by email; nothing is charged automatically. The checkout reuses an unpaid
+invoice instead of billing twice, swaps it if they change plans before paying, and sends members who already pay
+to Stripe's "Manage my plan" page.
+
+To turn it on:
+
+1. **Stripe settings** (live mode). Billing → Subscriptions and emails: turn on **Email finalized invoices to
+   customers**; reminders on the due date and 3 days after; cancel the subscription 30 days after an invoice is
+   past due; Subscription management → Stripe's customer portal. Billing → Invoices: turn on **Include a link to a
+   payment page in the invoice email** and set a default memo (Jachi is a care-coordination membership; it is not
+   insurance or medical care). Business: turn on **Successful payments** receipts, add the logo and brand colour.
+2. **Restricted API key**: Developers → API keys → Create restricted key with Customers, Subscriptions and Invoices
+   (and Invoice items) set to Write, and Prices and Products set to Read.
+3. **Netlify environment variables** (Production only): `STRIPE_SECRET_KEY` (that key), `STRIPE_WEBHOOK_SECRET`
+   (step 4), `EMAIL_PROVIDER` (`resend`), `EMAIL_API_KEY`, `EMAIL_FROM` (`Jachi Health <hello@jachihealth.com>`),
+   `EMAIL_REPLY_TO` (the support email). Optional: `TEAM_NOTIFY_WEBHOOK_URL` (a Slack, Google Chat or Discord
+   incoming webhook for "new member paid", failed card, past due and cancellation alerts), `INVOICE_DAYS_UNTIL_DUE`
+   (default 3), `FOUNDING_LIMIT` (default 100), `FOUNDING_OPEN` (`false` ends the founding price), `BILLING_PORTAL_URL`,
+   `TURNSTILE_SECRET_KEY`. Redeploy after changing them.
+4. **Webhook**: Stripe → Developers → Webhooks → Add endpoint `https://jachihealth.com/api/stripe/webhook` with
+   `invoice.paid`, `invoice.payment_failed`, `customer.subscription.updated` and `customer.subscription.deleted`.
+   Put its signing secret in `STRIPE_WEBHOOK_SECRET`.
+5. **Member emails**: at resend.com add the domain jachihealth.com, add the DNS records it shows at GoDaddy, wait for
+   Verified, then create the API key for `EMAIL_API_KEY`. Without these settings the site skips the emails.
+6. **Test once for real** with your own email and card, then refund the payment and cancel the plan in Stripe.
+
+Prices live in Stripe. To change one, make the new price in Stripe and move its lookup key to it, then change the
+printed amount in `membership.py` and rebuild.

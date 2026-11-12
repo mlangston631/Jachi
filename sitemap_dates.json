@@ -51,6 +51,10 @@
   "date": "2026-10-18",
   "hash": "6f6272129c8dbe13"
  },
+ "/es/planes/": {
+  "date": "2026-11-12",
+  "hash": "d253e29d7530de1d"
+ },
  "/es/resurtido-de-recetas/": {
   "date": "2026-10-18",
   "hash": "11ac6ad3f1739ac0"
@@ -107,13 +111,17 @@
   "date": "2026-10-18",
   "hash": "9a1b8ef591d0d506"
  },
+ "/plans/": {
+  "date": "2026-11-12",
+  "hash": "d6eb3d2a52657550"
+ },
  "/prescription-refills/": {
   "date": "2026-10-18",
   "hash": "4d653587db3efe56"
  },
  "/privacy/": {
-  "date": "2026-10-18",
-  "hash": "6962b960f456c60b"
+  "date": "2026-11-12",
+  "hash": "7754500a3d834d0c"
  },
  "/sexual-health/": {
   "date": "2026-10-18",
@@ -124,8 +132,8 @@
   "hash": "1f979ba3451240d8"
  },
  "/terms/": {
-  "date": "2026-10-18",
-  "hash": "81d35bf54f8f54d6"
+  "date": "2026-11-12",
+  "hash": "80fbd30fc3b19f8e"
  },
  "/texas-medical-board/": {
   "date": "2026-10-18",

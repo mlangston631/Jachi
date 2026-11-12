@@ -776,6 +776,129 @@ for code in HOW_PAGES:
     build_how(code)
 
 
+# ---------- Membership: plans and checkout (English and Spanish) ----------
+# Words, plans and printed prices in membership.py; the checkout talks to /api/membership/* (src/functions/billing.mjs).
+
+import membership as MEMBERSHIP
+
+PLANS_ALTERNATES = MEMBERSHIP.PATHS["plans"]
+CHECKOUT_ALTERNATES = MEMBERSHIP.PATHS["checkout"]
+MEMBERSHIP_CSS = (SRC / "membership.css").read_text()
+
+
+def plan_cards(lang):
+    W = MEMBERSHIP.WORDS[lang]
+    money = MEMBERSHIP.money
+    cards = []
+    for p in MEMBERSHIP.PLANS:
+        t = W["plans"][p["key"]]
+        cls = "m-plan" + (" m-plan--featured" if p.get("featured") else "") + (" m-plan--dark" if p.get("dark") else "")
+        badge = W["most_popular"] if p.get("featured") else W["white_glove"] if p.get("dark") else ""
+        note = (W["founding_note"].format(founding=money(p["founding"]), limit=MEMBERSHIP.FOUNDING_LIMIT,
+                                          regular=money(p["monthly"])) if p.get("founding") else t.get("note", ""))
+        features = "".join(f"<li>{icon_svg('check')}<span>{esc(f)}</span></li>" for f in t["features"])
+        cards.append(
+            f'<article class="{cls}"><div class="m-plan__head"><h2 class="m-plan__name">{esc(t["name"])}</h2>'
+            + (f'<p class="m-plan__badge">{esc(badge)}</p>' if badge else "") + "</div>"
+            f'<p class="m-plan__price">{esc(money(p["monthly"]))}<span class="m-plan__per">{esc(W["per_month"])}</span></p>'
+            f'<p class="m-plan__alt">{esc(W["or_yearly"].format(price=money(p["yearly"])))}</p>'
+            f'<p class="m-plan__tagline">{esc(t["tagline"])}</p>'
+            + (f'<p class="m-plan__note">{esc(note)}</p>' if note else "")
+            + f'<a class="btn btn--block" href="{CHECKOUT_ALTERNATES[lang]}?plan={p["key"]}">{esc(W["start"].format(name=t["name"]))}</a>'
+            f'<ul class="m-plan__list">{features}</ul></article>')
+    return "".join(cards)
+
+
+def membership_tokens(lang, path_alternates):
+    L = Lang(lang)
+    W = MEMBERSHIP.WORDS[lang]
+    home = HOME_PATH[lang]
+    checkout = CHECKOUT_ALTERNATES[lang]
+    return L, W, home, {**chrome_tokens(L, home, home, checkout, alt_href=path_alternates[OTHER[lang]]),
+                        "{{DOCK_HREF}}": checkout, "{{DOCK_LABEL}}": esc(W["cta_button"])}
+
+
+def build_plans(lang):
+    L, W, home, tokens = membership_tokens(lang, PLANS_ALTERNATES)
+    money = MEMBERSHIP.money
+    path = PLANS_ALTERNATES[lang]
+    founding = money(MEMBERSHIP.PLANS[0]["founding"])
+    trail = [(LEARN.LABELS[lang]["home"], home), (W["plans_crumb"], None)]
+    steps = lambda items: "".join(f"<li><h3>{esc(t)}</h3><p>{esc(d)}</p></li>" for t, d in items)
+    tokens.update({
+        "{{CRUMBS}}": crumbs(trail), "{{H1}}": esc(W["plans_h1"]), "{{LEAD}}": esc(W["plans_lead"]),
+        "{{PLAN_CARDS}}": plan_cards(lang),
+        "{{ADDON}}": esc(W["addon"].format(price=money(MEMBERSHIP.EXTRA_ADULT))), "{{CANCEL_LINE}}": esc(W["cancel_line"]),
+        "{{PROMISES_H2}}": esc(W["promises_h2"]), "{{PROMISES_LEAD}}": esc(W["promises_lead"]),
+        "{{PROMISES}}": steps((t, d.format(limit=MEMBERSHIP.FOUNDING_LIMIT, founding=founding)) for t, d in W["promises"]),
+        "{{REFERRAL}}": esc(W["referral"]), "{{CREDITS_FINE}}": esc(W["credits_fine"]),
+        "{{PAYING_H2}}": esc(W["paying_h2"]), "{{PAYING_LEAD}}": esc(W["paying_lead"]),
+        "{{PAYING_STEPS}}": steps(W["paying_steps"]), "{{PAYING_FINE}}": esc(W["paying_fine"]),
+        "{{NOT_INCLUDED_H3}}": esc(W["not_included_h3"]), "{{NOT_INCLUDED}}": esc(W["not_included"]),
+        "{{FAQ_H2}}": esc(W["faq_h2"]), "{{FAQ}}": faq_items(W["faq"]),
+        "{{CTA_H2}}": esc(W["cta_h2"]), "{{CTA_LEAD}}": esc(W["cta_lead"]), "{{CTA_BUTTON}}": esc(W["cta_button"]),
+        "{{CHECKOUT}}": CHECKOUT_ALTERNATES[lang],
+    })
+    main = render((SRC / "plans.html").read_text(), L, tokens)
+    web = page_node("WebPage", path, W["plans_title"], W["plans_description"], lang, about={"@id": ORG_ID},
+                    breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"})
+    page = {"lang": lang, "path": path, "alternates": PLANS_ALTERNATES, "main": main, "css": MEMBERSHIP_CSS,
+            "title": W["plans_title"], "description": W["plans_description"],
+            "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path)), faq_ld(W["faq"], lang)]}
+    write(path, document(page, assemble(lang, main, tokens)))
+    SITEMAP.append((path, PLANS_ALTERNATES))
+
+
+def build_checkout(lang):
+    L, W, home, tokens = membership_tokens(lang, CHECKOUT_ALTERNATES)
+    S = MEMBERSHIP.SCRIPT_WORDS[lang]
+    money = MEMBERSHIP.money
+    path = CHECKOUT_ALTERNATES[lang]
+    c = MEMBERSHIP.PLANS[0]
+    founding_note = W["founding_note"].format(founding=money(c["founding"]), limit=MEMBERSHIP.FOUNDING_LIMIT,
+                                              regular=money(c["monthly"]))
+    trail = [(LEARN.LABELS[lang]["home"], home), (W["plans_crumb"], PLANS_ALTERNATES[lang]), (W["co_crumb"], None)]
+    choices = "".join(
+        f'<label><input type="radio" name="plan" value="{p["key"]}"{" checked" if i == 0 else ""}><span>'
+        f'<b>{esc(W["plans"][p["key"]]["name"])}</b><span class="m-choice__price" data-price="{p["key"]}">'
+        f'{esc(money(p.get("founding") or p["monthly"]) + W["per_month"])}</span></span></label>'
+        for i, p in enumerate(MEMBERSHIP.PLANS))
+    languages = "".join(f'<option value="{code}"{" selected" if code == lang else ""}>{name}</option>'
+                        for code, name in (("en", "English"), ("es", "Español")))
+    first_line = f'{W["plans"]["concierge"]["name"]} ({S["founding"]}), {S["monthly"]}'
+    data = {
+        "lang": lang, "words": S, "perMonth": W["per_month"], "perYear": W["per_year"],
+        "daysToPay": MEMBERSHIP.DAYS_TO_PAY, "foundingNote": founding_note,
+        "plans": {p["key"]: {"name": W["plans"][p["key"]]["name"], "monthly": p["monthly"], "yearly": p["yearly"]}
+                  for p in MEMBERSHIP.PLANS},
+    }
+    data["plans"]["concierge"]["founding"] = {"amount": c["founding"], "open": True,
+                                              "limit": MEMBERSHIP.FOUNDING_LIMIT, "remaining": None}
+    data["plans"]["concierge"]["extraAdult"] = {"monthly": MEMBERSHIP.EXTRA_ADULT, "max": MEMBERSHIP.EXTRA_ADULT_MAX}
+    script = (SRC / "membership.js").read_text().replace("/*MEMBERSHIP_JSON*/", json.dumps(data, ensure_ascii=False))
+    words = {k: v for k, v in W.items() if k.startswith("co_") and isinstance(v, str)}
+    tokens.update({f"{{{{{k.upper()}}}}}": esc(v) for k, v in words.items()})
+    tokens.update({
+        "{{CRUMBS}}": crumbs(trail),
+        "{{CO_ADULTS_HINT}}": esc(W["co_adults_hint"].format(price=money(MEMBERSHIP.EXTRA_ADULT))),
+        "{{CO_READ_TERMS}}": W["co_read_terms"],  # trusted markup from membership.py
+        "{{PLAN_CHOICES}}": choices, "{{LANGUAGE_OPTIONS}}": languages, "{{FOUNDING_NOTE}}": esc(founding_note),
+        "{{SUMMARY_LINES}}": f"<li><span>{esc(first_line)}</span><span>{esc(money(c['founding'], True))}</span></li>",
+        "{{SUMMARY_TOTAL}}": esc(money(c["founding"], True)),
+        "{{SUMMARY_RENEW}}": esc(S["renew"].format(days=MEMBERSHIP.DAYS_TO_PAY, billing=S["monthly"], unit=S["month"])),
+        "{{DONE_STEPS}}": "".join(f"<li><p>{esc(step)}</p></li>" for step in W["co_done_steps"]),
+    })
+    main = render((SRC / "membership.html").read_text(), L, tokens)
+    page = {"lang": lang, "path": path, "alternates": CHECKOUT_ALTERNATES, "main": main, "noindex": True,
+            "css": MEMBERSHIP_CSS, "script": script, "title": W["co_title"], "description": W["co_description"]}
+    write(path, document(page, assemble(lang, main, tokens, parts=("footer", "chat"))))
+
+
+for code in PLANS_ALTERNATES:
+    build_plans(code)
+    build_checkout(code)
+
+
 # ---------- Consumer health data privacy policy (English and Spanish) ----------
 # Washington's My Health My Data Act (RCW 19.373.020) asks for this policy and a link to it on the home page:
 # the home page's privacy promise, every footer and the waitlist form's note link here.
@@ -1159,16 +1282,24 @@ for path, alternates in SITEMAP:
     + "\n".join(urls) + "\n</urlset>\n")
 (FUNCTIONS / "chat.mjs").write_text(chatbot.function_source())
 SERVER_CODE = {
-    "account": "Jachi Health account deletion. Netlify Function: POST /api/account/delete",
-    "admin": "Jachi Health admin console. Netlify Function: /api/admin/*",
+    "account": ("Jachi Health account deletion. Netlify Function: POST /api/account/delete", ["lib.mjs"]),
+    "admin": ("Jachi Health admin console. Netlify Function: /api/admin/*", ["lib.mjs"]),
+    # Membership billing (src/functions/billing.mjs is shared by these three).
+    "membership": ("Jachi Health membership checkout. Netlify Function: /api/membership/plans, /api/membership/start",
+                   ["lib.mjs", "billing.mjs"]),
+    "stripe-webhook": ("Jachi Health Stripe events: member emails and team alerts. Netlify Function: POST /api/stripe/webhook",
+                       ["lib.mjs", "billing.mjs"]),
+    "daily-emails": ("Jachi Health daily member emails. Netlify scheduled function", ["lib.mjs", "billing.mjs"]),
 }
-for name, title in SERVER_CODE.items():
+for name, (title, libs) in SERVER_CODE.items():
+    sources = " and ".join(f"src/functions/{lib}" for lib in libs)
     (FUNCTIONS / f"{name}.mjs").write_text(
         f"// {title}\n"
-        f"// GENERATED by build.py from src/functions/lib.mjs and src/functions/{name}.mjs. Edit those, then run\n"
+        f"// GENERATED by build.py from {sources} and src/functions/{name}.mjs. Edit those, then run\n"
         f"// `python3 build.py`. Never put a key or token in these files: they live in Netlify's environment variables.\n"
         f"const SUPPORT_EMAIL = {json.dumps(EMAIL)};\n\n"
-        + (SRC / "functions" / "lib.mjs").read_text() + "\n" + (SRC / "functions" / f"{name}.mjs").read_text())
+        + "".join((SRC / "functions" / lib).read_text() + "\n" for lib in libs)
+        + (SRC / "functions" / f"{name}.mjs").read_text())
 
 
 # ---------- Claude artifact preview of the English home page (not deployed) ----------
