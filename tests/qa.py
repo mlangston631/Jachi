@@ -237,6 +237,8 @@ with sync_playwright() as p:
     check("footer links to the privacy policy, health data policy and terms", page.locator("footer a[href='/privacy/']").count() == 1
           and page.locator(f"footer a[href='{HEALTH_EN}']").count() == 1
           and page.locator("footer a[href='/terms/']").count() == 1 and page.locator("footer a[href='/texas-medical-board/']").count() == 1)
+    socials = ["https://www.tiktok.com/@jachihealth", "https://www.instagram.com/jachihealth/"]
+    check("footer links Jachi's TikTok and Instagram", all(page.locator(f"footer a[href='{u}'][rel='me']").count() == 1 for u in socials))
     foot = page.locator("footer .footer__legal").inner_text()
     check("footer: Jachi coordinates care; independent providers give and bill it; not insurance; 911 and 988",
           all(x in foot for x in ("care-coordination company", "does not practice medicine", "independent", "referral fees",
@@ -466,6 +468,8 @@ with sync_playwright() as p:
           es_plans == ["/es/membresia/?plan=concierge", "/es/membresia/?plan=plus", "/es/membresia/?plan=signature"], str(es_plans))
     es_care = page.evaluate("[...document.querySelectorAll('footer nav[aria-label=\\'Atención\\'] a')].map(a => a.getAttribute('href'))")
     check("es footer: care links go to the Spanish service pages", es_care == list(SVC_PATH["es"].values()), str(es_care))
+    check("es footer: links Jachi's TikTok and Instagram", page.locator("footer a[href='https://www.tiktok.com/@jachihealth']").count() == 1
+          and page.locator("footer a[href='https://www.instagram.com/jachihealth/']").count() == 1)
     page.locator(f".picker a[href='{SVC_PATH['es']['uti-treatment']}']").click(); page.wait_for_load_state("networkidle")
     check("es quick picker: infección urinaria opens the Spanish UTI page", page.url == BASE + SVC_PATH["es"]["uti-treatment"], page.url)
     check("home on a computer: no console errors", not logs, json.dumps(logs))

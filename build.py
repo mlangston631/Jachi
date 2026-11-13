@@ -422,6 +422,8 @@ ORG_NODE = {
     "areaServed": {"@type": "State", "name": "Texas"}, "knowsLanguage": ["en", "es"],
     "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": EMAIL,
                      "availableLanguage": ["English", "Spanish"]},
+    # Jachi's own social accounts (linked from the footer's Company column, which the ad pages leave out).
+    "sameAs": ["https://www.tiktok.com/@jachihealth", "https://www.instagram.com/jachihealth/"],
 }
 ORG_REF = {"@type": "Organization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/"}
 SITE_NODE = {"@type": "WebSite", "@id": SITE_ID, "url": f"{SITE_URL}/", "name": "Jachi Health",
