@@ -269,7 +269,7 @@ WORDS = {
         ],
         "cta_h2": "Empiece cuando quiera.",
         "cta_lead": "Elija un plan en un minuto. Su coordinador se encarga del resto.",
-        "cta_button": "Elegir su plan",
+        "cta_button": "Elija su plan",
         # Checkout page
         "co_title": "Empiece su membresía | Jachi Health",
         "co_description": "Elija un plan de Jachi y pague con tarjeta de débito o crédito con una factura segura enviada a su correo.",

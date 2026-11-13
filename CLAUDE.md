@@ -11,12 +11,11 @@ keep replies short and plain, and ask only questions that change what you'll do.
 2. Keep English and Spanish in step:
    - After changing `src/en/home.html`, run `python3 tools/es_home.py`. It stops on any English sentence it
      can't find, which means a translation in that file needs adding or updating.
-   - `src/en/header.html`, `footer.html`, `chat.html`, `dock.html`, `how.html` and `service.html` have Spanish copies
-     in `src/es/`; change both. The health guides (`learn.py`) and `HOW` hold both languages; Spanish guides live at
-     `/es/guias/`.
-   - Every service page in `pages.py` has a Spanish twin in `pages_es.py` (`/es/<slug>/`, its "what to expect" in
-     `content_es.EXPECT`); change both. Pages in both languages name each other (`hreflang`), and tests/qa.py
-     checks every pair.
+   - `src/en/header.html`, `footer.html`, `chat.html`, `dock.html`, `how.html`, `service.html` and `waitlist.html` have
+     Spanish copies in `src/es/`; change both. The health guides (`learn.py`) and `HOW` hold both languages; Spanish
+     guides live at `/es/guias/`.
+   - Every service page in `pages.py` has a Spanish twin in `pages_es.py` (`/es/<slug>/`); change both. Pages in both
+     languages name each other (`hreflang`), and tests/qa.py checks every pair.
    - New text shown by `src/app.js` or the account page goes in `strings.py` under both `EN` and `ES`
      (account page keys start with `a_`). The admin console is English only.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.
@@ -36,8 +35,9 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Decisions the owner made (change only when he asks)
 
-- **Switching to the membership model (decided Nov 12, 2026), in steps on the `membership-switch` branch and one
-  pull request; merge only when every step is done and he approves the Deploy Preview.** Jachi Health LLC sells
+- **Switching to the membership model (decided Nov 12, 2026), in steps.** Steps 1 and 2 went live together from
+  the `membership-switch` pull request when he asked to make everything live (Nov 12, 2026); steps 3 and 4 come in
+  their own pull requests, each merged after he approves its Deploy Preview. Jachi Health LLC sells
   care coordination, not care: a coordinator finds care, confirms the self-pay price in writing, books every visit,
   sends reminders and handles paperwork. Independent licensed practices provide and bill the care. Jachi takes no
   money from providers and offers no discounts; plans aren't insurance. Plans (membership.py, Stripe lookup keys in
@@ -47,39 +47,46 @@ keep replies short and plain, and ask only questions that change what you'll do.
   (`collection_method: send_invoice`); nothing is charged automatically. Steps: 1) plans, checkout, billing
   functions, member emails, terms and privacy (done); 2) home page, How it works, service pages and the help chat
   rewritten for the membership; 3) Find care, Book a visit and For providers, only with real partner practices;
-  4) ad landing pages and accounts. Until step 2 is done, the older decisions below about the telehealth waitlist
-  still describe the rest of the site; prices are allowed only on the plans and checkout pages.
+  4) ad landing pages and accounts. Step 2 is done: the site describes the membership, and the decisions below
+  follow it. Until step 4, the ad landing pages (`landing.py`) and accounts still describe the telehealth waitlist.
 
-- Launching nationwide (decided Oct 17, 2026; the site used to say "Texas first"). Adults 18+ only. Cash pay, no
-  insurance. Keep the Texas Medical Board notice for Texas patients.
-- No prices anywhere (pages, titles, the assistant) until he has a quote from his medical partner (decided
-  Oct 15, 2026). The site says prices will be shared before opening. Commit 5cb4e08 is the last version with
-  prices; tests/qa.py fails if a price appears.
-- Not offered: controlled substances (ADHD stimulants, benzodiazepines, opioids, testosterone, phentermine,
-  sleep medication, Suboxone, ketamine), abortion medication, isotretinoin, peptides, medical marijuana.
-- Jachi isn't open yet. Nothing may say visits can be booked now; buttons collect waitlist sign-ups (the Netlify
-  form is still named `early-access`).
+- Memberships are for adults 18 and older who live in Texas (step 2 of the switch, following the launch plan; ask him
+  before changing it). The telehealth waitlist on the ad pages launched nationwide on Oct 17, 2026. Keep the Texas
+  Medical Board notice.
+- Prices: only Jachi's plan prices, from `membership.py`, on any page or in the assistant; never a provider's, lab's
+  or pharmacy's price (coordinators confirm those per visit, in writing). The ad pages show no prices at all.
+  tests/qa.py checks every page and the assistant's instructions.
+- Jachi is open for memberships: the main buttons say "Choose your plan" and go to the plans page. No page promises
+  a treatment, a prescription or a provider's availability, and only the health guides name medicines. The ad pages
+  still collect waitlist sign-ups (the Netlify form is still named `early-access`) and, until step 4, still describe
+  the telehealth waitlist, which didn't offer controlled substances (ADHD stimulants, benzodiazepines, opioids,
+  testosterone, phentermine, sleep medication, Suboxone, ketamine), abortion medication, isotretinoin, peptides or
+  medical marijuana.
 - Everything on the page must really work. No placeholder buttons, invented testimonials, ratings, statistics,
   badges, partner logos, clinician names or credentials.
-- The site promises (approved Oct 15, 2026) to name the medical group and its clinicians before opening, and to add
-  a faster way to reach the team about appointments, billing and prescriptions before opening. Keep both promises.
-- Credit care to clinicians, never to Jachi Health LLC: "Clinicians prescribe…", "What clinicians treat", not "we
-  prescribe" or "we treat". Texas Occupations Code §165.156 bars an unlicensed company from advertising as if it
-  practices medicine. Lines about what isn't offered ("We don't prescribe controlled substances") are fine.
+- The telehealth-era promises (Oct 15, 2026) to name a medical group before opening and to add a faster way to
+  reach the team were replaced in step 2: members reach their coordinator directly, and providers are named only
+  when there are real partner practices (step 3). The ad pages still carry the old promise until step 4.
+- Credit care to the independent providers, never to Jachi Health LLC: "your provider decides", "providers treat",
+  not "we treat", "we prescribe" or "Jachi's doctors". Jachi coordinates care. Texas Occupations Code §165.156 bars
+  an unlicensed company from advertising as if it practices medicine. Lines about what Jachi doesn't do ("Jachi
+  doesn't prescribe") are fine.
 - The assistant is labelled AI, never claims to be a person, and there are no live agents yet; tickets go to
   the support email in `content.py`.
 - Safety: emergencies get 911 and crisis messages get 988 (in Spanish: press 2, or text AYUDA), handled in the
   page before any AI call (`EMERGENCY` and `CRISIS` in `src/app.js`, English and Spanish) and again in the
   assistant's rules (`chatbot.py`).
 - Privacy: no analytics, ad pixels or trackers (it's a health site). Don't collect health details in forms or chat.
-  Patient accounts with health records must live on HIPAA-compliant systems with a BAA (his medical partner's
-  portal); Netlify's plan can't hold health data. The home page's privacy promise ("Your health is not for sale.",
-  decided Oct 18, 2026) states only what is true: no trackers on the site, no sign-ups sent to Meta or any ad
-  company, nothing sold.
-- The waitlist's service choices count as consumer health data under Washington's My Health My Data Act, so the
-  site keeps a consumer health data privacy policy (`/consumer-health-data/`, `/es/datos-de-salud/`) linked from
-  both home pages (the privacy promise and the footer) and the waitlist form; tests/qa.py checks the links. Update
-  it, and the privacy policy, whenever what the site collects or who handles it changes.
+  Coordinators talk with members by phone and share with a provider only what it needs to book them (the privacy
+  policy and the consumer health data policy say so). Anything holding health records must live on HIPAA-compliant
+  systems with a BAA; Netlify's plan can't hold health data. The home page's privacy promise ("Your health is not
+  for sale.", decided Oct 18, 2026) states only what is true: no referral fees from providers, no trackers on the
+  site, no sign-ups sent to Meta or any ad company, nothing sold.
+- The waitlist's service choices and the care members ask their coordinator to arrange count as consumer health
+  data under Washington's My Health My Data Act, so the site keeps a consumer health data privacy policy
+  (`/consumer-health-data/`, `/es/datos-de-salud/`) linked from both home pages (the privacy promise and the footer)
+  and the waitlist form; tests/qa.py checks the links. Update it, and the privacy policy, whenever what the site
+  collects or who handles it changes.
 - Meta ads (Oct 17, 2026) send people only to Meta's Instant Forms or the waitlist pages in `landing.py` (`/join/…`,
   `/es/unase/…`). Until LegitScript certification and Meta's authorization, those pages name no medicines, drug
   classes, refills, prescriptions or prices (`BANNED`, checked by tests/qa.py), and their footer links only to the
@@ -94,8 +101,9 @@ keep replies short and plain, and ask only questions that change what you'll do.
   Identity keeps that first password when the owner signs up again and confirms. Email-based admin access is
   also refused while Identity's autoconfirm is on. Sign-ups and tickets come from Netlify Forms through
   `NETLIFY_API_TOKEN`; the console only deletes ids that belong to the site's two forms.
-- The clinical standards section states only facts: who provides care, physician supervision where state law requires it, licenses
-  anyone can look up. Clinician names and credentials go there only when his medical partner provides them.
+- Say only what's true about providers: they're independent and licensed, they set their own prices and bill
+  members directly, they pay Jachi nothing, and anyone can look up a license (How Jachi works links DocInfo and
+  Nursys). Name a provider or practice only when it's a real partner (step 3).
 
 ## Security
 

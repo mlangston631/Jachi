@@ -36,6 +36,7 @@ import content as EN_CONTENT
 import content_es as ES_CONTENT
 import landing as LANDING
 import learn as LEARN
+import membership as MEMBERSHIP
 import pages as PAGES
 import pages_es as PAGES_ES
 import strings
@@ -132,45 +133,26 @@ class Lang:
     def __init__(self, code):
         self.code = code
         self.T = strings.STRINGS[code]
+        c = EN_CONTENT if code == "en" else ES_CONTENT
+        self.faq = list(c.FAQ)
+        self.build = c.BUILD
         if code == "en":
-            c = EN_CONTENT
-            self.services = [dict(s) for s in c.SERVICES]
-            self.finder = list(c.FINDER)
-            self.treated = list(c.TREATED)
-            self.not_offered = list(c.NOT_OFFERED)
-            self.emergencies = list(c.EMERGENCIES)
-            self.crisis = c.CRISIS
-            self.popular = list(c.POPULAR)
-            self.picker = [(label, key, SERVICE_PATH["en"][slug]) for label, key, slug in c.PICKER]
-            self.faq = list(c.FAQ)
-            self.build = c.BUILD
-            self.pricing_note = c.PRICING_NOTE
+            self.services = [dict(s) for s in EN_CONTENT.SERVICES]
             self.state_name = dict(STATES)
         else:
-            es = ES_CONTENT
             self.services = []
             for s in EN_CONTENT.SERVICES:
-                t = es.SERVICES[s["key"]]
+                t = ES_CONTENT.SERVICES[s["key"]]
                 self.services.append({**s, **t, "chip": t.get("chip", t["name"])})
-            self.finder = [(k, ic, *es.FINDER[k]) for k, ic, _t, _s in EN_CONTENT.FINDER]
-            self.treated = [(es.TREATED[n][0], cat, f"{es.TREATED[n][1]} {terms}", es.TREATED[n][2])
-                            for n, cat, terms, _note in EN_CONTENT.TREATED]
-            self.not_offered = [(es.NOT_OFFERED[n][0], f"{es.NOT_OFFERED[n][1]} {terms}", es.NOT_OFFERED[n][2])
-                                for n, terms, _note in EN_CONTENT.NOT_OFFERED]
-            self.emergencies = [(es.EMERGENCIES[n][0], f"{es.EMERGENCIES[n][1]} {terms}", es.EMERGENCIES[n][2])
-                                for n, terms, _note in EN_CONTENT.EMERGENCIES]
-            self.crisis = (es.CRISIS[0], f"{es.CRISIS[1]} {EN_CONTENT.CRISIS[1]}", es.CRISIS[2])
-            self.popular = list(es.POPULAR)
-            if len(es.PICKER) != len(EN_CONTENT.PICKER):
-                raise SystemExit("content_es.PICKER must match content.PICKER")
-            self.picker = [(label, key, SERVICE_PATH["es"][slug]) for label, (_l, key, slug) in zip(es.PICKER, EN_CONTENT.PICKER)]
-            self.faq = list(es.FAQ)
-            self.build = es.BUILD
-            self.pricing_note = es.PRICING_NOTE
-            self.state_name = {c: es.STATES.get(c, n) for c, n in STATES}
-        for s in self.services:
-            s.setdefault("ongoing", False)
-        self.by_key = {s["key"]: s for s in self.services}
+            self.state_name = {c: ES_CONTENT.STATES.get(c, n) for c, n in STATES}
+        # Each kind of care Jachi coordinates: its service page, icon and words in this language.
+        self.care = []
+        for p in PAGES.PAGES:
+            t = p if code == "en" else PAGES_ES.PAGES[p["slug"]]
+            self.care.append({"slug": p["slug"], "key": p["key"], "icon": p["icon"], "href": SERVICE_PATH[code][p["slug"]],
+                              "name": t["name"], "short": t["short"], "card": t["card"]})
+        by_slug = {c["slug"]: c for c in self.care}
+        self.picker = [by_slug[slug] for slug in EN_CONTENT.PICKER]
 
 
 def lower_first(name):
@@ -191,68 +173,18 @@ def faq_items(items):
         for i, (q, a) in enumerate(items, 1))
 
 
-def service_card(L, svc, i):
-    B = L.build
-    items = "".join(f"<li>{icon_svg('check')}<span>{esc(t)}</span></li>" for t in svc["items"])
-    tag_cls = "svc__tag svc__tag--ongoing" if svc["ongoing"] else "svc__tag"
-    name_lower = esc(svc["name"].lower())
-    if svc.get("elig"):
-        cta = (f'<a class="btn btn--ghost btn--block" href="#eligibility" data-elig>{esc(B["check_elig_long"])}'
-               f'<span class="visually-hidden">{esc(B["for_weight"])}</span></a>')
-    else:
-        cta = (f'<button class="btn btn--ghost btn--block" type="button" data-join="{svc["interest"]}">{esc(B["join"])}'
-               f'<span class="visually-hidden">{B["for"].format(x=name_lower)}</span></button>')
-    title = (f'<h3><a class="svc__link" href="{SERVICE_PATH[L.code][PAGES.SERVICE_SLUG[svc["key"]]]}">{esc(svc["name"])}'
-             f'<span class="visually-hidden">: {esc(B["learn_more"].format(x=svc["name"].lower()))}</span></a></h3>')
-    return (f'<article class="svc" id="svc-{svc["key"]}" data-reveal style="--d:{(i % 3) * 80}ms">'
-            f'<span class="svc__ic">{icon_svg(svc["icon"])}</span>{title}'
-            f'<span class="{tag_cls}">{esc(svc["tag"])}</span>'
-            f'<p class="svc__desc">{esc(svc["desc"])}</p>'
-            f'<ul class="svc__list">{items}</ul>{cta}</article>')
-
-
-def hit_row(kind, name, terms, meta, note, ic, cta):
-    note_html = f'<span class="hit__note">{note}</span>' if note else ""
-    return (f'<li class="hit hit--{kind}" data-name="{esc(name)}" data-terms="{esc(terms)}" hidden>'
-            f'<span class="hit__ic">{icon_svg(ic)}</span>'
-            f'<div class="hit__text"><b>{esc(name)}</b><small>{meta}</small>{note_html}</div>{cta}</li>')
-
-
-def condition_rows(L):
-    B = L.build
-    rows = []
-    for name, cat, terms, note in L.treated:
-        lower = esc(lower_first(name))
-        if cat == "mental+therapy":
-            meta = esc(B["mental_meta"])
-            ic, interest = "mind", "therapy,anxiety-depression"
-        else:
-            svc = L.by_key[cat]
-            meta = f"{esc(svc['name'])} · {esc(svc['tag'])}"
-            ic, interest = svc["icon"], svc["interest"]
-        if cat == "weight":
-            cta = (f'<a class="btn btn--ghost btn--sm hit__cta" href="#eligibility" data-elig>{esc(B["check_elig"])}'
-                   f'<span class="visually-hidden">{esc(B["for_weight"])}</span></a>')
-        else:
-            cta = (f'<button class="btn btn--ghost btn--sm hit__cta" type="button" data-join="{interest}">{esc(B["join"])}'
-                   f'<span class="visually-hidden">{B["for"].format(x=lower)}</span></button>')
-        rows.append(hit_row("ok", name, terms, meta, esc(note), ic, cta))
-    for name, terms, note in L.not_offered:
-        rows.append(hit_row("no", name, terms, esc(B["not_offered"]), note, "info", ""))
-    call911 = f'<a class="btn btn--danger btn--sm hit__cta" href="tel:911">{icon_svg("phone")}{esc(B["call_911"])}</a>'
-    for name, terms, note in L.emergencies:
-        rows.append(hit_row("911", name, terms, esc(B["emergency"]), note, "alert", call911))
-    name, terms, note = L.crisis
-    ctas = (f'<div class="hit__ctas"><a class="btn btn--sm" href="tel:988">{icon_svg("phone")}{esc(B["call_988"])}</a>'
-            f'<a class="btn btn--ghost btn--sm" href="{esc(L.T["sms_988"])}">{icon_svg("msg")}{esc(B["text_988"])}</a></div>')
-    rows.append(hit_row("988", name, terms, esc(B["support_now"]), note, "heart", ctas))
-    return "\n".join(rows)
+def care_card(c, i, B):
+    """A card on the home page for one kind of care, linking to its service page."""
+    return (f'<article class="svc svc--care" data-reveal style="--d:{(i % 3) * 80}ms">'
+            f'<span class="svc__ic">{icon_svg(c["icon"])}</span>'
+            f'<h3><a class="svc__link" href="{c["href"]}">{esc(c["name"])}'
+            f'<span class="visually-hidden">: {esc(B["learn_more"].format(x=lower_first(c["name"])))}</span></a></h3>'
+            f'<p class="svc__desc">{esc(c["card"])}</p></article>')
 
 
 def footer_care(L):
-    """The footer's Care links: each service's page in the footer's language."""
-    return "".join(f'<li><a href="{SERVICE_PATH[L.code][PAGES.SERVICE_SLUG[s["key"]]]}">{esc(s["name"])}</a></li>'
-                   for s in L.services)
+    """The footer's Care links: each service page in the footer's language."""
+    return "".join(f'<li><a href="{c["href"]}">{esc(c["name"])}</a></li>' for c in L.care)
 
 
 # ---------- Rendering ----------
@@ -260,7 +192,7 @@ def footer_care(L):
 def render(text, L, tokens):
     for token, value in tokens.items():
         text = text.replace(token, value)
-    text = text.replace("{{EMAIL}}", EMAIL).replace("{{PRICING_NOTE}}", esc(L.pricing_note))
+    text = text.replace("{{EMAIL}}", EMAIL)
     text = re.sub(r"\{\{T:(\w+)\}\}", lambda m: esc(L.T[m.group(1)]), text)
     text = re.sub(r"\{\{TH:(\w+)\}\}", lambda m: L.T[m.group(1)], text)  # trusted markup from strings.py
     text = re.sub(r"\{\{MARK:([\w-]+):(\w+)(?::([\w -]+))?\}\}",
@@ -349,9 +281,7 @@ def js_for(lang, rules=False):
     text = ((SRC / "app.js").read_text()
             .replace("/*ICONS_JSON*/", json.dumps(ICONS))
             .replace("/*EMAIL_JSON*/", json.dumps(EMAIL))
-            .replace("/*STRINGS_JSON*/", json.dumps({k: v for k, v in L.T.items() if not k.startswith("a_")}, ensure_ascii=False))
-            .replace("/*SERVICES_JSON*/", json.dumps({s["key"]: {"name": s["name"], "tag": s["tag"], "interest": s["interest"]}
-                                                      for s in L.services}, ensure_ascii=False)))
+            .replace("/*STRINGS_JSON*/", json.dumps({k: v for k, v in L.T.items() if not k.startswith("a_")}, ensure_ascii=False)))
     if "/*CHAT_RULES*/" not in text:
         raise SystemExit("chat rules hook missing")
     text = text.replace("/*CHAT_RULES*/", json.dumps(chatbot.system_prompt()) if rules else "null")
@@ -446,14 +376,17 @@ def page_js(name, L, extra=None):
     return text
 
 
-def chrome_tokens(L, home, home_top, join_href, share_url="", alt_href=None):
-    """Tokens for the shared header, footer, dock and chat. alt_href is the same page in the other language."""
+def chrome_tokens(L, home, home_top, cta_href=None, share_url="", alt_href=None):
+    """Tokens for the shared header, footer, dock and chat. cta_href is where the "Choose your plan" buttons go (the
+    plans page unless a page says otherwise); alt_href is the same page in the other language."""
+    plans = MEMBERSHIP.PATHS["plans"][L.code]
     return {
-        "{{HOME}}": home, "{{HOME_TOP}}": home_top, "{{JOIN_HREF}}": join_href,
+        "{{HOME}}": home, "{{HOME_TOP}}": home_top, "{{CTA_HREF}}": cta_href or plans, "{{PLANS_HREF}}": plans,
         "{{FOOTER_CARE}}": footer_care(L), "{{SHARE_URL}}": share_url,
         "{{ALT_HREF}}": alt_href or ("/es/" if L.code == "en" else "/"),
         # The home page's "How it works" links go to its own section; every other page links to the full page.
         "{{HOW_HREF}}": "#how" if home == "" else ("/how-it-works/" if L.code == "en" else "/es/como-funciona/"),
+        "{{DOCK_HREF}}": cta_href or plans, "{{DOCK_LABEL}}": esc(L.build["choose_plan"]),
     }
 
 
@@ -467,25 +400,26 @@ def write(path, text):
 
 
 # Search titles and descriptions: under about 60 and 160 characters so Google shows them whole.
-ORG_DESCRIPTION = ("See a licensed clinician online for urgent care, refills, therapy, sexual health, men's and women's "
-                   "health, skin and weight care. No insurance needed. Launching nationwide.")
-DESCRIPTION = ("Licensed clinicians online for urgent care, UTIs, refills, therapy, birth control, ED and weight care. "
-               "No insurance needed. Launching nationwide.")
-TITLE = "Online Doctor, No Insurance Needed | Jachi Health"
-ES_DESCRIPTION = ("Profesionales de la salud con licencia, en línea: atención de urgencia, resurtidos, terapia, salud "
-                  "sexual y más. Sin seguro médico. Pronto en todo EE. UU.")
-ES_TITLE = "Doctor en línea, sin seguro médico | Jachi Health"
-SHARE_ALT = "Jachi Health: online care, rooted in real medicine. Licensed clinicians, no insurance needed."
-SHARE_ALT_ES = "Jachi Health: atención en línea, con bases médicas sólidas. Profesionales con licencia, sin necesidad de seguro médico."
+_CONCIERGE = MEMBERSHIP.money(MEMBERSHIP.PLANS[0]["monthly"])
+ORG_DESCRIPTION = ("A care-coordination membership in Texas: a coordinator finds independent, licensed providers, confirms "
+                   "self-pay prices in writing and books visits. Not insurance or medical care.")
+DESCRIPTION = (f"A real coordinator finds care near you, confirms the self-pay price in writing and books every visit. "
+               f"Concierge from {_CONCIERGE} a month. Not insurance.")
+TITLE = "Care Coordination Membership in Texas | Jachi Health"
+ES_DESCRIPTION = (f"Un coordinador real busca atención cerca de usted, confirma por escrito el precio sin seguro y reserva "
+                  f"sus citas. Concierge desde {_CONCIERGE} al mes. No es un seguro.")
+ES_TITLE = "Membresía de coordinación de atención en Texas | Jachi Health"
+SHARE_ALT = "Jachi Health: your health, handled. A care-coordination membership in Texas."
+SHARE_ALT_ES = "Jachi Health: su salud, en buenas manos. Una membresía de coordinación de atención en Texas."
 # ---------- Structured data (schema.org JSON-LD) ----------
 # One connected graph per page: the organization and website are defined once (by @id) and every page points at them.
-# Only facts that are true today: no clinician names, reviews, ratings or prices until they exist.
+# Only facts that are true today: no reviews or ratings, and no provider names until there are real partners.
 ORG_ID, SITE_ID = f"{SITE_URL}/#organization", f"{SITE_URL}/#website"
 ORG_NODE = {
     "@type": "Organization", "@id": ORG_ID, "name": "Jachi Health", "url": f"{SITE_URL}/",
     "logo": {"@type": "ImageObject", "url": f"{SITE_URL}/apple-touch-icon.png", "width": 180, "height": 180},
     "image": f"{SITE_URL}/og.jpg", "email": EMAIL, "description": ORG_DESCRIPTION,
-    "areaServed": {"@type": "Country", "name": "United States"}, "knowsLanguage": ["en", "es"],
+    "areaServed": {"@type": "State", "name": "Texas"}, "knowsLanguage": ["en", "es"],
     "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": EMAIL,
                      "availableLanguage": ["English", "Spanish"]},
 }
@@ -505,45 +439,70 @@ HOME_ALTERNATES = {"en": "/", "es": "/es/"}
 SITEMAP = []
 
 
+def faq_ld(items, lang):
+    return {"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": lang, "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in items]}
+
+
+# ---------- Plan cards (the plans page and the home page) ----------
+
+MEMBERSHIP_CSS = (SRC / "membership.css").read_text()
+
+def plan_cards(lang, compact=False):
+    """One card per plan. The home page shows the first three features of each (compact) under an h3; the plans page
+    shows them all under an h2."""
+    W = MEMBERSHIP.WORDS[lang]
+    money = MEMBERSHIP.money
+    level = "h3" if compact else "h2"
+    cards = []
+    for p in MEMBERSHIP.PLANS:
+        t = W["plans"][p["key"]]
+        cls = "m-plan" + (" m-plan--featured" if p.get("featured") else "") + (" m-plan--dark" if p.get("dark") else "")
+        badge = W["most_popular"] if p.get("featured") else W["white_glove"] if p.get("dark") else ""
+        note = (W["founding_note"].format(founding=money(p["founding"]), limit=MEMBERSHIP.FOUNDING_LIMIT,
+                                          regular=money(p["monthly"])) if p.get("founding") else t.get("note", ""))
+        features = "".join(f"<li>{icon_svg('check')}<span>{esc(f)}</span></li>"
+                           for f in (t["features"][:3] if compact else t["features"]))
+        cards.append(
+            f'<article class="{cls}"><div class="m-plan__head"><{level} class="m-plan__name">{esc(t["name"])}</{level}>'
+            + (f'<p class="m-plan__badge">{esc(badge)}</p>' if badge else "") + "</div>"
+            f'<p class="m-plan__price">{esc(money(p["monthly"]))}<span class="m-plan__per">{esc(W["per_month"])}</span></p>'
+            f'<p class="m-plan__alt">{esc(W["or_yearly"].format(price=money(p["yearly"])))}</p>'
+            f'<p class="m-plan__tagline">{esc(t["tagline"])}</p>'
+            + (f'<p class="m-plan__note">{esc(note)}</p>' if note else "")
+            + f'<a class="btn btn--block" href="{MEMBERSHIP.PATHS["checkout"][lang]}?plan={p["key"]}">{esc(W["start"].format(name=t["name"]))}</a>'
+            f'<ul class="m-plan__list">{features}</ul></article>')
+    return "".join(cards)
+
+
 # ---------- Home pages (English and Spanish) ----------
 
 def home_tokens(L):
-    finder_needs = "".join(
-        f'<label class="need"><input type="radio" name="need" value="{k}"><span><i class="need__ic">{icon_svg(ic)}</i>'
-        f'<b>{esc(t)}</b><small>{esc(sub)}</small></span></label>' for k, ic, t, sub in L.finder)
-    join_interests = "".join(
-        f'<label class="check"><input type="checkbox" name="interest" value="{s["interest"]}"><span>{esc(s.get("chip", s["name"]))}</span></label>'
-        for s in L.services)
-    popular = "".join(f'<button type="button" data-q="{esc(q)}">{esc(q)}</button>' for q in L.popular)
-    picker = "".join(f'<li><a href="{href}" data-svc="{key}">{esc(label)}</a></li>' for label, key, href in L.picker)
+    concierge = MEMBERSHIP.PLANS[0]
     return {
-        "{{PICKER}}": picker,
-        "{{STATE_OPTIONS}}": state_options(L),
+        "{{PICKER}}": "".join(f'<li><a href="{c["href"]}">{esc(c["short"])}</a></li>' for c in L.picker),
+        "{{CARE_CARDS}}": "\n".join(care_card(c, i, L.build) for i, c in enumerate(L.care)),
+        "{{PLAN_CARDS}}": plan_cards(L.code, compact=True),
         "{{FAQ_ITEMS}}": faq_items(L.faq),
-        "{{SERVICE_CARDS}}": "\n".join(service_card(L, s, i) for i, s in enumerate(L.services)),
-        "{{FINDER_NEEDS}}": finder_needs,
-        "{{JOIN_INTERESTS}}": join_interests,
-        "{{CONDITION_ROWS}}": condition_rows(L),
-        "{{POPULAR}}": popular,
-        "{{CONDITION_COUNT}}": str(len(L.treated)),
         "{{LEARN_CARDS}}": guide_cards(L.code),
+        "{{FOUNDING_LIMIT}}": str(MEMBERSHIP.FOUNDING_LIMIT),
+        "{{CONCIERGE_PRICE}}": MEMBERSHIP.money(concierge["monthly"]),
     }
 
 
 def build_home(lang):
     L = Lang(lang)
     path = HOME_ALTERNATES[lang]
-    tokens = {**home_tokens(L), **chrome_tokens(L, "", "#top", "#join", SITE_URL + path),
-              "{{DOCK_HREF}}": "#join", "{{DOCK_LABEL}}": esc(L.T["get_early_access"])}
+    tokens = {**home_tokens(L), **chrome_tokens(L, "", "#top", share_url=SITE_URL + path)}
     main = render(part(lang, "home"), L, tokens)
     body = "\n".join(render(part(lang, n), L, tokens) for n in ("header",)) + "\n" + main + "\n" + "\n".join(
         render(part(lang, n), L, tokens) for n in ("footer", "dock", "chat"))
-    page = {"lang": lang, "path": path, "alternates": HOME_ALTERNATES, "main": main,
-            "title": TITLE if lang == "en" else ES_TITLE,
-            "description": DESCRIPTION if lang == "en" else ES_DESCRIPTION,
-            "ld": [ld_graph(ORG_NODE, SITE_NODE, page_node(
-                "WebPage", path, TITLE if lang == "en" else ES_TITLE,
-                DESCRIPTION if lang == "en" else ES_DESCRIPTION, lang, about={"@id": ORG_ID}))]}
+    title, description = (TITLE, DESCRIPTION) if lang == "en" else (ES_TITLE, ES_DESCRIPTION)
+    page = {"lang": lang, "path": path, "alternates": HOME_ALTERNATES, "main": main, "css": MEMBERSHIP_CSS,
+            "title": title, "description": description,
+            "ld": [ld_graph(ORG_NODE, SITE_NODE, page_node("WebPage", path, title, description, lang,
+                                                           about={"@id": ORG_ID})),
+                   faq_ld(L.faq, lang)]}
     write(path, document(page, body))
     SITEMAP.append((path, HOME_ALTERNATES))
     return body
@@ -563,11 +522,6 @@ HOW_PAGES = {"en": EN_CONTENT.HOW, "es": ES_CONTENT.HOW}
 HOW_ALTERNATES = {code: h["path"] for code, h in HOW_PAGES.items()}
 
 
-def faq_ld(items, lang):
-    return {"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": lang, "mainEntity": [
-        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in items]}
-
-
 def assemble(lang, main, tokens, parts=("footer", "dock", "chat")):
     """The page body: the shared header, the page's main content, then the shared footer, dock and chat."""
     L = Lang(lang)
@@ -578,69 +532,37 @@ def assemble(lang, main, tokens, parts=("footer", "dock", "chat")):
 # ---------- Service pages (English from pages.py, Spanish from pages_es.py) ----------
 
 SERVICE_WORDS = {
-    "en": {"services": "Services", "no_insurance": "No insurance needed",
-           "therapists": "Licensed therapists in your state", "clinicians": "Licensed clinicians in your state",
-           "check_ins": "Regular check-ins", "video": "Private video sessions",
-           "pharmacy": "Prescriptions sent to your pharmacy", "glance": "{x} at a glance",
-           "billed": "Medication and lab tests are billed separately.", "how": "See how Jachi works, step by step",
-           "lead_end": "No insurance needed."},
-    "es": {"services": "Servicios", "no_insurance": "No necesita seguro médico",
-           "therapists": "Terapeutas con licencia en su estado",
-           "clinicians": "Profesionales de la salud con licencia en su estado", "check_ins": "Seguimiento regular",
-           "video": "Sesiones privadas por video", "pharmacy": "Recetas enviadas a su farmacia",
-           "glance": "{x} en resumen", "billed": "Los medicamentos y los análisis de laboratorio se cobran por separado.",
-           "how": "Vea cómo funciona Jachi, paso a paso", "lead_end": "No necesita seguro médico."},
+    "en": {"crumb_help": "What we help with", "tag": "Care coordination", "glance": "{x} at a glance",
+           "perks": ["A real coordinator, in English or Spanish", "The self-pay price confirmed in writing",
+                     "Visits booked and reminders sent"],
+           "fine": "Plans from {price} a month. Providers bill their care separately.",
+           "how": "See how Jachi works, step by step", "service": "{x} coordination"},
+    "es": {"crumb_help": "En qué le ayudamos", "tag": "Coordinación de atención", "glance": "{x} en resumen",
+           "perks": ["Un coordinador real, en español o en inglés", "El precio sin seguro, confirmado por escrito",
+                     "Citas reservadas y recordatorios enviados"],
+           "fine": "Planes desde {price} al mes. Los proveedores cobran su atención por separado.",
+           "how": "Vea cómo funciona Jachi, paso a paso", "service": "Coordinación: {x}"},
 }
-
-
-def service_rows(entries, treated, slug):
-    """The page's list as (title, note) rows: a condition named from content.TREATED brings its note."""
-    rows = []
-    for entry in entries:
-        if isinstance(entry, tuple):
-            rows.append(entry)
-        elif entry in treated:
-            rows.append(treated[entry])
-        else:
-            raise SystemExit(f"pages.py: {slug} lists unknown condition {entry!r}")
-    return rows
 
 
 def service_words(p, lang):
     """A service page's words in one language: pages.py itself, or pages_es.py laid over it."""
-    if lang == "en":
-        treated = {name: (name, note) for name, _cat, _terms, note in EN_CONTENT.TREATED}
-        return {**p, "rows": service_rows(p["list"], treated, p["slug"]),
-                "list_lead": p.get("list_lead", PAGES.LIST_LEAD), "expect_lead": p.get("expect_lead", PAGES.EXPECT_LEAD)}
-    t = PAGES_ES.PAGES[p["slug"]]
-    treated = {name: (es_name, note) for name, (es_name, _terms, note) in ES_CONTENT.TREATED.items()}
-    e_title, e_lead, e_items = ES_CONTENT.EXPECT[p["slug"]]
-    if len(e_items) != len(p["expect"]):
-        raise SystemExit(f"content_es.EXPECT: {p['slug']} needs {len(p['expect'])} items")
-    return {**p, **{k: v for k, v in t.items() if k != "slug"},
-            "rows": service_rows(t.get("list", p["list"]), treated, p["slug"]),
-            "list_lead": t.get("list_lead", PAGES_ES.LIST_LEAD),
-            "expect_title": e_title, "expect_lead": e_lead or ES_CONTENT.EXPECT_LEAD,
-            "expect": [(ic, title, text) for (ic, _t, _d), (title, text) in zip(p["expect"], e_items)],
-            "safety": {**p["safety"], **t["safety"]}}
+    price = MEMBERSHIP.money(MEMBERSHIP.PLANS[0]["monthly"])
+    M = PAGES if lang == "en" else PAGES_ES
+    v = dict(p) if lang == "en" else {**p, **{k: val for k, val in PAGES_ES.PAGES[p["slug"]].items() if k != "slug"}}
+    v["safety"] = {**p["safety"], **v["safety"]}
+    v["faq"] = [(q, a.format(price=price)) for q, a in v["faq"]]
+    words = [(t, d) for _ic, t, d in PAGES.STEPS] if lang == "en" else PAGES_ES.STEPS
+    if len(words) != len(PAGES.STEPS):
+        raise SystemExit("pages_es.STEPS must match pages.STEPS")
+    v["steps"] = [(ic, t, d) for (ic, _t, _d), (t, d) in zip(PAGES.STEPS, words)]
+    v.update(list_lead=M.LIST_LEAD, steps_title=M.STEPS_TITLE, steps_lead=M.STEPS_LEAD)
+    return v
 
 
-def service_page(p, lang):
-    L = Lang(lang)
-    W, B = SERVICE_WORDS[lang], L.build
-    v = service_words(p, lang)
-    svc = L.by_key[p["key"]]
-    home, slug = HOME_PATH[lang], p["slug"]
-    path = SERVICE_PATH[lang][slug]
-    alternates = {code: SERVICE_PATH[code][slug] for code in ("en", "es")}
-    join_href = f'{home}?interest={svc["interest"]}'
-    trail = [(LEARN.LABELS[lang]["home"], home), (W["services"], home + "#services"), (v["crumb"], None)]
-    items = "".join(f"<li>{icon_svg('check')}<span><b>{esc(title)}</b>{f'<small>{esc(note)}</small>' if note else ''}"
-                    f"</span></li>" for title, note in v["rows"])
-    expect = "".join(f'<li><span class="expect__ic">{icon_svg(ic)}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>'
-                     for ic, t, d in v["expect"])
-    know = "".join(f"<li>{icon_svg('info')}<span>{esc(k)}</span></li>" for k in v["know"])
-    s = v["safety"]
+def safety_box(L, s):
+    """The page's safety box: when to call 911 or 988, or get seen in person."""
+    B = L.build
     flags = "".join(f"<li>{esc(x)}</li>" for x in s["items"])
     flags_html = f'<ul class="flags">{flags}</ul>' if flags else ""
     actions = ""
@@ -652,54 +574,61 @@ def service_page(p, lang):
                    f'<a class="btn btn--ghost btn--sm" href="{esc(L.T["sms_988"])}">{icon_svg("msg")}{esc(B["text_988"])}</a></div>')
     tone = "explain--caution" if s["kind"] == "caution" else "explain--alert"
     ic = "heart" if s["kind"] == "988" else "alert"
-    safety = (f'<div class="explain {tone} safety"><h3><span class="explain__ic" aria-hidden="true">{icon_svg(ic)}</span>'
-              f'{esc(s["title"])}</h3><p>{esc(s["text"])}</p>{flags_html}{actions}</div>')
-    if p.get("elig"):
-        second = f'<a class="btn btn--ghost btn--lg" href="{home}#eligibility">{esc(B["check_elig_long"])}</a>'
-    else:
-        second = f'<a class="btn btn--ghost btn--lg" href="{home}#care-finder">{esc(B["find_care"])}</a>'
-    perks = [W["no_insurance"], W["therapists"] if p["key"] == "therapy" else W["clinicians"],
-             W["check_ins"] if svc["ongoing"] else (W["video"] if p["key"] == "therapy" else W["pharmacy"])]
-    perk_items = "".join(f"<li>{icon_svg('check')}<span>{esc(x)}</span></li>" for x in perks)
-    tag_cls = "svc__tag svc__tag--ongoing" if svc["ongoing"] else "svc__tag"
-    card = (f'<aside class="glance" aria-label="{esc(W["glance"].format(x=svc["name"]))}">'
-            f'<span class="svc__ic">{icon_svg(svc["icon"])}</span>'
-            f'<p class="glance__name">{esc(svc["name"])}</p>'
-            f'<span class="{tag_cls}">{esc(svc["tag"])}</span>'
-            f'<ul>{perk_items}</ul>'
-            f'<p class="fine">{esc(L.pricing_note)} {esc(W["billed"])}</p></aside>')
-    crumb_of = (lambda r: PAGES.BY_SLUG[r]["crumb"]) if lang == "en" else (lambda r: PAGES_ES.PAGES[r]["crumb"])
-    related = "".join(f'<li><a href="{SERVICE_PATH[lang][r]}">{esc(crumb_of(r))}</a></li>' for r in p["related"])
+    return (f'<div class="explain {tone} safety"><h3><span class="explain__ic" aria-hidden="true">{icon_svg(ic)}</span>'
+            f'{esc(s["title"])}</h3><p>{esc(s["text"])}</p>{flags_html}{actions}</div>')
+
+
+def service_page(p, lang):
+    L = Lang(lang)
+    W = SERVICE_WORDS[lang]
+    v = service_words(p, lang)
+    home, slug = HOME_PATH[lang], p["slug"]
+    path = SERVICE_PATH[lang][slug]
+    alternates = {code: SERVICE_PATH[code][slug] for code in ("en", "es")}
+    trail = [(LEARN.LABELS[lang]["home"], home), (W["crumb_help"], home + "#help"), (v["crumb"], None)]
+    items = "".join(f"<li>{icon_svg('check')}<span><b>{esc(title)}</b><small>{esc(note)}</small></span></li>"
+                    for title, note in v["list"])
+    steps = "".join(f'<li><span class="expect__ic">{icon_svg(ic)}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>'
+                    for ic, t, d in v["steps"])
+    know = "".join(f"<li>{icon_svg('info')}<span>{esc(k)}</span></li>" for k in v["know"])
+    perks = "".join(f"<li>{icon_svg('check')}<span>{esc(x)}</span></li>" for x in W["perks"])
+    price = MEMBERSHIP.money(MEMBERSHIP.PLANS[0]["monthly"])
+    card = (f'<aside class="glance" aria-label="{esc(W["glance"].format(x=v["name"]))}">'
+            f'<span class="svc__ic">{icon_svg(p["icon"])}</span>'
+            f'<p class="glance__name">{esc(v["name"])}</p>'
+            f'<span class="svc__tag">{esc(W["tag"])}</span>'
+            f'<ul>{perks}</ul>'
+            f'<p class="fine">{esc(W["fine"].format(price=price))}</p></aside>')
+    name_of = (lambda r: PAGES.BY_SLUG[r]["name"]) if lang == "en" else (lambda r: PAGES_ES.PAGES[r]["name"])
+    related = "".join(f'<li><a href="{SERVICE_PATH[lang][r]}">{esc(name_of(r))}</a></li>' for r in p["related"])
     links = [(W["how"], HOW_PAGES[lang]["path"])] + [
         (a[lang]["h1"].rstrip("."), LEARN.path(a, lang)) for a in LEARN.ARTICLES if p["key"] in a["services"]]
     svc_links = "".join(f'<li><a class="textlink" href="{href}">{nw(esc(label))}{icon_svg("arrow", "i--arrow")}</a></li>'
                         for label, href in links)
     tokens = {
-        **chrome_tokens(L, home, home, join_href, alt_href=alternates[OTHER[lang]]),
+        **chrome_tokens(L, home, home, alt_href=alternates[OTHER[lang]]),
         "{{CRUMBS}}": crumbs(trail),
         "{{SVC_H1}}": f'{esc(v["h1"][0])} {esc(v["h1"][1])}',
-        "{{SVC_LEAD}}": esc(v["lead"]) + " " + esc(W["lead_end"]),
-        "{{SVC_SECOND_CTA}}": second,
+        "{{SVC_LEAD}}": esc(v["lead"]),
         "{{SVC_CARD}}": card,
         "{{SVC_LIST_TITLE}}": esc(v["list_title"]),
         "{{SVC_LIST_LEAD}}": esc(v["list_lead"]),
         "{{SVC_LIST}}": items,
-        "{{SVC_EXPECT}}": expect,
-        "{{SVC_EXPECT_TITLE}}": heading(v["expect_title"]),
-        "{{SVC_EXPECT_LEAD}}": esc(v["expect_lead"]),
+        "{{SVC_STEPS_TITLE}}": heading(v["steps_title"]),
+        "{{SVC_STEPS_LEAD}}": esc(v["steps_lead"]),
+        "{{SVC_STEPS}}": steps,
         "{{SVC_KNOW}}": know,
-        "{{SVC_SAFETY}}": safety,
+        "{{SVC_SAFETY}}": safety_box(L, v["safety"]),
         "{{SVC_FAQ}}": faq_items(v["faq"]),
-        "{{SVC_FAQ_TITLE}}": heading(v["faq_title"]),
         "{{SVC_RELATED}}": related,
         "{{SVC_LINKS}}": svc_links,
-        "{{DOCK_HREF}}": join_href, "{{DOCK_LABEL}}": esc(L.T["get_early_access"]),
     }
     main = render(part(lang, "service"), L, tokens)
-    about = [{"@type": "MedicalCondition", "name": a} if isinstance(a, str) else a for a in v["about"]]
-    web = page_node("MedicalWebPage", path, v["title"], v["description"], lang, publisher={"@id": ORG_ID},
-                    breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"}, medicalAudience={"@type": "Patient"},
-                    about=about, **({"specialty": f"https://schema.org/{p['specialty']}"} if p.get("specialty") else {}))
+    service = {"@type": "Service", "name": W["service"].format(x=v["name"]), "serviceType": "Care coordination",
+               "provider": {"@id": ORG_ID}, "areaServed": {"@type": "State", "name": "Texas"},
+               "description": v["description"]}
+    web = page_node("WebPage", path, v["title"], v["description"], lang, publisher={"@id": ORG_ID},
+                    breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"}, mainEntity=service)
     page = {"lang": lang, "path": path, "alternates": alternates, "main": main, "title": v["title"],
             "description": v["description"],
             "ld": [ld_graph(ORG_REF, web, breadcrumb_node(trail, path)), faq_ld(v["faq"], lang)]}
@@ -726,7 +655,7 @@ for slug, crumb, title, description in LEGAL:
     L = Lang("en")
     path = f"/{slug}/"
     trail = [("Home", "/"), (crumb, None)]
-    tokens = {**chrome_tokens(L, "/", "/", "/#join"), "{{CRUMBS}}": crumbs(trail)}
+    tokens = {**chrome_tokens(L, "/", "/"), "{{CRUMBS}}": crumbs(trail)}
     main = render(part("en", slug), L, tokens)
     body = render(part("en", "header"), L, tokens) + "\n" + main + "\n" + render(part("en", "footer"), L, tokens) + \
         "\n" + render(part("en", "chat"), L, tokens)
@@ -739,7 +668,7 @@ for slug, crumb, title, description in LEGAL:
 # ---------- How Jachi works (English and Spanish) ----------
 
 def how_lanes(H):
-    """The two lanes of the How page: the steps on Jachi, the handoff to the medical group, then the steps with it."""
+    """The two lanes of the How page: the coordinator's steps, the handoff to the provider, then the provider's steps."""
     (jachi, care), (h_title, h_text) = H["lanes"], H["handoff"]
 
     def lane(data, cls, before):
@@ -757,11 +686,10 @@ def build_how(lang):
     L = Lang(lang)
     H = HOW_PAGES[lang]
     home, path = HOME_PATH[lang], H["path"]
-    join_href = home + "#join"
     trail = [(LEARN.LABELS[lang]["home"], home), (H["crumb"], None)]
-    tokens = {**chrome_tokens(L, home, home, join_href, alt_href=HOW_ALTERNATES[OTHER[lang]]),
+    tokens = {**chrome_tokens(L, home, home, alt_href=HOW_ALTERNATES[OTHER[lang]]),
               "{{CRUMBS}}": crumbs(trail), "{{HOW_FAQ}}": faq_items(H["faq"]), "{{HOW_LANES}}": how_lanes(H),
-              "{{DOCK_HREF}}": join_href, "{{DOCK_LABEL}}": esc(L.T["get_early_access"])}
+              "{{CONCIERGE_PRICE}}": MEMBERSHIP.money(MEMBERSHIP.PLANS[0]["monthly"])}
     main = render(part(lang, "how"), L, tokens)
     web = page_node("WebPage", path, H["title"], H["description"], lang, about={"@id": ORG_ID},
                     breadcrumb={"@id": f"{SITE_URL}{path}#breadcrumb"})
@@ -779,34 +707,9 @@ for code in HOW_PAGES:
 # ---------- Membership: plans and checkout (English and Spanish) ----------
 # Words, plans and printed prices in membership.py; the checkout talks to /api/membership/* (src/functions/billing.mjs).
 
-import membership as MEMBERSHIP
 
 PLANS_ALTERNATES = MEMBERSHIP.PATHS["plans"]
 CHECKOUT_ALTERNATES = MEMBERSHIP.PATHS["checkout"]
-MEMBERSHIP_CSS = (SRC / "membership.css").read_text()
-
-
-def plan_cards(lang):
-    W = MEMBERSHIP.WORDS[lang]
-    money = MEMBERSHIP.money
-    cards = []
-    for p in MEMBERSHIP.PLANS:
-        t = W["plans"][p["key"]]
-        cls = "m-plan" + (" m-plan--featured" if p.get("featured") else "") + (" m-plan--dark" if p.get("dark") else "")
-        badge = W["most_popular"] if p.get("featured") else W["white_glove"] if p.get("dark") else ""
-        note = (W["founding_note"].format(founding=money(p["founding"]), limit=MEMBERSHIP.FOUNDING_LIMIT,
-                                          regular=money(p["monthly"])) if p.get("founding") else t.get("note", ""))
-        features = "".join(f"<li>{icon_svg('check')}<span>{esc(f)}</span></li>" for f in t["features"])
-        cards.append(
-            f'<article class="{cls}"><div class="m-plan__head"><h2 class="m-plan__name">{esc(t["name"])}</h2>'
-            + (f'<p class="m-plan__badge">{esc(badge)}</p>' if badge else "") + "</div>"
-            f'<p class="m-plan__price">{esc(money(p["monthly"]))}<span class="m-plan__per">{esc(W["per_month"])}</span></p>'
-            f'<p class="m-plan__alt">{esc(W["or_yearly"].format(price=money(p["yearly"])))}</p>'
-            f'<p class="m-plan__tagline">{esc(t["tagline"])}</p>'
-            + (f'<p class="m-plan__note">{esc(note)}</p>' if note else "")
-            + f'<a class="btn btn--block" href="{CHECKOUT_ALTERNATES[lang]}?plan={p["key"]}">{esc(W["start"].format(name=t["name"]))}</a>'
-            f'<ul class="m-plan__list">{features}</ul></article>')
-    return "".join(cards)
 
 
 def membership_tokens(lang, path_alternates):
@@ -814,8 +717,7 @@ def membership_tokens(lang, path_alternates):
     W = MEMBERSHIP.WORDS[lang]
     home = HOME_PATH[lang]
     checkout = CHECKOUT_ALTERNATES[lang]
-    return L, W, home, {**chrome_tokens(L, home, home, checkout, alt_href=path_alternates[OTHER[lang]]),
-                        "{{DOCK_HREF}}": checkout, "{{DOCK_LABEL}}": esc(W["cta_button"])}
+    return L, W, home, chrome_tokens(L, home, home, checkout, alt_href=path_alternates[OTHER[lang]])
 
 
 def build_plans(lang):
@@ -921,7 +823,7 @@ def build_health_data(lang):
     H = HEALTH_DATA[lang]
     home, path = HOME_PATH[lang], H["path"]
     trail = [(LEARN.LABELS[lang]["home"], home), (H["crumb"], None)]
-    tokens = {**chrome_tokens(L, home, home, home + "#join", alt_href=HEALTH_DATA_ALTERNATES[OTHER[lang]]),
+    tokens = {**chrome_tokens(L, home, home, alt_href=HEALTH_DATA_ALTERNATES[OTHER[lang]]),
               "{{CRUMBS}}": crumbs(trail)}
     main = render(part(lang, "health-data"), L, tokens)
     web = page_node("WebPage", path, H["title"], H["description"], lang, about={"@id": ORG_ID},
@@ -989,7 +891,7 @@ def build_learn_hub(lang):
     Hb, W = LEARN.HUB[lang], LEARN.LABELS[lang]
     home, path = HOME_PATH[lang], Hb["path"]
     trail = [(W["home"], home), (Hb["crumb"], None)]
-    tokens = {**chrome_tokens(L, home, home, home + "#join", alt_href=LEARN_ALTERNATES[OTHER[lang]]), **learn_tokens(lang),
+    tokens = {**chrome_tokens(L, home, home, alt_href=LEARN_ALTERNATES[OTHER[lang]]), **learn_tokens(lang),
               "{{CRUMBS}}": crumbs(trail), "{{HUB_H1}}": esc(Hb["h1"]), "{{HUB_LEAD}}": nw(esc(Hb["lead"])),
               "{{HUB_NOTE}}": esc(Hb["note"]), "{{HUB_LIST_LABEL}}": esc(W["list_label"]),
               "{{HUB_CARDS}}": guide_cards(lang, level="h2")}
@@ -1019,11 +921,11 @@ def build_guide(article, lang):
         for name, url in t["sources"])
     aside = (f'<aside class="article__aside" aria-label="{esc(W["aside_label"])}">'
              f'<div class="aside-card aside-card--dark on-dark"><h2>{esc(cta["title"])}</h2><p>{esc(cta["text"])}</p>'
-             f'<a class="btn btn--light btn--block" href="{cta["join"]}">{esc(W["cta_join"])} {icon_svg("arrow", "i--arrow")}</a>'
+             f'<a class="btn btn--light btn--block" href="{cta["plans"]}">{esc(W["cta_join"])} {icon_svg("arrow", "i--arrow")}</a>'
              f'<a class="textlink" href="{cta["page"][1]}">{esc(cta["page"][0])}{icon_svg("arrow", "i--arrow")}</a></div>'
              f'<div class="aside-card"><h2>{esc(W["note_title"])}</h2><p>{esc(W["note"])}</p>'
              f'<p class="aside-card__urgent">{icon_svg("alert")}<span>{W["urgent"]}</span></p></div></aside>')
-    tokens = {**chrome_tokens(L, home, home, cta["join"], alt_href=alternates[OTHER[lang]]), **learn_tokens(lang),
+    tokens = {**chrome_tokens(L, home, home, alt_href=alternates[OTHER[lang]]), **learn_tokens(lang),
               "{{CRUMBS}}": crumbs(trail), "{{ART_TOPIC}}": esc(t["topic"]),
               "{{ART_MINUTES}}": esc(W["minutes"].format(n=t["minutes"])), "{{ART_DATE}}": LEARN.UPDATED,
               "{{ART_UPDATED}}": esc(LEARN.UPDATED_LABEL[lang]), "{{ART_H1}}": nw(esc(t["h1"])), "{{ART_LEAD}}": nw(esc(t["lead"])),
@@ -1051,16 +953,21 @@ for code in LEARN.HUB:
 
 # ---------- Ad landing pages (English /join/..., Spanish /es/unase/...) ----------
 
+def join_interests(L):
+    """The waitlist form's service choices (the telehealth waitlist that the ad landing pages still collect)."""
+    return "".join(
+        f'<label class="check"><input type="checkbox" name="interest" value="{s["interest"]}"><span>{esc(s.get("chip", s["name"]))}</span></label>'
+        for s in L.services)
+
+
 def landing_form(lang, interests):
-    """The home page's waitlist form, word for word in each language, set up for one ad: its services ticked,
-    and no "how did you hear" question (the ad's tags already say).
+    """The waitlist form (src/<lang>/waitlist.html), set up for one ad: its services ticked, and no "how did you hear"
+    question (the ad's tags already say).
     Netlify keeps one copy's fields for each form name, so every copy must have the same fields: the question
     becomes an empty hidden field rather than disappearing (tests/qa.py checks every page)."""
-    body = HOME_BODIES[lang]
-    m = re.search(r"<!-- form-card -->(.*?)<!-- /form-card -->", body, re.S)
-    if not m:
-        raise SystemExit("home page form markers missing")
-    form = m.group(1).strip()
+    L = Lang(lang)
+    form = render(part(lang, "waitlist"), L, {"{{STATE_OPTIONS}}": state_options(L), "{{JOIN_INTERESTS}}": join_interests(L),
+                                               "{{SHARE_URL}}": SITE_URL + HOME_PATH[lang]}).strip()
     for value in interests:
         tag = f'<input type="checkbox" name="interest" value="{value}">'
         if tag not in form:
@@ -1078,17 +985,6 @@ def landing_form(lang, interests):
     return form
 
 
-LANDING_FOOTER_WORDS = {
-    # An ad's page names no medicine at all, so the footer's notes say the same things without the word "prescribe".
-    "en": [("It doesn't diagnose, prescribe, provide therapy or replace your clinician.",
-            "It doesn't diagnose, provide therapy or replace your clinician."),
-           ("and we don't prescribe controlled substances.", "and controlled substances aren't offered.")],
-    "es": [("No diagnostica, no receta, no da terapia ni reemplaza a su profesional de la salud.",
-            "No diagnostica, no da terapia ni reemplaza a su profesional de la salud."),
-           ("y no recetamos sustancias controladas.", "y no se ofrecen sustancias controladas.")],
-}
-
-
 def landing_footer(lang, tokens):
     """The site footer with its legal links and notes, but without the care and company link lists: an ad's page
     links only to the legal pages, so nothing one click away offers other services or names medicines."""
@@ -1101,10 +997,6 @@ def landing_footer(lang, tokens):
                       flags=re.S)
     if n != 2:
         raise SystemExit(f"landing: expected the care and company footer columns, found {n}")
-    for old, new in LANDING_FOOTER_WORDS[lang]:
-        if old not in foot:
-            raise SystemExit(f"landing: footer note changed: {old!r}")
-        foot = foot.replace(old, new)
     return foot
 
 
@@ -1116,10 +1008,6 @@ def build_landing(entry, lang):
     alts = LANDING.alternates(entry)
     home = HOME_PATH[lang]
     tokens = chrome_tokens(L, home, home, "#join", alt_href=alts[OTHER[lang]])
-    faq = dict(L.faq)
-    missing = [q for q in W["faq"] if q not in faq]
-    if missing:
-        raise SystemExit(f"landing.py: FAQ questions not on the home page: {missing}")
     safety = ""
     if entry["safety"]:
         title, text = (LANDING.SAFETY_911 if entry["safety"] == "911" else LANDING.SAFETY_988)[lang]
@@ -1142,12 +1030,12 @@ def build_landing(entry, lang):
         "{{LP_FORM}}": landing_form(lang, entry["interests"]),
         "{{LP_POINTS}}": "".join(f"<li>{icon_svg('check')}<span>{esc(x)}</span></li>" for x in W["points"]),
         "{{LP_NEXT_TITLE}}": esc(W["next_title"]),
-        "{{LP_NEXT}}": re.search(r'<ol class="perks perks--steps">.*?</ol>', HOME_BODIES[lang], re.S).group(0),
+        "{{LP_NEXT}}": '<ol class="perks perks--steps">' + "".join(f"<li>{esc(x)}</li>" for x in W["next"]) + "</ol>",
         "{{LP_HELPS_TITLE}}": esc(c["helps_title"]),
         "{{LP_HELPS}}": "".join(f"<li>{icon_svg('check')}<span>{esc(x)}</span></li>" for x in c["helps"]),
         "{{LP_SAFETY}}": safety,
         "{{LP_FAQ_TITLE}}": esc(W["faq_title"]),
-        "{{LP_FAQ}}": faq_items([(q, faq[q]) for q in W["faq"]]),
+        "{{LP_FAQ}}": faq_items(W["faq"]),
     })
     main = render((SRC / "landing.html").read_text(), L, tokens)
     body = main + "\n" + landing_footer(lang, tokens) + "\n" + render(part(lang, "chat"), L, tokens)
@@ -1173,7 +1061,7 @@ def build_account(lang):
         f'<label class="check"><input type="checkbox" name="interest" value="{s["interest"]}"><span>{esc(s.get("chip", s["name"]))}</span></label>'
         for s in L.services)
     other = "es" if lang == "en" else "en"
-    tokens = {**chrome_tokens(L, home, home, home + "#join", alt_href=ACCOUNT_PATHS[other]),
+    tokens = {**chrome_tokens(L, home, home, alt_href=ACCOUNT_PATHS[other]), "{{WAITLIST_HREF}}": LANDING.HUB[lang],
               "{{STATE_OPTIONS}}": state_options(L), "{{ACCOUNT_INTERESTS}}": interests}
     main = render((SRC / "account.html").read_text(), L, tokens)
     body = render(part(lang, "header"), L, tokens) + "\n" + main + "\n" + render(part(lang, "footer"), L, tokens) + \

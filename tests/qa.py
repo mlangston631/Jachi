@@ -20,7 +20,8 @@ sys.path.insert(0, str(ROOT / "tests"))
 import serve  # noqa: E402
 from common import ensure_fonts, use_brand_fonts  # noqa: E402
 from fake_identity import FakeIdentity  # noqa: E402
-from content import EMAIL, PRICING_NOTE  # noqa: E402
+from content import EMAIL  # noqa: E402
+import membership as MEMBERSHIP  # noqa: E402
 import pages as PAGES  # noqa: E402
 import pages_es as PAGES_ES  # noqa: E402
 import learn as LEARN  # noqa: E402
@@ -160,11 +161,10 @@ with sync_playwright() as p:
         page.screenshot(path=str(OUT / f"first-{w}.png"))
         ov = page.evaluate(OVERFLOW_JS)
         check(f"no horizontal overflow @{w}", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
-        tops = page.evaluate("[...document.querySelectorAll('.svc')].map(e => Math.round(e.getBoundingClientRect().top))")
-        rows_seen = len(set(tops))
-        expect_rows = 3 if w >= 1060 else (5 if w >= 640 else 9)
-        check(f"nine service cards in {expect_rows} rows @{w}", len(tops) == 9 and rows_seen == expect_rows, str(tops))
-        check(f"condition search visible @{w}", page.locator("#lookup").is_visible() and page.locator("#lookup-results").is_hidden())
+        tops = page.evaluate("[...document.querySelectorAll('#help .svc')].map(e => Math.round(e.getBoundingClientRect().top))")
+        expect_rows = 2 if w >= 1060 else (5 if w >= 640 else 10)
+        check(f"ten care cards in {expect_rows} rows @{w}", len(tops) == 10 and len(set(tops)) == expect_rows, str(tops))
+        check(f"three plans on the home page @{w}", page.locator("#plans .m-plan").count() == 3)
         page.screenshot(path=str(OUT / f"full-{w}.png"), full_page=True, animations="disabled")
         header_info = page.evaluate("""() => ({
           nav: [...document.querySelectorAll('.nav a')].filter(a => a.offsetParent).map(a => Math.round(a.getBoundingClientRect().height)),
@@ -172,7 +172,7 @@ with sync_playwright() as p:
           toggle: !!document.querySelector('.menu-toggle').offsetParent,
         })""")
         if w >= 1100:
-            check(f"header: full nav on one line, log in link @{w}", len(header_info["nav"]) == 5 and max(header_info["nav"]) < 50
+            check(f"header: full nav on one line, log in link @{w}", len(header_info["nav"]) == 4 and max(header_info["nav"]) < 50
                   and header_info["login"] == "/account/" and not header_info["toggle"], json.dumps(header_info))
         elif w >= 960:
             check(f"header: menu button and log in link @{w}", header_info["toggle"] and header_info["login"] == "/account/", json.dumps(header_info))
@@ -183,7 +183,7 @@ with sync_playwright() as p:
             check("anchors, labels, names, ids all valid", not problems, json.dumps(problems))
         ctx.close()
 
-    # 2) Mobile interactions
+    # 2) Mobile interactions on the home page
     ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
     page, logs = setup(ctx)
     page.goto(URL, wait_until="networkidle")
@@ -194,142 +194,69 @@ with sync_playwright() as p:
     check("menu opens", is_open(page, "#mobile-menu"))
     check("menu toggle aria-expanded", toggle.get_attribute("aria-expanded") == "true")
     check("main is inert while menu open", page.evaluate("document.getElementById('main').inert === true"))
-    check("menu lists eight sections (Plans first)", page.locator("#mobile-menu nav a").count() == 8
-          and page.locator("#mobile-menu nav a").first.get_attribute("href") == "/plans/")
-    check("menu offers log in", page.locator("#mobile-menu a[href='/account/']").is_visible())
+    menu_links = page.evaluate("[...document.querySelectorAll('#mobile-menu nav a')].map(a => a.getAttribute('href'))")
+    check("menu lists six sections (Plans first)", len(menu_links) == 6 and menu_links[0] == "/plans/", str(menu_links))
+    check("menu offers a plan and log in", page.locator("#mobile-menu .mobile-menu__foot a[href='/plans/']").is_visible()
+          and page.locator("#mobile-menu a[href='/account/']").is_visible())
     page.screenshot(path=str(OUT / "mobile-menu.png"))
     page.keyboard.press("Escape")
     page.wait_for_timeout(500)
     check("escape closes menu", not is_open(page, "#mobile-menu"))
     check("focus returns to toggle", page.evaluate("document.activeElement.classList.contains('menu-toggle')"))
     toggle.click(); page.wait_for_timeout(500)
-    page.locator("#mobile-menu a[href='#services']").click()
+    page.locator("#mobile-menu a[href='#help']").click()
     page.wait_for_timeout(1400)
     check("menu link closes menu", not is_open(page, "#mobile-menu"))
-    top = page.evaluate("document.getElementById('services').getBoundingClientRect().top")
-    check("menu link scrolls to services", 0 <= top < 160, f"top={top}")
+    top = page.evaluate("document.getElementById('help').getBoundingClientRect().top")
+    check("menu link scrolls to what we help with", 0 <= top < 160, f"top={top}")
     check("main not inert after close", page.evaluate("document.getElementById('main').inert === false"))
 
     # dock visibility
-    page.evaluate("window.scrollTo(0, document.getElementById('why').offsetTop + 200)")
+    page.evaluate("window.scrollTo(0, document.getElementById('how').offsetTop + 200)")
     page.wait_for_timeout(900)
     check("mobile dock shows after hero", page.locator("#dock").evaluate("el => el.classList.contains('is-visible')"))
-    check("dock points to the sign-up form", page.locator("#dock a").get_attribute("href") == "#join")
+    check("dock offers the plans", page.locator("#dock a").get_attribute("href") == "/plans/"
+          and "Choose your plan" in page.locator("#dock a").inner_text())
     page.screenshot(path=str(OUT / "mobile-dock.png"))
-    page.evaluate("document.getElementById('care-finder').scrollIntoView()")
+    page.evaluate("document.getElementById('plans').scrollIntoView()")
     page.wait_for_timeout(900)
-    check("mobile dock hides at care finder", not page.locator("#dock").evaluate("el => el.classList.contains('is-visible')"))
+    check("mobile dock hides at the plans, which have their own buttons", not page.locator("#dock").evaluate("el => el.classList.contains('is-visible')"))
+    page.screenshot(path=str(OUT / "plans-phone.png"))
+    page.evaluate("document.getElementById('privacy-promise').scrollIntoView()"); page.wait_for_timeout(400)
+    page.screenshot(path=str(OUT / "privacy-promise-phone.png"))
 
-    # care finder: errors, emergency path, restart, urgent path to sign-up
-    page.locator("#finder-next").click(); page.wait_for_timeout(300)
-    check("finder: empty step 1 shows error", page.locator("#err-need").is_visible())
-    check("finder: focus on first option", page.evaluate("document.activeElement.name") == "need")
-    page.screenshot(path=str(OUT / "finder-error-mobile.png"))
-    page.locator("label.need:has(input[value='urgent'])").click()
-    check("finder: error clears on choice", not page.locator("#err-need").is_visible())
-    page.locator("#finder-next").click(); page.wait_for_timeout(600)
-    check("finder: step 2 shows urgent question only",
-          page.locator("[data-path='urgent']").is_visible() and not page.locator("[data-path='refill']").is_visible()
-          and not page.locator("[data-path='mental']").is_visible())
-    check("finder: step counter", page.locator("#finder-count").inner_text() == "Step 2 of 2")
-    check("finder: button says See my options", page.locator("#finder-next-label").inner_text() == "See my options")
-    check("finder: step 2 title focused", page.evaluate("document.activeElement.classList.contains('q-title')"))
-    page.screenshot(path=str(OUT / "finder-redflags-mobile.png"))
-    page.locator("#finder-next").click(); page.wait_for_timeout(300)
-    check("finder: empty step 2 shows error", page.locator("#err-flag-urgent").is_visible())
-    page.locator("fieldset[data-field='flag-urgent'] label:has(input[value='yes'])").click()
-    check("finder: step 2 error clears", not page.locator("#err-flag-urgent").is_visible())
-    page.locator("#finder-next").click(); page.wait_for_timeout(700)
-    check("finder: emergency result", page.locator("#fres-title").inner_text() == "Call 911 now.", page.locator("#fres-title").inner_text())
-    check("finder: emergency CTA dials 911", page.locator("#fres-cta").get_attribute("href") == "tel:911"
-          and "btn--danger" in page.locator("#fres-cta").get_attribute("class") and page.locator("#fres-cta").is_visible())
-    check("finder: emergency hides sign-up note", not page.locator("#fres-note").is_visible() and not page.locator("#fres-hotline").is_visible())
-    check("finder: result title focused", page.evaluate("document.activeElement.id") == "fres-title")
-    page.screenshot(path=str(OUT / "finder-emergency-mobile.png"))
-    page.locator("#fres-restart").click(); page.wait_for_timeout(500)
-    check("finder: start over resets", page.locator("[data-fstep='1']").is_visible()
-          and page.evaluate("!document.querySelector('#finder-form input[name=need]:checked')")
-          and page.locator("#finder-count").inner_text() == "Step 1 of 2")
-    page.locator("label.need:has(input[value='urgent'])").click()
-    page.locator("#finder-next").click(); page.wait_for_timeout(400)
-    page.locator("#finder-back").click(); page.wait_for_timeout(300)
-    check("finder: back keeps the choice", page.locator("[data-fstep='1']").is_visible()
-          and page.locator("input[name='need'][value='urgent']").is_checked())
-    page.locator("#finder-next").click(); page.wait_for_timeout(400)
-    page.locator("fieldset[data-field='flag-urgent'] label:has(input[value='no'])").click()
-    page.locator("#finder-next").click(); page.wait_for_timeout(700)
-    chips = page.locator("#fres-chips").inner_text()
-    check("finder: urgent result names the service, no price", "Urgent care" in page.locator("#fres-title").inner_text()
-          and "Online visit" in chips and "$" not in chips, chips)
-    check("finder: launch note shown", "nationwide" in page.locator("#fres-note").inner_text())
-    check("finder: CTA arrow restored", page.locator("#fres-cta .i--arrow").count() == 1 and "btn--danger" not in page.locator("#fres-cta").get_attribute("class"))
-    page.screenshot(path=str(OUT / "finder-urgent-mobile.png"))
-    page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
-    check("finder CTA preselects urgent care", page.locator("input[name='interest'][value='urgent-care']").is_checked())
-    check("finder CTA lands on the form without opening the keyboard", page.evaluate("document.activeElement.id") == "join-form-title")
-    card_top = page.evaluate("document.querySelector('.form-card').getBoundingClientRect().top")
-    check("finder CTA scrolls the form into view", 60 <= card_top <= 140, f"top={card_top}")
+    # FAQ
+    page.locator("#faq").scroll_into_view_if_needed()
+    q = page.locator(".faq-q").first
+    q.click(); page.wait_for_timeout(600)
+    check("faq opens", q.get_attribute("aria-expanded") == "true" and page.locator("#faq-a-1 p").is_visible())
+    check("faq: the first answer says Jachi isn't a doctor's office", "doctor's office" in q.inner_text()
+          and page.locator("#faq-a-1 p").inner_text().startswith("No."), q.inner_text())
+    q.click(); page.wait_for_timeout(600)
+    check("faq closes", q.get_attribute("aria-expanded") == "false" and not page.locator("#faq-a-1 p").is_visible())
+    check("footer links to the privacy policy, health data policy and terms", page.locator("footer a[href='/privacy/']").count() == 1
+          and page.locator(f"footer a[href='{HEALTH_EN}']").count() == 1
+          and page.locator("footer a[href='/terms/']").count() == 1 and page.locator("footer a[href='/texas-medical-board/']").count() == 1)
+    foot = page.locator("footer .footer__legal").inner_text()
+    check("footer: Jachi coordinates care; independent providers give and bill it; not insurance; 911 and 988",
+          all(x in foot for x in ("care-coordination company", "does not practice medicine", "independent", "referral fees",
+                                  "don't pay for medical care", "live in Texas", "911", "988")), foot)
+    ov = page.evaluate(OVERFLOW_JS)
+    check("home on a phone: no overflow after scrolling through", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+    check("mobile interactions: no console errors", not logs, json.dumps(logs))
+    ctx.close()
 
-    # weight care check
-    page.evaluate("document.getElementById('eligibility').scrollIntoView()")
-    page.wait_for_timeout(900)
-    check("mobile dock hides at eligibility", not page.locator("#dock").evaluate("el => el.classList.contains('is-visible')"))
-    page.locator("#elig-next").click()
-    page.wait_for_timeout(300)
-    check("step 1 shows state error", page.locator("#err-state").is_visible())
-    check("step 1 shows age error", page.locator("#err-age").is_visible())
-    check("focus moves to first invalid field", page.evaluate("document.activeElement.id") == "elig-state")
-    page.screenshot(path=str(OUT / "elig-errors-mobile.png"))
-    page.select_option("#elig-state", "TX")
-    check("state error clears on change", not page.locator("#err-state").is_visible())
-    check("cleared error leaves no stale text", page.locator("#err-state span").inner_text() == "")
-    page.locator("#elig-tool .seg label:has(input[value='yes'])").first.click()
-    page.locator("#elig-next").click()
-    page.wait_for_timeout(600)
-    check("advances to step 2", page.locator("[data-step='2']").is_visible())
-    check("step counter updates", page.locator("#elig-count").inner_text() == "Step 2 of 3")
-    page.locator("#elig-next").click(); page.wait_for_timeout(200)
-    check("step 2 errors on empty", page.locator("#err-height").is_visible() and page.locator("#err-weight").is_visible())
-    page.locator("#elig-ft").fill("5")
-    check("ft auto-advances to inches", page.evaluate("document.activeElement.id") == "elig-in")
-    page.locator("#elig-in").fill("9")
-    page.locator("#elig-lb").fill("2x10")
-    check("weight input sanitized", page.locator("#elig-lb").input_value() == "210", page.locator("#elig-lb").input_value())
-    page.wait_for_timeout(900)
-    bmi = page.locator("#bmi-num").inner_text()
-    check("BMI computed 31.0", bmi == "31.0", bmi)
-    page.screenshot(path=str(OUT / "elig-gauge-mobile.png"))
-    page.locator("#elig-next").click(); page.wait_for_timeout(600)
-    check("advances to step 3", page.locator("[data-step='3']").is_visible())
-    page.locator("#elig-next").click(); page.wait_for_timeout(200)
-    check("step 3 errors on empty", all(page.locator(f"#err-{k}").is_visible() for k in ("cond", "mtc", "preg")))
-    page.locator("#elig-tool label.check:has(input[value='bp'])").click()
-    page.locator("#elig-tool label.check:has(input[value='none'])").click()
-    check("None of these clears others", not page.locator("input[value='bp']").is_checked() and page.locator("input[value='none']").is_checked())
-    page.locator("#elig-tool label.check:has(input[value='t2d'])").click()
-    check("Choosing a condition clears None", not page.locator("input[value='none']").is_checked())
-    page.locator("fieldset[data-field='mtc'] label:has(input[value='no'])").click()
-    page.locator("fieldset[data-field='preg'] label:has(input[value='no'])").click()
-    page.locator("#elig-next").click(); page.wait_for_timeout(700)
-    check("result shows", page.locator("#elig-result").is_visible())
-    title = page.locator("#res-title").inner_text()
-    check("likely result for BMI 31", "good fit" in title, title)
-    check("result title focused", page.evaluate("document.activeElement.id") == "res-title")
-    check("result note names the state", "when Jachi opens in Texas" in page.locator("#res-note").inner_text())
-    page.screenshot(path=str(OUT / "elig-result-mobile.png"))
-    page.locator("#res-join").click(); page.wait_for_timeout(1200)
-    check("join prefilled state", page.locator("#join-state").input_value() == "TX")
-    check("join adds weight care, keeps urgent care", page.locator("input[name='interest'][value='weight-care']").is_checked()
-          and page.locator("input[name='interest'][value='urgent-care']").is_checked())
-    check("join form focused (touch)", page.evaluate("document.activeElement.id") == "join-form-title")
-
-    # join form: errors then failure path (local server has no form backend)
+    # 2b) The waitlist form, which only the ad landing pages still have (step 4 of the membership switch replaces it):
+    # errors, an honest failure, then a sign-up
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    page.goto(f"{BASE}/join/", wait_until="networkidle"); page.wait_for_timeout(500)
     check("join form asks only for email and state, the rest optional", page.locator("#join-form [required]").count() == 2
-          and page.locator("#join-form .label__opt").count() == 3 and page.locator("#join-consent").count() == 0)
+          and page.locator("#join-form .label__opt").count() == 2 and page.locator("#join-consent").count() == 0)
     page.locator("#join-submit").click(); page.wait_for_timeout(300)
-    check("join: missing email caught, state already filled", page.locator("#err-email").is_visible()
-          and not page.locator("#err-jstate").is_visible())
-    check("join status explains", page.locator("#join-status").inner_text().strip() == strings.EN["fix_one"], page.locator("#join-status").inner_text())
+    check("join: missing email and state caught", page.locator("#err-email").is_visible() and page.locator("#err-jstate").is_visible())
+    check("join status explains", page.locator("#join-status").inner_text().strip() == strings.EN["fix_many"].replace("{n}", "2"),
+          page.locator("#join-status").inner_text())
     check("join: focus moves to the email field", page.evaluate("document.activeElement.id") == "join-email")
     page.screenshot(path=str(OUT / "join-errors-mobile.png"))
     page.locator("#join-email").fill("maya@example")
@@ -337,7 +264,9 @@ with sync_playwright() as p:
     check("invalid email caught", "valid email" in page.locator("#err-email").inner_text())
     page.locator("#join-email").fill("maya@example.com")
     page.locator("#join-name").fill("Maya")
-    page.select_option("#join-heard", "social")
+    page.select_option("#join-state", "TX")
+    page.locator("#join-form label.check:has(input[value='urgent-care'])").click()
+    page.locator("#join-form label.check:has(input[value='weight-care'])").click()
     page.locator("#join-submit").click(); page.wait_for_timeout(1500)
     check("server failure shows honest error", "couldn't save" in page.locator("#join-status").inner_text(), page.locator("#join-status").inner_text())
     check("button restored after failure", page.locator("#join-submit").is_enabled()
@@ -350,28 +279,15 @@ with sync_playwright() as p:
     check("success panel shows", page.locator("#join-success").is_visible())
     check("success names email", "maya@example.com" in page.locator("#join-success").inner_text())
     body = posted.get("body", "")
-    check("post body has form-name and fields", all(s in body for s in ("form-name=early-access", "first_name=Maya", "email=maya%40example.com", "state=TX", "language=en"))
+    check("post body has form-name and fields", all(s in body for s in ("form-name=early-access", "first_name=Maya", "email=maya%40example.com",
+                                                                         "state=TX", "language=en", "source=website"))
           and "consent" not in body, body)
-    check("post body says where it came from and how they heard", "source=website" in body and "heard=social" in body, body)
     check("account offer stays hidden while accounts are off", page.locator("#join-account").is_hidden())
     check("interests sent as one value", body.count("interest=") == 1 and "interest=urgent-care%2C+weight-care" in body, body)
     page.screenshot(path=str(OUT / "join-success-mobile.png"))
     page.locator("#join-again").click(); page.wait_for_timeout(300)
     check("add another resets form", page.locator("#join-form").is_visible() and page.locator("#join-name").input_value() == ""
           and page.evaluate("!document.querySelector('#join-form input[name=interest]:checked')"))
-
-    # FAQ + privacy
-    page.locator("#faq").scroll_into_view_if_needed()
-    q = page.locator(".faq-q").first
-    q.click(); page.wait_for_timeout(600)
-    check("faq opens", q.get_attribute("aria-expanded") == "true" and page.locator("#faq-a-1 p").is_visible())
-    check("faq: the first answer says Jachi isn't accepting patients yet", "accepting patients" in q.inner_text()
-          and page.locator("#faq-a-1 p").inner_text().startswith("Not yet."), q.inner_text())
-    q.click(); page.wait_for_timeout(600)
-    check("faq closes", q.get_attribute("aria-expanded") == "false" and not page.locator("#faq-a-1 p").is_visible())
-    check("footer links to the privacy policy, health data policy and terms", page.locator("footer a[href='/privacy/']").count() == 1
-          and page.locator(f"footer a[href='{HEALTH_EN}']").count() == 1
-          and page.locator("footer a[href='/terms/']").count() == 1 and page.locator("footer a[href='/texas-medical-board/']").count() == 1)
     page.locator("#join-form [data-open='privacy']").scroll_into_view_if_needed()
     page.locator("#join-form [data-open='privacy']").click(); page.wait_for_timeout(500)
     check("privacy dialog opens", page.locator("#privacy").evaluate("d => d.open"))
@@ -380,70 +296,7 @@ with sync_playwright() as p:
     check("privacy dialog closes", not page.locator("#privacy").evaluate("d => d.open"))
     check("focus back on opener", page.evaluate("document.activeElement.matches('#join-form [data-open=privacy]')"))
     unexpected = [l for l in logs if "501" not in l[1]]  # the 501 comes from the deliberate no-backend test
-    check("mobile interactions: no unexpected console errors", not unexpected, json.dumps(unexpected))
-    ctx.close()
-
-    # 2b) Condition search on a phone
-    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
-    page, logs = setup(ctx)
-    page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(600)
-    q = page.locator("#lookup-q")
-    def visible_hits():
-        return page.evaluate("[...document.querySelectorAll('#lookup-results .hit')].filter(h => !h.hidden).map(h => h.dataset.name)")
-    q.fill("uti"); page.wait_for_timeout(400)
-    hits = visible_hits()
-    check("search: 'uti' finds UTI", hits[:1] == ["Urinary tract infection (UTI)"], str(hits))
-    check("search: count announced", "result" in page.locator("#lookup-count").inner_text(), page.locator("#lookup-count").inner_text())
-    check("search: clear button shows", page.locator("#lookup-clear").is_visible())
-    check("search: popular chips step aside while searching", page.locator(".lookup__chips").is_hidden())
-    check("search: phone bar hides while typing", not page.locator("#dock").evaluate("el => el.classList.contains('is-visible')"))
-    page.screenshot(path=str(OUT / "search-uti-mobile.png"))
-    q.fill("viagra"); page.wait_for_timeout(300)
-    check("search: brand name finds ED", visible_hits() == ["Erectile dysfunction (ED)"], str(visible_hits()))
-    q.fill("hair loss"); page.wait_for_timeout(300)
-    check("search: two-word query finds men's and women's rows", set(visible_hits()) == {"Hair loss", "Hair thinning"}, str(visible_hits()))
-    q.fill("Adderall"); page.wait_for_timeout(300)
-    hits = visible_hits()
-    check("search: controlled drug explained, no sign-up", hits == ["ADHD medication"]
-          and page.locator(".hit--no:not([hidden]) .hit__cta").count() == 0, str(hits))
-    q.fill("testosterone"); page.wait_for_timeout(300)
-    check("search: testosterone not offered", visible_hits() == ["Testosterone (TRT)"], str(visible_hits()))
-    q.fill("heart"); page.wait_for_timeout(300)
-    hits = visible_hits()
-    check("search: emergencies sort first", hits[:1] == ["Chest pain"] and "Acid reflux (GERD)" in hits, str(hits))
-    check("search: emergency row dials 911", page.locator(".hit--911:not([hidden]) a[href='tel:911']").count() >= 1)
-    page.screenshot(path=str(OUT / "search-heart-mobile.png"))
-    q.fill("suicidal"); page.wait_for_timeout(300)
-    check("search: crisis row offers 988", visible_hits() == ["Thoughts of suicide or self-harm"]
-          and page.locator(".hit--988:not([hidden]) a[href='tel:988']").count() == 1
-          and page.locator(".hit--988:not([hidden]) a[href='sms:988']").count() == 1)
-    q.fill("zzzz"); page.wait_for_timeout(400)
-    check("search: no-match message", page.locator("#lookup-empty").is_visible() and "zzzz" in page.locator("#lookup-empty").inner_text()
-          and page.locator("#lookup-results").is_hidden())
-    page.screenshot(path=str(OUT / "search-empty-mobile.png"))
-    page.locator("#lookup-clear").click(); page.wait_for_timeout(300)
-    check("search: clear resets", q.input_value() == "" and page.locator("#lookup-results").is_hidden()
-          and page.locator("#lookup-empty").is_hidden() and page.locator("#lookup-clear").is_hidden())
-    page.locator(".lookup__chips button[data-q='Birth control']").click(); page.wait_for_timeout(300)
-    check("search: popular chip runs a search", q.input_value() == "Birth control" and visible_hits()[:1] == ["Birth control"], str(visible_hits()))
-    page.locator(".hit:not([hidden]) [data-join]").first.click(); page.wait_for_timeout(1200)
-    check("search: result signs up for that service", page.locator("input[name='interest'][value='womens-health']").is_checked())
-    page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(400)
-    page.locator("#lookup-q").fill("anxiety"); page.wait_for_timeout(300)
-    page.locator(".hit:not([hidden]) [data-join]").first.click(); page.wait_for_timeout(1200)
-    check("search: anxiety offers therapy and medication", page.locator("input[name='interest'][value='therapy']").is_checked()
-          and page.locator("input[name='interest'][value='anxiety-depression']").is_checked())
-    page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(400)
-    page.locator("#lookup-q").fill("wegovy"); page.wait_for_timeout(300)
-    page.locator(".hit:not([hidden]) [data-elig]").click(); page.wait_for_timeout(1300)
-    t = page.evaluate("document.getElementById('eligibility').getBoundingClientRect().top")
-    check("search: weight result opens the check", -5 <= t < 140, f"top={t}")
-    page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(400)
-    page.locator("#lookup-q").fill("acne"); page.keyboard.press("Escape"); page.wait_for_timeout(300)
-    check("search: Escape clears", page.locator("#lookup-q").input_value() == "")
-    ov = page.evaluate(OVERFLOW_JS)
-    check("search: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
-    check("search: no console errors", not logs, json.dumps(logs))
+    check("waitlist form: no unexpected console errors", not unexpected, json.dumps(unexpected))
     ctx.close()
 
     # 2c) Help chat on a laptop
@@ -457,7 +310,7 @@ with sync_playwright() as p:
             route.fulfill(status=503, content_type="application/json", body='{"error":"not_configured"}')
         else:
             route.fulfill(status=200, content_type="application/json",
-                          body=json.dumps({"reply": f"Our clinicians are licensed in your state. Questions? Email {EMAIL}."}))
+                          body=json.dumps({"reply": f"Your coordinator finds care near you and books it. Questions? Email {EMAIL}."}))
     page.route("**/api/chat", chat_route)
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(500)
     launcher = page.locator("#chat-launcher")
@@ -468,11 +321,11 @@ with sync_playwright() as p:
     check("chat: input focused on desktop", page.evaluate("document.activeElement.id") == "chat-input")
     check("chat: send disabled while empty", page.locator("#chat-send").is_disabled())
     page.screenshot(path=str(OUT / "chat-open-desktop.png"))
-    page.locator("#chat-quick button[data-ask='Who are the clinicians?']").click(); page.wait_for_timeout(700)
+    page.locator("#chat-quick button[data-ask='What does a coordinator do?']").click(); page.wait_for_timeout(700)
     bots = page.locator("#chat-log .msg--bot")
-    check("chat: quick question gets an AI reply", "licensed in your state" in bots.last.inner_text(), bots.last.inner_text())
+    check("chat: quick question gets an AI reply", "finds care near you" in bots.last.inner_text(), bots.last.inner_text())
     check("chat: quick replies hide after first question", page.locator("#chat-quick").is_hidden())
-    check("chat: request carries the conversation", chat_bodies and json.loads(chat_bodies[-1])["messages"][-1] == {"role": "user", "content": "Who are the clinicians?"}, str(chat_bodies[-1:]))
+    check("chat: request carries the conversation", chat_bodies and json.loads(chat_bodies[-1])["messages"][-1] == {"role": "user", "content": "What does a coordinator do?"}, str(chat_bodies[-1:]))
     check("chat: support email becomes a link", page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
     page.locator("#chat-input").fill("Do you take insurance?")
     page.keyboard.press("Enter"); page.wait_for_timeout(700)
@@ -537,10 +390,10 @@ with sync_playwright() as p:
     # 2d) Help chat on a phone
     ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
     page, logs = setup(ctx)
-    page.route("**/api/chat", lambda r: r.fulfill(status=200, content_type="application/json", body='{"reply":"We\'re launching nationwide."}'))
+    page.route("**/api/chat", lambda r: r.fulfill(status=200, content_type="application/json", body='{"reply":"Your coordinator replies within 1 business day."}'))
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(600)
     check("phone chat: launcher shows at the top", page.locator("#chat-launcher").is_visible())
-    page.evaluate("window.scrollTo({top: document.getElementById('why').offsetTop + 200, behavior: 'instant'})"); page.wait_for_timeout(1000)
+    page.evaluate("window.scrollTo({top: document.getElementById('how').offsetTop + 200, behavior: 'instant'})"); page.wait_for_timeout(1000)
     check("phone chat: launcher steps aside for the bottom bar", not page.locator("#chat-launcher").is_visible() and page.locator(".dock__chat").is_visible())
     page.screenshot(path=str(OUT / "chat-dock-phone.png"))
     page.locator(".dock__chat").click(); page.wait_for_timeout(600)
@@ -549,7 +402,7 @@ with sync_playwright() as p:
     check("phone chat: page behind is inert", page.evaluate("document.getElementById('main').inert === true"))
     check("phone chat: no keyboard pop on open", page.evaluate("document.activeElement.id") == "chat-title")
     page.locator("#chat-input").fill("When do you launch?"); page.locator("#chat-send").click(); page.wait_for_timeout(700)
-    check("phone chat: reply arrives", "nationwide" in page.locator("#chat-log .msg--bot").last.inner_text())
+    check("phone chat: reply arrives", "1 business day" in page.locator("#chat-log .msg--bot").last.inner_text())
     page.screenshot(path=str(OUT / "chat-open-phone.png"))
     page.locator("#chat .chat__fine [data-ticket]").click(); page.wait_for_timeout(300)
     page.screenshot(path=str(OUT / "ticket-phone.png"))
@@ -560,204 +413,63 @@ with sync_playwright() as p:
     check("phone chat: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
-    # 2e) Home page: the waitlist first, the quick picker, what's included and clinical standards
-    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
-    page, logs = setup(ctx)
-    page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(600)
-    hero_btns = page.locator(".hero .cta-row .btn")
-    check("hero: the waitlist is the main button, care finder second", hero_btns.first.get_attribute("href") == "#join"
-          and "Join the waitlist" in hero_btns.first.inner_text() and hero_btns.nth(1).get_attribute("href") == "#care-finder")
-    check("hero: says it's free to join", "Free to join" in page.locator(".hero .trust").inner_text())
-    picks = page.evaluate("[...document.querySelectorAll('.picker a')].map(a => a.getAttribute('href'))")
-    bad_picks = [h for h in picks if status_of(h) != 200]
-    check("hero: quick picker goes straight to service pages", len(picks) == 8 and not bad_picks and len(set(picks)) == 8, str(picks))
-    hero_btns.first.click(); page.wait_for_timeout(1200)
-    check("hero button: form in view, keyboard not opened", page.evaluate("document.activeElement.id") == "join-form-title"
-          and 0 <= page.evaluate("document.querySelector('.form-card').getBoundingClientRect().top") < 200)
-    page.evaluate("document.getElementById('services').scrollIntoView()"); page.wait_for_timeout(400)
-    inc = page.locator("#included").inner_text()
-    check("services: what's included and what's billed separately", page.locator(".included__col").count() == 2
-          and "What's included" in inc and "Billed separately" in inc and "Lab tests, by the lab" in inc and PRICING_NOTE in inc, inc[:200])
-    page.evaluate("document.getElementById('standards').scrollIntoView()"); page.wait_for_timeout(400)
-    links = page.evaluate("[...document.querySelectorAll('.verify__links a')].map(a => a.getAttribute('href'))")
-    check("clinical standards: six standards and where to check a license", page.locator(".standard").count() == 6
-          and any("docinfo.org" in l for l in links) and any("nursys.com" in l for l in links)
-          and "/texas-medical-board/" in links, str(links))
-    check("clinical standards: outside links don't pass on where you came from",
-          page.evaluate("[...document.querySelectorAll('.verify__links a[href^=http]')].every(a => a.relList.contains('noreferrer'))"))
-    page.screenshot(path=str(OUT / "standards-phone.png"))
-    page.evaluate("document.getElementById('privacy-promise').scrollIntoView()"); page.wait_for_timeout(400)
-    promise = page.locator("#privacy-promise")
-    check("privacy promise: three zeros, the on-device tools, and links to both privacy policies",
-          promise.locator(".ledger__row").count() == 3 and promise.locator(".ledger__n").all_inner_texts() == ["0", "0", "0"]
-          and "never leaves it" in promise.inner_text() and promise.locator(f"a[href='{HEALTH_EN}']").count() == 1
-          and promise.locator("a[href='/privacy/']").count() == 1, promise.inner_text()[:300])
-    check("privacy promise: screen readers hear each row as none", promise.locator(".ledger__row .visually-hidden").all_inner_texts() == [": none."] * 3)
-    page.screenshot(path=str(OUT / "privacy-promise-phone.png"))
-    ov = page.evaluate(OVERFLOW_JS)
-    check("home additions: no overflow on a phone", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
-    page.evaluate("window.scrollTo(0, 0)"); page.wait_for_timeout(300)
-    page.locator(".menu-toggle").click(); page.wait_for_timeout(600)
-    page.locator("#mobile-menu [data-to-join]").click(); page.wait_for_timeout(1300)
-    check("menu's waitlist button closes the menu and brings up the form", not is_open(page, "#mobile-menu")
-          and page.evaluate("document.activeElement.id") == "join-form-title")
-    check("home additions: no console errors", not logs, json.dumps(logs))
-    ctx.close()
+    # 2e) Home page on a computer: the plans button, the quick picker, the care cards, the plans and the privacy promise
     ctx = browser.new_context(viewport={"width": 1440, "height": 900})
     page, logs = setup(ctx)
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(500)
-    page.locator(".header-cta").click(); page.wait_for_timeout(1300)
-    check("header waitlist button (desktop): email field ready", page.evaluate("document.activeElement.id") == "join-email")
-    page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(300)
+    hero_btns = page.locator(".hero .cta-row .btn")
+    check("hero: choosing a plan is the main button, how it works second", hero_btns.first.get_attribute("href") == "/plans/"
+          and "Choose your plan" in hero_btns.first.inner_text() and hero_btns.nth(1).get_attribute("href") == "#how")
+    trust = page.locator(".hero .trust").inner_text()
+    check("hero: a real person, prices confirmed first, no referral fees",
+          all(x in trust for x in ("real person", "Prices confirmed", "No referral fees")), trust)
+    check("header: the plans button goes to the plans page", page.locator(".header-cta").get_attribute("href") == "/plans/")
+    picks = page.evaluate("[...document.querySelectorAll('.picker a')].map(a => a.getAttribute('href'))")
+    bad_picks = [h for h in picks if status_of(h) != 200]
+    check("hero: quick picker goes straight to service pages", len(picks) == 8 and not bad_picks and len(set(picks)) == 8, str(picks))
+    cards = page.evaluate("[...document.querySelectorAll('#help .svc__link')].map(a => a.getAttribute('href'))")
+    check("what we help with: a card for every service page", cards == list(SVC_PATH["en"].values()), str(cards))
+    inc = page.locator("#included").inner_text()
+    check("what we help with: what the plan includes and what providers bill", page.locator(".included__col").count() == 2
+          and "Your plan includes" in inc and "Billed by your provider" in inc and "aren't insurance" in inc, inc[:300])
+    plans = page.evaluate("""() => [...document.querySelectorAll('#plans .m-plan')].map(c => ({
+      name: c.querySelector('.m-plan__name').textContent, price: c.querySelector('.m-plan__price').textContent,
+      href: c.querySelector('.btn').getAttribute('href'), items: c.querySelectorAll('.m-plan__list li').length }))""")
+    check("plans: three plans, their monthly prices, three highlights each and a start button to checkout",
+          [x["name"] for x in plans] == ["Concierge", "Concierge Plus", "Signature"]
+          and [x["price"].replace("/month", "") for x in plans] == ["$49", "$99", "$250"]
+          and [x["href"] for x in plans] == ["/membership/?plan=concierge", "/membership/?plan=plus", "/membership/?plan=signature"]
+          and all(x["items"] == 3 for x in plans), json.dumps(plans))
+    check("plans: the founding price is on the Concierge card", "$39" in page.locator("#plans .m-plan").first.inner_text())
+    promise = page.locator("#privacy-promise")
+    check("privacy promise: four zeros, including referral fees, and links to both privacy policies",
+          promise.locator(".ledger__row").count() == 4 and promise.locator(".ledger__n").all_inner_texts() == ["0"] * 4
+          and "Referral fees" in promise.inner_text() and promise.locator(f"a[href='{HEALTH_EN}']").count() == 1
+          and promise.locator("a[href='/privacy/']").count() == 1, promise.inner_text()[:300])
+    check("privacy promise: screen readers hear each row as none",
+          promise.locator(".ledger__row .visually-hidden").all_inner_texts() == [": none."] * 4)
+    check("AI disclosure: on the page, and the footer links to it", "AI" in page.locator("#ai-disclosure").inner_text()
+          and page.locator("footer a[href='#ai-disclosure']").count() == 1)
     page.locator(".picker a[href='/uti-treatment/']").click(); page.wait_for_load_state("networkidle")
     check("quick picker: UTI opens the UTI page", page.url == f"{BASE}/uti-treatment/", page.url)
+    page.goto(URL + "#help", wait_until="networkidle"); page.wait_for_timeout(300)
+    page.locator("#help .svc__link[href='/skin-care/']").click(); page.wait_for_load_state("networkidle")
+    check("home care card opens its page", page.url == f"{BASE}/skin-care/", page.url)
     page.goto(ES_URL, wait_until="networkidle"); page.wait_for_timeout(300)
     es_picks = page.evaluate("[...document.querySelectorAll('.picker a')].map(a => a.getAttribute('href'))")
     check("es quick picker: goes straight to the Spanish service pages", len(es_picks) == 8 and len(set(es_picks)) == 8
           and all(h in SVC_PATH["es"].values() and status_of(h) == 200 for h in es_picks), str(es_picks))
+    es_cards = page.evaluate("[...document.querySelectorAll('#help .svc__link')].map(a => a.getAttribute('href'))")
+    check("es: a care card for every Spanish service page", es_cards == list(SVC_PATH["es"].values()), str(es_cards))
+    es_plans = page.evaluate("[...document.querySelectorAll('#plans .m-plan .btn')].map(a => a.getAttribute('href'))")
+    check("es plans: start buttons go to the Spanish checkout",
+          es_plans == ["/es/membresia/?plan=concierge", "/es/membresia/?plan=plus", "/es/membresia/?plan=signature"], str(es_plans))
+    es_care = page.evaluate("[...document.querySelectorAll('footer nav[aria-label=\\'Atención\\'] a')].map(a => a.getAttribute('href'))")
+    check("es footer: care links go to the Spanish service pages", es_care == list(SVC_PATH["es"].values()), str(es_care))
     page.locator(f".picker a[href='{SVC_PATH['es']['uti-treatment']}']").click(); page.wait_for_load_state("networkidle")
     check("es quick picker: infección urinaria opens the Spanish UTI page", page.url == BASE + SVC_PATH["es"]["uti-treatment"], page.url)
-    check("quick picker pages: no console errors", not logs, json.dumps(logs))
+    check("home on a computer: no console errors", not logs, json.dumps(logs))
     ctx.close()
-
-    # 3) Every care finder outcome
-    def run_finder(need, flag=None, shot=None):
-        ctx = browser.new_context(viewport={"width": 1280, "height": 900})
-        page, logs = setup(ctx)
-        page.goto(URL + "#care-finder", wait_until="networkidle")
-        page.locator(f"label.need:has(input[value='{need}'])").click()
-        page.locator("#finder-next").click(); page.wait_for_timeout(350)
-        if flag:
-            page.locator(f"fieldset[data-field='flag-{need}'] label:has(input[value='{flag}'])").click()
-            page.locator("#finder-next").click()
-        page.wait_for_timeout(700)
-        out = {
-            "title": page.locator("#fres-title").inner_text(),
-            "body": page.locator("#fres-body").inner_text(),
-            "chips": page.locator("#fres-chips").inner_text() if page.locator("#fres-chips").is_visible() else "",
-            "cta": page.locator("#fres-cta").is_visible(),
-            "href": page.locator("#fres-cta").get_attribute("href"),
-            "label": page.locator("#fres-cta").inner_text().strip(),
-            "hotline": page.locator("#fres-hotline").is_visible(),
-            "note": page.locator("#fres-note").is_visible(),
-            "kind": page.locator("#finder-result").get_attribute("class"),
-        }
-        if shot:
-            page.locator("#finder-tool").screenshot(path=str(OUT / f"finder-{shot}.png"))
-        return page, ctx, out, logs
-
-    page, ctx, o, lg = run_finder("refill", "yes", "refill-controlled")
-    check("refill controlled → can't refill", "can't refill controlled" in o["title"] and o["href"] == "#services"
-          and "don't stop taking it suddenly" in o["body"] and not o["note"], json.dumps(o))
-    page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
-    t = page.evaluate("document.getElementById('services').getBoundingClientRect().top")
-    check("controlled CTA scrolls to services", -5 <= t < 140, f"top={t}")
-    ctx.close()
-    page, ctx, o, lg = run_finder("refill", "unsure")
-    check("refill unsure → may be a fit, pharmacist note", "may be a good fit" in o["title"] and "pharmacist" in o["body"]
-          and "Online refill" in o["chips"], json.dumps(o))
-    ctx.close()
-    page, ctx, o, lg = run_finder("refill", "no", "refill")
-    check("refill no → good fit", o["title"] == "A refill visit is a good fit." and o["label"] == "Join the waitlist", json.dumps(o))
-    page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
-    check("refill CTA preselects refills", page.locator("input[name='interest'][value='refills']").is_checked())
-    ctx.close()
-    page, ctx, o, lg = run_finder("mental", "yes", "crisis")
-    check("mental crisis → 988 lifeline, no sign-up", o["hotline"] and not o["cta"] and not o["note"] and "result--crisis" in o["kind"], json.dumps(o))
-    links = page.evaluate("[...document.querySelectorAll('#fres-hotline a')].map(a => a.getAttribute('href'))")
-    check("crisis offers call and text 988", links == ["tel:988", "sms:988"], str(links))
-    ctx.close()
-    page, ctx, o, lg = run_finder("mental", "no", "mental")
-    check("mental no → therapy or medication, 988", "Therapy, medication or both" in o["title"] and "Therapy" in o["chips"]
-          and "Medication care" in o["chips"] and "988" in o["body"] and "$" not in o["chips"], json.dumps(o))
-    page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
-    check("mental CTA preselects therapy and medication care", page.locator("input[name='interest'][value='therapy']").is_checked()
-          and page.locator("input[name='interest'][value='anxiety-depression']").is_checked())
-    ctx.close()
-    page, ctx, o, lg = run_finder("sexual", "yes", "sexual-pep")
-    check("sexual + possible HIV exposure → get PEP today", "Get care today" in o["title"] and "PEP" in o["body"]
-          and not o["cta"] and "result--inperson" in o["kind"], json.dumps(o))
-    ctx.close()
-    page, ctx, o, lg = run_finder("sexual", "unsure")
-    check("sexual unsure → fit plus PEP warning", "Sexual health" in o["title"] and "Online visit" in o["chips"] and "72 hours" in o["body"], json.dumps(o))
-    page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
-    check("sexual CTA preselects sexual health", page.locator("input[name='interest'][value='sexual-health']").is_checked())
-    ctx.close()
-    page, ctx, o, lg = run_finder("mens", "yes", "mens-nitrates")
-    check("men's + nitrates → ED pills may not be safe", "may not be safe" in o["title"] and "nitrates" in o["body"]
-          and "hair loss" in o["body"], json.dumps(o))
-    ctx.close()
-    page, ctx, o, lg = run_finder("mens", "no", "mens")
-    check("men's no → fit", "Men's health" in o["title"] and "Online visit" in o["chips"], json.dumps(o))
-    page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
-    check("men's CTA preselects men's health", page.locator("input[name='interest'][value='mens-health']").is_checked())
-    ctx.close()
-    page, ctx, o, lg = run_finder("womens", "yes", "womens-redflag")
-    check("women's red flags → seen in person", "in person today" in o["title"] and not o["cta"], json.dumps(o))
-    ctx.close()
-    page, ctx, o, lg = run_finder("womens", "no")
-    check("women's no → fit", "Women's health" in o["title"] and "birth control" in o["body"], json.dumps(o))
-    ctx.close()
-    page, ctx, o, lg = run_finder("skin", "yes")
-    check("skin red flags → seen in person", "in person today" in o["title"] and "infection" in o["body"], json.dumps(o))
-    ctx.close()
-    page, ctx, o, lg = run_finder("skin", "no", "skin")
-    check("skin no → fit", "Skin care" in o["title"] and "acne" in o["body"], json.dumps(o))
-    page.locator("#fres-cta").click(); page.wait_for_timeout(1200)
-    check("skin CTA preselects skin care", page.locator("input[name='interest'][value='skin-care']").is_checked())
-    ctx.close()
-    page, ctx, o, lg = run_finder("weight", None, "weight")
-    check("weight → skips safety step to eligibility", "weight care check" in o["title"] and o["href"] == "#eligibility"
-          and "Ongoing care" in o["chips"], json.dumps(o))
-    page.locator("#fres-cta").click(); page.wait_for_timeout(1300)
-    t = page.evaluate("document.getElementById('eligibility').getBoundingClientRect().top")
-    check("weight CTA scrolls to the check", -5 <= t < 140, f"top={t}")
-    check("weight CTA focuses the check", page.evaluate("document.activeElement.closest('#elig-tool') !== null"))
-    check("finder runs: no console errors", not lg, json.dumps(lg))
-    ctx.close()
-
-    # 4) Other eligibility outcomes
-    def run_elig(state, age, ft, inch, lb, conds, mtc, preg):
-        ctx = browser.new_context(viewport={"width": 1280, "height": 900})
-        page, logs = setup(ctx)
-        page.goto(URL + "#eligibility", wait_until="networkidle")
-        page.select_option("#elig-state", state)
-        page.locator(f"fieldset[data-field='age'] label:has(input[value='{age}'])").click()
-        page.locator("#elig-next").click(); page.wait_for_timeout(300)
-        if age == "yes":
-            page.locator("#elig-ft").fill(ft); page.locator("#elig-in").fill(inch); page.locator("#elig-lb").fill(lb)
-            page.locator("#elig-next").click(); page.wait_for_timeout(300)
-            for c in conds:
-                page.locator(f"#elig-tool label.check:has(input[value='{c}'])").click()
-            page.locator(f"fieldset[data-field='mtc'] label:has(input[value='{mtc}'])").click()
-            page.locator(f"fieldset[data-field='preg'] label:has(input[value='{preg}'])").click()
-            page.locator("#elig-next").click()
-        page.wait_for_timeout(700)
-        nxt = page.locator("#res-next").inner_text() if page.locator("#res-next").is_visible() else ""
-        out = (page.locator("#res-title").inner_text(), page.locator("#res-body").inner_text() + ("\n" + nxt if nxt else ""),
-               page.locator("#res-note").inner_text() if page.locator("#res-note").is_visible() else "",
-               page.locator("#res-join").is_visible())
-        page.screenshot(path=str(OUT / f"elig-{state}-{age}-{lb}-{mtc}-{preg}.png"))
-        ctx.close()
-        return out, logs
-
-    (t, b, n, j), lg = run_elig("TX", "no", "", "", "", [], "", "")
-    check("minor result", "18 and older" in t and not j, t)
-    (t, b, n, j), lg = run_elig("CA", "yes", "5", "6", "175", ["bp"], "no", "no")
-    check("BMI 28.2 + condition → likely", "good fit" in t and "28.2" in b, b)
-    check("likely result: only a first step, and what a clinical evaluation involves", "not a diagnosis or a promise of a prescription" in b
-          and "What a clinical evaluation involves" in b and "Lab tests." in b and "Not everyone is prescribed medication." in b, b)
-    check("result note names the state chosen", "California" in n, n)
-    (t, b, n, j), lg = run_elig("TX", "yes", "5", "10", "160", ["none"], "no", "no")
-    check("BMI 23 → unlikely", "may not be the right fit" in t and "23.0" in b, b)
-    check("unlikely result: no evaluation steps", "What a clinical evaluation involves" not in b, b)
-    (t, b, n, j), lg = run_elig("TX", "yes", "5", "4", "220", ["none"], "yes", "no")
-    check("MTC history → caution", "may not be safe" in t and "medullary" in b, b)
-    check("caution result: no evaluation steps", "What a clinical evaluation involves" not in b, b)
-    (t, b, n, j), lg = run_elig("TX", "yes", "5", "4", "220", ["none"], "unsure", "no")
-    check("MTC unsure → likely + note", "good fit" in t and "family history" in b, b)
-    (t, b, n, j), lg = run_elig("NY", "yes", "5", "6", "175", ["none"], "no", "no")
-    check("BMI 28.2 no condition → unlikely", "may not be the right fit" in t, t)
 
     # 5) Desktop interactions + keyboard
     ctx = browser.new_context(viewport={"width": 1440, "height": 900})
@@ -769,22 +481,14 @@ with sync_playwright() as p:
     page.screenshot(path=str(OUT / "desktop-skip.png"))
     page.keyboard.press("Tab")
     check("second tab = brand", page.evaluate("document.activeElement.classList.contains('brand')"))
-    page.locator(".nav a[href='#approach']").click(); page.wait_for_timeout(1500)
+    page.locator(".nav a[href='#how']").click(); page.wait_for_timeout(1500)
     active = page.evaluate("[...document.querySelectorAll('.nav a.is-active')].map(a=>a.getAttribute('href'))")
-    check("scrollspy marks Our approach", active == ["#approach"], str(active))
+    check("scrollspy marks How it works", active == ["#how"], str(active))
     check("header solid after scroll", page.evaluate("document.getElementById('site-header').classList.contains('is-scrolled')"))
-    page.screenshot(path=str(OUT / "desktop-approach.png"))
-    page.locator(".nav a[href='#services']").click(); page.wait_for_timeout(1500)
+    page.screenshot(path=str(OUT / "desktop-how.png"))
+    page.locator(".nav a[href='#help']").click(); page.wait_for_timeout(1500)
     active = page.evaluate("[...document.querySelectorAll('.nav a.is-active')].map(a=>a.getAttribute('href'))")
-    check("scrollspy marks Services", active == ["#services"], str(active))
-    # keyboard through the care finder: arrow keys pick, Enter submits
-    page.goto(URL + "#care-finder", wait_until="networkidle"); page.wait_for_timeout(500)
-    page.locator("input[name='need'][value='urgent']").focus()
-    page.keyboard.press("ArrowRight")
-    check("arrow keys move between needs without advancing", page.locator("input[name='need'][value='refill']").is_checked()
-          and page.locator("[data-fstep='1']").is_visible())
-    page.keyboard.press("Enter"); page.wait_for_timeout(500)
-    check("Enter submits the finder step", page.locator("[data-path='refill']").is_visible())
+    check("scrollspy marks What we help with", active == ["#help"], str(active))
     # reveal: scroll from the top and check every block appears
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(500)
     page.mouse.wheel(0, 300); page.wait_for_timeout(300)
@@ -795,30 +499,18 @@ with sync_playwright() as p:
     page.wait_for_timeout(2900)
     left = page.evaluate("document.querySelectorAll('[data-reveal].pre').length")
     check("all reveal blocks shown after scrolling through", left == 0, str(left))
-    # service card buttons
-    page.locator("#svc-sexual [data-join]").click(); page.wait_for_timeout(1200)
-    check("sexual health card preselects its interest", page.locator("input[name='interest'][value='sexual-health']").is_checked())
-    check("desktop: email field focused for typing", page.evaluate("document.activeElement.id") == "join-email")
-    card_top = page.evaluate("document.querySelector('.form-card').getBoundingClientRect().top")
-    check("desktop: form card in view", 60 <= card_top <= 400, f"top={card_top}")
-    page.locator("#svc-therapy [data-join]").click(); page.wait_for_timeout(1200)
-    check("service card adds its interest", page.locator("input[name='interest'][value='therapy']").is_checked()
-          and page.locator("input[name='interest'][value='sexual-health']").is_checked())
-    check("sign-up lists all nine services", page.locator("#join-form input[name='interest']").count() == 9)
-    page.locator(".svc [data-elig]").click(); page.wait_for_timeout(1300)
-    t = page.evaluate("document.getElementById('eligibility').getBoundingClientRect().top")
-    check("weight card opens the check", -5 <= t < 140, f"top={t}")
-    # hover state screenshot of a tile
-    page.locator("#why").scroll_into_view_if_needed(); page.wait_for_timeout(500)
-    page.locator(".tile--wide").hover(); page.wait_for_timeout(600)
-    page.screenshot(path=str(OUT / "desktop-tile-hover.png"))
+    # keyboard: tab to a care card's link; the whole card answers to it
+    page.locator("#help .svc__link").first.focus()
+    check("care card link takes keyboard focus", page.evaluate("document.activeElement.classList.contains('svc__link')"))
+    page.locator("#help .svc").nth(3).hover(); page.wait_for_timeout(400)
+    page.screenshot(path=str(OUT / "desktop-care-cards.png"))
     check("desktop: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
     # 6) Preview mode (inside the artifact viewer): honest message, no network call
     ctx = browser.new_context(viewport={"width": 1280, "height": 900})
     page, logs = setup(ctx, preview=True)
-    page.goto(URL + "#join", wait_until="networkidle")
+    page.goto(f"{BASE}/join/", wait_until="networkidle")
     sent = []
     page.on("request", lambda req: sent.append(req.url) if req.method == "POST" else None)
     page.locator("#join-name").fill("Sam"); page.locator("#join-email").fill("sam@example.com")
@@ -846,10 +538,10 @@ with sync_playwright() as p:
       const fakeSample = async (input, opts) => {
         window.__sampleCalls.push(input);
         await new Promise(r => setTimeout(r, 150));
-        opts.onText({ text: 'We launch', delta: 'We launch' });
+        opts.onText({ text: 'Concierge is', delta: 'Concierge is' });
         await new Promise(r => setTimeout(r, 150));
-        opts.onText({ text: 'We launch nationwide.', delta: ' nationwide.' });
-        return { text: 'We launch nationwide.', truncated: false, modelTierApplied: 'quick' };
+        opts.onText({ text: 'Concierge is $49 a month.', delta: ' $49 a month.' });
+        return { text: 'Concierge is $49 a month.', truncated: false, modelTierApplied: 'quick' };
       };
       window.claude = { use: async (name) => (name === 'sample' ? fakeSample : null) };
     """)
@@ -857,13 +549,13 @@ with sync_playwright() as p:
     page.on("pageerror", lambda e: plogs.append(str(e)))
     page.goto(f"{BASE}/__dist/artifact-sim.html", wait_until="networkidle"); page.wait_for_timeout(500)
     page.locator("#chat-launcher").click(); page.wait_for_timeout(300)
-    page.locator("#chat-input").fill("When do you launch?"); page.keyboard.press("Enter"); page.wait_for_timeout(250)
+    page.locator("#chat-input").fill("What do the plans cost?"); page.keyboard.press("Enter"); page.wait_for_timeout(250)
     mid = page.locator("#chat-log .msg--bot").last.inner_text()
     page.wait_for_timeout(600)
     calls = page.evaluate("window.__sampleCalls")
-    check("preview AI: answer streams in", "nationwide" in page.locator("#chat-log .msg--bot").last.inner_text(), mid)
+    check("preview AI: answer streams in", "$49 a month" in page.locator("#chat-log .msg--bot").last.inner_text(), mid)
     check("preview AI: rules sent as the first turn", calls and calls[0][0]["role"] == "user" and "RULES" in calls[0][0]["content"]
-          and calls[0][-1] == {"role": "user", "content": "When do you launch?"})
+          and calls[0][-1] == {"role": "user", "content": "What do the plans cost?"})
     check("preview AI: no page errors", not plogs, json.dumps(plogs))
     ctx.close()
 
@@ -912,8 +604,8 @@ with sync_playwright() as p:
         page.screenshot(path=str(OUT / f"404-{w}.png"))
         ov = page.evaluate(OVERFLOW_JS)
         check(f"404 @{w}: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
-        check(f"404 @{w}: one h1, links home and to the care finder", page.locator("h1").count() == 1
-              and page.locator("a[href='/']").count() >= 2 and page.locator("a[href='/#care-finder']").count() == 1)
+        check(f"404 @{w}: one h1, links home and to the plans", page.locator("h1").count() == 1
+              and page.locator("a[href='/']").count() >= 2 and page.locator("a[href='/plans/']").count() == 1)
         page.locator(".nf a.btn[href='/']").click(); page.wait_for_load_state("networkidle")
         check(f"404 @{w}: homepage button works", page.url == URL and page.locator("#hero-title").is_visible(), page.url)
         check(f"404 @{w}: every file it uses loads", not bad, json.dumps(bad))
@@ -927,12 +619,12 @@ with sync_playwright() as p:
         page.goto(ES_URL, wait_until="networkidle"); page.wait_for_timeout(1200)
         ov = page.evaluate(OVERFLOW_JS)
         check(f"es: no horizontal overflow @{w}", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
-        tops = page.evaluate("[...document.querySelectorAll('.svc')].map(e => Math.round(e.getBoundingClientRect().top))")
-        expect_rows = 3 if w >= 1060 else (5 if w >= 640 else 9)
-        check(f"es: nine service cards in {expect_rows} rows @{w}", len(tops) == 9 and len(set(tops)) == expect_rows, str(tops))
+        tops = page.evaluate("[...document.querySelectorAll('#help .svc')].map(e => Math.round(e.getBoundingClientRect().top))")
+        expect_rows = 2 if w >= 1060 else (5 if w >= 640 else 10)
+        check(f"es: ten care cards in {expect_rows} rows @{w}", len(tops) == 10 and len(set(tops)) == expect_rows, str(tops))
         es_nav = page.evaluate("[...document.querySelectorAll('.nav a')].filter(a => a.offsetParent).map(a => Math.round(a.getBoundingClientRect().height))")
         if w >= 1100:
-            check(f"es: header nav on one line @{w}", len(es_nav) == 5 and max(es_nav) < 50, str(es_nav))
+            check(f"es: header nav on one line @{w}", len(es_nav) == 4 and max(es_nav) < 50, str(es_nav))
         check(f"es: no console errors @{w}", not logs, json.dumps(logs))
         if w in (390, 1440):
             page.screenshot(path=str(OUT / f"es-first-{w}.png"))
@@ -945,8 +637,9 @@ with sync_playwright() as p:
     STRUCTURE_JS = """() => ({
       ids: [...document.querySelectorAll('[id]')].map(e => e.id).sort(),
       fields: [...document.querySelectorAll('form[name] [name]')].map(e => e.closest('form').getAttribute('name') + ':' + e.name + ':' + e.type).sort(),
-      values: [...document.querySelectorAll('input[name=interest], #join-state option, #ticket-topic option')].map(e => e.value).sort(),
-      hits: document.querySelectorAll('.hit').length, faq: document.querySelectorAll('.faq-item').length,
+      values: [...document.querySelectorAll('#ticket-topic option')].map(e => e.value).sort(),
+      cards: document.querySelectorAll('#help .svc').length, plans: document.querySelectorAll('#plans .m-plan').length,
+      faq: document.querySelectorAll('.faq-item').length,
     })"""
     ctx = browser.new_context(viewport={"width": 1280, "height": 900})
     page, logs = setup(ctx)
@@ -969,41 +662,8 @@ with sync_playwright() as p:
     page, logs = setup(ctx)
     page.add_init_script("navigator.share = async data => { window.__shared = data; };")
     page.route("**/api/chat", lambda r: r.fulfill(status=200, content_type="application/json",
-                                                     body=json.dumps({"reply": f"Compartiremos los precios antes de abrir. Escriba a {EMAIL}."})))
-    page.goto(ES_URL + "#care-finder", wait_until="networkidle"); page.wait_for_timeout(500)
-    page.locator("#finder-next").click(); page.wait_for_timeout(300)
-    check("es finder: empty step shows the Spanish error", page.locator("#err-need").inner_text().strip() == ES["f_need"])
-    page.locator("label.need:has(input[value='urgent'])").click()
-    page.locator("#finder-next").click(); page.wait_for_timeout(500)
-    check("es finder: step counter in Spanish", page.locator("#finder-count").inner_text() == "Paso 2 de 2")
-    page.locator("fieldset[data-field='flag-urgent'] label:has(input[value='yes'])").click()
-    page.locator("#finder-next").click(); page.wait_for_timeout(600)
-    check("es finder: emergency result in Spanish", page.locator("#fres-title").inner_text() == ES["f_urgent_911_title"]
-          and page.locator("#fres-cta").get_attribute("href") == "tel:911" and ES["f_call_911"] in page.locator("#fres-cta").inner_text())
-    page.locator("#fres-restart").click(); page.wait_for_timeout(400)
-    page.locator("label.need:has(input[value='mental'])").click()
-    page.locator("#finder-next").click(); page.wait_for_timeout(400)
-    page.locator("fieldset[data-field='flag-mental'] label:has(input[value='no'])").click()
-    page.locator("#finder-next").click(); page.wait_for_timeout(600)
-    chips = page.locator("#fres-chips").inner_text()
-    check("es finder: therapy and medication result in Spanish", page.locator("#fres-title").inner_text() == ES["f_mental_title"]
-          and ES["f_mental_chip_therapy"] in chips and ES["f_mental_chip_meds"] in chips, chips)
-    page.screenshot(path=str(OUT / "es-finder-phone.png"))
-
-    page.goto(ES_URL + "#services", wait_until="networkidle"); page.wait_for_timeout(400)
-    def es_hits():
-        return page.evaluate("[...document.querySelectorAll('#lookup-results .hit')].filter(h => !h.hidden).map(h => h.dataset.name)")
-    page.locator("#lookup-q").fill("infeccion urinaria"); page.wait_for_timeout(400)
-    check("es search: Spanish words find the condition", es_hits()[:1] == ["Infección urinaria (IU)"], str(es_hits()))
-    check("es search: count in Spanish", "resultado" in page.locator("#lookup-count").inner_text(), page.locator("#lookup-count").inner_text())
-    page.locator("#lookup-q").fill("UTI"); page.wait_for_timeout(300)
-    check("es search: English words still work", "Infección urinaria (IU)" in es_hits(), str(es_hits()))
-    page.locator("#lookup-q").fill("dolor de pecho"); page.wait_for_timeout(300)
-    check("es search: emergencies first, with 911", es_hits()[:1] == ["Dolor de pecho"]
-          and page.locator(".hit--911:not([hidden]) a[href='tel:911']").count() >= 1, str(es_hits()))
-    page.locator(".lookup__clear").click(); page.wait_for_timeout(200)
-
-    page.goto(ES_URL + "#join", wait_until="networkidle"); page.wait_for_timeout(500)
+                                                     body=json.dumps({"reply": f"Concierge cuesta $49 al mes. Escriba a {EMAIL}."})))
+    page.goto(f"{BASE}/es/unase/", wait_until="networkidle"); page.wait_for_timeout(500)
     page.locator("#join-submit").click(); page.wait_for_timeout(300)
     check("es join: errors in Spanish", page.locator("#err-email").inner_text().strip() == ES["enter_email"]
           and page.locator("#err-jstate").inner_text().strip() == ES["choose_state"]
@@ -1023,24 +683,6 @@ with sync_playwright() as p:
     check("es share: opens the share sheet with the Spanish page", shared and shared["url"] == "https://jachihealth.com/es/" and shared["text"] == ES["share_text"], str(shared))
     page.screenshot(path=str(OUT / "es-join-success-phone.png"))
 
-    page.goto(ES_URL + "#eligibility", wait_until="networkidle"); page.wait_for_timeout(500)
-    page.locator("#elig-next").click(); page.wait_for_timeout(200)
-    check("es check: errors in Spanish", page.locator("#err-state").inner_text().strip() == ES["choose_state"])
-    page.select_option("#elig-state", "TX")
-    page.locator("fieldset[data-field='age'] label:has(input[value='yes'])").click()
-    page.locator("#elig-next").click(); page.wait_for_timeout(400)
-    page.locator("#elig-ft").fill("5"); page.locator("#elig-in").fill("9"); page.locator("#elig-lb").fill("210")
-    page.wait_for_timeout(900)
-    check("es check: BMI computed", page.locator("#bmi-num").inner_text() == "31.0" and page.locator("#bmi-hint").inner_text() == ES["e_gauge_30"])
-    page.screenshot(path=str(OUT / "es-elig-phone.png"))
-    page.locator("#elig-next").click(); page.wait_for_timeout(400)
-    page.locator("#elig-tool label.check:has(input[value='none'])").click()
-    page.locator("fieldset[data-field='mtc'] label:has(input[value='no'])").click()
-    page.locator("fieldset[data-field='preg'] label:has(input[value='no'])").click()
-    page.locator("#elig-next").click(); page.wait_for_timeout(600)
-    check("es check: result in Spanish", page.locator("#res-title").inner_text() == ES["e_likely_title"]
-          and page.locator("#res-note").inner_text() == ES["e_note"].replace("{state}", "Texas"))
-
     page.goto(ES_URL, wait_until="networkidle"); page.wait_for_timeout(500)
     page.locator("#chat-launcher").click(); page.wait_for_timeout(600)
     check("es chat: Spanish greeting and labels", "Soy el asistente de IA de Jachi" in page.locator("#chat-log").inner_text()
@@ -1054,7 +696,7 @@ with sync_playwright() as p:
           "AYUDA" in alert.inner_text() and alert.locator("a[href='tel:988']").count() == 1
           and alert.locator("a[href='sms:988?&body=AYUDA']").count() == 1)
     page.locator("#chat-input").fill("¿Cuánto cuesta?"); page.locator("#chat-send").click(); page.wait_for_timeout(700)
-    check("es chat: AI reply shown with the email linked", "antes de abrir" in page.locator("#chat-log .msg--bot").last.inner_text()
+    check("es chat: AI reply shown with the email linked", "$49 al mes" in page.locator("#chat-log .msg--bot").last.inner_text()
           and page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
     page.screenshot(path=str(OUT / "es-chat-phone.png"))
     page.locator("#chat .chat__fine [data-ticket]").click(); page.wait_for_timeout(300)
@@ -1069,7 +711,7 @@ with sync_playwright() as p:
     page, logs = setup(ctx)
     page.add_init_script("delete Navigator.prototype.share; Object.defineProperty(navigator, 'clipboard', { value: { writeText: async t => { window.__copied = t; } } });")
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
-    page.goto(URL + "#join", wait_until="networkidle"); page.wait_for_timeout(400)
+    page.goto(f"{BASE}/join/", wait_until="networkidle"); page.wait_for_timeout(400)
     page.locator("#join-email").fill("sam@example.com"); page.select_option("#join-state", "TX")
     page.locator("#join-submit").click(); page.wait_for_timeout(1000)
     check("sign-up with only email and state works", page.locator("#join-success").is_visible()
@@ -1084,11 +726,11 @@ with sync_playwright() as p:
     check("share: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
-    # 11) Service pages, in English and Spanish
+    # 11) Service pages, in English and Spanish: what a coordinator does for each kind of care
     slugs = [p["slug"] for p in PAGES.PAGES]
     svc_pages = [(lang, slug, SVC_PATH[lang][slug]) for slug in slugs for lang in ("en", "es")]
     for lang, slug, path in svc_pages:
-        home, twin = ("/" if lang == "en" else "/es/"), SVC_PATH["es" if lang == "en" else "en"][slug]
+        plans_path, twin = ("/plans/" if lang == "en" else "/es/planes/"), SVC_PATH["es" if lang == "en" else "en"][slug]
         for w, h in ((390, 844), (1440, 900)):
             ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=w < 900, is_mobile=w < 900)
             page, logs = setup(ctx)
@@ -1099,7 +741,8 @@ with sync_playwright() as p:
               lang: document.documentElement.lang,
               h1: document.querySelectorAll('h1').length,
               crumbs: document.querySelectorAll('.crumbs li').length,
-              join: [...document.querySelectorAll('a[href*="interest="]')].map(a => a.getAttribute('href')),
+              ctas: [...document.querySelectorAll('main a.btn')].filter(a => !a.closest('.glance')).map(a => a.getAttribute('href')),
+              helps: document.querySelectorAll('.conds li').length,
               canonical: (document.querySelector('link[rel=canonical]') || {}).href,
               alt: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map(l => l.hreflang + ' ' + new URL(l.href).pathname),
               swap: document.querySelector('.lang-switch').getAttribute('href'),
@@ -1108,12 +751,12 @@ with sync_playwright() as p:
               ld: [...document.querySelectorAll('script[type="application/ld+json"]')]
                 .flatMap(s => { const d = JSON.parse(s.textContent); return (d['@graph'] || [d]).map(n => n['@type']); }),
             })""")
-            ok = (info["lang"] == lang and info["h1"] == 1 and info["crumbs"] == 3 and len(info["join"]) >= 3
-                  and len(set(info["join"])) == 1 and info["join"][0].startswith(home + "?interest=")
-                  and info["canonical"] == f"https://jachihealth.com{path}" and len(info["related"]) == 3
-                  and all(r in SVC_PATH[lang].values() for r in info["related"]) and info["faq"] >= 3
-                  and info["ld"] == ["Organization", "MedicalWebPage", "BreadcrumbList", "FAQPage"])
-            check(f"{path} @{w}: language, heading, breadcrumb, sign-up links, canonical, related pages, FAQ and schema", ok, json.dumps(info))
+            ok = (info["lang"] == lang and info["h1"] == 1 and info["crumbs"] == 3 and info["helps"] >= 4
+                  and info["ctas"].count(plans_path) == 2 and info["canonical"] == f"https://jachihealth.com{path}"
+                  and len(info["related"]) == 3 and all(r in SVC_PATH[lang].values() for r in info["related"]) and info["faq"] >= 3
+                  and info["ld"] == ["Organization", "WebPage", "BreadcrumbList", "FAQPage"])
+            check(f"{path} @{w}: language, heading, breadcrumb, what the coordinator does, plan buttons, canonical, related pages, FAQ and schema",
+                  ok, json.dumps(info))
             check(f"{path} @{w}: points to its {'Spanish' if lang == 'en' else 'English'} twin (hreflang and language switch)",
                   sorted(info["alt"]) == sorted([f"en {SVC_PATH['en'][slug]}", f"es {SVC_PATH['es'][slug]}", f"x-default {SVC_PATH['en'][slug]}"])
                   and info["swap"] == twin, json.dumps(info["alt"] + [info["swap"]]))
@@ -1130,10 +773,10 @@ with sync_playwright() as p:
             ctx.close()
 
     # The Spanish pages are all Spanish: none of the English page's words are left in them
-    english_words = ["Join the waitlist", "Good to know", "Related services", "No insurance needed", "Waitlist open",
-                     "Launching nationwide", "Ask our assistant", "Have another question", "Be first in line",
-                     "What to expect", "at a glance", "billed separately", "Licensed clinicians", "Find the right care",
-                     "Check your eligibility", "Call 911", "Text 988", "questions, answered", "See how Jachi works"]
+    english_words = ["Choose your plan", "Good to know", "Related care", "Care coordination", "For adults in Texas",
+                     "Ask our assistant", "Have another question", "Ready when you are", "How it works", "at a glance",
+                     "Call 911", "Text 988", "Questions, answered", "See how Jachi works", "Your coordinator", "self-pay",
+                     "Plans from"]
     leftovers = {}
     for slug in slugs:
         path = SVC_PATH["es"][slug]
@@ -1147,51 +790,39 @@ with sync_playwright() as p:
              if re.search(r"\b(tú|tienes|puedes|necesitas|quieres|eres|estás|tu salud|tus )\b",
                           (ROOT / "public" / path.strip("/") / "index.html").read_text(), re.I)]
     check("es service pages: speak to the visitor as usted", not usted, str(usted))
+    # No service page promises treatment, names a medicine or quotes a provider's price
+    promising = {}
+    for lang, slug, path in svc_pages:
+        doc = (ROOT / "public" / path.strip("/") / "index.html").read_text()
+        words = html.unescape(re.sub(r"<[^>]+>", " ", re.search(r"<main\b.*?</main>", doc, re.S).group(0)))
+        found = [m.group(0) for m in re.finditer(r"\bwe (?:treat|prescribe|diagnose)\b|\bJachi (?:treats|prescribes|diagnoses)\b"
+                                                 r"|\b(?:wegovy|zepbound|ozempic|mounjaro|semaglutide|tirzepatide|viagra|cialis|adderall|xanax)\b"
+                                                 r"|\$\s?\d[\d,]*", words, re.I)]
+        found = [x for x in found if x not in ("$49",)]
+        if found:
+            promising[path] = found
+    check("service pages: no treatment promises, medicine names or prices other than the Concierge plan's", not promising,
+          json.dumps(promising))
 
-    # From a service page to the sign-up form with the service chosen
+    # From a service page to the plans
     ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
     page, logs = setup(ctx)
     page.goto(f"{BASE}/uti-treatment/", wait_until="networkidle"); page.wait_for_timeout(500)
     page.evaluate("window.scrollTo({top: document.querySelector('.conds').getBoundingClientRect().top + scrollY, behavior: 'instant'})"); page.wait_for_timeout(900)
-    check("service page phone: bottom bar appears after the hero", page.locator("#dock").evaluate("el => el.classList.contains('is-visible')")
-          and page.locator("#dock a").get_attribute("href") == "/?interest=urgent-care"
-          and not page.locator("#chat-launcher").is_visible())
+    check("service page phone: bottom bar appears after the hero and offers the plans",
+          page.locator("#dock").evaluate("el => el.classList.contains('is-visible')")
+          and page.locator("#dock a").get_attribute("href") == "/plans/" and not page.locator("#chat-launcher").is_visible())
     page.screenshot(path=str(OUT / "svc-dock-phone.png"))
-    page.locator(".page-hero .btn").first.click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1500)
-    check("service page CTA: lands on the home sign-up with the service ticked",
-          page.locator("input[name='interest'][value='urgent-care']").is_checked() and page.evaluate("location.search") == ""
-          and page.evaluate("location.hash") == "#join", page.url)
-    check("service page CTA: form in view, keyboard not opened", page.evaluate("document.activeElement.id") == "join-form-title"
-          and 0 <= page.evaluate("document.querySelector('.form-card').getBoundingClientRect().top") < 200)
-    check("service page CTA: no console errors", not logs, json.dumps(logs))
+    page.locator(".page-hero .btn").first.click(); page.wait_for_load_state("networkidle")
+    check("service page CTA: opens the plans page", page.evaluate("location.pathname") == "/plans/", page.url)
     page.goto(f"{BASE}{SVC_PATH['es']['uti-treatment']}", wait_until="networkidle"); page.wait_for_timeout(500)
-    page.locator(".page-hero .btn").first.click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1500)
-    check("es service page CTA: lands on the Spanish sign-up with the service ticked",
-          page.evaluate("location.pathname") == "/es/" and page.evaluate("location.hash") == "#join"
-          and page.locator("input[name='interest'][value='urgent-care']").is_checked()
+    page.locator(".page-hero .btn").first.click(); page.wait_for_load_state("networkidle")
+    check("es service page CTA: opens the Spanish plans page", page.evaluate("location.pathname") == "/es/planes/"
           and page.evaluate("document.documentElement.lang") == "es", page.url)
-    check("es service page CTA: no console errors", not logs, json.dumps(logs))
-    ctx.close()
-    ctx = browser.new_context(viewport={"width": 1440, "height": 900})
-    page, logs = setup(ctx)
-    page.goto(f"{BASE}/weight-loss/", wait_until="networkidle"); page.wait_for_timeout(300)
-    page.locator(".page-cta .btn").click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1500)
-    check("weight page CTA (desktop): weight care ticked and email field ready", page.locator("input[name='interest'][value='weight-care']").is_checked()
-          and page.evaluate("document.activeElement.id") == "join-email")
-    page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
-    page.locator("#svc-skin .svc__link").click(); page.wait_for_load_state("networkidle")
-    check("home service card title opens its page", page.url == f"{BASE}/skin-care/", page.url)
-    page.goto(ES_URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
-    page.locator("#svc-skin .svc__link").click(); page.wait_for_load_state("networkidle")
-    check("es home service card title opens the Spanish page", page.url == BASE + SVC_PATH["es"]["skin-care"], page.url)
-    es_care = page.evaluate("[...document.querySelectorAll('footer nav[aria-label=\\'Atención\\'] a')].map(a => a.getAttribute('href'))")
-    check("es footer: care links go to the Spanish service pages",
-          [h for h in es_care if h.startswith("/es/") and "#" not in h] == [SVC_PATH["es"][PAGES.SERVICE_SLUG[k]] for k in
-          ("urgent", "refill", "therapy", "mental", "sexual", "mens", "womens", "skin", "weight")], str(es_care))
-    check("service journeys: no console errors", not logs, json.dumps(logs))
+    check("service page journeys: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
-    # 11b) What to expect on every service page
+    # 11b) How it works on every service page: the same four steps, a safety box and a link to the full page
     ctx = browser.new_context(viewport={"width": 1440, "height": 900})
     page, logs = setup(ctx)
     for lang, slug, path in svc_pages:
@@ -1201,14 +832,13 @@ with sync_playwright() as p:
           title: (document.querySelector('#expect-title') || {}).textContent || '',
           items: [...document.querySelectorAll('#expect .expect li h3')].map(h => h.textContent),
           how: !!document.querySelector(`#expect a[href="${how}"]`),
+          safety: document.querySelectorAll('#expect .safety').length,
           tops: [...document.querySelectorAll('#expect .expect li h3')].map(h => Math.round(h.getBoundingClientRect().top)),
         })""", how_path)
-        check(f"{path}: what to expect (visit, tests, follow-up) lines up, with a link to how Jachi works",
-              exp["title"].startswith("What to expect" if lang == "en" else "Qué esperar") and len(exp["items"]) == 3
-              and exp["how"] and len(set(exp["tops"])) == 1, json.dumps(exp))
-    check("what to expect: no console errors", not logs, json.dumps(logs))
-    check("what to expect: the Spanish wording (for the app) covers every service page, item for item",
-          set(CONTENT_ES.EXPECT) == set(slugs) and all(len(CONTENT_ES.EXPECT[p["slug"]][2]) == len(p["expect"]) for p in PAGES.PAGES))
+        check(f"{path}: four steps line up, with a safety box and a link to how Jachi works",
+              exp["title"] == ("How it works." if lang == "en" else "Cómo funciona.") and len(exp["items"]) == 4
+              and exp["how"] and exp["safety"] == 1 and len(set(exp["tops"])) == 1, json.dumps(exp))
+    check("service steps: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
     # 11c) How Jachi works and the Learn guides, in English and Spanish
@@ -1268,22 +898,21 @@ with sync_playwright() as p:
       steps: [...document.querySelectorAll('.lane__steps li h4')].map(h => h.textContent),
       lanes: [...document.querySelectorAll('.lane .lane__who')].map(p => p.textContent),
       roles: [...document.querySelectorAll('.role .role__who')].map(p => p.textContent),
-      join: [...document.querySelectorAll('main a.btn')].filter(a => /waitlist/i.test(a.textContent)).map(a => a.getAttribute('href')),
-      notOpen: (document.querySelector('.note-box') || {}).textContent || '',
+      plans: [...document.querySelectorAll('main a.btn')].filter(a => /plan/i.test(a.textContent)).map(a => a.getAttribute('href')),
+      note: (document.querySelector('.note-box') || {}).textContent || '',
     })""")
-    check("how it works: seven steps, on Jachi then with the medical group", len(how["steps"]) == 7
-          and how["lanes"] == ["On Jachi", "With the medical group"] and how["roles"] == ["Jachi Health LLC", "The medical group"], json.dumps(how))
-    check("how it works: says Jachi isn't open yet, and every waitlist button goes to the sign-up", "isn't open yet" in how["notOpen"]
-          and how["join"] and set(how["join"]) == {"/#join"}, json.dumps(how))
+    check("how it works: seven steps, with the coordinator then the provider", len(how["steps"]) == 7
+          and how["lanes"] == ["Your coordinator", "Your provider"] and how["roles"] == ["Jachi Health LLC", "Your provider"], json.dumps(how))
+    check("how it works: says Jachi isn't a medical practice or insurance, and every plan button goes to the plans",
+          "isn't a medical practice or insurance" in how["note"] and len(how["plans"]) == 2 and set(how["plans"]) == {"/plans/"}, json.dumps(how))
     page.evaluate("window.scrollTo({top: document.querySelector('.lanes').getBoundingClientRect().top + scrollY, behavior: 'instant'})"); page.wait_for_timeout(900)
     check("how it works (phone): bottom bar appears after the hero", page.locator("#dock").evaluate("el => el.classList.contains('is-visible')")
-          and page.locator("#dock a").get_attribute("href") == "/#join")
-    page.locator(".page-top .cta-row .btn").first.click(); page.wait_for_load_state("networkidle"); page.wait_for_timeout(1300)
-    check("how it works: waitlist button lands on the home page form", page.evaluate("location.pathname") == "/"
-          and page.evaluate("location.hash") == "#join", page.url)
+          and page.locator("#dock a").get_attribute("href") == "/plans/")
+    page.locator(".page-top .cta-row .btn").first.click(); page.wait_for_load_state("networkidle")
+    check("how it works: the plan button opens the plans page", page.evaluate("location.pathname") == "/plans/", page.url)
     page.goto(f"{BASE}/es/como-funciona/", wait_until="networkidle"); page.wait_for_timeout(300)
-    es_how = page.evaluate("[...document.querySelectorAll('main a.btn')].filter(a => /lista de espera/i.test(a.textContent)).map(a => a.getAttribute('href'))")
-    check("cómo funciona: the Spanish page's waitlist buttons go to the Spanish sign-up", es_how and set(es_how) == {"/es/#join"}, str(es_how))
+    es_how = page.evaluate("[...document.querySelectorAll('main a.btn')].filter(a => /plan/i.test(a.textContent)).map(a => a.getAttribute('href'))")
+    check("cómo funciona: the Spanish page's plan buttons go to the Spanish plans", len(es_how) == 2 and set(es_how) == {"/es/planes/"}, str(es_how))
     check("how it works pages: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
@@ -1305,8 +934,8 @@ with sync_playwright() as p:
               tel: [...document.querySelectorAll('.article__aside a[href^="tel:"]')].map(x => x.getAttribute('href')),
               time: (document.querySelector('.meta time') || {}).getAttribute ? document.querySelector('.meta time').getAttribute('datetime') : '',
             })""")
-            check(f"{path}: sources, waitlist box, 911 and 988, two more guides, date", len(g["sources"]) >= 2
-                  and g["join"] == a[lang]["cta"]["join"] and g["tel"] == ["tel:911", "tel:988"] and len(g["more"]) == 2
+            check(f"{path}: sources, plans box, 911 and 988, two more guides, date", len(g["sources"]) >= 2
+                  and g["join"] == a[lang]["cta"]["plans"] and g["tel"] == ["tel:911", "tel:988"] and len(g["more"]) == 2
                   and path not in g["more"] and g["time"] == LEARN.UPDATED, json.dumps(g))
         where = LEARN.path(next(x for x in LEARN.ARTICLES if x["key"] == "where"), lang)
         page.goto(f"{BASE}{where}", wait_until="domcontentloaded")
@@ -1334,7 +963,7 @@ with sync_playwright() as p:
             names = tuple(sorted(set(re.findall(r'<(?:input|select|textarea)\b[^>]*\bname="([^"]+)"', form))))
             form_fields.setdefault(names, []).append(str(f.relative_to(ROOT / "public")))
     check("every copy of the waitlist form has the same fields, so Netlify keeps them all",
-          len(form_fields) == 1 and sum(len(v) for v in form_fields.values()) == 2 + 2 * len(LANDING.PAGES),
+          len(form_fields) == 1 and sum(len(v) for v in form_fields.values()) == 2 * len(LANDING.PAGES),
           json.dumps({", ".join(k): v for k, v in form_fields.items()}))
     lp_pairs = {}
     for entry in LANDING.PAGES:
@@ -1416,10 +1045,9 @@ with sync_playwright() as p:
           all(x in lb for x in ("form-name=early-access", "email=lena%40example.com", "state=FL", "interest=weight-care",
                                 "utm_source=ig", "utm_campaign=jh-us-waitlist-en", "utm_term=en-us-18plus-broad",
                                 "utm_content=en-weight-v1b", "source=website", "language=en")) and "fbclid" not in lb and "%3C" not in lb, lb[:400])
-    page.goto(f"{BASE}/", wait_until="networkidle")
+    page.goto(f"{BASE}/join/", wait_until="networkidle")
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
     lposted.clear()
-    page.evaluate("document.querySelector('#join').scrollIntoView()")
     page.locator("#join-email").fill("lena2@example.com")
     page.locator("#join-state").select_option("TX")
     page.locator("#join-submit").click()
@@ -1432,7 +1060,7 @@ with sync_playwright() as p:
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
     lposted.clear()
     page.on("request", lambda req: lposted.update(body=req.post_data) if req.method == "POST" and req.url.rstrip("/") == BASE else None)
-    page.goto(f"{BASE}/", wait_until="networkidle")
+    page.goto(f"{BASE}/join/", wait_until="networkidle")
     page.locator("#join-email").fill("noad@example.com")
     page.locator("#join-state").select_option("TX")
     page.locator("#join-submit").click()
@@ -1475,35 +1103,47 @@ with sync_playwright() as p:
         h = (ROOT / "public" / home).read_text()
         promise = h[h.index('id="privacy-promise"'):h.index("</section>", h.index('id="privacy-promise"'))]
         foot = h[h.index("<footer"):h.index("</footer>")]
-        note = re.search(r'<form class="form" id="join-form".*?</form>', h, re.S).group(0)
-        check(f"/{home.replace('index.html', '')}: links the health data policy from the privacy promise, the footer and the waitlist form",
-              f'href="{policy}"' in promise and f'href="{policy}"' in foot and f'href="{policy}"' in note)
+        check(f"/{home.replace('index.html', '')}: links the health data policy from the privacy promise and the footer",
+              f'href="{policy}"' in promise and f'href="{policy}"' in foot)
+    for entry in LANDING.PAGES:
+        for lang, policy in (("en", HEALTH_EN), ("es", HEALTH_ES)):
+            path = LANDING.path(entry, lang)
+            h = (ROOT / "public" / path.strip("/") / "index.html").read_text()
+            note = re.search(r'<form class="form" id="join-form".*?</form>', h, re.S).group(0)
+            check(f"{path}: the waitlist form links the health data policy", f'href="{policy}"' in note)
     check("the privacy policy links the health data policy",
           f'href="{HEALTH_EN}"' in (ROOT / "public" / "privacy" / "index.html").read_text().split("<footer")[0])
 
-    # 12b) No prices anywhere until the owner has a quote (terms keep their $100 liability cap)
-    import re as _re
-    priced = []
+    # 12b) The only prices on the site are Jachi's plan prices (membership.py); terms keep their $100 liability cap.
+    # Providers set and confirm their own prices, so no page or assistant answer quotes one. Ad pages show none at all.
+    plan_amounts = [c for p in MEMBERSHIP.PLANS for c in (p["monthly"], p["yearly"], p.get("founding")) if c] + [MEMBERSHIP.EXTRA_ADULT]
+    plan_prices = {MEMBERSHIP.money(c, cents) for c in plan_amounts for cents in (False, True)}
+    stray, ad_priced = [], []
     for f in sorted((ROOT / "public").rglob("*.html")):
         rel = "/" + str(f.relative_to(ROOT / "public"))
-        # Terms keep their $100 liability cap; the plans and checkout pages show the membership prices (decided Nov 12, 2026).
-        if rel in ("/terms/index.html", "/plans/index.html", "/es/planes/index.html", "/membership/index.html",
-                   "/es/membresia/index.html"):
+        text = re.sub(r"<(script|style)\b.*?</\1>", " ", f.read_text(), flags=re.S)
+        amounts = set(re.findall(r"\$\s?\d[\d,]*(?:\.\d+)?", html.unescape(re.sub(r"<[^>]+>", " ", text))))
+        if rel.startswith(("/join/", "/es/unase/")):
+            if amounts:
+                ad_priced.append(rel)
             continue
-        if _re.search(r"\$\s?\d", f.read_text()):
-            priced.append(rel)
+        allowed = plan_prices | ({"$100"} if rel == "/terms/index.html" else set())
+        if amounts - allowed:
+            stray.append(f"{rel}: {sorted(amounts - allowed)}")
+    check("every price on the site is a Jachi plan price", not stray, json.dumps(stray[:8]))
+    check("the ad landing pages show no prices", not ad_priced, str(ad_priced))
     chat_src = (ROOT / "netlify" / "functions" / "chat.mjs").read_text()
-    check("no prices on any page or in the assistant's instructions", not priced and not _re.search(r"\$\s?\d", chat_src)
-          and "Prices aren't set yet" in chat_src, str(priced))
+    chat_amounts = set(re.findall(r"\$\s?\d[\d,]*(?:\.\d+)?", chat_src))
+    check("the assistant knows only the plan prices and never quotes a provider's", chat_amounts and chat_amounts <= plan_prices
+          and "Never quote, estimate or compare what a provider" in chat_src, str(sorted(chat_amounts)))
     ctx = browser.new_context(viewport={"width": 1280, "height": 900})
     page, logs = setup(ctx)
-    page.goto(URL + "#services", wait_until="networkidle"); page.wait_for_timeout(300)
-    check("services say prices come before opening", PRICING_NOTE in page.locator("#included").inner_text())
     page.goto(f"{BASE}/weight-loss/", wait_until="networkidle"); page.wait_for_timeout(300)
     glance = page.locator(".glance").inner_text()
-    check("service page summary: service, kind of care, no price", "Weight care" in glance and "Ongoing care" in glance
-          and PRICING_NOTE in glance and "$" not in glance, glance)
-    check("no prices: no console errors", not logs, json.dumps(logs))
+    check("service page summary: the kind of care, care coordination, and the plans' starting price",
+          "Weight management" in glance and "Care coordination" in glance and "Plans from $49 a month" in glance
+          and "bill their care separately" in glance, glance)
+    check("prices: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
     # 12c) Membership: the plans pages and the checkout (Stripe is never called: the page's API answers are stood in)
@@ -1592,9 +1232,10 @@ with sync_playwright() as p:
         refs = re.findall(r'\{"@id": "([^"]+)"\}', json.dumps(nodes))
         sd_problems += [f"{u}: {r} isn't defined" for r in refs if r not in known]
     home_types = [[n.get("@type") for n in nodes_by_page.get(u, [])] for u in ("/", "/es/")]
-    service_ok = all(any(n.get("@type") == "MedicalWebPage" and n.get("about") for n in nodes_by_page[u]) for u in all_svc)
-    check("structured data: valid, connected, organization and website on both home pages, conditions on service pages",
-          not sd_problems and all(t == ["Organization", "WebSite", "WebPage"] for t in home_types) and service_ok,
+    service_ok = all(any(n.get("@type") == "WebPage" and (n.get("mainEntity") or {}).get("@type") == "Service"
+                         and n["mainEntity"].get("serviceType") == "Care coordination" for n in nodes_by_page[u]) for u in all_svc)
+    check("structured data: valid, connected, organization, website and FAQ on both home pages, a care-coordination service on service pages",
+          not sd_problems and all(t == ["Organization", "WebSite", "WebPage", "FAQPage"] for t in home_types) and service_ok,
           json.dumps(sd_problems[:6] + home_types))
     check("search titles fit (65 characters) and descriptions fit (50 to 160)", not meta_problems, json.dumps(meta_problems))
     titles = {}
@@ -1633,7 +1274,7 @@ with sync_playwright() as p:
               and key_files[0].name not in sm, f"{status} {headers.get('Content-Type')}")
     else:
         check("IndexNow key file is served as plain text and holds its own key", False, f"{len(key_files)} key files")
-    # Care is credited to clinicians, never to Jachi ("Clinicians treat...", not "we treat")
+    # Care is credited to the providers, never to Jachi ("your provider decides", not "we treat")
     credited = []
     for f in sorted((ROOT / "public").rglob("*.html")):
         text = re.sub(r"<(script|style)\b.*?</\1>", " ", f.read_text(), flags=re.S)
@@ -1642,7 +1283,7 @@ with sync_playwright() as p:
         hits += re.findall(r"(?<!No )(?<!no )(?<!ni )(?<!los )\b(?:tratamos|recetamos|diagnosticamos|resurtimos|trataremos|recetaremos)\b", text)
         if hits:
             credited.append(f"{f.relative_to(ROOT / 'public')}: {hits[:3]}")
-    check("care is credited to clinicians, not to Jachi, in both languages", not credited, json.dumps(credited[:6]))
+    check("care is credited to providers, not to Jachi, in both languages", not credited, json.dumps(credited[:6]))
     home_html = (ROOT / "public" / "index.html").read_text()
     check("only the two main fonts are preloaded (the italic waits, so the page paints sooner)",
           len(re.findall(r'rel="preload"[^>]*as="font"', home_html)) == 2 and "fraunces-italic" not in
@@ -1670,7 +1311,7 @@ with sync_playwright() as p:
     page, logs = setup(ctx)
     page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(500)
     check("account page: says accounts aren't open yet while Identity is off", view(page) == "off"
-          and page.locator("[data-view=off] a[href='/#join']").count() == 1)
+          and page.locator("[data-view=off] a[href='/join/']").count() == 1)
     page.goto(f"{BASE}/admin/", wait_until="networkidle"); page.wait_for_timeout(500)
     check("admin: explains how to turn accounts on while Identity is off", view(page) == "off" and "Enable Identity" in page.locator("[data-view=off]").inner_text())
     check("accounts off: no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
@@ -1681,7 +1322,7 @@ with sync_playwright() as p:
     fake = FakeIdentity()
     fake.attach(page)
     page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
-    page.goto(URL + "#join", wait_until="networkidle"); page.wait_for_timeout(400)
+    page.goto(f"{BASE}/join/", wait_until="networkidle"); page.wait_for_timeout(400)
     page.locator("#join-email").fill("maya@example.com"); page.select_option("#join-state", "TX")
     page.locator("#join-form label.check:has(input[value='therapy'])").click()
     page.locator("#join-submit").click(); page.wait_for_timeout(1200)

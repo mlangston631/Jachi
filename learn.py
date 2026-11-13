@@ -2,11 +2,12 @@
 
 Every fact here comes from the public health sources listed with each article (CDC, MedlinePlus, NIDDK, FDA and the
 988 Lifeline). Keep the same rules as the rest of the site: general information only, never medical advice; care is
-credited to clinicians, never to Jachi; no prices; nothing says visits can be booked yet. Spanish uses "usted".
+credited to providers, never to Jachi (Jachi coordinates care; independent providers give it). Spanish uses "usted".
 Have a clinician and a native Spanish speaker review any change to the medical wording.
 
 Each article lists the "services" it belongs to (their pages link to it), and in each language a "crumb" (its short
-name in the breadcrumb) and a "cta" for the box beside it.
+name in the breadcrumb) and a "cta" for the box beside it: its "page" is the service page it points to, and its
+button goes to the plans page.
 Body blocks: ("p", text), ("h2", text), ("ul", [items]), ("ol", [items]),
 ("callout", kind, title, [paragraphs or ("ul", items)], actions) where kind is "alert" or "note" and actions is a
 list of (label, href, style) with style "danger", "solid" or "ghost". Text may hold trusted markup (links, <b>).
@@ -51,15 +52,15 @@ LABELS = {
         "sources_lead": "This guide is based on these public health sources:",
         "more": "More guides",
         "all": "All guides",
-        "join": "Join the waitlist",
+        "join": "Choose your plan",
         "aside_label": "About this guide",
         "note_title": "General information",
-        "note": "This guide is general information, not medical advice. A licensed clinician will advise you on your own "
+        "note": "This guide is general information, not medical advice. A licensed provider can advise you on your own "
                 "health.",
         "urgent": "For an emergency, call <a href=\"tel:911\">911</a>. In a crisis, call or text <a href=\"tel:988\">988</a>.",
-        "cta_join": "Join the waitlist",
-        "cta_title": "Be first in line.",
-        "cta_lead": "We're launching nationwide. Join the list and we'll email you when Jachi opens in your state.",
+        "cta_join": "Choose your plan",
+        "cta_title": "Ready when you are.",
+        "cta_lead": "A Jachi coordinator finds care near you, confirms the price in writing and books every visit.",
         "list_label": "Guides",
     },
     "es": {
@@ -69,16 +70,16 @@ LABELS = {
         "sources_lead": "Esta guía se basa en estas fuentes de salud pública:",
         "more": "Más guías",
         "all": "Todas las guías",
-        "join": "Únase a la lista de espera",
+        "join": "Elija su plan",
         "aside_label": "Sobre esta guía",
         "note_title": "Información general",
-        "note": "Esta guía es información general, no consejo médico. Un profesional de la salud con licencia le orientará "
-                "sobre su propia salud.",
+        "note": "Esta guía es información general, no consejo médico. Un proveedor con licencia puede orientarle sobre su "
+                "propia salud.",
         "urgent": "En una emergencia, llame al <a href=\"tel:911\">911</a>. En una crisis, llame al "
                   "<a href=\"tel:988\">988</a> y oprima 2, o envíe AYUDA por mensaje de texto al 988.",
-        "cta_join": "Únase a la lista de espera",
-        "cta_title": "Sea de los primeros.",
-        "cta_lead": "Próximamente en todo EE. UU. Únase a la lista y le enviaremos un correo cuando Jachi abra en su estado.",
+        "cta_join": "Elija su plan",
+        "cta_title": "Empiece cuando quiera.",
+        "cta_lead": "Un coordinador de Jachi busca atención cerca de usted, le confirma el precio por escrito y reserva sus citas.",
         "list_label": "Guías",
     },
 }
@@ -138,11 +139,11 @@ ARTICLES = [
                 ("Urinary Tract Infection Basics, CDC", "https://www.cdc.gov/uti/about/index.html"),
                 ("Urinary tract infection, adults, MedlinePlus", "https://medlineplus.gov/ency/article/000521.htm"),
             ],
-            "cta": {"title": "Online UTI care",
-                    "text": "Learn how licensed clinicians will treat UTIs online, and join the waitlist to hear when we "
-                            "open.",
-                    "page": ("About UTI treatment", "/uti-treatment/"),
-                    "join": "/?interest=urgent-care"},
+            "cta": {"title": "UTI care, without the runaround",
+                    "text": "A Jachi coordinator can find a clinic or online visit for UTI symptoms and confirm the price "
+                            "before you book.",
+                    "page": ("How Jachi helps with UTI care", "/uti-treatment/"),
+                    "plans": "/plans/"},
         },
         "es": {
             "slug": "consulta-infeccion-urinaria-en-linea",
@@ -198,11 +199,11 @@ ARTICLES = [
                 ("Infección urinaria en adultos, MedlinePlus", "https://medlineplus.gov/spanish/ency/article/000521.htm"),
                 ("Urinary Tract Infection Basics, CDC (en inglés)", "https://www.cdc.gov/uti/about/index.html"),
             ],
-            "cta": {"title": "Atención en línea para infecciones urinarias",
-                    "text": "Únase a la lista de espera y le avisaremos cuando abramos. Profesionales con licencia "
-                            "tratarán infecciones urinarias en línea.",
-                    "page": ("Sobre el tratamiento de la infección urinaria", "/es/tratamiento-infeccion-urinaria/"),
-                    "join": "/es/?interest=urgent-care"},
+            "cta": {"title": "Atención para la infección urinaria, sin vueltas",
+                    "text": "Un coordinador de Jachi puede buscarle una clínica o una consulta en línea para los síntomas "
+                            "urinarios y confirmarle el precio antes de reservar.",
+                    "page": ("Cómo le ayuda Jachi con la infección urinaria", "/es/tratamiento-infeccion-urinaria/"),
+                    "plans": "/es/planes/"},
         },
     },
     {
@@ -250,8 +251,8 @@ ARTICLES = [
                         "endocrine neoplasia type 2 (MEN 2)"]),
                 ("h2", "FDA-approved or compounded?"),
                 ("p", "Compounded drugs are not FDA-approved, which means the FDA doesn't review them for safety, "
-                      "effectiveness or quality before they're sold. The clinicians who will care for you through Jachi "
-                      "prescribe FDA-approved medicines, and only when they're right for you."),
+                      "effectiveness or quality before they're sold. Ask your provider whether a medicine is FDA-approved before "
+                      "you start."),
                 ("h2", "What ongoing care looks like"),
                 ("ul", ["Regular check-ins to track your progress and any side effects",
                         "Dose changes, made slowly",
@@ -266,11 +267,11 @@ ARTICLES = [
                 ("FDA's Concerns with Unapproved GLP-1 Drugs Used for Weight Loss, FDA",
                  "https://www.fda.gov/drugs/drug-alerts-and-statements/fdas-concerns-unapproved-glp-1-drugs-used-weight-loss"),
             ],
-            "cta": {"title": "Medical weight care",
-                    "text": "See if weight-loss medication could be right for you with our quick check, then join the "
-                            "waitlist.",
-                    "page": ("Check your eligibility", "/#eligibility"),
-                    "join": "/?interest=weight-care"},
+            "cta": {"title": "Medical weight programs, compared",
+                    "text": "A Jachi coordinator can find weight-management providers near you or online and compare "
+                            "what they charge.",
+                    "page": ("How Jachi helps with weight management", "/weight-loss/"),
+                    "plans": "/plans/"},
         },
         "es": {
             "slug": "atencion-medica-para-bajar-de-peso",
@@ -317,9 +318,8 @@ ARTICLES = [
                         "neoplasia endocrina múltiple tipo 2 (MEN 2)"]),
                 ("h2", "¿Aprobado por la FDA o compuesto?"),
                 ("p", "Los medicamentos compuestos no están aprobados por la FDA. Eso significa que la FDA no revisa su "
-                      "seguridad, eficacia ni calidad antes de que se vendan. Los profesionales de la salud que brindarán "
-                      "la atención a través de Jachi recetan medicamentos aprobados por la FDA, y solo cuando son "
-                      "adecuados para usted."),
+                      "seguridad, eficacia ni calidad antes de que se vendan. Pregúntele a su proveedor si un medicamento está "
+                      "aprobado por la FDA antes de empezar."),
                 ("h2", "Cómo es el seguimiento"),
                 ("ul", ["Consultas regulares para revisar su progreso y cualquier efecto secundario",
                         "Cambios de dosis, hechos poco a poco",
@@ -335,11 +335,11 @@ ARTICLES = [
                 ("FDA's Concerns with Unapproved GLP-1 Drugs Used for Weight Loss, FDA (en inglés)",
                  "https://www.fda.gov/drugs/drug-alerts-and-statements/fdas-concerns-unapproved-glp-1-drugs-used-weight-loss"),
             ],
-            "cta": {"title": "Atención médica para bajar de peso",
-                    "text": "Vea si un medicamento para bajar de peso podría ser adecuado para usted con nuestra "
-                            "evaluación rápida y únase a la lista de espera.",
-                    "page": ("Hacer la evaluación", "/es/#eligibility"),
-                    "join": "/es/?interest=weight-care"},
+            "cta": {"title": "Programas médicos de control de peso, comparados",
+                    "text": "Un coordinador de Jachi puede buscar proveedores de control de peso cerca de usted o en línea "
+                            "y comparar lo que cobran.",
+                    "page": ("Cómo le ayuda Jachi con el control de peso", "/es/bajar-de-peso/"),
+                    "plans": "/es/planes/"},
         },
     },
     {
@@ -388,8 +388,8 @@ ARTICLES = [
                         "Therapy, and ongoing care for anxiety and depression"]),
                 ("h2", "When urgent care or your doctor's office is better"),
                 ("p", "If you need a hands-on exam, an X-ray, stitches or a test that has to be done in person, an "
-                      "urgent care clinic or your doctor's office is the right place. On Jachi, your clinician will "
-                      "tell you if you need to be seen in person."),
+                      "urgent care clinic or your doctor's office is the right place. An online clinician will tell you "
+                      "if you need to be seen in person."),
             ],
             "sources": [
                 ("Signs and Symptoms of Stroke, CDC", "https://www.cdc.gov/stroke/signs-symptoms/index.html"),
@@ -397,11 +397,11 @@ ARTICLES = [
                  "https://www.cdc.gov/heart-disease/about/heart-attack.html"),
                 ("988 Suicide & Crisis Lifeline", "https://988lifeline.org/get-help/"),
             ],
-            "cta": {"title": "Not sure where to go?",
-                    "text": "Answer two quick questions to see which kind of care fits, and when to get help in person "
-                            "instead.",
-                    "page": ("Find the right care", "/#care-finder"),
-                    "join": "/#join"},
+            "cta": {"title": "Know where to go",
+                    "text": "A Jachi coordinator can find urgent care clinics and online visits near you and confirm their "
+                            "self-pay prices ahead of time.",
+                    "page": ("How Jachi helps with urgent care", "/urgent-care/"),
+                    "plans": "/plans/"},
         },
         "es": {
             "slug": "atencion-en-linea-o-emergencias",
@@ -449,8 +449,8 @@ ARTICLES = [
                         "Terapia, y atención continua para la ansiedad y la depresión"]),
                 ("h2", "Cuándo es mejor una clínica de urgencias o el consultorio de su médico"),
                 ("p", "Si necesita un examen físico, una radiografía, puntos o un análisis que se debe hacer en persona, "
-                      "lo indicado es una clínica de urgencias o el consultorio de su médico. En Jachi, su profesional "
-                      "de la salud le dirá si necesita atención en persona."),
+                      "lo indicado es una clínica de urgencias o el consultorio de su médico. Un profesional de la salud "
+                      "en línea le dirá si necesita atención en persona."),
             ],
             "sources": [
                 ("Servicios en español, 988 Lifeline", "https://988lifeline.org/interpretation-services/servicios-en-espanol/"),
@@ -458,11 +458,11 @@ ARTICLES = [
                 ("About Heart Attack Symptoms, Risk, and Recovery, CDC (en inglés)",
                  "https://www.cdc.gov/heart-disease/about/heart-attack.html"),
             ],
-            "cta": {"title": "¿No sabe a dónde ir?",
-                    "text": "Responda dos preguntas rápidas para ver qué tipo de atención le conviene y cuándo buscar "
-                            "ayuda en persona.",
-                    "page": ("Encontrar la atención adecuada", "/es/#care-finder"),
-                    "join": "/es/#join"},
+            "cta": {"title": "Sepa adónde ir",
+                    "text": "Un coordinador de Jachi puede buscar clínicas de urgencia y consultas en línea cerca de usted "
+                            "y confirmar sus precios sin seguro con anticipación.",
+                    "page": ("Cómo le ayuda Jachi con la atención de urgencia", "/es/atencion-de-urgencia/"),
+                    "plans": "/es/planes/"},
         },
     },
 ]

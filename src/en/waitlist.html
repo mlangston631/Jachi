@@ -1,0 +1,66 @@
+<div class="form-card">
+  <form class="form" id="join-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <h3 class="form__title" id="join-form-title" tabindex="-1">Join the waitlist</h3>
+    <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+    <input type="hidden" name="language" value="en">
+    <input type="hidden" name="source" value="website">
+    <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_term"><input type="hidden" name="utm_content">
+    <div class="form__row">
+      <div class="field">
+        <label class="label" for="join-email">Email</label>
+        <input class="input" id="join-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required data-field="email" aria-describedby="err-email">
+        <p class="err" id="err-email" hidden>{{I:alert}}<span></span></p>
+      </div>
+      <div class="field">
+        <label class="label" for="join-state">State</label>
+        <select class="select" id="join-state" name="state" autocomplete="address-level1" required data-field="jstate" aria-describedby="err-jstate">
+          <option value="">Select your state</option>
+          {{STATE_OPTIONS}}
+        </select>
+        <p class="err" id="err-jstate" hidden>{{I:alert}}<span></span></p>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="join-name">First name <span class="label__opt">(optional)</span></label>
+      <input class="input" id="join-name" name="first_name" type="text" autocomplete="given-name" maxlength="60">
+    </div>
+    <fieldset class="fs">
+      <legend class="label">I'm interested in <span class="label__opt">(optional)</span></legend>
+      <div class="checks checks--chips">{{JOIN_INTERESTS}}</div>
+    </fieldset>
+    <div class="field">
+      <label class="label" for="join-heard">How did you hear about us? <span class="label__opt">(optional)</span></label>
+      <select class="select" id="join-heard" name="heard">
+        <option value="">Choose one</option>
+        <option value="search">Search engine</option>
+        <option value="social">Social media</option>
+        <option value="friend">Friend or family</option>
+        <option value="clinician">Doctor or clinic</option>
+        <option value="news">News or article</option>
+        <option value="app-store">App Store or Google Play</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Join the waitlist</span></button>
+    <div class="form-status" id="join-status" role="status"></div>
+    <p class="fine">By joining, you agree to get emails about our launch. Unsubscribe anytime. We'll never sell your information. Read our <button class="linkish" type="button" data-open="privacy">privacy notice</button> and <a href="/consumer-health-data/">consumer health data policy</a>.</p>
+  </form>
+
+  <div class="success" id="join-success" hidden>
+    <span class="success__icon" aria-hidden="true">{{I:check}}</span>
+    <h3 id="join-success-title" tabindex="-1">You're on the list<span id="join-success-name"></span>.</h3>
+    <p>We'll email <strong id="join-success-email"></strong> when Jachi opens in <strong id="join-success-state"></strong>.</p>
+    <div class="share">
+      <p class="share__lead">Know someone who'd want this? Send them Jachi.</p>
+      <div class="share__actions">
+        <button class="btn" type="button" id="join-share" data-share-url="{{SHARE_URL}}">{{I:share}}<span class="btn__label">Share Jachi</span></button>
+        <button class="btn btn--ghost" type="button" id="join-again">Add another email</button>
+      </div>
+      <p class="share__status" id="join-share-status" role="status"></p>
+    </div>
+    <div class="account-offer" id="join-account" hidden>
+      <p><strong>Want to change your details later?</strong> Create a free account to update your state and services, turn emails off or delete your details, anytime.</p>
+      <a class="btn btn--ghost" href="/account/?create" id="join-account-link">{{I:user}}<span>Create an account</span></a>
+    </div>
+  </div>
+</div>

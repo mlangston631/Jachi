@@ -1,9 +1,9 @@
 # Jachi Health website
 
-The website for [jachihealth.com](https://jachihealth.com): services, a care finder, condition search,
-a weight care check, a waitlist sign-up, an AI help chat with support tickets, a page for each service in English and
-Spanish, a Spanish home page, accounts for people on the waitlist, an admin console, and the privacy policy, terms of use
-and Texas Medical Board notice.
+The website for [jachihealth.com](https://jachihealth.com), a care-coordination membership: plans and a checkout that
+emails a Stripe invoice, a page for each kind of care a coordinator helps with, How Jachi works, health guides, an AI help
+chat with support tickets, all in English and Spanish; waitlist pages for ads, accounts for people on the waitlist, an
+admin console, and the privacy policy, terms of use and Texas Medical Board notice.
 
 ## How it goes live
 
@@ -19,8 +19,9 @@ Each production deploy uses 15 of the Netlify plan's monthly credits (the Free p
 the site if they run out). Pull requests get a free Deploy Preview, so changes can be checked before they go live.
 
 Sign-ups and support tickets are saved by Netlify Forms (forms `early-access`, the waitlist, and `support-ticket`).
-Both have `language` and `source` fields; `source` is `website`, `app-ios` or `app-android`. The waitlist form also
-asks the optional "How did you hear about us?" (`heard`), which the admin console counts. Sign-ups that come from
+Both have `language` and `source` fields; `source` is `website`, `app-ios` or `app-android`. The waitlist form has a
+`heard` field ("How did you hear about us?"), which the ad pages send empty because an ad's tags already say. Sign-ups
+now come only from the ad pages (step 4 of the membership switch replaces them). Sign-ups that come from
 an ad link also carry its `utm_*` tags, which the admin console counts by campaign and ad. Every copy of the waitlist
 form must have the same fields, because Netlify keeps only one copy's fields for each form name (`tests/qa.py`
 checks). To get them by email: Netlify → Project configuration → Notifications → Form submission notifications.
@@ -31,11 +32,11 @@ checks). To get them by email: Netlify → Project configuration → Notificatio
 | --- | --- |
 | `/` | `src/en/home.html` |
 | `/es/` | `src/es/home.html`, written by `tools/es_home.py` from the English page |
-| `/urgent-care/`, `/uti-treatment/` and the other service pages | `src/en/service.html` filled in from `pages.py` (with what to expect from the visit, tests and follow-up) |
-| `/es/atencion-de-urgencia/`, `/es/tratamiento-infeccion-urinaria/` and the other Spanish service pages | `src/es/service.html` filled in from `pages_es.py` laid over `pages.py` ("what to expect" from `content_es.EXPECT`) |
+| `/urgent-care/`, `/uti-treatment/` and the other service pages: how a coordinator helps with each kind of care | `src/en/service.html` filled in from `pages.py` |
+| `/es/atencion-de-urgencia/`, `/es/tratamiento-infeccion-urinaria/` and the other Spanish service pages | `src/es/service.html` filled in from `pages_es.py` laid over `pages.py` |
 | `/how-it-works/`, `/es/como-funciona/` | `src/en/how.html` and `src/es/how.html`, steps and questions in `content.py` and `content_es.py` (`HOW`) |
 | `/learn/` and its guides, `/es/guias/` and the Spanish guides | `src/learn.html` and `src/article.html`, words in `learn.py` (both languages) |
-| `/join/`, `/es/unase/` and their pages: waitlist pages for Meta ads (not indexed, not in the sitemap) | `src/landing.html`, words in `landing.py` (both languages), the form copied from the home page |
+| `/join/`, `/es/unase/` and their pages: waitlist pages for Meta ads (not indexed, not in the sitemap) | `src/landing.html`, words in `landing.py` (both languages), the form in `src/<lang>/waitlist.html` |
 | `/plans/`, `/es/planes/`: plans and prices | `src/plans.html`, words, plans and printed prices in `membership.py` |
 | `/membership/`, `/es/membresia/`: the checkout (not indexed, not in the sitemap) | `src/membership.html`, `src/membership.js`, `src/membership.css`, words in `membership.py` |
 | `/privacy/`, `/terms/`, `/texas-medical-board/` | `src/en/<name>.html` |
@@ -102,11 +103,11 @@ The published files are generated. Edit the source, then rebuild:
 
 | To change | Edit |
 | --- | --- |
-| Services, conditions, FAQ, support email | `content.py` (Spanish wording in `content_es.py`) |
+| Home page FAQ, How Jachi works, the quick picker, support email | `content.py` (Spanish wording in `content_es.py`) |
 | Home page layout and wording | `src/en/home.html`, then `python3 tools/es_home.py` for Spanish |
-| Header, footer, help chat | `src/en/*.html` and the Spanish copies in `src/es/` |
+| Header, footer, help chat, the waitlist form | `src/en/*.html` and the Spanish copies in `src/es/` |
 | Words the page script shows (results, errors, chat) | `strings.py` (both languages) |
-| Service pages | `pages.py` and `src/en/service.html`; the Spanish pages in `pages_es.py` and `src/es/service.html` (their "what to expect", shared with the app: `content_es.EXPECT`) |
+| Service pages (and the home page's care cards, footer links and the chat's list of them) | `pages.py` and `src/en/service.html`; the Spanish pages in `pages_es.py` and `src/es/service.html` |
 | How Jachi works | `HOW` in `content.py` and `content_es.py`, layout in `src/en/how.html` and `src/es/how.html` |
 | Health guides | `learn.py` (both languages, with their sources) |
 | Ad landing pages | `landing.py` (both languages, and the words they must never use) and `src/landing.html` |

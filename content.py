@@ -1,307 +1,128 @@
-"""Everything Jachi offers, in one place: services, the condition index and the FAQ.
+"""Words that several pages share: the support email, the home page's FAQ, the "How Jachi works" page and the waitlist's
+service choices. Spanish is in content_es.py.
 
-No prices are shown anywhere on the site until the owner has a quote from the medical partner (decided
-October 15, 2026). The last version with prices is commit 5cb4e08. Each service's "tag" says what kind of care
-it is (an online visit or ongoing care), never what it costs.
+Jachi Health LLC sells care coordination, not care (the membership switch, decided Nov 12, 2026): a coordinator finds
+care, confirms the provider's self-pay price in writing, books visits, sends reminders and handles paperwork.
+Independent, licensed providers provide and bill the care and make every medical decision. Credit care to them, never
+to Jachi ("your provider decides", not "we treat"): Texas Occupations Code §165.156 bars an unlicensed company from
+advertising as if it practices medicine. Jachi takes no money from providers and offers no discounts, and plans aren't
+insurance. Memberships are for adults 18 and older who live in Texas.
+
+Plans, prices and what each plan includes live in membership.py; each kind of care has a service page in pages.py.
 """
 
 EMAIL = "support@jachihealth.com"
-PRICING_NOTE = "Prices will be shared before we open."
 
+# The waitlist's service choices. The ad landing pages still collect waitlist sign-ups, and accounts and the admin
+# console show these names. The "interest" values are stored with each sign-up, so never change them.
+# Step 4 of the membership switch replaces the waitlist.
 SERVICES = [
-    {"key": "urgent", "interest": "urgent-care", "icon": "thermo", "name": "Urgent care", "tag": "Online visit",
-     "desc": "Care for everyday illnesses, with any prescription sent to the pharmacy you choose.",
-     "items": ["Colds, flu and sinus infections", "Sore throats, UTIs and pink eye", "Rashes, bites and allergies"]},
-    {"key": "refill", "interest": "refills", "icon": "pill", "name": "Prescription refills", "chip": "Refills",
-     "tag": "Online refill",
-     "desc": "Renew medications you already take, reviewed by a licensed clinician.",
-     "items": ["Blood pressure and cholesterol", "Thyroid, asthma and acid reflux", "Type 2 diabetes"]},
-    {"key": "therapy", "interest": "therapy", "icon": "talk", "name": "Therapy", "tag": "Video sessions",
-     "desc": "Private video sessions with a licensed therapist.",
-     "items": ["Stress, anxiety and depression", "Grief, relationships and life changes", "Trauma and burnout"]},
-    {"key": "mental", "interest": "anxiety-depression", "icon": "mind", "name": "Anxiety & depression",
-     "tag": "Ongoing care", "ongoing": True,
-     "desc": "Medication care from licensed clinicians, with regular check-ins.",
-     "items": ["An evaluation and personal plan", "Medication when it's right for you", "Check-ins and dose adjustments"]},
-    {"key": "sexual", "interest": "sexual-health", "icon": "heart", "name": "Sexual health", "tag": "Online visit",
-     "desc": "Private, judgment-free care. Lab tests are billed separately.",
-     "items": ["STI testing and treatment", "Herpes treatment", "HIV prevention with PrEP"]},
-    {"key": "mens", "interest": "mens-health", "icon": "male", "name": "Men's health", "tag": "Online visit",
-     "desc": "Discreet care from licensed clinicians, with treatment sent to your pharmacy.",
-     "items": ["Erectile dysfunction (ED)", "Hair loss", "Premature ejaculation"]},
-    {"key": "womens", "interest": "womens-health", "icon": "female", "name": "Women's health", "tag": "Online visit",
-     "desc": "Care for every stage, from birth control to menopause.",
-     "items": ["Birth control and emergency contraception", "Menopause symptoms", "Yeast infections and BV"]},
-    {"key": "skin", "interest": "skin-care", "icon": "drop", "name": "Skin care", "tag": "Online visit",
-     "desc": "Treatment plans for common skin conditions.",
-     "items": ["Acne and rosacea", "Eczema and psoriasis", "Cold sores and fungal infections"]},
-    {"key": "weight", "interest": "weight-care", "icon": "scale", "name": "Weight care",
-     "tag": "Ongoing care", "ongoing": True,
-     "desc": "A clinician-led program, with FDA-approved medication when it's right for you.",
-     "items": ["A personal plan from a clinician", "GLP-1 medication when appropriate", "Check-ins and dose adjustments"],
-     "elig": True},
-]
-BY_KEY = {s["key"]: s for s in SERVICES}
-
-# The home page's quick picker under the main buttons: (label, service key, service page)
-PICKER = [
-    ("UTI", "urgent", "uti-treatment"),
-    ("Cold & flu", "urgent", "urgent-care"),
-    ("Refills", "refill", "prescription-refills"),
-    ("Therapy", "therapy", "online-therapy"),
-    ("Anxiety", "mental", "anxiety-depression-treatment"),
-    ("Birth control", "womens", "womens-health"),
-    ("ED", "mens", "mens-health"),
-    ("Weight loss", "weight", "weight-loss"),
+    {"key": "urgent", "interest": "urgent-care", "name": "Urgent care"},
+    {"key": "refill", "interest": "refills", "name": "Prescription refills", "chip": "Refills"},
+    {"key": "therapy", "interest": "therapy", "name": "Therapy"},
+    {"key": "mental", "interest": "anxiety-depression", "name": "Anxiety & depression"},
+    {"key": "sexual", "interest": "sexual-health", "name": "Sexual health"},
+    {"key": "mens", "interest": "mens-health", "name": "Men's health"},
+    {"key": "womens", "interest": "womens-health", "name": "Women's health"},
+    {"key": "skin", "interest": "skin-care", "name": "Skin care"},
+    {"key": "weight", "interest": "weight-care", "name": "Weight care"},
 ]
 
-# Care finder, step 1
-FINDER = [
-    ("urgent", "thermo", "I'm sick or hurt", "Colds, flu, infections, rashes"),
-    ("refill", "pill", "I need a refill", "Medications you already take"),
-    ("mental", "mind", "Mental health", "Therapy, anxiety or depression"),
-    ("sexual", "heart", "Sexual health", "STI testing, herpes, PrEP"),
-    ("mens", "male", "Men's health", "ED, hair loss"),
-    ("womens", "female", "Women's health", "Birth control, menopause"),
-    ("skin", "drop", "Skin", "Acne, rosacea, eczema"),
-    ("weight", "scale", "Weight management", "Medical weight care"),
-]
-
-# Condition index: (name, service key, search terms, optional note)
-TREATED = [
-    ("Cold and flu", "urgent", "cold flu influenza cough fever congestion runny nose", ""),
-    ("COVID-19", "urgent", "covid coronavirus paxlovid", ""),
-    ("Sinus infection", "urgent", "sinusitis sinus congestion", ""),
-    ("Sore throat", "urgent", "strep throat tonsillitis", "Your clinician may send you for a quick strep test."),
-    ("Bronchitis", "urgent", "bronchitis chest cold cough", ""),
-    ("Urinary tract infection (UTI)", "urgent", "uti bladder infection burning urination cystitis", ""),
-    ("Pink eye", "urgent", "conjunctivitis eye infection red eye", ""),
-    ("Seasonal allergies", "urgent", "allergy allergies hay fever sneezing itchy eyes", ""),
-    ("Rashes, hives and bites", "urgent", "rash hives bug bite insect poison ivy itching itchy", ""),
-    ("Stomach bug", "urgent", "nausea vomiting diarrhea gastroenteritis food poisoning stomach", ""),
-    ("Migraine", "urgent", "headache migraine sumatriptan", ""),
-    ("High blood pressure", "refill", "hypertension blood pressure lisinopril amlodipine losartan", ""),
-    ("High cholesterol", "refill", "cholesterol statin atorvastatin rosuvastatin lipitor crestor", ""),
-    ("Hypothyroidism", "refill", "thyroid levothyroxine synthroid", ""),
-    ("Asthma", "refill", "asthma inhaler albuterol", ""),
-    ("Acid reflux (GERD)", "refill", "heartburn reflux gerd omeprazole", ""),
-    ("Type 2 diabetes", "refill", "diabetes metformin blood sugar", ""),
-    ("Anxiety", "mental+therapy", "anxiety anxious worry nervous gad sertraline zoloft lexapro escitalopram buspirone", ""),
-    ("Depression", "mental+therapy", "depression depressed sad low mood prozac fluoxetine wellbutrin bupropion", ""),
-    ("Panic attacks", "mental+therapy", "panic attack", ""),
-    ("Stress and burnout", "therapy", "stress stressed burnout overwhelmed work", ""),
-    ("Grief and loss", "therapy", "grief loss bereavement", ""),
-    ("Relationship issues", "therapy", "relationship breakup divorce marriage family conflict", ""),
-    ("Trauma", "therapy", "trauma ptsd", ""),
-    ("Life changes", "therapy", "life change transition new job moving", ""),
-    ("STI testing", "sexual", "sti std testing test chlamydia gonorrhea syphilis hiv trichomoniasis hepatitis", "Your clinician orders tests at a nearby lab. Lab fees are billed separately."),
-    ("Chlamydia", "sexual", "chlamydia sti std", ""),
-    ("Gonorrhea", "sexual", "gonorrhea clap sti std", "Testing is online. Treatment is usually a shot given in person."),
-    ("Genital herpes", "sexual", "herpes hsv valacyclovir valtrex outbreak", ""),
-    ("HIV prevention (PrEP)", "sexual", "prep hiv prevention truvada descovy", "PrEP needs an HIV test and lab work before you start and every 3 months."),
-    ("Doxy-PEP", "sexual", "doxy pep doxypep doxycycline sti prevention", ""),
-    ("Trichomoniasis", "sexual", "trich trichomoniasis", ""),
-    ("Genital warts", "sexual", "hpv warts genital", ""),
-    ("Erectile dysfunction (ED)", "mens", "ed erectile dysfunction impotence viagra sildenafil cialis tadalafil", ""),
-    ("Hair loss", "mens", "hair loss balding thinning finasteride propecia minoxidil rogaine", ""),
-    ("Premature ejaculation", "mens", "pe premature ejaculation", ""),
-    ("Birth control", "womens", "birth control contraception pill patch ring", ""),
-    ("Emergency contraception", "womens", "emergency contraception morning after ella plan b", "Works best the sooner you take it."),
-    ("Menopause symptoms", "womens", "menopause perimenopause hot flashes night sweats hrt estrogen hormone", ""),
-    ("Yeast infection", "womens", "yeast candida fluconazole diflucan", ""),
-    ("Bacterial vaginosis (BV)", "womens", "bv bacterial vaginosis metronidazole", ""),
-    ("Hair thinning", "womens", "hair loss thinning female", ""),
-    ("Acne", "skin", "acne pimples breakouts tretinoin retin a spironolactone", ""),
-    ("Rosacea", "skin", "rosacea redness flushing", ""),
-    ("Eczema", "skin", "eczema atopic dermatitis dry itchy skin", ""),
-    ("Psoriasis", "skin", "psoriasis", ""),
-    ("Cold sores", "skin", "cold sore fever blister oral herpes valacyclovir", ""),
-    ("Fungal infections", "skin", "fungal fungus athletes foot ringworm jock itch nail", ""),
-    ("Dandruff", "skin", "dandruff seborrheic dermatitis flaky scalp", ""),
-    ("Weight management", "weight", "weight obesity lose weight wegovy zepbound semaglutide tirzepatide glp 1 ozempic mounjaro", ""),
-]
-
-# Things people search for that we don't offer online, said plainly. Notes may hold trusted markup.
-NOT_OFFERED = [
-    ("ADHD medication", "adhd add adderall vyvanse ritalin concerta focalin stimulant",
-     "We don't prescribe ADHD stimulants. They're controlled substances."),
-    ("Benzodiazepines", "benzo benzodiazepine xanax alprazolam klonopin clonazepam ativan lorazepam valium diazepam",
-     "We don't prescribe benzodiazepines like Xanax. They're controlled substances."),
-    ("Opioid pain medicine", "opioid oxycodone percocet hydrocodone vicodin norco tramadol codeine morphine pain pills",
-     "We don't prescribe opioids. They're controlled substances."),
-    ("Testosterone (TRT)", "testosterone trt low t",
-     "We don't prescribe testosterone. It's a controlled substance."),
-    ("Sleep medicine like Ambien", "ambien zolpidem sleeping pills lunesta eszopiclone sonata",
-     "We don't prescribe controlled sleep medicines like Ambien."),
-    ("Phentermine", "phentermine adipex qsymia diet pills",
-     "We don't prescribe phentermine. It's a controlled substance."),
-    ("Suboxone", "suboxone buprenorphine subutex",
-     'We don\'t prescribe buprenorphine. For free, confidential help with substance use, call the SAMHSA helpline at '
-     '<a href="tel:18006624357">1-800-662-4357</a>, any time.'),
-    ("Ketamine", "ketamine spravato", "We don't offer ketamine treatment."),
-    ("Medical marijuana", "marijuana cannabis thc weed", "We don't offer medical marijuana."),
-    ("Isotretinoin (Accutane)", "isotretinoin accutane absorica",
-     "We don't prescribe isotretinoin. A clinician can suggest other acne treatments."),
-]
-
-EMERGENCIES = [
-    ("Chest pain", "chest pain pressure heart attack", "Call 911 now. Don't wait for an online visit."),
-    ("Trouble breathing", "trouble breathing shortness of breath cant breathe difficulty breathing",
-     "Call 911 now. Don't wait for an online visit."),
-    ("Stroke symptoms", "stroke face drooping slurred speech arm weakness numbness",
-     "Call 911 now. Every minute matters with a stroke."),
-    ("Severe allergic reaction", "anaphylaxis severe allergic reaction throat swelling",
-     "Call 911 now. Use an epinephrine auto-injector if you have one."),
-    ("Severe bleeding", "severe bleeding hemorrhage", "Call 911 now."),
-    ("Overdose or poisoning", "overdose poisoning poison",
-     'Call 911 now. For a possible poisoning, you can also call Poison Help at '
-     '<a href="tel:18002221222">1-800-222-1222</a>.'),
-]
-
-CRISIS = ("Thoughts of suicide or self-harm",
-          "suicide suicidal kill myself end my life self harm hurt myself want to die",
-          "You don't have to go through this alone. Call or text 988 to reach the Suicide &amp; Crisis Lifeline, "
-          "free and open 24/7.")
-
-POPULAR = ["UTI", "Sinus infection", "Acne", "ED", "Birth control", "STI testing", "Anxiety", "Hair loss"]
+# The service pages the home page's quick picker links to, in order. Labels are each page's "short" in pages.py.
+PICKER = ["uti-treatment", "urgent-care", "prescription-refills", "online-therapy", "anxiety-depression-treatment",
+          "womens-health", "mens-health", "weight-loss"]
 
 FAQ = [
-    ("Is Jachi accepting patients yet?",
-     "Not yet. We're getting ready to open. Visits can't be booked yet, and nothing is charged. Join the "
-     "waitlist and we'll email you before we open."),
-    ("Who are the clinicians?",
-     "Physicians, nurse practitioners and physician assistants for medical care, and licensed therapists for therapy. "
-     "Everyone will be licensed in your state, will practice through an independent medical group and will make "
-     "every clinical decision about your care. Before we open, we'll name the medical group and its clinicians on this site, so "
-     "you can check their licenses."),
-    ("Is the care assistant a doctor?",
-     "No. The care assistant is AI. When we open, it will help with intake, check-ins, reminders and everyday "
-     "questions about your care. "
-     "It never diagnoses, prescribes, provides therapy or changes your treatment. A clinician reviews what it prepares, "
-     "and we'll always tell you when you're talking with AI."),
-    ("What can clinicians treat online?",
-     "Everyday illnesses, prescription refills, therapy, anxiety and depression, sexual health, men's and women's "
-     "health, skin conditions and weight. Search the conditions on this page to check yours. Some problems need an "
-     "exam, a test or a procedure in person, and your clinician will tell you if that's the case."),
-    ("How does therapy work?",
-     "You meet with a licensed therapist by private video. Therapists don't prescribe medication. If medication could "
-     "help, anxiety and depression care from a licensed clinician can work alongside your therapy."),
-    ("How does STI testing work?",
-     "Your clinician orders the right tests, and you give a quick sample at a nearby lab. Lab fees are billed "
-     "separately. If you test positive for an infection that can be treated with medication, your clinician can "
-     "prescribe it. Some infections, like gonorrhea, are treated with a shot given in person."),
-    ("Will PrEP be available?",
-     "Yes, once we open. PrEP is medication that greatly lowers your chance of getting HIV. You'll need an HIV test and other lab "
-     "work before you start and every 3 months, which your clinician will order."),
-    ("What men's and women's health care is available?",
-     "For men: erectile dysfunction, hair loss and premature ejaculation. For women: birth control, emergency "
-     "contraception, menopause symptoms, yeast infections, BV and hair thinning. ED medications aren't safe with "
-     "nitrate heart medicines, so your clinician reviews your health and medications first."),
-    ("Do you prescribe controlled substances?",
-     "No. We don't prescribe or refill controlled substances, such as ADHD stimulants, benzodiazepines like Xanax, "
-     "opioids, testosterone, phentermine or sleep medicines like Ambien. If you take one, keep working with the "
-     "clinician who prescribes it."),
-    ("Which weight-loss medications do clinicians prescribe?",
-     "FDA-approved medications. That can include GLP-1 medications such as semaglutide (Wegovy®) and "
-     "tirzepatide (Zepbound®) when your clinician decides they're right for you. Not everyone will be prescribed "
-     "medication."),
-    ("Does weight-loss medication have side effects?",
-     "Yes. The most common side effects of GLP-1 medications affect digestion, like nausea, diarrhea, vomiting and "
-     "constipation. Serious risks can include pancreatitis, gallbladder problems and a possible risk of thyroid tumors. "
-     "Your clinician will go over the risks with you and won't prescribe if it isn't safe for you."),
-    ("How much does it cost?",
-     "We're finalizing our prices and will share them before we open, so you'll know what your care costs before you "
-     "start. Jachi is cash-pay, so you won't need insurance. Medication and lab tests are billed separately by your "
-     "pharmacy and lab."),
-    ("Do I need insurance?",
-     "No. Jachi is cash-pay, so you don't need insurance or a referral to see a clinician."),
-    ("Can I use Jachi if I'm under 18?",
-     "No. Jachi is for adults 18 and older."),
-    ("Where is Jachi available?",
-     "We're launching nationwide. Join the waitlist and we'll email you when Jachi opens in your state."),
-    ("How is my information protected?",
-     "Today, this site collects only what you send in its forms and chat, and it has no ads or tracking. When you "
-     "become a patient, your medical records will be kept by the medical group that treats you and protected under "
-     "HIPAA. The care finder, condition search and weight care check on this page run only in your browser, and "
-     "nothing you enter there is saved."),
-    ("Can I talk to a person?",
-     "Yes, by email. Submit a ticket in the help chat or email our team, and a person will reply. We don't have "
-     "live chat or phone support yet. Before we open, we'll add a faster way to reach our team about appointments, "
-     "billing and prescriptions."),
-    ("What if it's an emergency?",
-     "Jachi isn't for emergencies. If you think you're having a medical emergency, call 911. If you're in crisis or "
-     "thinking about suicide, call or text 988 to reach the Suicide & Crisis Lifeline, open 24/7."),
+    ("Is Jachi a doctor's office?",
+     "No. Jachi Health is a care-coordination membership. Your care comes from independent, licensed providers, who "
+     "make every medical decision and bill you directly."),
+    ("Is Jachi insurance?",
+     "No. A Jachi plan pays for our help, not for medical care, so it isn't health insurance. If you have insurance, "
+     "keep it."),
+    ("What does a coordinator do?",
+     "Your coordinator is a person on Jachi's team who finds care near you, confirms the provider's self-pay price in "
+     "writing, books your visits, sends reminders and handles paperwork. Coordinators don't give medical advice; your "
+     "provider does."),
+    ("How does booking work?",
+     "Tell your coordinator what kind of visit you need and the times that work for you. We contact the practice, "
+     "confirm the time and the self-pay price with you in writing, then book it and send you a reminder."),
+    ("Who are the providers?",
+     "Independent, licensed doctors, nurse practitioners, therapists, clinics and labs, in person or online. They set "
+     "their own prices and pay Jachi nothing, so we suggest them for fit, price and availability, never for a fee."),
+    ("Do members get discounts?",
+     "No. Providers charge Jachi members the same self-pay prices they charge everyone. Your plan pays for Jachi's "
+     "help, not for discounts."),
+    ("Who can join?",
+     "Adults 18 and older who live in Texas. Concierge Plus includes a second adult in your household, and Signature "
+     "covers up to four."),
+    ("How do I pay?",
+     "By debit or credit card. After you choose a plan, we email you a secure invoice from Stripe, our payment "
+     "processor, and you pay it online. Renewals arrive the same way, and nothing is charged automatically."),
+    ("Can I cancel?",
+     "Yes, anytime. You keep your membership through the end of the period you've paid for, and you get a full refund "
+     "if you cancel within 30 days of joining."),
+    ("Is Jachi for emergencies?",
+     "No. If you think you're having a medical emergency, call 911. If you're in crisis or thinking about suicide, "
+     "call or text 988."),
 ]
 
-# The "How Jachi works" page (/how-it-works/), laid out by src/en/how.html. The app shows the same steps.
+# The "How Jachi works" page (/how-it-works/), laid out by src/en/how.html: two lanes of steps (Jachi, then the
+# provider) with a handoff between them.
 HOW = {
     "path": "/how-it-works/",
     "lanes": [
-        {"who": "On Jachi", "title": "Find the right care", "steps": [
-            ("Visit Jachi", "Read about each service: the conditions clinicians treat, what's included and how it "
-                            "works."),
-            ("Choose a service", "Pick the care you need. Not sure? The care finder points the way, and our AI assistant "
-                                 "answers general questions."),
-            ("See prices and what's included", "Before you start, you'll see the price and what it covers. We'll share "
-                                               "prices before we open."),
+        {"who": "Your coordinator", "title": "Jachi handles the logistics", "steps": [
+            ("Choose a plan", "Pick Concierge, Concierge Plus or Signature, and pay your first invoice by debit or credit "
+                              "card. Your coordinator gets in touch within 1 business day."),
+            ("Tell us what you need", "Tell your coordinator what kind of care you're looking for, where, and when "
+                                      "you're free."),
+            ("We find options and confirm the price", "Your coordinator finds independent, licensed providers near you "
+                                                      "or online and confirms the self-pay price with you in writing."),
+            ("We book it", "Once you choose, we book the visit, send reminders and handle any rescheduling."),
         ]},
-        {"who": "With the medical group", "title": "Get care from licensed clinicians", "steps": [
-            ("Complete your intake", "Answer questions about your health, your medicines and your history."),
-            ("A clinician evaluates", "A licensed clinician reviews your answers. They may message you or start a video "
-                                      "visit."),
-            ("Your treatment plan", "If treatment is right for you, your clinician makes a plan with you. Not everyone "
-                                    "needs medication."),
-            ("Prescriptions, tests and follow-up", "Prescriptions go to your pharmacy and lab orders to a nearby lab. Your "
-                                                   "clinician tells you what follow-up you need and, with your "
-                                                   "permission, can send a summary to your primary care doctor."),
+        {"who": "Your provider", "title": "Your provider handles the medicine", "steps": [
+            ("Your visit", "You see your provider in person or online. They make every medical decision about your "
+                           "care."),
+            ("You pay the provider", "The provider bills you directly, at the self-pay price we confirmed. Jachi takes no "
+                                     "cut."),
+            ("Follow-up", "Your provider tells you what follow-up you need. Your coordinator books it, keeps your "
+                          "receipts in one place and helps if a bill looks wrong."),
         ]},
     ],
-    "handoff": ("Then you move to the medical group's patient portal.",
-                "Your health information goes into the medical group's secure patient system, not Jachi's website, and "
-                "you'll always see which medical group is providing your care."),
-    "title": "How Jachi Works: Online Care, Step by Step | Jachi Health",
-    "description": "How online care on Jachi works, from choosing a service to care from licensed clinicians at an "
-                   "independent medical group.",
+    "handoff": ("Then you see your provider.",
+                "Your medical records stay with your provider, in their own system, and they decide your care."),
+    "title": "How Jachi Works: Care Coordination, Step by Step | Jachi Health",
+    "description": "How a Jachi membership works: your coordinator finds care, confirms the self-pay price in writing "
+                   "and books visits. Independent providers handle the medicine.",
     "crumb": "How Jachi works",
     "faq": [
         ("Is Jachi a medical practice?",
-         "No. Jachi Health LLC provides the website, the app and support. Licensed clinicians at an independent medical "
-         "group provide your care and make every medical decision."),
-        ("When will you name the medical group?",
-         "Before we open. We'll name the medical group and its clinicians on this site, so you can check their licenses "
-         "before your first visit."),
+         "No. Jachi Health LLC coordinates care. Independent, licensed providers provide your care, make every medical "
+         "decision and bill you directly."),
+        ("Does my plan pay for my visits?",
+         "No. Your plan pays for Jachi's help. You pay each provider for the care you choose, at the self-pay price we "
+         "confirm with you before booking."),
+        ("How fast will my coordinator reply?",
+         "Within 1 business day on Concierge, and the same day on Concierge Plus (weekdays) and Signature (7 days a "
+         "week). If we miss it, your next month is free."),
+        ("Can I choose my own provider?",
+         "Yes. Tell us who you'd like to see and we'll book it, or we can suggest options near you. The choice is always "
+         "yours."),
         ("Where does my health information go?",
-         "Into the medical group's secure patient system, which keeps your medical records private. Jachi's "
-         "waitlist and help chat never ask for health details, and the care finder and weight care check run only in "
-         "your browser and save nothing."),
-        ("Can I book a visit now?",
-         "Not yet. Jachi isn't open. Join the waitlist and we'll email you before we open in your state, with prices and "
-         "how visits will work."),
-        ("Do I need insurance?",
-         "No. Jachi is cash-pay, so you don't need insurance or a referral. Medication and lab tests are billed "
-         "separately by your pharmacy and lab."),
+         "Your medical records stay with your provider. Jachi keeps what it needs to run your membership and book your "
+         "visits, and the checkout and help chat never ask for health details."),
         ("What does the AI assistant do?",
-         "It answers general questions about Jachi and how care works, and it always says it's AI. It never diagnoses, "
-         "prescribes or provides therapy."),
+         "It answers general questions about Jachi and how memberships work, and it always says it's AI. It never gives "
+         "medical advice. Your coordinator is a real person."),
     ],
 }
 
-# Words build.py uses when it writes the service cards, search rows and lists.
+# Words build.py uses on several pages.
 BUILD = {
-    "not_offered": "Not offered",
-    "emergency": "Emergency",
-    "support_now": "Get support now",
     "call_911": "Call 911",
     "call_988": "Call 988",
     "text_988": "Text 988",
-    "join": "Join the waitlist",
-    "check_elig": "Check eligibility",
-    "check_elig_long": "Check your eligibility",
-    "for": " for {x}",
-    "for_weight": " for weight care",
-    "mental_meta": "Therapy, or medication care from a clinician",
-    "launching_first": "Launching first",
-    "all_states": "All other states",
-    "find_care": "Find the right care",
-    "learn_more": "More about {x}",
+    "learn_more": "how Jachi helps with {x}",
+    "choose_plan": "Choose your plan",
+    "how": "How it works",
 }
