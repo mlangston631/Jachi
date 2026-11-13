@@ -6,7 +6,9 @@
   publish = "public"
   # Skip the deploy when a commit only changes the mobile app (app/) or GitHub workflow files, since each
   # production deploy uses 15 credits. git exits 0 (skip) when nothing else changed since the last deploy.
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)app' ':(exclude).github'"
+  # When Netlify builds without its cache, CACHED_COMMIT_REF is the same as COMMIT_REF and git would find no
+  # change, cancelling a real deploy (Nov 12, 2026); the first test makes those builds go ahead.
+  ignore = "[ \"$CACHED_COMMIT_REF\" != \"$COMMIT_REF\" ] && git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)app' ':(exclude).github'"
 
 [functions]
   # Server code: the help chat (/api/chat), account deletion (/api/account/delete) and the admin console (/api/admin/*).
