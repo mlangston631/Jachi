@@ -11,17 +11,16 @@ keep replies short and plain, and ask only questions that change what you'll do.
 2. Keep English and Spanish in step:
    - After changing `src/en/home.html`, run `python3 tools/es_home.py`. It stops on any English sentence it
      can't find, which means a translation in that file needs adding or updating.
-   - `src/en/header.html`, `footer.html`, `chat.html`, `dock.html`, `how.html` and `service.html` have Spanish copies
-     in `src/es/`; change both. The health guides (`learn.py`) and `HOW` hold both languages; Spanish guides live at
-     `/es/guias/`.
-   - Every service page in `pages.py` has a Spanish twin in `pages_es.py` (`/es/<slug>/`, its "what to expect" in
-     `content_es.EXPECT`); change both. Pages in both languages name each other (`hreflang`), and tests/qa.py
-     checks every pair.
+   - `src/en/header.html`, `footer.html`, `chat.html`, `dock.html`, `how.html`, `service.html` and `waitlist.html` have
+     Spanish copies in `src/es/`; change both. The health guides (`learn.py`) and `HOW` hold both languages; Spanish
+     guides live at `/es/guias/`.
+   - Every service page in `pages.py` has a Spanish twin in `pages_es.py` (`/es/<slug>/`); change both. Pages in both
+     languages name each other (`hreflang`), and tests/qa.py checks every pair.
    - New text shown by `src/app.js` or the account page goes in `strings.py` under both `EN` and `ES`
      (account page keys start with `a_`). The admin console is English only.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.
 3. `python3 build.py`
-4. `node tests/function.test.mjs` and `python3 tests/qa.py`. Every check must pass. Fix the cause rather than
+4. `node tests/function.test.mjs`, `node tests/membership.test.mjs` and `python3 tests/qa.py`. Every check must pass. Fix the cause rather than
    loosening a check; add or update checks when behaviour changes. Look at the screenshots in `tests/out/`
    for anything visual, at phone and desktop sizes.
 5. Commit source and built files together.
@@ -36,36 +35,58 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 ## Decisions the owner made (change only when he asks)
 
-- Launching nationwide (decided Oct 17, 2026; the site used to say "Texas first"). Adults 18+ only. Cash pay, no
-  insurance. Keep the Texas Medical Board notice for Texas patients.
-- No prices anywhere (pages, titles, the assistant) until he has a quote from his medical partner (decided
-  Oct 15, 2026). The site says prices will be shared before opening. Commit 5cb4e08 is the last version with
-  prices; tests/qa.py fails if a price appears.
-- Not offered: controlled substances (ADHD stimulants, benzodiazepines, opioids, testosterone, phentermine,
-  sleep medication, Suboxone, ketamine), abortion medication, isotretinoin, peptides, medical marijuana.
-- Jachi isn't open yet. Nothing may say visits can be booked now; buttons collect waitlist sign-ups (the Netlify
-  form is still named `early-access`).
+- **Switching to the membership model (decided Nov 12, 2026), in steps.** Steps 1 and 2 went live together from
+  the `membership-switch` pull request when he asked to make everything live (Nov 12, 2026); steps 3 and 4 come in
+  their own pull requests, each merged after he approves its Deploy Preview. Jachi Health LLC sells
+  care coordination, not care: a coordinator finds care, confirms the self-pay price in writing, books every visit,
+  sends reminders and handles paperwork. Independent licensed practices provide and bill the care. Jachi takes no
+  money from providers and offers no discounts; plans aren't insurance. Plans (membership.py, Stripe lookup keys in
+  `src/functions/billing.mjs`): Concierge $49/month or $490/year (founding $39/month for the first 100, for as long
+  as they stay), Concierge Plus $99/$990 (second adult included), Signature $250/$2,500 (up to 4 adults); add an
+  adult to monthly Concierge for $25/month. Payment is by debit or credit card through Stripe invoices sent by email
+  (`collection_method: send_invoice`); nothing is charged automatically. Steps: 1) plans, checkout, billing
+  functions, member emails, terms and privacy (done); 2) home page, How it works, service pages and the help chat
+  rewritten for the membership; 3) Find care, Book a visit and For providers, only with real partner practices;
+  4) ad landing pages and accounts. Step 2 is done: the site describes the membership, and the decisions below
+  follow it. Until step 4, the ad landing pages (`landing.py`) and accounts still describe the telehealth waitlist.
+
+- Memberships are for adults 18 and older who live in Texas (step 2 of the switch, following the launch plan; ask him
+  before changing it). The telehealth waitlist on the ad pages launched nationwide on Oct 17, 2026. Keep the Texas
+  Medical Board notice.
+- Prices: only Jachi's plan prices, from `membership.py`, on any page or in the assistant; never a provider's, lab's
+  or pharmacy's price (coordinators confirm those per visit, in writing). The ad pages show no prices at all.
+  tests/qa.py checks every page and the assistant's instructions.
+- Jachi is open for memberships: the main buttons say "Choose your plan" and go to the plans page. No page promises
+  a treatment, a prescription or a provider's availability, and only the health guides name medicines. The ad pages
+  still collect waitlist sign-ups (the Netlify form is still named `early-access`) and, until step 4, still describe
+  the telehealth waitlist, which didn't offer controlled substances (ADHD stimulants, benzodiazepines, opioids,
+  testosterone, phentermine, sleep medication, Suboxone, ketamine), abortion medication, isotretinoin, peptides or
+  medical marijuana.
 - Everything on the page must really work. No placeholder buttons, invented testimonials, ratings, statistics,
   badges, partner logos, clinician names or credentials.
-- The site promises (approved Oct 15, 2026) to name the medical group and its clinicians before opening, and to add
-  a faster way to reach the team about appointments, billing and prescriptions before opening. Keep both promises.
-- Credit care to clinicians, never to Jachi Health LLC: "Clinicians prescribe…", "What clinicians treat", not "we
-  prescribe" or "we treat". Texas Occupations Code §165.156 bars an unlicensed company from advertising as if it
-  practices medicine. Lines about what isn't offered ("We don't prescribe controlled substances") are fine.
+- The telehealth-era promises (Oct 15, 2026) to name a medical group before opening and to add a faster way to
+  reach the team were replaced in step 2: members reach their coordinator directly, and providers are named only
+  when there are real partner practices (step 3). The ad pages still carry the old promise until step 4.
+- Credit care to the independent providers, never to Jachi Health LLC: "your provider decides", "providers treat",
+  not "we treat", "we prescribe" or "Jachi's doctors". Jachi coordinates care. Texas Occupations Code §165.156 bars
+  an unlicensed company from advertising as if it practices medicine. Lines about what Jachi doesn't do ("Jachi
+  doesn't prescribe") are fine.
 - The assistant is labelled AI, never claims to be a person, and there are no live agents yet; tickets go to
   the support email in `content.py`.
 - Safety: emergencies get 911 and crisis messages get 988 (in Spanish: press 2, or text AYUDA), handled in the
   page before any AI call (`EMERGENCY` and `CRISIS` in `src/app.js`, English and Spanish) and again in the
   assistant's rules (`chatbot.py`).
 - Privacy: no analytics, ad pixels or trackers (it's a health site). Don't collect health details in forms or chat.
-  Patient accounts with health records must live on HIPAA-compliant systems with a BAA (his medical partner's
-  portal); Netlify's plan can't hold health data. The home page's privacy promise ("Your health is not for sale.",
-  decided Oct 18, 2026) states only what is true: no trackers on the site, no sign-ups sent to Meta or any ad
-  company, nothing sold.
-- The waitlist's service choices count as consumer health data under Washington's My Health My Data Act, so the
-  site keeps a consumer health data privacy policy (`/consumer-health-data/`, `/es/datos-de-salud/`) linked from
-  both home pages (the privacy promise and the footer) and the waitlist form; tests/qa.py checks the links. Update
-  it, and the privacy policy, whenever what the site collects or who handles it changes.
+  Coordinators talk with members by phone and share with a provider only what it needs to book them (the privacy
+  policy and the consumer health data policy say so). Anything holding health records must live on HIPAA-compliant
+  systems with a BAA; Netlify's plan can't hold health data. The home page's privacy promise ("Your health is not
+  for sale.", decided Oct 18, 2026) states only what is true: no referral fees from providers, no trackers on the
+  site, no sign-ups sent to Meta or any ad company, nothing sold.
+- The waitlist's service choices and the care members ask their coordinator to arrange count as consumer health
+  data under Washington's My Health My Data Act, so the site keeps a consumer health data privacy policy
+  (`/consumer-health-data/`, `/es/datos-de-salud/`) linked from both home pages (the privacy promise and the footer)
+  and the waitlist form; tests/qa.py checks the links. Update it, and the privacy policy, whenever what the site
+  collects or who handles it changes.
 - Meta ads (Oct 17, 2026) send people only to Meta's Instant Forms or the waitlist pages in `landing.py` (`/join/…`,
   `/es/unase/…`). Until LegitScript certification and Meta's authorization, those pages name no medicines, drug
   classes, refills, prescriptions or prices (`BANNED`, checked by tests/qa.py), and their footer links only to the
@@ -80,14 +101,17 @@ keep replies short and plain, and ask only questions that change what you'll do.
   Identity keeps that first password when the owner signs up again and confirms. Email-based admin access is
   also refused while Identity's autoconfirm is on. Sign-ups and tickets come from Netlify Forms through
   `NETLIFY_API_TOKEN`; the console only deletes ids that belong to the site's two forms.
-- The clinical standards section states only facts: who provides care, physician supervision where state law requires it, licenses
-  anyone can look up. Clinician names and credentials go there only when his medical partner provides them.
+- Say only what's true about providers: they're independent and licensed, they set their own prices and bill
+  members directly, they pay Jachi nothing, and anyone can look up a license (How Jachi works links DocInfo and
+  Nursys). Name a provider or practice only when it's a real partner (step 3).
 
 ## Security
 
 - The repository is public. Never commit keys or passwords. (The IndexNow key in `build.py` is the exception: it
   is published at `/<key>.txt` on purpose and only lets someone ask search engines to recrawl the site.)
-  Secrets live only in Netlify's environment variables: `NETLIFY_API_TOKEN` (a personal access token with access
+  Secrets live only in Netlify's environment variables (the membership ones: `STRIPE_SECRET_KEY`, a restricted key;
+  `STRIPE_WEBHOOK_SECRET`; `EMAIL_API_KEY`; optional `TEAM_NOTIFY_WEBHOOK_URL`, `TURNSTILE_SECRET_KEY`; set them for
+  the Production context only): `NETLIFY_API_TOKEN` (a personal access token with access
   to his whole Netlify account, used only inside
   `netlify/functions/admin.mjs` and `account.mjs`, never sent to a browser; set for the Production deploy
   context only, so Deploy Previews built from pull requests never get it), optional `ADMIN_EMAILS`, and
@@ -109,3 +133,15 @@ keep replies short and plain, and ask only questions that change what you'll do.
   Instrument Sans for text. Leaf logo in `brand.py`.
 - Mobile first, no sideways scrolling at 360px wide, calm motion that stops under reduced-motion settings,
   full keyboard and screen-reader support. The QA covers 9 screen sizes in both languages.
+
+## Membership billing
+
+- `src/functions/billing.mjs` is shared by `membership.mjs` (`/api/membership/plans`, `/api/membership/start`),
+  `stripe-webhook.mjs` (`/api/stripe/webhook`) and `daily-emails.mjs` (scheduled daily at 15:00 UTC). It calls
+  Stripe's REST API directly (pinned API version) and sends member emails through `EMAIL_PROVIDER` (Resend, Postmark
+  or SendGrid). Never put health details in Stripe, invoices, member emails or team alerts: none of those services
+  signs a HIPAA agreement.
+- Member emails (English and Spanish, wording in `billing.mjs`): one step left (with the Pay button), a payment nudge
+  a day later if unpaid, welcome when the first invoice is paid, a heads-up two weeks before a yearly renewal,
+  cancellation confirmed (with the 30-day refund note), cancellation undone, membership ended. Each is sent once.
+- `node tests/membership.test.mjs` runs the billing tests against an in-memory fake of Stripe (`tests/fake-stripe.mjs`).

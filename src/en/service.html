@@ -3,12 +3,12 @@
     <div class="wrap page-hero">
       <div class="page-hero__copy">
         {{CRUMBS}}
-        <p class="status"><span class="status__dot" aria-hidden="true"></span><span>Waitlist open</span><span class="status__rule" aria-hidden="true"></span><span>Launching nationwide</span></p>
+        <p class="status"><span class="status__dot" aria-hidden="true"></span><span>Care coordination</span><span class="status__rule" aria-hidden="true"></span><span>For adults in Texas</span></p>
         <h1 class="display display--page" id="page-title">{{SVC_H1}}</h1>
         <p class="lead">{{SVC_LEAD}}</p>
         <div class="cta-row">
-          <a class="btn btn--lg" href="{{JOIN_HREF}}">Join the waitlist {{I:arrow:i--arrow}}</a>
-          {{SVC_SECOND_CTA}}
+          <a class="btn btn--lg" href="{{PLANS_HREF}}">Choose your plan {{I:arrow:i--arrow}}</a>
+          <a class="btn btn--ghost btn--lg" href="{{HOW_HREF}}">How it works</a>
         </div>
       </div>
       {{SVC_CARD}}
@@ -28,10 +28,10 @@
   <section class="section" id="expect" aria-labelledby="expect-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 class="h2 h2--sm" id="expect-title">{{SVC_EXPECT_TITLE}}</h2>
-        <p class="lead">{{SVC_EXPECT_LEAD}}</p>
+        <h2 class="h2 h2--sm" id="expect-title">{{SVC_STEPS_TITLE}}</h2>
+        <p class="lead">{{SVC_STEPS_LEAD}}</p>
       </div>
-      <ol class="expect">{{SVC_EXPECT}}</ol>
+      <ol class="expect">{{SVC_STEPS}}</ol>
       <div class="expect__more">
         <div class="explain">
           <h3>Good to know</h3>
@@ -47,7 +47,7 @@
     <div class="wrap faq__grid">
       <div class="faq__intro">
         <div class="section-head">
-          <h2 class="h2" id="faq-title">{{SVC_FAQ_TITLE}}</h2>
+          <h2 class="h2" id="faq-title">Questions, answered.</h2>
         </div>
         <div class="faq-more">
           <p>Have another question? Ask our AI assistant, or email our team and we'll get back to you. Please don't include health details.</p>
@@ -64,11 +64,11 @@
   <section class="section join grain on-dark page-cta" aria-labelledby="cta-title">
     {{MARK:m-art-cta:outline:join__art}}
     <div class="wrap page-cta__inner">
-      <h2 class="h2 h2--light" id="cta-title">Be first in line.</h2>
-      <p class="lead lead--light">We're launching nationwide. Join the list and we'll email you when Jachi opens in your state.</p>
-      <a class="btn btn--light btn--lg" href="{{JOIN_HREF}}">Join the waitlist {{I:arrow:i--arrow}}</a>
-      <nav class="related" aria-label="Related services">
-        <h3 class="related__h">Related services</h3>
+      <h2 class="h2 h2--light" id="cta-title">Ready when you are.</h2>
+      <p class="lead lead--light">Pick a plan in about a minute. Your coordinator takes it from there.</p>
+      <a class="btn btn--light btn--lg" href="{{PLANS_HREF}}">Choose your plan {{I:arrow:i--arrow}}</a>
+      <nav class="related" aria-label="Related care">
+        <h3 class="related__h">Related care</h3>
         <ul>{{SVC_RELATED}}</ul>
       </nav>
     </div>

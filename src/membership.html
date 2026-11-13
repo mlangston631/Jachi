@@ -1,0 +1,110 @@
+<main id="main">
+  <section class="hero page-top" aria-labelledby="page-title">
+    <div class="wrap page-top__inner">
+      {{CRUMBS}}
+      <h1 class="display display--page" id="page-title" tabindex="-1">{{CO_H1}}</h1>
+      <p class="lead">{{CO_LEAD}}</p>
+    </div>
+  </section>
+
+  <section class="section m-checkout-section" aria-labelledby="page-title">
+    <div class="wrap">
+      <form class="m-checkout" id="m-form" novalidate>
+        <div class="form-card m-main">
+          <fieldset class="fs m-step">
+            <legend class="m-step__title"><span class="m-step__n" aria-hidden="true">1</span>{{CO_STEP_PLAN}}</legend>
+            <p class="label" id="m-billing-label">{{CO_BILLING}}</p>
+            <div class="seg" role="radiogroup" aria-labelledby="m-billing-label">
+              <label><input type="radio" name="billing" value="monthly" checked><span>{{CO_MONTHLY}}</span></label>
+              <label><input type="radio" name="billing" value="yearly"><span>{{CO_YEARLY}}</span></label>
+            </div>
+            <p class="label" id="m-plan-label">{{CO_PLAN}}</p>
+            <div class="seg seg--stack m-choices" role="radiogroup" aria-labelledby="m-plan-label">{{PLAN_CHOICES}}</div>
+            <div class="m-adults" id="m-adults">
+              <div>
+                <p class="label" id="m-adults-label">{{CO_ADULTS}}</p>
+                <p class="fine">{{CO_ADULTS_HINT}}</p>
+              </div>
+              <div class="m-stepper" role="group" aria-labelledby="m-adults-label">
+                <button type="button" id="m-minus" aria-label="{{CO_REMOVE_ADULT}}">−</button>
+                <output id="m-count" aria-live="polite">0</output>
+                <button type="button" id="m-plus" aria-label="{{CO_ADD_ADULT}}">+</button>
+              </div>
+            </div>
+            <p class="fine" id="m-adults-note" hidden>{{CO_ADULTS_NOTE}}</p>
+            <p class="fine m-founding" id="m-founding-note">{{FOUNDING_NOTE}}</p>
+          </fieldset>
+
+          <fieldset class="fs m-step">
+            <legend class="m-step__title"><span class="m-step__n" aria-hidden="true">2</span>{{CO_STEP_PAY}}</legend>
+            <div class="seg seg--stack">
+              <label><input type="radio" name="payment" value="card_invoice" checked><span class="m-pay"><b>{{CO_PAY_LABEL}}</b><small>{{CO_PAY_HINT}}</small><small>{{CO_CARDS}}</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="fs m-step">
+            <legend class="m-step__title"><span class="m-step__n" aria-hidden="true">3</span>{{CO_STEP_YOU}}</legend>
+            <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="website" id="m-website" tabindex="-1" autocomplete="off"></label></p>
+            <div class="field">
+              <label class="label" for="m-name">{{CO_NAME}}</label>
+              <input class="input" id="m-name" name="name" type="text" autocomplete="name" maxlength="100" required aria-describedby="m-err-name">
+              <p class="err" id="m-err-name" hidden>{{I:alert}}<span></span></p>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label class="label" for="m-email">{{CO_EMAIL}} <span class="label__opt">{{CO_EMAIL_HINT}}</span></label>
+                <input class="input" id="m-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-describedby="m-err-email">
+                <p class="err" id="m-err-email" hidden>{{I:alert}}<span></span></p>
+              </div>
+              <div class="field">
+                <label class="label" for="m-phone">{{CO_PHONE}} <span class="label__opt">{{CO_PHONE_HINT}}</span></label>
+                <input class="input" id="m-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required aria-describedby="m-err-phone">
+                <p class="err" id="m-err-phone" hidden>{{I:alert}}<span></span></p>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label class="label" for="m-language">{{CO_LANGUAGE}}</label>
+                <select class="select" id="m-language" name="language">{{LANGUAGE_OPTIONS}}</select>
+              </div>
+              <div class="field">
+                <label class="label" for="m-ref">{{CO_REF}} <span class="label__opt">{{CO_OPTIONAL}}</span></label>
+                <input class="input" id="m-ref" name="referredBy" type="text" maxlength="100" autocomplete="off" aria-describedby="m-ref-hint">
+                <p class="fine" id="m-ref-hint">{{CO_REF_HINT}}</p>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <aside class="form-card m-summary" aria-labelledby="m-summary-title">
+          <h2 class="form__title" id="m-summary-title">{{CO_SUMMARY}}</h2>
+          <ul class="m-lines" id="m-lines">{{SUMMARY_LINES}}</ul>
+          <p class="m-total"><span>{{CO_DUE_NOW}}</span><strong id="m-total">{{SUMMARY_TOTAL}}</strong></p>
+          <p class="fine" id="m-renew">{{SUMMARY_RENEW}}</p>
+          <label class="check" id="m-check-nonclinical"><input type="checkbox" id="m-nonclinical" name="agreeNonclinical" aria-describedby="m-err-nonclinical"><span>{{CO_AGREE_NONCLINICAL}}</span></label>
+          <p class="err" id="m-err-nonclinical" hidden>{{I:alert}}<span></span></p>
+          <label class="check" id="m-check-terms"><input type="checkbox" id="m-terms" name="agreeTerms" aria-describedby="m-err-terms"><span>{{CO_AGREE_TERMS}}</span></label>
+          <p class="err" id="m-err-terms" hidden>{{I:alert}}<span></span></p>
+          <p class="fine">{{CO_READ_TERMS}}</p>
+          <button class="btn btn--block btn--lg" type="submit" id="m-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label" id="m-submit-label">{{CO_SUBMIT}}</span></button>
+          <div class="form-status" id="m-status" role="alert"></div>
+          <p class="fine m-secure">{{I:lock}}<span>{{CO_SECURE}}</span></p>
+        </aside>
+      </form>
+
+      <div class="form-card m-done" id="m-done" hidden>
+        <h2 class="form__title" id="m-done-title" tabindex="-1">{{CO_DONE_H2}}</h2>
+        <p class="lead" id="m-done-text"></p>
+        <ol class="m-steps m-steps--done" id="m-done-steps">{{DONE_STEPS}}</ol>
+        <p class="fine" id="m-done-meta"></p>
+        <p class="fine" id="m-done-spam">{{CO_DONE_SPAM}}</p>
+        <div class="cta-row" id="m-done-actions">
+          <a class="btn" id="m-manage" href="#" hidden>{{CO_MANAGE}}</a>
+          <button class="btn btn--ghost" type="button" id="m-resend">{{CO_RESEND}}</button>
+          <a class="btn btn--ghost" href="{{HOME}}">{{CO_BACK}}</a>
+        </div>
+        <p class="fine" id="m-resend-status" role="status"></p>
+      </div>
+    </div>
+  </section>
+</main>

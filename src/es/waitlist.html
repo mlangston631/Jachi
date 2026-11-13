@@ -1,0 +1,66 @@
+<div class="form-card">
+  <form class="form" id="join-form" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <h3 class="form__title" id="join-form-title" tabindex="-1">Únase a la lista de espera</h3>
+    <p class="hp" aria-hidden="true"><label>Deje este campo vacío <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+    <input type="hidden" name="language" value="es">
+    <input type="hidden" name="source" value="website">
+    <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_term"><input type="hidden" name="utm_content">
+    <div class="form__row">
+      <div class="field">
+        <label class="label" for="join-email">Correo electrónico</label>
+        <input class="input" id="join-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required data-field="email" aria-describedby="err-email">
+        <p class="err" id="err-email" hidden>{{I:alert}}<span></span></p>
+      </div>
+      <div class="field">
+        <label class="label" for="join-state">Estado</label>
+        <select class="select" id="join-state" name="state" autocomplete="address-level1" required data-field="jstate" aria-describedby="err-jstate">
+          <option value="">Elija su estado</option>
+          {{STATE_OPTIONS}}
+        </select>
+        <p class="err" id="err-jstate" hidden>{{I:alert}}<span></span></p>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="join-name">Nombre <span class="label__opt">(opcional)</span></label>
+      <input class="input" id="join-name" name="first_name" type="text" autocomplete="given-name" maxlength="60">
+    </div>
+    <fieldset class="fs">
+      <legend class="label">Me interesa <span class="label__opt">(opcional)</span></legend>
+      <div class="checks checks--chips">{{JOIN_INTERESTS}}</div>
+    </fieldset>
+    <div class="field">
+      <label class="label" for="join-heard">¿Cómo supo de nosotros? <span class="label__opt">(opcional)</span></label>
+      <select class="select" id="join-heard" name="heard">
+        <option value="">Elija una</option>
+        <option value="search">Buscador de internet</option>
+        <option value="social">Redes sociales</option>
+        <option value="friend">Un amigo o familiar</option>
+        <option value="clinician">Un médico o una clínica</option>
+        <option value="news">Noticias o un artículo</option>
+        <option value="app-store">App Store o Google Play</option>
+        <option value="other">Otro</option>
+      </select>
+    </div>
+    <button class="btn btn--block btn--lg" type="submit" id="join-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Únase a la lista de espera</span></button>
+    <div class="form-status" id="join-status" role="status"></div>
+    <p class="fine">Al unirse, acepta recibir correos sobre nuestra apertura. Puede cancelar la suscripción cuando quiera. Nunca venderemos su información. Lea nuestro <button class="linkish" type="button" data-open="privacy">aviso de privacidad</button> y nuestra <a href="/es/datos-de-salud/">política de datos de salud del consumidor</a>.</p>
+  </form>
+
+  <div class="success" id="join-success" hidden>
+    <span class="success__icon" aria-hidden="true">{{I:check}}</span>
+    <h3 id="join-success-title" tabindex="-1">Ya está en la lista<span id="join-success-name"></span>.</h3>
+    <p>Le escribiremos a <strong id="join-success-email"></strong> cuando Jachi abra en <strong id="join-success-state"></strong>.</p>
+    <div class="share">
+      <p class="share__lead">¿Conoce a alguien a quien le serviría? Compártale Jachi.</p>
+      <div class="share__actions">
+        <button class="btn" type="button" id="join-share" data-share-url="{{SHARE_URL}}">{{I:share}}<span class="btn__label">Compartir Jachi</span></button>
+        <button class="btn btn--ghost" type="button" id="join-again">Agregar otro correo</button>
+      </div>
+      <p class="share__status" id="join-share-status" role="status"></p>
+    </div>
+    <div class="account-offer" id="join-account" hidden>
+      <p><strong>¿Quiere cambiar sus datos más adelante?</strong> Cree una cuenta gratuita para actualizar su estado y sus servicios, dejar de recibir correos o borrar sus datos cuando quiera.</p>
+      <a class="btn btn--ghost" href="/es/account/?create" id="join-account-link">{{I:user}}<span>Crear una cuenta</span></a>
+    </div>
+  </div>
+</div>

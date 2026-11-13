@@ -1,150 +1,158 @@
 {
  "/": {
-  "date": "2026-10-18",
-  "hash": "fecd308acde38006"
+  "date": "2026-11-13",
+  "hash": "5c43acd582d50141"
  },
  "/anxiety-depression-treatment/": {
-  "date": "2026-10-18",
-  "hash": "e69d2ce3bd4a3b4d"
+  "date": "2026-11-13",
+  "hash": "605211e0be822d63"
  },
  "/consumer-health-data/": {
-  "date": "2026-10-18",
-  "hash": "9b674919cf0e7d1b"
+  "date": "2026-11-13",
+  "hash": "d569f456710e0f19"
  },
  "/es/": {
-  "date": "2026-10-18",
-  "hash": "2ad2425109c319d2"
+  "date": "2026-11-13",
+  "hash": "83c8cd5e99d2ded4"
  },
  "/es/atencion-de-urgencia/": {
-  "date": "2026-10-18",
-  "hash": "546e922c59f9aa82"
+  "date": "2026-11-13",
+  "hash": "6bae2a8f8678c254"
  },
  "/es/bajar-de-peso/": {
-  "date": "2026-10-18",
-  "hash": "897e4c7d7786db26"
+  "date": "2026-11-13",
+  "hash": "be45c58e53a23ea2"
  },
  "/es/como-funciona/": {
-  "date": "2026-10-18",
-  "hash": "c3e1667be5782365"
+  "date": "2026-11-13",
+  "hash": "141ee1e0b984e262"
  },
  "/es/cuidado-de-la-piel/": {
-  "date": "2026-10-18",
-  "hash": "23fae488f07d0aa2"
+  "date": "2026-11-13",
+  "hash": "9a8001cfd140aa0e"
  },
  "/es/datos-de-salud/": {
-  "date": "2026-10-18",
-  "hash": "a97e62964ee30658"
+  "date": "2026-11-13",
+  "hash": "75732f392fb8449f"
  },
  "/es/guias/": {
-  "date": "2026-10-18",
-  "hash": "2b455415e867e823"
+  "date": "2026-11-13",
+  "hash": "5f570cf64fb0a516"
  },
  "/es/guias/atencion-en-linea-o-emergencias/": {
-  "date": "2026-10-18",
-  "hash": "01792e28745ba8c9"
+  "date": "2026-11-13",
+  "hash": "e097fcdaee9b9e05"
  },
  "/es/guias/atencion-medica-para-bajar-de-peso/": {
-  "date": "2026-10-18",
-  "hash": "d431755f6728cf09"
+  "date": "2026-11-13",
+  "hash": "295b30dae83deae0"
  },
  "/es/guias/consulta-infeccion-urinaria-en-linea/": {
-  "date": "2026-10-18",
-  "hash": "6f6272129c8dbe13"
+  "date": "2026-11-13",
+  "hash": "ea6447ad583a7932"
+ },
+ "/es/planes/": {
+  "date": "2026-11-13",
+  "hash": "4daef09e20323158"
  },
  "/es/resurtido-de-recetas/": {
-  "date": "2026-10-18",
-  "hash": "11ac6ad3f1739ac0"
+  "date": "2026-11-13",
+  "hash": "bb30ff95d7e30111"
  },
  "/es/salud-de-la-mujer/": {
-  "date": "2026-10-18",
-  "hash": "5d7a797460129699"
+  "date": "2026-11-13",
+  "hash": "98f0833f5e7d56ac"
  },
  "/es/salud-del-hombre/": {
-  "date": "2026-10-18",
-  "hash": "e95c411bc5b2fa5e"
+  "date": "2026-11-13",
+  "hash": "3f07f798ef65d2af"
  },
  "/es/salud-sexual/": {
-  "date": "2026-10-18",
-  "hash": "a30ee96c82838d87"
+  "date": "2026-11-13",
+  "hash": "fef7762432c19b8f"
  },
  "/es/terapia-en-linea/": {
-  "date": "2026-10-18",
-  "hash": "5aff8346c207f72a"
+  "date": "2026-11-13",
+  "hash": "6c1a34672c504938"
  },
  "/es/tratamiento-ansiedad-depresion/": {
-  "date": "2026-10-18",
-  "hash": "55c25d159c245216"
+  "date": "2026-11-13",
+  "hash": "6a8762bd6b804a6c"
  },
  "/es/tratamiento-infeccion-urinaria/": {
-  "date": "2026-10-18",
-  "hash": "a8589d057e0c878e"
+  "date": "2026-11-13",
+  "hash": "51ba09a93d86d53f"
  },
  "/how-it-works/": {
-  "date": "2026-10-18",
-  "hash": "0cce260124ed87af"
+  "date": "2026-11-13",
+  "hash": "8831176ee604ef26"
  },
  "/learn/": {
-  "date": "2026-10-18",
-  "hash": "69fed374c7a649ca"
+  "date": "2026-11-13",
+  "hash": "8974a7bc5619fc3f"
  },
  "/learn/medical-weight-care/": {
-  "date": "2026-10-18",
-  "hash": "c8f7865df9ba3b92"
+  "date": "2026-11-13",
+  "hash": "13f48f39b19e4130"
  },
  "/learn/online-care-or-the-er/": {
-  "date": "2026-10-18",
-  "hash": "6e5b09fcdf5bf46e"
+  "date": "2026-11-13",
+  "hash": "1d1c056abdad89ab"
  },
  "/learn/online-uti-visit/": {
-  "date": "2026-10-18",
-  "hash": "8c27b1e0745380af"
+  "date": "2026-11-13",
+  "hash": "8069ba9a12094172"
  },
  "/mens-health/": {
-  "date": "2026-10-18",
-  "hash": "ba3a57ef610047f1"
+  "date": "2026-11-13",
+  "hash": "75edb5eeba677533"
  },
  "/online-therapy/": {
-  "date": "2026-10-18",
-  "hash": "9a1b8ef591d0d506"
+  "date": "2026-11-13",
+  "hash": "6c3016b59ce30342"
+ },
+ "/plans/": {
+  "date": "2026-11-12",
+  "hash": "d6eb3d2a52657550"
  },
  "/prescription-refills/": {
-  "date": "2026-10-18",
-  "hash": "4d653587db3efe56"
+  "date": "2026-11-13",
+  "hash": "477c6ce7fbf54bdb"
  },
  "/privacy/": {
-  "date": "2026-10-18",
-  "hash": "6962b960f456c60b"
+  "date": "2026-11-13",
+  "hash": "d4b8dd55028ae91f"
  },
  "/sexual-health/": {
-  "date": "2026-10-18",
-  "hash": "d7a28243d429d99b"
+  "date": "2026-11-13",
+  "hash": "7be0879289033e08"
  },
  "/skin-care/": {
-  "date": "2026-10-18",
-  "hash": "1f979ba3451240d8"
+  "date": "2026-11-13",
+  "hash": "433be5b8ccd924d1"
  },
  "/terms/": {
-  "date": "2026-10-18",
-  "hash": "81d35bf54f8f54d6"
+  "date": "2026-11-13",
+  "hash": "dcb28da91cc1fcaa"
  },
  "/texas-medical-board/": {
   "date": "2026-10-18",
   "hash": "8fc66c696c3ad3e0"
  },
  "/urgent-care/": {
-  "date": "2026-10-18",
-  "hash": "5d7872ff1936f5e5"
+  "date": "2026-11-13",
+  "hash": "9b04c51b7f4fa724"
  },
  "/uti-treatment/": {
-  "date": "2026-10-18",
-  "hash": "5d03512b92ecab7c"
+  "date": "2026-11-13",
+  "hash": "b3e8bcc1282f02cc"
  },
  "/weight-loss/": {
-  "date": "2026-10-18",
-  "hash": "7dd0f027a2935010"
+  "date": "2026-11-13",
+  "hash": "c5387b51029d3083"
  },
  "/womens-health/": {
-  "date": "2026-10-18",
-  "hash": "fd149adafe6f2974"
+  "date": "2026-11-13",
+  "hash": "eb4cd64c63ad5d15"
  }
 }

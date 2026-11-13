@@ -5,7 +5,8 @@ Meta reviews the page an ad links to, and what the ad offers must match it. So t
 - name no drugs, drug classes or prices, and never say care can be booked now;
 - credit care to licensed clinicians;
 - stay out of search results (noindex) and out of the sitemap, because the service pages already cover search.
-The FAQ answers come from content.FAQ / content_es.FAQ by question, so they always match the home page.
+The waitlist form comes from src/<lang>/waitlist.html. These pages still describe the telehealth waitlist; step 4 of the
+membership switch rewrites them (see CLAUDE.md).
 """
 
 HUB = {"en": "/join/", "es": "/es/unase/"}
@@ -16,16 +17,48 @@ WORDS = {
         "open": "Waitlist open", "texas": "Launching nationwide",
         "points": ["Licensed clinicians", "No insurance needed", "Price shown before you start"],
         "next_title": "What happens after you join",
+        "next": ["We save your email and state, plus your first name and services if you add them.",
+                 "Before we open in your state, we email you the prices and how visits will work.",
+                 "You decide then. Nothing is booked or charged unless you choose a visit."],
         "faq_title": "Questions, answered.",
-        "faq": ["Is Jachi accepting patients yet?", "Who are the clinicians?", "How much does it cost?"],
+        "faq": [
+            ("Is Jachi accepting patients yet?",
+             "Not yet. We're getting ready to open. Visits can't be booked yet, and nothing is charged. Join the waitlist "
+             "and we'll email you before we open."),
+            ("Who are the clinicians?",
+             "Physicians, nurse practitioners and physician assistants for medical care, and licensed therapists for "
+             "therapy. Everyone will be licensed in your state, will practice through an independent medical group and "
+             "will make every clinical decision about your care. Before we open, we'll name the medical group and its "
+             "clinicians on this site, so you can check their licenses."),
+            ("How much does it cost?",
+             "We're finalizing our prices and will share them before we open, so you'll know what your care costs before "
+             "you start. Jachi is cash-pay, so you won't need insurance. Medication and lab tests are billed separately "
+             "by your pharmacy and lab."),
+        ],
     },
     "es": {
         "skip": "Saltar al contenido", "home_label": "Inicio de Jachi Health", "alt_label": "English", "alt_lang": "en",
         "open": "Lista de espera abierta", "texas": "Próximamente en todo EE. UU.",
         "points": ["Profesionales con licencia", "No necesita seguro médico", "El precio, antes de empezar"],
         "next_title": "Qué pasa después de unirse",
+        "next": ["Guardamos su correo y su estado, y también su nombre y sus servicios si los agrega.",
+                 "Antes de abrir en su estado, le enviaremos por correo los precios y cómo funcionarán las consultas.",
+                 "Usted decide entonces. No se reserva ni se cobra nada a menos que elija una consulta."],
         "faq_title": "Preguntas y respuestas.",
-        "faq": ["¿Jachi ya atiende pacientes?", "¿Quiénes son los profesionales de la salud?", "¿Cuánto cuesta?"],
+        "faq": [
+            ("¿Jachi ya atiende pacientes?",
+             "Todavía no. Nos estamos preparando para abrir. Aún no se pueden reservar consultas y no se cobra nada. "
+             "Únase a la lista de espera y le avisaremos por correo antes de abrir."),
+            ("¿Quiénes son los profesionales de la salud?",
+             "Médicos, enfermeros practicantes y asistentes médicos para la atención médica, y terapeutas con licencia "
+             "para la terapia. Todos tendrán licencia en su estado, ejercerán a través de un grupo médico independiente y "
+             "tomarán todas las decisiones clínicas sobre su atención. Antes de abrir, publicaremos en este sitio el "
+             "nombre del grupo médico y de sus profesionales, para que pueda verificar sus licencias."),
+            ("¿Cuánto cuesta?",
+             "Estamos definiendo nuestros precios y los compartiremos antes de abrir, así que sabrá cuánto cuesta su "
+             "atención antes de empezar. Jachi es de pago directo, así que no necesitará seguro médico. Los medicamentos "
+             "y los análisis de laboratorio los cobran por separado su farmacia y el laboratorio."),
+        ],
     },
 }
 
