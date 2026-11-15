@@ -71,6 +71,16 @@ def check(name, ok, detail=""):
 EXTERNAL = []  # requests that tried to leave the site, from every page the tests open
 
 
+def wait_grown(page, timeout=9000):
+    """Wait until the living leaf has finished growing. (The site's security policy forbids eval, which rules out
+    Playwright's wait_for_function, so this asks the page every 150 ms instead.)"""
+    waited = 0
+    while waited < timeout and not page.evaluate(GROWN):
+        page.wait_for_timeout(150)
+        waited += 150
+    return page.evaluate(GROWN)
+
+
 def setup(context, preview=False):
     page = context.new_page()
 
@@ -118,6 +128,36 @@ OVERFLOW_JS = """() => {
   return { scrollWidth: de.scrollWidth, clientWidth: vw, bodyScroll: document.body.scrollWidth, offenders: offenders.slice(0, 12) };
 }"""
 
+# The living leaf (src/leaf.js): how much is drawn on its canvases, and a fingerprint of the drawing
+LEAF_JS = """() => {
+  const m = document.querySelector('.canopy .leaf');
+  const pixels = c => {   // a copy made for reading, so the test raises no "read back often" warning
+    if (!c) return [];
+    const t = document.createElement('canvas');
+    t.width = c.width; t.height = c.height;
+    const x = t.getContext('2d', { willReadFrequently: true });
+    x.drawImage(c, 0, 0);
+    return x.getImageData(0, 0, t.width, t.height).data;
+  };
+  const d = pixels(m.querySelector('.leaf__veins'));
+  let ink = 0, print = 0;
+  for (let i = 3; i < d.length; i += 28) { if (d[i] > 40) ink++; print = (print * 31 + d[i]) >>> 0; }
+  const ld = pixels(m.querySelector('.leaf__light'));
+  let lit = 0;
+  for (let i = 3; i < ld.length; i += 28) if (ld[i] > 40) lit++;
+  return { live: m.classList.contains('is-live'), grown: m.classList.contains('is-grown'), ink, print, lit,
+           mode: getComputedStyle(m).getPropertyValue('--leaf-mode').trim(),
+           chips: document.querySelectorAll('.picker__list li.is-on').length,
+           hidden: m.getAttribute('aria-hidden') === 'true', events: getComputedStyle(m).pointerEvents };
+}"""
+GROWN = "document.querySelector('.canopy .leaf').classList.contains('is-grown')"
+HEADER_JS = """() => ({
+  canopy: document.body.classList.contains('has-canopy'),
+  past: document.getElementById('site-header').classList.contains('past-canopy'),
+  brand: getComputedStyle(document.querySelector('.site-header .brand__word b')).color,
+  theme: document.querySelector('meta[name=theme-color]').content.toUpperCase(),
+})"""
+
 STATIC_A11Y_JS = """() => {
   const problems = [];
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -162,8 +202,8 @@ with sync_playwright() as p:
         ov = page.evaluate(OVERFLOW_JS)
         check(f"no horizontal overflow @{w}", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
         tops = page.evaluate("[...document.querySelectorAll('#help .svc')].map(e => Math.round(e.getBoundingClientRect().top))")
-        expect_rows = 2 if w >= 1060 else (5 if w >= 640 else 10)
-        check(f"ten care cards in {expect_rows} rows @{w}", len(tops) == 10 and len(set(tops)) == expect_rows, str(tops))
+        expect_rows = 5 if w >= 640 else 10
+        check(f"the care index: ten kinds of care in {expect_rows} rows @{w}", len(tops) == 10 and len(set(tops)) == expect_rows, str(tops))
         check(f"three plans on the home page @{w}", page.locator("#plans .m-plan").count() == 3)
         page.screenshot(path=str(OUT / f"full-{w}.png"), full_page=True, animations="disabled")
         header_info = page.evaluate("""() => ({
@@ -187,7 +227,14 @@ with sync_playwright() as p:
     ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
     page, logs = setup(ctx)
     page.goto(URL, wait_until="networkidle")
-    page.wait_for_timeout(800)
+    wait_grown(page, 9000)
+    leaf = page.evaluate(LEAF_JS)
+    check("phone leaf: grown on canvas, leaning in from the side, with the picker as a list of chips",
+          leaf["live"] and leaf["mode"] == "side" and leaf["ink"] > 1500 and page.locator(".picker__list a").first.is_visible(), json.dumps(leaf))
+    page.screenshot(path=str(OUT / "leaf-phone.png"))
+    page.touchscreen.tap(352, 236); page.wait_for_timeout(350)   # on the canopy beside the headline, not on a link
+    check("phone leaf: a tap sends a ripple of light through the veins", page.evaluate(LEAF_JS)["lit"] > 60, str(page.evaluate(LEAF_JS)["lit"]))
+    page.wait_for_timeout(1500)
     toggle = page.locator(".menu-toggle")
     toggle.click()
     page.wait_for_timeout(700)
@@ -475,6 +522,53 @@ with sync_playwright() as p:
     check("home on a computer: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
+    # 2f) The canopy and the living leaf: the header's colours over the canopy and after it, the leaf grown on canvas
+    # with the picker's links at its veins, a new leaf on request, and the steps' line following the scroll
+    ctx = browser.new_context(viewport={"width": 1440, "height": 900})
+    page, logs = setup(ctx)
+    page.goto(URL, wait_until="networkidle")
+    head = page.evaluate(HEADER_JS)
+    check("canopy: the header starts light-on-dark and the browser's bar matches the canopy",
+          head["canopy"] and not head["past"] and head["brand"] == "rgb(255, 255, 255)" and head["theme"] == "#0A1E17", json.dumps(head))
+    wait_grown(page, 9000)
+    leaf = page.evaluate(LEAF_JS)
+    check("leaf: grown on canvas in the hero, with all eight picker links shown at the ends of its veins",
+          leaf["live"] and leaf["mode"] == "map" and leaf["ink"] > 4000 and leaf["chips"] == 8, json.dumps(leaf))
+    check("leaf: decoration only (hidden from screen readers, takes no clicks)", leaf["hidden"] and leaf["events"] == "none", json.dumps(leaf))
+    page.screenshot(path=str(OUT / "leaf-desktop.png"))
+    page.locator(".picker__list a").nth(2).hover(); page.wait_for_timeout(1000)
+    lit = page.evaluate(LEAF_JS)["lit"]
+    check("leaf: a picker link lights the vein that leads to it", lit > 60, str(lit))
+    page.screenshot(path=str(OUT / "leaf-path-desktop.png"))
+    page.mouse.move(300, 560); page.wait_for_timeout(300)
+    check("leaf: the note and the New leaf button show once the leaf is alive", page.locator(".leaf-note").is_visible()
+          and "No two visits grow the same leaf" in page.locator(".leaf-note").inner_text())
+    page.locator("[data-leaf-again]").click(); page.wait_for_timeout(250)
+    growing = not page.evaluate(GROWN)
+    wait_grown(page, 9000)
+    again = page.evaluate(LEAF_JS)
+    check("leaf: New leaf grows another, different leaf", growing and again["print"] != leaf["print"] and again["chips"] == 8,
+          f"{growing} {leaf['print']} {again['print']}")
+    j0 = page.evaluate("[...document.querySelectorAll('.journey .step')].map(s => s.classList.contains('is-lit'))")
+    page.evaluate("document.querySelector('.journey').scrollIntoView({block: 'start'})"); page.wait_for_timeout(900)
+    j1 = page.evaluate("[...document.querySelectorAll('.journey .step')].map(s => [s.classList.contains('is-lit'), getComputedStyle(s).getPropertyValue('--g').trim()])")
+    check("how it works: the steps wait until scrolled to, then the line fills and each step lights up",
+          len(j0) == 4 and not any(j0) and all(x[0] for x in j1) and j1[0][1] == "1.000", f"{j0} {j1}")
+    head = page.evaluate(HEADER_JS)
+    check("canopy: past it, the header wears its usual colours and the browser's bar turns light",
+          head["past"] and head["brand"] == "rgb(30, 74, 59)" and head["theme"] == "#F5F7F2", json.dumps(head))
+    page.goto(BASE + "/uti-treatment/", wait_until="networkidle")
+    wait_grown(page, 9000)
+    inner = page.evaluate(LEAF_JS)
+    check("inner pages open under the canopy too, with a leaf of their own", page.evaluate(HEADER_JS)["canopy"] and inner["mode"] == "side"
+          and inner["ink"] > 1500, json.dumps(inner))
+    page.goto(BASE + "/privacy/", wait_until="networkidle")
+    plain = page.evaluate(HEADER_JS)
+    check("pages without a canopy (the legal pages) keep the light header", not plain["canopy"] and plain["brand"] == "rgb(30, 74, 59)"
+          and plain["theme"] == "#F5F7F2", json.dumps(plain))
+    check("canopy and leaf: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+
     # 5) Desktop interactions + keyboard
     ctx = browser.new_context(viewport={"width": 1440, "height": 900})
     page, logs = setup(ctx)
@@ -571,6 +665,12 @@ with sync_playwright() as p:
     check("reduced motion: hero visible immediately", op == "1", op)
     page.mouse.wheel(0, 800); page.wait_for_timeout(300)
     check("reduced motion: nothing hidden on scroll", page.evaluate("document.querySelectorAll('[data-reveal].pre').length") == 0)
+    wait_grown(page, 4000)
+    still = page.evaluate(LEAF_JS)
+    page.touchscreen.tap(352, 236); page.wait_for_timeout(300)
+    check("reduced motion: the leaf is drawn at once, a tap moves nothing, and the steps are already filled in",
+          still["ink"] > 1500 and page.evaluate(LEAF_JS)["lit"] == 0
+          and not page.evaluate("document.querySelector('.journey').classList.contains('is-tracked')"), json.dumps(still))
     check("reduced motion: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
@@ -624,8 +724,8 @@ with sync_playwright() as p:
         ov = page.evaluate(OVERFLOW_JS)
         check(f"es: no horizontal overflow @{w}", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
         tops = page.evaluate("[...document.querySelectorAll('#help .svc')].map(e => Math.round(e.getBoundingClientRect().top))")
-        expect_rows = 2 if w >= 1060 else (5 if w >= 640 else 10)
-        check(f"es: ten care cards in {expect_rows} rows @{w}", len(tops) == 10 and len(set(tops)) == expect_rows, str(tops))
+        expect_rows = 5 if w >= 640 else 10
+        check(f"es: the care index: ten kinds of care in {expect_rows} rows @{w}", len(tops) == 10 and len(set(tops)) == expect_rows, str(tops))
         es_nav = page.evaluate("[...document.querySelectorAll('.nav a')].filter(a => a.offsetParent).map(a => Math.round(a.getBoundingClientRect().height))")
         if w >= 1100:
             check(f"es: header nav on one line @{w}", len(es_nav) == 4 and max(es_nav) < 50, str(es_nav))

@@ -131,8 +131,16 @@ keep replies short and plain, and ask only questions that change what you'll do.
 
 - Colours: forest `#1E4A3B`, moss `#4F7A5F`, sage `#9BC1A3`, mist `#F5F7F2`. Fonts: Fraunces for headings,
   Instrument Sans for text. Leaf logo in `brand.py`.
-- Mobile first, no sideways scrolling at 360px wide, calm motion that stops under reduced-motion settings,
-  full keyboard and screen-reader support. The QA covers 9 screen sizes in both languages.
+- The look (Nov 14, 2026, when he asked for a UI "like never before seen"): every page opens under a forest-dark
+  canopy (`.canopy`) with a leaf that grows itself on canvas (`src/leaf.js`; a new random leaf each visit, so no two
+  visitors see the same one; on the home page its veins lead to the quick picker and "New leaf" grows another), reads
+  on mist, and ends on a dark sheet. The header wears light-on-dark colours over the canopy and the usual ones after
+  it. Icons and step numbers sit on leaf-shaped badges. Keep it to one living thing per page (the leaf); everything
+  else stays still unless the visitor scrolls, taps, hovers or focuses. The leaf is decoration: hidden from screen
+  readers, no text in it, nothing loaded from anywhere.
+- Mobile first, no sideways scrolling at 360px wide, calm motion that stops under reduced-motion settings (the leaf
+  is then drawn at once and nothing moves), full keyboard and screen-reader support. The QA covers 9 screen sizes in
+  both languages.
 
 ## Membership billing
 

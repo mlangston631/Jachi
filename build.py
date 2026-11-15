@@ -174,12 +174,13 @@ def faq_items(items):
 
 
 def care_card(c, i, B):
-    """A card on the home page for one kind of care, linking to its service page."""
-    return (f'<article class="svc svc--care" data-reveal style="--d:{(i % 3) * 80}ms">'
+    """A row in the home page's index of care, linking to its service page."""
+    return (f'<article class="svc" data-reveal style="--d:{(i % 2) * 70}ms">'
             f'<span class="svc__ic">{icon_svg(c["icon"])}</span>'
             f'<h3><a class="svc__link" href="{c["href"]}">{esc(c["name"])}'
             f'<span class="visually-hidden">: {esc(B["learn_more"].format(x=lower_first(c["name"])))}</span></a></h3>'
-            f'<p class="svc__desc">{esc(c["card"])}</p></article>')
+            f'<p class="svc__desc">{esc(c["card"])}</p>'
+            f'<span class="svc__go" aria-hidden="true">{icon_svg("arrow")}</span></article>')
 
 
 def footer_care(L):
@@ -278,7 +279,10 @@ ICON_LINKS = ('<link rel="icon" href="/favicon.ico" sizes="32x32">\n'
 
 def js_for(lang, rules=False):
     L = Lang(lang)
-    text = ((SRC / "app.js").read_text()
+    text = (SRC / "app.js").read_text()
+    if "/*LEAF_JS*/" not in text:
+        raise SystemExit("leaf hook missing")
+    text = (text.replace("/*LEAF_JS*/", (SRC / "leaf.js").read_text())  # the living leaf, kept in its own file
             .replace("/*ICONS_JSON*/", json.dumps(ICONS))
             .replace("/*EMAIL_JSON*/", json.dumps(EMAIL))
             .replace("/*STRINGS_JSON*/", json.dumps({k: v for k, v in L.T.items() if not k.startswith("a_")}, ensure_ascii=False)))
@@ -290,8 +294,12 @@ def js_for(lang, rules=False):
     return text
 
 
+CANOPY = re.compile(r'class="[^"]*\bcanopy\b')
+
+
 def head(page, main_html):
     lang = page["lang"]
+    theme = "#0A1E17" if CANOPY.search(main_html) else "#F5F7F2"
     url = SITE_URL + page["path"]
     # The italic (76 KB) is only a few words in headings: preloading it slowed the main fonts and the page's
     # largest paint (LCP) on phones, so it loads when first used instead.
@@ -324,7 +332,7 @@ def head(page, main_html):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(page["title"])}</title>
 <meta name="description" content="{esc(page["description"])}">
-<meta name="theme-color" content="#F5F7F2">
+<meta name="theme-color" content="{theme}">
 {links}
 {ICON_LINKS}
 {robots}{canonical}{alternates}{og}{ld}<style>
@@ -350,12 +358,13 @@ def document(page, body):
     top = head(page, page.get("main", body))
     if page.get("strict_scripts"):
         top = top.replace('<meta charset="utf-8">\n', '<meta charset="utf-8">\n' + script_policy(contents), 1)
+    canopy = CANOPY.search(body)
     return f"""<!doctype html>
-<html lang="{page["lang"]}">
+<html lang="{page["lang"]}"{' class="under-canopy"' if canopy else ""}>
 <head>
 {top}
 </head>
-<body>
+<body{' class="has-canopy"' if canopy else ""}>
 {body}
 {tags}
 </body>
@@ -1097,22 +1106,22 @@ build_admin()
 # ---------- Page not found ----------
 
 NOT_FOUND_CSS = """
-.nf-page{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;padding:0}
+.nf-page{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;padding:0;border-radius:0}
 .nf-top{display:flex;align-items:center;min-height:var(--header-h);padding-top:env(safe-area-inset-top,0px)}
 .nf{position:relative;z-index:1;flex:1;display:grid;align-content:center;justify-items:start;gap:22px;padding-block:40px 64px}
 .nf .display{max-width:12ch}
 .nf .lead{max-width:30em}
-.nf .fine a{color:var(--forest);font-weight:600;text-underline-offset:3px}
-.nf__art{position:absolute;z-index:0;right:-140px;bottom:-170px;width:min(620px,80vw);color:rgba(30,74,59,.08);transform:rotate(-18deg);pointer-events:none}
+.nf .fine a{color:#fff;font-weight:600;text-underline-offset:3px}
+.nf__art{position:absolute;z-index:0;right:-140px;bottom:-170px;width:min(620px,80vw);color:rgba(255,255,255,.07);transform:rotate(-18deg);pointer-events:none}
 @media (max-width:640px){.nf__art{right:-180px;bottom:-120px}.nf .cta-row .btn{width:100%}}
 """
 L = Lang("en")
 nf_main = render(part("en", "404"), L, {})
 nf_page = {"lang": "en", "path": "/404", "noindex": True, "css": NOT_FOUND_CSS, "main": nf_main,
            "title": "Page not found | Jachi Health",
-           "description": "This page doesn't exist. Visit Jachi Health's homepage for online care from licensed clinicians."}
+           "description": "This page doesn't exist. Visit Jachi Health's homepage for plans and care coordination in Texas."}
 nf_html = f"""<!doctype html>
-<html lang="en">
+<html lang="en" class="under-canopy">
 <head>
 {head(nf_page, nf_main)}
 </head>

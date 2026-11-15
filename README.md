@@ -114,6 +114,7 @@ The published files are generated. Edit the source, then rebuild:
 | Legal pages | `src/en/privacy.html`, `terms.html`, `texas-medical-board.html`; the health data policy in `src/<lang>/health-data.html` |
 | Styles | `src/style.css` |
 | Interactive behaviour | `src/app.js` |
+| The living leaf at the top of each page (grown on canvas, a new one each visit) | `src/leaf.js` (built into `app.js`), placed by `.leaf` in `src/style.css` |
 | Chat assistant's instructions and server code | `chatbot.py` |
 | Account and admin server code | `src/functions/lib.mjs` (shared), `account.mjs`, `admin.mjs` |
 | Plans, prices and checkout wording | `membership.py` (prices must match Stripe) |

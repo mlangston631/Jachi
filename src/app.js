@@ -25,12 +25,24 @@
   const hasIO = 'IntersectionObserver' in window;
   const onMedia = (mq, fn) => (mq.addEventListener ? mq.addEventListener('change', fn) : mq.addListener(fn));
 
-  /* ---------- Header state ---------- */
+  /* ---------- Header state ----------
+     Pages open under a dark canopy: the header wears its light-on-dark colours over it and switches to the usual
+     ones once the canopy has scrolled away. The browser's own bar (theme-color) follows. */
   const header = $('#site-header');
+  const canopy = $('.canopy');
+  const themeColor = $('meta[name="theme-color"]');
   let headerTick = false;
+  let pastCanopy = null;
   const syncHeader = () => {
     headerTick = false;
-    if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (!header) return;
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (!canopy) return;
+    const past = canopy.getBoundingClientRect().bottom < header.getBoundingClientRect().height * 0.6;
+    if (past === pastCanopy) return;
+    pastCanopy = past;
+    header.classList.toggle('past-canopy', past);
+    if (themeColor) themeColor.setAttribute('content', past ? '#F5F7F2' : '#0A1E17');
   };
   window.addEventListener('scroll', () => {
     if (!headerTick) { headerTick = true; requestAnimationFrame(syncHeader); }
@@ -108,34 +120,30 @@
   };
   window.addEventListener('scroll', armReveal, { passive: true, once: true });
 
-  /* ---------- Hero parallax and tile spotlight (fine pointers only) ---------- */
-  const stage = $('#stage');
-  const hero = $('.hero');
-  if (stage && hero && mqFine.matches && !reduced()) {
-    let raf = 0, px = 0, py = 0;
-    const clamp = v => Math.max(-1, Math.min(1, v));
-    hero.addEventListener('pointermove', e => {
-      const r = stage.getBoundingClientRect();
-      px = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2));
-      py = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2));
-      if (!raf) raf = requestAnimationFrame(() => {
-        raf = 0;
-        stage.style.setProperty('--px', px.toFixed(3));
-        stage.style.setProperty('--py', py.toFixed(3));
+  /* ---------- How it works: the line between the steps follows the scroll ----------
+     Each step's line fills (--g, 0 to 1) as the visitor scrolls through the steps, and a step lights up when the
+     line reaches it. Without this (or with reduced motion) the CSS shows everything filled in. */
+  const journey = $('.journey');
+  if (journey && !reduced()) {
+    const jSteps = $$('.step', journey);
+    let jTick = false;
+    const track = () => {
+      jTick = false;
+      const r = journey.getBoundingClientRect(), vh = window.innerHeight;
+      const p = Math.max(0, Math.min(1, (vh * 0.8 - r.top) / (r.height + vh * 0.12)));
+      jSteps.forEach((step, i) => {
+        const at = p * jSteps.length - i;
+        step.style.setProperty('--g', Math.max(0, Math.min(1, at)).toFixed(3));
+        step.classList.toggle('is-lit', at > 0);
       });
-    });
-    hero.addEventListener('pointerleave', () => {
-      stage.style.setProperty('--px', '0');
-      stage.style.setProperty('--py', '0');
-    });
+    };
+    journey.classList.add('is-tracked');
+    window.addEventListener('scroll', () => { if (!jTick) { jTick = true; requestAnimationFrame(track); } }, { passive: true });
+    window.addEventListener('resize', track);
+    track();
   }
-  if (mqFine.matches) {
-    $$('.tile').forEach(t => t.addEventListener('pointermove', e => {
-      const r = t.getBoundingClientRect();
-      t.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      t.style.setProperty('--my', `${e.clientY - r.top}px`);
-    }));
-  }
+
+/*LEAF_JS*/
 
   /* ---------- Shared form helpers ---------- */
   const setError = (key, message) => {

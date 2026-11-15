@@ -2,7 +2,7 @@
 .m-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px;align-items:stretch}
 .m-plan{display:flex;flex-direction:column;gap:14px;padding:28px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--paper);box-shadow:var(--shadow-sm)}
 .m-plan--featured{border:2px solid var(--forest);box-shadow:var(--shadow-md)}
-.m-plan--dark{background:var(--forest-ink);border-color:var(--forest-ink);color:var(--on-dark)}
+.m-plan--dark{background:linear-gradient(165deg,var(--canopy-1),var(--canopy-0));border-color:var(--canopy-0);color:var(--on-dark)}
 .m-plan__head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px}
 .m-plan__name{font-family:var(--font-body);font-size:1.1rem;font-weight:600;letter-spacing:0;color:var(--text-2)}
 .m-plan--dark .m-plan__name{color:var(--sage)}
