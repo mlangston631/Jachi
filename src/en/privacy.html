@@ -2,7 +2,7 @@
   <div class="wrap legal__wrap">
     {{CRUMBS}}
     <h1 class="h2" id="page-title">Privacy policy</h1>
-    <p class="fine legal__date">Effective November 12, 2026</p>
+    <p class="fine legal__date">Effective November 15, 2026</p>
     <div class="prose">
       <p>This policy explains what information Jachi Health ("Jachi," "we," "us") collects through jachihealth.com and the Jachi Health app, how we use it and the choices you have. Jachi coordinates care but doesn't provide it: the providers you see keep your medical records under their own privacy notices.</p>
 
@@ -11,7 +11,7 @@
       <ul>
         <li><strong>Waitlist sign-ups:</strong> your email address and state, plus your first name and the services you're interested in if you choose to give them, and the language of the page you used. If you came to our site from one of our ads, we also record the ad's name and campaign with your sign-up.</li>
         <li><strong>Sign-up forms in our Facebook and Instagram ads:</strong> if you join the waitlist through one, Meta collects what you enter (your email, first name and state) under its own privacy policy and passes it to us. We use it only as this policy describes.</li>
-        <li><strong>Accounts:</strong> if you create one, your email address, a password (which our hosting provider stores only in scrambled form, so no one can read it), and the details you choose to save: your state, the services you're interested in, the language for our emails and whether you want them. We also keep when you created the account and when you last logged in.</li>
+        <li><strong>Accounts:</strong> if you create one, your email address, a password (which our hosting provider stores only in scrambled form, so no one can read it), and the details you choose to save: your state, the services you're interested in, the language for our emails and whether you want them. We also keep when you created the account and when you last logged in. If you're a member, your account page also shows your plan and invoices. It reads them from Stripe each time you open the page; they aren't saved in your account.</li>
         <li><strong>Memberships:</strong> your name, email address, mobile phone number, preferred language, the plan you choose, who referred you if you tell us, and a record of the terms you agreed to and when. Stripe, our payment processor, collects your card details on its own page: we never see or store your card number.</li>
         <li><strong>Support tickets:</strong> your name, email address, topic and message and, if you choose, a copy of your conversation with our AI assistant.</li>
         <li><strong>Help chat messages:</strong> what you type to our AI assistant.</li>
@@ -24,7 +24,7 @@
       <p>The app's waitlist sign-up, account, support tickets and AI guide send the same information as the website's, described above, and are covered by this policy. The AI guide never sends your journal.</p>
       <h3>Information collected automatically</h3>
       <p>Like most websites, our hosting provider records basic technical information when you visit, such as your IP address, browser type, the pages you request and when. It's used to deliver the site, keep it secure and prevent abuse, for example by limiting how many chat messages one visitor can send in a minute. This site doesn't use analytics or advertising trackers, and it loads nothing from other companies' servers. The app doesn't contain analytics, advertising or tracking code either. When it opens, it asks Expo, our app-update service, whether a newer version is ready; that check sends a random ID for your copy of the app, the app version and your phone's platform, and never your name, email or journal. If you choose to share diagnostics with app developers in your phone's settings, Apple or Google may send us anonymous crash reports.</p>
-      <p>If you log in to an account, your browser keeps a sign-in token in its local storage, so you stay logged in. Logging out removes it. It's never used for tracking or advertising.</p>
+      <p>If you log in to an account, your browser keeps a sign-in token in its local storage, so you stay logged in, and a number that draws your own leaf on the account page. Logging out removes both. They're never used for tracking or advertising.</p>
       <p>If you arrive from one of our ads, the link includes the ad's name and campaign. Your browser keeps them for that visit only, in its session storage, and sends them with the waitlist form if you join. They tell us which ads bring sign-ups. We don't use cookies or pixels for this, and we don't send it to Meta or any other ad company.</p>
 
       <h2 id="use">How we use it</h2>
@@ -46,7 +46,7 @@
         <li><strong>The providers you choose:</strong> when your coordinator books or prices care for you, the practice gets what it needs for that, such as your name, contact details and the kind of visit.</li>
         <li><strong>Netlify</strong> hosts the website, stores sign-ups, tickets and accounts, sends account emails, and runs the site's server code.</li>
         <li><strong>Stripe</strong> processes membership payments. It receives your name, email address, phone number, plan and payment details, and emails your invoices and receipts.</li>
-        <li><strong>Our email delivery service</strong> sends membership emails, such as your welcome email, payment reminders and cancellation confirmations.</li>
+        <li><strong>Our email delivery service</strong> sends membership emails, such as your welcome email, payment reminders and cancellation confirmations, and the automatic replies that confirm a waitlist sign-up or a support ticket. It receives your email address and first name, never what you chose or wrote.</li>
         <li><strong>Anthropic</strong> provides the AI that writes help chat replies. Your chat messages are sent to Anthropic, through Netlify, to generate each reply.</li>
         <li><strong>Our email provider</strong> hosts our support inbox, where tickets and your emails arrive.</li>
         <li><strong>Expo</strong> builds the Jachi Health app and delivers its updates, as described above.</li>

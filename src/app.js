@@ -33,6 +33,39 @@
   const themeColor = $('meta[name="theme-color"]');
   let headerTick = false;
   let pastCanopy = null;
+  // Plans: pay monthly or yearly. The switch changes every plan card's price, and the checkout opens on that choice.
+  const billingSwitches = $$('[data-billing-switch]');
+  const setBilling = mode => {
+    billingSwitches.forEach(sw => {
+      sw.dataset.on = mode;
+      $$('button', sw).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.billing === mode)));
+    });
+    $$('[data-price]').forEach(el => {
+      const [amount, per] = el.dataset[mode].split('|');
+      el.firstChild.textContent = amount;
+      el.lastElementChild.textContent = per;
+      if (!reduced() && el.animate) el.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'ease-out' });
+    });
+    $$('[data-alt]').forEach(el => { el.textContent = el.dataset[mode]; });
+    $$('[data-plan-link]').forEach(a => {
+      const url = new URL(a.getAttribute('href'), window.location.href);
+      if (mode === 'yearly') url.searchParams.set('billing', 'yearly'); else url.searchParams.delete('billing');
+      a.setAttribute('href', url.pathname + url.search);
+    });
+  };
+  billingSwitches.forEach(sw => {
+    sw.hidden = false;
+    sw.addEventListener('click', e => {
+      const button = e.target.closest('button[data-billing]');
+      if (button && button.getAttribute('aria-pressed') !== 'true') setBilling(button.dataset.billing);
+    });
+  });
+
+  // Signed in on this browser (the account page keeps the session there): the header says "My account".
+  try {
+    if (window.localStorage.getItem('jachi.session')) $$('[data-login-text]').forEach(el => { el.textContent = T.my_account; });
+  } catch (err) { /* storage blocked */ }
+
   const syncHeader = () => {
     headerTick = false;
     if (!header) return;

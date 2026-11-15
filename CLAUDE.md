@@ -17,7 +17,7 @@ keep replies short and plain, and ask only questions that change what you'll do.
    - Every service page in `pages.py` has a Spanish twin in `pages_es.py` (`/es/<slug>/`); change both. Pages in both
      languages name each other (`hreflang`), and tests/qa.py checks every pair.
    - New text shown by `src/app.js` or the account page goes in `strings.py` under both `EN` and `ES`
-     (account page keys start with `a_`). The admin console is English only.
+     (account page keys start with `a_`, the member page's with `a_p_`). The admin console is English only.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.
 3. `python3 build.py`
 4. `node tests/function.test.mjs`, `node tests/membership.test.mjs` and `python3 tests/qa.py`. Every check must pass. Fix the cause rather than
@@ -48,7 +48,8 @@ keep replies short and plain, and ask only questions that change what you'll do.
   functions, member emails, terms and privacy (done); 2) home page, How it works, service pages and the help chat
   rewritten for the membership; 3) Find care, Book a visit and For providers, only with real partner practices;
   4) ad landing pages and accounts. Step 2 is done: the site describes the membership, and the decisions below
-  follow it. Until step 4, the ad landing pages (`landing.py`) and accounts still describe the telehealth waitlist.
+  follow it. The accounts half of step 4 is done (Nov 15, 2026): `/account/` is the member page. Until the rest of
+  step 4, the ad landing pages (`landing.py`) still describe the telehealth waitlist.
 
 - Memberships are for adults 18 and older who live in Texas (step 2 of the switch, following the launch plan; ask him
   before changing it). The telehealth waitlist on the ad pages launched nationwide on Oct 17, 2026. Keep the Texas
@@ -92,9 +93,16 @@ keep replies short and plain, and ask only questions that change what you'll do.
   classes, refills, prescriptions or prices (`BANNED`, checked by tests/qa.py), and their footer links only to the
   legal pages. No Meta pixel or Conversions API: an ad's `utm_*` tags are saved with the sign-up and shown in the
   admin console, and sign-ups are never sent to Meta or used for ad audiences.
-- Accounts (`/account/`, Netlify Identity) are for waitlist details only: state, services, language, emails
-  on or off. Never add health fields. Deleting an account also deletes that email's sign-ups and tickets, but only
-  when the person proved the email by a link we sent (`provedEmail`) and Identity's autoconfirm is off.
+- Accounts (`/account/`, Netlify Identity) are the member page (Nov 15, 2026, when he asked for a client portal).
+  A signed-in member sees their plan, dates and invoices, how to reach their coordinator ("Ask for a call" opens the
+  ticket form) and their settings. The plan and invoices are read from Stripe by `/api/member` each time the page
+  opens and are never copied into the account, which still stores only state, services, language and emails on or
+  off. Never add health fields, and never show visits, records, what care someone asked for or messages about
+  care: those need a HIPAA-compliant system with a BAA. `/api/member` answers only for an email the person proved by
+  a link we sent (`provedEmail`) and never while Identity's autoconfirm is on; the page links to Stripe's own pages
+  only (addresses on stripe.com). `/account/?demo` shows a sample member page with made-up details; it is switched
+  off on jachihealth.com. Deleting an account also deletes that email's sign-ups and tickets, under the same
+  `provedEmail` and autoconfirm rules.
 - Admin console (`/admin/`): admins are accounts with the "admin" role in Netlify's Identity tab, or accounts
   whose email is in `ADMIN_EMAILS` (default: the support email) that were created from an invitation sent in
   Netlify (`invited_at`). Without the invitation rule, a stranger could sign up with the admin address first;
@@ -117,7 +125,7 @@ keep replies short and plain, and ask only questions that change what you'll do.
   context only, so Deploy Previews built from pull requests never get it), optional `ADMIN_EMAILS`, and
   optional `ANTHROPIC_API_KEY`. Environment variable changes need a redeploy. Keep Netlify's sensitive variable
   policy on "Require approval" so pull requests from strangers don't deploy with secrets.
-- The admin and account functions check the person's sign-in with Identity on every request. Everything the
+- The admin, account and member functions check the person's sign-in with Identity on every request. Everything the
   admin console shows was typed by the public: keep escaping it, keep every CSV cell quoted with the formula
   guard, and keep reply links to addresses that pass the strict `MAILTO_RE`. The account and admin pages also
   carry their own script policy (`script_policy` in `build.py`) that lets only their exact inline scripts run;
@@ -138,6 +146,10 @@ keep replies short and plain, and ask only questions that change what you'll do.
   it. Icons and step numbers sit on leaf-shaped badges. Keep it to one living thing per page (the leaf); everything
   else stays still unless the visitor scrolls, taps, hovers or focuses. The leaf is decoration: hidden from screen
   readers, no text in it, nothing loaded from anywhere.
+- The member page (Nov 15, 2026): its leaf is the member's own, grown from their account id (`data-seed` on the
+  mount), so it is the same every time they log in. Its sections (Overview, Billing, Help, Settings) sit in a bar at
+  the bottom of a phone and above the page on a computer. Plan cards have a Monthly / Yearly switch that changes every
+  price and the checkout link, and a thin line under the header fills as a page scrolls (CSS only).
 - Mobile first, no sideways scrolling at 360px wide, calm motion that stops under reduced-motion settings (the leaf
   is then drawn at once and nothing moves), full keyboard and screen-reader support. The QA covers 9 screen sizes in
   both languages.
@@ -152,4 +164,10 @@ keep replies short and plain, and ask only questions that change what you'll do.
 - Member emails (English and Spanish, wording in `billing.mjs`): one step left (with the Pay button), a payment nudge
   a day later if unpaid, welcome when the first invoice is paid, a heads-up two weeks before a yearly renewal,
   cancellation confirmed (with the 30-day refund note), cancellation undone, membership ended. Each is sent once.
+- Automatic replies (Nov 15, 2026): Netlify runs `submission-created.mjs` for every accepted waitlist sign-up
+  (`waitlist_joined`, "You're on the list") and support ticket (`ticket_received`, "We got your message"). They go
+  through the same email service, never repeat what the person chose or wrote (services and ticket text can be
+  health details), carry the 911 and 988 lines, and stop at three an hour per address. `EMAIL_FROM` is a no-reply
+  address with `EMAIL_REPLY_TO` set to the support email, so a reply still reaches a person.
+  `node tools/email_preview.mjs` writes `dist/emails.html`, every email in both languages.
 - `node tests/membership.test.mjs` runs the billing tests against an in-memory fake of Stripe (`tests/fake-stripe.mjs`).

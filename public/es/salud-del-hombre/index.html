@@ -1248,6 +1248,14 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
 
 /* Moving between pages of the site cross-fades (browsers that support it), unless motion is reduced */
 @media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+/* Reading progress: a thin line under the header that fills as the page scrolls. No script; it only moves when the visitor does. */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:scroll()){
+    .site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--sage);transform-origin:0 50%;scale:0 1;pointer-events:none;animation:readProgress linear both;animation-timeline:scroll(root block)}
+    @keyframes readProgress{to{scale:1 1}}
+    .site-header.menu-open::after{display:none}
+  }
+}
 
 
 </style>
@@ -1268,7 +1276,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
       <a href="/es/#faq">Preguntas</a>
     </nav>
     <a class="lang-switch" href="/mens-health/" hreflang="en" lang="en" aria-label="English"><span class="lang-switch__long">English</span><span class="lang-switch__short">EN</span></a>
-    <a class="login-link" href="/es/account/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg><span class="login-link__text">Iniciar sesión</span></a>
+    <a class="login-link" href="/es/account/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg><span class="login-link__text" data-login-text>Iniciar sesión</span></a>
     <a class="btn btn--sm header-cta" href="/es/planes/">Elija su plan</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
       <span class="line" aria-hidden="true"></span><span class="line" aria-hidden="true"></span><span class="visually-hidden">Menú</span>
@@ -1289,7 +1297,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
   </nav>
   <div class="mobile-menu__foot">
     <a class="btn btn--block btn--lg" href="/es/planes/">Elija su plan <svg class="i i--arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-    <a class="btn btn--ghost btn--block" href="/es/account/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg> Iniciar sesión</a>
+    <a class="btn btn--ghost btn--block" href="/es/account/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg> <span data-login-text>Iniciar sesión</span></a>
     <p class="fine">Para adultos de 18 años o más que viven en Texas.</p>
   </div>
 </div>
@@ -1488,6 +1496,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
           <option value="Waitlist">Lista de espera</option>
           <option value="Website problem">Problema con el sitio web</option>
           <option value="Partnerships or press">Alianzas o prensa</option>
+          <option value="Call me back" data-topic="call">Quiero que me llamen</option>
           <option value="Something else">Otro tema</option>
         </select>
       </div>
@@ -1546,9 +1555,9 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const ICONS = {"arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "arrow-left": "<path d=\"M19 12H5\"/><path d=\"M11 6l-6 6 6 6\"/>", "check": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "steth": "<path d=\"M6 3.5V9a4 4 0 0 0 8 0V3.5\"/><path d=\"M10 13v1.5a5 5 0 0 0 10 0V12.5\"/><circle cx=\"20\" cy=\"10.5\" r=\"2\"/>", "shield": "<path d=\"M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z\"/><path d=\"M8.8 12.2l2.2 2.2 4.4-4.6\"/>", "spark": "<path d=\"M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z\"/><path d=\"M19 3.5v3M17.5 5h3\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/>", "box": "<path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5\"/><path d=\"M12 12v9\"/>", "home": "<path d=\"M4 11l8-7 8 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>", "pharmacy": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>", "lock": "<rect x=\"5\" y=\"11\" width=\"14\" height=\"9.5\" rx=\"2\"/><path d=\"M8 11V8a4 4 0 0 1 8 0v3\"/>", "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5\"/><path d=\"M12 7.6v.4\"/>", "alert": "<path d=\"M12 4.5l8.5 15h-17z\"/><path d=\"M12 10v4.2\"/><path d=\"M12 16.8v.3\"/>", "msg": "<path d=\"M4 5.5h16v11H10l-4.5 3.5v-3.5H4z\"/>", "clip": "<rect x=\"5.5\" y=\"4.5\" width=\"13\" height=\"16\" rx=\"2\"/><path d=\"M9 4.5v-1h6v1\"/><path d=\"M9 10h6M9 14h4\"/>", "x": "<path d=\"M6 6l12 12M18 6L6 18\"/>", "mail": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"M4.5 7.5l7.5 5.5 7.5-5.5\"/>", "thermo": "<path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9.5v6\"/>", "pill": "<rect x=\"3.5\" y=\"8.5\" width=\"17\" height=\"7\" rx=\"3.5\" transform=\"rotate(-45 12 12)\"/><path d=\"M9.6 9.6l4.8 4.8\"/>", "mind": "<path d=\"M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20\"/><path d=\"M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z\"/>", "scale": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8.5 10a5 5 0 0 1 7 0\"/><path d=\"M12 12.6l1.7-2.5\"/>", "phone": "<path d=\"M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z\"/>", "heart": "<path d=\"M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z\"/>", "talk": "<path d=\"M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z\"/><path d=\"M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8\"/>", "male": "<circle cx=\"10\" cy=\"14\" r=\"5.5\"/><path d=\"M14 10l6-6\"/><path d=\"M15 4h5v5\"/>", "female": "<circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M12 14.5V21\"/><path d=\"M9 18h6\"/>", "drop": "<path d=\"M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z\"/><path d=\"M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6\"/>", "video": "<rect x=\"3\" y=\"6.5\" width=\"12.5\" height=\"11\" rx=\"2.5\"/><path d=\"M15.5 10.5l5-3v9l-5-3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/>", "chat": "<path d=\"M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z\"/><path d=\"M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01\"/>", "send": "<path d=\"M12 19V5\"/><path d=\"M6 11l6-6 6 6\"/>", "share": "<path d=\"M12 15V4\"/><path d=\"M8 8l4-4 4 4\"/><path d=\"M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11\"/>", "plus": "<path d=\"M12 5.5v13M5.5 12h13\"/>", "out": "<path d=\"M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14\"/><path d=\"M10 16.5L5.5 12 10 7.5\"/><path d=\"M5.5 12H15\"/>", "trash": "<path d=\"M4.5 7h15\"/><path d=\"M9.5 7V4.8h5V7\"/><path d=\"M6.5 7l1 12.5h9l1-12.5\"/><path d=\"M10.2 10.8v5.4M13.8 10.8v5.4\"/>", "download": "<path d=\"M12 4v11\"/><path d=\"M7.5 10.5L12 15l4.5-4.5\"/><path d=\"M5 19.5h14\"/>", "refresh": "<path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4.5v4.2h-4.2\"/>", "eye": "<path d=\"M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>", "eye-off": "<path d=\"M4 4l16 16\"/><path d=\"M9.9 6A9.8 9.8 0 0 1 12 5.5c5.8 0 9.2 6.5 9.2 6.5a16.6 16.6 0 0 1-3 3.8M14.1 18.2a9.6 9.6 0 0 1-2.1.3c-5.8 0-9.2-6.5-9.2-6.5a16.4 16.4 0 0 1 3.4-4.2\"/><path d=\"M10 10a2.8 2.8 0 0 0 4 4\"/>"};
+  const ICONS = {"arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "card": "<rect x=\"3\" y=\"5.5\" width=\"18\" height=\"13\" rx=\"2.6\"/><path d=\"M3 10h18\"/><path d=\"M7 15h3.5\"/>", "sliders": "<path d=\"M4 7h9\"/><path d=\"M19 7h1\"/><circle cx=\"16\" cy=\"7\" r=\"2.4\"/><path d=\"M4 17h1\"/><path d=\"M11 17h9\"/><circle cx=\"8\" cy=\"17\" r=\"2.4\"/>", "external": "<path d=\"M14 5h5v5\"/><path d=\"M19 5l-8 8\"/><path d=\"M11 7H7.5A2.5 2.5 0 0 0 5 9.5v7A2.5 2.5 0 0 0 7.5 19h7a2.5 2.5 0 0 0 2.5-2.5V13\"/>", "arrow-left": "<path d=\"M19 12H5\"/><path d=\"M11 6l-6 6 6 6\"/>", "check": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "steth": "<path d=\"M6 3.5V9a4 4 0 0 0 8 0V3.5\"/><path d=\"M10 13v1.5a5 5 0 0 0 10 0V12.5\"/><circle cx=\"20\" cy=\"10.5\" r=\"2\"/>", "shield": "<path d=\"M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z\"/><path d=\"M8.8 12.2l2.2 2.2 4.4-4.6\"/>", "spark": "<path d=\"M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z\"/><path d=\"M19 3.5v3M17.5 5h3\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/>", "box": "<path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5\"/><path d=\"M12 12v9\"/>", "home": "<path d=\"M4 11l8-7 8 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>", "pharmacy": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>", "lock": "<rect x=\"5\" y=\"11\" width=\"14\" height=\"9.5\" rx=\"2\"/><path d=\"M8 11V8a4 4 0 0 1 8 0v3\"/>", "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5\"/><path d=\"M12 7.6v.4\"/>", "alert": "<path d=\"M12 4.5l8.5 15h-17z\"/><path d=\"M12 10v4.2\"/><path d=\"M12 16.8v.3\"/>", "msg": "<path d=\"M4 5.5h16v11H10l-4.5 3.5v-3.5H4z\"/>", "clip": "<rect x=\"5.5\" y=\"4.5\" width=\"13\" height=\"16\" rx=\"2\"/><path d=\"M9 4.5v-1h6v1\"/><path d=\"M9 10h6M9 14h4\"/>", "x": "<path d=\"M6 6l12 12M18 6L6 18\"/>", "mail": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"M4.5 7.5l7.5 5.5 7.5-5.5\"/>", "thermo": "<path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9.5v6\"/>", "pill": "<rect x=\"3.5\" y=\"8.5\" width=\"17\" height=\"7\" rx=\"3.5\" transform=\"rotate(-45 12 12)\"/><path d=\"M9.6 9.6l4.8 4.8\"/>", "mind": "<path d=\"M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20\"/><path d=\"M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z\"/>", "scale": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8.5 10a5 5 0 0 1 7 0\"/><path d=\"M12 12.6l1.7-2.5\"/>", "phone": "<path d=\"M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z\"/>", "heart": "<path d=\"M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z\"/>", "talk": "<path d=\"M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z\"/><path d=\"M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8\"/>", "male": "<circle cx=\"10\" cy=\"14\" r=\"5.5\"/><path d=\"M14 10l6-6\"/><path d=\"M15 4h5v5\"/>", "female": "<circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M12 14.5V21\"/><path d=\"M9 18h6\"/>", "drop": "<path d=\"M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z\"/><path d=\"M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6\"/>", "video": "<rect x=\"3\" y=\"6.5\" width=\"12.5\" height=\"11\" rx=\"2.5\"/><path d=\"M15.5 10.5l5-3v9l-5-3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/>", "chat": "<path d=\"M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z\"/><path d=\"M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01\"/>", "send": "<path d=\"M12 19V5\"/><path d=\"M6 11l6-6 6 6\"/>", "share": "<path d=\"M12 15V4\"/><path d=\"M8 8l4-4 4 4\"/><path d=\"M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11\"/>", "plus": "<path d=\"M12 5.5v13M5.5 12h13\"/>", "out": "<path d=\"M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14\"/><path d=\"M10 16.5L5.5 12 10 7.5\"/><path d=\"M5.5 12H15\"/>", "trash": "<path d=\"M4.5 7h15\"/><path d=\"M9.5 7V4.8h5V7\"/><path d=\"M6.5 7l1 12.5h9l1-12.5\"/><path d=\"M10.2 10.8v5.4M13.8 10.8v5.4\"/>", "download": "<path d=\"M12 4v11\"/><path d=\"M7.5 10.5L12 15l4.5-4.5\"/><path d=\"M5 19.5h14\"/>", "refresh": "<path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4.5v4.2h-4.2\"/>", "eye": "<path d=\"M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>", "eye-off": "<path d=\"M4 4l16 16\"/><path d=\"M9.9 6A9.8 9.8 0 0 1 12 5.5c5.8 0 9.2 6.5 9.2 6.5a16.6 16.6 0 0 1-3 3.8M14.1 18.2a9.6 9.6 0 0 1-2.1.3c-5.8 0-9.2-6.5-9.2-6.5a16.4 16.4 0 0 1 3.4-4.2\"/><path d=\"M10 10a2.8 2.8 0 0 0 4 4\"/>"};
   const EMAIL = "support@jachihealth.com";
-  const T = {"get_early_access": "Únase a la lista de espera", "sms_988": "sms:988?&body=AYUDA", "choose_state": "Elija su estado.", "fix_one": "Corrija el campo marcado.", "fix_many": "Corrija los {n} campos marcados.", "enter_email": "Escriba su correo electrónico.", "valid_email": "Escriba un correo válido, como nombre@ejemplo.com.", "j_preview": "Esta es una vista previa del sitio, así que aquí no se guardan los registros.", "j_saving": "Guardando su lugar…", "j_failed": "No pudimos guardar su lugar en este momento. Revise su conexión e inténtelo de nuevo.", "j_your_state": "su estado", "share_title": "Jachi Health", "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en todo EE. UU. Únase a la lista de espera:", "share_button": "Compartir Jachi", "share_copied_button": "Enlace copiado", "share_copied": "Enlace copiado. Péguelo en un mensaje de texto o un correo.", "share_manual": "Copie este enlace para compartirlo: {url}", "c_crisis": "Lamento mucho que esté pasando por esto, y no tiene que enfrentarlo sin ayuda. Llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la Línea 988 de Prevención del Suicidio y Crisis. Es gratuita, confidencial y atiende las 24 horas. Si está en peligro inmediato, llame al 911.", "c_emergency": "Esto podría ser una emergencia. Llame al 911 ahora o vaya a la sala de emergencias más cercana. Soy un asistente de IA y no puedo ayudar con emergencias.", "c_typing": "El asistente está escribiendo", "c_busy": "Hay muchas preguntas en este momento. Inténtelo de nuevo en un minuto, o envíe una solicitud y nuestro equipo le responderá por correo.", "c_off": "Las respuestas de IA están desactivadas en esta vista previa. Aún puede enviar una solicitud.", "c_down": "No puedo responder en este momento. Puede enviar una solicitud y nuestro equipo le responderá por correo.", "c_call_988": "Llamar al 988", "c_text_988": "Enviar texto al 988", "c_call_911": "Llamar al 911", "c_ticket": "Enviar una solicitud", "t_name": "Escriba su nombre.", "t_msg": "Cuéntenos un poco más (al menos 10 caracteres).", "t_preview": "Esta es una vista previa del sitio, así que aquí no se envían solicitudes. En el sitio real llegan a {email}.", "t_sending": "Enviando…", "t_send": "Enviar solicitud", "t_failed": "No pudimos enviar su solicitud. Revise su conexión e inténtelo de nuevo, o escriba a {email}."};
+  const T = {"get_early_access": "Únase a la lista de espera", "my_account": "Mi cuenta", "sms_988": "sms:988?&body=AYUDA", "choose_state": "Elija su estado.", "fix_one": "Corrija el campo marcado.", "fix_many": "Corrija los {n} campos marcados.", "enter_email": "Escriba su correo electrónico.", "valid_email": "Escriba un correo válido, como nombre@ejemplo.com.", "j_preview": "Esta es una vista previa del sitio, así que aquí no se guardan los registros.", "j_saving": "Guardando su lugar…", "j_failed": "No pudimos guardar su lugar en este momento. Revise su conexión e inténtelo de nuevo.", "j_your_state": "su estado", "share_title": "Jachi Health", "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en todo EE. UU. Únase a la lista de espera:", "share_button": "Compartir Jachi", "share_copied_button": "Enlace copiado", "share_copied": "Enlace copiado. Péguelo en un mensaje de texto o un correo.", "share_manual": "Copie este enlace para compartirlo: {url}", "c_crisis": "Lamento mucho que esté pasando por esto, y no tiene que enfrentarlo sin ayuda. Llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la Línea 988 de Prevención del Suicidio y Crisis. Es gratuita, confidencial y atiende las 24 horas. Si está en peligro inmediato, llame al 911.", "c_emergency": "Esto podría ser una emergencia. Llame al 911 ahora o vaya a la sala de emergencias más cercana. Soy un asistente de IA y no puedo ayudar con emergencias.", "c_typing": "El asistente está escribiendo", "c_busy": "Hay muchas preguntas en este momento. Inténtelo de nuevo en un minuto, o envíe una solicitud y nuestro equipo le responderá por correo.", "c_off": "Las respuestas de IA están desactivadas en esta vista previa. Aún puede enviar una solicitud.", "c_down": "No puedo responder en este momento. Puede enviar una solicitud y nuestro equipo le responderá por correo.", "c_call_988": "Llamar al 988", "c_text_988": "Enviar texto al 988", "c_call_911": "Llamar al 911", "c_ticket": "Enviar una solicitud", "t_name": "Escriba su nombre.", "t_msg": "Cuéntenos un poco más (al menos 10 caracteres).", "t_preview": "Esta es una vista previa del sitio, así que aquí no se envían solicitudes. En el sitio real llegan a {email}.", "t_sending": "Enviando…", "t_send": "Enviar solicitud", "t_failed": "No pudimos enviar su solicitud. Revise su conexión e inténtelo de nuevo, o escriba a {email}."};
   const fmt = (text, values = {}) => text.replace(/\{(\w+)\}/g, (m, k) => (k in values ? String(values[k]) : m));
   // Account emails link to the home page with a token after the #. Send the visitor to the account page,
   // which finishes the job (confirming the email, setting a new password or accepting an invite).
@@ -1576,6 +1585,39 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
   const themeColor = $('meta[name="theme-color"]');
   let headerTick = false;
   let pastCanopy = null;
+  // Plans: pay monthly or yearly. The switch changes every plan card's price, and the checkout opens on that choice.
+  const billingSwitches = $$('[data-billing-switch]');
+  const setBilling = mode => {
+    billingSwitches.forEach(sw => {
+      sw.dataset.on = mode;
+      $$('button', sw).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.billing === mode)));
+    });
+    $$('[data-price]').forEach(el => {
+      const [amount, per] = el.dataset[mode].split('|');
+      el.firstChild.textContent = amount;
+      el.lastElementChild.textContent = per;
+      if (!reduced() && el.animate) el.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'ease-out' });
+    });
+    $$('[data-alt]').forEach(el => { el.textContent = el.dataset[mode]; });
+    $$('[data-plan-link]').forEach(a => {
+      const url = new URL(a.getAttribute('href'), window.location.href);
+      if (mode === 'yearly') url.searchParams.set('billing', 'yearly'); else url.searchParams.delete('billing');
+      a.setAttribute('href', url.pathname + url.search);
+    });
+  };
+  billingSwitches.forEach(sw => {
+    sw.hidden = false;
+    sw.addEventListener('click', e => {
+      const button = e.target.closest('button[data-billing]');
+      if (button && button.getAttribute('aria-pressed') !== 'true') setBilling(button.dataset.billing);
+    });
+  });
+
+  // Signed in on this browser (the account page keeps the session there): the header says "My account".
+  try {
+    if (window.localStorage.getItem('jachi.session')) $$('[data-login-text]').forEach(el => { el.textContent = T.my_account; });
+  } catch (err) { /* storage blocked */ }
+
   const syncHeader = () => {
     headerTick = false;
     if (!header) return;
@@ -2012,9 +2054,11 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
       raf = 0;
       const mine = ++run, shape = mode, slow = animate && !reduced();
       const area = Math.min(1, (W * H) / 520000);
-      const job = growLeaf((Math.random() * 4294967296) >>> 0, mode === 'map'
+      // A mount can ask for one particular leaf (data-seed): the member page grows each member their own.
+      const own = /^\d+$/.test(mount.dataset.seed || '') ? Number(mount.dataset.seed) >>> 0 : -1;
+      const job = growLeaf(own < 0 ? (Math.random() * 4294967296) >>> 0 : own, mode === 'map'
         ? { rows: [-435, -340, -245, -150], leads: true, dot: 152, sources: 1150, kill: 7, bow: 0 }
-        : { rows: [-472, -398, -324, -250, -176, -102], leads: false, dot: 0, sources: Math.round(520 + 580 * area), kill: 7.2, bow: 8 });
+        : { rows: [-472, -398, -324, -250, -176, -102], leads: false, dot: 0, sources: own < 0 ? Math.round(520 + 580 * area) : 900, kill: 7.2, bow: 8 });
       order = []; shown = 0; grown = false; pending = true; fx.length = 0; hot = -1;
       mount.classList.remove('is-grown');
       chips.forEach(li => li.classList.remove('is-on'));
@@ -2136,6 +2180,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
       if (!leaf) { if (!pending) start(true); } else if (changed === 2) start(false); else if (changed) redraw();
     };
     const begin = () => { ready = true; sync(); };
+    mount.addEventListener('leaf:regrow', () => { if (ready && W) start(true); });
     if ('ResizeObserver' in window) new ResizeObserver(() => { if (ready) sync(); }).observe(mount);
     // Growing takes a few dozen milliseconds of sums: wait until the page has painted.
     if ('requestIdleCallback' in window) window.requestIdleCallback(begin, { timeout: 400 }); else window.setTimeout(begin, 80);

@@ -64,6 +64,9 @@ SERVICE_PATH = {"en": {slug: f"/{slug}/" for slug in PAGES.BY_SLUG},
 
 ICONS = {
     "arrow": '<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>',
+    "card": '<rect x="3" y="5.5" width="18" height="13" rx="2.6"/><path d="M3 10h18"/><path d="M7 15h3.5"/>',
+    "sliders": '<path d="M4 7h9"/><path d="M19 7h1"/><circle cx="16" cy="7" r="2.4"/><path d="M4 17h1"/><path d="M11 17h9"/><circle cx="8" cy="17" r="2.4"/>',
+    "external": '<path d="M14 5h5v5"/><path d="M19 5l-8 8"/><path d="M11 7H7.5A2.5 2.5 0 0 0 5 9.5v7A2.5 2.5 0 0 0 7.5 19h7a2.5 2.5 0 0 0 2.5-2.5V13"/>',
     "arrow-left": '<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>',
     "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
     "steth": '<path d="M6 3.5V9a4 4 0 0 0 8 0V3.5"/><path d="M10 13v1.5a5 5 0 0 0 10 0V12.5"/><circle cx="20" cy="10.5" r="2"/>',
@@ -474,16 +477,26 @@ def plan_cards(lang, compact=False):
                                           regular=money(p["monthly"])) if p.get("founding") else t.get("note", ""))
         features = "".join(f"<li>{icon_svg('check')}<span>{esc(f)}</span></li>"
                            for f in (t["features"][:3] if compact else t["features"]))
+        or_yearly = W["or_yearly"].format(price=money(p["yearly"]))
+        or_monthly = W["or_monthly"].format(price=money(p["monthly"]))
         cards.append(
             f'<article class="{cls}"><div class="m-plan__head"><{level} class="m-plan__name">{esc(t["name"])}</{level}>'
             + (f'<p class="m-plan__badge">{esc(badge)}</p>' if badge else "") + "</div>"
-            f'<p class="m-plan__price">{esc(money(p["monthly"]))}<span class="m-plan__per">{esc(W["per_month"])}</span></p>'
-            f'<p class="m-plan__alt">{esc(W["or_yearly"].format(price=money(p["yearly"])))}</p>'
+            f'<p class="m-plan__price" data-price data-monthly="{esc(money(p["monthly"]))}|{esc(W["per_month"])}" '
+            f'data-yearly="{esc(money(p["yearly"]))}|{esc(W["per_year"])}">{esc(money(p["monthly"]))}'
+            f'<span class="m-plan__per">{esc(W["per_month"])}</span></p>'
+            f'<p class="m-plan__alt" data-alt data-monthly="{esc(or_yearly)}" data-yearly="{esc(or_monthly)}">{esc(or_yearly)}</p>'
             f'<p class="m-plan__tagline">{esc(t["tagline"])}</p>'
             + (f'<p class="m-plan__note">{esc(note)}</p>' if note else "")
-            + f'<a class="btn btn--block" href="{MEMBERSHIP.PATHS["checkout"][lang]}?plan={p["key"]}">{esc(W["start"].format(name=t["name"]))}</a>'
+            + f'<a class="btn btn--block" data-plan-link href="{MEMBERSHIP.PATHS["checkout"][lang]}?plan={p["key"]}">{esc(W["start"].format(name=t["name"]))}</a>'
             f'<ul class="m-plan__list">{features}</ul></article>')
-    return "".join(cards)
+    # Monthly or yearly: the switch (shown by src/app.js) changes every card's price and where its button goes.
+    yearly, _, saving = W["co_yearly"].partition(" · ")
+    switch = (f'<div class="m-switch" data-billing-switch data-on="monthly" role="group" aria-label="{esc(W["co_billing"])}" hidden>'
+              f'<button type="button" data-billing="monthly" aria-pressed="true">{esc(W["co_monthly"])}</button>'
+              f'<button type="button" data-billing="yearly" aria-pressed="false">{esc(yearly)}'
+              + (f'<small>{esc(saving)}</small>' if saving else "") + '</button></div>')
+    return switch + "".join(cards)
 
 
 # ---------- Home pages (English and Spanish) ----------
@@ -1189,6 +1202,9 @@ SERVER_CODE = {
     "stripe-webhook": ("Jachi Health Stripe events: member emails and team alerts. Netlify Function: POST /api/stripe/webhook",
                        ["lib.mjs", "billing.mjs"]),
     "daily-emails": ("Jachi Health daily member emails. Netlify scheduled function", ["lib.mjs", "billing.mjs"]),
+    "member": ("Jachi Health member page. Netlify Function: GET /api/member", ["lib.mjs", "billing.mjs"]),
+    "submission-created": ("Jachi Health automatic replies to form submissions. Netlify event function (runs on every "
+                           "accepted sign-up and ticket)", ["lib.mjs", "billing.mjs"]),
 }
 for name, (title, libs) in SERVER_CODE.items():
     sources = " and ".join(f"src/functions/{lib}" for lib in libs)

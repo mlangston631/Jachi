@@ -1212,3 +1212,11 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
 
 /* Moving between pages of the site cross-fades (browsers that support it), unless motion is reduced */
 @media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+/* Reading progress: a thin line under the header that fills as the page scrolls. No script; it only moves when the visitor does. */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:scroll()){
+    .site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--sage);transform-origin:0 50%;scale:0 1;pointer-events:none;animation:readProgress linear both;animation-timeline:scroll(root block)}
+    @keyframes readProgress{to{scale:1 1}}
+    .site-header.menu-open::after{display:none}
+  }
+}

@@ -67,3 +67,11 @@
 .m-secure{display:flex;gap:8px;align-items:flex-start}
 .m-secure .i{width:16px;height:16px;margin-top:2px}
 .m-done{display:grid;gap:14px;max-width:720px}
+/* Monthly or yearly: one switch above the cards */
+.m-switch{grid-column:1/-1;justify-self:center;position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:100%;padding:4px;border-radius:999px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.m-switch::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--forest);transition:translate .45s var(--ease)}
+.m-switch[data-on="yearly"]::before{translate:100% 0}
+.m-switch button{position:relative;display:grid;place-content:center;justify-items:center;gap:1px;min-height:48px;padding:4px 22px;border:0;border-radius:999px;background:none;font:600 .97rem/1.15 var(--font-body);color:var(--text-2);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .3s ease}
+.m-switch small{font-size:.76rem;font-weight:500;color:var(--moss);transition:color .3s ease}
+.m-switch button[aria-pressed="true"],.m-switch button[aria-pressed="true"] small{color:#fff}
+@media (prefers-reduced-motion:reduce){.m-switch::before{transition:none}}

@@ -324,9 +324,11 @@
       raf = 0;
       const mine = ++run, shape = mode, slow = animate && !reduced();
       const area = Math.min(1, (W * H) / 520000);
-      const job = growLeaf((Math.random() * 4294967296) >>> 0, mode === 'map'
+      // A mount can ask for one particular leaf (data-seed): the member page grows each member their own.
+      const own = /^\d+$/.test(mount.dataset.seed || '') ? Number(mount.dataset.seed) >>> 0 : -1;
+      const job = growLeaf(own < 0 ? (Math.random() * 4294967296) >>> 0 : own, mode === 'map'
         ? { rows: [-435, -340, -245, -150], leads: true, dot: 152, sources: 1150, kill: 7, bow: 0 }
-        : { rows: [-472, -398, -324, -250, -176, -102], leads: false, dot: 0, sources: Math.round(520 + 580 * area), kill: 7.2, bow: 8 });
+        : { rows: [-472, -398, -324, -250, -176, -102], leads: false, dot: 0, sources: own < 0 ? Math.round(520 + 580 * area) : 900, kill: 7.2, bow: 8 });
       order = []; shown = 0; grown = false; pending = true; fx.length = 0; hot = -1;
       mount.classList.remove('is-grown');
       chips.forEach(li => li.classList.remove('is-on'));
@@ -448,6 +450,7 @@
       if (!leaf) { if (!pending) start(true); } else if (changed === 2) start(false); else if (changed) redraw();
     };
     const begin = () => { ready = true; sync(); };
+    mount.addEventListener('leaf:regrow', () => { if (ready && W) start(true); });
     if ('ResizeObserver' in window) new ResizeObserver(() => { if (ready) sync(); }).observe(mount);
     // Growing takes a few dozen milliseconds of sums: wait until the page has painted.
     if ('requestIdleCallback' in window) window.requestIdleCallback(begin, { timeout: 400 }); else window.setTimeout(begin, 80);

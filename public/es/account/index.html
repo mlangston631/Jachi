@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="under-canopy">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="script-src 'sha256-CWa4Tv0dM7cs7TEw5l1eFQJ2/lr41HCNKb6kFuyXDEM=' 'sha256-UTZ6Ffphwat/xNr8zz/OqMDreuSsuaS1TCtwrX6JU5o='; object-src 'none'; base-uri 'self'">
+<meta http-equiv="Content-Security-Policy" content="script-src 'sha256-76Hm8AHTHcaqKflCOIvas/UwgFAQUBlcsNIvvnfZaKI=' 'sha256-ULwmxOxXwfYfJ2Fc1abR5sV/MK5r2E3iHJeKLP6tM1g='; object-src 'none'; base-uri 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Su cuenta | Jachi Health</title>
-<meta name="description" content="Inicie sesión para actualizar sus datos de la lista de espera de Jachi Health, dejar de recibir correos o borrar su cuenta.">
-<meta name="theme-color" content="#F5F7F2">
+<meta name="description" content="Inicie sesión para ver su plan y sus facturas de Jachi Health, comunicarse con su coordinador o actualizar sus datos.">
+<meta name="theme-color" content="#0A1E17">
 <link rel="preload" href="/fonts/fraunces.75bd1428.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/instrument-sans.a6ddc5cf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -1233,17 +1233,28 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
 
 /* Moving between pages of the site cross-fades (browsers that support it), unless motion is reduced */
 @media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+/* Reading progress: a thin line under the header that fills as the page scrolls. No script; it only moves when the visitor does. */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:scroll()){
+    .site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--sage);transform-origin:0 50%;scale:0 1;pointer-events:none;animation:readProgress linear both;animation-timeline:scroll(root block)}
+    @keyframes readProgress{to{scale:1 1}}
+    .site-header.menu-open::after{display:none}
+  }
+}
 
-/* The account page (/account/ and /es/account/). Uses the site's form, button and status styles. */
-.acct{min-height:100vh;min-height:100svh;padding-top:calc(var(--header-h) + env(safe-area-inset-top,0px) + clamp(28px,5vw,64px));padding-bottom:clamp(64px,8vw,112px);background:radial-gradient(60% 45% at 100% 0%,rgba(155,193,163,.32),rgba(155,193,163,0) 70%),radial-gradient(50% 40% at 0% 100%,rgba(207,227,212,.6),rgba(207,227,212,0) 70%),var(--mist)}
-.acct__grid{display:grid;gap:clamp(28px,4vw,56px);align-items:start}
-@media (min-width:960px){.acct__grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.acct__intro{position:sticky;top:calc(var(--header-h) + 40px)}}
-.acct__intro{display:grid;gap:18px;justify-items:start;min-width:0}
-.acct__intro .lead{max-width:30em}
-.acct__facts{display:grid;gap:10px;margin:4px 0 0;padding:0;list-style:none}
-.acct__facts li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:center;font-weight:500;color:var(--text-2)}
-.acct__facts .i{width:24px;height:24px;padding:4px;border-radius:50%;background:var(--sage-100);color:var(--forest);stroke-width:2.2}
-.acct__card{min-width:0;padding:clamp(22px,3.6vw,40px);border-radius:var(--r-xl);background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+/* The account page (/account/ and /es/account/): sign-in on a small card; once signed in, the member page.
+   Uses the site's form, button and status styles. */
+.acct{background:var(--mist)}
+.acct__top .display--page{max-width:18ch}
+.acct__yours{display:flex;gap:9px;align-items:center;margin:0;font-size:.95rem;color:var(--on-dark-3)}
+.acct__yours::before{content:"";flex:none;width:11px;height:11px;border-radius:62% 9px;background:var(--sage)}
+.acct__sheet{position:relative;padding:clamp(26px,4.4vw,56px) 0 clamp(64px,8vw,112px);background:var(--mist)}
+.acct__grid{display:grid;gap:clamp(20px,3vw,32px);justify-items:center}
+.acct__card{width:100%;max-width:560px;min-width:0;padding:clamp(20px,3.6vw,40px);border-radius:var(--r-xl);background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.acct.is-portal .acct__card{max-width:880px}
+.acct__facts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:0;padding:0;list-style:none}
+.acct__facts li{display:flex;gap:9px;align-items:center;font-size:.93rem;font-weight:500;color:var(--text-2)}
+.acct__facts .i{flex:none;width:24px;height:24px;padding:4px;border-radius:50%;background:var(--sage-100);color:var(--forest);stroke-width:2.2}
 .acct__view{display:grid;gap:18px;justify-items:start;min-width:0;animation:stepIn .4s var(--ease)}
 .acct__view > form,.acct__view > .tabs,.acct__view > .tabpanel,.acct__view > .form-status,.acct__view > .acct__block,.acct__view > .acct__head{width:100%}
 .acct__title{font-size:clamp(1.5rem,1.3rem + .8vw,1.9rem);line-height:1.15;color:var(--forest-ink)}
@@ -1283,9 +1294,105 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
 .confirm__actions{display:flex;flex-wrap:wrap;gap:10px}
 .confirm .form-status:empty{margin-top:-12px}
 
+/* ---------- The member page ---------- */
+@keyframes portalIn{from{opacity:0}}
+.acct__view.portal{gap:20px;animation:portalIn .4s ease}
+.portal > *{width:100%}
+.portal__demo{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 14px;border-radius:14px;background:var(--warn-bg);color:var(--warn);font-size:.95rem;font-weight:500}
+.portal__demo .i{flex:none;width:20px;height:20px;margin-top:1px}
+.acct__view.portal .portal__demo{color:var(--warn)}
+.pwho{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px}
+.acct__view .pwho .acct__who{margin:0}
+.ptabs{position:relative;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));padding:4px;border-radius:999px;background:var(--mist);border:1px solid var(--line)}
+.ptabs::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / var(--n,4));border-radius:999px;background:var(--forest);translate:calc(var(--at,0) * 100%) 0;transition:translate .5s var(--ease)}
+.ptab{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:46px;padding:0 8px;border-radius:999px;font:600 .95rem/1.1 var(--font-body);color:var(--text-2);text-decoration:none;-webkit-tap-highlight-color:transparent;transition:color .3s ease}
+.ptab .i{flex:none;width:19px;height:19px}
+.ptab span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ptab[aria-current]{color:#fff}
+@media (hover:hover){.ptab:not([aria-current]):hover{color:var(--forest)}}
+.ppanel{display:grid;gap:18px;justify-items:start;min-width:0;scroll-margin-top:calc(var(--header-h) + 20px);animation:portalIn .35s ease}
+.ppanel > *{width:100%}
+.acct__block--first{padding-top:0;border-top:0}
+
+.mcard{position:relative;isolation:isolate;overflow:hidden;display:grid;gap:10px;padding:clamp(20px,3.4vw,32px);border-radius:26px;color:var(--dew);background:radial-gradient(46% 64% at var(--mx,84%) var(--my,6%),rgba(155,193,163,.28),rgba(155,193,163,0) 72%),linear-gradient(150deg,var(--canopy-1),var(--canopy-0) 80%);box-shadow:0 18px 44px rgba(10,30,23,.22)}
+.mcard__leaf{position:absolute;z-index:-1;right:-52px;bottom:-84px;width:min(60%,290px);height:auto;color:rgba(155,193,163,.2);rotate:-24deg;pointer-events:none}
+.mcard__row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:30px;margin:0}
+.mcard__brand{font:600 .92rem/1 var(--font-body);color:var(--sage)}
+.acct__view .mcard__plan{margin:6px 0 0;max-width:15ch;font-family:var(--font-display);font-size:clamp(1.9rem,1.4rem + 2vw,2.7rem);font-weight:370;line-height:1.05;letter-spacing:-.024em;color:#fff;text-wrap:balance}
+.acct__view .mcard__line{margin:0;max-width:34em;color:var(--on-dark-2)}
+.mcard__line:empty{display:none}
+.mcard:not([data-state="member"]) .mcard__plan{max-width:20ch;font-size:clamp(1.4rem,1.2rem + .9vw,1.8rem);line-height:1.15}
+.mcard[data-state="loading"] .mcard__plan{color:var(--on-dark-2)}
+.mcard__facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:14px 18px;margin:10px 0 0;padding-top:16px;border-top:1px solid rgba(255,255,255,.14)}
+.mcard__facts dt{font-size:.84rem;color:var(--on-dark-3)}
+.mcard__facts dd{margin:3px 0 0;font-weight:600;color:#fff}
+.mcard__facts small{display:block;font-size:.82rem;font-weight:500;color:var(--sage)}
+.mcard__acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.mcard .btn{--bg:var(--dew);--fg:#0E2A20;--bd:transparent}
+.mcard :focus-visible{outline-color:var(--sage)}
+@media (hover:hover){.mcard .btn:hover{background:#fff}}
+
+.mpill{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;background:var(--sage-100);color:var(--forest-ink);font:600 .8rem/1.2 var(--font-body);white-space:nowrap}
+.mpill::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:currentColor}
+.mpill[data-kind="payment_due"],.mpill[data-kind="past_due"]{background:#FFF1D6;color:#7A4B00}
+.mpill[data-kind="canceling"],.mpill[data-kind="paused"]{background:#ECEFEA;color:#46554C}
+.mpill[data-kind="ended"]{background:#F3E9E6;color:#7A3B32}
+.mcard .mpill{background:rgba(155,193,163,.22);color:#E4F2E6}
+.mcard .mpill[data-kind="payment_due"],.mcard .mpill[data-kind="past_due"]{background:rgba(255,205,120,.2);color:#FFE2A8}
+.mcard .mpill[data-kind="canceling"],.mcard .mpill[data-kind="paused"],.mcard .mpill[data-kind="ended"]{background:rgba(255,255,255,.14);color:#E9EFEA}
+
+.pay{display:grid;gap:10px;justify-items:start;padding:16px 18px;border-radius:20px;background:#FFF8E8;border:1px solid rgba(160,110,10,.22)}
+.acct__view .pay__title{margin:0;font-weight:600;color:var(--text)}
+.pay .fine,.pnote{display:flex;gap:8px;align-items:flex-start}
+.pay .fine .i,.pnote .i{flex:none;width:17px;height:17px;margin-top:2px}
+
+.pquick{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.pquick__a{display:grid;grid-template-columns:44px minmax(0,1fr) 20px;gap:12px;align-items:center;height:100%;padding:12px 14px;border-radius:18px;border:1px solid var(--line);background:#fff;color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent;transition:border-color .2s ease,box-shadow .2s ease}
+.pquick__ic{display:grid;place-items:center;width:44px;height:44px;border-radius:62% 9px;background:var(--sage-100);color:var(--forest)}
+.pquick__ic .i{width:21px;height:21px}
+.pquick__a b{display:block;font-weight:600;line-height:1.25;color:var(--text)}
+.pquick__a small{display:block;margin-top:2px;font-size:.88rem;line-height:1.35;color:var(--text-3)}
+.pquick__a .i--arrow{width:18px;height:18px;color:var(--moss);transition:translate .25s var(--ease)}
+.pquick__a:active{border-color:var(--moss)}
+@media (hover:hover){.pquick__a:hover{border-color:var(--moss);box-shadow:var(--shadow-sm)}.pquick__a:hover .i--arrow{translate:3px 0}}
+@media (min-width:760px){.pquick{grid-template-columns:repeat(3,minmax(0,1fr))}.pquick__a{grid-template-columns:44px minmax(0,1fr)}.pquick__a .i--arrow{display:none}}
+
+.invs{display:grid;width:100%;margin:0;padding:0;list-style:none}
+.invs:empty{display:none}
+.inv{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.inv:first-child{padding-top:2px}
+.inv__what b{display:block;font-weight:600;color:var(--text)}
+.inv__what small{display:block;font-size:.86rem;color:var(--text-3);overflow-wrap:anywhere}
+.inv__amt{justify-self:end;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text)}
+.inv .mpill{justify-self:start}
+.inv__go{justify-self:end;display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line-strong);font-weight:600;font-size:.93rem;color:var(--forest);text-decoration:none;transition:background-color .2s ease,border-color .2s ease}
+@media (hover:hover){.inv__go:hover{background:var(--mist);border-color:var(--forest)}}
+@media (min-width:620px){.inv{grid-template-columns:minmax(0,1fr) auto auto auto;gap:18px}.inv .mpill{justify-self:end}}
+
+.pacts{display:flex;flex-wrap:wrap;gap:10px}
+.acct__view .purgent{display:flex;gap:10px;align-items:flex-start;margin:0;padding:14px 16px;border-radius:16px;background:var(--warn-bg);color:var(--warn);font-size:.95rem;font-weight:500}
+.purgent .i{flex:none;width:20px;height:20px;margin-top:1px}
+
+/* On a phone the sections sit in a bar at the bottom, where a thumb reaches; the help button moves into Help. */
+@media (max-width:719px){
+  .acct.is-portal .ptabs{position:fixed;z-index:45;left:max(10px,env(safe-area-inset-left,0px));right:max(10px,env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));width:auto;padding:5px;border-radius:24px;border-color:rgba(255,255,255,.12);background:rgba(10,30,23,.93);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 14px 40px rgba(6,20,15,.35)}
+  .acct.is-portal .ptabs::before{top:5px;bottom:5px;left:5px;width:calc((100% - 10px) / var(--n,4));border-radius:19px;background:rgba(155,193,163,.24)}
+  .acct.is-portal .ptab{flex-direction:column;gap:4px;min-height:54px;font-size:.74rem;color:var(--on-dark-3)}
+  .acct.is-portal .ptab[aria-current]{color:#fff}
+  .acct.is-portal .ptab:focus-visible{outline-color:var(--sage);outline-offset:-3px}
+  .acct.is-portal .ptab .i{width:21px;height:21px}
+  .acct.is-portal .acct__sheet{padding-bottom:calc(118px + env(safe-area-inset-bottom,0px))}
+  .acct.is-portal .acct__card{padding:18px 16px 22px;border-radius:26px}
+  body:has(.acct.is-portal) .chat-launcher{display:none}
+  .chat-open .acct.is-portal .ptabs,body:has(.site-header.menu-open) .acct.is-portal .ptabs{display:none}
+}
+@media (prefers-reduced-motion:reduce){.ptabs::before{transition:none}.acct__view.portal,.ppanel{animation:none}}
+/* The account page is a place to do things, not to read down: no reading-progress line here. */
+.site-header::after{display:none}
+
 </style>
 </head>
-<body>
+<body class="has-canopy">
 <a class="skip" href="#main">Saltar al contenido</a>
 
 <header class="site-header" id="site-header">
@@ -1301,7 +1408,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
       <a href="/es/#faq">Preguntas</a>
     </nav>
     <a class="lang-switch" href="/account/" hreflang="en" lang="en" aria-label="English"><span class="lang-switch__long">English</span><span class="lang-switch__short">EN</span></a>
-    <a class="login-link" href="/es/account/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg><span class="login-link__text">Iniciar sesión</span></a>
+    <a class="login-link" href="/es/account/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg><span class="login-link__text" data-login-text>Iniciar sesión</span></a>
     <a class="btn btn--sm header-cta" href="/es/planes/">Elija su plan</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
       <span class="line" aria-hidden="true"></span><span class="line" aria-hidden="true"></span><span class="visually-hidden">Menú</span>
@@ -1322,24 +1429,24 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
   </nav>
   <div class="mobile-menu__foot">
     <a class="btn btn--block btn--lg" href="/es/planes/">Elija su plan <svg class="i i--arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
-    <a class="btn btn--ghost btn--block" href="/es/account/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg> Iniciar sesión</a>
+    <a class="btn btn--ghost btn--block" href="/es/account/"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg> <span data-login-text>Iniciar sesión</span></a>
     <p class="fine">Para adultos de 18 años o más que viven en Texas.</p>
   </div>
 </div>
 
 <main id="main" class="acct" data-auth-page>
-  <div class="wrap acct__grid">
-    <div class="acct__intro">
+  <section class="hero page-top canopy acct__top" aria-labelledby="page-title">
+    <div class="leaf" data-leaf aria-hidden="true"></div>
+    <div class="wrap page-top__inner">
       <p class="eyebrow">Su cuenta</p>
-      <h1 class="h2" id="page-title">Su cuenta de la <em>lista de espera.</em></h1>
-      <p class="lead">Actualice sus datos, deje de recibir nuestros correos o borre su cuenta cuando quiera. Aquí no hay información de salud: las consultas y los expedientes médicos no forman parte de esta cuenta.</p>
-      <ul class="acct__facts">
-        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Gratis y sin datos de pago</span></li>
-        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>No guarda información de salud</span></li>
-        <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 7h15"/><path d="M9.5 7V4.8h5V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10.2 10.8v5.4M13.8 10.8v5.4"/></svg><span>Puede borrarla cuando quiera</span></li>
-      </ul>
+      <h1 class="display display--page" id="page-title">Su página de miembro.</h1>
+      <p class="lead" id="page-lead">Vea su plan y sus facturas, comuníquese con su coordinador y mantenga sus datos al día. Aquí no hay información de salud: las consultas y los expedientes médicos no forman parte de esta cuenta.</p>
+      <p class="acct__yours" id="leaf-yours" hidden>La hoja de aquí arriba es suya. Crece igual cada vez que inicia sesión.</p>
     </div>
+  </section>
 
+  <div class="acct__sheet">
+  <div class="wrap acct__grid">
     <div class="acct__card">
       <section class="acct__view" data-view="loading">
         <p class="acct__loading"><span class="spinner spinner--dark" aria-hidden="true"></span><span>Cargando su cuenta…</span></p>
@@ -1408,7 +1515,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
             </fieldset>
             <button class="btn btn--block btn--lg" type="submit" id="create-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Crear cuenta</span></button>
             <div class="form-status" id="create-status" role="status"></div>
-            <p class="fine acct__note">Al crear una cuenta, acepta recibir correos sobre nuestra apertura. Puede dejar de recibirlos cuando quiera. Lea nuestra <a href="/privacy/" hreflang="en">política de privacidad (en inglés)</a> y nuestra <a href="/es/datos-de-salud/">política de datos de salud del consumidor</a>.</p>
+            <p class="fine acct__note">Al crear una cuenta, acepta recibir novedades de Jachi por correo. Puede dejar de recibirlas cuando quiera. Lea nuestra <a href="/privacy/" hreflang="en">política de privacidad (en inglés)</a> y nuestra <a href="/es/datos-de-salud/">política de datos de salud del consumidor</a>.</p>
           </form>
         </div>
       </section>
@@ -1469,72 +1576,137 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
         </form>
       </section>
 
-      <section class="acct__view" data-view="profile" hidden>
-        <div class="acct__head">
-          <h2 class="acct__title" tabindex="-1">Sus datos</h2>
-          <p class="acct__who" id="who"></p>
-        </div>
+      <section class="acct__view portal" data-view="profile" hidden>
+        <p class="portal__demo" id="portal-demo" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.6v.4"/></svg><span>Página de miembro de muestra. Los datos de abajo son inventados, para que vea cómo se ve.</span></p>
         <div class="form-status" id="profile-status" role="status"></div>
+        <div class="pwho">
+          <p class="acct__who" id="who"></p>
+          <button class="btn btn--ghost btn--sm" type="button" id="logout"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14"/><path d="M10 16.5L5.5 12 10 7.5"/><path d="M5.5 12H15"/></svg> Cerrar sesión</button>
+        </div>
+
+        <nav class="ptabs" id="ptabs" aria-label="Secciones de la página de miembro">
+          <a class="ptab" href="#home" data-tab="home" aria-current="page"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg><span>Resumen</span></a>
+          <a class="ptab" href="#billing" data-tab="billing"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13" rx="2.6"/><path d="M3 10h18"/><path d="M7 15h3.5"/></svg><span>Pagos</span></a>
+          <a class="ptab" href="#help" data-tab="help"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z"/><path d="M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8"/></svg><span>Ayuda</span></a>
+          <a class="ptab" href="#settings" data-tab="settings"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h9"/><path d="M19 7h1"/><circle cx="16" cy="7" r="2.4"/><path d="M4 17h1"/><path d="M11 17h9"/><circle cx="8" cy="17" r="2.4"/></svg><span>Ajustes</span></a>
+        </nav>
+
+        <div class="ppanel" id="home" data-panel="home">
+          <h2 class="acct__title" tabindex="-1">Su membresía</h2>
+          <div class="mcard" id="mcard" data-state="loading">
+            <svg class="mark mcard__leaf" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 4C40 16 58 34 32 52C6 34 24 16 32 4Z" fill="none" stroke="currentColor" stroke-width=".7"/><path d="M32 8V50" fill="none" stroke="currentColor" stroke-width=".5"/><path d="M32 22Q35.5 21 37.5 16.5M32 30Q37 28.5 40 23M32 37Q37.5 35.5 40.5 30M32 22Q28.5 21 26.5 16.5M32 30Q27 28.5 24 23M32 37Q26.5 35.5 23.5 30" fill="none" stroke="currentColor" stroke-width=".45" stroke-linecap="round"/><path d="M32 52C32 56 31.5 58.5 29.5 61" fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"/></svg>
+            <p class="mcard__row"><span class="mcard__brand">Jachi Health</span><span class="mpill" id="m-status"></span></p>
+            <p class="mcard__plan" id="m-plan">Cargando su membresía…</p>
+            <p class="mcard__line" id="m-line"></p>
+            <dl class="mcard__facts" id="m-facts" hidden>
+              <div><dt id="m-when-label">Se renueva</dt><dd id="m-when"></dd></div>
+              <div><dt>Precio</dt><dd><span id="m-price"></span><small id="m-founding" hidden>Precio de fundador</small></dd></div>
+              <div><dt>Adultos cubiertos</dt><dd id="m-adults"></dd></div>
+            </dl>
+            <div class="mcard__acts" id="m-acts" hidden>
+              <a class="btn" id="m-plans" href="/es/planes/" hidden>Elija su plan <svg class="i i--arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+              <button class="btn" type="button" id="m-retry" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4.2h-4.2"/></svg> Intentar de nuevo</button>
+            </div>
+          </div>
+          <div class="pay" id="m-pay" hidden>
+            <p class="pay__title" id="m-pay-title"></p>
+            <a class="btn" id="m-pay-link" href="/es/planes/" target="_blank" rel="noopener">Pagar</a>
+            <p class="fine"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Usted paga en la página segura de Stripe. Los números de tarjeta nunca llegan a este sitio.</span></p>
+          </div>
+          <ul class="pquick" id="m-quick">
+            <li><a class="pquick__a" href="#help" data-tab-go="help"><span class="pquick__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z"/><path d="M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8"/></svg></span><span><b id="q-help">Ayuda</b><small id="q-reply">Una persona de nuestro equipo responde por correo</small></span><svg class="i i--arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></li>
+            <li><a class="pquick__a" href="#billing" data-tab-go="billing"><span class="pquick__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13" rx="2.6"/><path d="M3 10h18"/><path d="M7 15h3.5"/></svg></span><span><b>Facturas</b><small id="q-invoices">Todavía no hay facturas</small></span><svg class="i i--arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></li>
+            <li><a class="pquick__a" href="/es/planes/"><span class="pquick__ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z"/><path d="M19 3.5v3M17.5 5h3"/></svg></span><span><b>Qué incluye su plan</b><small>Compare los tres planes</small></span><svg class="i i--arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a></li>
+          </ul>
+        </div>
+
+        <div class="ppanel" id="billing" data-panel="billing" hidden>
+          <h2 class="acct__title" tabindex="-1">Pagos</h2>
+          <div class="acct__block acct__block--first">
+            <h3>Facturas</h3>
+            <ul class="invs" id="m-invoices"></ul>
+            <p id="m-invoices-none">Todavía no hay facturas</p>
+          </div>
+          <div class="acct__block" id="m-manage-block" hidden>
+            <h3>Cambiar o cancelar su plan</h3>
+            <p>Stripe, nuestra empresa de pagos, guarda su tarjeta y su plan. Allí puede actualizar su tarjeta, cambiar de plan o cancelar cuando quiera.</p>
+            <a class="btn btn--ghost" id="m-manage" href="/es/planes/" target="_blank" rel="noopener">Administrar pagos en Stripe <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5"/><path d="M19 5l-8 8"/><path d="M11 7H7.5A2.5 2.5 0 0 0 5 9.5v7A2.5 2.5 0 0 0 7.5 19h7a2.5 2.5 0 0 0 2.5-2.5V13"/></svg></a>
+            <p class="fine">Stripe le envía un enlace por correo para entrar.</p>
+          </div>
+        </div>
+
+        <div class="ppanel" id="help" data-panel="help" hidden>
+          <h2 class="acct__title" tabindex="-1" id="h-title">Ayuda</h2>
+          <p id="h-reply">Una persona de nuestro equipo responde por correo</p>
+          <div class="pacts">
+            <a class="btn" id="h-email" href="mailto:support@jachihealth.com"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="M4.5 7.5l7.5 5.5 7.5-5.5"/></svg> <span id="h-email-text">Escribir a nuestro equipo</span></a>
+            <button class="btn btn--ghost" type="button" id="h-call" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z"/></svg> Pedir una llamada</button>
+            <button class="btn btn--ghost" type="button" data-chat-open aria-controls="chat"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z"/><path d="M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01"/></svg> Preguntar al asistente de IA</button>
+          </div>
+          <p class="fine pnote"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Para proteger su privacidad, no incluya detalles de salud en correos ni mensajes. Su coordinador revisará con usted lo que necesita por teléfono.</span></p>
+          <p class="purgent"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.3"/></svg><span>Si cree que tiene una emergencia médica, llame al 911. Si está en crisis o piensa en el suicidio, llame al 988 y oprima 2, o envíe AYUDA al 988.</span></p>
+        </div>
+
+        <div class="ppanel" id="settings" data-panel="settings" hidden>
+          <h2 class="acct__title" tabindex="-1">Sus datos</h2>
         <form class="form" id="profile-form" novalidate>
-          <div class="field">
-            <label class="label" for="profile-state">Estado</label>
-            <select class="select" id="profile-state" name="state" autocomplete="address-level1" data-field="profile-state" aria-describedby="err-profile-state">
-              <option value="">Elija su estado</option>
-              <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="NC">Carolina del Norte</option><option value="SC">Carolina del Sur</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="ND">Dakota del Norte</option><option value="SD">Dakota del Sur</option><option value="DE">Delaware</option><option value="DC">Distrito de Columbia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawái</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Luisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Misisipi</option><option value="MO">Misuri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NJ">Nueva Jersey</option><option value="NY">Nueva York</option><option value="NH">Nuevo Hampshire</option><option value="NM">Nuevo México</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregón</option><option value="PA">Pensilvania</option><option value="RI">Rhode Island</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WV">Virginia Occidental</option><option value="WA">Washington</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
-            </select>
-            <p class="err" id="err-profile-state" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.3"/></svg><span></span></p>
-          </div>
-          <fieldset class="fs">
-            <legend class="label">Me interesa <span class="label__opt">(opcional)</span></legend>
-            <div class="checks checks--chips"><label class="check"><input type="checkbox" name="interest" value="urgent-care"><span>Atención de urgencia</span></label><label class="check"><input type="checkbox" name="interest" value="refills"><span>Resurtidos</span></label><label class="check"><input type="checkbox" name="interest" value="therapy"><span>Terapia</span></label><label class="check"><input type="checkbox" name="interest" value="anxiety-depression"><span>Ansiedad y depresión</span></label><label class="check"><input type="checkbox" name="interest" value="sexual-health"><span>Salud sexual</span></label><label class="check"><input type="checkbox" name="interest" value="mens-health"><span>Salud del hombre</span></label><label class="check"><input type="checkbox" name="interest" value="womens-health"><span>Salud de la mujer</span></label><label class="check"><input type="checkbox" name="interest" value="skin-care"><span>Cuidado de la piel</span></label><label class="check"><input type="checkbox" name="interest" value="weight-care"><span>Control de peso</span></label></div>
-          </fieldset>
-          <fieldset class="fs">
-            <legend class="label">Idioma de nuestros correos</legend>
-            <div class="seg">
-              <label><input type="radio" name="language" value="en"><span lang="en">English</span></label>
-              <label><input type="radio" name="language" value="es"><span lang="es">Español</span></label>
-            </div>
-          </fieldset>
-          <label class="consent" for="profile-updates">
-            <input type="checkbox" id="profile-updates" name="updates" value="yes" aria-describedby="profile-updates-hint">
-            <span>Envíenme correos sobre la apertura de Jachi<small class="consent__hint" id="profile-updates-hint">Desactívelo para dejar de recibir nuestros correos.</small></span>
-          </label>
-          <button class="btn btn--block" type="submit" id="profile-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Guardar cambios</span></button>
-        </form>
-
-        <div class="acct__block">
-          <h3>Contraseña</h3>
-          <button class="btn btn--ghost btn--sm" type="button" id="password-open" aria-expanded="false" aria-controls="password-form"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Cambiar contraseña</button>
-          <form class="form" id="password-form" hidden novalidate>
             <div class="field">
-              <label class="label" for="new-password">Nueva contraseña<span class="label__hint" id="new-password-hint">Al menos 8 caracteres.</span></label>
-              <div class="pw">
-                <input class="input" id="new-password" name="password" type="password" autocomplete="new-password" maxlength="200" data-field="new-password" aria-describedby="new-password-hint err-new-password">
-                <button class="pw__toggle" type="button" aria-controls="new-password" aria-pressed="false" aria-label="Mostrar contraseña" data-show="Mostrar contraseña" data-hide="Ocultar contraseña"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
+              <label class="label" for="profile-state">Estado</label>
+              <select class="select" id="profile-state" name="state" autocomplete="address-level1" data-field="profile-state" aria-describedby="err-profile-state">
+                <option value="">Elija su estado</option>
+                <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="NC">Carolina del Norte</option><option value="SC">Carolina del Sur</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="ND">Dakota del Norte</option><option value="SD">Dakota del Sur</option><option value="DE">Delaware</option><option value="DC">Distrito de Columbia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawái</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Luisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Misisipi</option><option value="MO">Misuri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NJ">Nueva Jersey</option><option value="NY">Nueva York</option><option value="NH">Nuevo Hampshire</option><option value="NM">Nuevo México</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregón</option><option value="PA">Pensilvania</option><option value="RI">Rhode Island</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WV">Virginia Occidental</option><option value="WA">Washington</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+              </select>
+              <p class="err" id="err-profile-state" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.3"/></svg><span></span></p>
+            </div>
+            <fieldset class="fs">
+              <legend class="label">Me interesa <span class="label__opt">(opcional)</span></legend>
+              <div class="checks checks--chips"><label class="check"><input type="checkbox" name="interest" value="urgent-care"><span>Atención de urgencia</span></label><label class="check"><input type="checkbox" name="interest" value="refills"><span>Resurtidos</span></label><label class="check"><input type="checkbox" name="interest" value="therapy"><span>Terapia</span></label><label class="check"><input type="checkbox" name="interest" value="anxiety-depression"><span>Ansiedad y depresión</span></label><label class="check"><input type="checkbox" name="interest" value="sexual-health"><span>Salud sexual</span></label><label class="check"><input type="checkbox" name="interest" value="mens-health"><span>Salud del hombre</span></label><label class="check"><input type="checkbox" name="interest" value="womens-health"><span>Salud de la mujer</span></label><label class="check"><input type="checkbox" name="interest" value="skin-care"><span>Cuidado de la piel</span></label><label class="check"><input type="checkbox" name="interest" value="weight-care"><span>Control de peso</span></label></div>
+            </fieldset>
+            <fieldset class="fs">
+              <legend class="label">Idioma de nuestros correos</legend>
+              <div class="seg">
+                <label><input type="radio" name="language" value="en"><span lang="en">English</span></label>
+                <label><input type="radio" name="language" value="es"><span lang="es">Español</span></label>
               </div>
-              <p class="err" id="err-new-password" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.3"/></svg><span></span></p>
-            </div>
-            <button class="btn btn--sm" type="submit" id="password-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Guardar contraseña</span></button>
+            </fieldset>
+            <label class="consent" for="profile-updates">
+              <input type="checkbox" id="profile-updates" name="updates" value="yes" aria-describedby="profile-updates-hint">
+              <span>Envíenme novedades de Jachi<small class="consent__hint" id="profile-updates-hint">Desactívelo para dejar de recibir novedades. Los correos sobre su plan y sus pagos seguirán llegando.</small></span>
+            </label>
+            <button class="btn btn--block" type="submit" id="profile-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Guardar cambios</span></button>
           </form>
-          <div class="form-status" id="password-status" role="status"></div>
-        </div>
 
-        <div class="acct__block">
-          <h3>Borrar su cuenta</h3>
-          <p>Esto borra su cuenta y quita este correo de nuestra lista de espera y de nuestros registros de soporte.</p>
-          <button class="btn btn--ghost btn--sm btn--warn" type="button" id="delete-open" aria-expanded="false" aria-controls="delete-confirm"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 7h15"/><path d="M9.5 7V4.8h5V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10.2 10.8v5.4M13.8 10.8v5.4"/></svg> Borrar mi cuenta</button>
-          <div class="confirm" id="delete-confirm" hidden>
-            <p id="delete-warn" tabindex="-1">Esto no se puede deshacer. ¿Quiere borrar su cuenta y todo lo que tenemos de este correo?</p>
-            <div class="confirm__actions">
-              <button class="btn btn--danger btn--sm" type="button" id="delete-yes"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Sí, borrar todo</span></button>
-              <button class="btn btn--ghost btn--sm" type="button" id="delete-no">Cancelar</button>
-            </div>
-            <div class="form-status" id="delete-status" role="status"></div>
+          <div class="acct__block">
+            <h3>Contraseña</h3>
+            <button class="btn btn--ghost btn--sm" type="button" id="password-open" aria-expanded="false" aria-controls="password-form"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Cambiar contraseña</button>
+            <form class="form" id="password-form" hidden novalidate>
+              <div class="field">
+                <label class="label" for="new-password">Nueva contraseña<span class="label__hint" id="new-password-hint">Al menos 8 caracteres.</span></label>
+                <div class="pw">
+                  <input class="input" id="new-password" name="password" type="password" autocomplete="new-password" maxlength="200" data-field="new-password" aria-describedby="new-password-hint err-new-password">
+                  <button class="pw__toggle" type="button" aria-controls="new-password" aria-pressed="false" aria-label="Mostrar contraseña" data-show="Mostrar contraseña" data-hide="Ocultar contraseña"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z"/><circle cx="12" cy="12" r="2.8"/></svg></button>
+                </div>
+                <p class="err" id="err-new-password" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10v4.2"/><path d="M12 16.8v.3"/></svg><span></span></p>
+              </div>
+              <button class="btn btn--sm" type="submit" id="password-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Guardar contraseña</span></button>
+            </form>
+            <div class="form-status" id="password-status" role="status"></div>
           </div>
-        </div>
 
-        <div class="acct__block">
-          <button class="btn btn--ghost btn--block" type="button" id="logout"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14"/><path d="M10 16.5L5.5 12 10 7.5"/><path d="M5.5 12H15"/></svg> Cerrar sesión</button>
+          <div class="acct__block">
+            <h3>Borrar su cuenta</h3>
+            <p>Esto borra su cuenta y quita este correo de nuestra lista de espera y de nuestros registros de soporte. No cancela una membresía: para cancelar, use Pagos primero.</p>
+            <button class="btn btn--ghost btn--sm btn--warn" type="button" id="delete-open" aria-expanded="false" aria-controls="delete-confirm"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 7h15"/><path d="M9.5 7V4.8h5V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10.2 10.8v5.4M13.8 10.8v5.4"/></svg> Borrar mi cuenta</button>
+            <div class="confirm" id="delete-confirm" hidden>
+              <p id="delete-warn" tabindex="-1">Esto no se puede deshacer. ¿Quiere borrar su cuenta y todo lo que tenemos de este correo?</p>
+              <div class="confirm__actions">
+                <button class="btn btn--danger btn--sm" type="button" id="delete-yes"><span class="spinner" aria-hidden="true"></span><span class="btn__label">Sí, borrar todo</span></button>
+                <button class="btn btn--ghost btn--sm" type="button" id="delete-no">Cancelar</button>
+              </div>
+              <div class="form-status" id="delete-status" role="status"></div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -1560,6 +1732,13 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
         <button class="btn" type="button" id="retry"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4.2h-4.2"/></svg> Intentar de nuevo</button>
       </section>
     </div>
+
+    <ul class="acct__facts">
+      <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>No guarda información de salud</span></li>
+      <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13" rx="2.6"/><path d="M3 10h18"/><path d="M7 15h3.5"/></svg><span>Sin números de tarjeta aquí: usted paga en Stripe</span></li>
+      <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 7h15"/><path d="M9.5 7V4.8h5V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10.2 10.8v5.4M13.8 10.8v5.4"/></svg><span>Puede borrarla cuando quiera</span></li>
+    </ul>
+  </div>
   </div>
 </main>
 
@@ -1671,6 +1850,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
           <option value="Waitlist">Lista de espera</option>
           <option value="Website problem">Problema con el sitio web</option>
           <option value="Partnerships or press">Alianzas o prensa</option>
+          <option value="Call me back" data-topic="call">Quiero que me llamen</option>
           <option value="Something else">Otro tema</option>
         </select>
       </div>
@@ -1729,9 +1909,9 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const ICONS = {"arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "arrow-left": "<path d=\"M19 12H5\"/><path d=\"M11 6l-6 6 6 6\"/>", "check": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "steth": "<path d=\"M6 3.5V9a4 4 0 0 0 8 0V3.5\"/><path d=\"M10 13v1.5a5 5 0 0 0 10 0V12.5\"/><circle cx=\"20\" cy=\"10.5\" r=\"2\"/>", "shield": "<path d=\"M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z\"/><path d=\"M8.8 12.2l2.2 2.2 4.4-4.6\"/>", "spark": "<path d=\"M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z\"/><path d=\"M19 3.5v3M17.5 5h3\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/>", "box": "<path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5\"/><path d=\"M12 12v9\"/>", "home": "<path d=\"M4 11l8-7 8 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>", "pharmacy": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>", "lock": "<rect x=\"5\" y=\"11\" width=\"14\" height=\"9.5\" rx=\"2\"/><path d=\"M8 11V8a4 4 0 0 1 8 0v3\"/>", "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5\"/><path d=\"M12 7.6v.4\"/>", "alert": "<path d=\"M12 4.5l8.5 15h-17z\"/><path d=\"M12 10v4.2\"/><path d=\"M12 16.8v.3\"/>", "msg": "<path d=\"M4 5.5h16v11H10l-4.5 3.5v-3.5H4z\"/>", "clip": "<rect x=\"5.5\" y=\"4.5\" width=\"13\" height=\"16\" rx=\"2\"/><path d=\"M9 4.5v-1h6v1\"/><path d=\"M9 10h6M9 14h4\"/>", "x": "<path d=\"M6 6l12 12M18 6L6 18\"/>", "mail": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"M4.5 7.5l7.5 5.5 7.5-5.5\"/>", "thermo": "<path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9.5v6\"/>", "pill": "<rect x=\"3.5\" y=\"8.5\" width=\"17\" height=\"7\" rx=\"3.5\" transform=\"rotate(-45 12 12)\"/><path d=\"M9.6 9.6l4.8 4.8\"/>", "mind": "<path d=\"M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20\"/><path d=\"M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z\"/>", "scale": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8.5 10a5 5 0 0 1 7 0\"/><path d=\"M12 12.6l1.7-2.5\"/>", "phone": "<path d=\"M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z\"/>", "heart": "<path d=\"M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z\"/>", "talk": "<path d=\"M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z\"/><path d=\"M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8\"/>", "male": "<circle cx=\"10\" cy=\"14\" r=\"5.5\"/><path d=\"M14 10l6-6\"/><path d=\"M15 4h5v5\"/>", "female": "<circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M12 14.5V21\"/><path d=\"M9 18h6\"/>", "drop": "<path d=\"M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z\"/><path d=\"M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6\"/>", "video": "<rect x=\"3\" y=\"6.5\" width=\"12.5\" height=\"11\" rx=\"2.5\"/><path d=\"M15.5 10.5l5-3v9l-5-3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/>", "chat": "<path d=\"M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z\"/><path d=\"M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01\"/>", "send": "<path d=\"M12 19V5\"/><path d=\"M6 11l6-6 6 6\"/>", "share": "<path d=\"M12 15V4\"/><path d=\"M8 8l4-4 4 4\"/><path d=\"M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11\"/>", "plus": "<path d=\"M12 5.5v13M5.5 12h13\"/>", "out": "<path d=\"M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14\"/><path d=\"M10 16.5L5.5 12 10 7.5\"/><path d=\"M5.5 12H15\"/>", "trash": "<path d=\"M4.5 7h15\"/><path d=\"M9.5 7V4.8h5V7\"/><path d=\"M6.5 7l1 12.5h9l1-12.5\"/><path d=\"M10.2 10.8v5.4M13.8 10.8v5.4\"/>", "download": "<path d=\"M12 4v11\"/><path d=\"M7.5 10.5L12 15l4.5-4.5\"/><path d=\"M5 19.5h14\"/>", "refresh": "<path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4.5v4.2h-4.2\"/>", "eye": "<path d=\"M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>", "eye-off": "<path d=\"M4 4l16 16\"/><path d=\"M9.9 6A9.8 9.8 0 0 1 12 5.5c5.8 0 9.2 6.5 9.2 6.5a16.6 16.6 0 0 1-3 3.8M14.1 18.2a9.6 9.6 0 0 1-2.1.3c-5.8 0-9.2-6.5-9.2-6.5a16.4 16.4 0 0 1 3.4-4.2\"/><path d=\"M10 10a2.8 2.8 0 0 0 4 4\"/>"};
+  const ICONS = {"arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "card": "<rect x=\"3\" y=\"5.5\" width=\"18\" height=\"13\" rx=\"2.6\"/><path d=\"M3 10h18\"/><path d=\"M7 15h3.5\"/>", "sliders": "<path d=\"M4 7h9\"/><path d=\"M19 7h1\"/><circle cx=\"16\" cy=\"7\" r=\"2.4\"/><path d=\"M4 17h1\"/><path d=\"M11 17h9\"/><circle cx=\"8\" cy=\"17\" r=\"2.4\"/>", "external": "<path d=\"M14 5h5v5\"/><path d=\"M19 5l-8 8\"/><path d=\"M11 7H7.5A2.5 2.5 0 0 0 5 9.5v7A2.5 2.5 0 0 0 7.5 19h7a2.5 2.5 0 0 0 2.5-2.5V13\"/>", "arrow-left": "<path d=\"M19 12H5\"/><path d=\"M11 6l-6 6 6 6\"/>", "check": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "steth": "<path d=\"M6 3.5V9a4 4 0 0 0 8 0V3.5\"/><path d=\"M10 13v1.5a5 5 0 0 0 10 0V12.5\"/><circle cx=\"20\" cy=\"10.5\" r=\"2\"/>", "shield": "<path d=\"M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z\"/><path d=\"M8.8 12.2l2.2 2.2 4.4-4.6\"/>", "spark": "<path d=\"M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z\"/><path d=\"M19 3.5v3M17.5 5h3\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/>", "box": "<path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5\"/><path d=\"M12 12v9\"/>", "home": "<path d=\"M4 11l8-7 8 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>", "pharmacy": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>", "lock": "<rect x=\"5\" y=\"11\" width=\"14\" height=\"9.5\" rx=\"2\"/><path d=\"M8 11V8a4 4 0 0 1 8 0v3\"/>", "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5\"/><path d=\"M12 7.6v.4\"/>", "alert": "<path d=\"M12 4.5l8.5 15h-17z\"/><path d=\"M12 10v4.2\"/><path d=\"M12 16.8v.3\"/>", "msg": "<path d=\"M4 5.5h16v11H10l-4.5 3.5v-3.5H4z\"/>", "clip": "<rect x=\"5.5\" y=\"4.5\" width=\"13\" height=\"16\" rx=\"2\"/><path d=\"M9 4.5v-1h6v1\"/><path d=\"M9 10h6M9 14h4\"/>", "x": "<path d=\"M6 6l12 12M18 6L6 18\"/>", "mail": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"M4.5 7.5l7.5 5.5 7.5-5.5\"/>", "thermo": "<path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9.5v6\"/>", "pill": "<rect x=\"3.5\" y=\"8.5\" width=\"17\" height=\"7\" rx=\"3.5\" transform=\"rotate(-45 12 12)\"/><path d=\"M9.6 9.6l4.8 4.8\"/>", "mind": "<path d=\"M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20\"/><path d=\"M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z\"/>", "scale": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8.5 10a5 5 0 0 1 7 0\"/><path d=\"M12 12.6l1.7-2.5\"/>", "phone": "<path d=\"M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z\"/>", "heart": "<path d=\"M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z\"/>", "talk": "<path d=\"M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z\"/><path d=\"M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8\"/>", "male": "<circle cx=\"10\" cy=\"14\" r=\"5.5\"/><path d=\"M14 10l6-6\"/><path d=\"M15 4h5v5\"/>", "female": "<circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M12 14.5V21\"/><path d=\"M9 18h6\"/>", "drop": "<path d=\"M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z\"/><path d=\"M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6\"/>", "video": "<rect x=\"3\" y=\"6.5\" width=\"12.5\" height=\"11\" rx=\"2.5\"/><path d=\"M15.5 10.5l5-3v9l-5-3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/>", "chat": "<path d=\"M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z\"/><path d=\"M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01\"/>", "send": "<path d=\"M12 19V5\"/><path d=\"M6 11l6-6 6 6\"/>", "share": "<path d=\"M12 15V4\"/><path d=\"M8 8l4-4 4 4\"/><path d=\"M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11\"/>", "plus": "<path d=\"M12 5.5v13M5.5 12h13\"/>", "out": "<path d=\"M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14\"/><path d=\"M10 16.5L5.5 12 10 7.5\"/><path d=\"M5.5 12H15\"/>", "trash": "<path d=\"M4.5 7h15\"/><path d=\"M9.5 7V4.8h5V7\"/><path d=\"M6.5 7l1 12.5h9l1-12.5\"/><path d=\"M10.2 10.8v5.4M13.8 10.8v5.4\"/>", "download": "<path d=\"M12 4v11\"/><path d=\"M7.5 10.5L12 15l4.5-4.5\"/><path d=\"M5 19.5h14\"/>", "refresh": "<path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4.5v4.2h-4.2\"/>", "eye": "<path d=\"M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>", "eye-off": "<path d=\"M4 4l16 16\"/><path d=\"M9.9 6A9.8 9.8 0 0 1 12 5.5c5.8 0 9.2 6.5 9.2 6.5a16.6 16.6 0 0 1-3 3.8M14.1 18.2a9.6 9.6 0 0 1-2.1.3c-5.8 0-9.2-6.5-9.2-6.5a16.4 16.4 0 0 1 3.4-4.2\"/><path d=\"M10 10a2.8 2.8 0 0 0 4 4\"/>"};
   const EMAIL = "support@jachihealth.com";
-  const T = {"get_early_access": "Únase a la lista de espera", "sms_988": "sms:988?&body=AYUDA", "choose_state": "Elija su estado.", "fix_one": "Corrija el campo marcado.", "fix_many": "Corrija los {n} campos marcados.", "enter_email": "Escriba su correo electrónico.", "valid_email": "Escriba un correo válido, como nombre@ejemplo.com.", "j_preview": "Esta es una vista previa del sitio, así que aquí no se guardan los registros.", "j_saving": "Guardando su lugar…", "j_failed": "No pudimos guardar su lugar en este momento. Revise su conexión e inténtelo de nuevo.", "j_your_state": "su estado", "share_title": "Jachi Health", "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en todo EE. UU. Únase a la lista de espera:", "share_button": "Compartir Jachi", "share_copied_button": "Enlace copiado", "share_copied": "Enlace copiado. Péguelo en un mensaje de texto o un correo.", "share_manual": "Copie este enlace para compartirlo: {url}", "c_crisis": "Lamento mucho que esté pasando por esto, y no tiene que enfrentarlo sin ayuda. Llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la Línea 988 de Prevención del Suicidio y Crisis. Es gratuita, confidencial y atiende las 24 horas. Si está en peligro inmediato, llame al 911.", "c_emergency": "Esto podría ser una emergencia. Llame al 911 ahora o vaya a la sala de emergencias más cercana. Soy un asistente de IA y no puedo ayudar con emergencias.", "c_typing": "El asistente está escribiendo", "c_busy": "Hay muchas preguntas en este momento. Inténtelo de nuevo en un minuto, o envíe una solicitud y nuestro equipo le responderá por correo.", "c_off": "Las respuestas de IA están desactivadas en esta vista previa. Aún puede enviar una solicitud.", "c_down": "No puedo responder en este momento. Puede enviar una solicitud y nuestro equipo le responderá por correo.", "c_call_988": "Llamar al 988", "c_text_988": "Enviar texto al 988", "c_call_911": "Llamar al 911", "c_ticket": "Enviar una solicitud", "t_name": "Escriba su nombre.", "t_msg": "Cuéntenos un poco más (al menos 10 caracteres).", "t_preview": "Esta es una vista previa del sitio, así que aquí no se envían solicitudes. En el sitio real llegan a {email}.", "t_sending": "Enviando…", "t_send": "Enviar solicitud", "t_failed": "No pudimos enviar su solicitud. Revise su conexión e inténtelo de nuevo, o escriba a {email}."};
+  const T = {"get_early_access": "Únase a la lista de espera", "my_account": "Mi cuenta", "sms_988": "sms:988?&body=AYUDA", "choose_state": "Elija su estado.", "fix_one": "Corrija el campo marcado.", "fix_many": "Corrija los {n} campos marcados.", "enter_email": "Escriba su correo electrónico.", "valid_email": "Escriba un correo válido, como nombre@ejemplo.com.", "j_preview": "Esta es una vista previa del sitio, así que aquí no se guardan los registros.", "j_saving": "Guardando su lugar…", "j_failed": "No pudimos guardar su lugar en este momento. Revise su conexión e inténtelo de nuevo.", "j_your_state": "su estado", "share_title": "Jachi Health", "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en todo EE. UU. Únase a la lista de espera:", "share_button": "Compartir Jachi", "share_copied_button": "Enlace copiado", "share_copied": "Enlace copiado. Péguelo en un mensaje de texto o un correo.", "share_manual": "Copie este enlace para compartirlo: {url}", "c_crisis": "Lamento mucho que esté pasando por esto, y no tiene que enfrentarlo sin ayuda. Llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la Línea 988 de Prevención del Suicidio y Crisis. Es gratuita, confidencial y atiende las 24 horas. Si está en peligro inmediato, llame al 911.", "c_emergency": "Esto podría ser una emergencia. Llame al 911 ahora o vaya a la sala de emergencias más cercana. Soy un asistente de IA y no puedo ayudar con emergencias.", "c_typing": "El asistente está escribiendo", "c_busy": "Hay muchas preguntas en este momento. Inténtelo de nuevo en un minuto, o envíe una solicitud y nuestro equipo le responderá por correo.", "c_off": "Las respuestas de IA están desactivadas en esta vista previa. Aún puede enviar una solicitud.", "c_down": "No puedo responder en este momento. Puede enviar una solicitud y nuestro equipo le responderá por correo.", "c_call_988": "Llamar al 988", "c_text_988": "Enviar texto al 988", "c_call_911": "Llamar al 911", "c_ticket": "Enviar una solicitud", "t_name": "Escriba su nombre.", "t_msg": "Cuéntenos un poco más (al menos 10 caracteres).", "t_preview": "Esta es una vista previa del sitio, así que aquí no se envían solicitudes. En el sitio real llegan a {email}.", "t_sending": "Enviando…", "t_send": "Enviar solicitud", "t_failed": "No pudimos enviar su solicitud. Revise su conexión e inténtelo de nuevo, o escriba a {email}."};
   const fmt = (text, values = {}) => text.replace(/\{(\w+)\}/g, (m, k) => (k in values ? String(values[k]) : m));
   // Account emails link to the home page with a token after the #. Send the visitor to the account page,
   // which finishes the job (confirming the email, setting a new password or accepting an invite).
@@ -1759,6 +1939,39 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
   const themeColor = $('meta[name="theme-color"]');
   let headerTick = false;
   let pastCanopy = null;
+  // Plans: pay monthly or yearly. The switch changes every plan card's price, and the checkout opens on that choice.
+  const billingSwitches = $$('[data-billing-switch]');
+  const setBilling = mode => {
+    billingSwitches.forEach(sw => {
+      sw.dataset.on = mode;
+      $$('button', sw).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.billing === mode)));
+    });
+    $$('[data-price]').forEach(el => {
+      const [amount, per] = el.dataset[mode].split('|');
+      el.firstChild.textContent = amount;
+      el.lastElementChild.textContent = per;
+      if (!reduced() && el.animate) el.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'ease-out' });
+    });
+    $$('[data-alt]').forEach(el => { el.textContent = el.dataset[mode]; });
+    $$('[data-plan-link]').forEach(a => {
+      const url = new URL(a.getAttribute('href'), window.location.href);
+      if (mode === 'yearly') url.searchParams.set('billing', 'yearly'); else url.searchParams.delete('billing');
+      a.setAttribute('href', url.pathname + url.search);
+    });
+  };
+  billingSwitches.forEach(sw => {
+    sw.hidden = false;
+    sw.addEventListener('click', e => {
+      const button = e.target.closest('button[data-billing]');
+      if (button && button.getAttribute('aria-pressed') !== 'true') setBilling(button.dataset.billing);
+    });
+  });
+
+  // Signed in on this browser (the account page keeps the session there): the header says "My account".
+  try {
+    if (window.localStorage.getItem('jachi.session')) $$('[data-login-text]').forEach(el => { el.textContent = T.my_account; });
+  } catch (err) { /* storage blocked */ }
+
   const syncHeader = () => {
     headerTick = false;
     if (!header) return;
@@ -2195,9 +2408,11 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
       raf = 0;
       const mine = ++run, shape = mode, slow = animate && !reduced();
       const area = Math.min(1, (W * H) / 520000);
-      const job = growLeaf((Math.random() * 4294967296) >>> 0, mode === 'map'
+      // A mount can ask for one particular leaf (data-seed): the member page grows each member their own.
+      const own = /^\d+$/.test(mount.dataset.seed || '') ? Number(mount.dataset.seed) >>> 0 : -1;
+      const job = growLeaf(own < 0 ? (Math.random() * 4294967296) >>> 0 : own, mode === 'map'
         ? { rows: [-435, -340, -245, -150], leads: true, dot: 152, sources: 1150, kill: 7, bow: 0 }
-        : { rows: [-472, -398, -324, -250, -176, -102], leads: false, dot: 0, sources: Math.round(520 + 580 * area), kill: 7.2, bow: 8 });
+        : { rows: [-472, -398, -324, -250, -176, -102], leads: false, dot: 0, sources: own < 0 ? Math.round(520 + 580 * area) : 900, kill: 7.2, bow: 8 });
       order = []; shown = 0; grown = false; pending = true; fx.length = 0; hot = -1;
       mount.classList.remove('is-grown');
       chips.forEach(li => li.classList.remove('is-on'));
@@ -2319,6 +2534,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
       if (!leaf) { if (!pending) start(true); } else if (changed === 2) start(false); else if (changed) redraw();
     };
     const begin = () => { ready = true; sync(); };
+    mount.addEventListener('leaf:regrow', () => { if (ready && W) start(true); });
     if ('ResizeObserver' in window) new ResizeObserver(() => { if (ready) sync(); }).observe(mount);
     // Growing takes a few dozen milliseconds of sums: wait until the page has painted.
     if ('requestIdleCallback' in window) window.requestIdleCallback(begin, { timeout: 400 }); else window.setTimeout(begin, 80);
@@ -3101,16 +3317,17 @@ const Identity = (() => {
   };
 })();
 
-/* The account page: log in, create an account, confirm an email, reset a password, update details,
-   turn emails off, delete the account and log out. Accounts hold early-access details only, never health
-   information. Uses Identity (src/identity.js), which is loaded first. */
+/* The account page: log in, create an account, confirm an email, reset a password; and, once signed in, the
+   member page: the plan and its invoices (read from Stripe by /api/member), how to reach a coordinator, and
+   settings (details, emails, password, delete, log out). Accounts never hold health information.
+   Uses Identity (src/identity.js), which is loaded first. */
 (() => {
   'use strict';
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const T = {"get_early_access": "Únase a la lista de espera", "sms_988": "sms:988?&body=AYUDA", "choose_state": "Elija su estado.", "fix_one": "Corrija el campo marcado.", "fix_many": "Corrija los {n} campos marcados.", "enter_email": "Escriba su correo electrónico.", "valid_email": "Escriba un correo válido, como nombre@ejemplo.com.", "j_preview": "Esta es una vista previa del sitio, así que aquí no se guardan los registros.", "j_saving": "Guardando su lugar…", "j_failed": "No pudimos guardar su lugar en este momento. Revise su conexión e inténtelo de nuevo.", "j_your_state": "su estado", "share_title": "Jachi Health", "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en todo EE. UU. Únase a la lista de espera:", "share_button": "Compartir Jachi", "share_copied_button": "Enlace copiado", "share_copied": "Enlace copiado. Péguelo en un mensaje de texto o un correo.", "share_manual": "Copie este enlace para compartirlo: {url}", "c_crisis": "Lamento mucho que esté pasando por esto, y no tiene que enfrentarlo sin ayuda. Llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la Línea 988 de Prevención del Suicidio y Crisis. Es gratuita, confidencial y atiende las 24 horas. Si está en peligro inmediato, llame al 911.", "c_emergency": "Esto podría ser una emergencia. Llame al 911 ahora o vaya a la sala de emergencias más cercana. Soy un asistente de IA y no puedo ayudar con emergencias.", "c_typing": "El asistente está escribiendo", "c_busy": "Hay muchas preguntas en este momento. Inténtelo de nuevo en un minuto, o envíe una solicitud y nuestro equipo le responderá por correo.", "c_off": "Las respuestas de IA están desactivadas en esta vista previa. Aún puede enviar una solicitud.", "c_down": "No puedo responder en este momento. Puede enviar una solicitud y nuestro equipo le responderá por correo.", "c_call_988": "Llamar al 988", "c_text_988": "Enviar texto al 988", "c_call_911": "Llamar al 911", "c_ticket": "Enviar una solicitud", "t_name": "Escriba su nombre.", "t_msg": "Cuéntenos un poco más (al menos 10 caracteres).", "t_preview": "Esta es una vista previa del sitio, así que aquí no se envían solicitudes. En el sitio real llegan a {email}.", "t_sending": "Enviando…", "t_send": "Enviar solicitud", "t_failed": "No pudimos enviar su solicitud. Revise su conexión e inténtelo de nuevo, o escriba a {email}.", "a_meta_title": "Su cuenta | Jachi Health", "a_meta_desc": "Inicie sesión para actualizar sus datos de la lista de espera de Jachi Health, dejar de recibir correos o borrar su cuenta.", "a_eyebrow": "Su cuenta", "a_h1": "Su cuenta de la <em>lista de espera.</em>", "a_lead": "Actualice sus datos, deje de recibir nuestros correos o borre su cuenta cuando quiera. Aquí no hay información de salud: las consultas y los expedientes médicos no forman parte de esta cuenta.", "a_fact_free": "Gratis y sin datos de pago", "a_fact_nohealth": "No guarda información de salud", "a_fact_delete": "Puede borrarla cuando quiera", "a_loading": "Cargando su cuenta…", "a_noscript": "Su cuenta necesita JavaScript. Actívelo en la configuración de su navegador y vuelva a cargar esta página.", "a_off_title": "Las cuentas aún no están disponibles", "a_off_body": "Aún puede unirse a la lista de espera, y le avisaremos por correo cuando abramos en su estado.", "a_tabs": "Inicie sesión o cree una cuenta", "a_tab_login": "Iniciar sesión", "a_tab_create": "Crear cuenta", "a_email": "Correo electrónico", "a_password": "Contraseña", "a_new_password": "Nueva contraseña", "a_password_hint": "Al menos 8 caracteres.", "a_show_password": "Mostrar contraseña", "a_hide_password": "Ocultar contraseña", "a_state": "Estado", "a_choose_state": "Elija su estado", "a_interests": "Me interesa", "a_optional": "(opcional)", "a_login": "Iniciar sesión", "a_create": "Crear cuenta", "a_forgot_link": "¿Olvidó su contraseña?", "a_create_note": "Al crear una cuenta, acepta recibir correos sobre nuestra apertura. Puede dejar de recibirlos cuando quiera. Lea nuestra <a href=\"/privacy/\" hreflang=\"en\">política de privacidad (en inglés)</a> y nuestra <a href=\"/es/datos-de-salud/\">política de datos de salud del consumidor</a>.", "a_sent_title": "Revise su correo", "a_sent_body": "Enviamos un enlace a {email}. Ábralo para confirmar su cuenta.", "a_sent_from": "El correo llega de no-reply@netlify.com, el servicio que aloja nuestro sitio, y está en inglés. Si no lo ve en su bandeja de entrada, revise la carpeta de correo no deseado.", "a_back_login": "Volver a iniciar sesión", "a_forgot_title": "Restablezca su contraseña", "a_forgot_lead": "Escriba el correo de su cuenta y le enviaremos un enlace para elegir una nueva contraseña.", "a_send_link": "Enviar enlace", "a_forgot_sent": "Si hay una cuenta para {email}, le enviamos un enlace para restablecer su contraseña.", "a_reset_title": "Elija una nueva contraseña", "a_save_password": "Guardar contraseña", "a_invite_title": "Elija una contraseña para terminar", "a_invite_lead": "Le invitaron a una cuenta de Jachi Health. Elija una contraseña para terminar de configurarla.", "a_profile_title": "Sus datos", "a_signed_in_as": "Sesión iniciada como {email}", "a_language": "Idioma de nuestros correos", "a_updates": "Envíenme correos sobre la apertura de Jachi", "a_updates_hint": "Desactívelo para dejar de recibir nuestros correos.", "a_save": "Guardar cambios", "a_password_title": "Contraseña", "a_change_password": "Cambiar contraseña", "a_delete_title": "Borrar su cuenta", "a_delete_body": "Esto borra su cuenta y quita este correo de nuestra lista de espera y de nuestros registros de soporte.", "a_delete": "Borrar mi cuenta", "a_delete_warn": "Esto no se puede deshacer. ¿Quiere borrar su cuenta y todo lo que tenemos de este correo?", "a_delete_confirm": "Sí, borrar todo", "a_cancel": "Cancelar", "a_logout": "Cerrar sesión", "a_deleted_title": "Su cuenta se borró", "a_deleted_done": "También quitamos este correo de nuestra lista de espera y de nuestros registros de soporte.", "a_deleted_partial": "Para quitar este correo también de nuestra lista de espera, escriba a {email} y nos encargaremos.", "a_home": "Volver al inicio", "a_link_title": "Este enlace venció", "a_link_body": "Los enlaces de nuestros correos funcionan una sola vez y vencen después de un tiempo. Inicie sesión, o restablezca su contraseña para recibir un enlace nuevo.", "a_down_title": "No pudimos cargar su cuenta", "a_down_body": "Revise su conexión e inténtelo de nuevo.", "a_try_again": "Intentar de nuevo", "a_err_password": "Escriba su contraseña.", "a_err_password_short": "Use al menos 8 caracteres.", "a_e_invalid_login": "Ese correo y esa contraseña no coinciden con ninguna cuenta. Revíselos e inténtelo de nuevo.", "a_e_unconfirmed": "Primero confirme su correo. Abra el enlace que le enviamos cuando creó su cuenta.", "a_e_exists": "Ya hay una cuenta con este correo. Inicie sesión o restablezca su contraseña.", "a_e_signup_off": "Por ahora no se pueden crear cuentas nuevas.", "a_e_rate": "Demasiados intentos. Espere un minuto e inténtelo de nuevo.", "a_e_network": "No pudimos conectar con el servidor. Revise su conexión e inténtelo de nuevo.", "a_e_unknown": "Algo salió mal. Inténtelo de nuevo o escriba a {email}.", "a_e_weak": "Elija una contraseña más larga, de al menos 8 caracteres.", "a_working": "Un momento…", "a_saved": "Cambios guardados.", "a_password_saved": "Contraseña guardada.", "a_confirmed": "Su correo está confirmado y ya inició sesión.", "a_welcome": "Su cuenta está lista.", "a_logged_out": "Cerró sesión.", "a_email_changed": "Su correo electrónico se actualizó.", "a_email_change_login": "Inicie sesión y luego vuelva a abrir el enlace de su correo para terminar de cambiar su dirección de correo electrónico.", "a_delete_failed": "No pudimos borrar su cuenta en este momento. Inténtelo de nuevo o escriba a {email}."};
-  const ICONS = {"arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "arrow-left": "<path d=\"M19 12H5\"/><path d=\"M11 6l-6 6 6 6\"/>", "check": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "steth": "<path d=\"M6 3.5V9a4 4 0 0 0 8 0V3.5\"/><path d=\"M10 13v1.5a5 5 0 0 0 10 0V12.5\"/><circle cx=\"20\" cy=\"10.5\" r=\"2\"/>", "shield": "<path d=\"M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z\"/><path d=\"M8.8 12.2l2.2 2.2 4.4-4.6\"/>", "spark": "<path d=\"M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z\"/><path d=\"M19 3.5v3M17.5 5h3\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/>", "box": "<path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5\"/><path d=\"M12 12v9\"/>", "home": "<path d=\"M4 11l8-7 8 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>", "pharmacy": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>", "lock": "<rect x=\"5\" y=\"11\" width=\"14\" height=\"9.5\" rx=\"2\"/><path d=\"M8 11V8a4 4 0 0 1 8 0v3\"/>", "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5\"/><path d=\"M12 7.6v.4\"/>", "alert": "<path d=\"M12 4.5l8.5 15h-17z\"/><path d=\"M12 10v4.2\"/><path d=\"M12 16.8v.3\"/>", "msg": "<path d=\"M4 5.5h16v11H10l-4.5 3.5v-3.5H4z\"/>", "clip": "<rect x=\"5.5\" y=\"4.5\" width=\"13\" height=\"16\" rx=\"2\"/><path d=\"M9 4.5v-1h6v1\"/><path d=\"M9 10h6M9 14h4\"/>", "x": "<path d=\"M6 6l12 12M18 6L6 18\"/>", "mail": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"M4.5 7.5l7.5 5.5 7.5-5.5\"/>", "thermo": "<path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9.5v6\"/>", "pill": "<rect x=\"3.5\" y=\"8.5\" width=\"17\" height=\"7\" rx=\"3.5\" transform=\"rotate(-45 12 12)\"/><path d=\"M9.6 9.6l4.8 4.8\"/>", "mind": "<path d=\"M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20\"/><path d=\"M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z\"/>", "scale": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8.5 10a5 5 0 0 1 7 0\"/><path d=\"M12 12.6l1.7-2.5\"/>", "phone": "<path d=\"M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z\"/>", "heart": "<path d=\"M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z\"/>", "talk": "<path d=\"M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z\"/><path d=\"M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8\"/>", "male": "<circle cx=\"10\" cy=\"14\" r=\"5.5\"/><path d=\"M14 10l6-6\"/><path d=\"M15 4h5v5\"/>", "female": "<circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M12 14.5V21\"/><path d=\"M9 18h6\"/>", "drop": "<path d=\"M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z\"/><path d=\"M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6\"/>", "video": "<rect x=\"3\" y=\"6.5\" width=\"12.5\" height=\"11\" rx=\"2.5\"/><path d=\"M15.5 10.5l5-3v9l-5-3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/>", "chat": "<path d=\"M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z\"/><path d=\"M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01\"/>", "send": "<path d=\"M12 19V5\"/><path d=\"M6 11l6-6 6 6\"/>", "share": "<path d=\"M12 15V4\"/><path d=\"M8 8l4-4 4 4\"/><path d=\"M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11\"/>", "plus": "<path d=\"M12 5.5v13M5.5 12h13\"/>", "out": "<path d=\"M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14\"/><path d=\"M10 16.5L5.5 12 10 7.5\"/><path d=\"M5.5 12H15\"/>", "trash": "<path d=\"M4.5 7h15\"/><path d=\"M9.5 7V4.8h5V7\"/><path d=\"M6.5 7l1 12.5h9l1-12.5\"/><path d=\"M10.2 10.8v5.4M13.8 10.8v5.4\"/>", "download": "<path d=\"M12 4v11\"/><path d=\"M7.5 10.5L12 15l4.5-4.5\"/><path d=\"M5 19.5h14\"/>", "refresh": "<path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4.5v4.2h-4.2\"/>", "eye": "<path d=\"M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>", "eye-off": "<path d=\"M4 4l16 16\"/><path d=\"M9.9 6A9.8 9.8 0 0 1 12 5.5c5.8 0 9.2 6.5 9.2 6.5a16.6 16.6 0 0 1-3 3.8M14.1 18.2a9.6 9.6 0 0 1-2.1.3c-5.8 0-9.2-6.5-9.2-6.5a16.4 16.4 0 0 1 3.4-4.2\"/><path d=\"M10 10a2.8 2.8 0 0 0 4 4\"/>"};
+  const T = {"get_early_access": "Únase a la lista de espera", "my_account": "Mi cuenta", "sms_988": "sms:988?&body=AYUDA", "choose_state": "Elija su estado.", "fix_one": "Corrija el campo marcado.", "fix_many": "Corrija los {n} campos marcados.", "enter_email": "Escriba su correo electrónico.", "valid_email": "Escriba un correo válido, como nombre@ejemplo.com.", "j_preview": "Esta es una vista previa del sitio, así que aquí no se guardan los registros.", "j_saving": "Guardando su lugar…", "j_failed": "No pudimos guardar su lugar en este momento. Revise su conexión e inténtelo de nuevo.", "j_your_state": "su estado", "share_title": "Jachi Health", "share_text": "Atención en línea con profesionales de la salud con licencia, pronto en todo EE. UU. Únase a la lista de espera:", "share_button": "Compartir Jachi", "share_copied_button": "Enlace copiado", "share_copied": "Enlace copiado. Péguelo en un mensaje de texto o un correo.", "share_manual": "Copie este enlace para compartirlo: {url}", "c_crisis": "Lamento mucho que esté pasando por esto, y no tiene que enfrentarlo sin ayuda. Llame al 988 y oprima 2, o envíe AYUDA por mensaje de texto al 988, para hablar en español con la Línea 988 de Prevención del Suicidio y Crisis. Es gratuita, confidencial y atiende las 24 horas. Si está en peligro inmediato, llame al 911.", "c_emergency": "Esto podría ser una emergencia. Llame al 911 ahora o vaya a la sala de emergencias más cercana. Soy un asistente de IA y no puedo ayudar con emergencias.", "c_typing": "El asistente está escribiendo", "c_busy": "Hay muchas preguntas en este momento. Inténtelo de nuevo en un minuto, o envíe una solicitud y nuestro equipo le responderá por correo.", "c_off": "Las respuestas de IA están desactivadas en esta vista previa. Aún puede enviar una solicitud.", "c_down": "No puedo responder en este momento. Puede enviar una solicitud y nuestro equipo le responderá por correo.", "c_call_988": "Llamar al 988", "c_text_988": "Enviar texto al 988", "c_call_911": "Llamar al 911", "c_ticket": "Enviar una solicitud", "t_name": "Escriba su nombre.", "t_msg": "Cuéntenos un poco más (al menos 10 caracteres).", "t_preview": "Esta es una vista previa del sitio, así que aquí no se envían solicitudes. En el sitio real llegan a {email}.", "t_sending": "Enviando…", "t_send": "Enviar solicitud", "t_failed": "No pudimos enviar su solicitud. Revise su conexión e inténtelo de nuevo, o escriba a {email}.", "a_meta_title": "Su cuenta | Jachi Health", "a_meta_desc": "Inicie sesión para ver su plan y sus facturas de Jachi Health, comunicarse con su coordinador o actualizar sus datos.", "a_eyebrow": "Su cuenta", "a_h1": "Su página de miembro.", "a_lead": "Vea su plan y sus facturas, comuníquese con su coordinador y mantenga sus datos al día. Aquí no hay información de salud: las consultas y los expedientes médicos no forman parte de esta cuenta.", "a_fact_free": "Sin números de tarjeta aquí: usted paga en Stripe", "a_fact_nohealth": "No guarda información de salud", "a_fact_delete": "Puede borrarla cuando quiera", "a_loading": "Cargando su cuenta…", "a_noscript": "Su cuenta necesita JavaScript. Actívelo en la configuración de su navegador y vuelva a cargar esta página.", "a_off_title": "Las cuentas aún no están disponibles", "a_off_body": "Aún puede unirse a la lista de espera, y le avisaremos por correo cuando abramos en su estado.", "a_tabs": "Inicie sesión o cree una cuenta", "a_tab_login": "Iniciar sesión", "a_tab_create": "Crear cuenta", "a_email": "Correo electrónico", "a_password": "Contraseña", "a_new_password": "Nueva contraseña", "a_password_hint": "Al menos 8 caracteres.", "a_show_password": "Mostrar contraseña", "a_hide_password": "Ocultar contraseña", "a_state": "Estado", "a_choose_state": "Elija su estado", "a_interests": "Me interesa", "a_optional": "(opcional)", "a_login": "Iniciar sesión", "a_create": "Crear cuenta", "a_forgot_link": "¿Olvidó su contraseña?", "a_create_note": "Al crear una cuenta, acepta recibir novedades de Jachi por correo. Puede dejar de recibirlas cuando quiera. Lea nuestra <a href=\"/privacy/\" hreflang=\"en\">política de privacidad (en inglés)</a> y nuestra <a href=\"/es/datos-de-salud/\">política de datos de salud del consumidor</a>.", "a_sent_title": "Revise su correo", "a_sent_body": "Enviamos un enlace a {email}. Ábralo para confirmar su cuenta.", "a_sent_from": "El correo llega de no-reply@netlify.com, el servicio que aloja nuestro sitio, y está en inglés. Si no lo ve en su bandeja de entrada, revise la carpeta de correo no deseado.", "a_back_login": "Volver a iniciar sesión", "a_forgot_title": "Restablezca su contraseña", "a_forgot_lead": "Escriba el correo de su cuenta y le enviaremos un enlace para elegir una nueva contraseña.", "a_send_link": "Enviar enlace", "a_forgot_sent": "Si hay una cuenta para {email}, le enviamos un enlace para restablecer su contraseña.", "a_reset_title": "Elija una nueva contraseña", "a_save_password": "Guardar contraseña", "a_invite_title": "Elija una contraseña para terminar", "a_invite_lead": "Le invitaron a una cuenta de Jachi Health. Elija una contraseña para terminar de configurarla.", "a_profile_title": "Sus datos", "a_signed_in_as": "Sesión iniciada como {email}", "a_language": "Idioma de nuestros correos", "a_updates": "Envíenme novedades de Jachi", "a_updates_hint": "Desactívelo para dejar de recibir novedades. Los correos sobre su plan y sus pagos seguirán llegando.", "a_save": "Guardar cambios", "a_password_title": "Contraseña", "a_change_password": "Cambiar contraseña", "a_delete_title": "Borrar su cuenta", "a_delete_body": "Esto borra su cuenta y quita este correo de nuestra lista de espera y de nuestros registros de soporte. No cancela una membresía: para cancelar, use Pagos primero.", "a_delete": "Borrar mi cuenta", "a_delete_warn": "Esto no se puede deshacer. ¿Quiere borrar su cuenta y todo lo que tenemos de este correo?", "a_delete_confirm": "Sí, borrar todo", "a_cancel": "Cancelar", "a_logout": "Cerrar sesión", "a_deleted_title": "Su cuenta se borró", "a_deleted_done": "También quitamos este correo de nuestra lista de espera y de nuestros registros de soporte.", "a_deleted_partial": "Para quitar este correo también de nuestra lista de espera, escriba a {email} y nos encargaremos.", "a_home": "Volver al inicio", "a_link_title": "Este enlace venció", "a_link_body": "Los enlaces de nuestros correos funcionan una sola vez y vencen después de un tiempo. Inicie sesión, o restablezca su contraseña para recibir un enlace nuevo.", "a_down_title": "No pudimos cargar su cuenta", "a_down_body": "Revise su conexión e inténtelo de nuevo.", "a_try_again": "Intentar de nuevo", "a_err_password": "Escriba su contraseña.", "a_err_password_short": "Use al menos 8 caracteres.", "a_e_invalid_login": "Ese correo y esa contraseña no coinciden con ninguna cuenta. Revíselos e inténtelo de nuevo.", "a_e_unconfirmed": "Primero confirme su correo. Abra el enlace que le enviamos cuando creó su cuenta.", "a_e_exists": "Ya hay una cuenta con este correo. Inicie sesión o restablezca su contraseña.", "a_e_signup_off": "Por ahora no se pueden crear cuentas nuevas.", "a_e_rate": "Demasiados intentos. Espere un minuto e inténtelo de nuevo.", "a_e_network": "No pudimos conectar con el servidor. Revise su conexión e inténtelo de nuevo.", "a_e_unknown": "Algo salió mal. Inténtelo de nuevo o escriba a {email}.", "a_e_weak": "Elija una contraseña más larga, de al menos 8 caracteres.", "a_working": "Un momento…", "a_saved": "Cambios guardados.", "a_password_saved": "Contraseña guardada.", "a_confirmed": "Su correo está confirmado y ya inició sesión.", "a_welcome": "Su cuenta está lista.", "a_logged_out": "Cerró sesión.", "a_email_changed": "Su correo electrónico se actualizó.", "a_email_change_login": "Inicie sesión y luego vuelva a abrir el enlace de su correo para terminar de cambiar su dirección de correo electrónico.", "a_delete_failed": "No pudimos borrar su cuenta en este momento. Inténtelo de nuevo o escriba a {email}.", "a_p_demo": "Página de miembro de muestra. Los datos de abajo son inventados, para que vea cómo se ve.", "a_p_nav": "Secciones de la página de miembro", "a_p_home": "Resumen", "a_p_billing": "Pagos", "a_p_help": "Ayuda", "a_p_settings": "Ajustes", "a_p_hello": "Hola, {name}.", "a_p_hello_plain": "Qué gusto verle de nuevo.", "a_p_leaf": "La hoja de aquí arriba es suya. Crece igual cada vez que inicia sesión.", "a_p_membership": "Su membresía", "a_p_loading": "Cargando su membresía…", "a_p_status_active": "Activa", "a_p_status_payment_due": "Pago pendiente", "a_p_status_past_due": "Pago vencido", "a_p_status_canceling": "Termina pronto", "a_p_status_ended": "Terminada", "a_p_status_paused": "En pausa", "a_p_since": "Miembro desde {date}", "a_p_line_payment_due": "Falta un paso: pague su primera factura para empezar.", "a_p_line_ended": "Terminó el {date}", "a_p_renews": "Se renueva", "a_p_ends": "Termina", "a_p_price": "Precio", "a_p_adults": "Adultos cubiertos", "a_p_per_month": "{amount} al mes", "a_p_per_year": "{amount} al año", "a_p_founding": "Precio de fundador", "a_p_adults_upto": "Hasta {n}", "a_p_pay_title": "Factura con vencimiento el {date}", "a_p_pay_title_nodate": "Tiene una factura pendiente", "a_p_pay": "Pagar {amount}", "a_p_pay_note": "Usted paga en la página segura de Stripe. Los números de tarjeta nunca llegan a este sitio.", "a_p_none_title": "Todavía no hay una membresía con este correo", "a_p_none_body": "Las membresías están abiertas para adultos en Texas. Si se unió con otro correo, inicie sesión con ese, o escriba a {email}.", "a_p_none_cta": "Elija su plan", "a_p_unverified_title": "Primero confirme su correo", "a_p_unverified": "Para ver su membresía, abra el enlace del correo que le enviamos cuando creó esta cuenta.", "a_p_error_title": "No pudimos cargar su membresía", "a_p_error": "Su plan está bien. Intente de nuevo en un momento.", "a_p_plan_link": "Qué incluye su plan", "a_p_plan_link_hint": "Compare los tres planes", "a_p_help_title": "Su coordinador", "a_p_reply_concierge": "Responde en un plazo de 1 día hábil", "a_p_reply_plus": "Responde el mismo día, de lunes a viernes", "a_p_reply_signature": "Responde el mismo día, los 7 días de la semana", "a_p_reply_none": "Una persona de nuestro equipo responde por correo", "a_p_email_cta": "Escribir a su coordinador", "a_p_email_team": "Escribir a nuestro equipo", "a_p_email_subject": "Solicitud de miembro", "a_p_call_cta": "Pedir una llamada", "a_p_ai_cta": "Preguntar al asistente de IA", "a_p_call_msg": "Por favor, llámenme. El mejor momento para comunicarse conmigo es: ", "a_p_help_privacy": "Para proteger su privacidad, no incluya detalles de salud en correos ni mensajes. Su coordinador revisará con usted lo que necesita por teléfono.", "a_p_help_911": "Si cree que tiene una emergencia médica, llame al 911. Si está en crisis o piensa en el suicidio, llame al 988 y oprima 2, o envíe AYUDA al 988.", "a_p_billing_title": "Pagos", "a_p_invoices": "Facturas", "a_p_inv_paid": "Pagada", "a_p_inv_open": "Pendiente", "a_p_inv_view": "Ver", "a_p_inv_pay": "Pagar", "a_p_inv_none": "Todavía no hay facturas", "a_p_inv_count_one": "1 factura", "a_p_inv_count": "{n} facturas", "a_p_inv_due": "{amount} pendiente", "a_p_inv_label": "Factura {number}", "a_p_manage_title": "Cambiar o cancelar su plan", "a_p_manage_body": "Stripe, nuestra empresa de pagos, guarda su tarjeta y su plan. Allí puede actualizar su tarjeta, cambiar de plan o cancelar cuando quiera.", "a_p_manage_cta": "Administrar pagos en Stripe", "a_p_manage_hint": "Stripe le envía un enlace por correo para entrar."};
+  const ICONS = {"arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "card": "<rect x=\"3\" y=\"5.5\" width=\"18\" height=\"13\" rx=\"2.6\"/><path d=\"M3 10h18\"/><path d=\"M7 15h3.5\"/>", "sliders": "<path d=\"M4 7h9\"/><path d=\"M19 7h1\"/><circle cx=\"16\" cy=\"7\" r=\"2.4\"/><path d=\"M4 17h1\"/><path d=\"M11 17h9\"/><circle cx=\"8\" cy=\"17\" r=\"2.4\"/>", "external": "<path d=\"M14 5h5v5\"/><path d=\"M19 5l-8 8\"/><path d=\"M11 7H7.5A2.5 2.5 0 0 0 5 9.5v7A2.5 2.5 0 0 0 7.5 19h7a2.5 2.5 0 0 0 2.5-2.5V13\"/>", "arrow-left": "<path d=\"M19 12H5\"/><path d=\"M11 6l-6 6 6 6\"/>", "check": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "steth": "<path d=\"M6 3.5V9a4 4 0 0 0 8 0V3.5\"/><path d=\"M10 13v1.5a5 5 0 0 0 10 0V12.5\"/><circle cx=\"20\" cy=\"10.5\" r=\"2\"/>", "shield": "<path d=\"M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z\"/><path d=\"M8.8 12.2l2.2 2.2 4.4-4.6\"/>", "spark": "<path d=\"M11 4c.6 4.2 2.4 6 6.6 6.6-4.2.6-6 2.4-6.6 6.6-.6-4.2-2.4-6-6.6-6.6C8.6 10 10.4 8.2 11 4z\"/><path d=\"M19 3.5v3M17.5 5h3\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"3.5\"/><path d=\"M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5\"/>", "box": "<path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M4 7.5l8 4.5 8-4.5\"/><path d=\"M12 12v9\"/>", "home": "<path d=\"M4 11l8-7 8 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>", "pharmacy": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><path d=\"M12 8.5v7M8.5 12h7\"/>", "lock": "<rect x=\"5\" y=\"11\" width=\"14\" height=\"9.5\" rx=\"2\"/><path d=\"M8 11V8a4 4 0 0 1 8 0v3\"/>", "info": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5\"/><path d=\"M12 7.6v.4\"/>", "alert": "<path d=\"M12 4.5l8.5 15h-17z\"/><path d=\"M12 10v4.2\"/><path d=\"M12 16.8v.3\"/>", "msg": "<path d=\"M4 5.5h16v11H10l-4.5 3.5v-3.5H4z\"/>", "clip": "<rect x=\"5.5\" y=\"4.5\" width=\"13\" height=\"16\" rx=\"2\"/><path d=\"M9 4.5v-1h6v1\"/><path d=\"M9 10h6M9 14h4\"/>", "x": "<path d=\"M6 6l12 12M18 6L6 18\"/>", "mail": "<rect x=\"3.5\" y=\"5.5\" width=\"17\" height=\"13\" rx=\"2.5\"/><path d=\"M4.5 7.5l7.5 5.5 7.5-5.5\"/>", "thermo": "<path d=\"M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0Z\"/><path d=\"M12 9.5v6\"/>", "pill": "<rect x=\"3.5\" y=\"8.5\" width=\"17\" height=\"7\" rx=\"3.5\" transform=\"rotate(-45 12 12)\"/><path d=\"M9.6 9.6l4.8 4.8\"/>", "mind": "<path d=\"M9.5 20v-3.2H7.4a1.9 1.9 0 0 1-1.9-1.9v-2.3L4 11.2l1.6-2.4a6.6 6.6 0 0 1 6.6-5.3c3.7 0 6.3 2.8 6.3 6.4 0 2-.9 3.6-2.3 4.8V20\"/><path d=\"M12.6 11.7s-2.6-1.4-2.6-3.1a1.4 1.4 0 0 1 2.6-.8 1.4 1.4 0 0 1 2.6.8c0 1.7-2.6 3.1-2.6 3.1z\"/>", "scale": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8.5 10a5 5 0 0 1 7 0\"/><path d=\"M12 12.6l1.7-2.5\"/>", "phone": "<path d=\"M6.6 4h2.6l1.4 3.6-1.8 1.2a10 10 0 0 0 6.4 6.4l1.2-1.8 3.6 1.4v2.6a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 4.6 6.2 2 2 0 0 1 6.6 4z\"/>", "heart": "<path d=\"M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z\"/>", "talk": "<path d=\"M6.5 3h7A2.5 2.5 0 0 1 16 5.5v4A2.5 2.5 0 0 1 13.5 12H9l-3.5 3v-3.1A2.5 2.5 0 0 1 4 9.5v-4A2.5 2.5 0 0 1 6.5 3z\"/><path d=\"M19 9a2 2 0 0 1 1.5 1.9v3.6a2.5 2.5 0 0 1-2.5 2.5h-.5v2.6L14.6 17H11a2 2 0 0 1-1.6-.8\"/>", "male": "<circle cx=\"10\" cy=\"14\" r=\"5.5\"/><path d=\"M14 10l6-6\"/><path d=\"M15 4h5v5\"/>", "female": "<circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M12 14.5V21\"/><path d=\"M9 18h6\"/>", "drop": "<path d=\"M12 3.5c3.4 4.2 6 7.4 6 10.6a6 6 0 0 1-12 0c0-3.2 2.6-6.4 6-10.6z\"/><path d=\"M9.2 14.6a2.9 2.9 0 0 0 2.4 2.6\"/>", "video": "<rect x=\"3\" y=\"6.5\" width=\"12.5\" height=\"11\" rx=\"2.5\"/><path d=\"M15.5 10.5l5-3v9l-5-3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/>", "chat": "<path d=\"M5 5.5h14A1.5 1.5 0 0 1 20.5 7v8.5A1.5 1.5 0 0 1 19 17h-9l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z\"/><path d=\"M8.5 11.25h.01M12 11.25h.01M15.5 11.25h.01\"/>", "send": "<path d=\"M12 19V5\"/><path d=\"M6 11l6-6 6 6\"/>", "share": "<path d=\"M12 15V4\"/><path d=\"M8 8l4-4 4 4\"/><path d=\"M6 11v7.5A1.5 1.5 0 0 0 7.5 20h9a1.5 1.5 0 0 0 1.5-1.5V11\"/>", "plus": "<path d=\"M12 5.5v13M5.5 12h13\"/>", "out": "<path d=\"M14 4.5h4.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H14\"/><path d=\"M10 16.5L5.5 12 10 7.5\"/><path d=\"M5.5 12H15\"/>", "trash": "<path d=\"M4.5 7h15\"/><path d=\"M9.5 7V4.8h5V7\"/><path d=\"M6.5 7l1 12.5h9l1-12.5\"/><path d=\"M10.2 10.8v5.4M13.8 10.8v5.4\"/>", "download": "<path d=\"M12 4v11\"/><path d=\"M7.5 10.5L12 15l4.5-4.5\"/><path d=\"M5 19.5h14\"/>", "refresh": "<path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.5 4.5v4.2h-4.2\"/>", "eye": "<path d=\"M2.8 12S6.2 5.5 12 5.5 21.2 12 21.2 12 17.8 18.5 12 18.5 2.8 12 2.8 12z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>", "eye-off": "<path d=\"M4 4l16 16\"/><path d=\"M9.9 6A9.8 9.8 0 0 1 12 5.5c5.8 0 9.2 6.5 9.2 6.5a16.6 16.6 0 0 1-3 3.8M14.1 18.2a9.6 9.6 0 0 1-2.1.3c-5.8 0-9.2-6.5-9.2-6.5a16.4 16.4 0 0 1 3.4-4.2\"/><path d=\"M10 10a2.8 2.8 0 0 0 4 4\"/>"};
   const EMAIL = "support@jachihealth.com";
   const LANG = document.documentElement.lang === 'es' ? 'es' : 'en';
   const fmt = (text, values = {}) => text.replace(/\{(\w+)\}/g, (m, k) => (k in values ? String(values[k]) : m));
@@ -3124,18 +3341,27 @@ const Identity = (() => {
   /* ---------- Views ---------- */
   const views = $$('[data-view]');
   const card = $('.acct__card');
-  const show = (name, { focus = true } = {}) => {
-    views.forEach(v => { v.hidden = v.dataset.view !== name; });
-    const view = $(`[data-view="${name}"]`);
-    if (!focus) return;
-    const target = $('.acct__title', view) || $('[role="tab"][aria-selected="true"]', view);
-    if (target) target.focus({ preventScroll: true });
+  const acct = $('.acct');
+  const calm = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Bring the card's top into view when it is under the header (always) or far down the screen (far only).
+  const settle = (far = true) => {
     const top = card.getBoundingClientRect().top;
     const header = document.getElementById('site-header');
     const offset = header ? header.getBoundingClientRect().height + 12 : 12;
-    if (top < offset || top > window.innerHeight * 0.5) {
-      window.scrollTo({ top: window.scrollY + top - offset, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    if (top < offset || (far && top > window.innerHeight * 0.5)) {
+      window.scrollTo({ top: window.scrollY + top - offset, behavior: calm() ? 'auto' : 'smooth' });
     }
+  };
+  const show = (name, { focus = true } = {}) => {
+    views.forEach(v => { v.hidden = v.dataset.view !== name; });
+    acct.classList.toggle('is-portal', name === 'profile');
+    // Any other screen is the plain account page: no greeting, and a visitor's leaf rather than a member's.
+    if (name !== 'profile' && name !== 'loading') ungreet();
+    const view = $(`[data-view="${name}"]`);
+    if (!focus) return;
+    const target = $$('.acct__title', view).find(t => t.offsetParent !== null) || $('[role="tab"][aria-selected="true"]', view);
+    if (target) target.focus({ preventScroll: true });
+    settle();
   };
 
   /* ---------- Form helpers ---------- */
@@ -3233,6 +3459,8 @@ const Identity = (() => {
     });
   });
   const goLogin = (message = '') => {
+    ungreet();
+    if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
     selectTab('tab-login');
     setStatus($('#login-status'), message ? 'ok' : '', message);
     show('auth');
@@ -3259,11 +3487,224 @@ const Identity = (() => {
     $$('input[name="interest"]', form).forEach(c => { c.checked = wanted.includes(c.value); });
   };
 
+  /* ---------- The member page ---------- */
+  // A preview with made-up details, for looking at the member page without an account. Never on the live site.
+  const DEMO = new URLSearchParams(window.location.search).has('demo') && !/(^|\.)jachihealth\.com$/.test(window.location.hostname);
+  const HOME = { title: $('#page-title').textContent, lead: $('#page-lead').textContent };
+  const money = cents => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((cents || 0) / 100).replace(/\.00$/, '');
+  const when = (unix, parts) => new Intl.DateTimeFormat(LANG === 'es' ? 'es-US' : 'en-US', parts).format(new Date(unix * 1000));
+  const fullDate = unix => when(unix, { month: 'long', day: 'numeric', year: 'numeric' });
+  // Invoices and billing settings open on Stripe's own pages; nothing else is ever linked from Stripe's data.
+  const stripeUrl = url => (DEMO ? `${window.location.pathname}?demo`
+    : /^https:\/\/([a-z0-9-]+\.)*stripe\.com\//.test(String(url || '')) ? url : '');
+
+  // Sections: Overview, Billing, Help, Settings. One shows at a time; the address keeps the place (#billing).
+  const ptabs = $$('.ptab');
+  const panels = $$('.ppanel');
+  const selectPanel = (name, { focus = false, keep = true } = {}) => {
+    const open = ptabs.filter(t => !t.hidden);
+    const tab = open.find(t => t.dataset.tab === name) || open[0];
+    ptabs.forEach(t => { if (t === tab) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
+    panels.forEach(pn => { pn.hidden = pn.dataset.panel !== tab.dataset.tab; });
+    const bar = $('#ptabs');
+    bar.style.setProperty('--at', String(open.indexOf(tab)));
+    bar.style.setProperty('--n', String(open.length));
+    if (keep) {
+      const hash = tab.dataset.tab === 'home' ? '' : `#${tab.dataset.tab}`;
+      window.history.replaceState(null, '', window.location.pathname + window.location.search + hash);
+    }
+    if (!focus) return;
+    const title = $('.acct__title', panels.find(pn => !pn.hidden));
+    if (title) title.focus({ preventScroll: true });
+    settle(false);
+  };
+  document.addEventListener('click', e => {
+    const tab = e.target.closest('.ptab, [data-tab-go]');
+    if (!tab) return;
+    e.preventDefault();
+    selectPanel(tab.dataset.tab || tab.dataset.tabGo, { focus: true });
+  });
+  window.addEventListener('hashchange', () => {
+    if (acct.classList.contains('is-portal')) selectPanel(window.location.hash.slice(1), { keep: false });
+  });
+
+  // The leaf at the top of the page: a member's own, grown from their account, the same each time they log in.
+  const leafMount = $('.acct__top [data-leaf]');
+  const seedOf = text => {
+    let h = 2166136261;
+    for (const ch of String(text)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+    return String(h >>> 0);
+  };
+  const ownLeaf = person => {
+    const seed = person ? seedOf(person.id || person.email) : '';
+    try {
+      if (seed) window.localStorage.setItem('jachi.leaf', seed); else window.localStorage.removeItem('jachi.leaf');
+    } catch (err) { /* storage blocked */ }
+    $('#leaf-yours').hidden = !seed;
+    if (!leafMount || (leafMount.dataset.seed || '') === seed) return;
+    if (seed) leafMount.dataset.seed = seed; else delete leafMount.dataset.seed;
+    leafMount.dispatchEvent(new CustomEvent('leaf:regrow'));
+  };
+  const greet = name => {
+    $('#page-title').textContent = name ? fmt(T.a_p_hello, { name }) : T.a_p_hello_plain;
+    $('#page-lead').hidden = true;
+  };
+  const ungreet = () => {
+    $('#page-title').textContent = HOME.title;
+    $('#page-lead').hidden = false;
+    ownLeaf(null);
+  };
+  try {
+    // Someone already signed in: show their greeting and grow their leaf from the start, so nothing jumps
+    // when the account arrives. If the sign-in turns out to have ended, goLogin() puts the page back.
+    const saved = window.localStorage.getItem('jachi.leaf');
+    if (saved && /^\d+$/.test(saved) && window.localStorage.getItem('jachi.session') && !DEMO) {
+      if (leafMount) leafMount.dataset.seed = saved;
+      $('#leaf-yours').hidden = false;
+      greet('');
+    }
+  } catch (err) { /* storage blocked */ }
+
+  const mcard = $('#mcard');
+  const setCard = (state, { plan = '', line = '', pill = '', kind = '' } = {}) => {
+    mcard.dataset.state = state;
+    $('#m-plan').textContent = plan;
+    $('#m-line').textContent = line;
+    const tag = $('#m-status');
+    tag.textContent = pill;
+    tag.dataset.kind = kind;
+    tag.hidden = !pill;
+    $('#m-facts').hidden = true;
+    $('#m-plans').hidden = state !== 'none';
+    $('#m-retry').hidden = state !== 'error';
+    $('#m-acts').hidden = state !== 'none' && state !== 'error';
+  };
+  const renderMember = data => {
+    const m = data && data.verified ? data.member : null;
+    const list = $('#m-invoices');
+    list.textContent = '';
+    $('#m-pay').hidden = true;
+    $('#m-manage-block').hidden = true;
+    const current = m && m.status !== 'ended';
+    const reply = T[(current && T[`a_p_reply_${m.plan.key}`]) ? `a_p_reply_${m.plan.key}` : 'a_p_reply_none'];
+    $('#q-reply').textContent = reply;
+    $('#h-reply').textContent = `${reply}.`;
+    // A coordinator, and calls from one, come with a membership; everyone else reaches the team by email.
+    $('#h-title').textContent = $('#q-help').textContent = current ? T.a_p_help_title : T.a_p_help;
+    $('#h-email-text').textContent = current ? T.a_p_email_cta : T.a_p_email_team;
+    $('#h-call').hidden = !current;
+    if (m && m.first_name) greet(m.first_name);
+    if (!data || !data.verified) setCard('unverified', { plan: T.a_p_unverified_title, line: T.a_p_unverified });
+    else if (!m) setCard('none', { plan: T.a_p_none_title, line: fmt(T.a_p_none_body, { email: EMAIL }) });
+    else {
+      setCard('member', {
+        plan: m.plan.name,
+        line: m.status === 'payment_due' ? T.a_p_line_payment_due
+          : !current && m.ends_at ? fmt(T.a_p_line_ended, { date: fullDate(m.ends_at) })
+            : m.since ? fmt(T.a_p_since, { date: when(m.since, { month: 'long', year: 'numeric' }) }) : '',
+        pill: T[`a_p_status_${m.status}`] || '',
+        kind: m.status,
+      });
+      const date = m.status === 'canceling' ? m.ends_at : m.renews_at;
+      $('#m-when-label').textContent = m.status === 'canceling' ? T.a_p_ends : T.a_p_renews;
+      $('#m-when').textContent = date ? when(date, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+      $('#m-when').parentNode.hidden = !date;
+      $('#m-price').textContent = fmt(m.plan.billing === 'yearly' ? T.a_p_per_year : T.a_p_per_month, { amount: money(m.amount) });
+      $('#m-founding').hidden = !m.plan.founding;
+      const adults = { concierge: String(1 + (m.plan.extra_adults || 0)), plus: '2', signature: fmt(T.a_p_adults_upto, { n: 4 }) }[m.plan.key] || '';
+      $('#m-adults').textContent = adults;
+      $('#m-adults').parentNode.hidden = !adults;
+      $('#m-facts').hidden = !current;
+      if (!current) { $('#m-acts').hidden = false; $('#m-plans').hidden = false; }
+      const due = current && m.open_invoice && stripeUrl(m.open_invoice.url) ? m.open_invoice : null;
+      if (due) {
+        $('#m-pay-title').textContent = due.due ? fmt(T.a_p_pay_title, { date: fullDate(due.due) }) : T.a_p_pay_title_nodate;
+        const link = $('#m-pay-link');
+        link.href = stripeUrl(due.url);
+        link.textContent = fmt(T.a_p_pay, { amount: money(due.amount) });
+        $('#m-pay').hidden = false;
+      }
+      (Array.isArray(m.invoices) ? m.invoices : []).forEach(inv => {
+        const url = stripeUrl(inv.url);
+        if (!url) return;
+        const paid = inv.status === 'paid';
+        const row = document.createElement('li');
+        row.className = 'inv';
+        row.innerHTML = '<span class="inv__what"><b></b><small></small></span><span class="inv__amt"></span>'
+          + '<span class="mpill"></span><a class="inv__go" target="_blank" rel="noopener"></a>';
+        const label = inv.number ? fmt(T.a_p_inv_label, { number: inv.number }) : T.a_p_invoices;
+        $('b', row).textContent = inv.date ? fullDate(inv.date) : label;
+        $('small', row).textContent = inv.date ? label : '';
+        $('.inv__amt', row).textContent = money(inv.amount);
+        $('.mpill', row).textContent = paid ? T.a_p_inv_paid : T.a_p_inv_open;
+        $('.mpill', row).dataset.kind = paid ? 'active' : 'payment_due';
+        const go = $('.inv__go', row);
+        go.href = url;
+        go.textContent = paid ? T.a_p_inv_view : T.a_p_inv_pay;
+        go.setAttribute('aria-label', `${go.textContent}: ${label}`);
+        list.appendChild(row);
+      });
+      const n = list.children.length;
+      $('#q-invoices').textContent = due ? fmt(T.a_p_inv_due, { amount: money(due.amount) })
+        : n === 1 ? T.a_p_inv_count_one : n ? fmt(T.a_p_inv_count, { n }) : T.a_p_inv_none;
+      if (stripeUrl(m.manage_url)) { $('#m-manage').href = stripeUrl(m.manage_url); $('#m-manage-block').hidden = false; }
+    }
+    $('#m-invoices-none').hidden = list.children.length > 0;
+    if (!list.children.length) $('#q-invoices').textContent = T.a_p_inv_none;
+    if (DEMO) $$('#m-pay-link, #m-manage, .inv__go').forEach(a => a.removeAttribute('target'));
+  };
+  let asked = 0;
+  const loadMember = async () => {
+    const mine = ++asked;
+    setCard('loading', { plan: T.a_p_loading });
+    try {
+      const data = await Identity.api('/api/member');
+      if (mine === asked) renderMember(data);
+    } catch (err) {
+      if (mine !== asked) return;
+      if (err.code === 'signed_out' || err.status === 401) { goLogin(); return; }
+      setCard('error', { plan: T.a_p_error_title, line: T.a_p_error });
+    }
+  };
+  $('#m-retry').addEventListener('click', loadMember);
+  $('#h-email').href = `mailto:${EMAIL}?subject=${encodeURIComponent(T.a_p_email_subject)}`;
+  // "Ask for a call" opens the ticket form in the help chat, with the topic chosen and the first words written.
+  $('#h-call').addEventListener('click', () => {
+    const chat = document.getElementById('chat');
+    const opener = $('[data-panel="help"] [data-chat-open]');
+    const toTicket = chat && $('[data-ticket]', chat);
+    if (!toTicket) { window.location.href = $('#h-email').href; return; }
+    if (!document.documentElement.classList.contains('chat-open')) opener.click();
+    const sent = document.getElementById('ticket-success');
+    if (sent && !sent.hidden) document.getElementById('ticket-done').click();   // a ticket sent earlier: start a new one
+    toTicket.click();
+    const topic = $('#ticket-topic option[data-topic="call"]');
+    if (topic) topic.selected = true;
+    const email = $('#ticket-email');
+    if (email && !email.value && user && !DEMO) email.value = user.email;
+    const message = $('#ticket-message');
+    if (message && !message.value) message.value = T.a_p_call_msg;
+  });
+  // A soft light follows the pointer across the membership card (mouse and pen only).
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    mcard.addEventListener('pointermove', e => {
+      const box = mcard.getBoundingClientRect();
+      mcard.style.setProperty('--mx', `${((e.clientX - box.left) / box.width * 100).toFixed(1)}%`);
+      mcard.style.setProperty('--my', `${((e.clientY - box.top) / box.height * 100).toFixed(1)}%`);
+    });
+  }
+
   let user = null;
   const renderProfile = (person, message = '') => {
     user = person;
     const meta = person.user_metadata || {};
     const form = $('#profile-form');
+    greet('');
+    ownLeaf(person);
+    selectPanel(window.location.hash.slice(1), { keep: false });
+    $('#portal-demo').hidden = !DEMO;
+    $('#logout').hidden = DEMO;
+    if (!DEMO) loadMember();
     $('#who').textContent = fmt(T.a_signed_in_as, { email: person.email });
     const state = $('#profile-state');
     state.value = typeof meta.state === 'string' ? meta.state : '';
@@ -3420,6 +3861,7 @@ const Identity = (() => {
     try {
       user = await Identity.update({ data: { ...details, language, updates: $('#profile-updates').checked } });
       setStatus(status, 'ok', T.a_saved);
+      settle(false);
     } catch (err) {
       if (err.code === 'signed_out') goLogin(); else setStatus(status, 'error', explain(err));
     } finally {
@@ -3479,6 +3921,7 @@ const Identity = (() => {
       const result = await Identity.api('/api/account/delete', { method: 'POST' });
       Identity.forget();
       user = null;
+      ungreet();
       $('#deleted-body').textContent = result && result.forms === 'done' ? T.a_deleted_done : fmt(T.a_deleted_partial, { email: EMAIL });
       show('deleted');
     } catch (err) {
@@ -3499,7 +3942,23 @@ const Identity = (() => {
   });
 
   /* ---------- Start ---------- */
+  const startDemo = () => {
+    const now = Math.floor(Date.now() / 1000), DAY = 86400;
+    ptabs.find(t => t.dataset.tab === 'settings').hidden = true;
+    renderProfile({ id: 'sample-member', email: 'sample.member@example.com', user_metadata: {} });
+    const invoice = (n, ago, status) => ({ number: `SAMPLE-000${n}`, date: now - ago * DAY, due: status === 'open' ? now + 2 * DAY : null,
+      amount: 6400, status, url: 'https://invoice.stripe.com/i/sample' });
+    renderMember({ verified: true, member: {
+      first_name: LANG === 'es' ? 'Ana' : 'Maya',
+      plan: { key: 'concierge', name: 'Jachi Concierge', billing: 'monthly', founding: true, extra_adults: 1 },
+      status: 'active', since: now - 64 * DAY, renews_at: now + 29 * DAY, ends_at: null, amount: 6400,
+      open_invoice: invoice(3, 1, 'open'), invoices: [invoice(3, 1, 'open'), invoice(2, 32, 'paid'), invoice(1, 64, 'paid')],
+      manage_url: 'https://billing.stripe.com/p/login/sample',
+    } });
+  };
+
   const start = async () => {
+    if (DEMO) { startDemo(); return; }
     const params = new URLSearchParams(window.location.hash.replace(/^#/, ''));
     const link = {
       confirmation: params.get('confirmation_token'),

@@ -1260,6 +1260,28 @@ with sync_playwright() as p:
         page.goto(BASE + plans_path, wait_until="networkidle"); page.wait_for_timeout(300)
         prices = page.locator(".m-plan__price").all_inner_texts()
         links = page.evaluate("[...document.querySelectorAll('.m-plan .btn')].map(a => a.getAttribute('href'))")
+        WM = MEMBERSHIP.WORDS["es" if plans_path.startswith("/es/") else "en"]
+        sw = page.locator(".m-switch")
+        page.locator(".m-switch [data-billing=yearly]").click(); page.wait_for_timeout(500)
+        yearly = ["".join(x.split()) for x in page.locator(".m-plan__price").all_inner_texts()]
+        check(f"{plans_path}: the Monthly / Yearly switch changes every price and where each button goes", sw.is_visible()
+              and yearly == [f"$490{WM['per_year']}", f"$990{WM['per_year']}", f"$2,500{WM['per_year']}"]
+              and page.locator(".m-plan__alt").first.inner_text() == WM["or_monthly"].format(price="$49")
+              and page.locator(".m-switch [data-billing=yearly]").get_attribute("aria-pressed") == "true"
+              and page.evaluate("[...document.querySelectorAll('.m-plan .btn')].every(a => a.getAttribute('href').endsWith('&billing=yearly'))"),
+              json.dumps(yearly))
+        page.route("**/api/membership/plans", lambda route: route.fulfill(status=200, content_type="application/json", body=json.dumps(
+            {"ok": True, "daysUntilDue": 3, "plans": {"concierge": {"monthly": 4900, "yearly": 49000, "founding": {"amount": 3900, "open": True, "limit": 100, "remaining": 12}, "extraAdult": {"monthly": 2500, "max": 3}},
+                                                     "plus": {"monthly": 9900, "yearly": 99000}, "signature": {"monthly": 25000, "yearly": 250000}}})))
+        page.locator(".m-plan .btn").first.click(); page.wait_for_url("**/?plan=concierge&billing=yearly"); page.wait_for_timeout(900)
+        check(f"{plans_path}: the checkout opens on the yearly price that was showing", page.locator("input[name=billing][value=yearly]").is_checked(), page.url)
+        page.goto(BASE + plans_path, wait_until="networkidle"); page.wait_for_timeout(300)
+        page.locator(".m-switch [data-billing=yearly]").click(); page.locator(".m-switch [data-billing=monthly]").click(); page.wait_for_timeout(500)
+        check(f"{plans_path}: switching back to Monthly restores the prices and links",
+              page.locator(".m-plan__price").all_inner_texts() == prices and page.locator(".m-plan__alt").first.inner_text() == WM["or_yearly"].format(price="$490")
+              and page.evaluate("[...document.querySelectorAll('.m-plan .btn')].map(a => a.getAttribute('href'))") == links)
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"{plans_path}: the switch fits a phone", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
         check(f"{plans_path}: three plans at $49, $99 and $250 a month, each starting checkout",
               ["".join(x.split()) for x in prices] == [f"$49{per}", f"$99{per}", f"$250{per}"]
               and links == [f"{checkout_path}?plan={k}" for k in ("concierge", "plus", "signature")], f"{prices} {links}")
@@ -1467,6 +1489,13 @@ with sync_playwright() as p:
           and page.locator("#profile-form input[value='therapy']").is_checked() and page.locator("#profile-form input[name=language][value=en]").is_checked()
           and page.locator("#profile-updates").is_checked())
     page.screenshot(path=str(OUT / "account-profile-phone.png"), full_page=True)
+    check("member page: opens on Overview; Settings is one tap away", page.locator("[data-panel=home]").is_visible()
+          and page.locator("#profile-form").is_hidden() and page.locator(".ptab[aria-current]").get_attribute("data-tab") == "home")
+    page.locator(".ptab[data-tab=settings]").click(); page.wait_for_timeout(300)
+    check("member page: Settings shows the details form, and the address remembers the section", page.locator("#profile-form").is_visible()
+          and page.locator("[data-panel=home]").is_hidden() and page.url.endswith("/account/#settings")
+          and page.evaluate("document.activeElement.textContent") == A["a_profile_title"], page.url)
+    page.screenshot(path=str(OUT / "account-settings-phone.png"), full_page=True)
     page.select_option("#profile-state", "CA")
     page.locator("#profile-form label:has(input[value='therapy'])").click()
     page.locator("#profile-form label:has(input[value='anxiety-depression'])").click()
@@ -1509,6 +1538,7 @@ with sync_playwright() as p:
     check("an expired or used link explains itself, token cleared from the address", view(page) == "link" and "#" not in page.url, page.url)
     page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(700)
     check("returning to the account page keeps you logged in", view(page) == "profile")
+    page.locator(".ptab[data-tab=settings]").click(); page.wait_for_timeout(300)
     page.locator("#delete-open").click(); page.wait_for_timeout(200)
     check("delete: asks first", page.locator("#delete-confirm").is_visible() and page.evaluate("document.activeElement.id") == "delete-warn")
     page.locator("#delete-no").click(); page.wait_for_timeout(200)
@@ -1522,6 +1552,149 @@ with sync_playwright() as p:
     check("account page: no overflow on a phone", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
     check("accounts (phone): no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
     ctx.close()
+
+    # 14b) The member page: plan, invoices and coordinator, from /api/member (faked here), at phone and desktop sizes
+    import time
+    NOW = int(time.time()); DAY = 86400
+    def inv(number, ago, status, url):
+        return {"number": number, "date": NOW - ago * DAY, "due": NOW + 2 * DAY if status == "open" else None, "amount": 99000, "status": status, "url": url}
+    MEMBER = {"ok": True, "verified": True, "member": {
+        "first_name": "Maya", "plan": {"key": "plus", "name": "Jachi Concierge Plus", "billing": "yearly", "founding": False, "extra_adults": 0},
+        "status": "active", "since": NOW - 40 * DAY, "renews_at": NOW + 325 * DAY, "ends_at": None, "amount": 99000,
+        "open_invoice": inv("JH-0002", 1, "open", "https://invoice.stripe.com/i/acct_x/open"),
+        "invoices": [inv("JH-0002", 1, "open", "https://invoice.stripe.com/i/acct_x/open"), inv("JH-0001", 40, "paid", "https://invoice.stripe.com/i/acct_x/paid"),
+                     inv("JH-0000", 80, "paid", "https://evil.example/not-stripe")],
+        "manage_url": "https://billing.stripe.com/p/login/test"}}
+    LEAF_SUM_JS = """() => { const c = document.querySelector('.acct__top .leaf__veins'); if (!c || !c.width) return 0;
+        const t = document.createElement('canvas'); t.width = c.width; t.height = c.height;
+        const x = t.getContext('2d', { willReadFrequently: true }); x.drawImage(c, 0, 0);
+        const d = x.getImageData(0, 0, t.width, t.height).data; let s = 0;
+        for (let i = 3; i < d.length; i += 28) s = (s + d[i] * (i % 1009)) % 1000000007; return s; }"""
+    def member_login(page, path="/account/"):
+        page.goto(f"{BASE}{path}", wait_until="networkidle"); page.wait_for_timeout(500)
+        page.locator("#login-email").fill("maya@example.com"); page.locator("#login-password").fill("garden-path-42")
+        page.locator("#login-submit").click(); page.wait_for_timeout(900)
+    for w, h in ((390, 844), (1280, 900)):
+        phone = w < 700
+        ctx = browser.new_context(viewport={"width": w, "height": h}, device_scale_factor=2 if phone else 1, has_touch=phone, is_mobile=phone)
+        page, logs = setup(ctx)
+        fake = FakeIdentity(); fake.attach(page)
+        fake.add_user("maya@example.com", "garden-path-42", confirmed=True)
+        answer = {"status": 200, "body": MEMBER}
+        page.route("**/api/member", lambda r: r.fulfill(status=answer["status"], content_type="application/json", body=json.dumps(answer["body"])))
+        page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
+        member_login(page)
+        check(f"member page @{w}: greets the member and shows the plan", view(page) == "profile" and page.locator("#page-title").inner_text() == "Hello, Maya."
+              and page.locator("#mcard").get_attribute("data-state") == "member" and page.locator("#m-plan").inner_text() == "Jachi Concierge Plus"
+              and page.locator("#m-status").inner_text() == A["a_p_status_active"] and page.locator("#m-price").inner_text() == "$990 a year"
+              and page.locator("#m-adults").inner_text() == "2" and page.locator("#m-when").inner_text() != "" and page.locator("#m-founding").is_hidden(),
+              page.locator("#mcard").inner_text())
+        pay = page.locator("#m-pay-link")
+        check(f"member page @{w}: an open invoice is one tap from Stripe's page", page.locator("#m-pay").is_visible() and pay.inner_text() == "Pay $990"
+              and pay.get_attribute("href") == "https://invoice.stripe.com/i/acct_x/open" and pay.get_attribute("target") == "_blank"
+              and "noopener" in pay.get_attribute("rel") and page.locator("#q-invoices").inner_text() == "$990 due")
+        wait_grown(page)
+        seed = page.evaluate("document.querySelector('.acct__top [data-leaf]').dataset.seed || ''")
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900); wait_grown(page); page.wait_for_timeout(300)
+        first = page.evaluate(LEAF_SUM_JS)
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900); wait_grown(page); page.wait_for_timeout(300)
+        again = page.evaluate(LEAF_SUM_JS)
+        check(f"member page @{w}: the member's own leaf grows the same way every time", seed.isdigit() and first > 0 and again == first
+              and page.evaluate("document.querySelector('.acct__top [data-leaf]').dataset.seed") == seed
+              and page.locator("#leaf-yours").is_visible(), f"{seed} {first} {again}")
+        bar = page.evaluate("""() => { const b = document.getElementById('ptabs'), r = b.getBoundingClientRect(), l = document.getElementById('chat-launcher');
+            return { fixed: getComputedStyle(b).position === 'fixed', bottom: Math.round(innerHeight - r.bottom), launcher: getComputedStyle(l).display !== 'none' }; }""")
+        if phone:
+            check("member page (phone): sections sit in a bar at the bottom; the help button moves into Help", bar["fixed"] and 0 <= bar["bottom"] <= 40 and not bar["launcher"], json.dumps(bar))
+        else:
+            check("member page (desktop): sections sit above the page; the help button stays", not bar["fixed"] and bar["launcher"], json.dumps(bar))
+        page.screenshot(path=str(OUT / f"member-home-{w}.png"), full_page=not phone)
+        if not phone:
+            problems = page.evaluate(STATIC_A11Y_JS)
+            check("member page: labels, names and ids valid", not problems, json.dumps(problems))
+        page.locator(".ptab[data-tab=billing]").click(); page.wait_for_timeout(300)
+        rows = page.locator("#m-invoices .inv")
+        check(f"member page @{w}: invoices link only to Stripe; pay or view", rows.count() == 2 and rows.nth(0).locator(".inv__go").inner_text() == A["a_p_inv_pay"]
+              and rows.nth(1).locator(".inv__go").inner_text() == A["a_p_inv_view"] and rows.nth(1).locator(".inv__go").get_attribute("href") == "https://invoice.stripe.com/i/acct_x/paid"
+              and "evil.example" not in page.locator("[data-view=profile]").inner_html() and page.locator("#m-invoices-none").is_hidden()
+              and page.locator("#m-manage").get_attribute("href") == "https://billing.stripe.com/p/login/test", page.locator("#m-invoices").inner_text())
+        page.screenshot(path=str(OUT / f"member-billing-{w}.png"))
+        page.locator(".ptab[data-tab=help]").click(); page.wait_for_timeout(300)
+        check(f"member page @{w}: Help says how fast the plan's coordinator replies, with 911 and 988", page.locator("#h-reply").inner_text() == A["a_p_reply_plus"] + "."
+              and "911" in page.locator(".purgent").inner_text() and "988" in page.locator(".purgent").inner_text()
+              and page.locator("#h-email").get_attribute("href").startswith(f"mailto:{EMAIL}?subject=")
+              and page.locator("#h-title").inner_text() == A["a_p_help_title"] and page.locator("#h-email").inner_text().strip() == A["a_p_email_cta"]
+              and page.locator("#h-call").is_visible())
+        page.screenshot(path=str(OUT / f"member-help-{w}.png"))
+        page.locator("#h-call").click(); page.wait_for_timeout(700)
+        check(f"member page @{w}: Ask for a call opens the ticket form, topic chosen and email filled in", page.locator("#ticket-form").is_visible()
+              and page.locator("#ticket-topic").input_value() == "Call me back" and page.locator("#ticket-message").input_value() == A["a_p_call_msg"]
+              and page.locator("#ticket-email").input_value() == "maya@example.com")
+        page.locator("#ticket-name").fill("Maya"); page.locator("#ticket-message").type("weekday mornings")
+        page.locator("#ticket-submit").click(); page.wait_for_timeout(700)
+        check(f"member page @{w}: the call request is sent as a ticket", page.locator("#ticket-success").is_visible())
+        page.keyboard.press("Escape"); page.wait_for_timeout(500)
+        page.locator("#h-call").click(); page.wait_for_timeout(700)
+        check(f"member page @{w}: asking for another call starts a new ticket", page.locator("#ticket-form").is_visible() and page.locator("#ticket-success").is_hidden()
+              and page.locator("#ticket-topic").input_value() == "Call me back" and page.locator("#ticket-message").input_value() == A["a_p_call_msg"])
+        page.keyboard.press("Escape"); page.wait_for_timeout(500)
+        page.goto(f"{BASE}/", wait_until="networkidle"); page.wait_for_timeout(400)
+        check(f"signed in @{w}: the header says My account", "My account" in page.evaluate("[...document.querySelectorAll('[data-login-text]')].map(e => e.textContent).join()"))
+        answer["body"] = {"ok": True, "verified": True, "member": None}
+        page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member page @{w}: no membership yet → says so, with the way to the plans", page.locator("#mcard").get_attribute("data-state") == "none"
+              and page.locator("#m-plan").inner_text() == A["a_p_none_title"] and page.locator("#m-plans").is_visible()
+              and page.locator("#m-plans").get_attribute("href") == "/plans/" and page.locator("#m-facts").is_hidden() and page.locator("#m-pay").is_hidden()
+              and page.locator("#page-title").inner_text() == A["a_p_hello_plain"])
+        page.locator(".ptab[data-tab=help]").click(); page.wait_for_timeout(300)
+        check(f"member page @{w}: without a membership, Help is the team's email and the assistant, not a coordinator's call",
+              page.locator("#h-title").inner_text() == A["a_p_help"] and page.locator("#h-email").inner_text().strip() == A["a_p_email_team"]
+              and page.locator("#h-call").is_hidden() and page.locator("#h-reply").inner_text() == A["a_p_reply_none"] + "."
+              and page.locator("[data-panel=help] [data-chat-open]").is_visible())
+        page.locator(".ptab[data-tab=home]").click(); page.wait_for_timeout(200)
+        answer["body"] = {"ok": True, "verified": False, "member": None}
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member page @{w}: an unproved email is asked to confirm first", page.locator("#mcard").get_attribute("data-state") == "unverified"
+              and page.locator("#m-plan").inner_text() == A["a_p_unverified_title"])
+        answer["status"] = 503; answer["body"] = {"error": "billing_unavailable"}
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        failed = page.locator("#mcard").get_attribute("data-state") == "error" and page.locator("#m-retry").is_visible()
+        answer["status"] = 200; answer["body"] = MEMBER
+        page.locator("#m-retry").click(); page.wait_for_timeout(700)
+        check(f"member page @{w}: when billing can't be reached it says so, and Try again works", failed
+              and page.locator("#mcard").get_attribute("data-state") == "member")
+        ended = json.loads(json.dumps(MEMBER)); ended["member"].update(status="ended", renews_at=None, ends_at=NOW - 3 * DAY, open_invoice=None)
+        answer["body"] = ended
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member page @{w}: an ended plan says when it ended and offers the plans", page.locator("#m-status").inner_text() == A["a_p_status_ended"]
+              and page.locator("#m-facts").is_hidden() and page.locator("#m-plans").is_visible() and page.locator("#m-pay").is_hidden()
+              and page.locator("#h-reply").inner_text() == A["a_p_reply_none"] + ".")
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"member page @{w}: no sideways scrolling", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+        answer["body"] = MEMBER
+        member_login_es = page.goto(f"{BASE}/es/account/", wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member page @{w}: in Spanish", page.locator("#page-title").inner_text() == "Hola, Maya." and page.locator("#m-status").inner_text() == ES["a_p_status_active"]
+              and page.locator("#m-price").inner_text() == "$990 al año" and page.locator("[data-panel=home] .acct__title").inner_text() == ES["a_p_membership"]
+              and page.locator(".ptab[data-tab=billing]").inner_text().strip() == ES["a_p_billing"])
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"member page @{w}: Spanish has no sideways scrolling", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+        page.screenshot(path=str(OUT / f"es-member-home-{w}.png"))
+        page.locator("#logout").click(); page.wait_for_timeout(600)
+        check(f"member page @{w}: logging out puts the page back", view(page) == "auth" and page.locator("#page-title").inner_text() == ES["a_h1"]
+              and page.locator("#leaf-yours").is_hidden() and page.evaluate("localStorage.getItem('jachi.leaf')") is None
+              and "#" not in page.url)
+        page.evaluate("localStorage.setItem('jachi.leaf', '123'); localStorage.setItem('jachi.session', JSON.stringify({ access_token: 'gone', refresh_token: '', expires_at: 9999999999 }))")
+        page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member page @{w}: a sign-in that has ended goes back to the plain log-in page", view(page) == "auth" and page.locator("#page-title").inner_text() == A["a_h1"]
+              and page.locator("#leaf-yours").is_hidden() and page.locator("#page-lead").is_visible() and page.evaluate("localStorage.getItem('jachi.leaf')") is None
+              and page.evaluate("document.querySelector('.acct__top [data-leaf]').dataset.seed === undefined"))
+        page.goto(f"{BASE}/account/?demo", wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"sample member page @{w}: labelled as made up, no settings, links stay here", view(page) == "profile" and page.locator("#portal-demo").is_visible()
+              and page.locator(".ptab[data-tab=settings]").is_hidden() and page.locator("#logout").is_hidden()
+              and page.locator("#m-plan").inner_text() == "Jachi Concierge" and page.locator("#m-founding").is_visible()
+              and page.locator("#m-pay-link").get_attribute("href").endswith("/account/?demo") and page.locator("#m-pay-link").get_attribute("target") is None)
+        check(f"member page @{w}: no unexpected console errors", not expected_http_errors([l for l in logs if "status of 503" not in l[1]]), json.dumps(logs))
+        ctx.close()
 
     # The account page in Spanish, at every size
     for w, h in ((360, 740), (768, 1024), (1440, 900)):
