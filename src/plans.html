@@ -10,6 +10,24 @@
 
   <section class="section m-plans-section" aria-labelledby="page-title">
     <div class="wrap">
+      <details class="planfit" id="planfit" hidden>
+        <summary class="planfit__open">{{I:leaf}}<span>{{FINDER_OPEN}}</span><span class="planfit__chev" aria-hidden="true"></span></summary>
+        <div class="planfit__body">
+          <fieldset class="planfit__q">
+            <legend>{{T:f_q1}}</legend>
+            <div class="planfit__opts">{{FINDER_ADULTS}}</div>
+          </fieldset>
+          <fieldset class="planfit__q">
+            <legend>{{T:f_q2}}</legend>
+            <div class="planfit__opts">{{FINDER_SPEEDS}}</div>
+          </fieldset>
+          <div class="planfit__fit" id="planfit-fit" role="status" hidden>
+            <p class="planfit__label">{{T:f_yours}}</p>
+            <div class="planfit__text" id="planfit-text"></div>
+            <a class="btn" id="planfit-start" href="{{CHECKOUT}}">{{CTA_BUTTON}}</a>
+          </div>
+        </div>
+      </details>
       <div class="m-plans">{{PLAN_CARDS}}</div>
       <p class="m-addon">{{ADDON}} {{CANCEL_LINE}}</p>
     </div>

@@ -287,6 +287,52 @@ check('daily: yearly members get one renewal heads-up two weeks out, monthly mem
 d = await daily();
 check('daily: renewal heads-up sent once', d.renewalNotices === 0);
 
+// Member tips: a few short emails a year for members who are paid up, sent once each, never after "off".
+fresh();
+await post(form({ email: 'cy@example.com', plan: 'concierge', language: 'en', name: 'Cy Ray' }));
+await post(form({ email: 'pia@example.com', plan: 'plus', language: 'es', name: 'Pia Sol' }));
+await post(form({ email: 'unpaid@example.com', plan: 'concierge', language: 'en', name: 'Una Late' }));
+for (const i of invoices().filter((x) => x.customer_email !== 'unpaid@example.com')) stripe._payInvoice(i.id);
+const startedDaysAgo = (n) => { for (const s of subs()) s.start_date = now() - n * DAY; emails.length = 0; };
+startedDaysAgo(1);
+d = await daily();
+check('tips: nothing on the first days', d.tips === 0 && emails.length === 0, JSON.stringify(d));
+startedDaysAgo(4);
+d = await daily();
+let tip = tagged('first_steps');
+check('tips: a few days in, paid members get "where to start"; an unpaid sign-up gets nothing', d.tips === 2 && tip.length === 2
+  && tip.map((e) => e.body.to[0]).sort().join() === 'cy@example.com,pia@example.com', JSON.stringify([d, emails.map((e) => e.body.to[0])]));
+const piaTip = tip.find((e) => e.body.to[0] === 'pia@example.com');
+check('tips: in the member\'s language, with their plan\'s reply promise and the member page', piaTip.body.subject === 'Tres cosas que los miembros piden primero'
+  && piaTip.body.text.includes('el mismo día, de lunes a viernes') && piaTip.body.html.includes('https://jachihealth.com/es/account/')
+  && tip.find((e) => e.body.to[0] === 'cy@example.com').body.text.includes('within 1 business day'));
+check('tips: each says how to turn them off, and none asks for health details', tip.every((e) => /turn them off in your member page|desactívelos en los ajustes/.test(e.body.text)
+  && /don't send medical details|no envíe detalles médicos/.test(e.body.text)));
+d = await daily();
+check('tips: each is sent once', d.tips === 0 && tagged('first_steps').length === 2);
+startedDaysAgo(22);
+d = await daily();
+check('tips: about three weeks in, a check-in with the two promises', d.tips === 2 && tagged('month_checkin').length === 2
+  && tagged('month_checkin').every((e) => /next month is free|próximo mes es gratis/.test(e.body.text)), JSON.stringify(d));
+startedDaysAgo(86);
+d = await daily();
+tip = tagged('planning_call');
+check('tips: before each quarter, Plus and Signature members hear about their planning call; Concierge members don\'t', d.tips === 1
+  && tip.length === 1 && tip[0].body.to[0] === 'pia@example.com' && tip[0].body.text.includes('30 minutos'), JSON.stringify([d, emails.map((e) => e.body.to[0])]));
+d = await daily();
+startedDaysAgo(86 + 91);
+const second = await daily();
+check('tips: one planning-call note a quarter', d.tips === 0 && second.tips === 1 && tagged('planning_call').length === 1);
+for (const s of subs()) s.metadata = { ...s.metadata, jachi_tip_first: '', jachi_tip_month: '', jachi_tip_quarter: '' };
+for (const c of stripe._state.customers.values()) c.metadata = { ...c.metadata, jachi_tips: 'off' };
+startedDaysAgo(4);
+d = await daily();
+check('tips: none for a member who turned them off', d.tips === 0 && emails.length === 0, JSON.stringify(d));
+for (const c of stripe._state.customers.values()) c.metadata = { ...c.metadata, jachi_tips: '' };
+for (const s of subs()) s.cancel_at_period_end = true;
+d = await daily();
+check('tips: none for a member who is leaving', d.tips === 0 && emails.length === 0, JSON.stringify(d));
+
 // ---------- Email wording ----------
 let blanks = [];
 for (const name of billing.templateNames) for (const lang of ['en', 'es']) {
@@ -316,9 +362,10 @@ globalThis.fetch = async (url, init = {}) => {
   return realFetch(url, init);
 };
 globalThis.netlifyIdentityContext = { url: ID, token: 'operator' };
-const member = async (token, { method = 'GET', origin } = {}) => {
+const member = async (token, { method = 'GET', origin, body } = {}) => {
   const res = await memberFn.default(new Request('https://jachihealth.com/api/member', {
     method, headers: { ...(token ? { authorization: `Bearer ${token}` } : {}), ...(origin ? { origin } : {}) },
+    ...(body === undefined ? {} : { body: typeof body === 'string' ? body : JSON.stringify(body) }),
   }), {});
   return { status: res.status, body: await res.json().catch(() => null) };
 };
@@ -329,7 +376,7 @@ await post(form({ plan: 'plus', billing: 'yearly', name: 'Maria Lopez' }));
 idUsers = { maria: person('maria@example.com'), stranger: person('nobody@example.com'),
   unproved: person('maria@example.com', { confirmation_sent_at: null }) };
 check('member page: signed out → 401, wrong method → 405, other sites → 403', (await member('')).status === 401
-  && (await member('nope')).status === 401 && (await member('maria', { method: 'POST' })).status === 405
+  && (await member('nope')).status === 401 && (await member('maria', { method: 'PUT', body: {} })).status === 405
   && (await member('maria', { origin: 'https://evil.example' })).status === 403);
 r = await member('maria');
 let m = r.body.member;
@@ -343,6 +390,19 @@ check('member page: paid → active, renewal date, invoice listed as paid, nothi
   && m.open_invoice === null && m.invoices.length === 1 && m.invoices[0].status === 'paid' && m.since > 0
   && m.manage_url.startsWith('https://billing.stripe.com/'), JSON.stringify(m));
 check('member page: billing facts only (no ids, phone, email or address)', !/cus_|sub_|phone|\+1214|maria@example\.com|address/.test(JSON.stringify(r.body)), JSON.stringify(r.body));
+check('member page: the member\'s own referral link, and tips on until they say otherwise', m.referral_url === 'https://jachihealth.com/membership/?ref=Maria+Lopez'
+  && m.tips === true, JSON.stringify([m.referral_url, m.tips]));
+r = await member('maria', { method: 'POST', body: { tips: false } });
+const mariaCustomer = () => [...stripe._state.customers.values()].find((c) => c.email === 'maria@example.com');
+check('member page: a member can turn the tips off, and back on', r.status === 200 && r.body.tips === false
+  && mariaCustomer().metadata.jachi_tips === 'off' && (await member('maria')).body.member.tips === false
+  && (await member('maria', { method: 'POST', body: { tips: true } })).body.tips === true && (await member('maria')).body.member.tips === true,
+  JSON.stringify([r.body, mariaCustomer().metadata]));
+check('member page: the tips switch needs a yes or no, a membership, and a proved email', (await member('maria', { method: 'POST', body: { tips: 'no' } })).status === 400
+  && (await member('maria', { method: 'POST', body: 'not json' })).status === 400
+  && (await member('stranger', { method: 'POST', body: { tips: false } })).status === 404
+  && (await member('unproved', { method: 'POST', body: { tips: false } })).body.verified === false
+  && (await member('', { method: 'POST', body: { tips: false } })).status === 401 && mariaCustomer().metadata.jachi_tips !== 'off');
 r = await member('stranger');
 check('member page: an account with no membership sees none', r.status === 200 && r.body.verified === true && r.body.member === null);
 r = await member('unproved');

@@ -9,6 +9,7 @@
       <h2 class="chat__title" id="chat-title" tabindex="-1">Jachi Help</h2>
       <p class="chat__sub" id="chat-sub"><span class="ai-tag">AI</span>Assistant · No live agents yet</p>
     </div>
+    <button class="chat__close chat__reset" type="button" id="chat-reset" aria-label="Start over" title="Start over" hidden>{{I:refresh}}</button>
     <button class="chat__close" type="button" id="chat-close" aria-label="Close help chat">{{I:x}}</button>
   </header>
 
@@ -17,10 +18,11 @@
       <div class="msg msg--bot">Hi! I'm Jachi's AI assistant. I can answer questions about our plans and how Jachi works. I can't give medical advice, so please don't share personal health details here.</div>
     </div>
     <div class="chat__quick" id="chat-quick">
-      <button type="button" data-ask="What can Jachi help with?">What can you help with?</button>
-      <button type="button" data-ask="What do the plans cost?">Plans and prices</button>
-      <button type="button" data-ask="What does a coordinator do?">Coordinators</button>
-      <button type="button" data-ask="Is Jachi insurance?">Insurance</button>
+      <button type="button" data-answer="help" data-ask="What can Jachi help with?">What we help with</button>
+      <button type="button" data-answer="prices" data-ask="What do the plans cost?">Plans and prices</button>
+      <button type="button" data-answer="finder" data-ask="Help me pick a plan">Help me pick a plan</button>
+      <button type="button" data-answer="coordinator" data-ask="What does a coordinator do?">Coordinators</button>
+      <button type="button" data-answer="insurance" data-ask="Is Jachi insurance?">Insurance</button>
       <button type="button" data-ticket>Submit a ticket</button>
     </div>
     <form class="chat__composer" id="chat-form" novalidate>
@@ -51,7 +53,7 @@
         <label class="label" for="ticket-topic">Topic</label>
         <select class="select" id="ticket-topic" name="topic">
           <option>General question</option>
-          <option>Membership or billing</option>
+          <option data-topic="billing">Membership or billing</option>
           <option>Waitlist</option>
           <option>Website problem</option>
           <option>Partnerships or press</option>
@@ -92,10 +94,12 @@
     <p>If you join the waitlist, we collect your email and state and, if you give them, your first name and the services you're interested in, plus the language of the page you used. If you came from one of our ads, we also note the ad's name. We use them only to email you about our launch. Sign-ups are stored with our website host. If you join through a form in one of our Facebook or Instagram ads, Meta collects what you enter and passes it to us.</p>
     <h3>Accounts</h3>
     <p>If you create an account, we keep your email, your password in scrambled form, and the details you save there. Your browser keeps a sign-in token until you log out. You can update or delete your account at any time on the <a href="/account/">account page</a>.</p>
+    <h3>Your health notebook</h3>
+    <p>The health notebook on the account page is saved only in your own browser, on your own device. It is never sent to us, so we can't see it, restore it or reset its passcode. You can lock it, back it up to a file you keep, or erase it at any time.</p>
     <h3>Memberships</h3>
     <p>If you start a membership, we collect your name, email, phone, language and plan. Stripe, our payment processor, takes your card on its own page and emails your invoices; we never see your card number.</p>
     <h3>Help chat and support tickets</h3>
-    <p>Messages you send to our AI assistant pass through our website host, Netlify, to our AI provider, Anthropic, so it can write a reply. We don't save chats. If you send a ticket, we collect your name, email, topic, message and, if you choose, your chat, and use them only to answer you. Tickets are stored with our website host and sent to our support inbox.</p>
+    <p>Messages you send to our AI assistant pass through our website host, Netlify, to our AI provider, Anthropic, so it can write a reply. We don't save chats. Your browser keeps the conversation in the tab you're using, so it's still there on the next page, until you close the tab or tap Start over. Common questions are answered from this website itself, with no AI. If you send a ticket, we collect your name, email, topic, message and, if you choose, your chat, and use them only to answer you. Tickets are stored with our website host and sent to our support inbox.</p>
     <h3>What we don't do</h3>
     <p>We don't sell your information, and this site doesn't use advertising cookies, pixels or tracking. We never send your sign-up to Meta or any other ad company.</p>
     <h3>Your choices</h3>

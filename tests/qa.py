@@ -31,6 +31,7 @@ import content_es as CONTENT_ES  # noqa: E402
 import strings  # noqa: E402
 
 ES = strings.ES
+EN_T = strings.EN
 
 PORT = 8765
 BASE = f"http://127.0.0.1:{PORT}"
@@ -359,7 +360,8 @@ with sync_playwright() as p:
             route.fulfill(status=503, content_type="application/json", body='{"error":"not_configured"}')
         else:
             route.fulfill(status=200, content_type="application/json",
-                          body=json.dumps({"reply": f"Your coordinator finds care near you and books it. Questions? Email {EMAIL}."}))
+                          body=json.dumps({"reply": f"Your coordinator finds care near you and books it. The plans are at jachihealth.com/plans/ "
+                                                    f"and not at jachihealth.com/made-up/, evil.example/plans/ or other@jachihealth.com. Questions? Email {EMAIL}."}))
     page.route("**/api/chat", chat_route)
     page.goto(URL, wait_until="networkidle"); page.wait_for_timeout(500)
     launcher = page.locator("#chat-launcher")
@@ -370,16 +372,26 @@ with sync_playwright() as p:
     check("chat: input focused on desktop", page.evaluate("document.activeElement.id") == "chat-input")
     check("chat: send disabled while empty", page.locator("#chat-send").is_disabled())
     page.screenshot(path=str(OUT / "chat-open-desktop.png"))
+    chips = lambda: page.locator("#chat-quick button").all_inner_texts()
+    check("chat: opens on the questions people ask most, by short names", chips() == ["What we help with", "Plans and prices", "Help me pick a plan",
+          "Coordinators", "Insurance", "Submit a ticket"], str(chips()))
     page.locator("#chat-quick button[data-ask='What does a coordinator do?']").click(); page.wait_for_timeout(700)
     bots = page.locator("#chat-log .msg--bot")
-    check("chat: quick question gets an AI reply", "finds care near you" in bots.last.inner_text(), bots.last.inner_text())
-    check("chat: quick replies hide after first question", page.locator("#chat-quick").is_hidden())
-    check("chat: request carries the conversation", chat_bodies and json.loads(chat_bodies[-1])["messages"][-1] == {"role": "user", "content": "What does a coordinator do?"}, str(chat_bodies[-1:]))
-    check("chat: support email becomes a link", page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
+    coordinator = dict(CONTENT.FAQ)["What does a coordinator do?"]
+    check("chat: a common question is answered at once in the site's own words, with no AI call", not chat_bodies
+          and bots.last.locator(".msg__src").inner_text() == EN_T["c_from_site"] and coordinator in bots.last.inner_text()
+          and page.locator("#chat-log .msg--user").last.inner_text() == "What does a coordinator do?", bots.last.inner_text())
+    check("chat: then offers what to ask next, and a way to say it missed", chips() == ["Booking", "Reply times", "Plans and prices", EN_T["c_retry"]], str(chips()))
     page.locator("#chat-input").fill("Do you take insurance?")
     page.keyboard.press("Enter"); page.wait_for_timeout(700)
     sent = json.loads(chat_bodies[-1])["messages"]
     check("chat: Enter sends and history grows", len(sent) == 3 and sent[1]["role"] == "assistant", json.dumps(sent))
+    check("chat: anything else goes to the assistant, with the conversation so far and nothing more", len(chat_bodies) == 1
+          and sent[-1] == {"role": "user", "content": "Do you take insurance?"} and sent[1]["content"] == coordinator
+          and all(set(m) == {"role", "content"} for m in sent), json.dumps(sent))
+    check("chat: support email becomes a link", page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
+    check("chat: a reply links this site's own pages and nothing else", bots.last.locator("a[href='/plans/']").count() == 1
+          and bots.last.locator("a").count() == 2 and "jachihealth.com/made-up/" in bots.last.inner_text(), bots.last.inner_html())
     check("chat: input clears after sending", page.locator("#chat-input").input_value() == "")
     n_before = len(chat_bodies)
     page.locator("#chat-input").fill("I have chest pain right now"); page.keyboard.press("Enter"); page.wait_for_timeout(400)
@@ -460,6 +472,113 @@ with sync_playwright() as p:
     page.locator("#chat-close").click(); page.wait_for_timeout(500)
     check("phone chat: closing restores the page", page.evaluate("document.getElementById('main').inert === false") and page.locator("#chat").is_hidden())
     check("phone chat: no console errors", not logs, json.dumps(logs))
+    ctx.close()
+
+    # 2d2) The chat's own tools: the plan finder, a close call, "That didn't answer it", the visit's memory and
+    # Start over, a service page's own questions, Spanish, and the ad pages (which keep to the assistant)
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    asked = []
+    def tools_route(route):
+        asked.append(json.loads(route.request.post_data)["messages"])
+        route.fulfill(status=200, content_type="application/json", body='{"reply":"Here is another way to put it. See jachihealth.com/how-it-works/."}')
+    page.route("**/api/chat", tools_route)
+    chips = lambda: page.locator("#chat-quick button").all_inner_texts()
+    bot = lambda: page.locator("#chat-log .msg--bot").last
+    tap = lambda label: (page.locator("#chat-quick button", has_text=label).first.click(), page.wait_for_timeout(350))
+    say = lambda text: (page.locator("#chat-input").fill(text), page.locator("#chat-send").click(), page.wait_for_timeout(450))
+    page.goto(f"{BASE}/plans/", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#chat-launcher").click(); page.wait_for_timeout(700)
+    check("chat tools: on the plans page the first questions are about plans", chips()[:3] == ["Help me pick a plan", "Plans and prices", "Paying"]
+          and page.locator("#chat-reset").is_hidden(), str(chips()))
+    tap("Help me pick a plan")
+    check("plan finder: first asks how many adults", bot().inner_text() == EN_T["f_q1"] and chips() == [EN_T[f"f_a{n}"] for n in range(1, 5)], str(chips()))
+    tap("2 adults")
+    check("plan finder: then how fast", bot().inner_text() == EN_T["f_q2"] and chips() == [EN_T["f_s_biz"], EN_T["f_s_day"], EN_T["f_s_week"]], str(chips()))
+    tap("Within 1 business day")
+    fit = bot().inner_text()
+    check("plan finder: names the least expensive plan that fits, shows the sum and the step up", "Concierge with one more adult fits: $49 + $25 = $74 a month" in fit
+          and "Or Concierge Plus, at $99 a month" in fit and "$39 a month" in fit and EN_T["f_fine"] in fit and not asked, fit)
+    links = bot().locator("a").evaluate_all("els => els.map(a => [a.textContent.trim(), a.getAttribute('href')])")
+    check("plan finder: one button starts that plan with the adult added, another compares plans", links == [["Start Concierge", "/membership/?plan=concierge&adults=1"],
+          ["Compare plans", "/plans/"]], str(links))
+    page.screenshot(path=str(OUT / "chat-finder-phone.png"))
+    tap("Change my answers"); tap("Just me"); tap("Same day on weekdays")
+    check("plan finder: one adult who wants same-day replies fits Concierge Plus", "Concierge Plus fits" in bot().inner_text()
+          and bot().locator("a").first.get_attribute("href") == "/membership/?plan=plus")
+    tap("Change my answers"); tap("4 adults"); tap("Same day, 7 days a week")
+    check("plan finder: seven-day replies fit Signature", "Signature fits" in bot().inner_text() and "$250 a month or $2,500 a year" in bot().inner_text()
+          and bot().locator("a").first.get_attribute("href") == "/membership/?plan=signature")
+    say("join")
+    check("chat tools: a close call offers the nearest questions instead of guessing", bot().inner_text() == EN_T["c_which"]
+          and chips() == ["Who can join?", "How do I join?", EN_T["c_none"]] and not asked, str(chips()))
+    tap("How do I join?")
+    check("chat tools: picking one answers it from the site, with a button to the checkout", "secure invoice from Stripe" in bot().inner_text()
+          and bot().locator("a").get_attribute("href") == "/membership/" and not asked)
+    tap(EN_T["c_retry"]); page.wait_for_timeout(400)
+    check("chat tools: 'That didn't answer it' after a site answer hands the conversation to the assistant", len(asked) == 1
+          and asked[0][-1] == {"role": "user", "content": EN_T["c_retry"]} and "another way" in bot().inner_text()
+          and bot().locator("a[href='/how-it-works/']").count() == 1, json.dumps(asked[-1:]))
+    tap(EN_T["c_retry"])
+    check("chat tools: after the assistant, it offers a person instead", bot().inner_text().startswith(EN_T["c_retry_ticket"]) and bot().locator("[data-ticket]").count() == 1
+          and len(asked) == 1)
+    say("how much is a knee replacement")
+    check("chat tools: a question the site doesn't answer isn't guessed at", len(asked) == 2, json.dumps(asked[-1][-1]))
+    say("my chest hurts, chest pain")
+    n_msgs = page.locator("#chat-log .msg").count()
+    kept = page.evaluate("JSON.parse(sessionStorage.getItem('jachi.chat'))")
+    check("chat tools: the conversation is kept in this tab only", kept["v"] == 1 and len(kept["turns"]) == n_msgs - 3
+          and page.evaluate("localStorage.getItem('jachi.chat')") is None and kept["turns"][-1]["kind"] == "emergency", str(len(kept["turns"])))
+    page.goto(f"{BASE}/how-it-works/", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#chat-launcher").click(); page.wait_for_timeout(700)
+    check("chat tools: on the next page the conversation is still there, and says where it's kept", page.locator("#chat-log .msg").count() == n_msgs - 2
+          and page.locator(".msg__note").inner_text() == EN_T["c_kept"] and page.locator("#chat-reset").is_visible()
+          and page.locator("#chat-log .msg--alert a[href='tel:911']").count() == 1
+          and page.locator("#chat-log .msg--bot a[href='/membership/?plan=signature']").count() == 1
+          and page.locator("#chat-log .msg--bot a[href='/how-it-works/']").count() == 2, str(page.locator("#chat-log .msg").count()))
+    page.evaluate("""() => { const k = JSON.parse(sessionStorage.getItem('jachi.chat'));
+        k.turns.push({ role: 'assistant', content: 'Tampered', acts: [{ label: 'Go', href: 'javascript:alert(1)' }, { label: 'Out', href: 'https://evil.example/' }, { label: 'Ok', href: '/plans/' }] });
+        sessionStorage.setItem('jachi.chat', JSON.stringify(k)); }""")
+    page.reload(wait_until="networkidle"); page.wait_for_timeout(400)
+    page.locator("#chat-launcher").click(); page.wait_for_timeout(600)
+    hrefs = page.locator("#chat-log .msg--bot").last.locator("a").evaluate_all("els => els.map(a => a.getAttribute('href'))")
+    check("chat tools: a remembered conversation can only bring back buttons to this site's own pages", hrefs == ["/plans/"], str(hrefs))
+    page.locator("#chat-reset").click(); page.wait_for_timeout(300)
+    check("chat tools: Start over clears the conversation here and in the tab's memory", page.locator("#chat-log .msg").count() == 1
+          and page.evaluate("sessionStorage.getItem('jachi.chat')") is None and page.locator("#chat-reset").is_hidden()
+          and chips()[:2] == ["Booking", "Reply times"], str(chips()))
+    page.goto(f"{BASE}/weight-loss/", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#chat-launcher").click(); page.wait_for_timeout(700)
+    own = PAGES.BY_SLUG["weight-loss"]["faq"]
+    check("chat tools: on a service page, that page's own questions come first", chips()[:2] == [own[0][0], own[1][0]], str(chips()))
+    tap(own[0][0])
+    check("chat tools: and are answered with that page's own words", own[0][1] in bot().inner_text() and len(asked) == 2)
+    say("join")
+    page.reload(wait_until="networkidle"); page.wait_for_timeout(400)
+    page.locator("#chat-launcher").click(); page.wait_for_timeout(600)
+    check("chat tools: a question that never got its answer isn't brought back", page.locator("#chat-log .msg").last.inner_text() == bot().inner_text()
+          and own[0][1] in bot().inner_text() and page.locator("#chat-log .msg--user").last.inner_text() == own[0][0])
+    ov = page.evaluate(OVERFLOW_JS)
+    check("chat tools: no sideways scrolling", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+    page.locator("#chat-reset").click(); page.wait_for_timeout(200)
+    page.goto(f"{BASE}/es/planes/", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#chat-launcher").click(); page.wait_for_timeout(700)
+    tap(ES["f_open"]); tap(ES["f_a3"]); tap(ES["f_s_biz"])
+    check("chat tools (Spanish): the plan finder speaks Spanish and goes to the Spanish checkout", "Le conviene Concierge con 2 adultos más: $49 + 2 × $25 = $99 al mes" in bot().inner_text()
+          and bot().locator(".msg__src").inner_text() == ES["c_from_site"]
+          and bot().locator("a").first.get_attribute("href") == "/es/membresia/?plan=concierge&adults=2", bot().inner_text())
+    say("reembolso")
+    check("chat tools (Spanish): its own answers in Spanish", "reembolso completo" in bot().inner_text() and len(asked) == 2)
+    page.screenshot(path=str(OUT / "es-chat-finder-phone.png"))
+    page.locator("#chat-reset").click(); page.wait_for_timeout(200)
+    page.goto(f"{BASE}/join/", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#chat-launcher").click(); page.wait_for_timeout(700)
+    check("chat tools: the ad pages have no plan finder", EN_T["f_open"] not in chips() and len(chips()) == 5, str(chips()))
+    tap("Plans and prices"); page.wait_for_timeout(400)
+    check("chat tools: and every question there still goes to the assistant", len(asked) == 3 and page.locator("#chat-log .msg__src").count() == 0)
+    page.locator("#chat-reset").click(); page.wait_for_timeout(300)
+    check("chat tools: Start over on an ad page brings back its own questions, still without the plan finder", len(chips()) == 5 and EN_T["f_open"] not in chips(), str(chips()))
+    check("chat tools: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
     # 2e) Home page on a computer: the plans button, the quick picker, the care cards, the plans and the privacy promise
@@ -800,6 +919,9 @@ with sync_playwright() as p:
           "AYUDA" in alert.inner_text() and alert.locator("a[href='tel:988']").count() == 1
           and alert.locator("a[href='sms:988?&body=AYUDA']").count() == 1)
     page.locator("#chat-input").fill("¿Cuánto cuesta?"); page.locator("#chat-send").click(); page.wait_for_timeout(700)
+    check("es chat: a price question is answered from the site, in Spanish", "Concierge cuesta $49 al mes" in page.locator("#chat-log .msg--bot").last.inner_text()
+          and page.locator("#chat-log .msg--bot").last.locator(".msg__src").inner_text() == ES["c_from_site"])
+    page.locator("#chat-input").fill("¿Puedo llevar a mi perro a la consulta?"); page.locator("#chat-send").click(); page.wait_for_timeout(700)
     check("es chat: AI reply shown with the email linked", "$49 al mes" in page.locator("#chat-log .msg--bot").last.inner_text()
           and page.locator(f"#chat-log .msg--bot a[href='mailto:{EMAIL}']").count() >= 1)
     page.screenshot(path=str(OUT / "es-chat-phone.png"))
@@ -1174,8 +1296,10 @@ with sync_playwright() as p:
     ctx.close()
 
     # 12) Legal pages
-    for slug, must in (("privacy", ["What we collect", "Who we share it with", "Netlify", "Anthropic", EMAIL]),
-                       ("terms", ["Not medical advice", "call 911", "Tarrant County"]),
+    for slug, must in (("privacy", ["What we collect", "Who we share it with", "Netlify", "Anthropic", EMAIL, "Information that stays in your browser",
+                                    "Your health notebook", "we can't see it, copy it, restore it or reset its passcode", "until you close the tab or tap Start over"]),
+                       ("terms", ["Not medical advice", "call 911", "Tarrant County", "The health notebook", "it doesn't give medical advice",
+                                  "We don't have a copy and can't recover it"]),
                        ("texas-medical-board", ["NOTICE CONCERNING COMPLAINTS", "1801 Congress Avenue, Suite 9.200", "P.O. Box 2018",
                                                 "Austin, Texas 78768-2018", "1-800-201-9353", "www.tmb.state.tx.us"])):
         for w, h in ((390, 844), (1440, 900)):
@@ -1217,6 +1341,42 @@ with sync_playwright() as p:
             check(f"{path}: the waitlist form links the health data policy", f'href="{policy}"' in note)
     check("the privacy policy links the health data policy",
           f'href="{HEALTH_EN}"' in (ROOT / "public" / "privacy" / "index.html").read_text().split("<footer")[0])
+    plain_text = lambda rel: re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", (ROOT / "public" / rel).read_text())))
+    check("both health data policies and both privacy summaries say the notebook stays in the browser and is never sent to us",
+          "stays in your own browser, on your own device" in plain_text("consumer-health-data/index.html")
+          and "se queda en su propio navegador, en su propio dispositivo" in plain_text("es/datos-de-salud/index.html")
+          and "saved only in your own browser, on your own device" in plain_text("index.html")
+          and "se guarda solo en su propio navegador, en su propio dispositivo" in plain_text("es/index.html"))
+
+    # 12a2) The home pages say what the member page's tools do, in both languages, and nothing the tools don't do
+    for home, create in (("index.html", "/account/?create"), ("es/index.html", "/es/account/?create")):
+        h = (ROOT / "public" / home).read_text()
+        tools = h[h.index('id="tools"'):h.index("</section>", h.index('id="tools"'))]
+        check(f"/{home.replace('index.html', '')}: the member tools section has its three tools and a way to start a free notebook",
+              tools.count('class="proof"') == 3 and f'href="{create}"' in tools and "$" not in tools)
+
+    # 12a3) The chat's own answers (public/help.<lang>.json): only this site's pages, only the plan prices, both languages alike
+    helps = {lang: json.loads((ROOT / "public" / f"help.{lang}.json").read_text()) for lang in ("en", "es")}
+    plan_money = {MEMBERSHIP.money(c, cents) for p in MEMBERSHIP.PLANS for c in (p["monthly"], p["yearly"], p.get("founding")) if c
+                  for cents in (False, True)} | {MEMBERSHIP.money(MEMBERSHIP.EXTRA_ADULT)}
+    for lang, data in helps.items():
+        text = json.dumps(data, ensure_ascii=False)
+        stray = set(re.findall(r"\$\s?\d[\d,]*(?:\.\d+)?", text)) - plan_money
+        missing_pages = [p for p in data["pages"] if not (ROOT / "public" / p.strip("/") / "index.html").exists()]
+        bad_links = [e["go"]["href"] for e in data["faq"] if e.get("go") and e["go"]["href"] not in data["pages"]]
+        ids = {e["id"] for e in data["faq"]}
+        check(f"chat answers ({lang}): only plan prices, only pages that exist, every follow-up is a real answer", not stray and not missing_pages
+              and not bad_links and all(set(e["next"]) <= ids | {"finder"} for e in data["faq"]) and not any(p.startswith(("/join/", "/es/unase/")) for p in data["pages"])
+              and all(set(v) <= ids | {"finder"} for v in data["chips"].values()), json.dumps([sorted(stray), missing_pages, bad_links]))
+        said = " ".join(e["a"] for e in data["faq"])
+        check(f"chat answers ({lang}): credit care to providers and promise no treatment", not re.search(
+              r"\b(we treat|we prescribe|we diagnose|Jachi's doctors|our doctors|tratamos|recetamos|diagnosticamos|nuestros médicos)\b", said, re.I), "")
+    check("chat answers: the same questions in both languages", [e["id"] for e in helps["en"]["faq"]] == [e["id"] for e in helps["es"]["faq"]]
+          and helps["en"]["pages"] == helps["es"]["pages"] and all(e["a"] != s["a"] for e, s in zip(helps["en"]["faq"], helps["es"]["faq"])))
+    site_faq = dict(list(CONTENT.FAQ) + list(CONTENT.HOW["faq"]))
+    reused = [e for e in helps["en"]["faq"] if e["q"] in site_faq]
+    check("chat answers: questions the site already answers get the site's exact words", len(reused) >= 15
+          and all(e["a"] == (dict(CONTENT.FAQ).get(e["q"]) or site_faq[e["q"]]) for e in reused), str(len(reused)))
 
     # 12b) The only prices on the site are Jachi's plan prices (membership.py); terms keep their $100 liability cap.
     # Providers set and confirm their own prices, so no page or assistant answer quotes one. Ad pages show none at all.
@@ -1288,6 +1448,33 @@ with sync_playwright() as p:
         check(f"{plans_path}: founding price and the not-insurance note", "$39" in page.locator(".m-plan--featured").inner_text()
               and page.locator(".note-box").count() >= 1)
         check(f"{plans_path}: no sideways scrolling at 390px", page.evaluate("document.documentElement.scrollWidth") <= 390)
+        TL = strings.STRINGS[lang]
+        check(f"{plans_path}: the plan finder is one closed line above the plans", page.locator("#planfit").is_visible()
+              and page.locator("#planfit").get_attribute("open") is None and page.locator("#planfit summary").inner_text().strip() == WM["finder_open"]
+              and page.evaluate("document.getElementById('planfit').getBoundingClientRect().top < document.querySelector('.m-plans').getBoundingClientRect().top"))
+        page.locator("#planfit summary").click(); page.wait_for_timeout(300)
+        page.locator("#planfit input[name=fit-adults][value='2']").check(force=True)
+        check(f"{plans_path}: the plan finder waits for both answers", page.locator("#planfit-fit").is_hidden())
+        page.locator("#planfit input[name=fit-speed][value=day]").check(force=True); page.wait_for_timeout(200)
+        check(f"{plans_path}: two adults who want same-day replies fit Concierge Plus, and its card is marked",
+              page.locator("#planfit-text strong").inner_text() == TL["f_r_plus"].format(monthly="$99", yearly="$990")
+              and page.locator("#planfit-start").get_attribute("href") == f"{checkout_path}?plan=plus"
+              and page.locator("#planfit-start").inner_text() == TL["f_start"].format(plan="Concierge Plus")
+              and page.locator(".m-plan.is-fit .m-plan__name").all_inner_texts() == ["Concierge Plus"], page.locator("#planfit-text").inner_text())
+        page.locator("#planfit input[name=fit-adults][value='1']").focus(); page.keyboard.press("ArrowLeft"); page.wait_for_timeout(100)
+        page.locator("#planfit input[name=fit-adults][value='4']").check(force=True)
+        page.locator("#planfit input[name=fit-speed][value=biz]").check(force=True); page.wait_for_timeout(200)
+        fit_text = page.locator("#planfit-text").inner_text()
+        check(f"{plans_path}: four adults at one business day fit Concierge with three adults added, the sum shown, Signature named as the step up",
+              "$49 + 3 × $25 = $124" in fit_text and "$250" in fit_text and TL["f_fine"] in fit_text
+              and page.locator("#planfit-start").get_attribute("href") == f"{checkout_path}?plan=concierge&adults=3"
+              and page.locator(".m-plan.is-fit .m-plan__name").all_inner_texts() == ["Concierge"], fit_text)
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"{plans_path}: the plan finder fits a phone", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+        page.locator("#planfit").scroll_into_view_if_needed(); page.screenshot(path=str(OUT / f"{'es-' if lang == 'es' else ''}plans-finder-390.png"))
+        page.locator("#planfit-start").click(); page.wait_for_url("**/?plan=concierge&adults=3"); page.wait_for_timeout(900)
+        check(f"{plans_path}: its button opens the checkout with the three adults already added", page.locator("#m-count").inner_text() == "3"
+              and page.locator("input[name=plan][value=concierge]").is_checked(), page.url)
         sent = []
         page.route("**/api/membership/plans", lambda route: route.fulfill(status=200, content_type="application/json", body=json.dumps(
             {"ok": True, "daysUntilDue": 3, "plans": {"concierge": {"monthly": 4900, "yearly": 49000, "founding": {"amount": 3900, "open": True, "limit": 100, "remaining": 12}, "extraAdult": {"monthly": 2500, "max": 3}},
@@ -1621,7 +1808,7 @@ with sync_playwright() as p:
         page.screenshot(path=str(OUT / f"member-billing-{w}.png"))
         page.locator(".ptab[data-tab=help]").click(); page.wait_for_timeout(300)
         check(f"member page @{w}: Help says how fast the plan's coordinator replies, with 911 and 988", page.locator("#h-reply").inner_text() == A["a_p_reply_plus"] + "."
-              and "911" in page.locator(".purgent").inner_text() and "988" in page.locator(".purgent").inner_text()
+              and "911" in page.locator("[data-panel=help] .purgent").inner_text() and "988" in page.locator("[data-panel=help] .purgent").inner_text()
               and page.locator("#h-email").get_attribute("href").startswith(f"mailto:{EMAIL}?subject=")
               and page.locator("#h-title").inner_text() == A["a_p_help_title"] and page.locator("#h-email").inner_text().strip() == A["a_p_email_cta"]
               and page.locator("#h-call").is_visible())
@@ -1774,6 +1961,305 @@ with sync_playwright() as p:
     check("account page: only its own scripts can run (injected ones are blocked)", ran == 0
           and page.locator("meta[http-equiv=Content-Security-Policy]").count() == 1)
     ctx.close()
+
+    # 14c) The member page's tools: the health notebook (kept in the browser, never sent anywhere), For you, the
+    # plan's uses, the promise clock, the referral link, calendar reminders, the tips switch and the Home Screen file
+    MEMBER2 = json.loads(json.dumps(MEMBER))
+    MEMBER2["member"].update(plan={"key": "plus", "name": "Jachi Concierge Plus", "billing": "monthly", "founding": False, "extra_adults": 0},
+                             since=NOW - 12 * DAY, renews_at=NOW + 5 * DAY, amount=9900, open_invoice=None, invoices=[],
+                             referral_url="https://jachihealth.com/membership/?ref=Maya+Lopez", tips=True)
+    SECRET_WORDS = ["Felt dizzy after lunch", "Slept badly", "Is this dose still right", "Dr. Lee", "violet-door"]
+    NB_KEYS_JS = "Object.keys(localStorage).filter(k => k.startsWith('jachi.nb.')).map(k => localStorage.getItem(k))"
+    for w, h in ((390, 844), (1280, 900)):
+        phone = w < 700
+        ctx = browser.new_context(viewport={"width": w, "height": h}, device_scale_factor=2 if phone else 1, has_touch=phone, is_mobile=phone, accept_downloads=True)
+        ctx.grant_permissions(["clipboard-read", "clipboard-write"], origin=BASE)
+        page, logs = setup(ctx)
+        fake = FakeIdentity(); fake.attach(page)
+        fake.add_user("maya@example.com", "garden-path-42", confirmed=True)
+        answer = {"body": MEMBER2}
+        tips_posts = []
+        def member_route(route):
+            if route.request.method == "POST":
+                tips_posts.append(json.loads(route.request.post_data))
+                route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True, "tips": tips_posts[-1]["tips"]}))
+            else:
+                route.fulfill(status=200, content_type="application/json", body=json.dumps(answer["body"]))
+        page.route("**/api/member", member_route)
+        page.route(f"{BASE}/", lambda r: r.fulfill(status=200, body="ok") if r.request.method == "POST" else r.continue_())
+        traffic = []
+        page.on("request", lambda req: traffic.append(req.url + " " + (req.post_data or "")))
+        member_login(page)
+        titles = lambda: page.locator("#fy-list .fy__item b").all_inner_texts()
+        check(f"member tools @{w}: five sections, Health among them", page.locator(".ptab").evaluate_all("els => els.map(e => e.dataset.tab)")
+              == ["home", "health", "billing", "help", "settings"], str(page.locator(".ptab").all_inner_texts()))
+        check(f"member tools @{w}: For you lists what's worth doing now", page.locator("#fy").is_visible() and A["a_u_refund_t"] in titles()
+              and A["a_u_quarter_t"] in titles() and A["a_u_ref_t"] in titles() and 3 <= len(titles()) <= 6
+              and page.locator(".ptab[data-tab=home]").get_attribute("data-count") == str(len(titles())), str(titles()))
+        n_items = len(titles())
+        shown = lambda: page.locator("#fy-list .fy__item:visible").count()
+        check(f"member tools @{w}: the top three show first, the rest behind one button", shown() == 3
+              and page.locator("#fy-more").inner_text().strip() == A["a_u_more"].format(n=n_items - 3), page.locator("#fy-more").inner_text())
+        page.locator("#fy-more").click(); page.wait_for_timeout(200)
+        check(f"member tools @{w}: Show more opens them all", shown() == n_items and page.locator("#fy-more").is_hidden())
+        first_title = titles()[0]
+        page.locator("#fy-list [data-hide]").first.click(); page.wait_for_timeout(250)
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member tools @{w}: a note you close stays closed", first_title not in titles() and len(titles()) <= n_items, str(titles()))
+        uses = page.locator("#uses-list input[type=checkbox]")
+        check(f"member tools @{w}: every part of the plan is listed to tick off", page.locator("#uses").is_visible() and uses.count() >= 8
+              and page.locator("#uses-count").inner_text() == A["a_r_uses_count"].format(n=0, total=uses.count()), page.locator("#uses-count").inner_text())
+        page.locator("#uses-list label").nth(1).click(); page.wait_for_timeout(200)
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member tools @{w}: ticks are remembered on this device", page.locator("#uses-list input[type=checkbox]").nth(1).is_checked()
+              and page.locator("#uses-count").inner_text() == A["a_r_uses_count"].format(n=1, total=page.locator("#uses-list input[type=checkbox]").count()))
+        page.locator("#refer-copy").click(); page.wait_for_timeout(300)
+        check(f"member tools @{w}: the member's own referral link, ready to copy", page.locator("#refer").is_visible()
+              and page.locator("#refer-link").inner_text() == "https://jachihealth.com/membership/?ref=Maya+Lopez"
+              and page.locator("#refer-status").inner_text().strip() == A["a_n_copied"]
+              and "https://jachihealth.com/membership/?ref=Maya+Lopez" in page.evaluate("navigator.clipboard.readText()"), page.locator("#refer").inner_text())
+        odd = json.loads(json.dumps(MEMBER2)); odd["member"]["referral_url"] = "javascript:alert(1)"
+        answer["body"] = odd
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member tools @{w}: anything that isn't an https link is never shown as one", page.locator("#refer").is_hidden())
+        answer["body"] = MEMBER2
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        page.screenshot(path=str(OUT / f"member-tools-home-{w}.png"), full_page=True)
+
+        # The health notebook
+        page.locator(".ptab[data-tab=health]").click(); page.wait_for_timeout(300)
+        check(f"notebook @{w}: starts with what it is and where it's kept", page.locator("#nb-intro").is_visible() and page.locator("#nb-open").is_hidden()
+              and A["a_n_private"] in page.locator("[data-panel=health] .nb__private").inner_text()
+              and "911" in page.locator("[data-panel=health] .purgent").inner_text() and page.evaluate(NB_KEYS_JS) == [])
+        page.locator("#nb-start").click(); page.wait_for_timeout(300)
+        page.locator("#nb-levels label").nth(1).click()
+        page.locator("#nb-tag-new").fill("Slept badly"); page.locator("#nb-tag-add").click()
+        page.locator("#nb-note").fill("Felt dizzy after lunch")
+        page.locator("#nb-check-save").click(); page.wait_for_timeout(300)
+        page.locator("#nb-q-new").fill("Is this dose still right?"); page.locator("#nb-q-form button").click(); page.wait_for_timeout(200)
+        check(f"notebook @{w}: a check-in and a question are saved", page.locator("#nb-check-status").inner_text().strip() != ""
+              and page.locator("#nb-q-list li").count() == 1 and "slept badly" in page.locator("#nb-lately").inner_text().lower(),
+              page.locator("#nb-lately").inner_text().replace("\n", " | "))
+        page.locator("[data-nb-view=numbers]").click(); page.wait_for_timeout(200)
+        page.locator("#nb-track-list label:has(input[value=bp])").click(); page.wait_for_timeout(200)
+        for top, bottom in (("124", "80"), ("131", "84")):
+            page.locator("[data-add=bp]").click(); page.locator("#nb-val-bp").fill(top); page.locator("#nb-val2-bp").fill(bottom)
+            page.locator("form[data-reading=bp] button[type=submit]").click(); page.wait_for_timeout(300)
+        latest = page.locator(".nb__latest").first.inner_text()
+        check(f"notebook @{w}: readings are kept and charted, never judged", "131/84" in latest and page.locator("#nb-metrics canvas").count() >= 1
+              and not re.search(r"\b(high|low|normal|elevated|hypertension)\b", page.locator("#nb-metrics").inner_text(), re.I), latest)
+        page.locator("[data-nb-view=visits]").click(); page.locator("#nb-visit-open").click()
+        page.locator("#nb-v-where").fill("Dr. Lee"); page.locator("#nb-v-confirmed").fill("120"); page.locator("#nb-v-billed").fill("160.50")
+        page.locator("#nb-visit-form button[type=submit]").click(); page.wait_for_timeout(300)
+        visit = page.locator("#nb-visits").inner_text()
+        check(f"notebook @{w}: a visit billed above the confirmed price is flagged with the price promise", A["a_n_v_over"].format(amount="$40.50") in visit
+              and A["a_n_v_over_hint"] in visit and page.locator("#nb-visits [data-tell]").count() == 1 and page.locator("#nb-yearbox").is_visible()
+              and "$160.50" in page.locator("#nb-year").inner_text(), visit)
+        page.locator("#nb-visits [data-tell]").click(); page.wait_for_timeout(700)
+        check(f"notebook @{w}: Tell my coordinator starts a call request that says only that the bill was higher", page.locator("#ticket-form").is_visible()
+              and page.locator("#ticket-topic").input_value() == "Call me back" and page.locator("#ticket-message").input_value() == A["a_n_v_over_msg"]
+              and "Dr. Lee" not in page.locator("#ticket-message").input_value() and "160" not in page.locator("#ticket-message").input_value())
+        page.keyboard.press("Escape"); page.wait_for_timeout(500)
+        page.locator("[data-nb-view=summary]").click(); page.wait_for_timeout(300)
+        brief = page.locator("#nb-brief").inner_text()
+        check(f"notebook @{w}: the summary gathers check-ins, readings, visits and questions", "124/80" in brief and "131/84" in brief and "Dr. Lee" in brief
+              and "Is this dose still right?" in brief and "Slept badly".lower() in brief.lower(), brief)
+        plain_store = page.evaluate(NB_KEYS_JS)
+        check(f"notebook @{w}: without a passcode it says anyone using this browser could read it", len(plain_store) == 1 and '"enc":false' in plain_store[0]
+              and page.locator("#nb-lock-state").inner_text() == A["a_n_lock_off"])
+        page.locator("#nb-lock-open").click(); page.locator("#nb-lock-new").fill("violet-door"); page.locator("#nb-lock-again").fill("violet-door")
+        page.locator("#nb-lock-save").click()
+        for _ in range(60):
+            if page.locator("#nb-lock-state").inner_text() == A["a_n_lock_on"]:
+                break
+            page.wait_for_timeout(100)
+        locked_store = page.evaluate(NB_KEYS_JS)
+        check(f"notebook @{w}: with a passcode, what's saved is encrypted and unreadable", len(locked_store) == 1 and '"enc":true' in locked_store[0]
+              and not any(word in locked_store[0] for word in SECRET_WORDS) and page.locator("#nb-lock-state").inner_text() == A["a_n_lock_on"], locked_store[0][:80])
+        page.screenshot(path=str(OUT / f"notebook-summary-{w}.png"), full_page=True)
+        with page.expect_download() as got:
+            page.locator("#nb-backup").click()
+        backup = Path(got.value.path()).read_text()
+        check(f"notebook @{w}: the backup file is locked with the passcode too", '"enc":true' in backup and not any(word in backup for word in SECRET_WORDS),
+              got.value.suggested_filename)
+        with page.expect_download() as got:
+            page.locator("#nb-remind-get").click()
+        ics = Path(got.value.path()).read_text()
+        check(f"notebook @{w}: a check-in reminder is a calendar file for the phone's own calendar", got.value.suggested_filename.endswith(".ics")
+              and "BEGIN:VCALENDAR" in ics and "RRULE:FREQ=DAILY" in ics and "BEGIN:VALARM" in ics and not any(word in ics for word in SECRET_WORDS))
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        page.locator(".ptab[data-tab=health]").click(); page.wait_for_timeout(300)
+        check(f"notebook @{w}: after a reload it's locked", page.locator("#nb-locked").is_visible() and page.locator("#nb-open").is_hidden()
+              and "Dr. Lee" not in page.locator("[data-panel=health]").inner_text())
+        page.locator("#nb-pass").fill("wrong-one"); page.locator("#nb-unlock").click()
+        for _ in range(60):
+            if page.locator("#err-nb-pass").is_visible():
+                break
+            page.wait_for_timeout(100)
+        check(f"notebook @{w}: a wrong passcode opens nothing", page.locator("#err-nb-pass").inner_text().strip() == A["a_n_wrong"] and page.locator("#nb-open").is_hidden())
+        page.locator("#nb-pass").fill("violet-door"); page.locator("#nb-unlock").click()
+        for _ in range(60):
+            if page.locator("#nb-open").is_visible():
+                break
+            page.wait_for_timeout(100)
+        check(f"notebook @{w}: the right passcode opens it, with everything still there", page.locator("#nb-open").is_visible() and page.locator("#nb-q-list li").count() == 1)
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"notebook @{w}: no sideways scrolling", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+        if not phone:
+            problems = page.evaluate(STATIC_A11Y_JS)
+            check("notebook: labels, names and ids valid", not problems, json.dumps(problems))
+        page.locator(".ptab[data-tab=home]").click(); page.wait_for_timeout(300)
+
+        # The promise clock, leaving, the calendar and the tips switch
+        page.locator(".ptab[data-tab=help]").click(); page.wait_for_timeout(200)
+        check(f"member tools @{w}: no promise clock until a call is asked for", page.locator("#asked").is_hidden())
+        page.locator("#h-call").click(); page.wait_for_timeout(600)
+        page.locator("#ticket-name").fill("Maya"); page.locator("#ticket-message").type("mornings"); page.locator("#ticket-submit").click(); page.wait_for_timeout(800)
+        page.keyboard.press("Escape"); page.wait_for_timeout(500)
+        check(f"member tools @{w}: after asking for a call, the page shows what was promised", page.locator("#asked").is_visible()
+              and "next month is free" in page.locator("#asked-body").inner_text() and page.locator("#asked-claim").is_hidden()
+              and page.locator("#asked-late").is_hidden(), page.locator("#asked").inner_text())
+        page.evaluate("""() => { const k = Object.keys(localStorage).find(x => x.startsWith('jachi.portal.')); const v = JSON.parse(localStorage.getItem(k));
+            v.asked = Date.now() - 6 * 86400000; localStorage.setItem(k, JSON.stringify(v)); }""")
+        page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
+        page.locator(".ptab[data-tab=help]").click(); page.wait_for_timeout(200)
+        check(f"member tools @{w}: once the promised time has passed, it says so and offers to tell us", page.locator("#asked-late").is_visible()
+              and page.locator("#asked-claim").is_visible())
+        page.locator("#asked-claim").click(); page.wait_for_timeout(700)
+        check(f"member tools @{w}: 'I'm still waiting' starts a billing ticket about the guarantee", page.locator("#ticket-form").is_visible()
+              and page.locator("#ticket-topic").input_value() == "Membership or billing"
+              and "fast-response guarantee" in page.locator("#ticket-message").input_value())
+        page.keyboard.press("Escape"); page.wait_for_timeout(500)
+        page.locator("#asked-reached").click(); page.wait_for_timeout(300)
+        check(f"member tools @{w}: 'They reached me' puts the clock away", page.locator("#asked").is_hidden())
+        page.locator(".ptab[data-tab=billing]").click(); page.wait_for_timeout(300)
+        page.locator("#leave summary").click(); page.wait_for_timeout(200)
+        leaving = page.locator("#leave-list").inner_text()
+        check(f"member tools @{w}: 'Thinking about leaving?' says plainly what happens, with the refund date", page.locator("#leave-list li").count() >= 3
+              and "refund" in leaving.lower(), leaving)
+        with page.expect_download() as got:
+            page.locator("#cal-renew").click()
+        check(f"member tools @{w}: the renewal date can go in the phone's calendar", got.value.suggested_filename.endswith(".ics")
+              and "BEGIN:VEVENT" in Path(got.value.path()).read_text())
+        page.locator(".ptab[data-tab=settings]").click(); page.wait_for_timeout(300)
+        box = page.locator("#tips-on")
+        check(f"member tools @{w}: member tips are on until switched off", page.locator("#tips").is_visible() and box.is_checked())
+        page.locator("label[for=tips-on]").click(); page.wait_for_timeout(500)
+        check(f"member tools @{w}: switching tips off is saved with the membership", tips_posts == [{"tips": False}] and not box.is_checked()
+              and page.locator("#tips-status").inner_text().strip() == A["a_r_tips_off"], str(tips_posts))
+
+        # Nothing typed into the notebook ever leaves the browser
+        leaked = [t[:120] for t in traffic if any(word.lower() in t.lower() for word in SECRET_WORDS + ["124", "131", "160.50", "160,50"])]
+        check(f"notebook @{w}: nothing written in it was sent anywhere, to us or anyone else", not leaked and len(traffic) > 10, json.dumps(leaked[:3]))
+        outside = [t.split(" ")[0] for t in traffic if not t.startswith((BASE, "data:", "blob:"))]
+        check(f"member tools @{w}: the page talks to no other site", not outside, json.dumps(outside[:3]))
+
+        # Spanish, an account without a membership, and erasing
+        answer["body"] = {"ok": True, "verified": True, "member": None}
+        page.goto(f"{BASE}/es/account/", wait_until="networkidle"); page.wait_for_timeout(900)
+        check(f"member tools @{w}: without a membership there's no plan list, referral or tips switch", page.locator("#uses").is_hidden()
+              and page.locator("#refer").is_hidden() and page.locator("#tips").is_hidden() and page.locator("#asked").is_hidden())
+        page.locator(".ptab[data-tab=health]").click(); page.wait_for_timeout(300)
+        check(f"notebook @{w}: free with any account, and in Spanish", page.locator(".ptab[data-tab=health]").inner_text().strip() == ES["a_p_health"]
+              and page.locator("#nb-locked").is_visible() and page.locator("[data-panel=health] .acct__title").inner_text() == ES["a_n_title"])
+        page.locator("#nb-pass").fill("violet-door"); page.locator("#nb-unlock").click()
+        for _ in range(60):
+            if page.locator("#nb-open").is_visible():
+                break
+            page.wait_for_timeout(100)
+        page.locator("[data-nb-view=visits]").click(); page.wait_for_timeout(200)
+        check(f"notebook @{w}: someone who isn't a member isn't offered a coordinator", page.locator("#nb-visits [data-tell]").count() == 0
+              and ES["a_n_v_over"].format(amount="$40.50") in page.locator("#nb-visits").inner_text())
+        ov = page.evaluate(OVERFLOW_JS)
+        check(f"notebook @{w}: Spanish has no sideways scrolling", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
+        page.screenshot(path=str(OUT / f"es-notebook-visits-{w}.png"), full_page=True)
+        page.locator("[data-nb-view=summary]").click(); page.wait_for_timeout(200)
+        page.locator("[data-nb-erase]:visible").first.click(); page.wait_for_timeout(200)
+        page.locator("#nb-erase-yes").click(); page.wait_for_timeout(500)
+        check(f"notebook @{w}: Erase removes it from the device", page.evaluate(NB_KEYS_JS) == [] and page.locator("#nb-intro").is_visible())
+        check(f"member tools @{w}: no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
+        ctx.close()
+
+    # The sample member page shows the tools with made-up entries and saves nothing; deleting an account erases its notebook
+    ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    fake = FakeIdentity(); fake.attach(page)
+    page.goto(f"{BASE}/account/?demo", wait_until="networkidle"); page.wait_for_timeout(900)
+    page.locator(".ptab[data-tab=health]").click(); page.wait_for_timeout(400)
+    check("sample member page: the notebook opens on made-up entries, labelled as a sample", page.locator("#nb-demo").is_visible() and page.locator("#nb-open").is_visible()
+          and page.locator("#nb-lately li").count() >= 1)
+    page.locator("#nb-levels label").nth(3).click(); page.locator("#nb-check-save").click(); page.wait_for_timeout(300)
+    check("sample member page: nothing is saved on the device", page.evaluate("Object.keys(localStorage).filter(k => k.startsWith('jachi.nb.') || k.startsWith('jachi.portal.'))") == [])
+    page.screenshot(path=str(OUT / "sample-notebook-phone.png"), full_page=True)
+    fake.add_user("del@example.com", "garden-path-42", confirmed=True)
+    page.route("**/api/member", lambda r: r.fulfill(status=200, content_type="application/json", body='{"ok":true,"verified":true,"member":null}'))
+    page.goto(f"{BASE}/account/", wait_until="networkidle"); page.wait_for_timeout(500)
+    page.locator("#login-email").fill("del@example.com"); page.locator("#login-password").fill("garden-path-42")
+    page.locator("#login-submit").click(); page.wait_for_timeout(900)
+    page.locator(".ptab[data-tab=health]").click(); page.locator("#nb-start").click(); page.wait_for_timeout(200)
+    page.locator("#nb-levels label").nth(2).click(); page.locator("#nb-check-save").click(); page.wait_for_timeout(300)
+    odd = {"v": 1, "enc": False, "data": {"people": [{"id": "me", "name": ""}, {"id": 7}], "metrics": {"me": ["bp", "nope"]}, "custom": "x", "tags": ["ok", 5],
+           "entries": [{"id": "a1", "p": "me", "t": NOW - 100, "k": "check", "v": 4, "tags": "nope", "note": 9},
+                       {"id": "a2", "p": "me", "t": "soon", "k": "check", "v": 4}, {"id": "a3", "p": "ghost", "t": NOW, "k": "check", "v": 3},
+                       {"id": "a4", "p": "me", "t": NOW - 50, "k": "num", "m": "bp", "a": 120},
+                       {"id": "a5", "p": "me", "t": NOW - 40, "k": "num", "m": "bp", "a": 118, "b": 76},
+                       {"id": "a6", "p": "me", "t": NOW - 30, "k": "q", "text": "<img src=x onerror=window.__hit=1>"},
+                       {"id": "a7", "p": "me", "t": NOW - 20, "k": "visit", "where": {"x": 1}, "billed": "lots", "follow": "tomorrow"}, None, "junk"]}}
+    page.locator("[data-nb-view=summary]").click(); page.wait_for_timeout(200)
+    page.set_input_files("#nb-restore-file", {"name": "odd.json", "mimeType": "application/json", "buffer": json.dumps(odd).encode()})
+    page.wait_for_timeout(300); page.locator("#nb-restore-yes").click(); page.wait_for_timeout(500)
+    page.locator("[data-nb-view=today]").click(); page.wait_for_timeout(200)
+    kept_entries = json.loads(page.evaluate(NB_KEYS_JS)[0])["data"]["entries"]
+    check("notebook: a damaged backup file brings back only what makes sense, and nothing in it can run", [e["id"] for e in kept_entries] == ["a1", "a5", "a6"]
+          and "<img src=x" in page.locator("#nb-q-list").inner_text() and page.evaluate("window.__hit === undefined") and page.locator("#nb-open").is_visible()
+          and page.locator("#nb-q-list img").count() == 0, json.dumps(kept_entries)[:300])
+    page.set_input_files("#nb-restore-file", {"name": "not.json", "mimeType": "application/json", "buffer": b"this is not a backup"})
+    page.wait_for_timeout(300)
+    check("notebook: a file that isn't a backup is turned away", page.locator("#nb-restore-confirm").is_hidden()
+          and page.locator("#nb-safe-status").inner_text().strip() == A["a_n_restore_bad"])
+    had = len(page.evaluate(NB_KEYS_JS))
+    page.locator(".ptab[data-tab=settings]").click(); page.wait_for_timeout(200)
+    page.locator("#delete-open").click(); page.locator("#delete-yes").click(); page.wait_for_timeout(900)
+    check("deleting an account erases its notebook and its lists from the device", had == 1 and view(page) == "deleted" and page.evaluate(NB_KEYS_JS) == []
+          and page.evaluate("Object.keys(localStorage).filter(k => k.startsWith('jachi.portal.'))") == [], view(page))
+    check("sample member page and deletion: no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
+    ctx.close()
+
+    # Every view of the member page fits the narrowest phone, in both languages: no sideways scrolling, and nothing
+    # (a long Spanish button, say) poking out of the box it sits in
+    STICK_JS = """() => { const out = []; document.querySelectorAll('[data-view=profile] *').forEach(el => {
+      if (!el.getClientRects().length) return; const cs = getComputedStyle(el); if (cs.position === 'absolute' || cs.position === 'fixed') return;
+      const r = el.getBoundingClientRect(), p = el.parentElement && el.parentElement.getBoundingClientRect();
+      if (p && r.width > 0 && (r.right > p.right + 1.5 || r.left < p.left - 1.5)) out.push((el.id || el.className || el.tagName).toString().slice(0, 40) + ' +' + Math.round(Math.max(r.right - p.right, p.left - r.left)));
+    }); return [...new Set(out)].slice(0, 8); }"""
+    ctx = browser.new_context(viewport={"width": 360, "height": 740}, device_scale_factor=2, has_touch=True, is_mobile=True)
+    page, logs = setup(ctx)
+    for lang, path in (("en", "/account/?demo"), ("es", "/es/account/?demo")):
+        page.goto(f"{BASE}{path}", wait_until="networkidle"); page.wait_for_timeout(900)
+        if page.locator("#fy-more").is_visible():
+            page.locator("#fy-more").click(); page.wait_for_timeout(200)
+        cramped = []
+        for tab, part in (("home", ""), ("health", "today"), ("health", "numbers"), ("health", "visits"), ("health", "summary"), ("billing", ""), ("help", "")):
+            page.evaluate(f"document.querySelector('.ptab[data-tab={tab}]').click()"); page.wait_for_timeout(250)
+            if part:
+                page.evaluate(f"document.querySelector('[data-nb-view={part}]').click()"); page.wait_for_timeout(250)
+            if tab == "billing":
+                page.evaluate("document.getElementById('leave').open = true"); page.wait_for_timeout(100)
+            ov = page.evaluate(OVERFLOW_JS)
+            stuck = page.evaluate(STICK_JS)
+            if ov["scrollWidth"] > ov["clientWidth"] or ov["offenders"] or stuck:
+                cramped.append([tab, part, ov["scrollWidth"], ov["offenders"][:3], stuck])
+        check(f"member page @360 ({lang}): every section and every notebook view fits, with nothing poking out of its box", not cramped, json.dumps(cramped))
+        short = page.evaluate("[...document.querySelectorAll('#nb-tabs button')].filter(b => b.scrollWidth > b.clientWidth + 1).map(b => b.textContent)")
+        check(f"member page @360 ({lang}): the notebook's section names aren't cut short", not short, str(short))
+    check("member page @360: no unexpected console errors", not expected_http_errors(logs), json.dumps(logs))
+    ctx.close()
+
+    # The Home Screen file: where the saved icon opens, and icons that exist
+    manifest = json.loads(get("/manifest.webmanifest")[2].decode())
+    check("home screen: the manifest opens the member page full screen, with its icons", manifest.get("start_url") == "/account/"
+          and manifest.get("display") == "standalone" and len(manifest.get("icons", [])) >= 2
+          and all(status_of(i["src"]) == 200 for i in manifest["icons"]) and 'rel="manifest"' in get("/account/")[2].decode(), json.dumps(manifest)[:200])
 
     # 15) Admin console
     def admin_fake(page):

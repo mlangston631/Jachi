@@ -15,6 +15,9 @@ const WHEN = {
   cancel_confirmed: ['When a member cancels', 'Members'],
   cancel_reversed: ['When a member undoes a cancellation', 'Members'],
   membership_ended: ['When a membership ends', 'Members'],
+  first_steps: ['Member tip: a few days after joining', 'Members'],
+  month_checkin: ['Member tip: about three weeks after joining', 'Members'],
+  planning_call: ['Member tip: before each quarter, on Concierge Plus and Signature', 'Members'],
   waitlist_joined: ['Automatic reply to a waitlist sign-up', 'Website forms'],
   ticket_received: ['Automatic reply to a support ticket or call request', 'Website forms'],
 };

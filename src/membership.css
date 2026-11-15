@@ -75,3 +75,29 @@
 .m-switch small{font-size:.76rem;font-weight:500;color:var(--moss);transition:color .3s ease}
 .m-switch button[aria-pressed="true"],.m-switch button[aria-pressed="true"] small{color:#fff}
 @media (prefers-reduced-motion:reduce){.m-switch::before{transition:none}}
+
+/* The plan finder: closed it is one line above the plans; open it asks two questions and names the plan that fits. */
+.planfit{max-width:760px;margin:0 auto 22px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--paper);box-shadow:var(--shadow-sm)}
+.planfit__open{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 20px;font-weight:600;color:var(--forest);cursor:pointer;list-style:none;border-radius:var(--r-lg)}
+.planfit__open::-webkit-details-marker{display:none}
+.planfit__open .i{flex:none;width:22px;height:22px;color:var(--moss)}
+.planfit__open>span:first-of-type{flex:1;min-width:0}
+.planfit__chev{flex:none;width:10px;height:10px;margin-right:4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;rotate:45deg;translate:0 -3px;transition:rotate .3s var(--ease),translate .3s var(--ease)}
+.planfit[open] .planfit__chev{rotate:225deg;translate:0 3px}
+.planfit__body{display:grid;gap:20px;padding:6px 20px 22px}
+.planfit__q{min-width:0;margin:0;padding:0;border:0}
+.planfit__q legend{padding:0;margin-bottom:10px;font-weight:600;color:var(--forest-ink)}
+.planfit__opts{display:flex;flex-wrap:wrap;gap:8px}
+.planfit__opts label{position:relative;display:block;cursor:pointer}
+.planfit__opts input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.planfit__opts span{display:grid;place-items:center;min-height:44px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line-strong);background:#fff;font-weight:500;color:var(--forest);transition:background-color .2s ease,border-color .2s ease,color .2s ease}
+.planfit__opts input:hover+span{border-color:var(--forest)}
+.planfit__opts input:checked+span{background:var(--forest);border-color:var(--forest);color:#fff}
+.planfit__opts input:focus-visible+span{outline:3px solid var(--sage);outline-offset:2px}
+.planfit__fit{display:grid;gap:10px;justify-items:start;padding:18px 20px;border-radius:var(--r-md,16px);background:var(--mist);border:1px solid var(--line)}
+.planfit__label{font-size:.8rem;font-weight:600;color:var(--moss)}
+.planfit__text{display:grid;gap:6px;color:var(--text-2)}
+.planfit__text strong{font-weight:600;font-size:1.05rem;line-height:1.4;color:var(--forest-ink)}
+.planfit__text span{font-size:.95rem}
+.m-plan.is-fit{outline:3px solid var(--sage);outline-offset:4px}
+@media (prefers-reduced-motion:reduce){.planfit__chev,.planfit__opts span{transition:none}}

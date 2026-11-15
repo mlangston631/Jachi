@@ -43,7 +43,9 @@ checks). To get them by email: Netlify → Project configuration → Notificatio
 | `/membership/`, `/es/membresia/`: the checkout (not indexed, not in the sitemap) | `src/membership.html`, `src/membership.js`, `src/membership.css`, words in `membership.py` |
 | `/privacy/`, `/terms/`, `/texas-medical-board/` | `src/en/<name>.html` |
 | `/consumer-health-data/`, `/es/datos-de-salud/`: the consumer health data privacy policy (Washington's My Health My Data Act) | `src/en/health-data.html` and `src/es/health-data.html` |
-| `/account/`, `/es/account/` | `src/account.html`, `account.css`, `account.js` and `identity.js`, words in `strings.py` |
+| `/account/`, `/es/account/` | `src/account.html`, `account.css`, `account.js`, `notebook.js` (the health notebook), `portal.js` (the member tools) and `identity.js`, words in `strings.py` |
+| `/help.en.json`, `/help.es.json`: the chat's own answers | written by `build.py` from `chatbot.py` (`help_data`) |
+| `/manifest.webmanifest`: lets a member put their page on a phone's Home Screen | written by `build.py`; icons from `tools/make_images.py` |
 | `/admin/` (not linked, not indexed) | `src/admin.html`, `admin.css`, `admin.js` and `identity.js` |
 | `404.html` | `src/en/404.html` |
 
@@ -75,6 +77,13 @@ Environment variables and redeploy. Never put a key in this repository; it is pu
 Messages about emergencies (911) or a crisis (988), in English or Spanish, are answered by the page itself and never
 sent to the AI. Netlify limits each visitor to 12 chat messages a minute.
 
+Common questions never reach the AI either. The page answers them at once with the site's own words (the FAQs, the
+plans and prices), which costs no credits: `build.py` writes those answers to `public/help.<lang>.json` from
+`chatbot.py`. When a question is close to two answers, the chat offers both instead of guessing. "Help me pick a
+plan" asks how many adults and how fast they want replies, then names the least expensive plan that fits; the plans
+page has the same finder. The conversation stays in the visitor's browser tab, so it follows them from page to
+page until they close the tab or tap Start over. The ad pages (`/join/…`) use the assistant alone.
+
 ## Accounts and the admin console
 
 Accounts use Netlify Identity on this site. People on the waitlist can create one at `/account/` to
@@ -82,6 +91,17 @@ update their state, services and language, turn emails off, or delete their acco
 sign-ups and tickets sent with that email, if they confirmed the email from our message (not while Identity's
 Autoconfirm is on). Accounts hold no health information. Netlify sends the confirmation and
 password emails from no-reply@netlify.com and stores passwords scrambled.
+
+The account page has a **health notebook** (the Health section): check-ins, readings with charts, visits with the
+price that was confirmed and the price that was billed, questions for the next visit, and a summary to copy or
+print. It is saved only in the person's own browser, on their own device, and is never sent to Jachi or anyone
+else, which is why it can exist on a site whose host can't hold health data. A passcode encrypts it; nobody can
+recover a forgotten one. The browser tests watch every request while the notebook is used and fail if anything
+written in it leaves the page.
+
+A signed-in member also gets a "For you" list, a list of what their plan includes to tick off, a clock on the
+fast-response guarantee after they ask for a call, their own referral link, calendar reminders, and a way to put the
+page on their phone's Home Screen. All of that is worked out in the browser; nothing new is stored.
 
 The admin console at `/admin/` shows sign-ups (with search, filters and a CSV download), tickets (reply by email,
 delete), accounts, a launch checklist and a setup report. To use it:
@@ -122,6 +142,11 @@ The published files are generated. Edit the source, then rebuild:
 | Plans, prices and checkout wording | `membership.py` (prices must match Stripe) |
 | Membership billing and member emails | `src/functions/billing.mjs` (shared), `membership.mjs`, `stripe-webhook.mjs`, `daily-emails.mjs` |
 | The member page (signed-in `/account/`): plan, invoices, coordinator, settings | `src/account.html`, `account.js`, `account.css`; its data comes from `src/functions/member.mjs` |
+| The health notebook (kept in the browser only) | `src/notebook.js`, words in `strings.py` (`a_n_…`) |
+| The member tools: For you, plan uses, promise clock, referral link, reminders | `src/portal.js`, words in `strings.py` (`a_u_…`, `a_r_…`) |
+| The chat's own answers and the questions it suggests | `chatbot.py` (`FROM_FAQ`, `KEYS`, `SHORT`, `NEXT`, `CHIPS`, `help_data`) |
+| The plan finder (in the chat and on the plans page) | `pickPlan` in `src/app.js`, words in `strings.py` (`f_…`) |
+| Member tips emails (a few a year; members can turn them off) | `src/functions/billing.mjs` (`first_steps`, `month_checkin`, `planning_call`, `sendTips`) |
 | Automatic replies to sign-ups and tickets | `src/functions/submission-created.mjs`, wording in `billing.mjs` (`waitlist_joined`, `ticket_received`) |
 | A page showing every automatic email, in both languages | `node tools/email_preview.mjs` writes `dist/emails.html` |
 | Logo and brand colours | `brand.py` |
@@ -129,9 +154,9 @@ The published files are generated. Edit the source, then rebuild:
 
 ```sh
 python3 build.py               # writes public/ and netlify/functions/
-node tests/function.test.mjs   # server code tests: chat, account deletion, admin console
-node tests/membership.test.mjs # membership billing: checkout, Stripe events, member emails (fake Stripe)
-python3 tests/qa.py            # browser tests: both languages, every page, 9 screen sizes, accounts, admin
+node tests/function.test.mjs   # server code tests: chat (and which questions it answers itself), account deletion, admin console
+node tests/membership.test.mjs # membership billing: checkout, Stripe events, member emails and tips, the member page (fake Stripe)
+python3 tests/qa.py            # browser tests: both languages, every page, 9 screen sizes, chat, accounts, the notebook, admin (about 15 minutes)
 python3 tools/make_images.py   # only when the logo or headline changes: share image and icons
 python3 tools/make_fonts.py    # only when the fonts change: the site's own font files
 ```

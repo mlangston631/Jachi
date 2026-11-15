@@ -75,6 +75,7 @@ ICONS = {
     "user": '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/>',
     "box": '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5"/><path d="M12 12v9"/>',
     "home": '<path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>',
+    "leaf": '<path d="M12 3.5c3.4 3.9 7.2 8.2 0 14.2-7.2-6-3.4-10.3 0-14.2z"/><path d="M12 8.5V21"/><path d="M12 13.2l2.6-2.2M12 15.6l-2.6-2.2"/>',
     "pharmacy": '<rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M12 8.5v7M8.5 12h7"/>',
     "lock": '<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
     "info": '<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.6v.4"/>',
@@ -273,11 +274,27 @@ GOOGLE_FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
                 '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;'
                 '1,9..144,300..700&family=Instrument+Sans:wght@400;500;600;700&display=swap">')
 
-ICON_LINKS = ('<link rel="icon" href="/favicon.ico" sizes="32x32">\n'
+ICON_LINKS = ('<link rel="manifest" href="/manifest.webmanifest">\n'
+              '<link rel="icon" href="/favicon.ico" sizes="32x32">\n'
               '<link rel="icon" href="/icon.svg" type="image/svg+xml">\n'
               '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n'
               '<meta name="apple-mobile-web-app-title" content="Jachi Health">\n'
               '<meta name="application-name" content="Jachi Health">')
+
+
+# The chat's own answers live in one small file per language, fetched the first time the chat opens.
+HELP_FILE = {"en": "/help.en.json", "es": "/help.es.json"}
+
+
+def finder_data(lang):
+    """What the plan finder (in the chat and on the plans page) needs: each plan's name and prices, straight from
+    membership.py, and where its buttons go."""
+    W = MEMBERSHIP.WORDS[lang]
+    return {"plans": {p["key"]: {"name": W["plans"][p["key"]]["name"], "monthly": p["monthly"], "yearly": p["yearly"]}
+                      for p in MEMBERSHIP.PLANS},
+            "extra": MEMBERSHIP.EXTRA_ADULT, "max": MEMBERSHIP.EXTRA_ADULT_MAX,
+            "founding": MEMBERSHIP.PLANS[0]["founding"], "limit": MEMBERSHIP.FOUNDING_LIMIT,
+            "checkout": MEMBERSHIP.PATHS["checkout"][lang], "compare": MEMBERSHIP.PATHS["plans"][lang]}
 
 
 def js_for(lang, rules=False):
@@ -292,6 +309,8 @@ def js_for(lang, rules=False):
     if "/*CHAT_RULES*/" not in text:
         raise SystemExit("chat rules hook missing")
     text = text.replace("/*CHAT_RULES*/", json.dumps(chatbot.system_prompt()) if rules else "null")
+    text = (text.replace("/*HELP_URL_JSON*/", json.dumps(HELP_FILE[lang]))
+                .replace("/*FINDER_JSON*/", json.dumps(finder_data(lang), ensure_ascii=False)))
     if re.search(r"/\*[A-Z_]+_JSON\*/", text):
         raise SystemExit("data not injected: " + re.search(r"/\*[A-Z_]+_JSON\*/", text).group())
     return text
@@ -378,6 +397,10 @@ def document(page, body):
 def page_js(name, L, extra=None):
     """src/identity.js followed by src/<name>.js, with the words, icons, email and any extra data filled in."""
     text = (SRC / "identity.js").read_text() + "\n" + (SRC / f"{name}.js").read_text()
+    for mark_, part_ in (("/*NOTEBOOK_JS*/", "notebook.js"), ("/*PORTAL_JS*/", "portal.js")):
+        if name == "account" and mark_ not in text:
+            raise SystemExit(f"account.js: the {mark_} mark is missing")
+        text = text.replace(mark_, (SRC / part_).read_text())
     text = (text.replace("/*STRINGS_JSON*/", json.dumps(L.T, ensure_ascii=False))
                 .replace("/*ICONS_JSON*/", json.dumps(ICONS))
                 .replace("/*EMAIL_JSON*/", json.dumps(EMAIL)))
@@ -754,6 +777,12 @@ def build_plans(lang):
     tokens.update({
         "{{CRUMBS}}": crumbs(trail), "{{H1}}": esc(W["plans_h1"]), "{{LEAD}}": esc(W["plans_lead"]),
         "{{PLAN_CARDS}}": plan_cards(lang),
+        # The plan finder: two questions, answered by src/app.js with the plan that fits.
+        "{{FINDER_OPEN}}": esc(W["finder_open"]),
+        "{{FINDER_ADULTS}}": "".join(f'<label><input type="radio" name="fit-adults" value="{n}"><span>{esc(L.T[f"f_a{n}"])}</span></label>'
+                                     for n in range(1, 5)),
+        "{{FINDER_SPEEDS}}": "".join(f'<label><input type="radio" name="fit-speed" value="{key}"><span>{esc(L.T[f"f_s_{key}"])}</span></label>'
+                                     for key in ("biz", "day", "week")),
         "{{ADDON}}": esc(W["addon"].format(price=money(MEMBERSHIP.EXTRA_ADULT))), "{{CANCEL_LINE}}": esc(W["cancel_line"]),
         "{{PROMISES_H2}}": esc(W["promises_h2"]), "{{PROMISES_LEAD}}": esc(W["promises_lead"]),
         "{{PROMISES}}": steps((t, d.format(limit=MEMBERSHIP.FOUNDING_LIMIT, founding=founding)) for t, d in W["promises"]),
@@ -1077,6 +1106,24 @@ for entry in LANDING.PAGES:
 
 ACCOUNT_PATHS = {"en": "/account/", "es": "/es/account/"}
 
+# What each plan covers that a member can ask for, for the member page's "Get your money's worth" list. The words are
+# the plans' own features (membership.py); a higher plan lists the lower plan's features it doesn't replace.
+# The positions below point into those feature lists, so a change there has to be looked at here too.
+if [len(MEMBERSHIP.WORDS[c]["plans"][k]["features"]) for c in ("en", "es") for k in ("concierge", "plus", "signature")] != [8, 7, 8] * 2:
+    raise SystemExit("membership.py features changed: update USES in build.py (the member page's list of what a plan covers)")
+USES = {"concierge": [("concierge", i) for i in (1, 2, 3, 5, 6, 7)]}
+USES["plus"] = [u for u in USES["concierge"] if u != ("concierge", 6)] + [("plus", i) for i in (3, 4, 5, 6)]
+USES["signature"] = ([u for u in USES["plus"] if u not in (("plus", 3), ("plus", 4))]
+                     + [("signature", i) for i in (4, 5, 6, 7)])
+
+
+def plan_uses(lang):
+    plans = MEMBERSHIP.WORDS[lang]["plans"]
+    return {key: [plans[k]["features"][i] for k, i in items] for key, items in USES.items()}
+
+
+PLAN_PRICES = {p["key"]: {"monthly": p["monthly"], "yearly": p["yearly"]} for p in MEMBERSHIP.PLANS}
+
 
 def build_account(lang):
     L = Lang(lang)
@@ -1092,12 +1139,22 @@ def build_account(lang):
         "\n" + render(part(lang, "chat"), L, tokens)
     page = {"lang": lang, "path": ACCOUNT_PATHS[lang], "noindex": True, "main": main,
             "title": L.T["a_meta_title"], "description": L.T["a_meta_desc"],
-            "css": (SRC / "account.css").read_text(), "script": page_js("account", L), "strict_scripts": True}
+            "css": (SRC / "account.css").read_text(), "strict_scripts": True,
+            "script": page_js("account", L, {"USES": plan_uses(lang), "PRICES": PLAN_PRICES})}
     write(ACCOUNT_PATHS[lang], document(page, body))
 
 
 for code in ACCOUNT_PATHS:
     build_account(code)
+
+
+# Added to a phone's Home Screen, Jachi opens on the member page, full screen, in the canopy's colours.
+(PUBLIC / "manifest.webmanifest").write_text(json.dumps({
+    "name": "Jachi Health", "short_name": "Jachi", "description": "Your Jachi Health member page.",
+    "start_url": "/account/", "scope": "/", "display": "standalone", "background_color": "#0A1E17", "theme_color": "#0A1E17",
+    "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+              {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}],
+}, indent=1) + "\n")
 
 
 # ---------- Admin console (English only, not linked from the site) ----------
@@ -1193,6 +1250,21 @@ for path, alternates in SITEMAP:
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
     + "\n".join(urls) + "\n</urlset>\n")
 (FUNCTIONS / "chat.mjs").write_text(chatbot.function_source())
+
+# The chat's own answers (chatbot.py), and every page a chat reply may link to: only this site's own pages, never
+# the ad pages.
+kinds = {**{p: "home" for p in HOME_PATH.values()}, **{p: "plans" for p in PLANS_ALTERNATES.values()},
+         **{p: "plans" for p in CHECKOUT_ALTERNATES.values()}, **{p: "how" for p in HOW_ALTERNATES.values()},
+         **{p: "service" for paths in SERVICE_PATH.values() for p in paths.values()},
+         **{p: "account" for p in ACCOUNT_PATHS.values()}}
+site_pages = {path: kinds.get(path, "learn" if path.startswith(("/learn/", "/es/guias/")) else "page")
+              for path in [p for p, _a in SITEMAP] + list(CHECKOUT_ALTERNATES.values()) + list(ACCOUNT_PATHS.values())
+              if not path.startswith(("/join/", "/es/unase/"))}
+for code, name in HELP_FILE.items():
+    data = chatbot.help_data(code, {"plans": PLANS_ALTERNATES[code], "checkout": CHECKOUT_ALTERNATES[code],
+                                    "account": ACCOUNT_PATHS[code], "how": HOW_ALTERNATES[code], "spanish": HOME_PATH["es"]},
+                             site_pages)
+    (PUBLIC / name.lstrip("/")).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n")
 SERVER_CODE = {
     "account": ("Jachi Health account deletion. Netlify Function: POST /api/account/delete", ["lib.mjs"]),
     "admin": ("Jachi Health admin console. Netlify Function: /api/admin/*", ["lib.mjs"]),
@@ -1235,7 +1307,7 @@ artifact = f"""<title>Jachi Health</title>
     '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" '
     'content="width=device-width, initial-scale=1"></head><body>' + artifact + '</body></html>')
 
-missing = [n for n in ("og.jpg", "apple-touch-icon.png", "favicon.ico") if not (PUBLIC / n).exists()]
+missing = [n for n in ("og.jpg", "apple-touch-icon.png", "favicon.ico", "icon-192.png", "icon-512.png") if not (PUBLIC / n).exists()]
 if missing:
     print("note: run tools/make_images.py to create", ", ".join(missing))
 print(f"built {len(SITEMAP)} pages + account, admin and 404 pages into public/, the functions in netlify/functions/ "

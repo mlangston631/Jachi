@@ -385,7 +385,63 @@
     });
   }
 
-  /* ---------- Help chat: AI assistant and support tickets ---------- */
+  /* ---------- Plan finder: two questions, one plan (the chat and the plans page both use it) ---------- */
+  const FINDER = /*FINDER_JSON*/;
+  const usd = cents => `$${(cents / 100).toLocaleString('en-US')}`;
+  // The least expensive plan that covers what they asked for, and the next step up when there is one.
+  const pickPlan = (adults, speed) => {
+    if (speed === 'week') return { plan: 'signature', extra: 0, alt: '' };
+    if (speed === 'day') return { plan: adults <= 2 ? 'plus' : 'signature', extra: 0, alt: '' };
+    if (adults <= 1) return { plan: 'concierge', extra: 0, alt: '' };
+    return { plan: 'concierge', extra: Math.min(adults - 1, FINDER.max), alt: adults === 2 ? 'plus' : 'signature' };
+  };
+  const planFit = (adults, speed) => {
+    const pick = pickPlan(adults, speed);
+    const p = FINDER.plans[pick.plan];
+    const vals = {
+      monthly: usd(p.monthly), yearly: usd(p.yearly), extra: usd(FINDER.extra), n: pick.extra,
+      total: usd(p.monthly + pick.extra * FINDER.extra), limit: FINDER.limit, founding: usd(FINDER.founding),
+    };
+    const lines = [fmt(pick.extra > 1 ? T.f_r_addn : pick.extra === 1 ? T.f_r_add1 : T[`f_r_${pick.plan}`], vals)];
+    if (pick.alt) lines.push(fmt(T[`f_alt_${pick.alt}`], { monthly: usd(FINDER.plans[pick.alt].monthly) }));
+    if (pick.plan === 'concierge') lines.push(fmt(T.f_r_founding, vals));
+    return {
+      ...pick, name: p.name, lines, text: lines.join(' '),
+      href: `${FINDER.checkout}?plan=${pick.plan}${pick.extra ? `&adults=${pick.extra}` : ''}`,
+    };
+  };
+  const FINDER_ADULTS = [[1, T.f_a1], [2, T.f_a2], [3, T.f_a3], [4, T.f_a4]];
+  const FINDER_SPEEDS = [['biz', T.f_s_biz], ['day', T.f_s_day], ['week', T.f_s_week]];
+
+  // On the plans page: pick an answer to each question and the plan that fits appears, with its card marked.
+  const planfit = $('#planfit');
+  if (planfit) {
+    planfit.hidden = false;
+    planfit.addEventListener('change', () => {
+      const adults = $('input[name="fit-adults"]:checked', planfit);
+      const speed = $('input[name="fit-speed"]:checked', planfit);
+      if (!adults || !speed) return;
+      const fit = planFit(Number(adults.value), speed.value);
+      // The fit first, then the step up and the small print, each on its own line.
+      const text = $('#planfit-text');
+      text.textContent = '';
+      [...fit.lines, T.f_fine].forEach((line, i) => {
+        const p = document.createElement(i ? 'span' : 'strong');
+        p.textContent = line;
+        text.appendChild(p);
+      });
+      const start = $('#planfit-start');
+      start.textContent = fmt(T.f_start, { plan: fit.name });
+      start.href = fit.href;
+      $('#planfit-fit').hidden = false;
+      $$('.m-plan').forEach(card => {
+        const link = $('[data-plan-link]', card);
+        card.classList.toggle('is-fit', !!link && new URL(link.href).searchParams.get('plan') === fit.plan);
+      });
+    });
+  }
+
+  /* ---------- Help chat: the site's own answers, the AI assistant and support tickets ---------- */
   const C = {
     root: $('#chat'),
     launcher: $('#chat-launcher'),
@@ -394,6 +450,7 @@
     talk: $('#chat-talk'),
     log: $('#chat-log'),
     quick: $('#chat-quick'),
+    reset: $('#chat-reset'),
     form: $('#chat-form'),
     input: $('#chat-input'),
     send: $('#chat-send'),
@@ -421,6 +478,15 @@
     let busy = false;
     let opener = null;
     let closeTimer = 0;
+    // The ad pages keep to the waitlist: no plan finder and none of the site's own answers there.
+    const AD_PAGE = /^\/(join|es\/unase)\//.test(location.pathname);
+    const HELP_URL = /*HELP_URL_JSON*/;
+    const KEEP = 'jachi.chat';
+    let help = null;      // what the chat answers by itself (help.<lang>.json)
+    let helpLoad = null;
+    let entries = [];     // the answers, ready to match
+    let rarity = () => 1;
+    let lastKind = '';    // whose answer came last: the site's ('site') or the assistant's ('ai')
 
     // English and Spanish. Messages are checked without accents, so "daño" and "dano" both match.
     const plain = t => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -432,16 +498,28 @@
     const isOpen = () => !C.root.hidden;
     const scrollLog = () => { C.log.scrollTop = C.log.scrollHeight; };
 
-    // Plain text with only our own safe links: the support email, 911 and 988.
+    // Plain text with only our own safe links: the support email, 911, 988 and this site's own pages.
     const escapeRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const LINKABLE = new RegExp(`(${escapeRe(EMAIL)}|\\b911\\b|\\b988\\b)`);
+    const SITE_PAGE = /^(?:https?:\/\/)?(?:www\.)?jachihealth\.com(\/[a-z0-9\-/]*)?$/i;
+    const LINKABLE = new RegExp(`(${escapeRe(EMAIL)}|\\b911\\b|\\b988\\b|(?:https?:\\/\\/)?(?:www\\.)?jachihealth\\.com(?:\\/[a-z0-9\\-/]*)?)`, 'i');
+    // A page a reply may link to: one of this site's own, by its path. Anything else stays plain text.
+    const sitePath = part => {
+      const m = SITE_PAGE.exec(part);
+      if (!m || !help) return '';
+      const path = (m[1] || '/').toLowerCase().replace(/\/*$/, '/');
+      return Object.prototype.hasOwnProperty.call(help.pages, path) ? path : '';
+    };
     const fillText = (el, text) => {
       el.textContent = '';
+      let before = '';
       String(text).split(LINKABLE).forEach(part => {
         if (!part) return;
-        if (part === EMAIL || part === '911' || part === '988') {
+        // Only a whole address becomes a link, never the tail of some other email address or word.
+        const path = part === EMAIL || /[@\w.-]$/.test(before) ? '' : sitePath(part);
+        before = part;
+        if (part === EMAIL || part === '911' || part === '988' || path) {
           const a = document.createElement('a');
-          a.href = part === EMAIL ? `mailto:${part}` : `tel:${part}`;
+          a.href = path || (part === EMAIL ? `mailto:${part}` : `tel:${part}`);
           a.textContent = part;
           el.appendChild(a);
         } else {
@@ -489,11 +567,13 @@
       C.root.classList.toggle('is-busy', on);
     };
 
+    const wire = () => turns.slice(-12).map(t => ({ role: t.role, content: t.content }));
+
     const askSite = async () => {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: turns.slice(-12) }),
+        body: JSON.stringify({ messages: wire() }),
       });
       if (res.status === 429) throw { code: 'rate_limited' };
       if (!res.ok) throw { code: 'unavailable' };
@@ -507,7 +587,7 @@
       if (!sample) throw { code: 'unavailable' };
       const input = [
         { role: 'user', content: `${RULES}\n\nThe website visitor's messages follow. Reply as the assistant, following the rules above.` },
-        ...turns.slice(-12),
+        ...wire(),
       ];
       const { text } = await sample(input, {
         cache: false,
@@ -523,24 +603,174 @@
       return T.c_down;
     };
 
-    const ask = async raw => {
-      const text = String(raw || '').trim().slice(0, 800);
-      if (!text || busy) return;
-      C.quick.hidden = true;
-      addMsg('user', text);
-      turns.push({ role: 'user', content: text });
-      if (CRISIS.test(plain(text))) {
-        const el = addMsg('bot', CRISIS_TEXT, 'msg--alert');
-        addActions(el, [{ label: T.c_call_988, href: 'tel:988', icon: 'phone' }, { label: T.c_text_988, href: T.sms_988, icon: 'msg', ghost: true }]);
-        turns.push({ role: 'assistant', content: CRISIS_TEXT });
-        return;
+    /* The chat remembers this visit. It's kept in this browser tab only (sessionStorage), so it's still here on the
+       next page, and it's gone when the tab closes or the visitor starts over. Nothing is saved on our side. */
+    const SAFE_HREF = /^\/[a-z0-9\-/]*(\?[a-z0-9=&_-]*)?(#[a-z0-9-]*)?$/i;
+    const keep = () => {
+      try {
+        if (turns.length) sessionStorage.setItem(KEEP, JSON.stringify({ v: 1, turns: turns.slice(-40) }));
+        else sessionStorage.removeItem(KEEP);
+      } catch (e) { /* storage is off: the chat still works, it just isn't remembered */ }
+      if (C.reset) C.reset.hidden = turns.length === 0;
+    };
+    const push = turn => { turns.push(turn); keep(); };
+
+    // The row of suggestions above the message box: what to ask first, then what to ask next.
+    if (AD_PAGE) $$('[data-answer="finder"]', C.quick).forEach(b => b.remove());
+    const startChips = C.quick.innerHTML;
+    const setQuick = chips => {
+      C.quick.textContent = '';
+      chips.forEach(c => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = c.label;
+        Object.keys(c).forEach(k => { if (k !== 'label') b.dataset[k] = c[k] === true ? '' : c[k]; });
+        C.quick.appendChild(b);
+      });
+      C.quick.hidden = chips.length === 0;
+      scrollLog();
+    };
+    const ticketChip = () => ({ label: T.c_ticket, ticket: true });
+    const chipFor = id => {
+      if (id === 'finder') return AD_PAGE ? null : { label: T.f_open, answer: 'finder', ask: T.f_open };
+      const e = entries.find(x => x.id === id);
+      return e ? { label: e.s || e.q, answer: e.id, ask: e.q } : null;
+    };
+    const chipsFor = ids => (ids || []).map(chipFor).filter(Boolean);
+    const pageKind = () => (help && help.pages[location.pathname]) || 'page';
+    const firstChips = () => {
+      const kind = pageKind();
+      const own = entries.filter(e => e.own).slice(0, 2).map(e => ({ label: e.q, answer: e.id, ask: e.q }));
+      return [...own, ...chipsFor(help.chips[kind] || help.chips.page), ticketChip()];
+    };
+    const nextChips = () => (help ? [...chipsFor(help.chips.after_ai), { label: T.c_retry, retry: true }] : []);
+
+    /* The site's own answers. Words are compared without accents; "plan" and "plans" count as the same word. */
+    let wordsOf = () => [];
+    const alike = (a, b) => {
+      if (a === b) return true;
+      const n = Math.min(a.length, b.length);
+      if (n < 4) return false;
+      let i = 0;
+      while (i < n && a[i] === b[i]) i += 1;
+      return i >= Math.max(4, n - 1);
+    };
+    const index = () => {
+      const stop = new Set(help.stop.split(' '));
+      wordsOf = text => [...new Set(plain(text).replace(/[^a-z0-9 ]+/g, ' ').split(' ').filter(w => w.length > 1 && !stop.has(w)))];
+      // A service page's own questions come first: its answers are about that kind of care.
+      const own = pageKind() === 'service' ? $$('.faq-item').map((el, i) => {
+        const q = $('.faq-q', el);
+        const a = $('.faq-a', el);
+        return q && a ? { id: `own${i}`, q: q.textContent.trim(), a: a.textContent.trim(), keys: [], own: true } : null;
+      }).filter(Boolean) : [];
+      entries = [...own, ...help.faq].map(e => ({ ...e, qt: wordsOf(e.q), keys: e.keys || [], all: [...new Set([...wordsOf(e.q), ...(e.keys || [])])] }));
+      const seen = new Map();
+      rarity = t => {
+        if (!seen.has(t)) seen.set(t, entries.filter(e => e.all.some(k => alike(k, t))).length);
+        return Math.log(1 + entries.length / (seen.get(t) || 0.5));
+      };
+    };
+    // Answer from the site only when the question is clearly one it already answers. A close call offers the nearest
+    // questions instead of guessing, and everything else goes to the assistant.
+    const firstWord = text => plain(text).replace(/[^a-z0-9 ]+/g, ' ').trim().split(' ')[0] || '';
+    const match = text => {
+      const q = entries.length ? wordsOf(text) : [];
+      if (!q.length || q.length > 8) return { hit: null, close: [] };
+      const w = q.map(rarity);
+      const total = w.reduce((a, b) => a + b, 0);
+      const scored = entries.map(e => {
+        let got = 0;
+        q.forEach((t, i) => { if (e.all.some(k => alike(k, t))) got += w[i]; });
+        // How much of the entry's own question was asked, and how many of the words are ones we listed for it.
+        const back = e.qt.length ? e.qt.filter(k => q.some(t => alike(k, t))).length / e.qt.length : 0;
+        const listed = q.filter(t => e.keys.some(k => alike(k, t))).length / q.length;
+        return { e, cover: got / total, score: (got / total) * (0.6 + 0.2 * back + 0.2 * listed) };
+      }).filter(x => x.cover >= 0.74).sort((a, b) => b.score - a.score);
+      if (!scored.length) return { hit: null, close: [] };
+      let near = scored.filter(x => x.score >= scored[0].score * 0.92);
+      // "Who can join?" and "How do I join?" differ only in how they start.
+      if (near.length > 1) {
+        const opens = near.filter(x => firstWord(x.e.q) === firstWord(text));
+        if (opens.length === 1) near = opens;
       }
-      if (EMERGENCY.test(plain(text))) {
-        const el = addMsg('bot', EMERGENCY_TEXT, 'msg--alert');
-        addActions(el, [{ label: T.c_call_911, href: 'tel:911', icon: 'phone', danger: true }]);
-        turns.push({ role: 'assistant', content: EMERGENCY_TEXT });
-        return;
+      return near.length === 1 ? { hit: near[0].e, close: [] } : { hit: null, close: near.slice(0, 3).map(x => x.e) };
+    };
+
+    const relink = [];
+    const loadHelp = () => {
+      if (!helpLoad) {
+        helpLoad = (AD_PAGE || PREVIEW ? Promise.resolve(null) : fetch(HELP_URL).then(r => (r.ok ? r.json() : null)))
+          .then(data => {
+            if (!data || !Array.isArray(data.faq) || !data.pages || !data.chips) return;
+            help = data;
+            index();
+            relink.splice(0).forEach(([el, text]) => fillText(el, text));
+            const last = turns[turns.length - 1];
+            if (!last) setQuick(firstChips());
+            else if (last.role === 'assistant' && !last.kind && C.quick.hidden && !busy) setQuick(nextChips());
+          })
+          .catch(() => { /* no answers of our own this time: the assistant takes every question */ });
       }
+      return helpLoad;
+    };
+
+    const srcTag = el => {
+      const tag = document.createElement('span');
+      tag.className = 'msg__src';
+      tag.textContent = T.c_from_site;
+      el.prepend(tag);
+    };
+    // A reply that is ours, not the AI's: the site's own words, a plan finder question or its result.
+    const say = (text, extra = {}) => {
+      const el = addMsg('bot', text);
+      if (extra.src) srcTag(el);
+      if (extra.acts && extra.acts.length) addActions(el, extra.acts);
+      push({ role: 'assistant', content: text, ...extra });
+      return el;
+    };
+    const answerFrom = e => {
+      const acts = [];
+      if (e.go) acts.push({ label: e.go.label, href: e.go.href });
+      if (e.ticket) acts.push({ label: T.c_ticket, ticket: true, ghost: true });
+      say(e.a, { src: true, acts });
+      lastKind = 'site';
+      setQuick([...chipsFor(e.own ? help.chips.service : e.next).slice(0, 3), { label: T.c_retry, retry: true }]);
+    };
+    const offer = close => {
+      addMsg('bot', T.c_which);
+      setQuick([...close.map(e => ({ label: e.q, answer: e.id, ask: e.q })), { label: T.c_none, ai: true }]);
+    };
+
+    // The plan finder: how many adults, how fast, then the plan that fits with a button to start it.
+    const CRISIS_ACTS = [{ label: T.c_call_988, href: 'tel:988', icon: 'phone' }, { label: T.c_text_988, href: T.sms_988, icon: 'msg', ghost: true }];
+    const EMERGENCY_ACTS = [{ label: T.c_call_911, href: 'tel:911', icon: 'phone', danger: true }];
+    const adultChips = () => FINDER_ADULTS.map(([n, label]) => ({ label, adults: n }));
+    const speedChips = n => FINDER_SPEEDS.map(([key, label]) => ({ label, speed: key, adults: n }));
+    const finderAsk = () => { say(T.f_q1, { kind: 'f1' }); setQuick(adultChips()); };
+    const pickAdults = (n, label) => {
+      if (busy || !(n >= 1 && n <= 4)) return;
+      addMsg('user', label);
+      push({ role: 'user', content: label });
+      say(T.f_q2, { kind: 'f2', n });
+      setQuick(speedChips(n));
+    };
+    const pickSpeed = (n, speed, label) => {
+      if (busy || !(n >= 1 && n <= 4) || !FINDER_SPEEDS.some(([key]) => key === speed)) return;
+      addMsg('user', label);
+      push({ role: 'user', content: label });
+      const fit = planFit(n, speed);
+      say(`${fit.text} ${T.f_fine}`, { src: true, acts: [
+        { label: fmt(T.f_start, { plan: fit.name }), href: fit.href },
+        { label: T.f_compare, href: FINDER.compare, ghost: true },
+      ] });
+      lastKind = 'site';
+      setQuick([{ label: T.f_again, answer: 'finder', ask: T.f_open }, ...chipsFor(['included', 'pay']), ticketChip()]);
+    };
+
+    const askAI = async () => {
+      if (busy) return;
+      setQuick([]);
       setBusy(true);
       const bubble = typingBubble();
       try {
@@ -548,7 +778,9 @@
         bubble.classList.remove('msg--typing');
         bubble.removeAttribute('aria-label');
         fillText(bubble, reply);
-        turns.push({ role: 'assistant', content: reply });
+        push({ role: 'assistant', content: reply });
+        lastKind = 'ai';
+        setQuick(nextChips());
       } catch (err) {
         bubble.classList.remove('msg--typing');
         bubble.removeAttribute('aria-label');
@@ -559,6 +791,107 @@
         scrollLog();
       }
     };
+
+    const ask = async (raw, opts = {}) => {
+      const text = String(raw || '').trim().slice(0, 800);
+      if (!text || busy) return;
+      setQuick([]);
+      addMsg('user', text);
+      push({ role: 'user', content: text });
+      // Safety first, in the page, before anything else looks at the message.
+      if (CRISIS.test(plain(text))) {
+        const el = addMsg('bot', CRISIS_TEXT, 'msg--alert');
+        addActions(el, CRISIS_ACTS);
+        push({ role: 'assistant', content: CRISIS_TEXT, kind: 'crisis' });
+        return;
+      }
+      if (EMERGENCY.test(plain(text))) {
+        const el = addMsg('bot', EMERGENCY_TEXT, 'msg--alert');
+        addActions(el, EMERGENCY_ACTS);
+        push({ role: 'assistant', content: EMERGENCY_TEXT, kind: 'emergency' });
+        return;
+      }
+      // Then the site's own answers: instant, and no AI call to pay for.
+      if (!opts.ai) {
+        if (opts.id === 'finder' && !AD_PAGE) { finderAsk(); return; }
+        setBusy(true);
+        try { await loadHelp(); } finally { setBusy(false); }
+        const known = opts.id ? entries.find(e => e.id === opts.id) : null;
+        const found = known ? { hit: known, close: [] } : match(text);
+        if (found.hit) { answerFrom(found.hit); return; }
+        if (found.close.length) { offer(found.close); return; }
+      }
+      await askAI();
+    };
+
+    // "That didn't answer it": after one of the site's answers the assistant tries; after the assistant, a person.
+    const retry = () => {
+      if (busy) return;
+      if (lastKind === 'site') { ask(T.c_retry, { ai: true }); return; }
+      setQuick([]);
+      const el = addMsg('bot', T.c_retry_ticket);
+      addActions(el, [{ label: T.c_ticket, ticket: true }]);
+    };
+
+    // Bring back this visit's conversation (see keep above). Buttons are rebuilt only from our own page addresses.
+    const restore = () => {
+      let saved = null;
+      try { saved = JSON.parse(sessionStorage.getItem(KEEP) || 'null'); } catch (e) { saved = null; }
+      const list = saved && saved.v === 1 && Array.isArray(saved.turns) ? saved.turns : [];
+      const clean = [];
+      list.forEach(t => {
+        if (!t || typeof t.content !== 'string' || !t.content.trim()) return;
+        const content = t.content.slice(0, 4000);
+        if (t.role === 'user') { clean.push({ role: 'user', content }); return; }
+        if (t.role !== 'assistant') return;
+        const turn = { role: 'assistant', content };
+        if (['crisis', 'emergency', 'f1', 'f2'].includes(t.kind)) turn.kind = t.kind;
+        if (turn.kind === 'f2') turn.n = Math.min(4, Math.max(1, parseInt(t.n, 10) || 1));
+        if (t.src === true) turn.src = true;
+        const acts = (Array.isArray(t.acts) ? t.acts : [])
+          .filter(a => a && typeof a.label === 'string' && (a.ticket === true || SAFE_HREF.test(String(a.href || ''))))
+          .slice(0, 3)
+          .map(a => ({ label: a.label.slice(0, 80), ...(a.ticket === true ? { ticket: true } : { href: a.href }), ...(a.ghost ? { ghost: true } : {}) }));
+        if (acts.length) turn.acts = acts;
+        clean.push(turn);
+      });
+      while (clean.length && clean[clean.length - 1].role === 'user') clean.pop();
+      if (!clean.length) return;
+      const note = document.createElement('p');
+      note.className = 'msg__note';
+      note.textContent = T.c_kept;
+      C.log.appendChild(note);
+      clean.forEach(turn => {
+        turns.push(turn);
+        if (turn.role === 'user') { addMsg('user', turn.content); return; }
+        if (turn.kind === 'crisis' || turn.kind === 'emergency') {
+          addActions(addMsg('bot', turn.content, 'msg--alert'), turn.kind === 'crisis' ? CRISIS_ACTS : EMERGENCY_ACTS);
+          return;
+        }
+        const el = addMsg('bot', turn.content);
+        if (turn.src) srcTag(el);
+        if (turn.acts) addActions(el, turn.acts);
+        if (!turn.src && !turn.acts) relink.push([el, turn.content]);
+      });
+      const last = turns[turns.length - 1];
+      if (last.kind === 'f1' && !AD_PAGE) setQuick(adultChips());
+      else if (last.kind === 'f2' && !AD_PAGE) setQuick(speedChips(last.n));
+      else setQuick([]);
+      if (C.reset) C.reset.hidden = false;
+    };
+    restore();
+
+    const startOver = () => {
+      if (busy) return;
+      turns.length = 0;
+      lastKind = '';
+      keep();
+      while (C.log.children.length > 1) C.log.lastElementChild.remove();
+      if (help) setQuick(firstChips());
+      else { C.quick.innerHTML = startChips; C.quick.hidden = false; }
+      if (!mqPhone.matches) C.input.focus({ preventScroll: true });
+    };
+    if (C.reset) C.reset.addEventListener('click', startOver);
 
     const growInput = () => {
       C.input.style.height = 'auto';
@@ -598,6 +931,7 @@
       else if (phone) C.title.focus({ preventScroll: true });
       else C.input.focus({ preventScroll: true });
       scrollLog();
+      loadHelp();
     };
 
     const closeChat = () => {
@@ -623,8 +957,16 @@
       const openBtn = e.target.closest('[data-chat-open]');
       if (openBtn) { e.preventDefault(); if (isOpen()) closeChat(); else openChat(openBtn); return; }
       if (e.target.closest('#chat [data-ticket]')) { showTicket(); return; }
+      const chip = e.target.closest('#chat-quick button');
+      if (chip) {
+        const d = chip.dataset;
+        if ('retry' in d) { retry(); return; }
+        if ('ai' in d) { askAI(); return; }
+        if (d.speed) { pickSpeed(Number(d.adults), d.speed, chip.textContent); return; }
+        if (d.adults) { pickAdults(Number(d.adults), chip.textContent); return; }
+      }
       const askBtn = e.target.closest('#chat [data-ask]');
-      if (askBtn) ask(askBtn.dataset.ask);
+      if (askBtn) ask(askBtn.dataset.ask, { id: askBtn.dataset.answer });
     });
     C.close.addEventListener('click', closeChat);
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen()) { e.preventDefault(); closeChat(); } });

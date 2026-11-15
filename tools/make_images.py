@@ -3,6 +3,7 @@
 
   public/og.jpg               1200x630 picture shown when someone shares the link (iMessage, WhatsApp, LinkedIn...)
   public/apple-touch-icon.png 180x180 icon for iPhone home screens and bookmarks
+  public/icon-192.png, icon-512.png  Home Screen icons for the web app manifest (public/manifest.webmanifest)
   public/favicon.ico          16/32/48 px tab icon for browsers that can't use icon.svg
 
 Run: python3 tools/make_images.py   (fetches the fonts first if needed)
@@ -116,6 +117,13 @@ with sync_playwright() as p:
     page.set_content(tile(180, 34, FOREST, MIST, "solid"))
     page.screenshot(path=str(PUBLIC / "apple-touch-icon.png"))
     print("apple-touch-icon.png")
+
+    # Home Screen icons for the web app manifest: the leaf with room around it, so a phone can round the corners.
+    for size in (192, 512):
+        page = browser.new_page(viewport={"width": size, "height": size}, device_scale_factor=1)
+        page.set_content(tile(size, round(size * 0.22), FOREST, MIST, "solid"))
+        page.screenshot(path=str(PUBLIC / f"icon-{size}.png"))
+        print(f"icon-{size}.png")
 
     icons = []
     for size in (16, 32, 48):
