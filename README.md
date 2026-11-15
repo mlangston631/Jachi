@@ -13,7 +13,9 @@ Netlify publishes this repository every time `main` changes (settings in `netlif
 - `netlify/functions/` is the server code: `chat.mjs` (the help chat, `/api/chat`), `account.mjs` (deleting an
   account, `/api/account/delete`), `admin.mjs` (the admin console, `/api/admin/*`), and the membership billing:
   `membership.mjs` (`/api/membership/plans` and `/api/membership/start`), `stripe-webhook.mjs` (`/api/stripe/webhook`)
-  and `daily-emails.mjs` (runs every day on Netlify's scheduler).
+  `daily-emails.mjs` (runs every day on Netlify's scheduler), `member.mjs` (the member page's plan and invoices,
+  `/api/member`) and `submission-created.mjs` (Netlify runs it for every accepted sign-up or ticket; it sends the
+  automatic reply).
 
 Each production deploy uses 15 of the Netlify plan's monthly credits (the Free plan has 300, and Netlify pauses
 the site if they run out). Pull requests get a free Deploy Preview, so changes can be checked before they go live.
@@ -114,10 +116,14 @@ The published files are generated. Edit the source, then rebuild:
 | Legal pages | `src/en/privacy.html`, `terms.html`, `texas-medical-board.html`; the health data policy in `src/<lang>/health-data.html` |
 | Styles | `src/style.css` |
 | Interactive behaviour | `src/app.js` |
+| The living leaf at the top of each page (grown on canvas, a new one each visit) | `src/leaf.js` (built into `app.js`), placed by `.leaf` in `src/style.css` |
 | Chat assistant's instructions and server code | `chatbot.py` |
 | Account and admin server code | `src/functions/lib.mjs` (shared), `account.mjs`, `admin.mjs` |
 | Plans, prices and checkout wording | `membership.py` (prices must match Stripe) |
 | Membership billing and member emails | `src/functions/billing.mjs` (shared), `membership.mjs`, `stripe-webhook.mjs`, `daily-emails.mjs` |
+| The member page (signed-in `/account/`): plan, invoices, coordinator, settings | `src/account.html`, `account.js`, `account.css`; its data comes from `src/functions/member.mjs` |
+| Automatic replies to sign-ups and tickets | `src/functions/submission-created.mjs`, wording in `billing.mjs` (`waitlist_joined`, `ticket_received`) |
+| A page showing every automatic email, in both languages | `node tools/email_preview.mjs` writes `dist/emails.html` |
 | Logo and brand colours | `brand.py` |
 | Security headers, redirects, publish settings | `netlify.toml` |
 
@@ -151,7 +157,7 @@ To turn it on:
 2. **Restricted API key**: Developers → API keys → Create restricted key with Customers, Subscriptions and Invoices
    (and Invoice items) set to Write, and Prices and Products set to Read.
 3. **Netlify environment variables** (Production only): `STRIPE_SECRET_KEY` (that key), `STRIPE_WEBHOOK_SECRET`
-   (step 4), `EMAIL_PROVIDER` (`resend`), `EMAIL_API_KEY`, `EMAIL_FROM` (`Jachi Health <hello@jachihealth.com>`),
+   (step 4), `EMAIL_PROVIDER` (`resend`), `EMAIL_API_KEY`, `EMAIL_FROM` (`Jachi Health <no-reply@jachihealth.com>`),
    `EMAIL_REPLY_TO` (the support email). Optional: `TEAM_NOTIFY_WEBHOOK_URL` (a Slack, Google Chat or Discord
    incoming webhook for "new member paid", failed card, past due and cancellation alerts), `INVOICE_DAYS_UNTIL_DUE`
    (default 3), `FOUNDING_LIMIT` (default 100), `FOUNDING_OPEN` (`false` ends the founding price), `BILLING_PORTAL_URL`,

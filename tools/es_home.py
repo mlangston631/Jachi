@@ -28,6 +28,8 @@ R = [
     ('{{I:check}}</span>Prices confirmed before you book</li>', '{{I:check}}</span>Precios confirmados antes de reservar</li>', 1),
     ('{{I:check}}</span>No referral fees, ever</li>', '{{I:check}}</span>Sin comisiones por referidos, nunca</li>', 1),
     ('id="picker-label">Get help with</p>', 'id="picker-label">Ayuda con</p>', 1),
+    ('<span>No two visits grow the same leaf.</span><button class="leaf-again" type="button" data-leaf-again>{{I:refresh}}New leaf</button>',
+     '<span>Cada visita hace crecer una hoja distinta.</span><button class="leaf-again" type="button" data-leaf-again>{{I:refresh}}Hoja nueva</button>', 1),
 
     # What we help with
     ('id="help-title">Help with the care you need.</h2>', 'id="help-title">Ayuda con la atención que necesita.</h2>', 1),

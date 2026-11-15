@@ -64,6 +64,9 @@ SERVICE_PATH = {"en": {slug: f"/{slug}/" for slug in PAGES.BY_SLUG},
 
 ICONS = {
     "arrow": '<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>',
+    "card": '<rect x="3" y="5.5" width="18" height="13" rx="2.6"/><path d="M3 10h18"/><path d="M7 15h3.5"/>',
+    "sliders": '<path d="M4 7h9"/><path d="M19 7h1"/><circle cx="16" cy="7" r="2.4"/><path d="M4 17h1"/><path d="M11 17h9"/><circle cx="8" cy="17" r="2.4"/>',
+    "external": '<path d="M14 5h5v5"/><path d="M19 5l-8 8"/><path d="M11 7H7.5A2.5 2.5 0 0 0 5 9.5v7A2.5 2.5 0 0 0 7.5 19h7a2.5 2.5 0 0 0 2.5-2.5V13"/>',
     "arrow-left": '<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>',
     "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
     "steth": '<path d="M6 3.5V9a4 4 0 0 0 8 0V3.5"/><path d="M10 13v1.5a5 5 0 0 0 10 0V12.5"/><circle cx="20" cy="10.5" r="2"/>',
@@ -174,12 +177,13 @@ def faq_items(items):
 
 
 def care_card(c, i, B):
-    """A card on the home page for one kind of care, linking to its service page."""
-    return (f'<article class="svc svc--care" data-reveal style="--d:{(i % 3) * 80}ms">'
+    """A row in the home page's index of care, linking to its service page."""
+    return (f'<article class="svc" data-reveal style="--d:{(i % 2) * 70}ms">'
             f'<span class="svc__ic">{icon_svg(c["icon"])}</span>'
             f'<h3><a class="svc__link" href="{c["href"]}">{esc(c["name"])}'
             f'<span class="visually-hidden">: {esc(B["learn_more"].format(x=lower_first(c["name"])))}</span></a></h3>'
-            f'<p class="svc__desc">{esc(c["card"])}</p></article>')
+            f'<p class="svc__desc">{esc(c["card"])}</p>'
+            f'<span class="svc__go" aria-hidden="true">{icon_svg("arrow")}</span></article>')
 
 
 def footer_care(L):
@@ -278,7 +282,10 @@ ICON_LINKS = ('<link rel="icon" href="/favicon.ico" sizes="32x32">\n'
 
 def js_for(lang, rules=False):
     L = Lang(lang)
-    text = ((SRC / "app.js").read_text()
+    text = (SRC / "app.js").read_text()
+    if "/*LEAF_JS*/" not in text:
+        raise SystemExit("leaf hook missing")
+    text = (text.replace("/*LEAF_JS*/", (SRC / "leaf.js").read_text())  # the living leaf, kept in its own file
             .replace("/*ICONS_JSON*/", json.dumps(ICONS))
             .replace("/*EMAIL_JSON*/", json.dumps(EMAIL))
             .replace("/*STRINGS_JSON*/", json.dumps({k: v for k, v in L.T.items() if not k.startswith("a_")}, ensure_ascii=False)))
@@ -290,8 +297,12 @@ def js_for(lang, rules=False):
     return text
 
 
+CANOPY = re.compile(r'class="[^"]*\bcanopy\b')
+
+
 def head(page, main_html):
     lang = page["lang"]
+    theme = "#0A1E17" if CANOPY.search(main_html) else "#F5F7F2"
     url = SITE_URL + page["path"]
     # The italic (76 KB) is only a few words in headings: preloading it slowed the main fonts and the page's
     # largest paint (LCP) on phones, so it loads when first used instead.
@@ -324,7 +335,7 @@ def head(page, main_html):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(page["title"])}</title>
 <meta name="description" content="{esc(page["description"])}">
-<meta name="theme-color" content="#F5F7F2">
+<meta name="theme-color" content="{theme}">
 {links}
 {ICON_LINKS}
 {robots}{canonical}{alternates}{og}{ld}<style>
@@ -350,12 +361,13 @@ def document(page, body):
     top = head(page, page.get("main", body))
     if page.get("strict_scripts"):
         top = top.replace('<meta charset="utf-8">\n', '<meta charset="utf-8">\n' + script_policy(contents), 1)
+    canopy = CANOPY.search(body)
     return f"""<!doctype html>
-<html lang="{page["lang"]}">
+<html lang="{page["lang"]}"{' class="under-canopy"' if canopy else ""}>
 <head>
 {top}
 </head>
-<body>
+<body{' class="has-canopy"' if canopy else ""}>
 {body}
 {tags}
 </body>
@@ -465,16 +477,26 @@ def plan_cards(lang, compact=False):
                                           regular=money(p["monthly"])) if p.get("founding") else t.get("note", ""))
         features = "".join(f"<li>{icon_svg('check')}<span>{esc(f)}</span></li>"
                            for f in (t["features"][:3] if compact else t["features"]))
+        or_yearly = W["or_yearly"].format(price=money(p["yearly"]))
+        or_monthly = W["or_monthly"].format(price=money(p["monthly"]))
         cards.append(
             f'<article class="{cls}"><div class="m-plan__head"><{level} class="m-plan__name">{esc(t["name"])}</{level}>'
             + (f'<p class="m-plan__badge">{esc(badge)}</p>' if badge else "") + "</div>"
-            f'<p class="m-plan__price">{esc(money(p["monthly"]))}<span class="m-plan__per">{esc(W["per_month"])}</span></p>'
-            f'<p class="m-plan__alt">{esc(W["or_yearly"].format(price=money(p["yearly"])))}</p>'
+            f'<p class="m-plan__price" data-price data-monthly="{esc(money(p["monthly"]))}|{esc(W["per_month"])}" '
+            f'data-yearly="{esc(money(p["yearly"]))}|{esc(W["per_year"])}">{esc(money(p["monthly"]))}'
+            f'<span class="m-plan__per">{esc(W["per_month"])}</span></p>'
+            f'<p class="m-plan__alt" data-alt data-monthly="{esc(or_yearly)}" data-yearly="{esc(or_monthly)}">{esc(or_yearly)}</p>'
             f'<p class="m-plan__tagline">{esc(t["tagline"])}</p>'
             + (f'<p class="m-plan__note">{esc(note)}</p>' if note else "")
-            + f'<a class="btn btn--block" href="{MEMBERSHIP.PATHS["checkout"][lang]}?plan={p["key"]}">{esc(W["start"].format(name=t["name"]))}</a>'
+            + f'<a class="btn btn--block" data-plan-link href="{MEMBERSHIP.PATHS["checkout"][lang]}?plan={p["key"]}">{esc(W["start"].format(name=t["name"]))}</a>'
             f'<ul class="m-plan__list">{features}</ul></article>')
-    return "".join(cards)
+    # Monthly or yearly: the switch (shown by src/app.js) changes every card's price and where its button goes.
+    yearly, _, saving = W["co_yearly"].partition(" · ")
+    switch = (f'<div class="m-switch" data-billing-switch data-on="monthly" role="group" aria-label="{esc(W["co_billing"])}" hidden>'
+              f'<button type="button" data-billing="monthly" aria-pressed="true">{esc(W["co_monthly"])}</button>'
+              f'<button type="button" data-billing="yearly" aria-pressed="false">{esc(yearly)}'
+              + (f'<small>{esc(saving)}</small>' if saving else "") + '</button></div>')
+    return switch + "".join(cards)
 
 
 # ---------- Home pages (English and Spanish) ----------
@@ -1097,22 +1119,22 @@ build_admin()
 # ---------- Page not found ----------
 
 NOT_FOUND_CSS = """
-.nf-page{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;padding:0}
+.nf-page{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;padding:0;border-radius:0}
 .nf-top{display:flex;align-items:center;min-height:var(--header-h);padding-top:env(safe-area-inset-top,0px)}
 .nf{position:relative;z-index:1;flex:1;display:grid;align-content:center;justify-items:start;gap:22px;padding-block:40px 64px}
 .nf .display{max-width:12ch}
 .nf .lead{max-width:30em}
-.nf .fine a{color:var(--forest);font-weight:600;text-underline-offset:3px}
-.nf__art{position:absolute;z-index:0;right:-140px;bottom:-170px;width:min(620px,80vw);color:rgba(30,74,59,.08);transform:rotate(-18deg);pointer-events:none}
+.nf .fine a{color:#fff;font-weight:600;text-underline-offset:3px}
+.nf__art{position:absolute;z-index:0;right:-140px;bottom:-170px;width:min(620px,80vw);color:rgba(255,255,255,.07);transform:rotate(-18deg);pointer-events:none}
 @media (max-width:640px){.nf__art{right:-180px;bottom:-120px}.nf .cta-row .btn{width:100%}}
 """
 L = Lang("en")
 nf_main = render(part("en", "404"), L, {})
 nf_page = {"lang": "en", "path": "/404", "noindex": True, "css": NOT_FOUND_CSS, "main": nf_main,
            "title": "Page not found | Jachi Health",
-           "description": "This page doesn't exist. Visit Jachi Health's homepage for online care from licensed clinicians."}
+           "description": "This page doesn't exist. Visit Jachi Health's homepage for plans and care coordination in Texas."}
 nf_html = f"""<!doctype html>
-<html lang="en">
+<html lang="en" class="under-canopy">
 <head>
 {head(nf_page, nf_main)}
 </head>
@@ -1180,6 +1202,9 @@ SERVER_CODE = {
     "stripe-webhook": ("Jachi Health Stripe events: member emails and team alerts. Netlify Function: POST /api/stripe/webhook",
                        ["lib.mjs", "billing.mjs"]),
     "daily-emails": ("Jachi Health daily member emails. Netlify scheduled function", ["lib.mjs", "billing.mjs"]),
+    "member": ("Jachi Health member page. Netlify Function: GET /api/member", ["lib.mjs", "billing.mjs"]),
+    "submission-created": ("Jachi Health automatic replies to form submissions. Netlify event function (runs on every "
+                           "accepted sign-up and ticket)", ["lib.mjs", "billing.mjs"]),
 }
 for name, (title, libs) in SERVER_CODE.items():
     sources = " and ".join(f"src/functions/{lib}" for lib in libs)

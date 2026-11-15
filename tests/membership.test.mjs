@@ -300,5 +300,108 @@ for (const name of billing.templateNames) for (const lang of ['en', 'es']) {
 }
 check('every member email renders in English and Spanish, escaped, with the 911 line', blanks.length === 0, blanks.join(', '));
 
+
+// ---------- The member page: /api/member ----------
+const memberFn = await fn('member');
+const ID = 'https://jachihealth.com/.netlify/identity';
+let idUsers = {}, idSettings = { external: {}, autoconfirm: false };
+const realFetch = globalThis.fetch;
+globalThis.fetch = async (url, init = {}) => {
+  const u = String(url);
+  if (u === `${ID}/user`) {
+    const user = idUsers[String((init.headers || {}).Authorization || '').replace('Bearer ', '')];
+    return user ? answer(200, user) : answer(401, { msg: 'invalid token' });
+  }
+  if (u === `${ID}/settings`) return idSettings ? answer(200, idSettings) : answer(500, {});
+  return realFetch(url, init);
+};
+globalThis.netlifyIdentityContext = { url: ID, token: 'operator' };
+const member = async (token, { method = 'GET', origin } = {}) => {
+  const res = await memberFn.default(new Request('https://jachihealth.com/api/member', {
+    method, headers: { ...(token ? { authorization: `Bearer ${token}` } : {}), ...(origin ? { origin } : {}) },
+  }), {});
+  return { status: res.status, body: await res.json().catch(() => null) };
+};
+const person = (email, over = {}) => ({ id: 'u1', email, confirmed_at: '2026-11-01T00:00:00Z', confirmation_sent_at: '2026-11-01T00:00:00Z', ...over });
+
+fresh();
+await post(form({ plan: 'plus', billing: 'yearly', name: 'Maria Lopez' }));
+idUsers = { maria: person('maria@example.com'), stranger: person('nobody@example.com'),
+  unproved: person('maria@example.com', { confirmation_sent_at: null }) };
+check('member page: signed out → 401, wrong method → 405, other sites → 403', (await member('')).status === 401
+  && (await member('nope')).status === 401 && (await member('maria', { method: 'POST' })).status === 405
+  && (await member('maria', { origin: 'https://evil.example' })).status === 403);
+r = await member('maria');
+let m = r.body.member;
+check('member page: joined but not paid yet → payment due, with the invoice to pay', r.status === 200 && r.body.verified === true
+  && m.status === 'payment_due' && m.plan.key === 'plus' && m.plan.name === 'Jachi Concierge Plus' && m.plan.billing === 'yearly'
+  && m.amount === 99000 && m.open_invoice && m.open_invoice.url === invoices()[0].hosted_invoice_url && m.open_invoice.amount === 99000
+  && m.first_name === 'Maria', JSON.stringify(m));
+stripe._payInvoice(invoices()[0].id);
+r = await member('maria'); m = r.body.member;
+check('member page: paid → active, renewal date, invoice listed as paid, nothing to pay', m.status === 'active' && m.renews_at > now()
+  && m.open_invoice === null && m.invoices.length === 1 && m.invoices[0].status === 'paid' && m.since > 0
+  && m.manage_url.startsWith('https://billing.stripe.com/'), JSON.stringify(m));
+check('member page: billing facts only (no ids, phone, email or address)', !/cus_|sub_|phone|\+1214|maria@example\.com|address/.test(JSON.stringify(r.body)), JSON.stringify(r.body));
+r = await member('stranger');
+check('member page: an account with no membership sees none', r.status === 200 && r.body.verified === true && r.body.member === null);
+r = await member('unproved');
+check("member page: an email that wasn't proved by a link sees nothing", r.status === 200 && r.body.verified === false && r.body.member === null);
+idSettings = { external: {}, autoconfirm: true };
+r = await member('maria');
+check('member page: nothing while Identity confirms accounts automatically', r.body.verified === false && r.body.member === null);
+idSettings = { external: {}, autoconfirm: false };
+const live = subs()[0];
+live.cancel_at_period_end = true;
+m = (await member('maria')).body.member;
+check('member page: a plan set to cancel shows its last day', m.status === 'canceling' && m.ends_at > now() && m.renews_at === null, JSON.stringify(m));
+live.cancel_at_period_end = false; live.status = 'canceled'; live.ended_at = now() - DAY;
+m = (await member('maria')).body.member;
+check('member page: an ended plan says so', m.status === 'ended' && m.ends_at === live.ended_at && m.renews_at === null, JSON.stringify(m));
+delete globalThis.__jachiStripe;
+const stripeKey = process.env.STRIPE_SECRET_KEY; delete process.env.STRIPE_SECRET_KEY;
+r = await member('maria');
+check('member page: says billing is unavailable when Stripe is not set up', r.status === 503 && r.body.error === 'billing_unavailable', JSON.stringify(r.body));
+process.env.STRIPE_SECRET_KEY = stripeKey;
+
+// ---------- Automatic replies to the website's forms ----------
+const formFn = await fn('submission-created');
+const submit = async (payload) => (await formFn.default(new Request('https://jachihealth.com/.netlify/functions/submission-created', {
+  method: 'POST', body: JSON.stringify({ payload }) }))).status;
+fresh();
+let st = await submit({ id: 'sub_abc123', form_name: 'early-access', data: { email: ' Ana@Example.com ', first_name: 'Ana', state: 'TX',
+  interest: 'therapy, weight-loss', language: 'es' } });
+let ack = tagged('waitlist_joined')[0];
+check('waitlist sign-up → "You\'re on the list", in Spanish, once per submission', st === 200 && emails.length === 1 && ack
+  && ack.body.to[0] === 'ana@example.com' && ack.body.subject === 'Ya está en la lista de Jachi Health'
+  && ack.headers['Idempotency-Key'] === 'ack:sub_abc123' && ack.body.html.includes('/es/planes/'), JSON.stringify(emails.map(e => e.body.subject)));
+check('the reply never repeats the services or state someone chose', !/therapy|weight-loss|terapia|\bTX\b/.test(ack.body.html + ack.body.text));
+check('the reply says why it was sent and how to leave', ack.body.text.includes('Si no fue usted') && ack.body.text.includes('Para salir de la lista')
+  && ack.body.reply_to === 'support@jachihealth.com');
+st = await submit({ id: 't1', form_name: 'support-ticket', data: { email: 'sam@example.com', name: 'Sam Rivera', topic: 'General question',
+  message: 'My knee has hurt since Tuesday and I take lisinopril', language: 'en', chat_transcript: 'private words' } });
+ack = tagged('ticket_received')[0];
+check('support ticket → "We got your message", with 911 and 988', st === 200 && ack && ack.body.to[0] === 'sam@example.com'
+  && ack.body.subject === 'We got your message' && ack.body.text.includes('Thanks, Sam.') && ack.body.text.includes('call 911')
+  && ack.body.text.includes('call or text 988'));
+check('the reply never repeats the message or the chat', !/knee|lisinopril|private words|General question/.test(ack.body.html + ack.body.text));
+emails.length = 0;
+for (const bad of [{ form_name: 'early-access', data: { email: 'not-an-email' } }, { form_name: 'newsletter', data: { email: 'x@example.com' } },
+  { form_name: 'early-access', data: { email: 'bot@example.com', 'bot-field': 'x' } }, null]) await submit(bad);
+check('no reply without a real email, for other forms, or for bots', emails.length === 0);
+for (let i = 0; i < 5; i++) await submit({ id: `flood${i}`, form_name: 'support-ticket', data: { email: 'flood@example.com', message: 'hi' } });
+check('at most three automatic replies an hour to one address', emails.length === 3, String(emails.length));
+failEmails = true;
+check('a failed email never breaks the form', (await submit({ id: 'x9', form_name: 'early-access', data: { email: 'late@example.com', state: 'TX' } })) === 200);
+failEmails = false;
+delete process.env.EMAIL_API_KEY;
+emails.length = 0;
+check('nothing is sent until the email service is set up', (await submit({ id: 'x10', form_name: 'early-access', data: { email: 'new@example.com', state: 'TX' } })) === 200
+  && emails.length === 0);
+process.env.EMAIL_API_KEY = 're_test_key';
+const wel = billing.renderEmail('welcome', { lang: 'en', name: 'Ana', planKey: 'concierge', billing: 'monthly', manageUrl: 'https://billing.stripe.com/p/login/x',
+  portalUrl: 'https://jachihealth.com/account/?create', supportEmail: 'support@jachihealth.com' });
+check('the welcome email points to the member page', wel.html.includes('https://jachihealth.com/account/?create') && wel.text.includes('Your member page'));
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

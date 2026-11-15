@@ -2,7 +2,7 @@
 .m-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px;align-items:stretch}
 .m-plan{display:flex;flex-direction:column;gap:14px;padding:28px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--paper);box-shadow:var(--shadow-sm)}
 .m-plan--featured{border:2px solid var(--forest);box-shadow:var(--shadow-md)}
-.m-plan--dark{background:var(--forest-ink);border-color:var(--forest-ink);color:var(--on-dark)}
+.m-plan--dark{background:linear-gradient(165deg,var(--canopy-1),var(--canopy-0));border-color:var(--canopy-0);color:var(--on-dark)}
 .m-plan__head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px}
 .m-plan__name{font-family:var(--font-body);font-size:1.1rem;font-weight:600;letter-spacing:0;color:var(--text-2)}
 .m-plan--dark .m-plan__name{color:var(--sage)}
@@ -67,3 +67,11 @@
 .m-secure{display:flex;gap:8px;align-items:flex-start}
 .m-secure .i{width:16px;height:16px;margin-top:2px}
 .m-done{display:grid;gap:14px;max-width:720px}
+/* Monthly or yearly: one switch above the cards */
+.m-switch{grid-column:1/-1;justify-self:center;position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:100%;padding:4px;border-radius:999px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.m-switch::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--forest);transition:translate .45s var(--ease)}
+.m-switch[data-on="yearly"]::before{translate:100% 0}
+.m-switch button{position:relative;display:grid;place-content:center;justify-items:center;gap:1px;min-height:48px;padding:4px 22px;border:0;border-radius:999px;background:none;font:600 .97rem/1.15 var(--font-body);color:var(--text-2);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .3s ease}
+.m-switch small{font-size:.76rem;font-weight:500;color:var(--moss);transition:color .3s ease}
+.m-switch button[aria-pressed="true"],.m-switch button[aria-pressed="true"] small{color:#fff}
+@media (prefers-reduced-motion:reduce){.m-switch::before{transition:none}}

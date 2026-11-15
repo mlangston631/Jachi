@@ -1,7 +1,7 @@
 <main id="main">
 
   <!-- Hero -->
-  <section class="hero" id="top" aria-labelledby="hero-title">
+  <section class="hero canopy" id="top" aria-labelledby="hero-title">
     <div class="wrap hero__grid">
       <div class="hero__head">
         <p class="status" data-rise style="--d:0ms"><span class="status__dot" aria-hidden="true"></span><span>Ya abierto en Texas</span><span class="status__rule" aria-hidden="true"></span><span>Precio de fundador para los primeros {{FOUNDING_LIMIT}}</span></p>
@@ -21,26 +21,14 @@
         </ul>
       </div>
       <div class="map">
-        <svg class="map__art" viewBox="0 0 800 540" aria-hidden="true" focusable="false">
-          <defs>
-            <linearGradient id="map-blade" x1="0.25" y1="0" x2="0.75" y2="1">
-              <stop offset="0" stop-color="#EDF4EE"/>
-              <stop offset="0.55" stop-color="#C6DDCB"/>
-              <stop offset="1" stop-color="#9BC1A3"/>
-            </linearGradient>
-          </defs>
-          <path class="map__blade" d="M400 34C456 84 508 180 502 266C496 350 446 416 400 448C354 416 304 350 298 266C292 180 344 84 400 34Z" fill="url(#map-blade)"/>
-          <path class="map__stem" pathLength="1" d="M400 448C400 480 392 506 374 524"/>
-          <g class="map__veins">
-            <path class="map__rib" pathLength="1" d="M400 446C398 340 402 160 400 52"/>
-            <path class="map__vein map__v1" pathLength="1" d="M400 150Q376.5 144 353 104"/><path class="map__vein map__v2" pathLength="1" d="M400 150Q423.5 144 447 104"/><path class="map__vein map__v3" pathLength="1" d="M400 225Q360 219 320 179"/><path class="map__vein map__v4" pathLength="1" d="M400 225Q440 219 480 179"/><path class="map__vein map__v5" pathLength="1" d="M400 300Q354 294 308 254"/><path class="map__vein map__v6" pathLength="1" d="M400 300Q446 294 492 254"/><path class="map__vein map__v7" pathLength="1" d="M400 375Q360 369 320 329"/><path class="map__vein map__v8" pathLength="1" d="M400 375Q440 369 480 329"/>
-          </g>
-          <g class="map__leads"><g class="map__lead map__l1"><path pathLength="1" d="M347 104H252"/><circle cx="252" cy="104" r="3.5"/></g><g class="map__lead map__l2"><path pathLength="1" d="M453 104H548"/><circle cx="548" cy="104" r="3.5"/></g><g class="map__lead map__l3"><path pathLength="1" d="M314 179H252"/><circle cx="252" cy="179" r="3.5"/></g><g class="map__lead map__l4"><path pathLength="1" d="M486 179H548"/><circle cx="548" cy="179" r="3.5"/></g><g class="map__lead map__l5"><path pathLength="1" d="M302 254H252"/><circle cx="252" cy="254" r="3.5"/></g><g class="map__lead map__l6"><path pathLength="1" d="M498 254H548"/><circle cx="548" cy="254" r="3.5"/></g><g class="map__lead map__l7"><path pathLength="1" d="M314 329H252"/><circle cx="252" cy="329" r="3.5"/></g><g class="map__lead map__l8"><path pathLength="1" d="M486 329H548"/><circle cx="548" cy="329" r="3.5"/></g></g>
-        </svg>
+        <div class="leaf" data-leaf aria-hidden="true">
+          <svg class="leaf__fallback" viewBox="0 0 800 660" focusable="false"><path class="leaf__f-blade" d="M400 40C422 80 526 170 540 290C550 380 488 528 400 580C312 528 250 380 260 290C274 170 378 80 400 40Z"/><path class="leaf__f-rib" d="M380 654Q399 620 400 580V50"/><path class="leaf__f-vein" d="M400 183.6Q352.1 173.6 322.7 145M400 183.6Q447.9 173.6 477.3 145M400 303Q321.9 286.6 274.1 240M400 303Q478.1 286.6 525.9 240M400 403.3Q315.3 385.6 263.3 335M400 403.3Q484.7 385.6 536.7 335M400 486Q330.5 471.5 287.9 430M400 486Q469.5 471.5 512.1 430"/><path class="leaf__f-lead" d="M322.7 145H248M477.3 145H552M274.1 240H248M525.9 240H552M263.3 335H248M536.7 335H552M287.9 430H248M512.1 430H552"/><g class="leaf__f-dot"><circle cx="248" cy="145" r="3.2"/><circle cx="552" cy="145" r="3.2"/><circle cx="248" cy="240" r="3.2"/><circle cx="552" cy="240" r="3.2"/><circle cx="248" cy="335" r="3.2"/><circle cx="552" cy="335" r="3.2"/><circle cx="248" cy="430" r="3.2"/><circle cx="552" cy="430" r="3.2"/></g></svg>
+        </div>
         <nav class="picker" aria-labelledby="picker-label">
           <p class="picker__label" id="picker-label">Ayuda con</p>
           <ul class="picker__list">{{PICKER}}</ul>
         </nav>
+        <p class="leaf-note" hidden><span>Cada visita hace crecer una hoja distinta.</span><button class="leaf-again" type="button" data-leaf-again>{{I:refresh}}Hoja nueva</button></p>
       </div>
     </div>
   </section>
@@ -86,7 +74,7 @@
         <h2 class="h2" id="how-title">Usted elige la atención. Nosotros nos encargamos de las gestiones.</h2>
         <p class="lead">Su proveedor se encarga de la parte médica. Esto es lo que pasa cuando nos pide ayuda.</p>
       </div>
-      <div class="journey" data-reveal>
+      <div class="journey">
         <p class="journey__key" aria-hidden="true"><span class="journey__key-jachi">Su coordinador</span><span class="journey__key-care">Su proveedor</span></p>
         <ol class="steps">
           <li class="step step--jachi" style="--i:0">
@@ -143,8 +131,9 @@
   </section>
 
   <!-- Privacy promise -->
-  <section class="section section--paper" id="privacy-promise" aria-labelledby="promise-title">
-    <div class="wrap promise">
+  <section class="section section--slab" id="privacy-promise" aria-labelledby="promise-title">
+    <div class="wrap">
+      <div class="slab forest promise" data-reveal>
       <div class="section-head">
         <h2 class="h2" id="promise-title">Su salud no está a la venta.</h2>
         <p class="lead">Los proveedores no nos pagan y no vendemos lo que usted comparte. Lo usamos para manejar su membresía, reservar su atención y responder sus preguntas, nunca para dirigirle anuncios.</p>
@@ -159,6 +148,7 @@
         <p class="promise__note">Sus proveedores toman todas las decisiones médicas. Los coordinadores se encargan de las citas, los precios y el papeleo, nunca del diagnóstico ni del tratamiento.</p>
         <p class="promise__check">{{I:shield}}<span><strong>Compruébelo usted mismo.</strong> Este sitio no carga nada de los servidores de otras empresas. Un bloqueador de rastreadores o el informe de privacidad de su navegador no encontrará ningún rastreador aquí.</span></p>
         <p class="promise__links"><a class="textlink" href="/es/datos-de-salud/">Política de privacidad de datos de salud del consumidor{{I:arrow:i--arrow}}</a><a class="textlink" href="/privacy/" hreflang="en">Política de privacidad (en inglés){{I:arrow:i--arrow}}</a></p>
+      </div>
       </div>
     </div>
   </section>

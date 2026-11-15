@@ -1068,9 +1068,13 @@ function footerLines(ctx) {
     es
       ? 'Jachi Health es una membresía de coordinación de atención. No es un seguro ni atención médica. Si cree que tiene una emergencia, llame al 911.'
       : 'Jachi Health is a care-coordination membership. It is not insurance or medical care. If you think you have an emergency, call 911.',
-    es
-      ? 'Recibe este correo por su membresía o pedido con Jachi Health.'
-      : 'You are getting this email because of your Jachi Health membership or order.',
+    ctx.audience === 'site'
+      ? es
+        ? 'Recibe este correo porque esta dirección se usó en jachihealth.com. Si no fue usted, responda a este correo y la eliminaremos.'
+        : "You are getting this email because this address was used on jachihealth.com. If that wasn't you, reply and we'll remove it."
+      : es
+        ? 'Recibe este correo por su membresía o pedido con Jachi Health.'
+        : 'You are getting this email because of your Jachi Health membership or order.',
   ];
 }
 
@@ -1303,6 +1307,19 @@ const templates = {
         },
       });
     }
+    if (ctx.portalUrl) {
+      blocks.push({
+        link: {
+          before: L(
+            ctx,
+            'Your member page shows your plan and invoices, and how to reach your coordinator: ',
+            'Su página de miembro muestra su plan y sus facturas, y cómo comunicarse con su coordinador: ',
+          ),
+          url: ctx.portalUrl,
+          label: L(ctx, 'set it up with this email', 'créela con este correo'),
+        },
+      });
+    }
     blocks.push(
       {
         small: L(ctx, 'Update your details, switch plans or cancel anytime:', 'Actualice sus datos, cambie de plan o cancele cuando quiera:'),
@@ -1496,6 +1513,94 @@ const templates = {
   },
 };
 
+// Automatic replies to the website's forms. They never repeat what the person chose or wrote: the services someone
+// picks and the words of a ticket can be health details, and email isn't the place for those.
+templates.waitlist_joined = (ctx) => {
+  const first = firstNameOf(ctx.name);
+  return layout(
+    { ...ctx, audience: 'site' },
+    L(ctx, "You're on the Jachi Health list", 'Ya está en la lista de Jachi Health'),
+    L(ctx, 'We got your sign-up. Nothing else to do for now.', 'Recibimos su registro. No tiene que hacer nada más por ahora.'),
+    [
+      {
+        h1: L(
+          ctx,
+          first ? `You're on the list, ${first}.` : "You're on the list.",
+          first ? `Ya está en la lista, ${first}.` : 'Ya está en la lista.',
+        ),
+      },
+      {
+        p: L(
+          ctx,
+          "Thanks for signing up. We'll email you when there's news for your state. It's free to stay on the list, and you can leave it anytime.",
+          'Gracias por registrarse. Le escribiremos cuando haya novedades para su estado. Estar en la lista es gratis y puede salir cuando quiera.',
+        ),
+      },
+      {
+        box: {
+          title: L(ctx, 'Live in Texas?', '¿Vive en Texas?'),
+          text: L(
+            ctx,
+            'Memberships are open now for adults in Texas. A coordinator finds care near you, confirms the price in writing and books your visits.',
+            'Las membresías ya están abiertas para adultos en Texas. Un coordinador busca atención cerca de usted, le confirma el precio por escrito y reserva sus citas.',
+          ),
+          link: { url: ctx.plansUrl || `https://jachihealth.com${ctx.lang === 'es' ? '/es/planes/' : '/plans/'}`, label: L(ctx, 'See the plans', 'Ver los planes') },
+        },
+      },
+      {
+        small: L(
+          ctx,
+          'To come off the list, reply to this email and say so.',
+          'Para salir de la lista, responda a este correo y díganoslo.',
+        ),
+      },
+    ],
+  );
+};
+
+templates.ticket_received = (ctx) => {
+  const first = firstNameOf(ctx.name);
+  return layout(
+    { ...ctx, audience: 'site' },
+    L(ctx, 'We got your message', 'Recibimos su mensaje'),
+    L(ctx, 'A person on our team will reply by email.', 'Una persona de nuestro equipo le responderá por correo.'),
+    [
+      {
+        h1: L(
+          ctx,
+          first ? `Thanks, ${first}. We got your message.` : 'We got your message.',
+          first ? `Gracias, ${first}. Recibimos su mensaje.` : 'Recibimos su mensaje.',
+        ),
+      },
+      {
+        p: L(
+          ctx,
+          'A person on our team reads every message and replies by email. This note is automatic, so you know it arrived.',
+          'Una persona de nuestro equipo lee cada mensaje y responde por correo. Este aviso es automático, para que sepa que llegó.',
+        ),
+      },
+      {
+        box: {
+          tone: 'dark',
+          title: L(ctx, 'Not for emergencies', 'No es para emergencias'),
+          text: L(
+            ctx,
+            "If you think you're having a medical emergency, call 911. If you're in crisis or thinking about suicide, call or text 988.",
+            'Si cree que tiene una emergencia médica, llame al 911. Si está en crisis o piensa en el suicidio, llame al 988 y oprima 2, o envíe AYUDA al 988.',
+          ),
+        },
+      },
+      {
+        small: L(
+          ctx,
+          "To protect your privacy, please don't send medical details by email.",
+          'Para proteger su privacidad, no envíe detalles médicos por correo electrónico.',
+        ),
+      },
+    ],
+  );
+};
+
 function renderEmail(name, ctx) {
   const fn = templates[name];
   if (!fn) throw new Error(`Unknown email template: ${name}`);
@@ -1515,6 +1620,7 @@ function links() {
     manageUrl:
       process.env.BILLING_PORTAL_URL || 'https://billing.stripe.com/p/login/8x200l8bPaki7uhgGodIA00',
     joinUrl: process.env.JOIN_URL || `${site}/membership/`,
+    site,
     supportEmail: process.env.SUPPORT_EMAIL || SUPPORT_EMAIL,
     supportPhone: process.env.SUPPORT_PHONE || '',
     businessAddress: process.env.BUSINESS_ADDRESS || '',
@@ -1596,7 +1702,12 @@ function periodEnd(sub) {
 async function sendMemberEmail(template, recipient, data, idempotencyKey) {
   if (!recipient || !recipient.email) return { skipped: true, reason: 'no email' };
   const ctx = { ...links(), lang: recipient.lang, name: recipient.name, ...data };
-  if (template === 'welcome') ctx.referralUrl = referralUrl(ctx.joinUrl, recipient.name);
+  const es = ctx.lang === 'es';
+  ctx.plansUrl = `${ctx.site}${es ? '/es/planes/' : '/plans/'}`;
+  if (template === 'welcome') {
+    ctx.referralUrl = referralUrl(ctx.joinUrl, recipient.name);
+    ctx.portalUrl = `${ctx.site}${es ? '/es/account/' : '/account/'}?create`;
+  }
   const email = renderEmail(template, ctx);
   return sendEmail({
     to: recipient.email,
@@ -1619,6 +1730,93 @@ async function recipientFromCustomer(stripe, customerOrId) {
   }
   if (!customer || customer.deleted || !customer.email) return null;
   return { email: customer.email, name: customer.name || '', lang: langOf(customer) };
+}
+
+/* ---------- The member page (/account/) ---------- */
+
+// What the signed-in person's membership looks like: plan, dates and invoices, found by the email they proved is
+// theirs. Billing facts only; nothing here is, or may become, a health detail.
+async function memberView(email) {
+  const wanted = String(email || '').trim().toLowerCase();
+  if (!wanted) return null;
+  const stripe = getStripe();
+  const rank = { member: 3, pending: 2, ended: 1 };
+  let best = null;
+  for (const customer of await findCustomers(stripe, wanted)) {
+    const subs = await stripe.subscriptions.list({ customer: customer.id, status: 'all', limit: 20, expand: ['data.latest_invoice'] });
+    for (const sub of subs.data) {
+      if (!isJachiSubscription(sub)) continue;
+      const kind = classifySubscription(sub);
+      const newer = (sub.created || 0) > ((best && best.sub.created) || 0);
+      if (!best || rank[kind] > rank[best.kind] || (rank[kind] === rank[best.kind] && newer)) best = { customer, sub, kind };
+    }
+  }
+  if (!best) return null;
+  const { customer, sub, kind } = best;
+  const plan = planFromSubscription(sub);
+  const def = PLANS[plan.planKey];
+  const list = await stripe.invoices.list({ customer: customer.id, limit: 24 });
+  const invoices = list.data
+    .filter((inv) => (inv.status === 'open' || inv.status === 'paid') && inv.hosted_invoice_url)
+    .slice(0, 8)
+    .map((inv) => ({
+      number: inv.number || '',
+      date: inv.created || null,
+      due: inv.status === 'open' ? inv.due_date || null : null,
+      amount: typeof inv.total === 'number' ? inv.total : inv.amount_due || 0,
+      status: inv.status,
+      url: inv.hosted_invoice_url,
+    }));
+  const open = invoices.find((inv) => inv.status === 'open') || null;
+  const now = Math.floor(Date.now() / 1000);
+  const ending = sub.cancel_at || (sub.cancel_at_period_end ? periodEnd(sub) : null);
+  let status = 'active';
+  if (kind === 'ended') status = 'ended';
+  else if (kind === 'pending') status = 'payment_due';
+  else if (ending) status = 'canceling';
+  else if (sub.status === 'paused') status = 'paused';
+  else if (sub.status === 'past_due' || sub.status === 'unpaid' || (open && open.due && open.due < now)) status = 'past_due';
+  const items = (sub.items && sub.items.data) || [];
+  return {
+    first_name: firstNameOf(customer.name),
+    plan: {
+      key: def ? plan.planKey : '',
+      name: def ? def.name : 'Jachi',
+      billing: plan.billing === 'yearly' ? 'yearly' : 'monthly',
+      founding: Boolean(plan.founding),
+      extra_adults: plan.extraAdults || 0,
+    },
+    status,
+    since: sub.start_date || sub.created || null,
+    renews_at: status === 'active' || status === 'past_due' ? periodEnd(sub) : null,
+    ends_at: status === 'ended' ? sub.ended_at || sub.canceled_at || null : ending || null,
+    amount: items.reduce((sum, it) => sum + ((it.price && it.price.unit_amount) || 0) * (it.quantity || 1), 0),
+    open_invoice: open,
+    invoices,
+    manage_url: links().manageUrl,
+  };
+}
+
+/* ---------- Automatic replies to the website's forms ---------- */
+
+// Netlify hands every accepted waitlist sign-up and support ticket to netlify/functions/submission-created.mjs,
+// which calls this. One short email says it arrived; at most three an hour go to any one address.
+async function acknowledge(payload) {
+  const p = payload && typeof payload === 'object' ? payload : {};
+  const data = (p.data && typeof p.data === 'object' ? p.data : p.human_fields) || {};
+  const text = (key, max) => (typeof data[key] === 'string' ? data[key].trim().slice(0, max) : '');
+  const form = String(p.form_name || data['form-name'] || '');
+  let template = '';
+  if (form === 'support-ticket' || (!form && ('message' in data || 'topic' in data))) template = 'ticket_received';
+  else if (form === 'early-access' || (!form && ('state' in data || 'interest' in data))) template = 'waitlist_joined';
+  if (!template) return { skipped: true, reason: 'not one of our forms' };
+  if (text('bot-field', 10)) return { skipped: true, reason: 'bot' };
+  const email = (text('email', 254) || String(p.email || '').trim()).toLowerCase();
+  if (!EMAIL_RE.test(email) || email.length > 254) return { skipped: true, reason: 'no email' };
+  if (rateLimited(`ack:${email}`, 3, ONE_HOUR * 1000)) return { skipped: true, reason: 'too many' };
+  const id = String(p.id || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 64);
+  const recipient = { email, name: text('first_name', 80) || text('name', 80), lang: text('language', 5) === 'es' ? 'es' : 'en' };
+  return sendMemberEmail(template, recipient, {}, id ? `ack:${id}` : undefined);
 }
 
 /* ---------- Signing up ---------- */
@@ -2201,5 +2399,5 @@ async function daily() {
   return summary;
 }
 
-return { start, plans, webhook, daily, renderEmail, templateNames: Object.keys(templates), sendEmail, encodeForm, verifyStripeSignature };
+return { start, plans, webhook, daily, memberView, acknowledge, renderEmail, templateNames: Object.keys(templates), sendEmail, encodeForm, verifyStripeSignature };
 })();
