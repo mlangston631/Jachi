@@ -57,22 +57,43 @@ def get(url, timeout=60):
         return res.read()
 
 
+def exists(url):
+    try:
+        req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": AGENT})
+        with urllib.request.urlopen(req, timeout=40) as res:
+            return res.status == 200
+    except Exception:
+        return False
+
+
 def monthly_file_url():
-    """The newest full monthly file linked from CMS's page (not a weekly update, not the deactivation list)."""
+    """The newest full monthly file (not a weekly update, not the deactivation list)."""
     if ZIP_URL:
         return ZIP_URL
-    page = get(INDEX).decode("utf-8", "replace")
-    links = re.findall(r'href="([^"]+\.zip)"', page, flags=re.I)
-    log(f"index: {len(links)} zip links: " + ", ".join(link.rsplit('/', 1)[-1] for link in links[:12]))
+    pattern = r"NPPES_Data_Dissemination_([A-Za-z]+)_(\d{4})(_V2)?\.zip"
     full = []
-    for link in links:
-        name = link.rsplit("/", 1)[-1]
-        m = re.fullmatch(r"NPPES_Data_Dissemination_([A-Za-z]+)_(\d{4})(_V2)?\.zip", name, flags=re.I)
-        if m and m.group(1).capitalize() in MONTHS:
-            full.append(((int(m.group(2)), MONTHS.index(m.group(1).capitalize()), 1 if m.group(3) else 0), link))
-    if not full:
-        raise RuntimeError("no monthly file link found on " + INDEX)
-    return urllib.parse.urljoin(INDEX, max(full)[1])
+    try:
+        page = get(INDEX).decode("utf-8", "replace")
+        names = sorted(set(m.group(0) for m in re.finditer(pattern, page, flags=re.I)))
+        log(f"index: {len(page)} characters; monthly files named on it: {names or 'none'}")
+        for name in names:
+            m = re.fullmatch(pattern, name, flags=re.I)
+            if m.group(1).capitalize() in MONTHS:
+                full.append(((int(m.group(2)), MONTHS.index(m.group(1).capitalize()), 1 if m.group(3) else 0), name))
+    except Exception as err:
+        log(f"index not read: {type(err).__name__}: {err}")
+    if full:
+        return urllib.parse.urljoin(INDEX, max(full)[1])
+    # The page named no file (it may fill its list in with a script): try the usual name for this month, then earlier
+    now = time.gmtime()
+    year, month = now.tm_year, now.tm_mon - 1
+    for _ in range(4):
+        for suffix in ("_V2", ""):
+            url = urllib.parse.urljoin(INDEX, f"NPPES_Data_Dissemination_{MONTHS[month]}_{year}{suffix}.zip")
+            if exists(url):
+                return url
+        year, month = (year, month - 1) if month else (year - 1, 11)
+    raise RuntimeError("no monthly file found, by the page or by its usual name")
 
 
 def download(url, dest):
