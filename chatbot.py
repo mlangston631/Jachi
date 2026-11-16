@@ -215,23 +215,23 @@ NEXT = {
     "providers": ["choose", "discounts", "booking"],
     "discounts": ["prices", "visits", "providers"],
     "who": ["prices", "finder", "start"],
-    "pay": ["prices", "refund", "start"],
-    "cancel": ["refund", "after_cancel", "switch"],
+    "pay": ["prices", "start", "included"],
+    "cancel": ["after_cancel", "switch"],
     "emergencies": ["help", "coordinator"],
     "visits": ["prices", "discounts", "insurance"],
     "speed": ["promises", "finder", "person"],
     "choose": ["providers", "booking"],
     "privacy": ["notebook", "ai", "account"],
     "ai": ["person", "coordinator"],
-    "switch": ["cancel", "refund", "prices"],
-    "after_cancel": ["refund", "switch"],
+    "switch": ["cancel", "prices"],
+    "after_cancel": ["switch"],
     "prices": ["finder", "included", "pay"],
     "help": ["coordinator", "prices", "finder"],
     "included": ["prices", "finder", "promises"],
     "refund": ["cancel", "promises", "pay"],
     "founding": ["prices", "start", "finder"],
     "referral": ["account", "prices"],
-    "promises": ["speed", "refund", "prices"],
+    "promises": ["speed", "prices"],
     "person": ["coordinator", "speed"],
     "spanish": ["coordinator", "prices"],
     "notebook": ["privacy", "account", "prices"],
@@ -239,10 +239,11 @@ NEXT = {
     "start": ["finder", "pay", "prices"],
 }
 
-# Which questions the chat offers first, by the kind of page it's opened on.
+# Which questions the chat offers first, by the kind of page it's opened on. Refunds are answered when someone asks
+# (the policy is published) but never suggested: not here and not in NEXT. The owner asked for that (Nov 15, 2026).
 CHIPS = {
     "home": ["help", "prices", "finder", "coordinator", "insurance"],
-    "plans": ["finder", "prices", "pay", "refund", "founding"],
+    "plans": ["finder", "prices", "pay", "included", "founding"],
     "how": ["booking", "speed", "choose", "providers"],
     "account": ["account", "notebook", "pay", "person"],
     "service": ["finder", "prices", "coordinator"],

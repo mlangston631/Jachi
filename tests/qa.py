@@ -1368,6 +1368,8 @@ with sync_playwright() as p:
         check(f"chat answers ({lang}): only plan prices, only pages that exist, every follow-up is a real answer", not stray and not missing_pages
               and not bad_links and all(set(e["next"]) <= ids | {"finder"} for e in data["faq"]) and not any(p.startswith(("/join/", "/es/unase/")) for p in data["pages"])
               and all(set(v) <= ids | {"finder"} for v in data["chips"].values()), json.dumps([sorted(stray), missing_pages, bad_links]))
+        check(f"chat answers ({lang}): a refund question has an answer, but the chat never suggests refunds by itself", "refund" in ids
+              and not any("refund" in v for v in data["chips"].values()) and not any("refund" in e["next"] for e in data["faq"]))
         said = " ".join(e["a"] for e in data["faq"])
         check(f"chat answers ({lang}): credit care to providers and promise no treatment", not re.search(
               r"\b(we treat|we prescribe|we diagnose|Jachi's doctors|our doctors|tratamos|recetamos|diagnosticamos|nuestros médicos)\b", said, re.I), "")
@@ -1993,7 +1995,7 @@ with sync_playwright() as p:
         titles = lambda: page.locator("#fy-list .fy__item b").all_inner_texts()
         check(f"member tools @{w}: five sections, Health among them", page.locator(".ptab").evaluate_all("els => els.map(e => e.dataset.tab)")
               == ["home", "health", "billing", "help", "settings"], str(page.locator(".ptab").all_inner_texts()))
-        check(f"member tools @{w}: For you lists what's worth doing now", page.locator("#fy").is_visible() and A["a_u_refund_t"] in titles()
+        check(f"member tools @{w}: For you lists what's worth doing now", page.locator("#fy").is_visible()
               and A["a_u_quarter_t"] in titles() and A["a_u_ref_t"] in titles() and 3 <= len(titles()) <= 6
               and page.locator(".ptab[data-tab=home]").get_attribute("data-count") == str(len(titles())), str(titles()))
         n_items = len(titles())
@@ -2002,6 +2004,8 @@ with sync_playwright() as p:
               and page.locator("#fy-more").inner_text().strip() == A["a_u_more"].format(n=n_items - 3), page.locator("#fy-more").inner_text())
         page.locator("#fy-more").click(); page.wait_for_timeout(200)
         check(f"member tools @{w}: Show more opens them all", shown() == n_items and page.locator("#fy-more").is_hidden())
+        check(f"member tools @{w}: For you never brings up refunds, even in a member's first 30 days", "refund" not in page.locator("#fy").inner_text().lower(),
+              page.locator("#fy").inner_text()[:200])
         first_title = titles()[0]
         page.locator("#fy-list [data-hide]").first.click(); page.wait_for_timeout(250)
         page.reload(wait_until="networkidle"); page.wait_for_timeout(900)
@@ -2135,8 +2139,8 @@ with sync_playwright() as p:
         page.locator(".ptab[data-tab=billing]").click(); page.wait_for_timeout(300)
         page.locator("#leave summary").click(); page.wait_for_timeout(200)
         leaving = page.locator("#leave-list").inner_text()
-        check(f"member tools @{w}: 'Thinking about leaving?' says plainly what happens, with the refund date", page.locator("#leave-list li").count() >= 3
-              and "refund" in leaving.lower(), leaving)
+        check(f"member tools @{w}: 'Thinking about leaving?' says plainly what happens, without a refund date", page.locator("#leave-list li").count() >= 3
+              and "refund" not in leaving.lower(), leaving)
         with page.expect_download() as got:
             page.locator("#cal-renew").click()
         check(f"member tools @{w}: the renewal date can go in the phone's calendar", got.value.suggested_filename.endswith(".ics")

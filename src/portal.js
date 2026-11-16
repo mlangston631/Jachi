@@ -170,7 +170,6 @@
     });
 
     /* ----- billing: what leaving means, and the renewal date ----- */
-    const refundUntil = () => (active() && m.since && nowS() < m.since + 30 * DAY ? m.since + 30 * DAY : 0);
     const renderBilling = () => {
       const on = active() && !!manage();
       $('#leave').hidden = !on;
@@ -178,7 +177,6 @@
         const lines = [];
         const until = m.status === 'canceling' ? m.ends_at : m.renews_at;
         if (until) lines.push(fmt(T.a_r_leave_keep, { date: fullDate(until) }));
-        if (refundUntil()) lines.push(fmt(T.a_r_leave_refund, { date: fullDate(refundUntil()) }));
         if (m.plan.founding && PRICES.concierge) lines.push(fmt(T.a_r_leave_founding, { regular: money(PRICES.concierge.monthly) }));
         lines.push(T.a_r_leave_fix, T.a_r_leave_notebook);
         const ul = $('#leave-list');
@@ -198,7 +196,6 @@
       const call = { label: T.a_p_call_cta, act: 'call' };
       if (state.asked && current()) add('asked', 'phone', fmt(T.a_r_asked_title, { date: askedDate() }), promise(), { label: T.a_p_help_title, act: 'tab', tab: 'help' });
       if (m && m.status === 'active' && m.since && t - m.since < 7 * DAY) add('welcome', 'talk', T.a_u_welcome_t, T.a_u_welcome_b, call);
-      if (refundUntil()) add('refund', 'shield', T.a_u_refund_t, fmt(T.a_u_refund_b, { date: longDate(refundUntil()) }), { label: T.a_u_refund_c, act: 'tab', tab: 'billing' });
       if (m && m.status === 'active' && m.renews_at > t && m.renews_at - t < (m.plan.billing === 'yearly' ? 30 : 7) * DAY) {
         add(`renew-${m.renews_at}`, 'card', fmt(T.a_u_renew_t, { date: longDate(m.renews_at) }), T.a_u_renew_b, Notebook.calendar ? { label: T.a_u_cal, act: 'cal' } : null);
       }

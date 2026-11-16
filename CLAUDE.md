@@ -134,7 +134,10 @@ keep replies short and plain, and ask only questions that change what you'll do.
   weeks, and `planning_call` before each quarter on Concierge Plus and Signature. The daily job sends each once, to
   paid, active members who aren't leaving, in their language. A member turns them off in Settings (`POST /api/member`,
   kept as `jachi_tips=off` on their Stripe customer). They say nothing about health or the care someone asked for.
-  Only the member page shows the 30-day refund date; putting it in an email is his call.
+  They don't mention the 30-day refund, and neither does the member page: he had the refund date taken off it
+  (Nov 15, 2026). The refund policy stays where it was published (the plans pages, the FAQ, the terms and the
+  cancellation email), and the chat answers a refund question when someone asks, but nothing suggests or reminds
+  people of refunds: no "For you" note, no chat suggestion button, no email line. Don't add any.
 - **The help chat answers from the site first** (Nov 15, 2026). Common questions are answered in the page with the
   site's own words (`public/help.<lang>.json`, written by `build.py` from `chatbot.help_data`): no AI call, no
   credits. A close call offers the nearest questions instead of guessing, and everything else goes to the assistant;
