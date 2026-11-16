@@ -182,7 +182,7 @@ To turn it on:
 2. **Restricted API key**: Developers → API keys → Create restricted key with Customers, Subscriptions and Invoices
    (and Invoice items) set to Write, and Prices and Products set to Read.
 3. **Netlify environment variables** (Production only): `STRIPE_SECRET_KEY` (that key), `STRIPE_WEBHOOK_SECRET`
-   (step 4), `EMAIL_PROVIDER` (`resend`), `EMAIL_API_KEY`, `EMAIL_FROM` (`Jachi Health <no-reply@jachihealth.com>`),
+   (step 4), `EMAIL_PROVIDER` (`resend`), `EMAIL_API_KEY`, `EMAIL_FROM` (`Jachi Health <no-reply@mail.jachihealth.com>`; `mail.jachihealth.com` is the sending domain verified in Resend),
    `EMAIL_REPLY_TO` (the support email). Optional: `TEAM_NOTIFY_WEBHOOK_URL` (a Slack, Google Chat or Discord
    incoming webhook for "new member paid", failed card, past due and cancellation alerts), `INVOICE_DAYS_UNTIL_DUE`
    (default 3), `FOUNDING_LIMIT` (default 100), `FOUNDING_OPEN` (`false` ends the founding price), `BILLING_PORTAL_URL`,

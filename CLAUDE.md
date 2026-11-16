@@ -211,7 +211,11 @@ keep replies short and plain, and ask only questions that change what you'll do.
 - Automatic replies (Nov 15, 2026): Netlify runs `submission-created.mjs` for every accepted waitlist sign-up
   (`waitlist_joined`, "You're on the list") and support ticket (`ticket_received`, "We got your message"). They go
   through the same email service, never repeat what the person chose or wrote (services and ticket text can be
-  health details), carry the 911 and 988 lines, and stop at three an hour per address. `EMAIL_FROM` is a no-reply
-  address with `EMAIL_REPLY_TO` set to the support email, so a reply still reaches a person.
+  health details), carry the 911 and 988 lines, and stop at three an hour per address. `EMAIL_FROM` is
+  `Jachi Health <no-reply@mail.jachihealth.com>` (`mail.jachihealth.com` is the sending domain verified in Resend,
+  Nov 15, 2026; its DNS records are at the domain's host), and replies go to the support email (`EMAIL_REPLY_TO`,
+  which defaults to it), so a reply still reaches a person. A send is tried up to three times when Resend is busy
+  or briefly down, with the same idempotency key so nobody gets an email twice, and every send logs the email's
+  type and Resend's id (`[email sent] welcome <id>`), never the address.
   `node tools/email_preview.mjs` writes `dist/emails.html`, every email in both languages.
 - `node tests/membership.test.mjs` runs the billing tests against an in-memory fake of Stripe (`tests/fake-stripe.mjs`).

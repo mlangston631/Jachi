@@ -478,6 +478,7 @@
     let busy = false;
     let opener = null;
     let closeTimer = 0;
+    let focusTimer = 0;
     // The ad pages keep to the waitlist: no plan finder and none of the site's own answers there.
     const AD_PAGE = /^\/(join|es\/unase)\//.test(location.pathname);
     const HELP_URL = /*HELP_URL_JSON*/;
@@ -915,6 +916,7 @@
 
     const openChat = from => {
       window.clearTimeout(closeTimer);
+      window.clearTimeout(focusTimer);
       if (menuOpen()) setMenu(false, false);
       opener = from || C.launcher;
       const phone = mqPhone.matches;
@@ -941,16 +943,27 @@
       blockedWhileOpen.forEach(el => { if (el) el.inert = false; });
       $$('[data-chat-open]').forEach(b => b.setAttribute('aria-expanded', 'false'));
       closeTimer = window.setTimeout(() => { C.root.hidden = true; }, reduced() ? 0 : 280);
+      // The chat's text box closes with the panel, so it stops counting as typing right now. That brings the Help
+      // button (or the phone's bottom bar) back in this same step, in time to take focus.
+      if (C.root.contains(document.activeElement)) document.activeElement.blur();
+      updateDock();
       const shown = el => !!el && el.isConnected && el.getClientRects().length > 0;
       const back = shown(opener) ? opener : C.launcher;
-      if (shown(back)) back.focus({ preventScroll: true });
-      // If the launcher was still fading back in, focus it once the panel has gone.
-      if (document.activeElement !== back) {
-        window.setTimeout(() => {
-          const lost = document.activeElement === document.body || C.root.contains(document.activeElement);
-          if (lost && !isOpen() && shown(back)) back.focus({ preventScroll: true });
-        }, reduced() ? 0 : 320);
-      }
+      const giveBack = () => {
+        if (shown(back)) back.focus({ preventScroll: true });
+        return document.activeElement === back;
+      };
+      window.clearTimeout(focusTimer);
+      if (giveBack()) return;
+      // Whatever opened the chat can't take focus yet (it may still be sliding back into view). Keep trying for a
+      // moment; stop once it has focus, the chat is open again or the person has moved on to something else.
+      let tries = 0;
+      const again = () => {
+        const lost = document.activeElement === document.body || C.root.contains(document.activeElement);
+        if (!lost || document.documentElement.classList.contains('chat-open') || giveBack() || (tries += 1) >= 15) return;
+        focusTimer = window.setTimeout(again, 100);
+      };
+      focusTimer = window.setTimeout(again, reduced() ? 0 : 100);
     };
 
     document.addEventListener('click', e => {

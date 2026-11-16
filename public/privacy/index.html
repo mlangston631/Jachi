@@ -783,8 +783,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 @media (min-width:960px){.chat-launcher{right:max(28px, env(safe-area-inset-right,0px));bottom:28px}}
 .past-hero .chat-launcher,.is-typing .chat-launcher,.chat-open .chat-launcher{opacity:0;visibility:hidden;transform:translateY(12px);pointer-events:none;transition:transform .4s var(--ease),opacity .3s ease,visibility 0s linear .3s}
 /* On a computer the launcher stays put while scrolling or typing, but never shows (or flickers) behind the open chat:
-   it comes back the moment the chat closes, so focus can return to it. */
-@media (min-width:960px){html:not(.chat-open).past-hero .chat-launcher,html:not(.chat-open).is-typing .chat-launcher{opacity:1;visibility:visible;transform:none;pointer-events:auto}}
+   it comes back the moment the chat closes, so focus can return to it. The transition is set again here because the
+   rule above would otherwise keep the launcher hidden for its 0.3s delay after the chat closes. */
+@media (min-width:960px){html:not(.chat-open).past-hero .chat-launcher,html:not(.chat-open).is-typing .chat-launcher{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:transform .4s var(--ease),opacity .3s ease,background-color .25s ease,visibility 0s}}
 .chat-open .dock{visibility:hidden}
 .chat{position:fixed;z-index:90;right:max(16px, env(safe-area-inset-right,0px));bottom:calc(96px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;width:min(400px,calc(100vw - 32px));height:min(640px,calc(100dvh - 128px));border-radius:var(--r-lg);background:var(--paper);border:1px solid var(--line);box-shadow:0 30px 80px -24px rgba(13,36,28,.45),0 8px 20px -10px rgba(13,36,28,.2);overflow:hidden;opacity:0;transform:translateY(16px) scale(.98);transform-origin:bottom right;transition:opacity .28s var(--ease),transform .4s var(--ease)}
 .chat.is-open{opacity:1;transform:none}
@@ -2521,6 +2522,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
     let busy = false;
     let opener = null;
     let closeTimer = 0;
+    let focusTimer = 0;
     // The ad pages keep to the waitlist: no plan finder and none of the site's own answers there.
     const AD_PAGE = /^\/(join|es\/unase)\//.test(location.pathname);
     const HELP_URL = "/help.en.json";
@@ -2958,6 +2960,7 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
 
     const openChat = from => {
       window.clearTimeout(closeTimer);
+      window.clearTimeout(focusTimer);
       if (menuOpen()) setMenu(false, false);
       opener = from || C.launcher;
       const phone = mqPhone.matches;
@@ -2984,16 +2987,27 @@ main:not(:has(> .page-cta:last-child)) + .footer{position:relative;z-index:1;mar
       blockedWhileOpen.forEach(el => { if (el) el.inert = false; });
       $$('[data-chat-open]').forEach(b => b.setAttribute('aria-expanded', 'false'));
       closeTimer = window.setTimeout(() => { C.root.hidden = true; }, reduced() ? 0 : 280);
+      // The chat's text box closes with the panel, so it stops counting as typing right now. That brings the Help
+      // button (or the phone's bottom bar) back in this same step, in time to take focus.
+      if (C.root.contains(document.activeElement)) document.activeElement.blur();
+      updateDock();
       const shown = el => !!el && el.isConnected && el.getClientRects().length > 0;
       const back = shown(opener) ? opener : C.launcher;
-      if (shown(back)) back.focus({ preventScroll: true });
-      // If the launcher was still fading back in, focus it once the panel has gone.
-      if (document.activeElement !== back) {
-        window.setTimeout(() => {
-          const lost = document.activeElement === document.body || C.root.contains(document.activeElement);
-          if (lost && !isOpen() && shown(back)) back.focus({ preventScroll: true });
-        }, reduced() ? 0 : 320);
-      }
+      const giveBack = () => {
+        if (shown(back)) back.focus({ preventScroll: true });
+        return document.activeElement === back;
+      };
+      window.clearTimeout(focusTimer);
+      if (giveBack()) return;
+      // Whatever opened the chat can't take focus yet (it may still be sliding back into view). Keep trying for a
+      // moment; stop once it has focus, the chat is open again or the person has moved on to something else.
+      let tries = 0;
+      const again = () => {
+        const lost = document.activeElement === document.body || C.root.contains(document.activeElement);
+        if (!lost || document.documentElement.classList.contains('chat-open') || giveBack() || (tries += 1) >= 15) return;
+        focusTimer = window.setTimeout(again, 100);
+      };
+      focusTimer = window.setTimeout(again, reduced() ? 0 : 100);
     };
 
     document.addEventListener('click', e => {

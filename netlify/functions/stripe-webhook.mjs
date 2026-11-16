@@ -1064,7 +1064,7 @@ function verifyStripeSignature(payload, header, secret, toleranceSeconds = 300) 
  *
  *   EMAIL_PROVIDER = resend | postmark | sendgrid
  *   EMAIL_API_KEY  = that provider's API key (Postmark: the server token)
- *   EMAIL_FROM     = "Jachi Health <hello@jachihealth.com>"  (a verified sender on your domain)
+ *   EMAIL_FROM     = "Jachi Health <no-reply@mail.jachihealth.com>"  (a sender on the domain verified with the provider)
  *   EMAIL_REPLY_TO = support@jachihealth.com                (where member replies go)
  *
  * When these aren't set, emails are skipped (logged only) so nothing else breaks.
@@ -1099,7 +1099,16 @@ function cleanHeader(value) {
 /*
  * message: { to, subject, html, text, tag, idempotencyKey }
  * Returns { sent: true, id } or { skipped: true }. Throws if the provider refuses.
+ *
+ * A send is tried up to three times when the provider is busy (HTTP 429) or, for a message with an idempotency key,
+ * briefly down (HTTP 5xx) or unreachable. Retries reuse the same key, so Resend never delivers a message twice;
+ * without a key a failed try isn't repeated, because it may have gone through. Everything fits inside one function
+ * call's time: later tries wait a moment, get less time, and are skipped when too little is left.
  */
+const EMAIL_TRIES = 3;
+const EMAIL_BUDGET_MS = 9000;
+const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 async function sendEmail(message) {
   const s = emailSettings();
   const to = cleanHeader(message.to);
@@ -1160,24 +1169,47 @@ async function sendEmail(message) {
     };
   }
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(body),
-    signal: typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined,
-  });
-  const raw = await res.text().catch(() => '');
-  if (!res.ok) {
-    throw new Error(`Email not sent (${s.provider} HTTP ${res.status}): ${raw.slice(0, 300)}`);
+  const repeatable = s.provider === 'resend' && Boolean(message.idempotencyKey);
+  const step = Number(process.env.EMAIL_RETRY_MS) > 0 ? Number(process.env.EMAIL_RETRY_MS) : 500;
+  const started = Date.now();
+  let limit = 8000;
+  for (let attempt = 1; ; attempt += 1) {
+    let failure;
+    let again = false;
+    let wait = step * (attempt === 1 ? 1 : 3);
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body),
+        signal: typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(limit) : undefined,
+      });
+      const raw = await res.text().catch(() => '');
+      if (res.ok) {
+        let id = null;
+        try {
+          const data = raw ? JSON.parse(raw) : {};
+          id = data.id || data.MessageID || null;
+        } catch (e) {
+          /* SendGrid replies 202 with an empty body */
+        }
+        // The provider's own id for the message, so a "did it send?" question can be answered from its log.
+        console.log(`[email sent] ${tag} ${id || 'no id'}${attempt > 1 ? ` (try ${attempt})` : ''}`);
+        return { sent: true, id };
+      }
+      failure = new Error(`Email not sent (${s.provider} HTTP ${res.status}): ${raw.slice(0, 300)}`);
+      again = res.status === 429 || (repeatable && res.status >= 500);
+      const after = Number(res.headers && res.headers.get && res.headers.get('retry-after'));
+      if (after > 0) wait = Math.min(after * 1000, 3000);
+    } catch (err) {
+      failure = new Error(`Email not sent (${s.provider}: ${err && err.name === 'TimeoutError' ? 'timed out' : (err && err.message) || 'network error'})`);
+      again = repeatable;
+    }
+    const left = EMAIL_BUDGET_MS - (Date.now() - started) - wait;
+    if (!again || attempt >= EMAIL_TRIES || left < 1500) throw failure;
+    await pause(wait);
+    limit = Math.min(4000, left);
   }
-  let id = null;
-  try {
-    const data = raw ? JSON.parse(raw) : {};
-    id = data.id || data.MessageID || null;
-  } catch (e) {
-    /* SendGrid replies 202 with an empty body */
-  }
-  return { sent: true, id };
 }
 
 /*

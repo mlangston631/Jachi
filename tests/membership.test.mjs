@@ -20,12 +20,15 @@ process.env.EMAIL_PROVIDER = 'resend';
 process.env.EMAIL_API_KEY = 're_test_key';
 process.env.EMAIL_FROM = 'Jachi Health <hello@jachihealth.com>';
 process.env.EMAIL_REPLY_TO = 'support@jachihealth.com';
+process.env.EMAIL_RETRY_MS = '2';   // the wait between tries of a failed send; half a second on the real site
 delete process.env.TURNSTILE_SECRET_KEY;
 
 const alerts = [];
 const emails = [];
+const emailTries = [];              // every call to the email service, failed ones included
 let failAlerts = false, failEmails = false;
-const answer = (status, body) => new Response(JSON.stringify(body), { status });
+let emailBlips = [];                // status codes to answer with before letting a send through
+const answer = (status, body, headers) => new Response(JSON.stringify(body), { status, headers });
 globalThis.fetch = async (url, init = {}) => {
   const u = String(url);
   if (u.startsWith('https://hooks.slack.com')) {
@@ -34,7 +37,13 @@ globalThis.fetch = async (url, init = {}) => {
     return answer(200, {});
   }
   if (u.startsWith('https://api.resend.com')) {
+    emailTries.push(init.headers['Idempotency-Key'] || '');
     if (failEmails) return answer(503, { message: 'down' });
+    if (emailBlips.length) {
+      const blip = emailBlips.shift();
+      if (blip === 'network') throw new TypeError('fetch failed');
+      return answer(blip, { message: 'blip' }, blip === 429 ? { 'retry-after': '0.001' } : undefined);
+    }
     emails.push({ headers: init.headers, body: JSON.parse(init.body) });
     return answer(200, { id: `e_${emails.length}` });
   }
@@ -47,7 +56,7 @@ function fresh() {
   stripe = createMockStripe();
   seedJachiCatalog(stripe);
   globalThis.__jachiStripe = stripe;
-  alerts.length = 0; emails.length = 0; failAlerts = false; failEmails = false;
+  alerts.length = 0; emails.length = 0; emailTries.length = 0; emailBlips = []; failAlerts = false; failEmails = false;
   process.env.FOUNDING_LIMIT = '100';
   process.env.FOUNDING_OPEN = 'true';
   return stripe;
@@ -459,6 +468,39 @@ emails.length = 0;
 check('nothing is sent until the email service is set up', (await submit({ id: 'x10', form_name: 'early-access', data: { email: 'new@example.com', state: 'TX' } })) === 200
   && emails.length === 0);
 process.env.EMAIL_API_KEY = 're_test_key';
+
+// ---------- Sending: a busy email service is tried again, and nobody gets the same email twice ----------
+fresh();
+const note = (extra = {}) => ({ to: 'ana@example.com', subject: 'Hi', html: '<p>Hi</p>', text: 'Hi', tag: 'test', ...extra });
+emailBlips = [503, 429];
+let sentNow = await billing.sendEmail(note({ idempotencyKey: 'k-1' }));
+check('email: a busy or briefly down service is tried again with the same key, and one email goes out', sentNow.sent === true && sentNow.id === 'e_1'
+  && emails.length === 1 && emailTries.length === 3 && emailTries.every((k) => k === 'k-1'), JSON.stringify(emailTries));
+fresh();
+emailBlips = ['network'];
+sentNow = await billing.sendEmail(note({ idempotencyKey: 'k-2' }));
+check('email: a dropped connection is tried again when the message carries a key', sentNow.sent === true && emailTries.length === 2 && emails.length === 1);
+fresh();
+emailBlips = [503];
+let refused = null;
+try { await billing.sendEmail(note()); } catch (e) { refused = e; }
+check('email: without a key a server error is not repeated, in case the first try went through', Boolean(refused) && /HTTP 503/.test(refused.message)
+  && emailTries.length === 1 && emails.length === 0);
+fresh();
+emailBlips = [429];
+sentNow = await billing.sendEmail(note());
+check('email: "too many requests" is always safe to try again', sentNow.sent === true && emailTries.length === 2 && emails.length === 1);
+fresh();
+emailBlips = [422];
+refused = null;
+try { await billing.sendEmail(note({ idempotencyKey: 'k-3' })); } catch (e) { refused = e; }
+check('email: a refusal (a bad address, a domain that is not verified) is not tried again', Boolean(refused) && /HTTP 422/.test(refused.message) && emailTries.length === 1);
+fresh();
+failEmails = true;
+refused = null;
+try { await billing.sendEmail(note({ idempotencyKey: 'k-4' })); } catch (e) { refused = e; }
+check('email: gives up after three tries', Boolean(refused) && /HTTP 503/.test(refused.message) && emailTries.length === 3 && emails.length === 0);
+failEmails = false;
 const wel = billing.renderEmail('welcome', { lang: 'en', name: 'Ana', planKey: 'concierge', billing: 'monthly', manageUrl: 'https://billing.stripe.com/p/login/x',
   portalUrl: 'https://jachihealth.com/account/?create', supportEmail: 'support@jachihealth.com' });
 check('the welcome email points to the member page', wel.html.includes('https://jachihealth.com/account/?create') && wel.text.includes('Your member page'));

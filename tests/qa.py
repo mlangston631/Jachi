@@ -71,6 +71,15 @@ def check(name, ok, detail=""):
 
 EXTERNAL = []  # requests that tried to leave the site, from every page the tests open
 
+# Where focus is the moment the chat's own Escape handler has run. This listener is added after the site's, so it runs
+# straight after it in the same step: focus must already be back by then, and not arrive later on a timer that has to
+# land after the Help button's fade (on a busy device that timer came too early, and focus was lost).
+FOCUS_AFTER_ESCAPE = """document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const a = document.activeElement;
+  window.__afterEscape = a ? (a.id || a.className || a.tagName) : 'nothing';
+})"""
+
 
 def wait_grown(page, timeout=9000):
     """Wait until the living leaf has finished growing. (The site's security policy forbids eval, which rules out
@@ -433,7 +442,10 @@ with sync_playwright() as p:
     page.screenshot(path=str(OUT / "ticket-sent-desktop.png"))
     page.locator("#ticket-done").click(); page.wait_for_timeout(300)
     check("ticket: back to chat", page.locator("#chat-talk").is_visible() and page.locator("#ticket-form").is_visible() is False)
+    page.evaluate(FOCUS_AFTER_ESCAPE)
     page.keyboard.press("Escape")
+    check("chat: Escape hands focus back to the Help button in the same step, even from the text box",
+          page.evaluate("window.__afterEscape") == "chat-launcher", str(page.evaluate("window.__afterEscape")))
     closed = "document.getElementById('chat').hidden && document.activeElement && document.activeElement.id === 'chat-launcher'"
     for _ in range(30):  # the panel hides after its closing animation (wait_for_function can't run under the site's CSP)
         if page.evaluate(closed):
@@ -441,6 +453,16 @@ with sync_playwright() as p:
         page.wait_for_timeout(100)
     check("chat: Escape closes and returns focus", page.evaluate(closed),
           json.dumps(page.evaluate("[document.activeElement.id || document.activeElement.tagName, document.getElementById('chat').hidden, document.documentElement.className]")))
+    page.evaluate("window.scrollTo({top: document.getElementById('how').offsetTop + 200, behavior: 'instant'})"); page.wait_for_timeout(700)
+    launcher.click(); page.wait_for_timeout(500)
+    scrolled = page.evaluate("[document.documentElement.className, document.activeElement.id]")
+    page.evaluate("window.__afterEscape = null")
+    page.keyboard.press("Escape")
+    check("chat: and in the same step on a scrolled page", "past-hero" in scrolled[0] and scrolled[1] == "chat-input"
+          and page.evaluate("window.__afterEscape") == "chat-launcher", json.dumps([scrolled, page.evaluate("window.__afterEscape")]))
+    page.wait_for_timeout(500)
+    check("chat: focus stays on the Help button once the panel has gone", page.evaluate(closed),
+          json.dumps(page.evaluate("[document.activeElement.id || document.activeElement.tagName, document.getElementById('chat').hidden]")))
     page.locator("#faq [data-chat-open]").click(); page.wait_for_timeout(400)
     check("chat: FAQ button opens the chat", page.locator("#chat").is_visible())
     page.locator("#chat-close").click(); page.wait_for_timeout(400)
@@ -471,6 +493,19 @@ with sync_playwright() as p:
     check("phone chat: no overflow", ov["scrollWidth"] <= ov["clientWidth"] and not ov["offenders"], json.dumps(ov))
     page.locator("#chat-close").click(); page.wait_for_timeout(500)
     check("phone chat: closing restores the page", page.evaluate("document.getElementById('main').inert === false") and page.locator("#chat").is_hidden())
+    page.locator(".dock__chat").click(); page.wait_for_timeout(600)
+    page.locator("#ticket-name").focus(); page.wait_for_timeout(200)
+    typing = page.evaluate("[document.documentElement.className, document.activeElement.id]")
+    page.evaluate(FOCUS_AFTER_ESCAPE)
+    page.keyboard.press("Escape")
+    check("phone chat: Escape from a text box hands focus back to the bar's chat button in the same step",
+          "is-typing" in typing[0] and typing[1] == "ticket-name" and page.evaluate("window.__afterEscape") == "dock__chat",
+          json.dumps([typing, page.evaluate("window.__afterEscape")]))
+    page.wait_for_timeout(500)
+    check("phone chat: and it stays there, with the bar back, once the panel has gone",
+          page.locator("#chat").is_hidden() and page.locator(".dock__chat").is_visible()
+          and page.evaluate("document.activeElement.className") == "dock__chat" and page.evaluate("document.getElementById('main').inert === false"),
+          json.dumps(page.evaluate("[document.activeElement.id || document.activeElement.className || document.activeElement.tagName, document.documentElement.className]")))
     check("phone chat: no console errors", not logs, json.dumps(logs))
     ctx.close()
 
