@@ -1,254 +1,246 @@
 #!/usr/bin/env python3
-"""Fetch the raw material for the clinic outreach call list: organizations (practices, clinics, labs) across Texas
-whose registered specialty matches the kinds of care Jachi coordinates.
+"""Fetch the raw material for the clinic outreach call list: every active organization (practice, clinic, lab) whose
+practice address is in Texas, with its registered specialties, from the federal NPI Registry.
 
-Source: the NPI Registry (NPPES), the public directory of health care providers run by the federal Centers for
-Medicare & Medicaid Services. It is free and needs no key. Everything in it is about practices, never patients,
-so nothing this tool reads or writes is health information.
+Source: the NPPES monthly data file, published free by the Centers for Medicare & Medicaid Services at
+https://download.cms.gov/nppes/NPI_Files.html . It is a public directory of providers. Everything in it is about
+practices, never patients, so nothing this tool reads or writes is health information.
 
-    python3 tools/clinic_list.py              # writes outreach/raw.csv.gz, outreach/run_log.txt, outreach/summary.json
-    python3 tools/clinic_list.py --probe      # a handful of small requests, to check the registry answers as expected
+    python3 tools/clinic_list.py     # writes outreach/tx_organizations.csv.gz, taxonomy_codes.csv, summary.json, run_log.txt
 
-Needs internet access (the registry is at npiregistry.cms.hhs.gov). Standard library only.
-Sorting the raw rows into a call list (one row per phone number, by area and kind of care) happens afterwards, away
-from here, so the rules for that can change without asking the registry again.
+Needs internet access and about 2 GB of disk for the download. Standard library plus the `unzip` command.
+Sorting the rows into a call list (one row per phone number, by area and kind of care) happens afterwards, away from
+here, so those rules can change without downloading the file again.
+
+Why the whole file and not the registry's search API: the API finds a specialty by its description but looks at no
+more than ten matching specialty codes per search, so a search for "Obstetrics & Gynecology" silently leaves out
+most OB-GYN practices (measured Nov 16, 2026). The file has every code for every organization.
 """
 import csv
 import gzip
+import io
 import json
 import os
+import re
+import subprocess
 import sys
-import threading
 import time
-import urllib.error
 import urllib.parse
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-BASE = os.environ.get("NPI_API_BASE", "https://npiregistry.cms.hhs.gov/api/")
+INDEX = os.environ.get("NPPES_INDEX_URL", "https://download.cms.gov/nppes/NPI_Files.html")
+ZIP_URL = os.environ.get("NPPES_ZIP_URL", "")
+API = os.environ.get("NPI_API_BASE", "https://npiregistry.cms.hhs.gov/api/")
 OUT = Path(os.environ.get("NPI_OUT", Path(__file__).resolve().parent.parent / "outreach"))
-PAGE = int(os.environ.get("NPI_PAGE", "200"))            # the registry's largest page
-SKIP_MAX = int(os.environ.get("NPI_SKIP_MAX", "1000"))    # and the furthest it lets a search skip ahead
-PAUSE = float(os.environ.get("NPI_PAUSE", "0.3"))         # seconds each worker waits between requests
-WORKERS = int(os.environ.get("NPI_WORKERS", "3"))
-AGENT = "JachiHealth-clinic-list/1.0 (+https://jachihealth.com; support@jachihealth.com)"
+WORK = Path(os.environ.get("NPI_WORK", os.environ.get("RUNNER_TEMP", "/tmp")))
+STATE = os.environ.get("NPI_STATE", "TX")
+AGENT = "JachiHealth-clinic-list/2.0 (+https://jachihealth.com; support@jachihealth.com)"
+MONTHS = "January February March April May June July August September October November December".split()
 
-# What to search the registry's specialty descriptions for. The label is only a first guess at the kind of care:
-# the real sorting uses each organization's own primary specialty, later.
-TERMS = [
-    ("Primary care", "Family Medicine"), ("Primary care", "Internal Medicine"), ("Primary care", "General Practice"),
-    ("Primary care", "Primary Care"), ("Primary care", "Federally Qualified Health Center"),
-    ("Primary care", "Rural Health"), ("Primary care", "Community Health"), ("Primary care", "Nurse Practitioner"),
-    ("Urgent care", "Urgent Care"),
-    ("Therapy and mental health", "Mental Health"), ("Therapy and mental health", "Psychiatry"),
-    ("Therapy and mental health", "Psychologist"), ("Therapy and mental health", "Counselor"),
-    ("Therapy and mental health", "Social Worker"), ("Therapy and mental health", "Marriage & Family Therapist"),
-    ("Women's health", "Obstetrics & Gynecology"), ("Women's health", "Family Planning"),
-    ("Men's health", "Urology"),
-    ("Skin care", "Dermatology"),
-    ("Weight management", "Obesity Medicine"),
-    ("Labs", "Clinical Medical Laboratory"),
-]
-# Texas ZIP codes start with 750 to 799, plus 885 (El Paso).
-PREFIXES = [str(n) for n in range(750, 800)] + ["885"]
-
-FIELDS = ["npi", "name", "other_names", "primary_specialty", "all_specialties", "phone", "fax", "address_1",
-          "address_2", "city", "state", "zip", "official_name", "official_title", "official_phone", "status",
-          "last_updated", "enumeration_date", "matched_terms"]
-
-log_lock = threading.Lock()
 log_lines = []
-stats = {"requests": 0, "errors": 0, "retries": 0, "capped": []}
 
 
 def log(line):
-    with log_lock:
-        log_lines.append(line)
+    log_lines.append(line)
     print(line, flush=True)
 
 
-def fetch(params):
-    """One request to the registry. Returns the decoded JSON, or {'_failed': reason} after a few tries."""
-    query = urllib.parse.urlencode(params, quote_via=urllib.parse.quote, safe="*")
-    url = f"{BASE}?{query}"
-    last = ""
-    for attempt in range(1, 6):
-        with log_lock:
-            stats["requests"] += 1
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": AGENT, "Accept": "application/json"})
-            with urllib.request.urlopen(req, timeout=40) as res:
-                data = json.loads(res.read().decode("utf-8", "replace"))
-            time.sleep(PAUSE)
-            return data
-        except urllib.error.HTTPError as err:
-            last = f"HTTP {err.code}"
-            if err.code in (400, 404):
+def save_log():
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "run_log.txt").write_text("\n".join(log_lines) + "\n")
+
+
+def get(url, timeout=60):
+    req = urllib.request.Request(url, headers={"User-Agent": AGENT})
+    with urllib.request.urlopen(req, timeout=timeout) as res:
+        return res.read()
+
+
+def monthly_file_url():
+    """The newest full monthly file linked from CMS's page (not a weekly update, not the deactivation list)."""
+    if ZIP_URL:
+        return ZIP_URL
+    page = get(INDEX).decode("utf-8", "replace")
+    links = re.findall(r'href="([^"]+\.zip)"', page, flags=re.I)
+    log(f"index: {len(links)} zip links: " + ", ".join(link.rsplit('/', 1)[-1] for link in links[:12]))
+    full = []
+    for link in links:
+        name = link.rsplit("/", 1)[-1]
+        m = re.fullmatch(r"NPPES_Data_Dissemination_([A-Za-z]+)_(\d{4})(_V2)?\.zip", name, flags=re.I)
+        if m and m.group(1).capitalize() in MONTHS:
+            full.append(((int(m.group(2)), MONTHS.index(m.group(1).capitalize()), 1 if m.group(3) else 0), link))
+    if not full:
+        raise RuntimeError("no monthly file link found on " + INDEX)
+    return urllib.parse.urljoin(INDEX, max(full)[1])
+
+
+def download(url, dest):
+    req = urllib.request.Request(url, headers={"User-Agent": AGENT})
+    started, size = time.time(), 0
+    with urllib.request.urlopen(req, timeout=120) as res, open(dest, "wb") as fh:
+        while True:
+            block = res.read(4 << 20)
+            if not block:
                 break
-        except Exception as err:  # timeouts, resets, bad JSON
-            last = f"{type(err).__name__}: {err}"
-        with log_lock:
-            stats["retries"] += 1
-        time.sleep(min(2 ** attempt, 20))
-    with log_lock:
-        stats["errors"] += 1
-    return {"_failed": last, "_url": url}
+            fh.write(block)
+            size += len(block)
+    log(f"downloaded {url.rsplit('/', 1)[-1]}: {size / 1e6:.0f} MB in {time.time() - started:.0f} s")
 
 
-def search(term, prefix):
-    """Every organization the registry returns for one specialty term in one ZIP prefix (up to its ceiling)."""
-    found, skip = [], 0
-    while True:
-        data = fetch({"version": "2.1", "enumeration_type": "NPI-2", "taxonomy_description": term, "state": "TX",
-                      "postal_code": prefix + "*" if len(prefix) < 5 else prefix, "address_purpose": "LOCATION",
-                      "limit": PAGE, "skip": skip})
-        if "_failed" in data:
-            log(f"FAILED {term!r} {prefix}: {data['_failed']}")
-            return found, False
-        if data.get("Errors"):
-            log(f"ERROR  {term!r} {prefix}: {json.dumps(data['Errors'])[:300]}")
-            return found, False
-        page = data.get("results") or []
-        found.extend(page)
-        if len(page) < PAGE:
-            return found, False
-        if skip >= SKIP_MAX:
-            return found, True  # the registry won't page further: the caller narrows the search
-        skip += PAGE
+def norm(text):
+    return re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
 
 
-def gather(term, prefix):
-    """search(), narrowing a search that hits the registry's ceiling into ten smaller ones."""
-    found, capped = search(term, prefix)
-    if capped and len(prefix) < 5:
-        log(f"narrow {term!r} {prefix}: {len(found)} rows hit the ceiling, splitting by the next digit")
-        found = []
-        for digit in "0123456789":
-            found.extend(gather(term, prefix + digit))
-    elif capped:
-        with log_lock:
-            stats["capped"].append([term, prefix])
-        log(f"CAPPED {term!r} {prefix}: more than {len(found)} rows in one ZIP code; the rest are missing")
-    return found
+def column(header, *words, exclude=()):
+    """The index of the one column whose name has every word (so a small renaming by CMS doesn't break the tool)."""
+    hits = [i for i, name in enumerate(header)
+            if all(w in norm(name) for w in words) and not any(x in norm(name) for x in exclude)]
+    if len(hits) != 1:
+        raise RuntimeError(f"expected one column for {words}, found {[header[i] for i in hits]}")
+    return hits[0]
 
 
-def text(value):
-    return " ".join(str(value or "").split())
+def clean(value):
+    return " ".join((value or "").split())
 
 
-def row_of(rec):
-    basic = rec.get("basic") or {}
-    addresses = rec.get("addresses") or []
-    place = next((a for a in addresses if a.get("address_purpose") == "LOCATION"), addresses[0] if addresses else {})
-    specialties = rec.get("taxonomies") or []
-    primary = next((t for t in specialties if t.get("primary")), specialties[0] if specialties else {})
-    other = [f"{text(o.get('organization_name'))} [{text(o.get('type'))}]" for o in (rec.get("other_names") or [])
-             if o.get("organization_name")]
-    official = " ".join(x for x in (text(basic.get("authorized_official_first_name")),
-                                    text(basic.get("authorized_official_last_name"))) if x)
-    credential = text(basic.get("authorized_official_credential"))
-    return {
-        "npi": text(rec.get("number")),
-        "name": text(basic.get("organization_name") or basic.get("name")),
-        "other_names": " | ".join(other),
-        "primary_specialty": text(primary.get("desc")),
-        "all_specialties": " | ".join(dict.fromkeys(text(t.get("desc")) for t in specialties if t.get("desc"))),
-        "phone": text(place.get("telephone_number")),
-        "fax": text(place.get("fax_number")),
-        "address_1": text(place.get("address_1")),
-        "address_2": text(place.get("address_2")),
-        "city": text(place.get("city")),
-        "state": text(place.get("state")),
-        "zip": text(place.get("postal_code")),
-        "official_name": official + (f", {credential}" if official and credential else ""),
-        "official_title": text(basic.get("authorized_official_title_or_position")),
-        "official_phone": text(basic.get("authorized_official_telephone_number")),
-        "status": text(basic.get("status")),
-        "last_updated": text(basic.get("last_updated")),
-        "enumeration_date": text(basic.get("enumeration_date")),
+def read_organizations(zip_path):
+    names = subprocess.run(["unzip", "-Z1", str(zip_path)], check=True, capture_output=True, text=True).stdout.split("\n")
+    log("in the zip: " + ", ".join(n for n in names if n))
+    main = [n for n in names if re.match(r"npidata_pfile_.*\.csv$", n, flags=re.I) and "fileheader" not in n.lower()]
+    if len(main) != 1:
+        raise RuntimeError(f"expected one npidata_pfile, found {main}")
+    proc = subprocess.Popen(["unzip", "-p", str(zip_path), main[0]], stdout=subprocess.PIPE)
+    lines = io.TextIOWrapper(proc.stdout, encoding="utf-8", errors="replace", newline="")
+    header = next(csv.reader([next(lines)]))
+    loc = ("business practice location address",)
+    cols = {
+        "npi": column(header, "npi", exclude=("replacement", "deactivation", "reactivation")),
+        "entity": column(header, "entity type code"),
+        "name": column(header, "provider organization name"),
+        "other_name": column(header, "provider other organization name", exclude=("type",)),
+        "other_name_type": column(header, "provider other organization name type code"),
+        "address_1": column(header, "first line", *loc),
+        "address_2": column(header, "second line", *loc),
+        "city": column(header, *loc, "city"),
+        "state": column(header, *loc, "state"),
+        "zip": column(header, *loc, "postal code"),
+        "phone": column(header, *loc, "telephone"),
+        "fax": column(header, *loc, "fax"),
+        "enumeration_date": column(header, "provider enumeration date"),
+        "last_updated": column(header, "last update date"),
+        "deactivated": column(header, "npi deactivation date"),
+        "reactivated": column(header, "npi reactivation date"),
+        "official_last": column(header, "authorized official last name"),
+        "official_first": column(header, "authorized official first name"),
+        "official_title": column(header, "authorized official title"),
+        "official_phone": column(header, "authorized official telephone"),
+        "official_credential": column(header, "authorized official credential"),
+        "subpart": column(header, "is organization subpart"),
+        "parent": column(header, "parent organization lbn"),
     }
+    # The fifteen specialty slots go by their exact names ("code 1" would otherwise also match 10 to 15)
+    exact = {norm(name): i for i, name in enumerate(header)}
+    codes = [(exact[f"healthcare provider taxonomy code {n}"], exact[f"healthcare provider primary taxonomy switch {n}"])
+             for n in range(1, 16)]
+    log(f"file {main[0]}: {len(header)} columns; using " + json.dumps({k: header[v] for k, v in cols.items()}))
+
+    quoted, bare = f'"{STATE}"', f",{STATE},"
+    total = kept = 0
+    for line in lines:
+        total += 1
+        if quoted not in line and bare not in line:  # a cheap first pass: only lines that mention the state are parsed
+            continue
+        row = next(csv.reader([line]))
+        if len(row) != len(header) or row[cols["entity"]] != "2" or row[cols["state"]] != STATE:
+            continue
+        if row[cols["deactivated"]] and not row[cols["reactivated"]]:
+            continue
+        kept += 1
+        specialties = [(row[c], row[s]) for c, s in codes if row[c]]
+        yield {
+            "npi": row[cols["npi"]], "name": clean(row[cols["name"]]),
+            "other_name": clean(row[cols["other_name"]]), "other_name_type": row[cols["other_name_type"]],
+            "address_1": clean(row[cols["address_1"]]), "address_2": clean(row[cols["address_2"]]),
+            "city": clean(row[cols["city"]]), "state": row[cols["state"]], "zip": row[cols["zip"]],
+            "phone": row[cols["phone"]], "fax": row[cols["fax"]],
+            "official_name": clean(f"{row[cols['official_first']]} {row[cols['official_last']]}"),
+            "official_credential": clean(row[cols["official_credential"]]),
+            "official_title": clean(row[cols["official_title"]]), "official_phone": row[cols["official_phone"]],
+            "enumeration_date": row[cols["enumeration_date"]], "last_updated": row[cols["last_updated"]],
+            "subpart": row[cols["subpart"]], "parent": clean(row[cols["parent"]]),
+            "primary_code": next((c for c, s in specialties if s == "Y"), specialties[0][0] if specialties else ""),
+            "codes": " ".join(dict.fromkeys(c for c, _ in specialties)),
+        }
+    proc.wait()
+    log(f"read {total} providers; kept {kept} active organizations with a practice address in {STATE}")
 
 
-def probe():
-    """A few small requests whose answers are written to the log, to show how the registry behaves today."""
-    ok = True
-    checks = [
-        ("one specialty in one ZIP prefix", {"version": "2.1", "enumeration_type": "NPI-2", "state": "TX",
-         "taxonomy_description": "Urgent Care", "postal_code": "794*", "address_purpose": "LOCATION", "limit": 5}),
-        ("the same with a full ZIP code", {"version": "2.1", "enumeration_type": "NPI-2", "state": "TX",
-         "taxonomy_description": "Urgent Care", "postal_code": "79424", "address_purpose": "LOCATION", "limit": 5}),
-        ("a second page", {"version": "2.1", "enumeration_type": "NPI-2", "state": "TX",
-         "taxonomy_description": "Family Medicine", "postal_code": "770*", "address_purpose": "LOCATION",
-         "limit": 5, "skip": 5}),
-    ]
-    for name, params in checks:
-        data = fetch(params)
-        results = data.get("results") or []
-        log(f"probe: {name}: keys={sorted(data.keys())} result_count={data.get('result_count')} rows={len(results)}"
-            + (f" errors={json.dumps(data.get('Errors'))[:300]}" if data.get("Errors") else "")
-            + (f" failed={data.get('_failed')}" if data.get("_failed") else ""))
-        for rec in results[:3]:
-            r = row_of(rec)
-            log(f"probe:   {r['primary_specialty']!r} | {r['city']} {r['zip']} | phone {'yes' if r['phone'] else 'no'}"
-                f" | result keys={sorted(rec.keys())}")
-        if name.startswith("one specialty") and not results:
-            ok = False
-    return ok
+def describe_codes(rows):
+    """What each specialty code is called, asked of the registry's API by looking up organizations that hold it."""
+    wanted = {c for r in rows for c in r["codes"].split()}
+    names, asked = {}, 0
+    by_size = sorted(rows, key=lambda r: -len(r["codes"].split()))
+    for r in by_size:
+        if not (set(r["codes"].split()) - names.keys()):
+            continue
+        if asked >= 1500:
+            break
+        asked += 1
+        try:
+            data = json.loads(get(f"{API}?version=2.1&number={r['npi']}", timeout=40).decode("utf-8", "replace"))
+        except Exception as err:
+            log(f"lookup failed for one organization: {type(err).__name__}")
+            time.sleep(2)
+            continue
+        for rec in data.get("results") or []:
+            for t in rec.get("taxonomies") or []:
+                if t.get("code") and t.get("desc"):
+                    names.setdefault(t["code"], clean(t["desc"]))
+        time.sleep(0.2)
+        if wanted <= names.keys():
+            break
+    log(f"specialty names: {len(wanted & names.keys())} of {len(wanted)} codes named, in {asked} lookups")
+    return names, sorted(wanted - names.keys())
 
 
 def main():
     started = time.time()
     OUT.mkdir(parents=True, exist_ok=True)
-    good = probe()
-    if "--probe" in sys.argv or not good:
-        if not good:
-            log("STOP: the first probe returned nothing, so the search would too. See the lines above.")
-        (OUT / "run_log.txt").write_text("\n".join(log_lines) + "\n")
-        return 0 if good else 2
-
-    jobs = [(label, term, prefix) for label, term in TERMS for prefix in PREFIXES]
-    rows = {}        # npi -> row
-    matched = {}     # npi -> set of terms that returned it
-    per_term = {}
-
-    def work(job):
-        label, term, prefix = job
-        return job, gather(term, prefix)
-
-    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        for done, ((label, term, prefix), found) in enumerate(pool.map(work, jobs), 1):
-            for rec in found:
-                r = row_of(rec)
-                if not r["npi"]:
-                    continue
-                rows.setdefault(r["npi"], r)
-                matched.setdefault(r["npi"], set()).add(term)
-            per_term[term] = per_term.get(term, 0) + len(found)
-            if done % 100 == 0:
-                log(f"{done}/{len(jobs)} searches done, {len(rows)} organizations so far, "
-                    f"{stats['requests']} requests, {round(time.time() - started)} s")
-
-    with gzip.open(OUT / "raw.csv.gz", "wt", newline="", encoding="utf-8") as fh:
-        writer = csv.DictWriter(fh, fieldnames=FIELDS)
-        writer.writeheader()
-        for npi in sorted(rows):
-            writer.writerow({**rows[npi], "matched_terms": " | ".join(sorted(matched[npi]))})
-
-    in_texas = sum(1 for r in rows.values() if r["state"] == "TX")
-    summary = {
-        "source": "NPI Registry (NPPES), Centers for Medicare & Medicaid Services, " + BASE,
-        "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "organizations": len(rows), "with_texas_practice_address": in_texas,
-        "with_phone": sum(1 for r in rows.values() if r["phone"]),
-        "rows_returned_per_term": per_term, "requests": stats["requests"], "retries": stats["retries"],
-        "failed_requests": stats["errors"], "searches_cut_short": stats["capped"],
-        "seconds": round(time.time() - started),
-    }
-    (OUT / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
-    log("done: " + json.dumps(summary))
-    (OUT / "run_log.txt").write_text("\n".join(log_lines) + "\n")
-    return 0 if not stats["errors"] else 1
+    try:
+        url = monthly_file_url()
+        log("monthly file: " + url)
+        zip_path = WORK / "nppes_monthly.zip"
+        download(url, zip_path)
+        rows = list(read_organizations(zip_path))
+        if not rows:
+            raise RuntimeError("the file was read but no organization matched: its layout may have changed")
+        fields = list(rows[0].keys())
+        with gzip.open(OUT / "tx_organizations.csv.gz", "wt", newline="", encoding="utf-8") as fh:
+            writer = csv.DictWriter(fh, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(rows)
+        names, unnamed = describe_codes(rows)
+        with open(OUT / "taxonomy_codes.csv", "w", newline="", encoding="utf-8") as fh:
+            writer = csv.writer(fh)
+            writer.writerow(["code", "description"])
+            writer.writerows(sorted(names.items()))
+        summary = {
+            "source": "NPPES monthly data file, Centers for Medicare & Medicaid Services, " + url,
+            "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "organizations": len(rows), "with_phone": sum(1 for r in rows if r["phone"]),
+            "specialty_codes": len({c for r in rows for c in r["codes"].split()}), "codes_without_a_name": unnamed,
+            "seconds": round(time.time() - started),
+        }
+        (OUT / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+        log("done: " + json.dumps(summary))
+        code = 0
+    except Exception as err:
+        log(f"STOPPED: {type(err).__name__}: {err}")
+        code = 2
+    save_log()
+    return code
 
 
 if __name__ == "__main__":
