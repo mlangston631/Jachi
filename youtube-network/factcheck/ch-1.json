@@ -1,0 +1,19 @@
+{
+ "channel": 1,
+ "niche": "Stick-figure money and economics explainers",
+ "description": "Money and economics, explained with stick figures and plain words.\n\nEach video takes one idea (interest, inflation, taxes, debt, how banks work) and draws it out step by step, with the maths shown so you can check it yourself.\n\nThis channel is for education only. Nothing here is financial advice, and no video tells you what to buy or sell.",
+ "titles": [
+  "Compound Interest, Drawn So You Can Actually See It",
+  "Where Does Money Come From? (It Isn't the Printer)",
+  "Inflation Explained With One Loaf of Bread",
+  "What a Bank Really Does With Your Deposit",
+  "Why a 30-Year Loan Costs So Much More Than the Price Tag",
+  "Stocks vs Bonds, Explained With Two Stick Figures",
+  "What Is a Recession, and Who Decides We're in One?",
+  "How Credit Scores Work, Step by Step",
+  "Tax Brackets: The Mistake Almost Everyone Makes",
+  "The Rule of 72: Doubling Time in Ten Seconds"
+ ],
+ "scriptTitle": "Compound Interest, Drawn So You Can Actually See It",
+ "script": "[Stick figure holding one coin]\nThis is Sam. Sam has two hundred dollars a month to put away, and a question: does starting early really matter that much?\n\n[Draw a second, identical stick figure]\nThis is also Sam, in another timeline. Same job. Same two hundred dollars. One difference: this Sam waits ten years to start.\n\n[Timeline: 40 years vs 30 years]\nLet's give both of them the same made-up return, seven percent a year, every year. Real life is bumpier. This is only to show the maths.\n\n[Early Sam's pile grows slowly, then fast]\nEarly Sam saves for forty years. Total paid in: ninety-six thousand dollars. Total at the end: about five hundred and twenty-five thousand.\n\n[Late Sam's pile]\nLate Sam saves for thirty years. Total paid in: seventy-two thousand. Total at the end: about two hundred and forty-four thousand.\n\n[Put the piles side by side]\nLook at that. Early Sam paid in only twenty-four thousand dollars more, and finished with more than double.\n\n[Zoom into the curve]\nHere's why. Interest is paid on your money. Then next year, interest is paid on your money and on last year's interest. The pile earns, and then the earnings earn.\n\n[Rule of 72 on a chalkboard]\nA shortcut: divide seventy-two by the yearly rate. At seven percent, that's about ten years to double. So ten extra years isn't ten years of saving. It's one whole extra doubling.\n\n[Both Sams wave]\nThat's compound interest. It isn't a trick, and it isn't a promise about any investment. It's just what happens when growth is left alone for a long time.\n\nNext time: where money actually comes from. It isn't the printer."
+}

@@ -1,0 +1,10 @@
+# Copies of other people's pages and pictures: readable again at any time, and not ours to publish.
+sources-local/
+growth/**/*.png
+network/**/*.png
+names/**/*.png
+# Caches, locks and logs the tools rebuild by themselves.
+ytcheck-cache.json
+ytscout-subs.json
+.ytcheck.lock*
+*.err

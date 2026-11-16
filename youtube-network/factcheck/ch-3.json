@@ -1,0 +1,19 @@
+{
+ "channel": 3,
+ "niche": "AI and tech explainers",
+ "description": "How AI and everyday technology actually work, in plain words.\n\nNo hype and no jargon. Each video takes one question (how a chatbot picks its next word, what a chip does, why your phone slows down) and answers it with simple pictures.\n\nWhere something is uncertain or still argued over, the video says so.",
+ "titles": [
+  "How a Chatbot Picks Its Next Word",
+  "What Is a \"Token\"? AI's Smallest Piece, Explained",
+  "Why AI Makes Things Up",
+  "What a Computer Chip Actually Does",
+  "How Your Phone Knows Where You Are",
+  "Training vs Using an AI: The Difference in Plain Words",
+  "What Happens When You Press Enter on a Search",
+  "How Image Generators Turn Noise Into Pictures",
+  "Why Batteries Wear Out",
+  "What \"The Cloud\" Really Is (It's a Building)"
+ ],
+ "scriptTitle": "How a Chatbot Picks Its Next Word",
+ "script": "[A sentence on screen with a blank at the end: \"The cat sat on the ___\"]\nFinish this sentence. You probably said \"mat\". Maybe \"sofa\". Almost certainly not \"volcano\".\n\n[Words appear with bars beside them: mat, sofa, floor, volcano]\nYou just did, in your head, the one thing a chatbot does. It looks at the words so far and asks: what's likely to come next?\n\n[The sentence breaks into small chunks]\nFirst, it chops the text into small pieces called tokens. A token can be a whole word, or part of one.\n\n[Chunks flow into a box labelled \"model\"]\nThose pieces go into the model: a very large pile of numbers that were adjusted, during training, by reading an enormous amount of text.\n\n[Out comes a list with percentages]\nOut comes a list. Every possible next piece, each with a chance. \"Mat\", high. \"Sofa\", lower. \"Volcano\", nearly zero.\n\n[A dice icon picks one]\nThen it picks one. Usually a likely one, but not always the top one, which is why the same question can get a different answer twice.\n\n[The picked word joins the sentence; the loop repeats]\nThat word is added to the sentence. And the whole thing runs again, for the next word. And the next. A long answer is this one small step, repeated hundreds of times.\n\n[A confident-looking but wrong sentence appears]\nThis also explains its strangest habit. It is built to produce text that sounds likely. Likely and true usually overlap. Not always. When they don't, you get a confident sentence that's simply wrong.\n\n[Title card]\nSo: no thinking ahead in sentences, no looking things up unless it's given a tool to do so. One piece at a time.\n\nNext: why it makes things up, and what actually reduces it."
+}
