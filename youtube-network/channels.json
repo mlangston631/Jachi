@@ -23,11 +23,11 @@
    "Inflation Explained With One Loaf of Bread",
    "What a Bank Really Does With Your Deposit",
    "Why a 30-Year Loan Costs So Much More Than the Price Tag",
-   "Stocks vs Bonds, Explained With Two Stick Figures",
+   "Stocks vs Bonds: Owning a Slice vs Lending the Money",
    "What Is a Recession, and Who Decides We're in One?",
    "How Credit Scores Work, Step by Step",
    "Tax Brackets: The Mistake So Many People Make",
-   "The Rule of 72: Doubling Time in Ten Seconds"
+   "The Rule of 72: Work Out Doubling Time in Ten Seconds"
   ],
   "scriptTitle": "Compound Interest, Drawn So You Can Actually See It",
   "script": "[Stick figure holding one coin]\nThis is Sam. Sam has two hundred dollars a month to put away, and a question: does starting early really matter that much?\n\n[Draw a second, identical stick figure]\nThis is also Sam, in another timeline. Same job. Same two hundred dollars. One difference: this Sam waits ten years to start.\n\n[Timeline: 40 years vs 30 years. Small print, kept on screen through both totals: $200 paid in at the end of each month; 7% a year, compounded monthly (7% ÷ 12 each month).]\nLet's give both of them the same made-up return, seven percent a year, every year. Real life is bumpier. This is only to show the maths.\n\n[Early Sam's pile grows slowly, then fast]\nEarly Sam saves for forty years. Total paid in: ninety-six thousand dollars. Total at the end: about five hundred and twenty-five thousand.\n\n[Late Sam's pile]\nLate Sam saves for thirty years. Total paid in: seventy-two thousand. Total at the end: about two hundred and forty-four thousand.\n\n[Put the piles side by side]\nLook at that. Early Sam paid in only twenty-four thousand dollars more, and finished with more than double.\n\n[Zoom into the curve]\nHere's why. Interest is paid on your money. Then next year, interest is paid on your money and on last year's interest. The pile earns, and then the earnings earn.\n\n[Rule of 72 on a chalkboard]\nA shortcut: divide seventy-two by the yearly rate. At seven percent, that's about ten years to double. So ten extra years isn't ten years of saving. It's one whole extra doubling.\n\n[Both Sams wave]\nThat's compound interest. It isn't a trick, and it isn't a promise about any investment. It's just what happens when growth is left alone for a long time.\n\nNext time: where money actually comes from. Mostly, it isn't the printer.",
@@ -84,6 +84,28 @@
      "https://taxfoundation.org/research/all/federal/us-tax-literacy-poll-knowledge-perceptions/"
     ],
     "confidence": "medium"
+   },
+   {
+    "step": "youtube-rules",
+    "field": "title",
+    "from": "Stocks vs Bonds, Explained With Two Stick Figures",
+    "to": "Stocks vs Bonds: Owning a Slice vs Lending the Money",
+    "reason": "Generic or repetitive (templated) content: Give each video its own visual idea and structure, so the side-by-side comparison isn't the default. Write every script yourself from sources; never copy or read out another site's text. Before uploading, watch the last three videos in a row and change anything that feels interchangeable. The About text can truthfully say that the scripts and drawings are made for this channel, since reviewers may read it.",
+    "sources": [
+     "https://support.google.com/youtube/answer/1311392"
+    ],
+    "confidence": null
+   },
+   {
+    "step": "youtube-rules",
+    "field": "title",
+    "from": "The Rule of 72: Doubling Time in Ten Seconds",
+    "to": "The Rule of 72: Work Out Doubling Time in Ten Seconds",
+    "reason": "Get-rich-quick scams and misleading titles: Never show a return figure in a title or thumbnail as something the viewer will get, and keep \"made-up rate\" on screen whenever a rate appears. Don't link to trading, crypto or \"passive income\" offers. Remove comments that offer investment help or give contact details (see the comment settings finding).",
+    "sources": [
+     "https://support.google.com/youtube/answer/2801973"
+    ],
+    "confidence": null
    }
   ],
   "sources": [
@@ -143,7 +165,7 @@
   "ac": "#D9A441",
   "font": "Bitstream Charter",
   "mark": "<path d=\"M10 80L34 48L50 62L74 22\" fill=\"none\" stroke=\"var(--ac)\" stroke-width=\"7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M74 22L90 78\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"7\" stroke-linecap=\"round\"/><circle cx=\"74\" cy=\"22\" r=\"6\" fill=\"currentColor\"/>",
-  "description": "Documentaries about how companies are built, and how they come apart.\n\nEach film follows one business from its best decision to its worst: what the people inside knew, what they chose, and what it cost. Every date and figure comes from public records, filings and reporting, listed under each video.\n\nThese are stories, not advice. Nothing here is a recommendation to invest in anything.",
+  "description": "Documentaries about how companies are built, and how they come apart.\n\nEach film follows one business from its best decision to its worst: what the people inside knew, what they chose, and what it cost. Every film is researched and written for this channel, with charts and illustrations made for it. Every date and figure comes from public records, filings and reporting, listed under each video with credits for any archive images.\n\nThese are stories, not advice. Nothing here is a recommendation to invest in anything, and this channel isn't connected to or endorsed by any company it covers.",
   "keywords": "business documentary, company history, rise and fall, why companies fail, business case study, corporate history, startup stories, bankruptcy explained",
   "titles": [
    "Kodak Invented the Digital Camera. It Still Went Bankrupt.",
@@ -158,7 +180,7 @@
    "Polaroid: Instant Success, Slow Collapse"
   ],
   "scriptTitle": "Kodak Invented the Digital Camera. It Still Went Bankrupt.",
-  "script": "[Black screen. One line of text: \"Rochester, New York. 1975.\"]\nIn 1975, a young engineer at Kodak named Steven Sasson built a strange machine out of spare parts. It was the size of a toaster. It took twenty-three seconds to record one black-and-white picture onto a cassette tape.\n\n[Archive-style still of the prototype]\nThe picture was tiny, about a hundredth of a megapixel. But there was no film in it. It was the first self-contained digital camera.\n\n[Boardroom illustration]\nSasson showed it to Kodak's managers and executives. Their reaction, as he later told it, was polite, and worried. Kodak made its money from film, paper and chemicals. Most photographs taken in America were, in some way, a small payment to Kodak. A camera with no film was a camera with no payment.\n\n[Text: \"That's cute — but don't tell anyone about it.\" (Steven Sasson, recalling management's reaction)]\nSo the camera stayed in the lab. Kodak patented it, but never sold it.\n\n[Graph: film sales rising through the 1980s and 1990s]\nFor a long time, that looked like the right call. Film kept selling. Kodak stayed one of the most recognised names in the world.\n\n[Graph bends]\nThen digital cameras got good enough. Kodak sold them too, and by 2005 it sold more of them in America than anyone else. Then they got cheap. Then they moved into phones, and camera sales began to fall.\n\n[Text: \"January 2012.\"]\nIn January 2012, Kodak filed for bankruptcy protection.\n\n[Slow push in on the prototype]\nKodak didn't miss the future. It built the future, in its own lab, thirty-six years before it went bankrupt. What it couldn't do was make the new thing pay the way the old thing did.\n\n[Title card]\nThis is Rise and Ruin Files. In the rest of this film: the patents Kodak held, the money it made from them, and the moment it was already too late.",
+  "script": "[Black screen. One line of text: \"Rochester, New York. 1975.\"]\nIn 1975, a young engineer at Kodak named Steven Sasson built a strange machine out of spare parts. It was the size of a toaster. It took twenty-three seconds to record one black-and-white picture onto a cassette tape.\n\n[Drawing of the prototype, made for this film (or Kodak's own photo, licensed and credited)]\nThe picture was tiny, about a hundredth of a megapixel. But there was no film in it. It was the first self-contained digital camera.\n\n[Boardroom illustration]\nSasson showed it to Kodak's managers and executives. Their reaction, as he later told it, was polite, and worried. Kodak made its money from film, paper and chemicals. Most photographs taken in America were, in some way, a small payment to Kodak. A camera with no film was a camera with no payment.\n\n[Text: \"That's cute — but don't tell anyone about it.\" (Steven Sasson, recalling management's reaction)]\nSo the camera stayed in the lab. Kodak patented it, but never sold it.\n\n[Graph: film sales rising through the 1980s and 1990s]\nFor a long time, that looked like the right call. Film kept selling. Kodak stayed one of the most recognised names in the world.\n\n[Graph bends]\nThen digital cameras got good enough. Kodak sold them too, and by 2005 it sold more of them in America than anyone else. Then they got cheap. Then they moved into phones, and camera sales began to fall.\n\n[Text: \"January 2012.\"]\nIn January 2012, Kodak filed for bankruptcy protection.\n\n[Slow push in on the prototype]\nKodak didn't miss the future. It built the future, in its own lab, thirty-six years before it went bankrupt. What it couldn't do was make the new thing pay the way the old thing did.\n\n[Title card]\nThis is Rise and Ruin Files. In the rest of this film: the patents Kodak held, the money it made from them, and the moment it was already too late.",
   "history": [
    {
     "step": "draft",
@@ -290,6 +312,39 @@
      "https://petapixel.com/how-steve-sasson-invented-the-digital-camera/"
     ],
     "confidence": "low"
+   },
+   {
+    "step": "youtube-rules",
+    "field": "description",
+    "from": "Every date and figure comes from public records, filings and reporting, listed under each video.",
+    "to": "Every film is researched and written for this channel, with charts and illustrations made for it. Every date and figure comes from public records, filings and reporting, listed under each video with credits for any archive images.",
+    "reason": "Reused content (news clips and archive material): Each film must be mainly the channel's own writing, narration, charts and illustrations. Use third-party clips only as short pieces of evidence that the narration discusses, never as a run of news clips with reporting read over them. Say in the description how the films are made, and say only what is true.",
+    "sources": [
+     "https://support.google.com/youtube/answer/1311392"
+    ],
+    "confidence": null
+   },
+   {
+    "step": "youtube-rules",
+    "field": "script",
+    "from": "[Archive-style still of the prototype]",
+    "to": "[Drawing of the prototype, made for this film (or Kodak's own photo, licensed and credited)]",
+    "reason": "AI images of real people and events: Show the prototype with a drawing made for the film, or with Kodak's real photo, licensed and credited. Never use an AI image made to look like an archive photo. Keep the boardroom scene plainly drawn. If any realistic AI image of a real person or event is used, set 'AI use' to Yes in the Attributes section in Studio when uploading. Never make a real executive's voice or face with AI.",
+    "sources": [
+     "https://support.google.com/youtube/answer/14328491"
+    ],
+    "confidence": null
+   },
+   {
+    "step": "youtube-rules",
+    "field": "description",
+    "from": "These are stories, not advice. Nothing here is a recommendation to invest in anything.",
+    "to": "These are stories, not advice. Nothing here is a recommendation to invest in anything, and this channel isn't connected to or endorsed by any company it covers.",
+    "reason": "Company logos and trademarks: Keep company logos and brand names out of the channel name, handle, avatar and banner. In thumbnails, use a logo only as a small identifier inside the channel's own design. Say in the description that the channel isn't connected to the companies it covers.",
+    "sources": [
+     "https://support.google.com/youtube/answer/6154218"
+    ],
+    "confidence": null
    }
   ],
   "sources": [
@@ -560,7 +615,7 @@
   "ac": "#9B8CFF",
   "font": "Inter",
   "mark": "<circle cx=\"38\" cy=\"58\" r=\"22\" fill=\"var(--ac)\"/><ellipse cx=\"38\" cy=\"58\" rx=\"36\" ry=\"10\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" transform=\"rotate(-20 38 58)\"/><path d=\"M78 14L81 24L91 27L81 30L78 40L75 30L65 27L75 24Z\" fill=\"currentColor\"/>",
-  "description": "Space and science, one question at a time.\n\nHow far is a light-year? Why is the sky dark at night? What is inside a neutron star? Each video answers a single question with real numbers and clear pictures, and links the sources underneath.\n\nWhen scientists don't know yet, the video says that too.",
+  "description": "Space and science, one question at a time.\n\nHow far is a light-year? Why is the sky dark at night? What is inside a neutron star? Each video answers a single question with real numbers and animations made for this channel, and links the sources underneath. Telescope and spacecraft images are credited, and artist's impressions are labelled as artist's impressions.\n\nWhen scientists don't know yet, the video says that too.",
   "keywords": "space explained, science explained, astronomy for beginners, how big is the universe, light year explained, solar system, physics explained, space documentary",
   "titles": [
    "How Far Is a Light-Year, Really?",
@@ -605,6 +660,17 @@
      "https://en.wikipedia.org/wiki/List_of_largest_stars"
     ],
     "confidence": "low"
+   },
+   {
+    "step": "youtube-rules",
+    "field": "description",
+    "from": "Each video answers a single question with real numbers and clear pictures, and links the sources underneath.",
+    "to": "Each video answers a single question with real numbers and animations made for this channel, and links the sources underneath. Telescope and spacecraft images are credited, and artist's impressions are labelled as artist's impressions.",
+    "reason": "Reused content (NASA/ESA footage alone doesn't count as the channel's own): Build every video on its own script, narration and animation, like the light-year script. Write the narration in your own words, never read out press releases or articles. Use agency photos and clips only as short supporting shots that the narration explains. Don't upload agency footage, launch replays, 'Earth from the ISS' loops or image slideshows without your own explanation on top. Change the description so it says what the channel makes itself.",
+    "sources": [
+     "https://support.google.com/youtube/answer/1311392"
+    ],
+    "confidence": null
    }
   ],
   "sources": [
@@ -672,7 +738,7 @@
   "ac": "#A63D2F",
   "font": "Bitstream Charter",
   "mark": "<path d=\"M14 26L38 16L62 26L86 16V74L62 84L38 74L14 84Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"5\" stroke-linejoin=\"round\"/><path d=\"M38 16V74M62 26V84\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\".45\"/><path d=\"M22 60C34 50 44 62 52 48S72 40 80 34\" fill=\"none\" stroke=\"var(--ac)\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-dasharray=\"2 9\"/>",
-  "description": "History, told by the map.\n\nEmpires grow, split and vanish, and the borders show it. Each documentary follows one line on the map and explains why it moved: the wars, the money, the rivers and the people.\n\nDates and sources are listed under every video. Where historians disagree, both sides are shown.",
+  "description": "History, told by the map.\n\nEmpires grow, split and vanish, and the borders show it. Each documentary follows one line on the map and explains why it moved: the wars, the money, the rivers and the people.\n\nDates and sources are listed under every video. Where historians disagree, the main views and their evidence are shown.",
   "keywords": "history documentary, animated history, history maps, rise and fall of empires, roman empire, world history explained, ancient history, medieval history",
   "titles": [
    "Why the Roman Empire Split in Two",
@@ -809,6 +875,17 @@
      "https://www.news24.com/world/africa/not-so-arbitrary-colonists-used-existing-borders-and-rivers-to-draw-africas-map-new-paper-argues-20240311"
     ],
     "confidence": "medium"
+   },
+   {
+    "step": "youtube-rules",
+    "field": "description",
+    "from": "Where historians disagree, both sides are shown.",
+    "to": "Where historians disagree, the main views and their evidence are shown.",
+    "reason": "Denying or minimising well-documented atrocities (\"both sides\"): Use the new description line. In scripts, state well-documented atrocities and their death tolls as fact, with sources. Where a government denies one, describe the denial as a political position and say in the narration what historians conclude.",
+    "sources": [
+     "https://support.google.com/youtube/answer/2801939?hl=en"
+    ],
+    "confidence": null
    }
   ],
   "sources": [
@@ -881,7 +958,7 @@
   "ac": "#F2B45A",
   "font": "Bitstream Charter",
   "mark": "<path d=\"M50 12C60 26 62 34 50 44C38 34 40 26 50 12Z\" fill=\"var(--ac)\"/><rect x=\"40\" y=\"48\" width=\"20\" height=\"34\" rx=\"3\" fill=\"currentColor\"/><path d=\"M26 86H74\" stroke=\"currentColor\" stroke-width=\"6\" stroke-linecap=\"round\"/>",
-  "description": "Quiet history for falling asleep.\n\nLong, slow, softly told stories about ordinary life in the past: a night in a monastery, a day in a Roman bakery, a winter on a medieval farm. No sudden sounds, no music changes, no adverts in the middle of the story where we can avoid them.\n\nPut one on, turn the screen down, and let it go on without you.",
+  "description": "Quiet history to fall asleep to, written for adults.\n\nLong, slow, softly told stories about ordinary life in the past: a night in a monastery, a day in a Roman bakery, a winter on a medieval farm. No sudden sounds, no music changes, no adverts in the middle of the story where we can avoid them.\n\nPut one on, turn the screen down, and let it go on without you.\n\nEvery story is researched and written for this channel, and the main sources are listed under each video.",
   "keywords": "sleep history, history for sleep, boring history for sleep, bedtime stories for adults, calm narration, fall asleep to history, medieval life, relaxing documentary",
   "titles": [
    "A Quiet Night in a Medieval Monastery (2 Hours)",
@@ -915,6 +992,28 @@
      "https://hridigital.shef.ac.uk/cistercians/glossary/horarium.php"
     ],
     "confidence": "medium"
+   },
+   {
+    "step": "youtube-rules",
+    "field": "description",
+    "from": "Put one on, turn the screen down, and let it go on without you.",
+    "to": "Put one on, turn the screen down, and let it go on without you.\n\nEvery story is researched and written for this channel, and the main sources are listed under each video.",
+    "reason": "Generic or repetitive content (monetization review): Make each video clearly different in substance: new facts, a new place, a new period. List the main sources in every video description. Once it is true, add a line to the About text saying the stories are researched and written for the channel.",
+    "sources": [
+     "https://support.google.com/youtube/answer/1311392"
+    ],
+    "confidence": null
+   },
+   {
+    "step": "youtube-rules",
+    "field": "description",
+    "from": "Quiet history for falling asleep.",
+    "to": "Quiet history to fall asleep to, written for adults.",
+    "reason": "Made for kids (bedtime stories): In YouTube Studio > Settings > Channel > Advanced settings > Audience, choose \"No, set this channel as not made for kids.\" Keep \"bedtime story\", \"for kids\" and cartoon characters out of titles, tags and thumbnails, and say in the description that the stories are for adults.",
+    "sources": [
+     "https://support.google.com/youtube/answer/9528076"
+    ],
+    "confidence": null
    }
   ],
   "sources": [
@@ -1267,7 +1366,7 @@
   "ac": "#7FB7BE",
   "font": "Inter",
   "mark": "<path d=\"M10 40L50 14L90 40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M28 54V66M42 60V78M56 54V70M70 60V82\" stroke=\"var(--ac)\" stroke-width=\"6\" stroke-linecap=\"round\"/>",
-  "description": "Long, quiet sound for sleep, study and focus.\n\nRain, wind, distant thunder, a fire, a slow piano. Every recording runs for hours with no sudden noises, no voice and no change of scene, so nothing pulls you back.\n\nAll sound here is recorded or made for this channel.",
+  "description": "Long, quiet sound for sleep, study and focus.\n\nRain, wind, distant thunder, a fire, a slow piano. Every recording runs for hours with no sudden noises, no voice and no change of scene, so nothing pulls you back.\n\nAll sound here is recorded or mixed for this channel. Each video's description says where it was recorded, what is layered in it, and credits any licensed sound.",
   "keywords": "rain sounds for sleep, sleep sounds, ambient sounds, study music, focus sounds, relaxing rain, white noise, lofi ambient, thunderstorm sounds",
   "titles": [
    "Rain on a Slate Roof, 8 Hours, Black Screen",
@@ -1282,11 +1381,66 @@
    "Brown Noise With Soft Rain, 10 Hours"
   ],
   "scriptTitle": "How to make the first recording (no script needed)",
-  "script": "This channel has no narration, so here is the recipe instead.\n\n1. Sound. Use rain you record yourself, or sound with a licence that allows commercial use on YouTube. Keep the licence. Sound copied from another channel is what gets these channels demonetized.\n\n2. Loop. Build a section of at least 10 to 15 minutes before it repeats, with crossfades so the join can't be heard. A short loop is easy to notice and reads as low effort.\n\n3. Level. Keep the volume even from start to end. No thunderclap louder than the rest. No fade-in that starts silent.\n\n4. Picture. One still image or a black screen. Say \"black screen\" in the title when it is one: people search for it.\n\n5. Length. Publish one 3-hour and one 8-hour version of each sound.\n\n6. Make each video its own thing. A different place, different layers, a different picture. Ten uploads of the same rain with new titles is exactly what the inauthentic-content rule is aimed at.\n\n7. Description. Say what the sounds are and how long the loop is. Don't claim it treats insomnia, anxiety or any condition.",
+  "script": "This channel has no narration, so here is the recipe instead.\n\n1. Sound. Record the main sound of each video yourself where you can. A licensed sound can be one layer in your own mix, never the whole video with little change: a licence settles copyright, but YouTube's reused-content rule applies even with permission, and the same library rain can be on many other channels. Keep every licence. Never use sound copied from another channel.\n\n2. Loop. Build a section of at least 10 to 15 minutes before it repeats, with crossfades so the join can't be heard. A short loop is easy to notice and reads as low effort.\n\n3. Level. Keep the volume even from start to end. No thunderclap louder than the rest. No fade-in that starts silent.\n\n4. Picture. One still image or a black screen. Use a photo you took or one licensed for commercial use, and keep the licence: a picture found online isn't yours to monetize. Say \"black screen\" in the title when it is one: people search for it.\n\n5. Length. Give each sound one length, anywhere from 2 to 10 hours (YouTube's upload limit is 12 hours). Don't upload the same mix again at another length: two videos of the same sound can look interchangeable, and YouTube doesn't monetize channels where videos feel interchangeable.\n\n6. Make each video its own thing. A different place, different layers, a different picture. Ten uploads of the same rain with new titles is exactly what the inauthentic-content rule is aimed at.\n\n7. Description. Say what the sounds are, where and how you recorded them, what you layered together and how long the loop is, and credit any licensed sound. YouTube's reviewers may read descriptions to see how you made the content. Don't claim it treats insomnia, anxiety or any condition.",
   "history": [
    {
     "step": "draft",
     "note": "First drafts written from general knowledge, before any checking."
+   },
+   {
+    "step": "youtube-rules",
+    "field": "script",
+    "from": "5. Length. Publish one 3-hour and one 8-hour version of each sound.",
+    "to": "5. Length. Give each sound one length, anywhere from 2 to 10 hours (YouTube's upload limit is 12 hours). Don't upload the same mix again at another length: two videos of the same sound can look interchangeable, and YouTube doesn't monetize channels where videos feel interchangeable.",
+    "reason": "Generic or repetitive content (the renamed \"inauthentic content\" rule): Give each sound one length, and make every upload a different recording or mix with its own place, layers and picture. Don't upload the same mix again at a second length.",
+    "sources": [
+     "https://support.google.com/youtube/answer/1311392?hl=en"
+    ],
+    "confidence": null
+   },
+   {
+    "step": "youtube-rules",
+    "field": "script",
+    "from": "1. Sound. Use rain you record yourself, or sound with a licence that allows commercial use on YouTube. Keep the licence. Sound copied from another channel is what gets these channels demonetized.",
+    "to": "1. Sound. Record the main sound of each video yourself where you can. A licensed sound can be one layer in your own mix, never the whole video with little change: a licence settles copyright, but YouTube's reused-content rule applies even with permission, and the same library rain can be on many other channels. Keep every licence. Never use sound copied from another channel.",
+    "reason": "Reused content: a licence or permission doesn't make it yours: Make the main sound of every video your own recording where you can. Use a licensed sound only as one layer in your own mix, never as the whole video with little change, and keep every licence.",
+    "sources": [
+     "https://support.google.com/youtube/answer/1311392?hl=en"
+    ],
+    "confidence": null
+   },
+   {
+    "step": "youtube-rules",
+    "field": "script",
+    "from": "7. Description. Say what the sounds are and how long the loop is. Don't claim it treats insomnia, anxiety or any condition.",
+    "to": "7. Description. Say what the sounds are, where and how you recorded them, what you layered together and how long the loop is, and credit any licensed sound. YouTube's reviewers may read descriptions to see how you made the content. Don't claim it treats insomnia, anxiety or any condition.",
+    "reason": "Reused content is judged for the whole channel: show that you made it: In every video description, say where and how the sound was recorded, what is layered in it and how long the loop is, and credit any licensed layer.",
+    "sources": [
+     "https://support.google.com/youtube/answer/1311392?hl=en"
+    ],
+    "confidence": null
+   },
+   {
+    "step": "youtube-rules",
+    "field": "description",
+    "from": "All sound here is recorded or made for this channel.",
+    "to": "All sound here is recorded or mixed for this channel. Each video's description says where it was recorded, what is layered in it, and credits any licensed sound.",
+    "reason": "Music and sound licensing: only the Audio Library is known to be copyright-safe: Play or compose the piano yourself, or use one licensed track as a layer. Prefer the YouTube Audio Library for any outside sound, and credit Creative Commons tracks in the description. Make the About text say only what is true.",
+    "sources": [
+     "https://support.google.com/youtube/answer/3376882?hl=en"
+    ],
+    "confidence": null
+   },
+   {
+    "step": "youtube-rules",
+    "field": "script",
+    "from": "4. Picture. One still image or a black screen. Say \"black screen\" in the title when it is one: people search for it.",
+    "to": "4. Picture. One still image or a black screen. Use a photo you took or one licensed for commercial use, and keep the licence: a picture found online isn't yours to monetize. Say \"black screen\" in the title when it is one: people search for it.",
+    "reason": "Rights to the still image and to samples and loops: Use your own photos, or images licensed for commercial use, and keep the licence or proof of purchase. Check that any sample or loop pack allows commercial use.",
+    "sources": [
+     "https://support.google.com/youtube/answer/2490020?hl=en"
+    ],
+    "confidence": null
    }
   ]
  },
@@ -1306,7 +1460,7 @@
   "ac": "#F25F5C",
   "font": "Inter",
   "mark": "<circle cx=\"50\" cy=\"56\" r=\"26\" fill=\"var(--ac)\"/><circle cx=\"41\" cy=\"52\" r=\"5\" fill=\"currentColor\"/><circle cx=\"59\" cy=\"52\" r=\"5\" fill=\"currentColor\"/><path d=\"M42 66Q50 73 58 66\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M50 30V16M50 16L62 20L50 25\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
-  "description": "Very small heroes. Very short stories.\n\nAnimated shorts about tiny characters doing difficult things: a snail crossing a road, a pebble climbing a hill, a raindrop trying to get home. No words, so anyone can watch.\n\nAll characters and stories are original to this channel.",
+  "description": "Very small heroes. Very short stories.\n\nAnimated stories about tiny characters and their big days: a snail who finds a friend at the end of a long road, a candle who is scared of the dark, a paper boat that meets the sea. Every episode is a new story with its own ending. No words, so anyone can watch.\n\nAll characters and stories are original to this channel.",
   "keywords": "animated shorts, 3d animation, short stories, cute animation, animated short film, wholesome shorts, no dialogue animation, family friendly shorts",
   "titles": [
    "The Snail Who Crossed the Road",
@@ -1326,6 +1480,17 @@
    {
     "step": "draft",
     "note": "First drafts written from general knowledge, before any checking."
+   },
+   {
+    "step": "youtube-rules",
+    "field": "description",
+    "from": "Animated shorts about tiny characters doing difficult things: a snail crossing a road, a pebble climbing a hill, a raindrop trying to get home.",
+    "to": "Animated stories about tiny characters and their big days: a snail who finds a friend at the end of a long road, a candle who is scared of the dark, a paper boat that meets the sea. Every episode is a new story with its own ending.",
+    "reason": "Generic or repetitive content (YouTube's \"inauthentic content\"): same storyline, same outcome: Before production, write one line per episode giving its concept and its ending, and make sure no two share the same arc. Vary the endings: some heroes find something better than their goal, some help someone else, some change their minds. Use the description below so it promises varied stories.",
+    "sources": [
+     "https://support.google.com/youtube/answer/1311392"
+    ],
+    "confidence": null
    }
   ]
  }
