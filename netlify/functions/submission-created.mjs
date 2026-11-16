@@ -1366,9 +1366,13 @@ function footerLines(ctx) {
       ? es
         ? 'Recibe este correo porque esta dirección se usó en jachihealth.com. Si no fue usted, responda a este correo y la eliminaremos.'
         : "You are getting this email because this address was used on jachihealth.com. If that wasn't you, reply and we'll remove it."
-      : es
-        ? 'Recibe este correo por su membresía o pedido con Jachi Health.'
-        : 'You are getting this email because of your Jachi Health membership or order.',
+      : ctx.audience === 'tips'
+        ? es
+          ? 'Recibe estos consejos, unos pocos al año, por su membresía con Jachi Health. Para dejar de recibirlos, desactívelos en los ajustes de su página de miembro o responda a este correo y lo hacemos por usted.'
+          : "You get these tips, a few a year, because you're a Jachi Health member. To stop them, turn them off in your member page's settings, or reply and we'll do it for you."
+        : es
+          ? 'Recibe este correo por su membresía o pedido con Jachi Health.'
+          : 'You are getting this email because of your Jachi Health membership or order.',
   ];
 }
 
@@ -1895,6 +1899,151 @@ templates.ticket_received = (ctx) => {
   );
 };
 
+/*
+ * Member tips: a few short emails a year that help someone use what they pay for. A member can turn them off in
+ * their member page's settings (customer metadata jachi_tips = "off"). Like every email here, they say nothing about
+ * anyone's health or the care they asked for.
+ */
+const NO_DETAILS = (ctx) => ({
+  small: L(
+    ctx,
+    "To protect your privacy, please don't send medical details by email. Your coordinator goes over what you need by phone.",
+    'Para proteger su privacidad, no envíe detalles médicos por correo electrónico. Su coordinador revisa con usted lo que necesita por teléfono.',
+  ),
+});
+
+// A few days in: three ways members start.
+templates.first_steps = (ctx) => {
+  const first = firstNameOf(ctx.name);
+  const reply = replyPromise(ctx.planKey, ctx.lang);
+  return layout(
+    { ...ctx, audience: 'tips' },
+    L(ctx, 'Three things members ask for first', 'Tres cosas que los miembros piden primero'),
+    L(ctx, `One request is all it takes. We start ${reply}.`, `Basta con una solicitud. Empezamos ${reply}.`),
+    [
+      { h1: L(ctx, first ? `Where to start, ${first}` : 'Where to start', first ? `Por dónde empezar, ${first}` : 'Por dónde empezar') },
+      {
+        p: L(
+          ctx,
+          `Your coordinator is ready when you are, and starts on any request ${reply}. Here are three ways members begin.`,
+          `Su coordinador está listo cuando usted lo esté, y empieza con cualquier solicitud ${reply}. Estas son tres formas en que los miembros comienzan.`,
+        ),
+      },
+      {
+        steps: {
+          title: L(ctx, 'Good first requests', 'Buenas primeras solicitudes'),
+          items: [
+            L(
+              ctx,
+              "A visit you've been putting off. We find options, confirm the provider's self-pay price in writing, and book it.",
+              'Una consulta que ha ido posponiendo. Buscamos opciones, le confirmamos por escrito el precio sin seguro del proveedor y hacemos la cita.',
+            ),
+            L(
+              ctx,
+              'A medical bill that looks wrong. Bill review is part of your plan.',
+              'Una factura médica que no le parece correcta. La revisión de facturas es parte de su plan.',
+            ),
+            L(
+              ctx,
+              'A prescription price check at pharmacies near you.',
+              'Una comparación del precio de una receta en farmacias cercanas.',
+            ),
+          ],
+        },
+      },
+      ...(ctx.portalUrl ? [{ button: { url: ctx.portalUrl, label: L(ctx, 'Ask for a call', 'Pedir una llamada') } }] : []),
+      {
+        box: {
+          title: L(ctx, 'On your member page', 'En su página de miembro'),
+          text: L(
+            ctx,
+            'Your plan and invoices, a list of what your plan includes, and a private health notebook that stays on your own device.',
+            'Su plan y sus facturas, una lista de lo que incluye su plan y una libreta de salud privada que se queda en su propio dispositivo.',
+          ),
+        },
+      },
+      NO_DETAILS(ctx),
+    ],
+  );
+};
+
+// About three weeks in: a check-in from the team, with the two promises that cover every request.
+templates.month_checkin = (ctx) => {
+  const first = firstNameOf(ctx.name);
+  const reply = replyPromise(ctx.planKey, ctx.lang);
+  return layout(
+    { ...ctx, audience: 'tips' },
+    L(ctx, 'Three weeks in: is Jachi working for you?', 'Tres semanas: ¿le está sirviendo Jachi?'),
+    L(ctx, 'If something is off, reply and a person on our team will fix it.', 'Si algo no va bien, responda y una persona de nuestro equipo lo resolverá.'),
+    [
+      { h1: L(ctx, first ? `Checking in, ${first}` : 'Checking in', first ? `¿Cómo va todo, ${first}?` : '¿Cómo va todo?') },
+      {
+        p: L(
+          ctx,
+          "You've been a member for about three weeks. If you haven't asked your coordinator for anything yet, this is a good week to start: one request is all it takes.",
+          'Lleva unas tres semanas como miembro. Si todavía no le ha pedido nada a su coordinador, esta es una buena semana para empezar: basta con una solicitud.',
+        ),
+      },
+      {
+        box: {
+          title: L(ctx, 'Two promises on every request', 'Dos promesas en cada solicitud'),
+          text: L(
+            ctx,
+            `We start ${reply}, or your next month is free. And we confirm the provider's self-pay price in writing before booking; if you're billed more, we take it up with the provider and your next month is on us.`,
+            `Empezamos ${reply}, o su próximo mes es gratis. Y le confirmamos por escrito el precio sin seguro del proveedor antes de hacer la cita; si le cobran más, lo resolvemos con el proveedor y su próximo mes corre por nuestra cuenta.`,
+          ),
+        },
+      },
+      ...(ctx.portalUrl ? [{ button: { url: ctx.portalUrl, label: L(ctx, 'Open my member page', 'Abrir mi página de miembro') } }] : []),
+      {
+        p: L(
+          ctx,
+          "If something isn't right, reply to this email. A person on our team reads every reply.",
+          'Si algo no va bien, responda a este correo. Una persona de nuestro equipo lee cada respuesta.',
+        ),
+      },
+      NO_DETAILS(ctx),
+    ],
+  );
+};
+
+// Concierge Plus and Signature: each quarter, a reminder that a planning call is part of the plan.
+templates.planning_call = (ctx) => {
+  const first = firstNameOf(ctx.name);
+  const signature = ctx.planKey === 'signature';
+  return layout(
+    { ...ctx, audience: 'tips' },
+    L(ctx, 'Your quarterly planning call is ready to book', 'Su llamada trimestral de planificación está lista para agendar'),
+    L(ctx, "It's part of your plan. Ask and your coordinator sets a time.", 'Es parte de su plan. Pídala y su coordinador le da una hora.'),
+    [
+      {
+        h1: L(
+          ctx,
+          first ? `Time to plan the next few months, ${first}` : 'Time to plan the next few months',
+          first ? `Es momento de planear los próximos meses, ${first}` : 'Es momento de planear los próximos meses',
+        ),
+      },
+      {
+        p: signature
+          ? L(
+              ctx,
+              'Your Signature plan includes a check-in with your coordinator every quarter. Use it to line up the visits, paperwork and follow-ups your household has coming.',
+              'Su plan Signature incluye una revisión con su coordinador cada trimestre. Úsela para organizar las consultas, los trámites y los seguimientos que vienen para su hogar.',
+            )
+          : L(
+              ctx,
+              'Your Concierge Plus plan includes a 30-minute planning call every quarter. Use it to line up the visits, paperwork and follow-ups you have coming.',
+              'Su plan Concierge Plus incluye una llamada de planificación de 30 minutos cada trimestre. Úsela para organizar las consultas, los trámites y los seguimientos que vienen.',
+            ),
+      },
+      ...(ctx.portalUrl ? [{ button: { url: ctx.portalUrl, label: L(ctx, 'Ask for a call', 'Pedir una llamada') } }] : []),
+      NO_DETAILS(ctx),
+    ],
+  );
+};
+
+const TIP_TEMPLATES = ['first_steps', 'month_checkin', 'planning_call'];
+
 function renderEmail(name, ctx) {
   const fn = templates[name];
   if (!fn) throw new Error(`Unknown email template: ${name}`);
@@ -2002,6 +2151,7 @@ async function sendMemberEmail(template, recipient, data, idempotencyKey) {
     ctx.referralUrl = referralUrl(ctx.joinUrl, recipient.name);
     ctx.portalUrl = `${ctx.site}${es ? '/es/account/' : '/account/'}?create`;
   }
+  if (TIP_TEMPLATES.includes(template)) ctx.portalUrl = `${ctx.site}${es ? '/es/account/' : '/account/'}`;
   const email = renderEmail(template, ctx);
   return sendEmail({
     to: recipient.email,
@@ -2088,7 +2238,31 @@ async function memberView(email) {
     open_invoice: open,
     invoices,
     manage_url: links().manageUrl,
+    // "Give a month, get a month": the checkout fills in "Who referred you?" from this link.
+    referral_url: kind === 'member' ? referralUrl(links().joinUrl, customer.name) : '',
+    // Member tips by email (a few a year): on unless the member turned them off.
+    tips: !tipsOff(customer),
   };
+}
+
+function tipsOff(customer) {
+  return Boolean(customer && customer.metadata && customer.metadata.jachi_tips === 'off');
+}
+
+// The member page's switch for the tips. Only the signed-in person's own customer records are touched: the caller
+// (src/functions/member.mjs) has already checked that they proved this email is theirs.
+async function setTips(email, on) {
+  const wanted = String(email || '').trim().toLowerCase();
+  if (!wanted) return { ok: false, tips: true };
+  const stripe = getStripe();
+  let changed = 0;
+  for (const customer of await findCustomers(stripe, wanted)) {
+    const subs = await stripe.subscriptions.list({ customer: customer.id, status: 'all', limit: 20 });
+    if (!subs.data.some(isJachiSubscription)) continue;
+    await stripe.customers.update(customer.id, { metadata: { jachi_tips: on ? '' : 'off' } });
+    changed += 1;
+  }
+  return { ok: changed > 0, tips: Boolean(on) };
 }
 
 /* ---------- Automatic replies to the website's forms ---------- */
@@ -2547,6 +2721,56 @@ async function sendRenewalNotices(stripe, now, summary) {
   }
 }
 
+// Member tips (see the templates): each is sent once, in a short window, to members who are active, paid up,
+// not canceling, and haven't turned tips off. A flag on the subscription records what was sent.
+async function sendTips(stripe, now, summary) {
+  const subs = await listAll((p) => stripe.subscriptions.list(p), { status: 'active', expand: ['data.customer'] });
+  for (const sub of subs) {
+    try {
+      if (!isJachiSubscription(sub) || sub.cancel_at_period_end || sub.cancel_at) continue;
+      const started = sub.start_date || sub.created;
+      if (!started) continue;
+      const days = (now - started) / ONE_DAY;
+      const md = sub.metadata || {};
+      const plan = planFromSubscription(sub);
+      let template = '';
+      let flag = null;
+      let key = '';
+      if (days >= 3 && days < 7 && !md.jachi_tip_first) {
+        template = 'first_steps';
+        flag = { jachi_tip_first: String(now) };
+        key = `tip-first-${sub.id}`;
+      } else if (days >= 21 && days < 25 && !md.jachi_tip_month) {
+        template = 'month_checkin';
+        flag = { jachi_tip_month: String(now) };
+        key = `tip-month-${sub.id}`;
+      } else if (plan.planKey === 'plus' || plan.planKey === 'signature') {
+        // Quarters since joining: a note in the week before each one comes round.
+        const quarter = Math.round((days + 4) / 91);
+        const until = quarter * 91 - days;
+        if (quarter >= 1 && until > 0 && until <= 7 && md.jachi_tip_quarter !== String(quarter)) {
+          template = 'planning_call';
+          flag = { jachi_tip_quarter: String(quarter) };
+          key = `tip-quarter-${sub.id}-${quarter}`;
+        }
+      }
+      if (!template) continue;
+      if (!(await hasPaidInvoice(stripe, sub.id))) continue;
+      const customer = await customerOf(stripe, sub.customer);
+      if (!customer || customer.deleted || !customer.email || tipsOff(customer)) continue;
+      const to = { email: customer.email, name: customer.name || '', lang: langOf(customer) };
+      const res = await sendMemberEmail(template, to, plan, key);
+      if (res && res.sent) {
+        await stripe.subscriptions.update(sub.id, { metadata: flag });
+        summary.tips += 1;
+      }
+    } catch (err) {
+      summary.errors += 1;
+      console.error(`Member tip for ${sub.id} failed:`, err.message);
+    }
+  }
+}
+
 /* ---------- Requests from the membership page ---------- */
 
 const ONE_HOUR = 3600;
@@ -2684,16 +2908,17 @@ async function webhook(req) {
 }
 
 async function daily() {
-  const summary = { nudges: 0, renewalNotices: 0, errors: 0 };
+  const summary = { nudges: 0, renewalNotices: 0, tips: 0, errors: 0 };
   const stripe = getStripe();
   const now = Math.floor(Date.now() / 1000);
   await sendPaymentNudges(stripe, now, summary);
   await sendRenewalNotices(stripe, now, summary);
+  await sendTips(stripe, now, summary);
   console.log('Daily member emails:', JSON.stringify(summary));
   return summary;
 }
 
-return { start, plans, webhook, daily, memberView, acknowledge, renderEmail, templateNames: Object.keys(templates), sendEmail, encodeForm, verifyStripeSignature };
+return { start, plans, webhook, daily, memberView, setTips, acknowledge, renderEmail, templateNames: Object.keys(templates), sendEmail, encodeForm, verifyStripeSignature };
 })();
 
 // ---------- Automatic replies to the site's forms (src/functions/submission-created.mjs) ----------

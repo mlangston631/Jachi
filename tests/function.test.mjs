@@ -344,5 +344,54 @@ r = await call(admin.default, '/api/admin/alerts', { method: 'POST', token: 'adm
 check('admin alerts: without the API token → 503 forms_not_connected', r.status === 503 && (await r.json()).error === 'forms_not_connected');
 delete globalThis.netlifyIdentityContext;
 
+// ---------- The chat's own answers: which questions the page answers itself, and which it leaves to the assistant ----------
+// The matcher is cut out of src/app.js and run on the answers build.py wrote (public/help.<lang>.json). A question
+// about someone's health, a provider's price or anything the site doesn't say must never be matched to a stock answer.
+const { readFileSync } = await import('node:fs');
+const root = new URL('../', import.meta.url);
+const appJs = readFileSync(new URL('src/app.js', root), 'utf8');
+const cutFrom = appJs.indexOf('    let wordsOf = () => [];');
+const cutTo = appJs.indexOf('    const relink = [];');
+check('chat answers: the matcher is where this test expects it in src/app.js', cutFrom > 0 && cutTo > cutFrom);
+const matcherFor = (lang) => {
+  const help = JSON.parse(readFileSync(new URL(`public/help.${lang}.json`, root), 'utf8'));
+  const plain = (t) => String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const make = new Function('help', 'plain', 'pageKind', '$$', '$',
+    `let entries = []; let rarity = () => 1;\n${appJs.slice(cutFrom, cutTo)}\nindex(); return text => match(text);`);
+  return make(help, plain, () => 'page', () => [], () => null);
+};
+const result = (m, q) => { const x = m(q); return x.hit ? x.hit.id : x.close.length ? `?${x.close.map((e) => e.id).sort().join(',')}` : null; };
+const expected = {
+  en: {
+    'how much does it cost': 'prices', 'price': 'prices', 'What do the plans cost?': 'prices', 'how much is it': 'prices',
+    'is this insurance': 'insurance', 'what does a coordinator do': 'coordinator', 'how fast will my coordinator reply': 'speed',
+    'can I cancel': 'cancel', 'how do i cancel my membership': 'cancel', 'refund': 'refund', 'can i get my money back': 'refund',
+    'are you a real person': 'ai', 'are you a bot': 'ai', 'can I talk to a human': 'person', 'who can join': 'who', 'how do I join': 'start',
+    'join': '?start,who', 'do you speak spanish': 'spanish', 'what is the health notebook': 'notebook', 'what services do you offer': 'help',
+    'do you have discounts': 'discounts', 'founding price': 'founding', 'how do I pay': 'pay', 'can I keep my doctor': 'choose',
+    'what happens when i cancel': 'after_cancel', 'is my data private': 'privacy', 'how do I log in': 'account', 'can I switch plans': 'switch',
+    'what is included': 'included', 'emergency': 'emergencies',
+    // Left to the assistant (and its rules): health questions, providers' prices, requests, and anything the site doesn't say.
+    'how much is a doctor visit': null, 'do you take insurance': null, 'I need a doctor': null, 'can you prescribe ozempic': null,
+    'my stomach hurts': null, 'do you treat anxiety': null, 'I have high blood pressure': null, 'do i get a discount on labs': null,
+    'can I book an appointment for tomorrow': null, 'is there a free trial': null, 'which plan is best for a family of 3': null,
+    'do you cover children': null, 'hello': null, 'is it worth it': null,
+  },
+  es: {
+    'cuanto cuesta': 'prices', '¿Cuánto cuestan los planes?': 'prices', 'precio': 'prices', 'es un seguro': 'insurance',
+    '¿Qué hace un coordinador?': 'coordinator', 'puedo cancelar': 'cancel', 'cancelar mi membresia': 'cancel', 'reembolso': 'refund',
+    'atienden en español': 'spanish', 'como pago': 'pay', '¿Quién puede unirse?': 'who', 'como me uno': 'start',
+    '¿puedo hablar con una persona?': 'person', 'eres un robot': 'ai', 'que es la libreta de salud': 'notebook',
+    'tienen descuentos': 'discounts', 'precio de fundador': 'founding', '¿qué tan rápido responden?': 'speed',
+    'me duele el pecho': null, 'necesito un doctor': null, 'pueden recetar antibioticos': null, 'tengo dolor de cabeza': null,
+    'cuanto cuesta una consulta con el dermatologo': null,
+  },
+};
+for (const lang of ['en', 'es']) {
+  const m = matcherFor(lang);
+  const wrong = Object.entries(expected[lang]).filter(([q, want]) => result(m, q) !== want).map(([q, want]) => `${q} → ${result(m, q)} (not ${want})`);
+  check(`chat answers (${lang}): common questions are matched, and health or price questions are left to the assistant`, wrong.length === 0, wrong.join('; '));
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

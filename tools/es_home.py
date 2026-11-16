@@ -81,6 +81,19 @@ R = [
     ('<p class="m-addon">Cancel anytime. Full refund if you cancel within 30 days of joining.</p>',
      '<p class="m-addon">Cancele cuando quiera. Reembolso completo si cancela dentro de los 30 días después de unirse.</p>', 1),
 
+    # The member page's tools
+    ('id="tools-title">Built to keep us honest.</h2>', 'id="tools-title">Hecho para que cumplamos lo prometido.</h2>', 1),
+    ('<p class="lead">Your member page tracks our promises to you, and keeps your health notes where only you can read them.</p>',
+     '<p class="lead">Su página de miembro lleva la cuenta de lo que le prometemos, y guarda sus notas de salud donde solo usted puede leerlas.</p>', 1),
+    ('<h3>A clock on our promise</h3><p>Ask for a call and your member page shows when we promised to start. If we miss it, your next month is free.</p>',
+     '<h3>Un reloj para nuestra promesa</h3><p>Pida una llamada y su página de miembro le muestra para cuándo prometimos empezar. Si no cumplimos, su próximo mes es gratis.</p>', 1),
+    ("<h3>The confirmed price, on record</h3><p>Note the price we confirmed and what you were billed. If it's more, one tap tells your coordinator.</p>",
+     '<h3>El precio confirmado, anotado</h3><p>Anote el precio que le confirmamos y lo que le cobraron. Si le cobraron más, avise a su coordinador con un toque.</p>', 1),
+    ('<h3>A health notebook only you can read</h3><p>Check-ins, readings and visits, saved on your own device and never sent to us. Free with any account.</p>',
+     '<h3>Una libreta de salud que solo usted puede leer</h3><p>Cómo se siente, sus lecturas y sus consultas, guardadas en su propio dispositivo y nunca enviadas a nosotros. Gratis con cualquier cuenta.</p>', 1),
+    ('<a class="btn" href="/account/?create">Start a free notebook</a>', '<a class="btn" href="/es/account/?create">Empiece una libreta gratis</a>', 1),
+    ('<a class="btn btn--ghost" href="{{PLANS_HREF}}">See the plans</a>', '<a class="btn btn--ghost" href="{{PLANS_HREF}}">Ver los planes</a>', 1),
+
     # Privacy promise
     ('id="promise-title">Your health is not for sale.</h2>', 'id="promise-title">Su salud no está a la venta.</h2>', 1),
     ("<p class=\"lead\">Providers don't pay us, and we don't sell what you share. We use it to run your membership, book your care and answer your questions, never to target you with ads.</p>",

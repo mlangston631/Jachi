@@ -1,19 +1,19 @@
 {
  "/": {
   "date": "2026-11-15",
-  "hash": "e7a49e32ca935492"
+  "hash": "5a32ad575243a947"
  },
  "/anxiety-depression-treatment/": {
   "date": "2026-11-15",
   "hash": "097ce934307c5c54"
  },
  "/consumer-health-data/": {
-  "date": "2026-11-13",
-  "hash": "d569f456710e0f19"
+  "date": "2026-11-15",
+  "hash": "181b3f15216c180e"
  },
  "/es/": {
   "date": "2026-11-15",
-  "hash": "869369310fddbe3a"
+  "hash": "1257f69667a26238"
  },
  "/es/atencion-de-urgencia/": {
   "date": "2026-11-15",
@@ -32,8 +32,8 @@
   "hash": "989155c0fa7c62e0"
  },
  "/es/datos-de-salud/": {
-  "date": "2026-11-13",
-  "hash": "75732f392fb8449f"
+  "date": "2026-11-15",
+  "hash": "17a4c19c4f03a17d"
  },
  "/es/guias/": {
   "date": "2026-11-15",
@@ -53,7 +53,7 @@
  },
  "/es/planes/": {
   "date": "2026-11-15",
-  "hash": "d449faa1fec1028d"
+  "hash": "f255b876d7735496"
  },
  "/es/resurtido-de-recetas/": {
   "date": "2026-11-15",
@@ -113,7 +113,7 @@
  },
  "/plans/": {
   "date": "2026-11-15",
-  "hash": "95280f8c153b0272"
+  "hash": "35153bb69f685360"
  },
  "/prescription-refills/": {
   "date": "2026-11-15",
@@ -121,7 +121,7 @@
  },
  "/privacy/": {
   "date": "2026-11-15",
-  "hash": "b759536c5a576d54"
+  "hash": "11a7a1ae78a91beb"
  },
  "/sexual-health/": {
   "date": "2026-11-15",
@@ -133,7 +133,7 @@
  },
  "/terms/": {
   "date": "2026-11-15",
-  "hash": "a69fa0ef04b80df9"
+  "hash": "0d14191fa149d8aa"
  },
  "/texas-medical-board/": {
   "date": "2026-10-18",

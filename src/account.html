@@ -150,6 +150,7 @@
 
         <nav class="ptabs" id="ptabs" aria-label="{{T:a_p_nav}}">
           <a class="ptab" href="#home" data-tab="home" aria-current="page">{{I:home}}<span>{{T:a_p_home}}</span></a>
+          <a class="ptab" href="#health" data-tab="health">{{I:leaf}}<span>{{T:a_p_health}}</span></a>
           <a class="ptab" href="#billing" data-tab="billing">{{I:card}}<span>{{T:a_p_billing}}</span></a>
           <a class="ptab" href="#help" data-tab="help">{{I:talk}}<span>{{T:a_p_help}}</span></a>
           <a class="ptab" href="#settings" data-tab="settings">{{I:sliders}}<span>{{T:a_p_settings}}</span></a>
@@ -177,11 +178,238 @@
             <a class="btn" id="m-pay-link" href="{{PLANS_HREF}}" target="_blank" rel="noopener">{{T:a_p_inv_pay}}</a>
             <p class="fine">{{I:lock}}<span>{{T:a_p_pay_note}}</span></p>
           </div>
+          <section class="fy" id="fy" aria-labelledby="fy-title" hidden>
+            <h3 class="psub" id="fy-title">{{T:a_u_title}}</h3>
+            <ul class="fy__list" id="fy-list"></ul>
+            <button class="btn btn--ghost btn--sm fy__more" type="button" id="fy-more" aria-controls="fy-list" hidden>{{T:a_u_more_plain}}</button>
+          </section>
           <ul class="pquick" id="m-quick">
             <li><a class="pquick__a" href="#help" data-tab-go="help"><span class="pquick__ic">{{I:talk}}</span><span><b id="q-help">{{T:a_p_help}}</b><small id="q-reply">{{T:a_p_reply_none}}</small></span>{{I:arrow:i--arrow}}</a></li>
             <li><a class="pquick__a" href="#billing" data-tab-go="billing"><span class="pquick__ic">{{I:card}}</span><span><b>{{T:a_p_invoices}}</b><small id="q-invoices">{{T:a_p_inv_none}}</small></span>{{I:arrow:i--arrow}}</a></li>
             <li><a class="pquick__a" href="{{PLANS_HREF}}"><span class="pquick__ic">{{I:spark}}</span><span><b>{{T:a_p_plan_link}}</b><small>{{T:a_p_plan_link_hint}}</small></span>{{I:arrow:i--arrow}}</a></li>
           </ul>
+          <section class="uses acct__block" id="uses" aria-labelledby="uses-title" hidden>
+            <h3 class="psub" id="uses-title">{{T:a_r_uses_title}}</h3>
+            <p>{{T:a_r_uses_lead}}</p>
+            <p class="uses__count" id="uses-count"></p>
+            <ul class="uses__list" id="uses-list"></ul>
+            <p class="fine">{{T:a_r_uses_note}}</p>
+          </section>
+          <section class="refer acct__block" id="refer" aria-labelledby="refer-title" hidden>
+            <h3 class="psub" id="refer-title">{{T:a_u_ref_t}}</h3>
+            <p>{{T:a_r_ref_body}}</p>
+            <p class="refer__link" id="refer-link"></p>
+            <div class="pacts">
+              <button class="btn btn--sm" type="button" id="refer-share">{{I:share}} {{T:a_r_ref_share}}</button>
+              <button class="btn btn--ghost btn--sm" type="button" id="refer-copy">{{T:a_r_ref_copy}}</button>
+            </div>
+            <div class="form-status" id="refer-status" role="status"></div>
+            <p class="fine">{{T:a_r_ref_fine}}</p>
+          </section>
+        </div>
+
+        <div class="ppanel nb" id="health" data-panel="health" hidden>
+          <h2 class="acct__title" tabindex="-1">{{T:a_n_title}}</h2>
+          <p class="nb__private">{{I:lock}}<span>{{T:a_n_private}}</span></p>
+          <p class="portal__demo" id="nb-demo" hidden>{{I:info}}<span>{{T:a_n_demo}}</span></p>
+          <div class="form-status" id="nb-status" role="status"></div>
+
+          <div class="nb__state" id="nb-intro" hidden>
+            <p>{{T:a_n_intro}}</p>
+            <ul class="nb__points">
+              <li>{{I:lock}}<span>{{T:a_n_intro_1}}</span></li>
+              <li>{{I:shield}}<span>{{T:a_n_intro_2}}</span></li>
+              <li>{{I:clip}}<span>{{T:a_n_intro_3}}</span></li>
+            </ul>
+            <button class="btn" type="button" id="nb-start">{{T:a_n_start}} {{I:arrow:i--arrow}}</button>
+            <p class="fine">{{T:a_n_not_advice}}</p>
+          </div>
+
+          <div class="nb__state" id="nb-locked" hidden>
+            <h3 class="nb__h" id="nb-locked-title" tabindex="-1">{{T:a_n_unlock_title}}</h3>
+            <form class="form" id="nb-unlock-form" novalidate>
+              <div class="field">
+                <label class="label" for="nb-pass">{{T:a_n_passcode}}</label>
+                <input class="input" id="nb-pass" type="password" autocomplete="off" maxlength="200" data-field="nb-pass" aria-describedby="err-nb-pass">
+                <p class="err" id="err-nb-pass" hidden>{{I:alert}}<span></span></p>
+              </div>
+              <button class="btn" type="submit" id="nb-unlock"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_n_unlock}}</span></button>
+            </form>
+            <p class="fine">{{T:a_n_forgot}}</p>
+            <button class="btn btn--ghost btn--sm btn--warn" type="button" data-nb-erase>{{I:trash}} {{T:a_n_erase}}</button>
+          </div>
+
+          <div class="nb__state" id="nb-open" hidden>
+            <div class="nb__who">
+              <label class="label" for="nb-person">{{T:a_n_for}}</label>
+              <select class="select" id="nb-person"></select>
+              <button class="btn btn--ghost btn--sm" type="button" id="nb-person-open" aria-expanded="false" aria-controls="nb-person-form">{{I:plus}} {{T:a_n_add_person}}</button>
+              <form class="nb__inline" id="nb-person-form" hidden novalidate>
+                <label class="label" for="nb-person-name">{{T:a_n_person_name}}<span class="label__hint">{{T:a_n_person_hint}}</span></label>
+                <div class="nb__row"><input class="input" id="nb-person-name" maxlength="40" autocomplete="off"><button class="btn btn--sm" type="submit">{{T:a_n_person_add}}</button></div>
+              </form>
+            </div>
+            <div class="nb__tabs" id="nb-tabs" role="group" aria-label="{{T:a_n_views}}">
+              <button type="button" data-nb-view="today" aria-pressed="true">{{T:a_n_today}}</button>
+              <button type="button" data-nb-view="numbers" aria-pressed="false">{{T:a_n_numbers}}</button>
+              <button type="button" data-nb-view="visits" aria-pressed="false">{{T:a_n_visits}}</button>
+              <button type="button" data-nb-view="summary" aria-pressed="false">{{T:a_n_summary}}</button>
+            </div>
+
+            <section class="nb__panel" data-nb-panel="today">
+              <form class="nb__card" id="nb-check-form" novalidate>
+                <fieldset class="fs">
+                  <legend class="nb__q" id="nb-check-q">{{T:a_n_check_q}}</legend>
+                  <div class="nb__levels" id="nb-levels">
+                    <label><input type="radio" name="level" value="1"><span class="nb__leaf" aria-hidden="true"></span><span>{{T:a_n_lv1}}</span></label>
+                    <label><input type="radio" name="level" value="2"><span class="nb__leaf" aria-hidden="true"></span><span>{{T:a_n_lv2}}</span></label>
+                    <label><input type="radio" name="level" value="3"><span class="nb__leaf" aria-hidden="true"></span><span>{{T:a_n_lv3}}</span></label>
+                    <label><input type="radio" name="level" value="4"><span class="nb__leaf" aria-hidden="true"></span><span>{{T:a_n_lv4}}</span></label>
+                    <label><input type="radio" name="level" value="5"><span class="nb__leaf" aria-hidden="true"></span><span>{{T:a_n_lv5}}</span></label>
+                  </div>
+                </fieldset>
+                <fieldset class="fs">
+                  <legend class="label">{{T:a_n_tags}}<span class="label__hint">{{T:a_n_tags_hint}}</span></legend>
+                  <div class="checks checks--chips" id="nb-tags"></div>
+                  <div class="nb__row"><label class="visually-hidden" for="nb-tag-new">{{T:a_n_tag_add}}</label><input class="input" id="nb-tag-new" maxlength="30" placeholder="{{T:a_n_tag_new}}" autocomplete="off" enterkeyhint="done"><button class="btn btn--ghost btn--sm" type="button" id="nb-tag-add">{{I:plus}} {{T:a_n_tag_add}}</button></div>
+                </fieldset>
+                <div class="field">
+                  <label class="label" for="nb-note">{{T:a_n_note}} <span class="label__opt">{{T:a_optional}}</span></label>
+                  <textarea class="input nb__note" id="nb-note" rows="2" maxlength="280"></textarea>
+                </div>
+                <button class="btn" type="submit" id="nb-check-save">{{T:a_n_save_check}}</button>
+                <div class="form-status" id="nb-check-status" role="status"></div>
+              </form>
+              <div class="nb__card">
+                <h3 class="nb__h">{{T:a_n_q_title}}</h3>
+                <form class="nb__row" id="nb-q-form" novalidate><label class="visually-hidden" for="nb-q-new">{{T:a_n_q_label}}</label><input class="input" id="nb-q-new" maxlength="200" placeholder="{{T:a_n_q_label}}" autocomplete="off"><button class="btn btn--sm" type="submit">{{T:a_n_q_add}}</button></form>
+                <ul class="nb__list" id="nb-q-list"></ul>
+                <p class="fine" id="nb-q-none">{{T:a_n_q_none}}</p>
+              </div>
+              <div class="nb__card">
+                <h3 class="nb__h">{{T:a_n_lately}}</h3>
+                <ul class="nb__list" id="nb-lately"></ul>
+                <p class="fine" id="nb-lately-none">{{T:a_n_none_yet}}</p>
+              </div>
+            </section>
+
+            <section class="nb__panel" data-nb-panel="numbers" hidden>
+              <p>{{T:a_n_num_lead}}</p>
+              <div class="nb__metrics" id="nb-metrics"></div>
+              <details class="nb__more" id="nb-track">
+                <summary>{{T:a_n_track}}</summary>
+                <div class="checks checks--chips" id="nb-track-list"></div>
+                <form class="nb__inline" id="nb-custom-form" novalidate>
+                  <p class="label">{{T:a_n_custom}}</p>
+                  <div class="nb__grid2">
+                    <div class="field"><label class="label" for="nb-custom-name">{{T:a_n_custom_name}}</label><input class="input" id="nb-custom-name" maxlength="30" autocomplete="off"></div>
+                    <div class="field"><label class="label" for="nb-custom-unit">{{T:a_n_custom_unit}} <span class="label__opt">{{T:a_optional}}</span></label><input class="input" id="nb-custom-unit" maxlength="12" autocomplete="off"></div>
+                  </div>
+                  <button class="btn btn--ghost btn--sm" type="submit">{{I:plus}} {{T:a_n_custom_add}}</button>
+                </form>
+              </details>
+            </section>
+
+            <section class="nb__panel" data-nb-panel="visits" hidden>
+              <p>{{T:a_n_v_lead}}</p>
+              <div class="nb__yearbox" id="nb-yearbox" hidden>
+                <p class="nb__year" id="nb-year"></p>
+                <button class="btn btn--ghost btn--sm" type="button" id="nb-year-copy">{{T:a_n_v_copy}}</button>
+              </div>
+              <button class="btn btn--sm" type="button" id="nb-visit-open" aria-expanded="false" aria-controls="nb-visit-form">{{I:plus}} {{T:a_n_v_add}}</button>
+              <form class="nb__card form" id="nb-visit-form" hidden novalidate>
+                <div class="nb__grid2">
+                  <div class="field"><label class="label" for="nb-v-date">{{T:a_n_v_date}}</label><input class="input" id="nb-v-date" type="date" data-field="nb-v-date" aria-describedby="err-nb-v-date"><p class="err" id="err-nb-v-date" hidden>{{I:alert}}<span></span></p></div>
+                  <div class="field"><label class="label" for="nb-v-where">{{T:a_n_v_where}}</label><input class="input" id="nb-v-where" maxlength="60" autocomplete="off"></div>
+                  <div class="field"><label class="label" for="nb-v-confirmed">{{T:a_n_v_confirmed}} <span class="label__opt">{{T:a_optional}}</span></label><input class="input" id="nb-v-confirmed" inputmode="decimal" maxlength="10" placeholder="$" autocomplete="off" data-field="nb-v-confirmed" aria-describedby="err-nb-v-confirmed"><p class="err" id="err-nb-v-confirmed" hidden>{{I:alert}}<span></span></p></div>
+                  <div class="field"><label class="label" for="nb-v-billed">{{T:a_n_v_billed}} <span class="label__opt">{{T:a_optional}}</span></label><input class="input" id="nb-v-billed" inputmode="decimal" maxlength="10" placeholder="$" autocomplete="off" data-field="nb-v-billed" aria-describedby="err-nb-v-billed"><p class="err" id="err-nb-v-billed" hidden>{{I:alert}}<span></span></p></div>
+                  <div class="field"><label class="label" for="nb-v-follow">{{T:a_n_v_follow}} <span class="label__opt">{{T:a_optional}}</span></label><input class="input" id="nb-v-follow" type="date"></div>
+                </div>
+                <div class="field"><label class="label" for="nb-v-note">{{T:a_n_v_note}} <span class="label__opt">{{T:a_optional}}</span></label><textarea class="input nb__note" id="nb-v-note" rows="2" maxlength="400"></textarea></div>
+                <button class="btn" type="submit">{{T:a_n_v_save}}</button>
+              </form>
+              <ul class="nb__visits" id="nb-visits"></ul>
+              <p class="fine" id="nb-visits-none">{{T:a_n_v_none}}</p>
+            </section>
+
+            <section class="nb__panel" data-nb-panel="summary" hidden>
+              <p>{{T:a_n_s_lead}}</p>
+              <div class="nb__card">
+                <div class="nb__brief-head">
+                  <h3 class="nb__h">{{T:a_n_s_brief}}</h3>
+                  <div class="nb__range"><label class="visually-hidden" for="nb-range">{{T:a_n_s_range}}</label>
+                    <select class="select select--sm" id="nb-range"><option value="30">{{T:a_n_s_30}}</option><option value="90">{{T:a_n_s_90}}</option><option value="0">{{T:a_n_s_all}}</option></select></div>
+                </div>
+                <p class="nb__brief" id="nb-brief" tabindex="0"></p>
+                <div class="pacts">
+                  <button class="btn btn--sm" type="button" id="nb-brief-copy">{{T:a_n_s_copy}}</button>
+                  <button class="btn btn--ghost btn--sm" type="button" id="nb-print">{{I:download}} {{T:a_n_s_print}}</button>
+                </div>
+                <div class="form-status" id="nb-brief-status" role="status"></div>
+              </div>
+              <div class="nb__card nb__helpcard">
+                <p id="nb-help-text"></p>
+                <button class="btn btn--sm" type="button" id="nb-help-call" hidden>{{I:phone}} {{T:a_p_call_cta}}</button>
+                <a class="btn btn--sm" id="nb-help-plans" href="{{PLANS_HREF}}" hidden>{{T:a_n_help_plans}} {{I:arrow:i--arrow}}</a>
+              </div>
+              <div class="nb__card">
+                <h3 class="nb__h">{{T:a_n_remind}}</h3>
+                <div class="nb__grid2">
+                  <div class="field"><label class="label" for="nb-remind-how">{{T:a_n_remind_how}}</label><select class="select" id="nb-remind-how"><option value="daily">{{T:a_n_remind_daily}}</option><option value="weekly">{{T:a_n_remind_weekly}}</option></select></div>
+                  <div class="field"><label class="label" for="nb-remind-time">{{T:a_n_remind_time}}</label><input class="input" id="nb-remind-time" type="time" value="20:00"></div>
+                </div>
+                <button class="btn btn--ghost btn--sm" type="button" id="nb-remind-get">{{I:download}} {{T:a_n_remind_get}}</button>
+                <p class="fine">{{T:a_n_remind_hint}}</p>
+              </div>
+              <div class="nb__card">
+                <h3 class="nb__h">{{T:a_n_safe_title}}</h3>
+                <p class="nb__lockstate" id="nb-lock-state"></p>
+                <div class="pacts">
+                  <button class="btn btn--sm" type="button" id="nb-backup">{{I:download}} {{T:a_n_backup}}</button>
+                  <label class="btn btn--ghost btn--sm nb__file" for="nb-restore-file">{{T:a_n_restore}}</label>
+                  <input class="visually-hidden" id="nb-restore-file" type="file" accept=".json,application/json">
+                  <button class="btn btn--ghost btn--sm" type="button" id="nb-lock-open" aria-expanded="false" aria-controls="nb-lock-form">{{I:lock}} <span id="nb-lock-open-text">{{T:a_n_lock_set}}</span></button>
+                  <button class="btn btn--ghost btn--sm" type="button" id="nb-lock-now" hidden>{{T:a_n_lock_now}}</button>
+                  <button class="btn btn--ghost btn--sm" type="button" id="nb-lock-remove" hidden>{{T:a_n_lock_remove}}</button>
+                </div>
+                <p class="fine">{{T:a_n_backup_hint}}</p>
+                <form class="nb__inline form" id="nb-lock-form" hidden novalidate>
+                  <div class="nb__grid2">
+                    <div class="field"><label class="label" for="nb-lock-new">{{T:a_n_lock_new}}</label><input class="input" id="nb-lock-new" type="password" autocomplete="off" maxlength="200" data-field="nb-lock-new" aria-describedby="nb-lock-hint err-nb-lock-new"><p class="err" id="err-nb-lock-new" hidden>{{I:alert}}<span></span></p></div>
+                    <div class="field"><label class="label" for="nb-lock-again">{{T:a_n_lock_again}}</label><input class="input" id="nb-lock-again" type="password" autocomplete="off" maxlength="200" data-field="nb-lock-again" aria-describedby="err-nb-lock-again"><p class="err" id="err-nb-lock-again" hidden>{{I:alert}}<span></span></p></div>
+                  </div>
+                  <p class="fine" id="nb-lock-hint">{{T:a_n_lock_hint}}</p>
+                  <button class="btn btn--sm" type="submit" id="nb-lock-save"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_n_lock_save}}</span></button>
+                </form>
+                <div class="confirm" id="nb-restore-confirm" hidden>
+                  <p id="nb-restore-warn" tabindex="-1">{{T:a_n_restore_confirm}}</p>
+                  <div class="field" id="nb-restore-pass-row" hidden>
+                    <label class="label" for="nb-restore-pass">{{T:a_n_restore_locked}}</label>
+                    <input class="input" id="nb-restore-pass" type="password" autocomplete="off" maxlength="200">
+                  </div>
+                  <div class="confirm__actions">
+                    <button class="btn btn--sm" type="button" id="nb-restore-yes">{{T:a_n_restore_yes}}</button>
+                    <button class="btn btn--ghost btn--sm" type="button" id="nb-restore-no">{{T:a_cancel}}</button>
+                  </div>
+                </div>
+                <div class="form-status" id="nb-safe-status" role="status"></div>
+                <details class="nb__more"><summary>{{T:a_n_how}}</summary><p>{{T:a_n_how_body}}</p><p>{{T:a_n_not_advice}}</p></details>
+                <div class="pacts">
+                  <button class="btn btn--ghost btn--sm btn--warn" type="button" id="nb-person-remove" hidden>{{I:trash}} <span id="nb-person-remove-text">{{T:a_n_remove_person_plain}}</span></button>
+                  <button class="btn btn--ghost btn--sm btn--warn" type="button" data-nb-erase>{{I:trash}} {{T:a_n_erase}}</button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="confirm" id="nb-erase-confirm" hidden>
+            <p id="nb-erase-warn" tabindex="-1">{{T:a_n_erase_warn}}</p>
+            <div class="confirm__actions">
+              <button class="btn btn--danger btn--sm" type="button" id="nb-erase-yes">{{T:a_n_erase_yes}}</button>
+              <button class="btn btn--ghost btn--sm" type="button" id="nb-erase-no">{{T:a_cancel}}</button>
+            </div>
+          </div>
+          <p class="purgent">{{I:alert}}<span>{{T:a_p_help_911}}</span></p>
         </div>
 
         <div class="ppanel" id="billing" data-panel="billing" hidden>
@@ -194,8 +422,16 @@
           <div class="acct__block" id="m-manage-block" hidden>
             <h3>{{T:a_p_manage_title}}</h3>
             <p>{{T:a_p_manage_body}}</p>
+            <details class="nb__more leave" id="leave" hidden>
+              <summary>{{T:a_r_leave_title}}</summary>
+              <ul class="leave__list" id="leave-list"></ul>
+            </details>
             <a class="btn btn--ghost" id="m-manage" href="{{PLANS_HREF}}" target="_blank" rel="noopener">{{T:a_p_manage_cta}} {{I:external}}</a>
             <p class="fine">{{T:a_p_manage_hint}}</p>
+          </div>
+          <div class="acct__block" id="cal-block" hidden>
+            <h3>{{T:a_r_remind_title}}</h3>
+            <button class="btn btn--ghost btn--sm" type="button" id="cal-renew">{{I:download}} {{T:a_r_remind_renew}}</button>
           </div>
         </div>
 
@@ -206,6 +442,15 @@
             <a class="btn" id="h-email" href="mailto:{{EMAIL}}">{{I:mail}} <span id="h-email-text">{{T:a_p_email_team}}</span></a>
             <button class="btn btn--ghost" type="button" id="h-call" hidden>{{I:phone}} {{T:a_p_call_cta}}</button>
             <button class="btn btn--ghost" type="button" data-chat-open aria-controls="chat">{{I:chat}} {{T:a_p_ai_cta}}</button>
+          </div>
+          <div class="asked" id="asked" hidden>
+            <p class="asked__title" id="asked-title"></p>
+            <p id="asked-body"></p>
+            <p class="asked__late" id="asked-late" hidden>{{T:a_r_asked_late}}</p>
+            <div class="pacts">
+              <button class="btn btn--sm" type="button" id="asked-reached">{{I:check}} {{T:a_r_asked_reached}}</button>
+              <button class="btn btn--ghost btn--sm" type="button" id="asked-claim" hidden>{{T:a_r_asked_claim}}</button>
+            </div>
           </div>
           <p class="fine pnote">{{I:lock}}<span>{{T:a_p_help_privacy}}</span></p>
           <p class="purgent">{{I:alert}}<span>{{T:a_p_help_911}}</span></p>
@@ -239,6 +484,22 @@
             </label>
             <button class="btn btn--block" type="submit" id="profile-submit"><span class="spinner" aria-hidden="true"></span><span class="btn__label">{{T:a_save}}</span></button>
           </form>
+
+          <div class="acct__block" id="tips" hidden>
+            <h3>{{T:a_r_tips_title}}</h3>
+            <label class="consent" for="tips-on">
+              <input type="checkbox" id="tips-on" aria-describedby="tips-hint">
+              <span>{{T:a_r_tips_label}}<small class="consent__hint" id="tips-hint">{{T:a_r_tips_hint}}</small></span>
+            </label>
+            <div class="form-status" id="tips-status" role="status"></div>
+          </div>
+
+          <div class="acct__block" id="install" hidden>
+            <h3>{{T:a_r_install_title}}</h3>
+            <p>{{T:a_r_install_body}}</p>
+            <p id="install-how"></p>
+            <button class="btn btn--sm" type="button" id="install-go" hidden>{{I:download}} {{T:a_r_install_cta}}</button>
+          </div>
 
           <div class="acct__block">
             <h3>{{T:a_password_title}}</h3>

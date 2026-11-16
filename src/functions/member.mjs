@@ -1,11 +1,12 @@
 // ---------- The member page's data (src/functions/member.mjs) ----------
-//   GET /api/member   the signed-in person's membership: plan, dates and invoices, read from Stripe by their email.
+//   GET  /api/member   the signed-in person's membership: plan, dates and invoices, read from Stripe by their email.
+//   POST /api/member   { "tips": true | false }: turn the member tips emails on or off for that same person.
 // Only for an email the person proved is theirs by opening a link we sent (see provedEmail), and never while
 // Identity's Autoconfirm setting is on. Otherwise someone could make an account with a member's email and read
 // that member's plan and invoices. Billing facts only: this site holds no health details.
 
 export default async (req, context) => {
-  if (req.method !== 'GET') return json(405, { error: 'method_not_allowed' });
+  if (req.method !== 'GET' && req.method !== 'POST') return json(405, { error: 'method_not_allowed' });
   if (!allowedOrigin(req, context)) return json(403, { error: 'forbidden' });
   const who = await signedInUser(req);
   if (!who.user) return json(who.status, { error: who.error });
@@ -13,6 +14,18 @@ export default async (req, context) => {
   const settings = await identitySettings(req);
   if (!settings) return json(502, { error: 'identity_unreachable' });
   if (settings.autoconfirm) return json(200, { ok: true, verified: false, member: null });
+  if (req.method === 'POST') {
+    let body;
+    try { body = await req.json(); } catch { return json(400, { error: 'bad_request' }); }
+    if (!body || typeof body.tips !== 'boolean') return json(400, { error: 'bad_request' });
+    try {
+      const done = await JachiBilling.setTips(who.user.email, body.tips);
+      return done.ok ? json(200, { ok: true, tips: done.tips }) : json(404, { error: 'no_membership' });
+    } catch (err) {
+      console.error('Could not change member tips:', err.message);
+      return json(503, { error: 'billing_unavailable' });
+    }
+  }
   try {
     return json(200, { ok: true, verified: true, member: await JachiBilling.memberView(who.user.email) });
   } catch (err) {

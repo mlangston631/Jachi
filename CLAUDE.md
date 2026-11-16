@@ -17,10 +17,15 @@ keep replies short and plain, and ask only questions that change what you'll do.
    - Every service page in `pages.py` has a Spanish twin in `pages_es.py` (`/es/<slug>/`); change both. Pages in both
      languages name each other (`hreflang`), and tests/qa.py checks every pair.
    - New text shown by `src/app.js` or the account page goes in `strings.py` under both `EN` and `ES`
-     (account page keys start with `a_`, the member page's with `a_p_`). The admin console is English only.
+     (account page keys start with `a_`, the member page's with `a_p_`, the health notebook's with `a_n_`, the
+     "For you" list's with `a_u_`, the other member tools' with `a_r_`; the chat's start with `c_` and the plan
+     finder's with `f_`). The admin console is English only.
+   - The chat's own answers are in `chatbot.py` (`FROM_FAQ`, `KEYS`, `SHORT`, `NEXT`, `CHIPS` and the answers made in
+     `help_data`), in both languages. Answers the site's FAQs already give are taken from them word for word, so
+     change the FAQ, not a copy.
    Spanish uses "usted". Have a native speaker check new medical or safety wording.
 3. `python3 build.py`
-4. `node tests/function.test.mjs`, `node tests/membership.test.mjs` and `python3 tests/qa.py`. Every check must pass. Fix the cause rather than
+4. `node tests/function.test.mjs`, `node tests/membership.test.mjs` and `python3 tests/qa.py` (about 15 minutes). Every check must pass. Fix the cause rather than
    loosening a check; add or update checks when behaviour changes. Look at the screenshots in `tests/out/`
    for anything visual, at phone and desktop sizes.
 5. Commit source and built files together.
@@ -98,11 +103,49 @@ keep replies short and plain, and ask only questions that change what you'll do.
   ticket form) and their settings. The plan and invoices are read from Stripe by `/api/member` each time the page
   opens and are never copied into the account, which still stores only state, services, language and emails on or
   off. Never add health fields, and never show visits, records, what care someone asked for or messages about
-  care: those need a HIPAA-compliant system with a BAA. `/api/member` answers only for an email the person proved by
+  care: those need a HIPAA-compliant system with a BAA. (The health notebook, below, isn't an exception: it lives
+  only in the person's browser, and the account and our systems still hold none of it.) `/api/member` answers only for an email the person proved by
   a link we sent (`provedEmail`) and never while Identity's autoconfirm is on; the page links to Stripe's own pages
   only (addresses on stripe.com). `/account/?demo` shows a sample member page with made-up details; it is switched
   off on jachihealth.com. Deleting an account also deletes that email's sign-ups and tickets, under the same
   `provedEmail` and autoconfirm rules.
+- **The health notebook** (Nov 15, 2026, when he asked for a health tracker people see when they log in) is the
+  Health section of `/account/`, for any account (`src/notebook.js`). Everything in it (check-ins, readings, visits
+  and their prices, questions, notes, the people it's kept for) is saved only in the person's own browser
+  (`localStorage`, `jachi.nb.<account id>`) and is never sent to Jachi or anyone else. That is the only reason a
+  health tracker can exist here while Netlify can't hold health data, so keep it that way: no request, form, ticket,
+  email, address or log may ever carry anything from the notebook (tests/qa.py watches every request while it's
+  used), and a call request started from it says only what kind of problem it is. A passcode encrypts it (AES-GCM,
+  key from PBKDF2); nobody, us included, can recover a forgotten one. It records and charts what the person enters
+  and never interprets it: no ranges, colours, scores, "normal" or advice. Syncing it between devices or sharing it
+  with a coordinator would need a HIPAA-compliant system with a BAA first, and his say. The privacy policy, both
+  health data policies, the terms ("The health notebook") and the chat's privacy summary describe it; update them
+  with it.
+- **Member tools** (Nov 15, 2026, `src/portal.js`): the "For you" list, the plan's uses to tick off, the promise
+  clock (after "Ask for a call", the page shows when we promised to start; once that time has passed the member can
+  say they're still waiting, which opens a billing ticket about the fast-response guarantee), the member's referral
+  link, calendar files for reminders, "Thinking about leaving?" and the Home Screen file (`manifest.webmanifest`).
+  All of it is worked out in the browser from `/api/member` and what the browser remembers (`localStorage`,
+  `jachi.portal.<account id>`); none of it is stored by us. It states only published promises and plan facts. The
+  home page's "Built to keep us honest" section describes these tools: change one, change the other. Phone push
+  notifications aren't built (they'd need a notification service and a privacy-policy change): reminders are
+  calendar files and emails.
+- **Member tips emails** (Nov 15, 2026): `first_steps` a few days after joining, `month_checkin` at about three
+  weeks, and `planning_call` before each quarter on Concierge Plus and Signature. The daily job sends each once, to
+  paid, active members who aren't leaving, in their language. A member turns them off in Settings (`POST /api/member`,
+  kept as `jachi_tips=off` on their Stripe customer). They say nothing about health or the care someone asked for.
+  They don't mention the 30-day refund, and neither does the member page: he had the refund date taken off it
+  (Nov 15, 2026). The refund policy stays where it was published (the plans pages, the FAQ, the terms and the
+  cancellation email), and the chat answers a refund question when someone asks, but nothing suggests or reminds
+  people of refunds: no "For you" note, no chat suggestion button, no email line. Don't add any.
+- **The help chat answers from the site first** (Nov 15, 2026). Common questions are answered in the page with the
+  site's own words (`public/help.<lang>.json`, written by `build.py` from `chatbot.help_data`): no AI call, no
+  credits. A close call offers the nearest questions instead of guessing, and everything else goes to the assistant;
+  911 and 988 still come before any of it. "Help me pick a plan" (in the chat and on the plans page) asks how many
+  adults and how fast they want replies, then names the least expensive plan that covers the answers, with the step
+  up beside it. Keep it that way round. The conversation is kept in the tab's `sessionStorage` until the tab closes
+  or "Start over"; a reply can link only this site's own pages. The ad pages keep the assistant alone: no plan
+  finder and none of the site's answers.
 - Admin console (`/admin/`): admins are accounts with the "admin" role in Netlify's Identity tab, or accounts
   whose email is in `ADMIN_EMAILS` (default: the support email) that were created from an invitation sent in
   Netlify (`invited_at`). Without the invitation rule, a stranger could sign up with the admin address first;
@@ -163,7 +206,8 @@ keep replies short and plain, and ask only questions that change what you'll do.
   signs a HIPAA agreement.
 - Member emails (English and Spanish, wording in `billing.mjs`): one step left (with the Pay button), a payment nudge
   a day later if unpaid, welcome when the first invoice is paid, a heads-up two weeks before a yearly renewal,
-  cancellation confirmed (with the 30-day refund note), cancellation undone, membership ended. Each is sent once.
+  cancellation confirmed (with the 30-day refund note), cancellation undone, membership ended, and the three member
+  tips (see the decisions above). Each is sent once; a flag in Stripe's metadata records it.
 - Automatic replies (Nov 15, 2026): Netlify runs `submission-created.mjs` for every accepted waitlist sign-up
   (`waitlist_joined`, "You're on the list") and support ticket (`ticket_received`, "We got your message"). They go
   through the same email service, never repeat what the person chose or wrote (services and ticket text can be

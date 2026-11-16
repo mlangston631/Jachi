@@ -1,7 +1,8 @@
 /* The account page: log in, create an account, confirm an email, reset a password; and, once signed in, the
-   member page: the plan and its invoices (read from Stripe by /api/member), how to reach a coordinator, and
-   settings (details, emails, password, delete, log out). Accounts never hold health information.
-   Uses Identity (src/identity.js), which is loaded first. */
+   member page: the plan and its invoices (read from Stripe by /api/member), how to reach a coordinator, a health
+   notebook that lives only in this browser (src/notebook.js), what needs attention today (src/portal.js) and
+   settings (details, emails, password, delete, log out). Accounts never hold health information: the notebook is
+   never sent anywhere. Uses Identity (src/identity.js), which is loaded first. */
 (() => {
   'use strict';
 
@@ -37,7 +38,7 @@
     views.forEach(v => { v.hidden = v.dataset.view !== name; });
     acct.classList.toggle('is-portal', name === 'profile');
     // Any other screen is the plain account page: no greeting, and a visitor's leaf rather than a member's.
-    if (name !== 'profile' && name !== 'loading') ungreet();
+    if (name !== 'profile' && name !== 'loading') { ungreet(); Notebook.close(); Portal.close(); }
     const view = $(`[data-view="${name}"]`);
     if (!focus) return;
     const target = $$('.acct__title', view).find(t => t.offsetParent !== null) || $('[role="tab"][aria-selected="true"]', view);
@@ -187,6 +188,7 @@
     const tab = open.find(t => t.dataset.tab === name) || open[0];
     ptabs.forEach(t => { if (t === tab) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
     panels.forEach(pn => { pn.hidden = pn.dataset.panel !== tab.dataset.tab; });
+    if (tab.dataset.tab === 'health') Notebook.show();
     const bar = $('#ptabs');
     bar.style.setProperty('--at', String(open.indexOf(tab)));
     bar.style.setProperty('--n', String(open.length));
@@ -332,6 +334,7 @@
     }
     $('#m-invoices-none').hidden = list.children.length > 0;
     if (!list.children.length) $('#q-invoices').textContent = T.a_p_inv_none;
+    Portal.member(m);
     if (DEMO) $$('#m-pay-link, #m-manage, .inv__go').forEach(a => a.removeAttribute('target'));
   };
   let asked = 0;
@@ -350,7 +353,9 @@
   $('#m-retry').addEventListener('click', loadMember);
   $('#h-email').href = `mailto:${EMAIL}?subject=${encodeURIComponent(T.a_p_email_subject)}`;
   // "Ask for a call" opens the ticket form in the help chat, with the topic chosen and the first words written.
-  $('#h-call').addEventListener('click', () => {
+  // The words are only ever ours (never anything from the notebook), and the person can change them.
+  const ours = new Set();
+  const openTicket = (kind, words) => {
     const chat = document.getElementById('chat');
     const opener = $('[data-panel="help"] [data-chat-open]');
     const toTicket = chat && $('[data-ticket]', chat);
@@ -359,13 +364,25 @@
     const sent = document.getElementById('ticket-success');
     if (sent && !sent.hidden) document.getElementById('ticket-done').click();   // a ticket sent earlier: start a new one
     toTicket.click();
-    const topic = $('#ticket-topic option[data-topic="call"]');
+    const topic = $(`#ticket-topic option[data-topic="${kind}"]`);
     if (topic) topic.selected = true;
     const email = $('#ticket-email');
     if (email && !email.value && user && !DEMO) email.value = user.email;
     const message = $('#ticket-message');
-    if (message && !message.value) message.value = T.a_p_call_msg;
-  });
+    ours.add(words);
+    if (message && (!message.value || ours.has(message.value))) message.value = words;
+  };
+  const askCall = words => openTicket('call', words || T.a_p_call_msg);
+  $('#h-call').addEventListener('click', () => askCall());
+  // When a "call me back" ticket goes out, the member page starts watching the promise that comes with it.
+  const ticketForm = document.getElementById('ticket-form');
+  const ticketSent = document.getElementById('ticket-success');
+  if (ticketForm && ticketSent) {
+    let wasCall = false;
+    ticketForm.addEventListener('submit', () => { const o = $('#ticket-topic').selectedOptions[0]; wasCall = !!o && o.dataset.topic === 'call'; }, true);
+    new MutationObserver(() => { if (!ticketSent.hidden && wasCall) { wasCall = false; Portal.called(); } })
+      .observe(ticketSent, { attributes: true, attributeFilter: ['hidden'] });
+  }
   // A soft light follows the pointer across the membership card (mouse and pen only).
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     mcard.addEventListener('pointermove', e => {
@@ -382,6 +399,8 @@
     const form = $('#profile-form');
     greet('');
     ownLeaf(person);
+    Notebook.open(person);
+    Portal.open(person);
     selectPanel(window.location.hash.slice(1), { keep: false });
     $('#portal-demo').hidden = !DEMO;
     $('#logout').hidden = DEMO;
@@ -402,6 +421,10 @@
     closeDelete();
     show('profile');
   };
+
+/*NOTEBOOK_JS*/
+
+/*PORTAL_JS*/
 
   /* ---------- Log in ---------- */
   $('#login-form').addEventListener('submit', async e => {
@@ -600,6 +623,8 @@
     setStatus(status, 'info', T.a_working);
     try {
       const result = await Identity.api('/api/account/delete', { method: 'POST' });
+      // The notebook and ticks kept in this browser go too (other devices keep theirs until they're erased there).
+      if (user) { Notebook.eraseFor(user.id || user.email); try { window.localStorage.removeItem(`jachi.portal.${user.id || user.email}`); } catch (err) { /* storage blocked */ } }
       Identity.forget();
       user = null;
       ungreet();
@@ -634,7 +659,7 @@
       plan: { key: 'concierge', name: 'Jachi Concierge', billing: 'monthly', founding: true, extra_adults: 1 },
       status: 'active', since: now - 64 * DAY, renews_at: now + 29 * DAY, ends_at: null, amount: 6400,
       open_invoice: invoice(3, 1, 'open'), invoices: [invoice(3, 1, 'open'), invoice(2, 32, 'paid'), invoice(1, 64, 'paid')],
-      manage_url: 'https://billing.stripe.com/p/login/sample',
+      manage_url: 'https://billing.stripe.com/p/login/sample', referral_url: `${window.location.origin}/membership/?ref=${LANG === 'es' ? 'Ana' : 'Maya'}`,
     } });
   };
 
