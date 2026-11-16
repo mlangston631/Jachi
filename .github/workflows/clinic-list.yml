@@ -1,0 +1,29 @@
+# Fetches the raw material for the clinic outreach call list from the public NPI Registry and saves it to outreach/
+# on this branch. Runs only when this file or the tool changes on the "clinic-list" branch. The website is not
+# built or deployed from this branch.
+name: clinic-list
+on:
+  push:
+    branches: [clinic-list]
+    paths: ['.github/workflows/clinic-list.yml', 'tools/clinic_list.py']
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ask the NPI Registry
+        run: python3 tools/clinic_list.py
+      - name: Save what came back
+        if: always()
+        run: |
+          git config user.name "jachi-ci"
+          git config user.email "ci@jachihealth.com"
+          git add -f outreach
+          git commit -m "CI: clinic list from the NPI Registry [skip ci] [skip netlify]" || true
+          git push
