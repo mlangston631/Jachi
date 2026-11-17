@@ -1911,11 +1911,34 @@
     "sources": [
      "results/design-team.json"
     ]
+   },
+   {
+    "step": "created",
+    "field": "youtube",
+    "from": null,
+    "to": "https://www.youtube.com/@UntilSomeoneTalked",
+    "reason": "Created by the owner with Claude in Chrome from kit/paste-into-claude-in-chrome.txt; confirmed live on YouTube with the first-choice handle.",
+    "sources": [
+     "https://www.youtube.com/@UntilSomeoneTalked"
+    ]
    }
   ],
   "open_questions": [
    "Documentary content plan (topics, first five uploads, series) is paused until the channels exist."
-  ]
+  ],
+  "youtube": {
+   "status": "created",
+   "created_on": "2026-11-17",
+   "channel_id": "UC3XBSFLFpVlFoN2gAKuVhpg",
+   "handle": "@UntilSomeoneTalked",
+   "url": "https://www.youtube.com/@UntilSomeoneTalked",
+   "verified_publicly": "2026-11-17: handle, description (exact match) and keywords read back from the live channel page by chanpage.py",
+   "not_verifiable_from_outside": [
+    "audience setting (made for kids)",
+    "comment moderation settings",
+    "phone verification"
+   ]
+  }
  },
  {
   "n": 12,
@@ -1962,11 +1985,34 @@
     "sources": [
      "results/design-team.json"
     ]
+   },
+   {
+    "step": "created",
+    "field": "youtube",
+    "from": null,
+    "to": "https://www.youtube.com/@CrookedArithmetic",
+    "reason": "Created by the owner with Claude in Chrome from kit/paste-into-claude-in-chrome.txt; confirmed live on YouTube with the first-choice handle.",
+    "sources": [
+     "https://www.youtube.com/@CrookedArithmetic"
+    ]
    }
   ],
   "open_questions": [
    "Documentary content plan (topics, first five uploads, series) is paused until the channels exist."
-  ]
+  ],
+  "youtube": {
+   "status": "created",
+   "created_on": "2026-11-17",
+   "channel_id": "UCwB66eiqhVP8IQ58kTwNxiQ",
+   "handle": "@CrookedArithmetic",
+   "url": "https://www.youtube.com/@CrookedArithmetic",
+   "verified_publicly": "2026-11-17: handle, description (exact match) and keywords read back from the live channel page by chanpage.py",
+   "not_verifiable_from_outside": [
+    "audience setting (made for kids)",
+    "comment moderation settings",
+    "phone verification"
+   ]
+  }
  },
  {
   "n": 13,

@@ -23,8 +23,8 @@ the repository connected to the work; nothing outside this folder reads it, and 
 | 8 | **Hereby Explained**: plain-English insurance, legal and real-estate terms | named |
 | 9 | **Cloister Weather**: hours-long ambient rain and sleep sound | named |
 | 10 | **Modest Catastrophes**: wordless animated Shorts for adults: tiny characters, grown-up problems | named |
-| 11 | **Until Someone Talked**: investigative documentaries, blue-collar crime (crews and organisations) | named |
-| 12 | **Crooked Arithmetic**: investigative documentaries, white-collar crime (fraud is the story) | named |
+| 11 | **Until Someone Talked**: investigative documentaries, blue-collar crime (crews and organisations) | **created** 17 Nov 2026: youtube.com/@UntilSomeoneTalked |
+| 12 | **Crooked Arithmetic**: investigative documentaries, white-collar crime (fraud is the story) | **created** 17 Nov 2026: youtube.com/@CrookedArithmetic |
 | 13 | **Respectable Front**: investigative documentaries, elite syndicates and transnational networks | named |
 
 Boundaries between overlapping channels are in `network/briefs.json`.
@@ -61,6 +61,7 @@ Run them from this folder. Each one's header explains how it works and why.
 | `preview.mjs <n> [design.json]` | A designer's proof sheet: the picture at 176-32 px on YouTube's dark and light, the banner as TV, desktop and phone crop it. Exit 3 = overflow, 5 = font not rendering. |
 | `build.mjs` | Builds the kit from `channels.json` and `design/`. Needs `CHECKED_ON` (the date the names last passed the checks); refuses to build on overflow or a missing font. |
 | `handoff.mjs` | Writes the instructions Claude in Chrome follows to create the channels in YouTube Studio. |
+| `chanpage.py @Handle ...` | Reads a live channel's public page: id, title, handle, description and keywords. Confirms a created channel matches the kit. |
 
 The tools need `curl`, Node and (for `build.mjs`, `preview.mjs` and `thumbsheet.mjs`) Playwright with Chromium; run those with `NODE_PATH=$(npm root -g)` if Playwright is installed globally. Network access they use:
 www.youtube.com, i.ytimg.com, support.google.com, blog.youtube, www.courtlistener.com, en.wikipedia.org,
