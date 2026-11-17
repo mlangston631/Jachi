@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // A designer's proof sheet: how a channel's picture and banner will really look on YouTube.
 //   NODE_PATH=$(npm root -g) node preview.mjs <channel number> [design.json] [out.png]
-// design.json (optional) holds look fields to try (see art.mjs) on top of the channel's entry in channels.json, so a
-// designer can iterate without touching the source of truth. The sheet shows the picture as YouTube crops it (a circle)
+// design.json (optional) holds look fields to try (see art.mjs), laid over the channel's approved look in
+// design/ch-<n>.json, so a designer can try one change without touching anything that ships. The sheet shows the picture as YouTube crops it (a circle)
 // at 176, 98, 48 and 32 px on YouTube's dark and light backgrounds, and the banner as a TV (whole), a desktop (centre
 // 2560x423) and a phone (centre 1546x423) show it. Exit status 3 means the name doesn't fit the phone-safe area;
 // 5 means the font isn't rendering (the banner would silently use another face).
@@ -18,7 +18,10 @@ const [nArg, designPath, outArg] = process.argv.slice(2);
 const n = Number(nArg);
 const base = JSON.parse(fs.readFileSync(path.join(here, 'channels.json'), 'utf8')).find(c => c.n === n);
 if (!base) { console.error('usage: node preview.mjs <channel number> [design.json] [out.png]'); process.exit(2); }
-const c = { ...base, ...(designPath ? JSON.parse(fs.readFileSync(designPath, 'utf8')) : {}) };
+// Layers, lowest first: the channel's content, its approved look (design/ch-<n>.json), then the fields being tried.
+// A trial file can therefore hold just the fields it changes, and passing design/ch-<n>.json itself changes nothing.
+const read = f => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) { if (e.code === 'ENOENT') return {}; throw e; } };
+const c = { ...base, ...read(path.join(here, 'design', `ch-${n}.json`)), ...(designPath ? read(designPath) : {}) };
 const outDir = path.join(here, 'design', 'previews');
 fs.mkdirSync(outDir, { recursive: true });
 const out = outArg || path.join(outDir, `ch-${n}-sheet.png`);
