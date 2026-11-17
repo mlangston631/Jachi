@@ -53,7 +53,7 @@ def build():
     svg += ''.join(f"<circle cx='{f(T(p)[0])}' cy='{f(T(p)[1])}' r='{f(ORB_R * k)}' fill='currentColor'/>" for p in orbs)
     stats = {'fit_scale': round(k, 3), 'reach_from_centre': round(reach, 1),
              'orb_y_left_to_right': [round(T(p)[1], 1) for p in orbs],
-             'orb_px_at_32': round(2 * ORB_R * k / 100 * 32 * MARK_SCALE, 1)}
+             'orb_px_at_32': round(2 * float(f(ORB_R * k)) / 100 * 32 * MARK_SCALE, 1)}   # from the radius as written
     return {'mark': svg, 'markScale': MARK_SCALE}, stats
 
 if __name__ == '__main__':

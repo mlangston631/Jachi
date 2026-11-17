@@ -421,10 +421,20 @@
     "field": "mark",
     "from": "crown tipped 24 degrees beside a thin plinth",
     "to": "crown tipped 38 degrees over a ledge from the picture edge (design/ch-2-crown.py)",
-    "reason": "An independent critic scored the first crown 'revise' (small size 6, originality 5, craft 6): the 24 degree tip cancelled the points' 23.4 degree rise, leaving the orbs level, a stock crown icon worn at an angle; the plinth shrank to a 2 px dash at 32 px; and at 15.7% ink it was the lightest mark of the 13. Now tipped 38 degrees so the orbs step down (y 28.4, 35.6, 41.6), over a ledge that runs out under the circle crop, orbs 3.4 px at 32 px, 24.8% ink, every part of the crown within 85% of the radius.",
+    "reason": "An independent critic scored the first crown 'revise' (small size 6, originality 5, craft 6): the 24 degree tip cancelled the points' 23.4 degree rise, leaving the orbs level, a stock crown icon worn at an angle; the plinth shrank to a 2 px dash at 32 px; and at 15.7% ink it was the lightest mark of the 13. Now tipped 38 degrees so the orbs step down (y 28.4, 35.6, 41.6), over a ledge that runs out under the circle crop, orbs 3.3 px at 32 px (radius 5.2 as written), 24.8% ink, every part of the crown within 85% of the radius.",
     "sources": [
      "results/design-ch2-critique.md",
      "design/ch-2-crown.py"
+    ]
+   },
+   {
+    "step": "design-review",
+    "field": "mark",
+    "from": null,
+    "to": "approved",
+    "reason": "Independent critic, round 2: approve. small_size 8, fit_to_name 8, originality 7, craft 8, banner 8, contrast 8, audience 8. Verified the geometry from the SVG (orb line falls 14.5 degrees; tilt 38.0; reach 41.97; base through the ledge corner) and that the shipped kit picture is pixel-identical to the approved design.",
+    "sources": [
+     "results/design-ch2-critique.md"
     ]
    }
   ],

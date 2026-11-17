@@ -33,6 +33,25 @@ The critic's own trial of these changes reached 25.3% ink and read at 32 px as a
 
 `design/ch-2-crown.py` was rewritten with the critic's numbers (38 degrees, ledge from the edge, orbs 6.5, fit 74,
 centre (54, 52), reach capped at 42.5 of 50). Measured result: orbs at y = 28.4, 35.6, 41.6 (stepping down to the
-right), orbs 3.4 px across at 32 px, 24.8% ink (the 13 now run 17.3-32.0% by the same measure), crown within 42.0
-units of the centre. Proof sheets checked at 176, 98, 48 and 32 px on dark and light, and the banner on TV, desktop
-and phone. Round 2 below.
+right); orbs 3.3 px across at 32 px (first reported as 3.4: the critic found the SVG rounds the radius to 5.2, and
+the generator now reports the rounded value); 24.8% ink (the 13 now run 17.3-32.0% by the same measure); crown within
+42.0 units of the centre. Proof sheets checked at 176, 98, 48 and 32 px on dark and light, and the banner on TV,
+desktop and phone. Round 2 below.
+
+## Round 2: the crown tipped 38 degrees over a ledge from the picture's edge
+
+**Verdict: approve.** small_size 8 (was 6), fit_to_name 8 (was 7), originality 7 (was 5), craft 8 (was 6), banner 8
+(was 7), contrast 8, audience 8 (was 7).
+
+- Geometry verified from the SVG: orbs at y = 28.4, 35.6, 41.6 (the orb line falls 14.5 degrees left to right; tilt
+  exactly 38.0); orbs 3.3 px at 32 px; reach 41.97 units; the crown's base passes through the ledge's top corner; the
+  ledge starts at x = 0 and the circle's rim crops it (rim at x = 1.0-6.8 at that height), 4.8 px thick at 32 px.
+- Ink coverage 25.3% by the critic's method (others 17.8-32.7%), consistent with 24.8% by ours: mid-set.
+- At 32 and 48 px the orbs visibly step down, so the crown topples rather than sits at a jaunty angle; the ledge reads
+  as an edge from the rim, not a dash.
+- Banner: the mark is 126 px tall against the 159 px name-and-tagline block, centred, 76 px gap; the ledge reads as a
+  step the crown falls off.
+- The oxblood band merges into the black below about 64 px: acceptable for a large-size detail.
+- The channel 13 clash is gone and no new clash appeared. Originality stays at 7 because a crown is the expected
+  metaphor for hubris, but the execution (stepped points toppling off an edge that runs out of the frame) is specific.
+- `kit/02-hubris-holdings-logo.png` is pixel-identical to the critic's render of the approved design.
