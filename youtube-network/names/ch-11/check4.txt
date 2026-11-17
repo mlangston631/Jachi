@@ -1,0 +1,23 @@
+TAKEN    No Clean Getaway  (@NoCleanGetaway; search returned 26 channels)
+           - handle @NoCleanGetaway is taken by "Harold Davis"
+           - near-name channel: "Clean Getaway" @CleanGetawayGTA @CleanGetawayGTA
+           - near-name channel: "Clean Getaway" @CleanGetawayStories @CleanGetawayStories, 1 subscriber
+           - near-name channel: "Clean Getaway" @CleanGetawayHQ @CleanGetawayHQ, 7 subscribers
+           - near-name channel: "Clean Getaway" @CleanGetawayCases @CleanGetawayCases, 16 subscribers
+           - near-name channel: "The Clean Getaway" @TheCleanGetawayGTA @TheCleanGetawayGTA, 9 subscribers
+CLEAR    Someone Always Talks  (@SomeoneAlwaysTalks; search returned 24 channels)
+CLEAR    Workboots and Wiretaps  (@WorkbootsandWiretaps; search returned 0 channels)
+CLEAR    Unmarked Car  (@UnmarkedCar; search returned 20 channels)
+CROWDED  Loyal Until  (@LoyalUntil; search returned 20 channels)
+           - contains-name channel: "Loyal Until Death - Topic" channel/UCBjlk5u9-1PZON5RMcHzrXQ 26 subscribers
+           - contains-name channel: "Loyal Until The End" @loyal_until_the_end @loyal_until_the_end, 1 subscriber
+           - contains-name channel: "If I Had Known" @LoyalUntilTheEndd @LoyalUntilTheEndd
+           - contains-name channel: "Loyal Until Death" @loyaluntildeath4330 @loyaluntildeath4330, 34 subscribers
+           - contains-name channel: "Loyal Until End" @LoyalUntilEnd @LoyalUntilEnd
+           - contains-name channel: "Loyal Untildeath" @loyaluntildeath1386 @loyaluntildeath1386, 8 subscribers
+           - contains-name channel: "LOYALUNTILDEATHdsb22" @LOYALUNTILDEATHdsb22 @LOYALUNTILDEATHdsb22, 1 subscriber
+           - contains-name channel: "LOYALUNTILDEATHdsb" @LOYALUNTILDEATHdsb @LOYALUNTILDEATHdsb, 4 subscribers
+TAKEN    Somebody Talks  (@SomebodyTalks; search returned 39 channels)
+           - handle @SomebodyTalks is taken by "somebodytalks"
+           - same-name channel: "Somebody Talks" @BradPitt-o8t @BradPitt-o8t
+           - near-name channel: "somebody talk" @somebody_talk @somebody_talk, 2 subscribers

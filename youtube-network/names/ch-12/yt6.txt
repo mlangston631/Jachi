@@ -1,0 +1,43 @@
+TAKEN    Count One  (@CountOne; search returned 20 channels)
+           - handle @CountOne is taken by "countone"
+           - same-name channel: "Count One" @count_one-10 @count_one-10, 41 subscribers
+TAKEN    Thirty Pieces  (@ThirtyPieces; search returned 36 channels)
+           - handle @ThirtyPieces is taken by "Ivan Denisovich"
+           - contains-name channel: "Thirty Pieces Of Silver" @thirtypiecesofsilver3774 @thirtypiecesofsilver3774, 4 subscribers
+           - contains-name channel: "Thirty Pieces of Silver" channel/UCiu2g1Zuq_SASQwBCYezDvQ 
+           - contains-name channel: "Thirty Pieces Of Silver (30 Pieces of Silver)" @thirtypiecesofsilver3768 @thirtypiecesofsilver3768, 1 subscriber
+TAKEN    Statement of Facts  (@StatementofFacts; search returned 29 channels)
+           - near-name channel: "Statement of Fact" @statementoffact6351 @statementoffact6351
+           - near-name channel: "STATEMENT OF FACT" @Statement-of-fact @Statement-of-fact
+TAKEN    Gilt and Guilt  (@GiltandGuilt; search returned 20 channels)
+           - handle @GiltandGuilt is taken by "Gilt & Guilt"
+           - same-name channel: "Gilt & Guilt" @GiltAndGuilt @GiltAndGuilt, 1 subscriber
+           - near-name channel: "Gilt & Guilt 日本語版" @GiltAndGuiltJP @GiltAndGuiltJP, 3 subscribers
+TAKEN    Overdrawn  (@Overdrawn; search returned 23 channels)
+           - handle @Overdrawn is taken by "Overdrawn"
+           - @TheOverdrawn is taken by "Over Drawn"
+           - same-name channel: "Overdrawn" @OverdrawnShorts @OverdrawnShorts, 2 subscribers
+           - same-name channel: "Overdrawn" @OverdrawnFinance @OverdrawnFinance, 223 subscribers
+           - contains-name channel: "Iben Overdrawn" @ibenoverdrawn7286 @ibenoverdrawn7286, 99 subscribers
+           - same-name channel: "Overdrawn" @OverdrawnFilms @OverdrawnFilms, 2 subscribers
+           - same-name channel: "Overdrawn" @OverdrawnShow @OverdrawnShow
+           - contains-name channel: "Overweight & Overdrawn" @OverweightAndOverdrawn @OverweightAndOverdrawn, 235 subscribers
+           - same-name channel: "Overdrawn" @Overdrawnstories @Overdrawnstories, 2 subscribers
+           - same-name channel: "overdrawn" @realoverdrawn @realoverdrawn, 6 subscribers
+           - contains-name channel: "Overdrawn - Topic" channel/UC2RxuACLfQjRAEOvcvCARTg 
+           - same-name channel: "Overdrawn" @OverdrawnVideos @OverdrawnVideos, 3 subscribers
+           - same-name channel: "overdrawn" @Anuragaaaart-y2l @Anuragaaaart-y2l, 37 subscribers
+           - same-name channel: "OVERDRAWN" @OVERDRAWN2D @OVERDRAWN2D
+           - same-name channel: "Overdrawn" @OverdrawnOfficial @OverdrawnOfficial, 1 subscriber
+           - same-name channel: "Overdrawn" @Overdrawnchromos @Overdrawnchromos, 59 subscribers
+           - same-name channel: "Overdrawn" @overdrawn4322 @overdrawn4322, 1 subscriber
+           - contains-name channel: "Overdrawn (Original Motion Picture Soundtrack)" channel/UCtUSGiHpHpRhAEcvm0SlQ1g 
+           - same-name channel: "Overdrawn" @overdrawn @overdrawn, 48 subscribers
+           - contains-name channel: "Overdrawn Studio" @OverdrawnStudio @OverdrawnStudio, 3 subscribers
+           - same-name channel: "Overdrawn" @Overdrawn_ @Overdrawn_, 5 subscribers
+           - same-name channel: "OverDrawn" @OverDrawn99 @OverDrawn99
+           - near-name channel: "OverDraws" @overdraws_yt @overdraws_yt, 57.8K subscribers
+           - contains-name channel: "Overdrawn - Topic" channel/UCQqje9Aq6Nto9dsmxrBdkrw 
+           - contains-name channel: "overdrawn - Topic" channel/UC-P62_BjJhXCUsBfV_VD0XA 
+CROWDED  Short Weight  (@ShortWeight; search returned 39 channels)
+           - contains-name channel: "SHort Weight Loss Tips" @shortweightlosstips5842 @shortweightlosstips5842, 1 subscriber

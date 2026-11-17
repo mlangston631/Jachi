@@ -1,0 +1,38 @@
+[
+ {
+  "name": "Until Someone Talked",
+  "verdict": "CLEAR",
+  "youtube": "CLEAR",
+  "handle": "@UntilSomeoneTalked",
+  "dot_com": {
+   "domain": "untilsomeonetalked.com",
+   "state": "available"
+  },
+  "trademarks": [],
+  "reasons": []
+ },
+ {
+  "name": "Crooked Arithmetic",
+  "verdict": "CLEAR",
+  "youtube": "CLEAR",
+  "handle": "@CrookedArithmetic",
+  "dot_com": {
+   "domain": "crookedarithmetic.com",
+   "state": "available"
+  },
+  "trademarks": [],
+  "reasons": []
+ },
+ {
+  "name": "Respectable Front",
+  "verdict": "CLEAR",
+  "youtube": "CLEAR",
+  "handle": "@RespectableFront",
+  "dot_com": {
+   "domain": "respectablefront.com",
+   "state": "available"
+  },
+  "trademarks": [],
+  "reasons": []
+ }
+]

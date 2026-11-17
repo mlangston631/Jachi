@@ -1,0 +1,28 @@
+TAKEN    Unreconciled  (@Unreconciled; search returned 22 channels)
+           - handle @Unreconciled is taken by "Julius Writes it Off"
+           - @TheUnreconciled is taken by "The Unreconciled "
+           - contains-name channel: "Unreconciled: The Business of Accounting" @unreconciledpod @unreconciledpod, 6 subscribers
+           - same-name channel: "Unreconciled" @Unreconciled-4 @Unreconciled-4
+           - same-name channel: "The Unreconciled " @theunreconciled @theunreconciled, 3.12K subscribers
+CLEAR    Weighed and Wanting  (@WeighedandWanting; search returned 27 channels)
+CLEAR    Pinstripe Noir  (@PinstripeNoir; search returned 19 channels)
+TAKEN    Balance Sheet Noir  (@BalanceSheetNoir; search returned 8 channels)
+           - handle @BalanceSheetNoir is taken by "Balance Sheet Noir"
+           - @TheBalanceSheetNoir is taken by "Balance sheet Noir"
+           - same-name channel: "Balance sheet Noir" @thebalancesheetnoir @thebalancesheetnoir, 18 subscribers
+           - same-name channel: "Balance Sheet Noir" @BalanceSheetNoir @BalanceSheetNoir
+CLEAR    Tailored Larceny  (@TailoredLarceny; search returned 23 channels)
+TAKEN    Pennyweight  (@Pennyweight; search returned 27 channels)
+           - handle @Pennyweight is taken by "pennyweight "
+           - @ThePennyweight is taken by "yourhistorymythology"
+           - contains-name channel: "Thomas "PennyWeight" Fowlkes" @thomaspennyweightfowlkes4094 @thomaspennyweightfowlkes4094, 884 subscribers
+           - contains-name channel: "Pennyweight Mind" @pennyweightmind @pennyweightmind, 2 subscribers
+           - same-name channel: "Pennyweight" @Pennyweight-yd2xo @Pennyweight-yd2xo
+           - same-name channel: "Pennyweight" channel/UC87O-d1KY3zN3a5Ve4P_zqg 
+           - same-name channel: "pennyweight" @pennyweight5818 @pennyweight5818, 9 subscribers
+           - contains-name channel: "Pennyweight Market" @pennyweightmarket3024 @pennyweightmarket3024, 12 subscribers
+           - contains-name channel: "Pennyweight Rising - Topic" channel/UC0ajNNOzHo5ocQcs3aWTx7w 
+           - contains-name channel: "Pennyweight Gully" @pennyweightgully1970 @pennyweightgully1970
+           - contains-name channel: "Pennyweight Productions" @pennyweightproductions1362 @pennyweightproductions1362, 3 subscribers
+           - contains-name channel: "Kevin Pennyweight" @k3jp1 @k3jp1
+           - same-name channel: "Penny Weight" @pennyannaweight @pennyannaweight

@@ -13,19 +13,19 @@ the repository connected to the work; nothing outside this folder reads it, and 
 
 | # | Niche | Status (17 Nov 2026) |
 |---|---|---|
-| 1 | Money and economics, explained with stick figures | renaming: first name was taken on YouTube |
-| 2 | How real companies rose and collapsed (no crime at the centre) | renaming |
-| 3 | How AI and everyday technology work | renaming |
-| 4 | Space and science questions with real numbers | renaming |
-| 5 | History told through animated maps | renaming |
-| 6 | Multi-hour calm history for falling asleep | renaming |
-| 7 | Historic true crime: lone thieves, cons and hoaxes, mostly pre-1950 | renaming |
-| 8 | Plain-English insurance, legal and real-estate terms | renaming |
-| 9 | Hours-long ambient rain and sleep sound | renaming |
-| 10 | Wordless animated Shorts about tiny original characters | renaming |
-| 11 | Investigative documentaries: blue-collar crime (crews and organisations) | naming |
-| 12 | Investigative documentaries: white-collar crime (fraud is the story) | naming |
-| 13 | Investigative documentaries: elite syndicates and transnational networks | naming |
+| 1 | **Economy of Means**: money and economics, explained with stick figures | named |
+| 2 | **Hubris Holdings**: how real companies rose and collapsed (no crime at the centre) | named |
+| 3 | **Legible Machines**: how AI and everyday technology work | named |
+| 4 | **Measured Awe**: space and science questions with real numbers | named |
+| 5 | **Ink Tectonics**: history told through animated maps | named |
+| 6 | **Chamberstick**: multi-hour calm history for falling asleep | named |
+| 7 | **Rogues of Record**: historic true crime: lone thieves, cons and hoaxes | named |
+| 8 | **Hereby Explained**: plain-English insurance, legal and real-estate terms | named |
+| 9 | **Cloister Weather**: hours-long ambient rain and sleep sound | named |
+| 10 | **Modest Catastrophes**: wordless animated Shorts for adults: tiny characters, grown-up problems | named |
+| 11 | **Until Someone Talked**: investigative documentaries, blue-collar crime (crews and organisations) | named |
+| 12 | **Crooked Arithmetic**: investigative documentaries, white-collar crime (fraud is the story) | named |
+| 13 | **Respectable Front**: investigative documentaries, elite syndicates and transnational networks | named |
 
 Boundaries between overlapping channels are in `network/briefs.json`.
 
@@ -33,7 +33,7 @@ Boundaries between overlapping channels are in `network/briefs.json`.
 
 | Path | What it is |
 |---|---|
-| `channels.json` | **The single source of truth** for channels 1-10: name, handle, description, keywords, titles, first script, sources, and a `history` of every change with its reason. Edit this, never the built outputs. |
+| `channels.json` | **The single source of truth** for all 13 channels: name, handle, description, keywords, titles, first script, sources, and a `history` of every change with its reason. Edit this, never the built outputs. |
 | `data.mjs` | The first, unchecked drafts. Kept only as the starting point that `history` refers back to. |
 | `network/briefs.json` | The owner's brief for channels 11-13, which every documentary agent reads. |
 | `agents/naming-agent.js` | The naming agent: research, invent, judge, clear. Use it for every new channel. |
@@ -67,9 +67,9 @@ survives is used.
 
 | Team | Script | State |
 |---|---|---|
-| Naming | `agents/naming-agent.js` (earlier rounds in `agents/runs/`) | channels 1-10 round 2 and 11-13 running |
+| Naming | `agents/naming-agent.js` (earlier rounds in `agents/runs/`) | done: all 13 named and cleared (YouTube, .com, US trademarks, web) |
 | Fact-check | `agents/runs/fact-check-first-scripts-*` | done: 45 corrections applied to channels 1-8 |
-| YouTube rules | `agents/runs/youtube-rules-review-*` | reviews done, skeptics finishing |
+| YouTube rules | `agents/runs/youtube-rules-review-*` | done: 15 fixes applied; setup steps in `plan/setup.md` |
 | Growth (1-10) | `agents/runs/growth-engine-*` | paused until channels exist |
 | Moonshot | `agents/runs/moonshot-playbook-*` | done: `plan/moonshot.md` |
 | Documentary network (11-13) | `agents/runs/documentary-network-*` | paused until channels exist |

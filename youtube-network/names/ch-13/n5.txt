@@ -1,0 +1,37 @@
+TAKEN    Upperworld  (@Upperworld; search returned 20 channels)
+           - handle @Upperworld is taken by "Bert Demuynck"
+           - same-name channel: "Upperworld" @upperworldmusic @upperworldmusic
+           - same-name channel: "Upperworld🪬" @upperworld111 @upperworld111, 7 subscribers
+           - same-name channel: "Upper World" @upperworld2091 @upperworld2091, 1 subscriber
+           - same-name channel: "UpperWorld" @upperworld4500 @upperworld4500, 110 subscribers
+           - same-name channel: "Upperworld YT" @UpperworldMinecraft @UpperworldMinecraft, 39 subscribers
+           - same-name channel: "UpperWorld" @UpperWorldGD @UpperWorldGD, 135 subscribers
+           - contains-name channel: "Upperworld Gamerz" @upperworldgamerz @upperworldgamerz, 2 subscribers
+           - same-name channel: "Upperworld" @upperworldtv @upperworldtv, 13 subscribers
+           - same-name channel: "Upperworld" @Upperworld. @Upperworld.
+           - same-name channel: "Bert Demuynck" @upperworld @upperworld
+           - same-name channel: "UPPERWORLD" @upperworld8508 @upperworld8508, 12 subscribers
+           - near-name channel: "Upperworld 2" @UpperWorld2 @UpperWorld2, 21 subscribers
+           - same-name channel: "UpperWorld Удивительные Факты" @upperworld863 @upperworld863, 1 subscriber
+           - same-name channel: "Upperworld " @upper_world @upper_world, 3 subscribers
+           - near-name channel: "UpperWorld io" @upperworldio5203 @upperworldio5203, 183 subscribers
+TAKEN    Higher Circles  (@HigherCircles; search returned 28 channels)
+           - handle @HigherCircles is taken by "highercircles"
+           - contains-name channel: "Higher Circles - Topic" channel/UCeN-dqiDTBF_2Fn9b8yTYjA 5 subscribers
+TAKEN    Good Families  (@GoodFamilies; search returned 40 channels)
+           - same-name channel: "good Families" @goodfamilies5063 @goodfamilies5063
+           - same-name channel: "GOOD FAMILIES" @goodfamilies4858 @goodfamilies4858, 18 subscribers
+           - contains-name channel: "Building Good Families" @buildinggoodfamilies @buildinggoodfamilies, 39 subscribers
+           - same-name channel: "Good families" @goodfamilies7186 @goodfamilies7186
+           - contains-name channel: "Social Good Families" @socialgoodfamilies8112 @socialgoodfamilies8112, 217 subscribers
+           - same-name channel: "good families" @goodfamilies1333 @goodfamilies1333, 1 subscriber
+TAKEN    Grey List  (@GreyList; search returned 35 channels)
+           - handle @GreyList is taken by "Mehmet ÖZSOY"
+           - contains-name channel: "Masi Grey list" @Soy-g7h @Soy-g7h, 47 subscribers
+           - same-name channel: "Greylist" @greylistIGuess @greylistIGuess, 26 subscribers
+           - same-name channel: "Greylist" @greylist9502 @greylist9502
+           - same-name channel: "greylist" @greylistq @greylistq, 30 subscribers
+           - same-name channel: "Greylist" @Greylist77797 @Greylist77797, 8 subscribers
+CLEAR    Threat Finance  (@ThreatFinance; search returned 25 channels)
+TAKEN    Everyone Knew  (@EveryoneKnew; search returned 0 channels)
+           - handle @EveryoneKnew is taken by "everyoneknew"

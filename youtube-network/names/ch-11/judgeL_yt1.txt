@@ -1,0 +1,30 @@
+CLEAR    Until Somebody Talked  (@UntilSomebodyTalked; search returned 21 channels)
+TAKEN    Somebody Talked  (@SomebodyTalked; search returned 40 channels)
+           - handle @SomebodyTalked is taken by "somebodytalked"
+           - near-name channel: "somebody talk" @somebody_talk @somebody_talk, 2 subscribers
+TAKEN    Someone Talked  (@SomeoneTalked; search returned 38 channels)
+           - same-name channel: "Someone Talked!" @someonetalked3119 @someonetalked3119, 67 subscribers
+           - contains-name channel: "Someone Talked! - Topic" channel/UCMXfvFLlgTql9mnp39wZDqA 3 subscribers
+           - near-name channel: "Someone talk" @SomeonetalkAha @SomeonetalkAha, 2 subscribers
+           - near-name channel: "Someone talk" @Someonetalk-r1z @Someonetalk-r1z, 3 subscribers
+           - near-name channel: "Someone Talk" @someonetalk1576 @someonetalk1576
+           - near-name channel: "Someone Talk" @someonetalk4343 @someonetalk4343, 142 subscribers
+           - near-name channel: "someone talk" @padilMohamad @padilMohamad, 4 subscribers
+           - near-name channel: "someone talk" @ahmadbasikal_uqi @ahmadbasikal_uqi, 2 subscribers
+TAKEN    Crime and Consequence  (@CrimeandConsequence; search returned 33 channels)
+           - same-name channel: "Crime and Consequence" @CrimeandConsequence-h5r @CrimeandConsequence-h5r, 90 subscribers
+           - same-name channel: "Crime and Consequence" @crimeandconsequencetv @crimeandconsequencetv, 129 subscribers
+           - same-name channel: "Crime and Consequence" @CaC_Pod @CaC_Pod, 7 subscribers
+           - near-name channel: "Crime And Consequence KE" @crimeandconske @crimeandconske, 1 subscriber
+           - same-name channel: "Crime And Consequence" @CrimeAndConsequenceUS @CrimeAndConsequenceUS
+           - contains-name channel: "Crime & Consequence TV News" @CrimeandConsequenceTVNews @CrimeandConsequenceTVNews, 3 subscribers
+           - same-name channel: "crime and consequence" @crimeandconsequence3350 @crimeandconsequence3350, 4 subscribers
+           - near-name channel: "Crime & Consequence" @CrimeandConsequence99 @CrimeandConsequence99, 1 subscriber
+           - near-name channel: "Crimeandconsequence-01" @Crimeandconsequence-o1l @Crimeandconsequence-o1l, 28.9K subscribers
+           - near-name channel: "Crimes and Consequences" @CrimesandConsequences @CrimesandConsequences, 4.53K subscribers
+           - contains-name channel: "Crime & Consequence" @CrimeAndConsequenceStories @CrimeAndConsequenceStories, 35 subscribers
+           - near-name channel: "Crime N Consequence" @CrimeNConsequence @CrimeNConsequence, 6 subscribers
+           - near-name channel: "Crime & Consequence" @CrimeanddConsequence @CrimeanddConsequence, 11.6K subscribers
+CROWDED  Who Talked  (@WhoTalked; search returned 38 channels)
+           - contains-name channel: "WhoTalkedMeIntoThis Ch.【Toad】" @whotalkedmeintothis @whotalkedmeintothis, 519 subscribers
+CLEAR    Work Boots and Wiretaps  (@WorkBootsandWiretaps; search returned 15 channels)

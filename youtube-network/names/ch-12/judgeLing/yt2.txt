@@ -1,0 +1,22 @@
+TAKEN    Audit the Audit  (@AudittheAudit; search returned 37 channels)
+           - handle @AudittheAudit is taken by "Audit the Audit"
+           - same-name channel: "Audit the Audit" @AuditTheAudit @AuditTheAudit, 2.99M subscribers
+           - same-name channel: "audit-the-audit" @audit-the-audit @audit-the-audit
+           - contains-name channel: "Audit the audit Español" @AudittheauditEpa%C3%B1ol @AudittheauditEpañol, 1.45K subscribers
+           - near-name channel: "Audit The Audit UK" @AuditTheAuditUK-r5z @AuditTheAuditUK-r5z, 1 subscriber
+           - near-name channel: "audit the audit uk" @audittheaudituk7914 @audittheaudituk7914
+           - near-name channel: "AUDIT THE AUDITOR" @audittheauditor6616 @audittheauditor6616, 4 subscribers
+           - near-name channel: "Prüfe die Prüfung" @audittheaudit_de @audittheaudit_de, 13 subscribers
+           - contains-name channel: "Lets audit the audit" @Letsaudittheaudit @Letsaudittheaudit, 420 subscribers
+           - near-name channel: "Audite a Auditoria" @audittheaudit_pt @audittheaudit_pt, 18 subscribers
+TAKEN    Crooked Media  (@CrookedMedia; search returned 32 channels)
+           - handle @CrookedMedia is taken by "Crooked Media"
+           - same-name channel: "Crooked Media" @crookedmedia6390 @crookedmedia6390, 14 subscribers
+           - same-name channel: "Crooked Media" @crookedmedia8331 @crookedmedia8331, 28 subscribers
+           - same-name channel: "Crooked Media" @Crookedmedia @Crookedmedia, 14 subscribers
+           - contains-name channel: "Crooked Media, LLC" @crookedmediallc6471 @crookedmediallc6471, 390 subscribers
+           - same-name channel: "CrookedMedia" @crookedmedia5326 @crookedmedia5326, 3 subscribers
+TAKEN    Forge Figures  (@ForgeFigures; search returned 21 channels)
+           - handle @ForgeFigures is taken by "forge figures"
+           - same-name channel: "forge figures" @forgefigures @forgefigures
+CLEAR    Maternally False  (@MaternallyFalse; search returned 0 channels)

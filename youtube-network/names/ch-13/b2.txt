@@ -1,0 +1,12 @@
+BLOCKED  Valued Client  (YouTube TAKEN; valuedclient.com registered; live same-name US marks: 0)
+           - near-name channel: "Valued Clients" @valuedclients4532 @valuedclients4532
+           - near-name channel: "VALUED CLIENTS" @valuedclients1468 @valuedclients1468
+           - near-name channel: "Valued Clients" @valuedclients759 @valuedclients759
+           - valuedclient.com is registered
+CAUTION  Private Means  (YouTube CLEAR; privatemeans.com registered; live same-name US marks: 0)
+           - privatemeans.com is registered
+CAUTION  Key Judgments  (YouTube CLEAR; keyjudgments.com registered; live same-name US marks: 0)
+           - keyjudgments.com is registered
+CLEAR    Significant Control  (YouTube CLEAR; significantcontrol.com available; live same-name US marks: 0)
+CLEAR    Kleptocene  (YouTube CLEAR; kleptocene.com available; live same-name US marks: 0)
+CLEAR    Connected Persons  (YouTube CLEAR; connectedpersons.com available; live same-name US marks: 0)

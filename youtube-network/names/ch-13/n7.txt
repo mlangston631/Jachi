@@ -1,0 +1,21 @@
+TAKEN    At Arms Length  (@AtArmsLength; search returned 37 channels)
+           - handle @AtArmsLength is taken by "AtArmslength"
+           - same-name channel: "At Arms' Length" @atarmslength3069 @atarmslength3069, 14 subscribers
+           - contains-name channel: "atarmslengthmusic" @atarmslengthmusic @atarmslengthmusic, 17 subscribers
+           - contains-name channel: "God at Arms Length" @godatarmslength @godatarmslength, 8 subscribers
+           - contains-name channel: "At Arm's Length - Topic" channel/UC9vAquecuvceTh8XB2wyilg 11 subscribers
+           - near-name channel: "Arm's Length" @armslengthblues @armslengthblues, 1.65K subscribers
+           - contains-name channel: "History at Arm's Length" @historyatarmslength @historyatarmslength, 19 subscribers
+           - contains-name channel: "YourAtArmsLength" @YourAtArmsLength @YourAtArmsLength, 1 subscriber
+           - near-name channel: "Arm's length" @armslength5985 @armslength5985, 6 subscribers
+TAKEN    Reasons of State  (@ReasonsofState; search returned 20 channels)
+           - handle @ReasonsofState is taken by "Reasons of State"
+           - same-name channel: "Reasons of State" @ReasonsofState @ReasonsofState, 3 subscribers
+           - contains-name channel: "For Reasons Of State - Topic" channel/UCNaFBbFLKSlyufTWmJSHARg 
+           - contains-name channel: "ReasonTV" @ReasonTV @ReasonTV, 1.43M subscribers
+CLEAR    Certain Arrangements  (@CertainArrangements; search returned 26 channels)
+CLEAR    Correspondent Account  (@CorrespondentAccount; search returned 20 channels)
+TAKEN    Diplomatic Bag  (@DiplomaticBag; search returned 29 channels)
+           - handle @DiplomaticBag is taken by "Doug Stanhope"
+CROWDED  Bearer Shares  (@BearerShares; search returned 20 channels)
+           - contains-name channel: "Bearer And Wolfoo" @Bearerchannel @Bearerchannel, 106 subscribers

@@ -1,0 +1,22 @@
+TAKEN    Called to Account  (@CalledtoAccount; search returned 20 channels)
+           - same-name channel: "Called to Account" @calledtoaccount7771 @calledtoaccount7771, 15 subscribers
+TAKEN    Held to the Light  (@HeldtotheLight; search returned 29 channels)
+           - handle @HeldtotheLight is taken by "Held to the Light"
+           - near-name channel: "Held in the Light" @HeldintheLight @HeldintheLight, 76 subscribers
+TAKEN    Gilded Lead  (@GildedLead; search returned 20 channels)
+           - handle @GildedLead is taken by "GildedLead"
+           - contains-name channel: "Gilded" @Gilded_0 @Gilded_0, 1.24K subscribers
+TAKEN    Clipped Coin  (@ClippedCoin; search returned 26 channels)
+           - handle @ClippedCoin is taken by "Clipped Coin"
+           - same-name channel: "Clipped Coin" @ClippedCoin @ClippedCoin, 17.1K subscribers
+           - contains-name channel: "Clipped" @Clipped4Good @Clipped4Good, 2 subscribers
+CLEAR    Materially False  (@MateriallyFalse; search returned 20 channels)
+TAKEN    Qualified Opinion  (@QualifiedOpinion; search returned 32 channels)
+           - handle @QualifiedOpinion is taken by "Qualified Opinion"
+           - @TheQualifiedOpinion is taken by "The Qualified Opinion"
+           - same-name channel: "Qualified Opinion" @QualifiedOpinion @QualifiedOpinion, 1 subscriber
+           - same-name channel: "The Qualified Opinion" @TheQualifiedOpinion_GRC @TheQualifiedOpinion_GRC, 8 subscribers
+           - same-name channel: "The Qualified Opinion" @TheQualifiedOpinion @TheQualifiedOpinion
+           - contains-name channel: "THE QUALIFIED OPINION - Topic" channel/UCeiON0jacXUYr9Wh_I3yE0A 1 subscriber
+           - contains-name channel: "Our-Not-So Qualified Opinion" @Our-Not-SoQualifiedOpinion @Our-Not-SoQualifiedOpinion, 3 subscribers
+           - contains-name channel: "Unqualified Opinions with Chelsea & Nate" @unqualifiedopinionswithche3488 @unqualifiedopinionswithche3488, 15 subscribers

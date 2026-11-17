@@ -1,0 +1,9 @@
+CLEAR    Until Somebody Talked  (@UntilSomebodyTalked; search returned 25 channels)
+CLEAR    Then Someone Talked  (@ThenSomeoneTalked; search returned 30 channels)
+TAKEN    Until Someone Talks  (@UntilSomeoneTalks; search returned 38 channels)
+           - handle @UntilSomeoneTalks is taken by "UNTIL SOMEONE TALKS"
+           - same-name channel: "UNTIL SOMEONE TALKS" @UNTILSOMEONETALKS @UNTILSOMEONETALKS, 4 subscribers
+CLEAR    Until Someone Talked Docs  (@UntilSomeoneTalkedDocs; search returned 27 channels)
+CLEAR    Until Someone Talked Files  (@UntilSomeoneTalkedFiles; search returned 24 channels)
+TAKEN    Somebody Always Talks  (@SomebodyAlwaysTalks; search returned 21 channels)
+           - handle @SomebodyAlwaysTalks is taken by "Somebody Always Talks"

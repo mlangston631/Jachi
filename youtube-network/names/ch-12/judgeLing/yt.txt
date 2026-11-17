@@ -1,0 +1,6 @@
+CLEAR    Crooked Arithmetic  (@CrookedArithmetic; search returned 23 channels)
+CLEAR    Tailored Larceny  (@TailoredLarceny; search returned 34 channels)
+CLEAR    Trial by Audit  (@TrialbyAudit; search returned 20 channels)
+CLEAR    Respectable Larceny  (@RespectableLarceny; search returned 20 channels)
+CLEAR    Forged Figures  (@ForgedFigures; search returned 24 channels)
+CLEAR    Materially False  (@MateriallyFalse; search returned 20 channels)

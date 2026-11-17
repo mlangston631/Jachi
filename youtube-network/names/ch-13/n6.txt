@@ -1,0 +1,42 @@
+CLEAR    Valued Client  (@ValuedClient; search returned 20 channels)
+TAKEN    Polite Company  (@PoliteCompany; search returned 26 channels)
+           - handle @PoliteCompany is taken by "politecompany"
+           - @ThePoliteCompany is taken by "Kristi Spencer"
+           - same-name channel: "Polite Company" @PoliteCompany24 @PoliteCompany24, 58 subscribers
+           - contains-name channel: "Polite Company - Topic" channel/UC98PyzIU0fiJJsPhbmnYa6g 
+           - same-name channel: "Polite Company" @politecompanyofficial @politecompanyofficial, 4 subscribers
+           - contains-name channel: "Polite Company - Topic" channel/UCgfRwAJfHM2OtOAnuUouE1A 1 subscriber
+           - same-name channel: "Polite Company" @Polite_company @Polite_company, 6 subscribers
+           - same-name channel: "Polite Company" @politecompany105 @politecompany105
+           - same-name channel: "polite company" @politecompany9221 @politecompany9221, 2 subscribers
+           - contains-name channel: "In Polite Company - Topic" channel/UC2MfoJg6jLmjxWO4I_x_log 
+           - near-name channel: "In Polite Company" @politepodcast @politepodcast, 3 subscribers
+           - near-name channel: "ImpoliteCompany" @impolitecompany1352 @impolitecompany1352, 14 subscribers
+TAKEN    Legitimate Business  (@LegitimateBusiness; search returned 28 channels)
+           - handle @LegitimateBusiness is taken by "legitimatebusiness"
+           - same-name channel: "Legitimate Business" @Have.Camera.Will.Travel @Legitimate.Business, 758 subscribers
+           - contains-name channel: "Legitimate Business - Topic" channel/UClJuBgeh961UVWrKMwnXRrQ 63 subscribers
+           - same-name channel: "Legitimate Business" @LegitimateBusiness500 @LegitimateBusiness500, 21 subscribers
+           - contains-name channel: "Legitimate Business Online" @legitimatebusinessonline5829 @legitimatebusinessonline5829
+           - same-name channel: "Legitimate Business" @legitimatebusiness7176 @legitimatebusiness7176, 1 subscriber
+           - contains-name channel: "legitimate business - Topic" channel/UC1yganNAPqOdT05xed5g4_g 
+           - contains-name channel: "Legitimate Business - Gaming, Reviews & Vlogs" @IdeaBoysDudes @IdeaBoysDudes, 45 subscribers
+           - contains-name channel: "Legitimate Business Ideas" @legitimatebusinessideas5612 @legitimatebusinessideas5612
+           - contains-name channel: "Work from Home Legitimate Business Opportunities" @workfromhomelegitimatebusi7710 @workfromhomelegitimatebusi7710, 3 subscribers
+           - same-name channel: "Legitimate Business" @legitimatebusiness3458 @legitimatebusiness3458, 11 subscribers
+           - contains-name channel: "Legitimate Business Man" @marinsmostwanted @marinsmostwanted, 3.36K subscribers
+           - contains-name channel: "Legitimate Business man" @legitimatebusinessman9844 @legitimatebusinessman9844, 1 subscriber
+TAKEN    Bill of Lading  (@BillofLading; search returned 25 channels)
+           - handle @BillofLading is taken by "billoflading"
+           - contains-name channel: "Bill of lading ( Bl series )" @BillofladingBlseries @BillofladingBlseries, 4 subscribers
+           - contains-name channel: "BILL OF LADING MUSEUM" @BillOfLadingMuseum-xj1bl @BillOfLadingMuseum-xj1bl, 21 subscribers
+           - same-name channel: "bill of lading" @bill-of-lading @bill-of-lading
+           - contains-name channel: "BILL OF LADING 2008 - GANDHIDHAM" @BILLOFLADING-GANDHIDHAM @BILLOFLADING-GANDHIDHAM
+           - contains-name channel: "Billofladingsoft Application" @billofladingsoftapplicatio2901 @billofladingsoftapplicatio2901, 2 subscribers
+CLEAR    Kleptocene  (@Kleptocene; search returned 0 channels)
+TAKEN    Seating Plan  (@SeatingPlan; search returned 27 channels)
+           - handle @SeatingPlan is taken by "Adam Proto"
+           - same-name channel: "Seating Plan" @megaseatingplan @megaseatingplan, 16 subscribers
+           - near-name channel: "Seatingplanfc" @Seatingplanfc @Seatingplanfc, 2 subscribers
+           - contains-name channel: "seating plan for next kumari" @seatingplanfornextkumari8759 @seatingplanfornextkumari8759
+           - contains-name channel: "SeatingPlan.net" @SeatingPlannet @SeatingPlannet, 2 subscribers

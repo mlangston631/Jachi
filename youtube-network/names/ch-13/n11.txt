@@ -1,0 +1,32 @@
+TAKEN    Ultimate Beneficiary  (@UltimateBeneficiary; search returned 26 channels)
+           - handle @UltimateBeneficiary is taken by "Под Другим Углом"
+           - contains-name channel: "ULTIMATE" @ultimate3778 @ultimate3778, 37 subscribers
+CLEAR    Registered Abroad  (@RegisteredAbroad; search returned 26 channels)
+TAKEN    Official Cover  (@OfficialCover; search returned 28 channels)
+           - handle @OfficialCover is taken by "ปอน'น ไม่แคร์. OFFICIAL COVER"
+           - @TheOfficialCover is taken by "TheOfficialCover"
+           - same-name channel: "Official - Cover" @official-cover185 @official-cover185
+           - same-name channel: "Official Cover" @officialcover5008 @officialcover5008, 25 subscribers
+           - same-name channel: "Official Cover" @officialcover3599 @officialcover3599, 1 subscriber
+           - same-name channel: "Official Cover" @officialcover8141 @officialcover8141, 1 subscriber
+           - same-name channel: "official Cover" @officialcover7052 @officialcover7052, 5 subscribers
+           - same-name channel: "Official Cover" @officialcover8085 @officialcover8085, 9 subscribers
+           - same-name channel: "OFFICIAL COVER" @officialcover2046 @officialcover2046
+           - contains-name channel: "BB Official - Cover Group" @bb.cebu4 @bb.cebu4, 4 subscribers
+           - same-name channel: "Official Cover" @coverms @coverms, 55 subscribers
+           - same-name channel: "Official Cover" @officialcover9316 @officialcover9316
+           - same-name channel: "Official Cover" @officialcover48 @officialcover48
+           - contains-name channel: "Simon Official Cover" @simonofficial5 @simonofficial5, 1.61K subscribers
+           - same-name channel: "Official Cover" @officialcover3338 @officialcover3338, 3 subscribers
+           - same-name channel: "official Cover" @officialcover1189 @officialcover1189
+           - same-name channel: "OFFICIAL COVER" @officialcover1793 @officialcover1793, 40 subscribers
+           - contains-name channel: "Raesta Official Cover" @RaestaOfficialCover @RaestaOfficialCover, 32.3K subscribers
+           - same-name channel: "Official Cover" @officialcover7545 @officialcover7545, 6 subscribers
+           - same-name channel: "Official Cover" @officialcover2654 @officialcover2654
+           - same-name channel: "Official Cover" @officialcover7104 @officialcover7104, 280 subscribers
+           - same-name channel: "Official Cover" @officialcover6700 @officialcover6700
+           - same-name channel: "Official Cover" @officialcover4280 @officialcover4280, 6 subscribers
+           - same-name channel: "Official Cover" @officialcover5724 @officialcover5724, 10 subscribers
+CLEAR    Generous Donor  (@GenerousDonor; search returned 37 channels)
+CLEAR    Diplomatic Cover  (@DiplomaticCover; search returned 27 channels)
+CLEAR    Respectable Front  (@RespectableFront; search returned 23 channels)

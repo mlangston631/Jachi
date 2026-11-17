@@ -1,0 +1,17 @@
+CLEAR    Grain and Scruple  (@GrainandScruple; search returned 0 channels)
+CROWDED  Fictitious Profits  (@FictitiousProfits; search returned 22 channels)
+           - contains-name channel: "𝕗𝕚𝕔𝕥𝕚𝕥𝕚𝕠𝕦𝕤༼༽ " @ficti_tious @ficti_tious, 41 subscribers
+TAKEN    Unjust Enrichment  (@UnjustEnrichment; search returned 24 channels)
+           - handle @UnjustEnrichment is taken by "Unjust Enrichment"
+           - same-name channel: "Unjust Enrichment" @UnjustEnrichment @UnjustEnrichment, 6.25K subscribers
+           - same-name channel: "Unjust Enrichment" @truelies786 @truelies786, 2 subscribers
+CLEAR    Velvet Larceny  (@VelvetLarceny; search returned 23 channels)
+TAKEN    Mahogany Row  (@MahoganyRow; search returned 26 channels)
+           - handle @MahoganyRow is taken by "Mahogany Row"
+           - same-name channel: "Mahogany Row" @MahoganyRowHQ @MahoganyRowHQ, 12 subscribers
+           - same-name channel: "Mahogany Row" @mahoganyrow5202 @mahoganyrow5202
+           - contains-name channel: "Mahogany Row - Topic" channel/UCN__kOPO13DL1GK_OFC1Avg 1 subscriber
+           - contains-name channel: "Mahogany Row Consulting" @mahoganyrowconsulting8031 @mahoganyrowconsulting8031
+TAKEN    Teller's Cage  (@TellersCage; search returned 20 channels)
+           - handle @TellersCage is taken by "Teller's Cage"
+           - same-name channel: "Teller's Cage" @TellersCage @TellersCage, 3 subscribers

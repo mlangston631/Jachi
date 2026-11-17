@@ -1,0 +1,44 @@
+[
+ {
+  "name": "The Chamberstick",
+  "handle": "@TheChamberstick",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 26
+ },
+ {
+  "name": "Rogues of Record Stories",
+  "handle": "@RoguesofRecordStories",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 20
+ },
+ {
+  "name": "The Rogues of Record",
+  "handle": "@TheRoguesofRecord",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 21
+ },
+ {
+  "name": "The Hereby Explained",
+  "handle": "@TheHerebyExplained",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 30
+ },
+ {
+  "name": "Hereby Explains",
+  "handle": "@HerebyExplains",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 20
+ },
+ {
+  "name": "The Cloister Weather",
+  "handle": "@TheCloisterWeather",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 13
+ }
+]

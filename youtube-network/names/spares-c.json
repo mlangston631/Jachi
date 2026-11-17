@@ -1,0 +1,44 @@
+[
+ {
+  "name": "Modest Catastrophe",
+  "handle": "@ModestCatastrophe",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 24
+ },
+ {
+  "name": "A Modest Catastrophe",
+  "handle": "@AModestCatastrophe",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 26
+ },
+ {
+  "name": "Until Somebody Talked",
+  "handle": "@UntilSomebodyTalked",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 25
+ },
+ {
+  "name": "Then Someone Talked",
+  "handle": "@ThenSomeoneTalked",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 30
+ },
+ {
+  "name": "The Crooked Arithmetic",
+  "handle": "@TheCrookedArithmetic",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 21
+ },
+ {
+  "name": "Crooked Arithmetics",
+  "handle": "@CrookedArithmetics",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 21
+ }
+]

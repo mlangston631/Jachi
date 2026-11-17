@@ -1,0 +1,32 @@
+CLEAR    Overseas Interests  (@OverseasInterests; search returned 4 channels)
+TAKEN    Mutual Interests  (@MutualInterests; search returned 37 channels)
+           - handle @MutualInterests is taken by "mutualinterests"
+           - same-name channel: "Mutual Interests" @mutualinterests820 @mutualinterests820, 132 subscribers
+           - same-name channel: "Mutual_Interests" @CleonlakeTube @CleonlakeTube, 1 subscriber
+           - near-name channel: "Mutual Interest" @Mutual_Interest @Mutual_Interest, 15 subscribers
+           - contains-name channel: "Mutual Interest Solution" @Mutual_Interest_Solution @Mutual_Interest_Solution
+TAKEN    Neutral Waters  (@NeutralWaters; search returned 34 channels)
+           - handle @NeutralWaters is taken by "John Nicholson - Saxophonist"
+           - near-name channel: "Neutral Water" @neutralwater7997 @neutralwater7997
+TAKEN    Pattern of Life  (@PatternofLife; search returned 261 channels)
+           - handle @PatternofLife is taken by "Pattern of Life "
+           - same-name channel: "Pattern of life" @patternoflife7696 @patternoflife7696
+           - contains-name channel: "Pattern of Life - Topic" channel/UCtP_JbYWew1Mu9Mxr6IMaZw 
+           - same-name channel: "pattern of life " @SuduBole-c5h @SuduBole-c5h, 2 subscribers
+           - same-name channel: "Pattern of Life" @patternoflife9677 @patternoflife9677, 1 subscriber
+           - same-name channel: "Pattern of Life " @patternoflife @patternoflife, 18 subscribers
+           - same-name channel: "Pattern of Life" @itsprashantzone @itsprashantzone
+           - same-name channel: " Pattern Of Life" @patternoflife2476 @patternoflife2476, 39 subscribers
+           - same-name channel: "Pattern Of Life" @patternoflife173 @patternoflife173, 703 subscribers
+           - contains-name channel: "The Pattern of Life's Journey" @ThePatternofLifesJourney-w6k @ThePatternofLifesJourney-w6k
+           - near-name channel: "Patterns of Life" @Pattern_2222 @Pattern_2222, 47 subscribers
+           - contains-name channel: "Tarot Guidance-The Pattern of Life Channel" @tarotguidance-thepatternof7302 @tarotguidance-thepatternof7302, 1 subscriber
+           - contains-name channel: "rose is a pattern of life" @MohammadAbdullah-v6i @MohammadAbdullah-v6i, 2 subscribers
+           - near-name channel: "PATTERN IN LIFE" @Ineedtomakeit @Ineedtomakeit, 5 subscribers
+           - contains-name channel: "PATTERN" @patterneqy @patterneqy, 6 subscribers
+           - contains-name channel: "THE PATTERN " @ThePatternOffical @ThePatternOffical
+           - near-name channel: "Pattern Life" @DKChawan-q2g @DKChawan-q2g, 1 subscriber
+           - contains-name channel: "THE PATTERN " @ThePatternPsychology44 @ThePatternPsychology44, 59 subscribers
+TAKEN    Plain Envelope  (@PlainEnvelope; search returned 36 channels)
+           - handle @PlainEnvelope is taken by "plainenvelope"
+CLEAR    Private Means  (@PrivateMeans; search returned 20 channels)

@@ -1,0 +1,9 @@
+CLEAR    Who Talked First  (@WhoTalkedFirst; search returned 28 channels)
+CLEAR    Grit and Gavel  (@GritandGavel; search returned 18 channels)
+CLEAR    Steel Toe Testimony  (@SteelToeTestimony; search returned 27 channels)
+CROWDED  Wrench and Witness  (@WrenchandWitness; search returned 20 channels)
+           - contains-name channel: "WRENCH" @wrenchstation @wrenchstation, 22 subscribers
+CROWDED  Cracks in the Crew  (@CracksintheCrew; search returned 20 channels)
+           - contains-name channel: "cracks" @cracks5303 @cracks5303
+CROWDED  Lunch Pails and Lineups  (@LunchPailsandLineups; search returned 26 channels)
+           - contains-name channel: "The Lineup" @thelineupfiles @thelineupfiles, 7 subscribers

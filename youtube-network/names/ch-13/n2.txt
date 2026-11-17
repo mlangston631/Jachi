@@ -1,0 +1,30 @@
+TAKEN    Numbered Account  (@NumberedAccount; search returned 23 channels)
+           - handle @NumberedAccount is taken by "Numbered Account"
+           - @TheNumberedAccount is taken by "Numbered Account"
+TAKEN    Source of Wealth  (@SourceofWealth; search returned 37 channels)
+           - handle @SourceofWealth is taken by "SourceOfWealth"
+           - @TheSourceofWealth is taken by "The Source of Wealth"
+           - same-name channel: "Source of Wealth" @SourceofWealth_SOW @SourceofWealth_SOW, 103 subscribers
+           - same-name channel: "The Source of Wealth" @TheSourceofWealth @TheSourceofWealth, 14 subscribers
+           - same-name channel: "Source of Wealth +" @WealthChristianity-SOW @WealthChristianity-SOW, 2 subscribers
+           - near-name channel: "Source Wealth" @sourcewealth @sourcewealth, 106 subscribers
+           - near-name channel: "SOURCE FOR WEALTH" @sourceforwealth9959 @sourceforwealth9959, 21 subscribers
+CLEAR    Key Judgments  (@KeyJudgments; search returned 33 channels)
+CLEAR    Letters Rogatory  (@LettersRogatory; search returned 11 channels)
+TAKEN    Strictly Private  (@StrictlyPrivate; search returned 28 channels)
+           - @TheStrictlyPrivate is taken by "Alex Monchenko"
+           - same-name channel: "Strictly Private" @StrictlyPrivate_Official @StrictlyPrivate_Official, 7.26K subscribers
+           - contains-name channel: "Strictly Private - Topic" channel/UCxk-4PgV33_s8P6yhJrYwLw 
+           - contains-name channel: "Area 51- Strictly Private" @area51-strictlyprivate90 @area51-strictlyprivate90, 6 subscribers
+           - contains-name channel: "área 51 Strictly Private" @area51strictlyprivate8 @area51strictlyprivate8
+           - contains-name channel: "SPR - STRICTLY PRIVATE ROOMS" @skyewildrift1788 @skyewildrift1788, 30 subscribers
+           - contains-name channel: "Private" @private3117 @private3117, 14 subscribers
+TAKEN    Smoke Filled Room  (@SmokeFilledRoom; search returned 30 channels)
+           - handle @SmokeFilledRoom is taken by "Laura DeJesus"
+           - @TheSmokeFilledRoom is taken by "thesmokefilledroom"
+           - same-name channel: "The Smoke-Filled Room" @thesmoke-filledroom4294 @thesmoke-filledroom4294, 13 subscribers
+           - contains-name channel: "Smoke Filled Room - Topic" channel/UCHO4jEOzButsDJkoz2r7Cag 4 subscribers
+           - same-name channel: "The Smoke Filled Room " @TheSmokeFilledRoom-r7v @TheSmokeFilledRoom-r7v, 1 subscriber
+           - same-name channel: "Smoke-Filled Room" @smoke-filledroom14 @smoke-filledroom14, 75 subscribers
+           - same-name channel: "Smoke Filled Room" @smokefilledroomband @smokefilledroomband, 77 subscribers
+           - same-name channel: "Smoke filled room" channel/UCEpC0rmewug2nBe_NN1v2gw 

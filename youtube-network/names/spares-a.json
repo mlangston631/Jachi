@@ -1,0 +1,44 @@
+[
+ {
+  "name": "The Economy of Means",
+  "handle": "@TheEconomyofMeans",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 21
+ },
+ {
+  "name": "Hubris Holdings Films",
+  "handle": "@HubrisHoldingsFilms",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 14
+ },
+ {
+  "name": "The Legible Machines",
+  "handle": "@TheLegibleMachines",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 22
+ },
+ {
+  "name": "The Measured Awe",
+  "handle": "@TheMeasuredAwe",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 21
+ },
+ {
+  "name": "The Ink Tectonics",
+  "handle": "@TheInkTectonics",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 20
+ },
+ {
+  "name": "Ink Techtonics",
+  "handle": "@InkTechtonics",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 14
+ }
+]

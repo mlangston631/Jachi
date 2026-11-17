@@ -1,0 +1,422 @@
+[
+ {
+  "query": "flags of convenience",
+  "period": "year",
+  "videos": [
+   {
+    "title": "How 3 Tiny Countries Took Over Global Shipping",
+    "id": "6qCsKKZs2MM",
+    "views": 17354,
+    "age_days": 30,
+    "length_s": 941,
+    "channel": "Bridged",
+    "channel_id": "UCzCwu6s8xCNTJgvf_2IdcQA",
+    "subs": 9540,
+    "outlier": 1.82,
+    "views_per_day": 578
+   },
+   {
+    "title": "Why landlocked countries have merchant navies",
+    "id": "99iu8toSb0Y",
+    "views": 10687,
+    "age_days": 30,
+    "length_s": 1056,
+    "channel": "Fredo Rockwell",
+    "channel_id": "UC2j0DJZpg3075fxzlNpR4dg",
+    "subs": 30400,
+    "outlier": 0.35,
+    "views_per_day": 356
+   },
+   {
+    "title": "Facts behind US Attacks on ships with Indians & the bitter truth of Flags of Convenience shipping",
+    "id": "LonBeZMIjn0",
+    "views": 82463,
+    "age_days": 150,
+    "length_s": 1387,
+    "channel": "ThePrint",
+    "channel_id": "UCuyRsHZILrU7ZDIAbGASHdA",
+    "subs": 3010000,
+    "outlier": 0.03,
+    "views_per_day": 550
+   },
+   {
+    "title": "[Selected] Taking US Advice Only to Be Left in the Lurch! Panama's Forced Port Takeover Backfires...",
+    "id": "9t9qtHUguP0",
+    "views": 28166,
+    "age_days": 90,
+    "length_s": 2560,
+    "channel": "寰宇新聞 頻道",
+    "channel_id": "UCp2f7tGJGN6R9Muxipem8Nw",
+    "subs": 1160000,
+    "outlier": 0.02,
+    "views_per_day": 313
+   },
+   {
+    "title": "US Blockade of Iranian Ports Brings Shadow Fleet and Flags of Convenience Back to the Forefront",
+    "id": "Sm0LO43dzHM",
+    "views": 18489,
+    "age_days": 180,
+    "length_s": 211,
+    "channel": "AlJazeera Arabic  قناة الجزيرة",
+    "channel_id": "UCfiwzLy-8yKzIbsmZTzxDgw",
+    "subs": 23800000,
+    "outlier": 0,
+    "views_per_day": 103
+   },
+   {
+    "title": "Loch Ness Mobster | Episode 1 of 3: Flag of Convenience (AUDIO ONLY)",
+    "id": "oX0eQ6IHIJE",
+    "views": 4326,
+    "age_days": 21,
+    "length_s": 2476,
+    "channel": "Al Jazeera English",
+    "channel_id": "UCNye-wNBqNL5ZzHSJj3l8Bg",
+    "subs": 18400000,
+    "outlier": null,
+    "views_per_day": 206
+   },
+   {
+    "title": "The world's poorest country controls the world's largest fleet. #ShadowFleet #FlagsOfConvenience ...",
+    "id": "8AnN8hmZCzs",
+    "views": 2142,
+    "age_days": 150,
+    "length_s": 931,
+    "channel": "艾瑪相對論",
+    "channel_id": "UCa9EveDG-UHqhGH067QUIBA",
+    "subs": 16600,
+    "outlier": null,
+    "views_per_day": 14
+   },
+   {
+    "title": "U.S Seizes Ship Flying Russian Flag: What Are 'Ghost Fleet' Ships? | Xplained By NewsX",
+    "id": "laRbmdx-BF4",
+    "views": 1408,
+    "age_days": 300,
+    "length_s": 562,
+    "channel": "NewsX Live",
+    "channel_id": "UCytSP0M0Jdnw6qIy3Y-nTig",
+    "subs": 1680000,
+    "outlier": null,
+    "views_per_day": 5
+   },
+   {
+    "title": "Russian Shadow Fleet Increasingly Exploiting African Flags: Reports | Firstpost Africa | N18G",
+    "id": "1U8nj6EuVN8",
+    "views": 1123,
+    "age_days": 90,
+    "length_s": 822,
+    "channel": "Firstpost",
+    "channel_id": "UCz8QaiQxApLq8sLNcszYyJw",
+    "subs": 9840000,
+    "outlier": null,
+    "views_per_day": 12
+   },
+   {
+    "title": "What Were Cruise Ships Like In the 1970's?",
+    "id": "O4DOLSu-JJ0",
+    "views": 734,
+    "age_days": 90,
+    "length_s": 817,
+    "channel": "Ocean Liners On Print",
+    "channel_id": "UCkgt_3pBYdv6GwPCeahTW7w",
+    "subs": 181,
+    "outlier": null,
+    "views_per_day": 8
+   }
+  ]
+ },
+ {
+  "query": "diplomatic cover",
+  "period": "year",
+  "videos": [
+   {
+    "title": "What Happens When Russia’s Spies Lose Diplomatic Cover?",
+    "id": "irA9UziVOcs",
+    "views": 104421,
+    "age_days": 30,
+    "length_s": 703,
+    "channel": "The Institute of World Politics",
+    "channel_id": "UCmxRh3CobqeOHzN-L15fNrg",
+    "subs": 62100,
+    "outlier": 1.68,
+    "views_per_day": 3481
+   },
+   {
+    "title": "Lukashenko's Spies Around the World / KGB and GRU Agents Disguised as Diplomats | BELPOL Investig...",
+    "id": "k-DW-SQvfic",
+    "views": 47373,
+    "age_days": 150,
+    "length_s": 4498,
+    "channel": "BELPOL",
+    "channel_id": "UCs-6x-6RKU_1ks1DNKi2oqA",
+    "subs": 61900,
+    "outlier": 0.77,
+    "views_per_day": 316
+   },
+   {
+    "title": "Saudi Arabia Executes Bangladeshi Couple | Mecca Mosque Case & Diplomatic Row || Shahid Saqlain",
+    "id": "RLslZO8Ldeg",
+    "views": 191381,
+    "age_days": 28,
+    "length_s": 634,
+    "channel": "Shahid Saqlain",
+    "channel_id": "UC4vzrnHe7-Ql2Jrr9Qaejdg",
+    "subs": 271000,
+    "outlier": 0.71,
+    "views_per_day": 6835
+   },
+   {
+    "title": "Devyani Khobragade Case: Why India Removed US Embassy Barricades and 3 Sailors Changed Nothing",
+    "id": "-c6GPVf33YA",
+    "views": 93656,
+    "age_days": 150,
+    "length_s": 225,
+    "channel": "India Today Global",
+    "channel_id": "UCq6L7JFb3gqCNDD2tjWAhBw",
+    "subs": 224000,
+    "outlier": 0.42,
+    "views_per_day": 624
+   },
+   {
+    "title": "Iran is using diplomacy as a ‘SMOKESCREEN’ to cover up their real agenda: Nathan Sales",
+    "id": "SGU1M1I32jg",
+    "views": 83561,
+    "age_days": 120,
+    "length_s": 378,
+    "channel": "Fox News Clips",
+    "channel_id": "UCqlYzSgsh5jdtWYfVIBoTDw",
+    "subs": 874000,
+    "outlier": 0.1,
+    "views_per_day": 696
+   },
+   {
+    "title": "Chinese spy na may diplomatic cover, nabisto ng Philippine counterintelligence forces noong 2024",
+    "id": "XET-UX80Eeg",
+    "views": 65866,
+    "age_days": 10,
+    "length_s": 153,
+    "channel": "Bilyonaryo News Channel",
+    "channel_id": "UCiXhD6IScRs5r-tDvVvKjSA",
+    "subs": 966000,
+    "outlier": 0.07,
+    "views_per_day": 6587
+   },
+   {
+    "title": "শেখ হাসিনার সংবাদ সম্মেলন ঘিরে নতুন কূটনৈতিক উত্তেজনা। Sheikh Hasina। Press Conference। Channel 24",
+    "id": "wB9TWVWq4gM",
+    "views": 358441,
+    "age_days": 90,
+    "length_s": 277,
+    "channel": "Channel 24",
+    "channel_id": "UCHLqIOMPk20w-6cFgkA90jw",
+    "subs": 17200000,
+    "outlier": 0.02,
+    "views_per_day": 3983
+   },
+   {
+    "title": "Wild Diplomatic Immunity Cases You Won’t Believe",
+    "id": "rT9Zs1taXtM",
+    "views": 147457,
+    "age_days": 300,
+    "length_s": 1076,
+    "channel": "The Infographics Show",
+    "channel_id": "UCfdNM3NAhaBOXCafH7krzrA",
+    "subs": 15500000,
+    "outlier": 0.01,
+    "views_per_day": 492
+   },
+   {
+    "title": "India’s Diplomatic Win: Ninety Nine Percent Exports to Oman Duty Free | Cover Story",
+    "id": "9tyn0LtbRPs",
+    "views": 33690,
+    "age_days": 300,
+    "length_s": 1859,
+    "channel": "Zee Business",
+    "channel_id": "UCkXopQ3ubd-rnXnStZqCl2w",
+    "subs": 6480000,
+    "outlier": 0.01,
+    "views_per_day": 112
+   },
+   {
+    "title": "I went to cover Nato, but this happened instead… | BBC News",
+    "id": "GaZ8S2Ao0Yc",
+    "views": 99644,
+    "age_days": 120,
+    "length_s": 402,
+    "channel": "BBC Politics and BBC News",
+    "channel_id": "",
+    "subs": null,
+    "outlier": null,
+    "views_per_day": 830
+   }
+  ]
+ },
+ {
+  "query": "utmost discretion",
+  "period": "year",
+  "videos": [
+   {
+    "title": "BE STILL ! What's Coming Demands Utmost Discretion!  In few hours CELEBRATE WITH JOY 🎊🎉🙏🏻💖🌈💃🏽🙌🔑💰 ",
+    "id": "nGI1oF6WUvE",
+    "views": 3652,
+    "age_days": 240,
+    "length_s": 187,
+    "channel": "Newman Gopherwood Church",
+    "channel_id": "UC00t1SX-hODtUZi33lyxvzw",
+    "subs": 43800,
+    "outlier": null,
+    "views_per_day": 15
+   },
+   {
+    "title": "How to Pronounce ''äußerste Diskretion'' (utmost discretion) Correctly in German",
+    "id": "nmdkEJD-S6U",
+    "views": 1,
+    "age_days": 300,
+    "length_s": 92,
+    "channel": "German Pronunciation",
+    "channel_id": "UCh-usQataoSh7vvul5k6d5Q",
+    "subs": 22500,
+    "outlier": null,
+    "views_per_day": 0
+   },
+   {
+    "title": "Handle this info with utmost discretion..🫵🏼",
+    "id": "fULCEIERK1Y",
+    "views": 1,
+    "age_days": 120,
+    "length_s": 78,
+    "channel": "Packet_Ghost",
+    "channel_id": "UC1Rl_CBqSIeZO6l3-cRSCmw",
+    "subs": 14,
+    "outlier": null,
+    "views_per_day": 0
+   }
+  ]
+ },
+ {
+  "query": "certain arrangements",
+  "period": "year",
+  "videos": [
+   {
+    "title": "SEATING ARRANGEMENTS COMPLETE CLASS FOR BANKS/SSC/RAILWAYS/SI/CONSTABLE BY LOKESWARI MAM #reasoning",
+    "id": "FtfV8FQa6Q4",
+    "views": 38389,
+    "age_days": 330,
+    "length_s": 22711,
+    "channel": "RAJU GARI TRICKS",
+    "channel_id": "UCjiRLbloUc2g4lWwKonEB_g",
+    "subs": 77600,
+    "outlier": 0.49,
+    "views_per_day": 116
+   },
+   {
+    "title": "👍🏻 Thread Method Puzzle & Seating Arrangement For Beginners Part-1 | Bank Exams 2026 | Ankush Lamba",
+    "id": "crnlLk_o2u4",
+    "views": 310040,
+    "age_days": 240,
+    "length_s": 14310,
+    "channel": "BANKING CHRONICLE",
+    "channel_id": "UCzARHhsjYS-qcaaIRv5A0mA",
+    "subs": 1090000,
+    "outlier": 0.28,
+    "views_per_day": 1292
+   },
+   {
+    "title": "IBPS PO 2026 Seating Arrangement One Shot | Complete Reasoning Marathon",
+    "id": "UZlqfAbJPYQ",
+    "views": 155773,
+    "age_days": 90,
+    "length_s": 7539,
+    "channel": "Adda247 Bank Exams",
+    "channel_id": "UC1L2JoMpcY6MRLhFd3gg5Xg",
+    "subs": 9460000,
+    "outlier": 0.02,
+    "views_per_day": 1731
+   },
+   {
+    "title": "Doing some arrangements in our bedroom ",
+    "id": "WH0AydrpOm0",
+    "views": 7110,
+    "age_days": 150,
+    "length_s": 6472,
+    "channel": " Nanev Erica ",
+    "channel_id": "UCYWdN8z0H1EiMHUx2RcS4Rw",
+    "subs": 21000,
+    "outlier": null,
+    "views_per_day": 47
+   },
+   {
+    "title": "Cocci vs Bacilli vs Spirilla Explained | Bacterial Shapes & Arrangements",
+    "id": "DbU_exm1Cwg",
+    "views": 7548,
+    "age_days": 210,
+    "length_s": 268,
+    "channel": "Microbiology Videos",
+    "channel_id": "UCD361ecAEjm_DYqNzVp8F7w",
+    "subs": 15400,
+    "outlier": null,
+    "views_per_day": 36
+   },
+   {
+    "title": "New Vlog, Some Arrangements, and Crumbling",
+    "id": "q4nbMOUNCDo",
+    "views": 5696,
+    "age_days": 60,
+    "length_s": 1765,
+    "channel": "Silky crumbling ASMR",
+    "channel_id": "UCZmKurxK2hC4QKhrDkaez5g",
+    "subs": 1600,
+    "outlier": null,
+    "views_per_day": 95
+   },
+   {
+    "title": "Subha subha record kia crumbling vlog ♥️ some arrangements 🤤",
+    "id": "wbTh74v433s",
+    "views": 1969,
+    "age_days": 180,
+    "length_s": 847,
+    "channel": "Relaxing Sounds ASMR",
+    "channel_id": "UCWmmRkfeg5SsRQUvDyRt7rg",
+    "subs": 4520,
+    "outlier": null,
+    "views_per_day": 11
+   },
+   {
+    "title": "New Crumbling vlog 💕 Claypot Crumbling and some arrangements 🤤",
+    "id": "L2WWUz7P4Dw",
+    "views": 1894,
+    "age_days": 240,
+    "length_s": 805,
+    "channel": "Relaxing Sounds ASMR",
+    "channel_id": "UCWmmRkfeg5SsRQUvDyRt7rg",
+    "subs": 4520,
+    "outlier": null,
+    "views_per_day": 8
+   },
+   {
+    "title": "New all in one crumbling vlog 💕 Workplace after some arrangements 🤤",
+    "id": "K-yDXKY94-k",
+    "views": 1861,
+    "age_days": 210,
+    "length_s": 807,
+    "channel": "RELAXING SOUNDS ASMR 2",
+    "channel_id": "UC66jBjvCKlBuEyXevorEpaA",
+    "subs": 2690,
+    "outlier": null,
+    "views_per_day": 9
+   },
+   {
+    "title": "PREPARE YOURSELF.... TRAVELLING ARRANGEMENTS ARE CERTAIN AND YOU'RE TRAVELING SOON....",
+    "id": "_sa_zHGvPLg",
+    "views": 2704,
+    "age_days": 5,
+    "length_s": 671,
+    "channel": "Heavenly Hosts Vision with Lidi",
+    "channel_id": "UCmJUdQ6T98Y2EnZOBvI4AMQ",
+    "subs": 48200,
+    "outlier": null,
+    "views_per_day": 541
+   }
+  ]
+ }
+]

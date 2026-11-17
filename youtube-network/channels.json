@@ -1,12 +1,12 @@
 [
  {
   "n": 1,
-  "slug": "stick-ledger",
-  "name": "Stick Ledger",
-  "handle": "@StickLedger",
+  "slug": "economy-of-means",
+  "name": "Economy of Means",
+  "handle": "@EconomyOfMeans",
   "alts": [
-   "@StickLedgerMoney",
-   "@TheStickLedger"
+   "@TheEconomyOfMeans",
+   "@EconomyOfMeansStudio"
   ],
   "niche": "Stick-figure money and economics explainers",
   "tagline": "Money, explained with stick figures.",
@@ -106,6 +106,30 @@
      "https://support.google.com/youtube/answer/2801973"
     ],
     "confidence": null
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Stick Ledger",
+     "handle": "@StickLedger",
+     "alts": [
+      "@StickLedgerMoney",
+      "@TheStickLedger"
+     ]
+    },
+    "to": {
+     "name": "Economy of Means",
+     "handle": "@EconomyOfMeans",
+     "alts": [
+      "@TheEconomyOfMeans",
+      "@EconomyOfMeansStudio"
+     ]
+    },
+    "reason": "Naming round 2 pick (panel 7.0). An art phrase for saying much with few lines, which is what stick figures do, made of two money words. .com is registered by someone else; YouTube and trademarks clear. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "sources": [
@@ -147,16 +171,17 @@
    "The first checker's Freddie Mac rate (7.18% for the week of November 5, 2026) is after my knowledge and I could not verify it. Nothing in the current text quotes it, but read it off freddiemac.com/pmms before it appears in the loan video.",
    "Before linking the SEC calculator, confirm what it returns for these inputs and that it treats deposits as end-of-month, so the on-screen note matches what viewers will see.",
    "Optional, not an error: the script never says whether the 7% is before or after inflation. If it is a nominal return, $525,000 in 40 years buys much less than it would today, and a short line saying so would head off a common comment. Fees and taxes are also left out, which is fine given 'made-up return' and 'this is only to show the maths'."
-  ]
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 2,
-  "slug": "rise-and-ruin-files",
-  "name": "Rise & Ruin Files",
-  "handle": "@RiseAndRuinFiles",
+  "slug": "hubris-holdings",
+  "name": "Hubris Holdings",
+  "handle": "@HubrisHoldings",
   "alts": [
-   "@RiseAndRuin_Files",
-   "@TheRiseAndRuinFiles"
+   "@TheHubrisHoldings",
+   "@HubrisHoldingsFilms"
   ],
   "niche": "Business and company story documentaries",
   "tagline": "How companies are built. How they fall.",
@@ -345,6 +370,30 @@
      "https://support.google.com/youtube/answer/6154218"
     ],
     "confidence": null
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Rise & Ruin Files",
+     "handle": "@RiseAndRuinFiles",
+     "alts": [
+      "@RiseAndRuin_Files",
+      "@TheRiseAndRuinFiles"
+     ]
+    },
+    "to": {
+     "name": "Hubris Holdings",
+     "handle": "@HubrisHoldings",
+     "alts": [
+      "@TheHubrisHoldings",
+      "@HubrisHoldingsFilms"
+     ]
+    },
+    "reason": "Naming round 2 pick (panel 7.75): an imagined holding company of every empire undone by its own pride. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "sources": [
@@ -399,16 +448,17 @@
    "Blockbuster title: the story comes only from the Netflix founders (Randolph's book says Antioco was 'struggling not to laugh'; Randolph and Hastings have also said Blockbuster laughed them out of the room). I left the title as is, but the video should attribute the account to them.",
    "Nokia title: 'five years' holds if it is measured from the 2007 iPhone launch to Samsung overtaking Nokia in Q1 2012. Measured to the Microsoft sale (2013 to 2014), it is six to seven years. The script should name its endpoints.",
    "For the rest of the film: Sasson's 1978 patent would have expired around 1995 (17-year term). Kodak's later licensing income came from later patents, so don't credit it to the 1975 camera. The 1989 Sasson/Hills digital SLR prototype, which Kodak reportedly declined to sell, is stronger evidence for a 'held back' story than the 1975 prototype, but I did not verify it here."
-  ]
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 3,
-  "slug": "plain-circuit",
-  "name": "Plain Circuit",
-  "handle": "@PlainCircuit",
+  "slug": "legible-machines",
+  "name": "Legible Machines",
+  "handle": "@LegibleMachines",
   "alts": [
-   "@PlainCircuitAI",
-   "@ThePlainCircuit"
+   "@TheLegibleMachines",
+   "@LegibleMachinesLab"
   ],
   "niche": "AI and tech explainers",
   "tagline": "AI and tech, in plain words.",
@@ -551,6 +601,30 @@
      "https://learn.microsoft.com/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure"
     ],
     "confidence": "low"
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Plain Circuit",
+     "handle": "@PlainCircuit",
+     "alts": [
+      "@PlainCircuitAI",
+      "@ThePlainCircuit"
+     ]
+    },
+    "to": {
+     "name": "Legible Machines",
+     "handle": "@LegibleMachines",
+     "alts": [
+      "@TheLegibleMachines",
+      "@LegibleMachinesLab"
+     ]
+    },
+    "reason": "Naming round 2 pick (panel 7.5): machines made readable. .com registered by someone else; YouTube and trademarks clear. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "sources": [
@@ -597,16 +671,17 @@
    "The URL https://huyenchip.com/2024/01/16/sampling.html was not checked live; the first checker cited it without '.html'.",
    "Picture directions to check before recording: the '[A confident-looking but wrong sentence appears]' sentence must really be false and clearly marked wrong (keep a source if it's a real chatbot error). '[The sentence breaks into small chunks]' should split 'The cat sat on the' along word lines, because real tokenizers keep these common words whole, with the space attached. Save part-word splits for a longer or rarer word.",
    "'Hundreds or even thousands' assumes OpenAI's English rule of thumb. Token counts differ by model and are higher for many other languages."
-  ]
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 4,
-  "slug": "farther-light",
-  "name": "Farther Light",
-  "handle": "@FartherLight",
+  "slug": "measured-awe",
+  "name": "Measured Awe",
+  "handle": "@MeasuredAwe",
   "alts": [
-   "@FartherLightSpace",
-   "@TheFartherLight"
+   "@TheMeasuredAwe",
+   "@MeasuredAweScience"
   ],
   "niche": "Science and space",
   "tagline": "Space and science, one question at a time.",
@@ -671,6 +746,30 @@
      "https://support.google.com/youtube/answer/1311392"
     ],
     "confidence": null
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Farther Light",
+     "handle": "@FartherLight",
+     "alts": [
+      "@FartherLightSpace",
+      "@TheFartherLight"
+     ]
+    },
+    "to": {
+     "name": "Measured Awe",
+     "handle": "@MeasuredAwe",
+     "alts": [
+      "@TheMeasuredAwe",
+      "@MeasuredAweScience"
+     ]
+    },
+    "reason": "Naming round 2 pick (panel 7.5): wonder, with the numbers. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "sources": [
@@ -720,16 +819,17 @@
    "Voyager 1 reaching one light-day from Earth (25.9 billion km, 173.1 AU by my arithmetic) in November 2026 is from the first checker's searches, and I couldn't confirm NASA's exact date. If the video mentions it, check NASA's own page and give a date.",
    "The sign-off 'if there are that many stars' has no star count to point back to. It's a wording choice for the owner, not a factual error. The first checker's alternative ('with so many stars out there') is fine.",
    "For the later title videos: in the speed-of-light video, credit the first km/s figure to Huygens working from Romer's timing, and quote Fizeau's 1849 result carefully (sources give about 313,000 to 315,000 km/s). In the Voyager title, 'thing' is fine (NASA says 'most distant human-made object'), though a pedant could point out that radio signals we've sent have gone much farther. The biggest-star video needs dated, hedged figures, because the candidates' sizes keep being revised."
-  ]
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 5,
-  "slug": "moving-border",
-  "name": "The Moving Border",
-  "handle": "@MovingBorder",
+  "slug": "ink-tectonics",
+  "name": "Ink Tectonics",
+  "handle": "@InkTectonics",
   "alts": [
-   "@TheMovingBorder",
-   "@MovingBorderHistory"
+   "@TheInkTectonics",
+   "@InkTechtonics"
   ],
   "niche": "History documentaries with maps",
   "tagline": "History, told by the map.",
@@ -886,6 +986,30 @@
      "https://support.google.com/youtube/answer/2801939?hl=en"
     ],
     "confidence": null
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "The Moving Border",
+     "handle": "@MovingBorder",
+     "alts": [
+      "@TheMovingBorder",
+      "@MovingBorderHistory"
+     ]
+    },
+    "to": {
+     "name": "Ink Tectonics",
+     "handle": "@InkTectonics",
+     "alts": [
+      "@TheInkTectonics",
+      "@InkTechtonics"
+     ]
+    },
+    "reason": "Naming round 2 pick (panel 7.25): borders drawn in ink that shift like plates. Replaced The Moving Border, which an NPR Latino USA series and a Columbia book already use. Spare @InkTechtonics catches the common misspelling. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "sources": [
@@ -940,16 +1064,17 @@
    "'How Britain Ended Up With a Quarter of the Map': the c. 1920 figure (about 35.5 million km², about 24% of land) includes League of Nations mandates, and 'of the map' should be understood as 'of the world's land'. Acceptable as a hook; I made no edit.",
    "'The Empire You've Never Heard Of: Khwarazm' overlaps heavily with the Mongol video (Khwarazm's fall in 1219-1221 is part of that story). Not an error, but a planning note.",
    "Unconfirmed by any search in either pass: Dacia abandoned c. 271-275; the 337/340/350/353 dates for Constantine's sons; eastern Illyricum passing to Theodosius in 379; Galerius's exact appointment date (1 March vs 21 May 293)."
-  ]
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 6,
-  "slug": "candlelit-chronicle",
-  "name": "Candlelit Chronicle",
-  "handle": "@CandlelitChronicle",
+  "slug": "chamberstick",
+  "name": "Chamberstick",
+  "handle": "@Chamberstick",
   "alts": [
-   "@TheCandlelitChronicle",
-   "@CandlelitChronicleSleep"
+   "@TheChamberstick",
+   "@ChamberstickStories"
   ],
   "niche": "Sleep history (long, calm narration)",
   "tagline": "Quiet history for falling asleep.",
@@ -1014,6 +1139,30 @@
      "https://support.google.com/youtube/answer/9528076"
     ],
     "confidence": null
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Candlelit Chronicle",
+     "handle": "@CandlelitChronicle",
+     "alts": [
+      "@TheCandlelitChronicle",
+      "@CandlelitChronicleSleep"
+     ]
+    },
+    "to": {
+     "name": "Chamberstick",
+     "handle": "@Chamberstick",
+     "alts": [
+      "@TheChamberstick",
+      "@ChamberstickStories"
+     ]
+    },
+    "reason": "Naming round 2 pick (panel 7.5): the small candle holder carried up to bed. .com registered by someone else; YouTube and trademarks clear. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "sources": [
@@ -1066,18 +1215,19 @@
    "The Rule's sixth-century date and Benedict's authorship are the mainstream view. Most of what we know of Benedict's life comes from Gregory the Great's Dialogues, and a minority of scholars (notably Francis Clark) have argued Gregory didn't write them. That doesn't affect anything the script says.",
    "'(2 Hours)' in the first title must match the finished upload. Only the opening exists so far.",
    "The future bakehouse section: under the Rule's winter timetable, the time after the night office is for study, and by the 11th century much everyday baking was done by servants. If monks are shown baking before dawn, it needs a source (baking the communion bread is the likeliest exception)."
-  ]
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 7,
-  "slug": "paper-trail-cases",
-  "name": "Paper Trail Cases",
-  "handle": "@PaperTrailCases",
+  "slug": "rogues-of-record",
+  "name": "Rogues of Record",
+  "handle": "@RoguesOfRecord",
   "alts": [
-   "@ThePaperTrailCases",
-   "@PaperTrailCaseFiles"
+   "@TheRoguesOfRecord",
+   "@RoguesOfRecordStories"
   ],
-  "niche": "True crime (historic, well-documented cases)",
+  "niche": "Historic true crime told from the record: lone thieves, cons and hoaxes",
   "tagline": "Real cases. Told from the record.",
   "bg": "#16181B",
   "fg": "#EDEDED",
@@ -1177,6 +1327,30 @@
      "Donald Sassoon, Mona Lisa: The History of the World's Most Famous Painting (HarperCollins, 2001)"
     ],
     "confidence": "low"
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Paper Trail Cases",
+     "handle": "@PaperTrailCases",
+     "alts": [
+      "@ThePaperTrailCases",
+      "@PaperTrailCaseFiles"
+     ]
+    },
+    "to": {
+     "name": "Rogues of Record",
+     "handle": "@RoguesOfRecord",
+     "alts": [
+      "@TheRoguesOfRecord",
+      "@RoguesOfRecordStories"
+     ]
+    },
+    "reason": "Chosen over the panel's first pick, Heist Almanac (7.0), for Rogues of Record (6.75): channels 11-13 were added after round 2 was judged, and crew heists now belong to channel 11, so a 'Heist' name would blur the boundary. Rogues of Record says lone rogues, cons and hoaxes, told from the record. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "sources": [
@@ -1225,17 +1399,19 @@
    "Whether Apollinaire was formally charged over the Mona Lisa or only over harbouring Pieret and receiving the statuettes. The script says only 'arrested', which is safe.",
    "Title checks resting only on background knowledge: Lustig's second attempt failing (and the thin record for the whole episode, mostly from a 1961 book); the Gardner Museum's own '81 minutes' figure (confirm on gardnermuseum.org); Göring's trade of 137 paintings for van Meegeren's fake; the Antwerp loot value and Notarbartolo's insurance-fraud claim (both contested).",
    "'Next: how he got it out of the building' promises a video that isn't in the first ten titles. Either add it to the list or change the closing line.",
-   "'Cleaners and workmen had the building to themselves' leaves out the guards on duty. I treated it as acceptable relative to the public, but a stricter reading would add 'and a few guards'."
-  ]
+   "'Cleaners and workmen had the building to themselves' leaves out the guards on duty. I treated it as acceptable relative to the public, but a stricter reading would add 'and a few guards'.",
+   "Titles 4, 5, 7 and 9 are crew heists (Great Train Robbery, Gardner Museum, Hatton Garden, Antwerp), which now belong to channel 11. Replace them when the growth plan resumes."
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 8,
-  "slug": "fine-print-plainly",
-  "name": "Fine Print, Plainly",
-  "handle": "@FinePrintPlainly",
+  "slug": "hereby-explained",
+  "name": "Hereby Explained",
+  "handle": "@HerebyExplained",
   "alts": [
-   "@FinePrint_Plainly",
-   "@TheFinePrintPlainly"
+   "@TheHerebyExplained",
+   "@HerebyExplains"
   ],
   "niche": "Legal, insurance and real-estate explainers",
   "tagline": "Contracts, cover and closings, in plain English.",
@@ -1303,6 +1479,30 @@
      "https://www.superlawyers.com/resources/landlord-and-tenant/residential-lease-review/"
     ],
     "confidence": "medium"
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Fine Print, Plainly",
+     "handle": "@FinePrintPlainly",
+     "alts": [
+      "@FinePrint_Plainly",
+      "@TheFinePrintPlainly"
+     ]
+    },
+    "to": {
+     "name": "Hereby Explained",
+     "handle": "@HerebyExplained",
+     "alts": [
+      "@TheHerebyExplained",
+      "@HerebyExplains"
+     ]
+    },
+    "reason": "Naming round 2 pick (panel 8.0): 'hereby' is the contract word that makes things official. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "sources": [
@@ -1348,16 +1548,17 @@
    "The car-accident reporting clause in edit 1 is a judgement call. The ISO standard form requires prompt notice, but insurers' forms vary and some state rules differ. 'May still require' is hedged to match. If the owner wants the shortest version, 'On a car or home policy, there's usually no point in claiming' alone still fixes the health-plan problem.",
    "The lease title is about tone as much as fact. Some viewers will read 'The Six Parts' as the six parts the video chose rather than a fixed legal structure.",
    "The first checker's figures (15 to 30 percent and 40 percent savings from a higher car deductible, and Florida's hurricane deductible applying once a year under Fla. Stat. 627.701(5)(a)) aren't in the script, so they don't affect this video. I couldn't re-check them myself."
-  ]
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 9,
-  "slug": "rain-on-slate",
-  "name": "Rain on Slate",
-  "handle": "@RainOnSlate",
+  "slug": "cloister-weather",
+  "name": "Cloister Weather",
+  "handle": "@CloisterWeather",
   "alts": [
-   "@RainOnSlateAudio",
-   "@RainOnSlateSounds"
+   "@TheCloisterWeather",
+   "@CloisterWeatherSound"
   ],
   "niche": "Ambient, lofi and sleep sound",
   "tagline": "Long, quiet sound for sleep and focus.",
@@ -1441,17 +1642,42 @@
      "https://support.google.com/youtube/answer/2490020?hl=en"
     ],
     "confidence": null
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Rain on Slate",
+     "handle": "@RainOnSlate",
+     "alts": [
+      "@RainOnSlateAudio",
+      "@RainOnSlateSounds"
+     ]
+    },
+    "to": {
+     "name": "Cloister Weather",
+     "handle": "@CloisterWeather",
+     "alts": [
+      "@TheCloisterWeather",
+      "@CloisterWeatherSound"
+     ]
+    },
+    "reason": "Naming round 2 pick (panel 7.5): weather heard from a sheltered walkway. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
-  ]
+  ],
+  "audience": "not made for kids"
  },
  {
   "n": 10,
-  "slug": "tiny-brave-things",
-  "name": "Tiny Brave Things",
-  "handle": "@TinyBraveThings",
+  "slug": "modest-catastrophes",
+  "name": "Modest Catastrophes",
+  "handle": "@ModestCatastrophes",
   "alts": [
-   "@TheTinyBraveThings",
-   "@TinyBraveThingsShorts"
+   "@ModestCatastrophe",
+   "@AModestCatastrophe"
   ],
   "niche": "Wordless animated Shorts for adults: tiny original characters, grown-up problems",
   "tagline": "Tiny characters. Grown-up problems.",
@@ -1520,8 +1746,170 @@
     "sources": [
      "https://support.google.com/youtube/answer/9528076"
     ]
+   },
+   {
+    "step": "naming",
+    "field": "name",
+    "from": {
+     "name": "Tiny Brave Things",
+     "handle": "@TinyBraveThings",
+     "alts": [
+      "@TheTinyBraveThings",
+      "@TinyBraveThingsShorts"
+     ]
+    },
+    "to": {
+     "name": "Modest Catastrophes",
+     "handle": "@ModestCatastrophes",
+     "alts": [
+      "@ModestCatastrophe",
+      "@AModestCatastrophe"
+     ]
+    },
+    "reason": "Naming agent pick for the adult concept (panel 8.0): tiny disasters, told with a straight face. Previous name was taken or crowded on YouTube.",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
    }
   ],
   "audience": "not made for kids"
+ },
+ {
+  "n": 11,
+  "name": "Until Someone Talked",
+  "handle": "@UntilSomeoneTalked",
+  "alts": [
+   "@UntilSomebodyTalked",
+   "@ThenSomeoneTalked"
+  ],
+  "niche": "Investigative documentaries: street-level crews and criminal organisations, and how they fell",
+  "tagline": "Crews, empires, and the moment someone talked.",
+  "description": "Crews, gangs and criminal organisations, and the moment someone talked.\n\nInvestigative documentaries about how street-level criminal empires were built, how they held together and how they came apart: the rivalries, the informants, the wiretaps and the trials.\n\nEvery film is researched and written for this channel from court records, investigations and reporting, listed under each video. Convictions are called convictions and allegations are called allegations. Nothing here glamorises crime: the people these crews hurt are part of every story.",
+  "keywords": "crime documentary, organized crime documentary, gang documentary, true crime, informant, heist documentary, criminal investigation, rise and fall, mafia documentary",
+  "slug": "until-someone-talked",
+  "audience": "not made for kids",
+  "titles": [],
+  "scriptTitle": "",
+  "script": "",
+  "bg": "#111111",
+  "fg": "#EEEEEE",
+  "ac": "#C8372D",
+  "font": "Inter",
+  "mark": "",
+  "network": "investigative documentaries",
+  "history": [
+   {
+    "step": "naming",
+    "field": "name",
+    "from": null,
+    "to": {
+     "name": "Until Someone Talked",
+     "handle": "@UntilSomeoneTalked",
+     "alts": [
+      "@UntilSomebodyTalked",
+      "@ThenSomeoneTalked"
+     ]
+    },
+    "reason": "Naming agent pick (panel 8.0): street crews almost always fall when an insider turns. Human and tense without glamorising crime. Concept from the owner's brief (network/briefs.json).",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
+   }
+  ],
+  "open_questions": [
+   "Documentary content plan (topics, first five uploads, series) is paused until the channels exist."
+  ]
+ },
+ {
+  "n": 12,
+  "name": "Crooked Arithmetic",
+  "handle": "@CrookedArithmetic",
+  "alts": [
+   "@TheCrookedArithmetic",
+   "@CrookedArithmetics"
+  ],
+  "niche": "Investigative documentaries: financial, corporate and institutional crime",
+  "tagline": "Fraud, followed through the numbers.",
+  "description": "Fraud, followed through the numbers.\n\nInvestigative documentaries about billion-dollar frauds, Ponzi schemes, cooked books and corporate cover-ups. Each film shows how the scheme worked, who it made rich, how the deception was kept alive, what finally exposed it, and what it cost.\n\nEvery film is researched and written for this channel. Every figure comes from court records, regulatory filings and reporting, listed under each video. Convictions, settlements and allegations are always named for what they are. Nothing here is financial or legal advice.",
+  "keywords": "white collar crime, fraud documentary, ponzi scheme, financial crime, corporate scandal, money laundering, accounting fraud, business documentary, true crime finance",
+  "slug": "crooked-arithmetic",
+  "audience": "not made for kids",
+  "titles": [],
+  "scriptTitle": "",
+  "script": "",
+  "bg": "#111111",
+  "fg": "#EEEEEE",
+  "ac": "#C8372D",
+  "font": "Inter",
+  "mark": "",
+  "network": "investigative documentaries",
+  "history": [
+   {
+    "step": "naming",
+    "field": "name",
+    "from": null,
+    "to": {
+     "name": "Crooked Arithmetic",
+     "handle": "@CrookedArithmetic",
+     "alts": [
+      "@TheCrookedArithmetic",
+      "@CrookedArithmetics"
+     ]
+    },
+    "reason": "Naming agent pick (panel 6.5): cooked books and doctored numbers are the heart of white-collar fraud. Runners-up Tailored Larceny and Respectable Larceny also cleared; Respectable Larceny would have clashed with channel 13. Concept from the owner's brief (network/briefs.json).",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
+   }
+  ],
+  "open_questions": [
+   "Documentary content plan (topics, first five uploads, series) is paused until the channels exist."
+  ]
+ },
+ {
+  "n": 13,
+  "name": "Respectable Front",
+  "handle": "@RespectableFront",
+  "alts": [
+   "@TheRespectableFront",
+   "@RespectableFrontDocs"
+  ],
+  "niche": "Investigative documentaries: international syndicates, illicit finance, and crime behind legitimate fronts",
+  "tagline": "Organised crime behind respectable doors.",
+  "description": "Organised crime behind respectable doors.\n\nInvestigations into the international networks where organised crime meets wealth, finance and power: syndicates, laundering networks, and the legitimate businesses that hide them. Each film follows the evidence across borders, from origins and leadership to the money trail, the investigations and the disruption.\n\nEvery film is researched and written for this channel. Documented fact, court findings, allegations and open questions are kept clearly apart, and every source is listed under each video.",
+  "keywords": "organized crime documentary, money laundering, international crime, crime syndicate, illicit finance, investigative documentary, mafia documentary, corruption, cartel documentary",
+  "slug": "respectable-front",
+  "audience": "not made for kids",
+  "titles": [],
+  "scriptTitle": "",
+  "script": "",
+  "bg": "#111111",
+  "fg": "#EEEEEE",
+  "ac": "#C8372D",
+  "font": "Inter",
+  "mark": "",
+  "network": "investigative documentaries",
+  "history": [
+   {
+    "step": "naming",
+    "field": "name",
+    "from": null,
+    "to": {
+     "name": "Respectable Front",
+     "handle": "@RespectableFront",
+     "alts": [
+      "@TheRespectableFront",
+      "@RespectableFrontDocs"
+     ]
+    },
+    "reason": "Naming agent pick (panel 6.75): names the channel's core subject, crime run through legitimate businesses and respectable people, in a dry, restrained, briefing-room tone. Concept from the owner's brief (network/briefs.json).",
+    "sources": [
+     "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
+   }
+  ],
+  "open_questions": [
+   "Documentary content plan (topics, first five uploads, series) is paused until the channels exist."
+  ]
  }
 ]

@@ -1,0 +1,216 @@
+[
+ {
+  "query": "who talked first",
+  "period": "year",
+  "videos": [
+   {
+    "title": "Cute Baby Laughing & Talking for the First Time 👶 | Hello Papa Hello Mama ❤️ | Heart-Melting Moments",
+    "id": "9L2ecJqyWJM",
+    "views": 2732573,
+    "age_days": 240,
+    "length_s": 484,
+    "channel": "SWEETBABYLAUGH",
+    "channel_id": "UCiIu_TrQjqUG5MLxSEkTAtw",
+    "subs": 5480,
+    "outlier": 498.64,
+    "views_per_day": 11386
+   },
+   {
+    "title": "Baby’s First Words & Gestures (Ages 1–2) | Learn to Talk with Miss Katie",
+    "id": "zYJ3VKQlui0",
+    "views": 12107752,
+    "age_days": 270,
+    "length_s": 1352,
+    "channel": "Miss Katie's Class- Toddler Learning Videos",
+    "channel_id": "UCI3dKg_6NBxzy9VrhyaoduQ",
+    "subs": 314000,
+    "outlier": 38.56,
+    "views_per_day": 44844
+   },
+   {
+    "title": "Baby Learning to Talk | First Words, Phonics & Nursery Rhymes for Babies & Toddlers",
+    "id": "7GQ9nJnHQec",
+    "views": 1882481,
+    "age_days": 300,
+    "length_s": 4616,
+    "channel": "Miss Katie's Class- Toddler Learning Videos",
+    "channel_id": "UCI3dKg_6NBxzy9VrhyaoduQ",
+    "subs": 314000,
+    "outlier": 6,
+    "views_per_day": 6275
+   },
+   {
+    "title": "Pregnancy in Second Marriage | First Child's Insecurity | YS EP-283 | SKJ Talks | Short film",
+    "id": "Y1qYDdHqB0E",
+    "views": 1593225,
+    "age_days": 180,
+    "length_s": 1441,
+    "channel": "SKJ Talks",
+    "channel_id": "UCGLL4RjClG-fRmXlCBFO-XQ",
+    "subs": 822000,
+    "outlier": 1.94,
+    "views_per_day": 8851
+   },
+   {
+    "title": "Baby Learning First Words, Learning To Talk, Kids Songs | Baby Videos and Toddler Learning Videos",
+    "id": "9BBQkm7JpzY",
+    "views": 4487342,
+    "age_days": 330,
+    "length_s": 3826,
+    "channel": "Toddler Learning Videos For Kids - Lucas & Friends",
+    "channel_id": "UCYqksDldZTkKmsrBb4OGJ9g",
+    "subs": 3140000,
+    "outlier": 1.43,
+    "views_per_day": 13598
+   },
+   {
+    "title": "Baby Learning First Words | Say Mama, Dada, Yes | Learn to Talk with Lucas | Toddler Learning Videos",
+    "id": "ztzM-V2Aw1s",
+    "views": 2550887,
+    "age_days": 240,
+    "length_s": 1952,
+    "channel": "Toddler Learning Videos For Kids - Lucas & Friends",
+    "channel_id": "UCYqksDldZTkKmsrBb4OGJ9g",
+    "subs": 3140000,
+    "outlier": 0.81,
+    "views_per_day": 10629
+   },
+   {
+    "title": "Learn to Talk with Lucas | First Words and Body Parts | Toddler Speech | Baby Learning Videos",
+    "id": "I75nTVlg4iA",
+    "views": 2338784,
+    "age_days": 210,
+    "length_s": 1921,
+    "channel": "Toddler Learning Videos For Kids - Lucas & Friends",
+    "channel_id": "UCYqksDldZTkKmsrBb4OGJ9g",
+    "subs": 3140000,
+    "outlier": 0.74,
+    "views_per_day": 11137
+   },
+   {
+    "title": "John Cena’s first interview after retiring | What Do You Wanna Talk About? With Cody Rhodes",
+    "id": "NSUgyaxzbnA",
+    "views": 1614711,
+    "age_days": 300,
+    "length_s": 6734,
+    "channel": "What Do You Wanna Talk About? With Cody Rhodes and WWE",
+    "channel_id": "",
+    "subs": null,
+    "outlier": null,
+    "views_per_day": 5382
+   }
+  ]
+ },
+ {
+  "query": "grease and gavel",
+  "period": "year",
+  "videos": []
+ },
+ {
+  "query": "crew and consequence",
+  "period": "year",
+  "videos": [
+   {
+    "title": "600 Kam - CONSEQUENCES (🎥WhoShotYa Filmz)",
+    "id": "KF2Xk5wr1bY",
+    "views": 45462,
+    "age_days": 210,
+    "length_s": 169,
+    "channel": "600 Kam",
+    "channel_id": "UCUNJ9Fsh4sYjGGSdcmqKXGw",
+    "subs": 1870,
+    "outlier": 24.31,
+    "views_per_day": 216
+   },
+   {
+    "title": "WORST vs. BEST heist crew in GTA 5 (the consequences are insane)",
+    "id": "EkXu6TC7LUs",
+    "views": 266633,
+    "age_days": 60,
+    "length_s": 1158,
+    "channel": "LOOKY",
+    "channel_id": "UCrAz9vqIdnqkbAkZX5PSPdQ",
+    "subs": 494000,
+    "outlier": 0.54,
+    "views_per_day": 4444
+   },
+   {
+    "title": "Your Choices Have Consequences… | The Expanse: Osiris Reborn Explained",
+    "id": "T1pnM_sR5Nw",
+    "views": 12979,
+    "age_days": 60,
+    "length_s": 751,
+    "channel": "Jackdaw",
+    "channel_id": "UCBH4QNo5dKDSoQ29TEHqiRg",
+    "subs": 41100,
+    "outlier": 0.32,
+    "views_per_day": 216
+   },
+   {
+    "title": "Until Dawn 2 - Choice & Consequence Pre-Order Trailer | PS5 Games",
+    "id": "ZD7scqO4XWc",
+    "views": 19107,
+    "age_days": 60,
+    "length_s": 149,
+    "channel": "PlayStation Asia",
+    "channel_id": "UCR6vFk2rgmwIkGEPR-xY8xg",
+    "subs": 70400,
+    "outlier": 0.27,
+    "views_per_day": 318
+   },
+   {
+    "title": "Until Dawn 2 - Choice & Consequence Pre-Order Trailer | PS5 Games",
+    "id": "-wjhso38sAY",
+    "views": 1345611,
+    "age_days": 60,
+    "length_s": 151,
+    "channel": "PlayStation",
+    "channel_id": "UC-2Y8dQb0S6DtpxNgAKoJKA",
+    "subs": 17300000,
+    "outlier": 0.08,
+    "views_per_day": 22427
+   },
+   {
+    "title": "Until Dawn 2 - Choice & Consequence Pre-Order Gameplay Trailer",
+    "id": "GA0n6t-iLBw",
+    "views": 137796,
+    "age_days": 60,
+    "length_s": 151,
+    "channel": "GameSpot",
+    "channel_id": "UCbu2SsF-Or3Rsn3NxqODImw",
+    "subs": 5720000,
+    "outlier": 0.02,
+    "views_per_day": 2297
+   },
+   {
+    "title": "Wealthy Black CEO Ignored on Plane — Seconds Later, Crew Faces Immediate Consequences",
+    "id": "3xn3MUoqE64",
+    "views": 5043,
+    "age_days": 210,
+    "length_s": 3510,
+    "channel": "Golden Afterglow",
+    "channel_id": "UCXzr3CSZWCVHH3h_tf4RH7g",
+    "subs": 2200,
+    "outlier": null,
+    "views_per_day": 24
+   },
+   {
+    "title": "MrBeast’s Crew Finally FACED The Consequences...",
+    "id": "GMilmH1ZF8U",
+    "views": 4561,
+    "age_days": 150,
+    "length_s": 1408,
+    "channel": "Exposia",
+    "channel_id": "UCuD5GUJ-EpjAGUW5QD6poVA",
+    "subs": 355,
+    "outlier": null,
+    "views_per_day": 30
+   }
+  ]
+ },
+ {
+  "query": "workboots and wiretaps",
+  "period": "year",
+  "videos": []
+ }
+]

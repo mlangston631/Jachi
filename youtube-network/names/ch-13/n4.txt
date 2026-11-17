@@ -1,0 +1,13 @@
+CROWDED  Specially Designated  (@SpeciallyDesignated; search returned 32 channels)
+           - contains-name channel: "Designated " @DesignatedQuizer @DesignatedQuizer, 29 subscribers
+CLEAR    Connected Persons  (@ConnectedPersons; search returned 36 channels)
+TAKEN    Close Associates  (@CloseAssociates; search returned 37 channels)
+           - handle @CloseAssociates is taken by "closeassociates"
+TAKEN    Directing Mind  (@DirectingMind; search returned 24 channels)
+           - handle @DirectingMind is taken by "directingmind"
+           - @TheDirectingMind is taken by "The Directing Mind"
+CLEAR    Significant Control  (@SignificantControl; search returned 34 channels)
+TAKEN    Fit and Proper  (@FitandProper; search returned 34 channels)
+           - handle @FitandProper is taken by "Fit and Proper"
+           - same-name channel: "Fit and Proper" @FitandProper @FitandProper, 1 subscriber
+           - contains-name channel: "All Together Fit and Proper" @alltogetherfitandproper4252 @alltogetherfitandproper4252, 1 subscriber

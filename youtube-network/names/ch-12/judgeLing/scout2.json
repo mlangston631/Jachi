@@ -1,0 +1,211 @@
+[
+ {
+  "query": "audit the audit",
+  "period": "year",
+  "videos": []
+ },
+ {
+  "query": "crooked media",
+  "period": "year",
+  "videos": [
+   {
+    "title": "Jared Kushner: Everything You Didn't Know About His Sh*tty Past",
+    "id": "ZqfcXBIyQOc",
+    "views": 592255,
+    "age_days": 150,
+    "length_s": 2765,
+    "channel": "Hysteria",
+    "channel_id": "UCRdPynbjhGkKdqs0gnIKBgA",
+    "subs": 571000,
+    "outlier": 1.04,
+    "views_per_day": 3948
+   },
+   {
+    "title": "Karoline Leavitt: Everything You Didn't Know About Her Sh*tty Past",
+    "id": "_iBnfLloO5Q",
+    "views": 557724,
+    "age_days": 180,
+    "length_s": 2439,
+    "channel": "Hysteria",
+    "channel_id": "UCRdPynbjhGkKdqs0gnIKBgA",
+    "subs": 571000,
+    "outlier": 0.98,
+    "views_per_day": 3098
+   },
+   {
+    "title": "DEMOCRATS WIN EVERYWHERE as Massive BLUE TSUNAMI Sweeps the Nation",
+    "id": "Ca6XflqGbt8",
+    "views": 1222893,
+    "age_days": 12,
+    "length_s": 3371,
+    "channel": "Pod Save America",
+    "channel_id": "UCKRoXz3hHAu2XL_k3Ef4vJQ",
+    "subs": 1330000,
+    "outlier": 0.92,
+    "views_per_day": 101908
+   },
+   {
+    "title": "Republicans and Trump In Shambles After Democratic Midterm WIPEOUT (ft Abdul El-Sayed + JB Pritzker)",
+    "id": "MDsup-hOdbU",
+    "views": 954836,
+    "age_days": 10,
+    "length_s": 5364,
+    "channel": "Pod Save America",
+    "channel_id": "UCKRoXz3hHAu2XL_k3Ef4vJQ",
+    "subs": 1330000,
+    "outlier": 0.72,
+    "views_per_day": 95484
+   },
+   {
+    "title": "Pod Save America Live Election Results with Alex Wagner!",
+    "id": "MGO3r1r7gdc",
+    "views": 849354,
+    "age_days": 12,
+    "length_s": 10761,
+    "channel": "Pod Save America",
+    "channel_id": "UCKRoXz3hHAu2XL_k3Ef4vJQ",
+    "subs": 1330000,
+    "outlier": 0.64,
+    "views_per_day": 70780
+   },
+   {
+    "title": "This New South Park is BRUTAL For Pete Hegseth and Trump Admin",
+    "id": "p6qQatj3oxY",
+    "views": 567745,
+    "age_days": 330,
+    "length_s": 1210,
+    "channel": "Pod Save America",
+    "channel_id": "UCKRoXz3hHAu2XL_k3Ef4vJQ",
+    "subs": 1330000,
+    "outlier": 0.43,
+    "views_per_day": 1720
+   },
+   {
+    "title": "DERANGED Elon Musk CRUMBLES In Shocking Interview",
+    "id": "YgwcwhRrf1M",
+    "views": 536371,
+    "age_days": 90,
+    "length_s": 1545,
+    "channel": "Pod Save America",
+    "channel_id": "UCKRoXz3hHAu2XL_k3Ef4vJQ",
+    "subs": 1330000,
+    "outlier": 0.4,
+    "views_per_day": 5960
+   },
+   {
+    "title": "One of Trump’s ‘most heated’ interviews: Media analyst reacts",
+    "id": "-4-azYBsj50",
+    "views": 605209,
+    "age_days": 150,
+    "length_s": 533,
+    "channel": "CNN",
+    "channel_id": "UCupvZG-5ko_eiXAupbDfxWw",
+    "subs": 20100000,
+    "outlier": 0.03,
+    "views_per_day": 4035
+   }
+  ]
+ },
+ {
+  "query": "forged figures",
+  "period": "year",
+  "videos": [
+   {
+    "title": "INSANE WWE Figure BACKSTAGE PLAYSET!",
+    "id": "pA1h8PQrLGA",
+    "views": 51987,
+    "age_days": 180,
+    "length_s": 642,
+    "channel": "BrettO Live",
+    "channel_id": "UCQKpbDZIkIxxYGL0yPvHNsA",
+    "subs": 408000,
+    "outlier": 0.13,
+    "views_per_day": 289
+   },
+   {
+    "title": "Michelangelo - The Vatican War That Forged a Masterpiece Documentary",
+    "id": "o2cigajWgz4",
+    "views": 209346,
+    "age_days": 270,
+    "length_s": 4240,
+    "channel": "The People Profiles",
+    "channel_id": "UCD6TPU-PvTMvqgzC_AM7_uA",
+    "subs": 1680000,
+    "outlier": 0.12,
+    "views_per_day": 775
+   },
+   {
+    "title": "Magnetic Metal Lego Style Figures from The Forged Legion Review",
+    "id": "6IT4bMEfGFo",
+    "views": 3910,
+    "age_days": 300,
+    "length_s": 237,
+    "channel": "LuckySpots7",
+    "channel_id": "UCo_9uRyvAkbr-fGdcfmfWkA",
+    "subs": 15,
+    "outlier": null,
+    "views_per_day": 13
+   },
+   {
+    "title": "Forged, Not Fallen - Mismatched Menace | Challenge Song",
+    "id": "KgOsKsGjuB4",
+    "views": 571,
+    "age_days": 300,
+    "length_s": 341,
+    "channel": "MisMatched Menace",
+    "channel_id": "UCvNaK0oCIyYabacKef772Lw",
+    "subs": 12700,
+    "outlier": null,
+    "views_per_day": 2
+   },
+   {
+    "title": "How Two Wars Forged America’s Westward Expansion: Texas Revolution to the Mexican-American War",
+    "id": "1bQx4xjSGKQ",
+    "views": 174,
+    "age_days": 330,
+    "length_s": 3015,
+    "channel": "Top History ",
+    "channel_id": "UC2Rzg2Rh2wDGBC7BMpXiRHQ",
+    "subs": 1680,
+    "outlier": null,
+    "views_per_day": 1
+   },
+   {
+    "title": "Scipio at Cannae: The Battle That Forged a Legend",
+    "id": "7qEyQHJ8itw",
+    "views": 136,
+    "age_days": 330,
+    "length_s": 285,
+    "channel": "C&C Animated History",
+    "channel_id": "UCAkVGbKEBeYttxHEU0uFdvw",
+    "subs": 15,
+    "outlier": null,
+    "views_per_day": 0
+   },
+   {
+    "title": "6. Hanuman: Forged in Kishkindha The Anatomy of an Ancient Hero | हनुमान महान किष्किंधा पुत्र",
+    "id": "_Os1GQWiBPw",
+    "views": 96,
+    "age_days": 120,
+    "length_s": 598,
+    "channel": "NAS100 Veda",
+    "channel_id": "UCnwE_UfYwCQ3ZHAqwDE30EQ",
+    "subs": 250,
+    "outlier": null,
+    "views_per_day": 1
+   },
+   {
+    "title": "Bullied, Rejected and Hospitalized. The Trials That Forged The Worlds Richest Legend!",
+    "id": "C41ayrzjMWg",
+    "views": 76,
+    "age_days": 150,
+    "length_s": 2785,
+    "channel": "Legend Origins",
+    "channel_id": "UCsq2AJ0DQVmMmLMfIT8OnFw",
+    "subs": 45,
+    "outlier": null,
+    "views_per_day": 1
+   }
+  ]
+ }
+]
