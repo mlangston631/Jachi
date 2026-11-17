@@ -137,7 +137,8 @@ fraud story. WorldCom's Room score counts the many well-known films outside this
 - **Scheme:** sold investors shares of confidential employment-case settlements that didn't exist, about $1.2B
   [plea].
 - **Records:** In re Rothstein Rosenfeldt Adler (Bankr. S.D. Fla. 2012, 2013; S.D. Fla. 2011); United States v.
-  Rothstein (11th Cir. 2013); Furr v. National Union Fire (11th Cir. 2017). 113 opinions.
+  Rothstein (11th Cir. 2013); United States v. Scott W. Rothstein (11th Cir. 2019, on the sentence-reduction question);
+  Emess Capital v. Rothstein (S.D. Fla. 2012); Furr v. National Union Fire (11th Cir. 2017). 113 opinions.
 - **Outcomes:** fled to Morocco about 27 Oct 2009, back within days; charged 1 Dec 2009; pleaded guilty Jan 2010;
   50 years, 9 June 2010 [plea/sentence].
 - **YouTube:** best dedicated film this year 3.8K (encrimen). **Risk:** medium (alive, a government cooperator; people
@@ -187,7 +188,8 @@ fraud story. WorldCom's Room score counts the many well-known films outside this
 
 ### 12. Stanford International Bank (Antigua, to 2009)
 - **Scheme:** about $7B of CDs [conviction].
-- **Records:** United States v. Stanford (S.D. Tex. 2009, 2011; 5th Cir. 2015); SEC v. Stanford International Bank
+- **Records:** United States v. Stanford (S.D. Tex. 2009, 2010, 2011, 2012, incl. the competency order; 5th Cir. 2011,
+  2015); Stanford v. United States (2017); SEC v. Stanford International Bank
   (5th Cir. 2010, 2012, 2014, 2019; N.D. Tex. 2020, 2021); Janvey v. Democratic Senatorial Campaign Committee (N.D.
   Tex. 2011, political-donation clawbacks); Pendergest-Holt v. Certain Underwriters at Lloyd's (5th Cir. 2010);
   Chadbourne & Parke v. Troice (U.S. 2014); Texas Supreme Court (2016). 135 opinions.
@@ -313,7 +315,8 @@ fraud story. WorldCom's Room score counts the many well-known films outside this
 
 - CourtListener's search returned HTTP 202 (a rate limit) for much of the session. Queries that didn't load:
   HealthSouth/Scrushy, BCCI, OneCoin and Horwitz loaded on a second try (now listed above); BitConnect/Kumbhani
-  didn't. The opinion texts
+  didn't, and neither did the rechecks for Minkow, Monus, Tino De Angelis and United States v. Wiles (the first-pass
+  results for ZZZZ Best, Phar-Mor/Monus and Allied Crude above stand). The opinion texts
   themselves couldn't be opened, so the records listed are confirmed to exist (by name, court, year) but their
   contents still have to be read before scripting.
 - The Crazy Eddie and Rita Crundwell YouTube scouts returned no results; the extra queries "Crazy Eddie documentary"
