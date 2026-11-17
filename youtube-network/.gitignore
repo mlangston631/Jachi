@@ -8,3 +8,5 @@ ytcheck-cache.json
 ytscout-subs.json
 .ytcheck.lock*
 *.err
+# Designers' proof sheets: rebuilt by preview.mjs at any time.
+design/previews/

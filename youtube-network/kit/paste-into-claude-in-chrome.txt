@@ -1,0 +1,231 @@
+Create my YouTube channels in this Chrome, where I'm signed in. I'm asking you to do this and I approve creating them. There are 13, listed below in the order to create them.
+
+BEFORE THE FIRST CHANNEL
+A. Ask me to confirm that 2-Step Verification is on for this Google account. Don't change any Google account or security settings yourself.
+B. Open studio.youtube.com, then Settings, Channel, Feature eligibility. Tell me what it shows for Standard, Intermediate and Advanced features. If it offers ID or video verification, tell me and let me do it myself. Don't start it.
+
+FOR EACH CHANNEL, in order:
+1. Search YouTube for the channel name. If a channel with the same or nearly the same name exists, skip it and tell me.
+2. Open youtube.com/account, choose "Add or manage your channel(s)", then "Create a channel". Enter the name exactly as written.
+3. Check the account switcher (top right) shows the new channel before changing anything.
+4. YouTube Studio, Customization, Profile: set the handle to the first choice. If it's taken, try the spares in order. If all are taken, keep YouTube's suggestion and tell me. Paste the description exactly as written. Publish.
+5. Settings, Channel, Basic info: paste the keywords. Advanced settings: set the audience as written. Save.
+6. Settings, Community: turn on holding comments that contain links, and add these blocked words: WhatsApp, Telegram, account manager, invest with, DM me. Save.
+
+RULES
+- Don't touch my existing channel or any other Google account setting.
+- Don't upload videos, post, comment, subscribe, or turn on monetization.
+- Skip the profile picture and banner: I'll add them myself.
+- Stop and ask me if YouTube asks for a phone number, a code, a password, ID, or payment details.
+- If YouTube says I can't add more channels, or blocks a step, stop there. Don't retry and don't try another route.
+- When you finish or stop, give me a table: channel, created or not, the handle it got, and its address.
+
+==================== CHANNEL 1 of 13 (kit #11) ====================
+Channel name: Until Someone Talked
+Handle, first choice: @UntilSomeoneTalked
+Spare handles: @UntilSomebodyTalked, @ThenSomeoneTalked
+Audience: No, set this channel as not made for kids
+
+Description:
+Crews, gangs and criminal organisations, and the moment someone talked.
+
+Investigative documentaries about how street-level criminal empires were built, how they held together and how they came apart: the rivalries, the informants, the wiretaps and the trials.
+
+Every film is researched and written for this channel from court records, investigations and reporting, listed under each video. Convictions are called convictions and allegations are called allegations. Nothing here glamorises crime: the people these crews hurt are part of every story.
+
+Keywords:
+crime documentary, organized crime documentary, gang documentary, true crime, informant, heist documentary, criminal investigation, rise and fall, mafia documentary
+
+==================== CHANNEL 2 of 13 (kit #12) ====================
+Channel name: Crooked Arithmetic
+Handle, first choice: @CrookedArithmetic
+Spare handles: @TheCrookedArithmetic, @CrookedArithmetics
+Audience: No, set this channel as not made for kids
+
+Description:
+Fraud, followed through the numbers.
+
+Investigative documentaries about billion-dollar frauds, Ponzi schemes, cooked books and corporate cover-ups. Each film shows how the scheme worked, who it made rich, how the deception was kept alive, what finally exposed it, and what it cost.
+
+Every film is researched and written for this channel. Every figure comes from court records, regulatory filings and reporting, listed under each video. Convictions, settlements and allegations are always named for what they are. Nothing here is financial or legal advice.
+
+Keywords:
+white collar crime, fraud documentary, ponzi scheme, financial crime, corporate scandal, money laundering, accounting fraud, business documentary, true crime finance
+
+==================== CHANNEL 3 of 13 (kit #13) ====================
+Channel name: Respectable Front
+Handle, first choice: @RespectableFront
+Spare handles: @TheRespectableFront, @RespectableFrontDocs
+Audience: No, set this channel as not made for kids
+
+Description:
+Organised crime behind respectable doors.
+
+Investigations into the international networks where organised crime meets wealth, finance and power: syndicates, laundering networks, and the legitimate businesses that hide them. Each film follows the evidence across borders, from origins and leadership to the money trail, the investigations and the disruption.
+
+Every film is researched and written for this channel. Documented fact, court findings, allegations and open questions are kept clearly apart, and every source is listed under each video.
+
+Keywords:
+organized crime documentary, money laundering, international crime, crime syndicate, illicit finance, investigative documentary, mafia documentary, corruption, cartel documentary
+
+==================== CHANNEL 4 of 13 (kit #1) ====================
+Channel name: Economy of Means
+Handle, first choice: @EconomyOfMeans
+Spare handles: @TheEconomyOfMeans, @EconomyOfMeansStudio
+Audience: No, set this channel as not made for kids
+
+Description:
+Money and economics, explained with stick figures and plain words.
+
+Each video takes one idea (interest, inflation, taxes, debt, how banks work) and draws it out step by step, with the maths shown so you can check it yourself.
+
+This channel is for education only. Nothing here is financial advice, and no video tells you what to buy or sell.
+
+Keywords:
+money explained, economics explained, personal finance basics, compound interest, inflation explained, how banks work, stick figure explainer, finance for beginners
+
+==================== CHANNEL 5 of 13 (kit #3) ====================
+Channel name: Legible Machines
+Handle, first choice: @LegibleMachines
+Spare handles: @TheLegibleMachines, @LegibleMachinesLab
+Audience: No, set this channel as not made for kids
+
+Description:
+How AI and everyday technology actually work, in plain words.
+
+No hype and no jargon. Each video takes one question (how a chatbot picks its next word, what a chip does, why your phone slows down) and answers it with simple pictures.
+
+Where something is uncertain or still argued over, the video says so.
+
+Keywords:
+AI explained, how AI works, artificial intelligence for beginners, tech explained, how chatbots work, large language models explained, how computers work, technology explainer
+
+==================== CHANNEL 6 of 13 (kit #5) ====================
+Channel name: Ink Tectonics
+Handle, first choice: @InkTectonics
+Spare handles: @TheInkTectonics, @InkTechtonics
+Audience: No, set this channel as not made for kids
+
+Description:
+History, told by the map.
+
+Empires grow, split and vanish, and the borders show it. Each documentary follows one line on the map and explains why it moved: the wars, the money, the rivers and the people.
+
+Dates and sources are listed under every video. Where historians disagree, the main views and their evidence are shown.
+
+Keywords:
+history documentary, animated history, history maps, rise and fall of empires, roman empire, world history explained, ancient history, medieval history
+
+==================== CHANNEL 7 of 13 (kit #2) ====================
+Channel name: Hubris Holdings
+Handle, first choice: @HubrisHoldings
+Spare handles: @TheHubrisHoldings, @HubrisHoldingsFilms
+Audience: No, set this channel as not made for kids
+
+Description:
+Documentaries about how companies are built, and how they come apart.
+
+Each film follows one business from its best decision to its worst: what the people inside knew, what they chose, and what it cost. Every film is researched and written for this channel, with charts and illustrations made for it. Every date and figure comes from public records, filings and reporting, listed under each video with credits for any archive images.
+
+These are stories, not advice. Nothing here is a recommendation to invest in anything, and this channel isn't connected to or endorsed by any company it covers.
+
+Keywords:
+business documentary, company history, rise and fall, why companies fail, business case study, corporate history, startup stories, bankruptcy explained
+
+==================== CHANNEL 8 of 13 (kit #4) ====================
+Channel name: Measured Awe
+Handle, first choice: @MeasuredAwe
+Spare handles: @TheMeasuredAwe, @MeasuredAweScience
+Audience: No, set this channel as not made for kids
+
+Description:
+Space and science, one question at a time.
+
+How far is a light-year? Why is the sky dark at night? What is inside a neutron star? Each video answers a single question with real numbers and animations made for this channel, and links the sources underneath. Telescope and spacecraft images are credited, and artist's impressions are labelled as artist's impressions.
+
+When scientists don't know yet, the video says that too.
+
+Keywords:
+space explained, science explained, astronomy for beginners, how big is the universe, light year explained, solar system, physics explained, space documentary
+
+==================== CHANNEL 9 of 13 (kit #6) ====================
+Channel name: Chamberstick
+Handle, first choice: @Chamberstick
+Spare handles: @TheChamberstick, @ChamberstickStories
+Audience: No, set this channel as not made for kids
+
+Description:
+Quiet history to fall asleep to, written for adults.
+
+Long, slow, softly told stories about ordinary life in the past: a night in a monastery, a day in a Roman bakery, a winter on a medieval farm. No sudden sounds, no music changes, no adverts in the middle of the story where we can avoid them.
+
+Put one on, turn the screen down, and let it go on without you.
+
+Every story is researched and written for this channel, and the main sources are listed under each video.
+
+Keywords:
+sleep history, history for sleep, boring history for sleep, bedtime stories for adults, calm narration, fall asleep to history, medieval life, relaxing documentary
+
+==================== CHANNEL 10 of 13 (kit #7) ====================
+Channel name: Rogues of Record
+Handle, first choice: @RoguesOfRecord
+Spare handles: @TheRoguesOfRecord, @RoguesOfRecordStories
+Audience: No, set this channel as not made for kids
+
+Description:
+Real cases, told from the record.
+
+Thefts, frauds, disappearances and investigations, reconstructed from court files, police reports and newspapers of the time. Sources are listed under every video.
+
+No guessing about guilt, no graphic detail for its own sake, and respect for the real people involved.
+
+Keywords:
+true crime, true crime documentary, historic crimes, famous heists, unsolved cases, art theft, fraud cases, crime history
+
+==================== CHANNEL 11 of 13 (kit #8) ====================
+Channel name: Hereby Explained
+Handle, first choice: @HerebyExplained
+Spare handles: @TheHerebyExplained, @HerebyExplains
+Audience: No, set this channel as not made for kids
+
+Description:
+The fine print, in plain English.
+
+What a deductible is. What "escrow" means. What you are actually agreeing to in a lease. Each video explains one term or one document with a simple worked example.
+
+This channel is general education only. It is not legal, insurance or financial advice, rules differ from place to place, and it can't tell you what to do in your own situation. For that, talk to a licensed professional.
+
+Keywords:
+insurance explained, deductible explained, legal terms explained, real estate terms, escrow explained, how insurance works, lease explained, plain english law
+
+==================== CHANNEL 12 of 13 (kit #9) ====================
+Channel name: Cloister Weather
+Handle, first choice: @CloisterWeather
+Spare handles: @TheCloisterWeather, @CloisterWeatherSound
+Audience: No, set this channel as not made for kids
+
+Description:
+Long, quiet sound for sleep, study and focus.
+
+Rain, wind, distant thunder, a fire, a slow piano. Every recording runs for hours with no sudden noises, no voice and no change of scene, so nothing pulls you back.
+
+All sound here is recorded or mixed for this channel. Each video's description says where it was recorded, what is layered in it, and credits any licensed sound.
+
+Keywords:
+rain sounds for sleep, sleep sounds, ambient sounds, study music, focus sounds, relaxing rain, white noise, lofi ambient, thunderstorm sounds
+
+==================== CHANNEL 13 of 13 (kit #10) ====================
+Channel name: Modest Catastrophes
+Handle, first choice: @ModestCatastrophes
+Spare handles: @ModestCatastrophe, @AModestCatastrophe
+Audience: No, set this channel as not made for kids
+
+Description:
+Tiny characters. Grown-up problems.
+
+Wordless animated shorts about very small heroes having very adult days: the commute, the job interview, the rent, the night before the big presentation. No words, so anyone, anywhere, can watch.
+
+Made for grown-ups. Every character and story is original to this channel, and every episode has its own story and its own ending.
+
+Keywords:
+animated short film, adult animation, 3d animation, wordless animation, no dialogue animation, relatable animation, office humor, deadpan comedy, short film
