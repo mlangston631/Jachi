@@ -4,7 +4,8 @@
 // design.json (optional) holds look fields to try (see art.mjs) on top of the channel's entry in channels.json, so a
 // designer can iterate without touching the source of truth. The sheet shows the picture as YouTube crops it (a circle)
 // at 176, 98, 48 and 32 px on YouTube's dark and light backgrounds, and the banner as a TV (whole), a desktop (centre
-// 2560x423) and a phone (centre 1546x423) show it. Exit status 3 means the name doesn't fit the phone-safe area.
+// 2560x423) and a phone (centre 1546x423) show it. Exit status 3 means the name doesn't fit the phone-safe area;
+// 5 means the font isn't rendering (the banner would silently use another face).
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
@@ -34,7 +35,7 @@ const circles = bgc => `<div style="background:${bgc};padding:18px;border-radius
   <span style="font:600 15px Inter;color:${bgc === '#0f0f0f' ? '#f1f1f1' : '#0f0f0f'}">${c.name}</span></div>`;
 await page.setViewportSize({ width: 1400, height: 900 });
 await page.setContent(`<body style="margin:0;padding:20px;background:#272727;color:#ddd;font:14px Inter;display:grid;gap:14px">
-  <div>Channel ${n}: ${c.name}${files.overflow ? ' — <b style="color:#ff6b6b">NAME OVERFLOWS THE PHONE-SAFE AREA</b>' : ''}</div>
+  <div>Channel ${n}: ${c.name}${files.overflow ? ' — <b style="color:#ff6b6b">NAME OVERFLOWS THE PHONE-SAFE AREA</b>' : ''}${files.fontMissing ? ` — <b style="color:#ff6b6b">FONT "${c.font}" IS NOT RENDERING</b>` : ''}</div>
   <div style="display:flex;gap:14px">${circles('#0f0f0f')}${circles('#ffffff')}</div>
   <div>TV (whole banner)</div>${crop(bw, bh, 0.42)}
   <div>Desktop (centre ${dw}x${dh})</div>${crop(dw, dh, 0.5)}
@@ -42,5 +43,5 @@ await page.setContent(`<body style="margin:0;padding:20px;background:#272727;col
 </body>`);
 await page.screenshot({ path: out, fullPage: true });
 await browser.close();
-console.log(`${out}${files.overflow ? '  (name overflows the phone-safe area)' : ''}`);
-process.exit(files.overflow ? 3 : 0);
+console.log(`${out}${files.overflow ? '  (name overflows the phone-safe area)' : ''}${files.fontMissing ? `  (font "${c.font}" is not rendering)` : ''}`);
+process.exit(files.overflow ? 3 : files.fontMissing ? 5 : 0);

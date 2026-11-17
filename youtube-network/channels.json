@@ -10,11 +10,6 @@
   ],
   "niche": "Stick-figure money and economics explainers",
   "tagline": "Money, explained with stick figures.",
-  "bg": "#FFF8E7",
-  "fg": "#1B1B1B",
-  "ac": "#E4572E",
-  "font": "Inter",
-  "mark": "<circle cx=\"50\" cy=\"24\" r=\"11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"6\"/><path d=\"M50 35V66M50 46L30 56M50 46L72 38M50 66L36 88M50 66L64 88\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"6\" stroke-linecap=\"round\"/><circle cx=\"80\" cy=\"32\" r=\"9\" fill=\"var(--ac)\"/>",
   "description": "Money and economics, explained with stick figures and plain words.\n\nEach video takes one idea (interest, inflation, taxes, debt, how banks work) and draws it out step by step, with the maths shown so you can check it yourself.\n\nThis channel is for education only. Nothing here is financial advice, and no video tells you what to buy or sell.",
   "keywords": "money explained, economics explained, personal finance basics, compound interest, inflation explained, how banks work, stick figure explainer, finance for beginners",
   "titles": [
@@ -130,6 +125,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-1.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "sources": [
@@ -185,11 +190,6 @@
   ],
   "niche": "Business and company story documentaries",
   "tagline": "How companies are built. How they fall.",
-  "bg": "#12161C",
-  "fg": "#F2EFE8",
-  "ac": "#D9A441",
-  "font": "Bitstream Charter",
-  "mark": "<path d=\"M10 80L34 48L50 62L74 22\" fill=\"none\" stroke=\"var(--ac)\" stroke-width=\"7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M74 22L90 78\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"7\" stroke-linecap=\"round\"/><circle cx=\"74\" cy=\"22\" r=\"6\" fill=\"currentColor\"/>",
   "description": "Documentaries about how companies are built, and how they come apart.\n\nEach film follows one business from its best decision to its worst: what the people inside knew, what they chose, and what it cost. Every film is researched and written for this channel, with charts and illustrations made for it. Every date and figure comes from public records, filings and reporting, listed under each video with credits for any archive images.\n\nThese are stories, not advice. Nothing here is a recommendation to invest in anything, and this channel isn't connected to or endorsed by any company it covers.",
   "keywords": "business documentary, company history, rise and fall, why companies fail, business case study, corporate history, startup stories, bankruptcy explained",
   "titles": [
@@ -394,6 +394,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-2.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "sources": [
@@ -462,11 +472,6 @@
   ],
   "niche": "AI and tech explainers",
   "tagline": "AI and tech, in plain words.",
-  "bg": "#0B1020",
-  "fg": "#EAF2FF",
-  "ac": "#4FD1C5",
-  "font": "Inter",
-  "mark": "<path d=\"M18 50H40M60 50H82M50 18V40M50 60V82\" stroke=\"currentColor\" stroke-width=\"6\" stroke-linecap=\"round\"/><rect x=\"38\" y=\"38\" width=\"24\" height=\"24\" rx=\"5\" fill=\"var(--ac)\"/><circle cx=\"18\" cy=\"50\" r=\"6\" fill=\"currentColor\"/><circle cx=\"82\" cy=\"50\" r=\"6\" fill=\"currentColor\"/><circle cx=\"50\" cy=\"18\" r=\"6\" fill=\"currentColor\"/><circle cx=\"50\" cy=\"82\" r=\"6\" fill=\"currentColor\"/>",
   "description": "How AI and everyday technology actually work, in plain words.\n\nNo hype and no jargon. Each video takes one question (how a chatbot picks its next word, what a chip does, why your phone slows down) and answers it with simple pictures.\n\nWhere something is uncertain or still argued over, the video says so.",
   "keywords": "AI explained, how AI works, artificial intelligence for beginners, tech explained, how chatbots work, large language models explained, how computers work, technology explainer",
   "titles": [
@@ -625,6 +630,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-3.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "sources": [
@@ -685,11 +700,6 @@
   ],
   "niche": "Science and space",
   "tagline": "Space and science, one question at a time.",
-  "bg": "#0A0A1A",
-  "fg": "#F4F1FF",
-  "ac": "#9B8CFF",
-  "font": "Inter",
-  "mark": "<circle cx=\"38\" cy=\"58\" r=\"22\" fill=\"var(--ac)\"/><ellipse cx=\"38\" cy=\"58\" rx=\"36\" ry=\"10\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" transform=\"rotate(-20 38 58)\"/><path d=\"M78 14L81 24L91 27L81 30L78 40L75 30L65 27L75 24Z\" fill=\"currentColor\"/>",
   "description": "Space and science, one question at a time.\n\nHow far is a light-year? Why is the sky dark at night? What is inside a neutron star? Each video answers a single question with real numbers and animations made for this channel, and links the sources underneath. Telescope and spacecraft images are credited, and artist's impressions are labelled as artist's impressions.\n\nWhen scientists don't know yet, the video says that too.",
   "keywords": "space explained, science explained, astronomy for beginners, how big is the universe, light year explained, solar system, physics explained, space documentary",
   "titles": [
@@ -770,6 +780,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-4.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "sources": [
@@ -833,11 +853,6 @@
   ],
   "niche": "History documentaries with maps",
   "tagline": "History, told by the map.",
-  "bg": "#F1E7D0",
-  "fg": "#2B2118",
-  "ac": "#A63D2F",
-  "font": "Bitstream Charter",
-  "mark": "<path d=\"M14 26L38 16L62 26L86 16V74L62 84L38 74L14 84Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"5\" stroke-linejoin=\"round\"/><path d=\"M38 16V74M62 26V84\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\".45\"/><path d=\"M22 60C34 50 44 62 52 48S72 40 80 34\" fill=\"none\" stroke=\"var(--ac)\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-dasharray=\"2 9\"/>",
   "description": "History, told by the map.\n\nEmpires grow, split and vanish, and the borders show it. Each documentary follows one line on the map and explains why it moved: the wars, the money, the rivers and the people.\n\nDates and sources are listed under every video. Where historians disagree, the main views and their evidence are shown.",
   "keywords": "history documentary, animated history, history maps, rise and fall of empires, roman empire, world history explained, ancient history, medieval history",
   "titles": [
@@ -1010,6 +1025,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-5.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "sources": [
@@ -1078,11 +1103,6 @@
   ],
   "niche": "Sleep history (long, calm narration)",
   "tagline": "Quiet history for falling asleep.",
-  "bg": "#1A1420",
-  "fg": "#F3E9D8",
-  "ac": "#F2B45A",
-  "font": "Bitstream Charter",
-  "mark": "<path d=\"M50 12C60 26 62 34 50 44C38 34 40 26 50 12Z\" fill=\"var(--ac)\"/><rect x=\"40\" y=\"48\" width=\"20\" height=\"34\" rx=\"3\" fill=\"currentColor\"/><path d=\"M26 86H74\" stroke=\"currentColor\" stroke-width=\"6\" stroke-linecap=\"round\"/>",
   "description": "Quiet history to fall asleep to, written for adults.\n\nLong, slow, softly told stories about ordinary life in the past: a night in a monastery, a day in a Roman bakery, a winter on a medieval farm. No sudden sounds, no music changes, no adverts in the middle of the story where we can avoid them.\n\nPut one on, turn the screen down, and let it go on without you.\n\nEvery story is researched and written for this channel, and the main sources are listed under each video.",
   "keywords": "sleep history, history for sleep, boring history for sleep, bedtime stories for adults, calm narration, fall asleep to history, medieval life, relaxing documentary",
   "titles": [
@@ -1163,6 +1183,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-6.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "sources": [
@@ -1229,11 +1259,6 @@
   ],
   "niche": "Historic true crime told from the record: lone thieves, cons and hoaxes",
   "tagline": "Real cases. Told from the record.",
-  "bg": "#16181B",
-  "fg": "#EDEDED",
-  "ac": "#C8372D",
-  "font": "Inter",
-  "mark": "<path d=\"M26 12H62L78 28V88H26Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"5\" stroke-linejoin=\"round\"/><path d=\"M62 12V28H78\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"5\" stroke-linejoin=\"round\"/><path d=\"M36 46H68M36 58H68M36 70H54\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" opacity=\".55\"/><circle cx=\"66\" cy=\"72\" r=\"9\" fill=\"var(--ac)\"/>",
   "description": "Real cases, told from the record.\n\nThefts, frauds, disappearances and investigations, reconstructed from court files, police reports and newspapers of the time. Sources are listed under every video.\n\nNo guessing about guilt, no graphic detail for its own sake, and respect for the real people involved.",
   "keywords": "true crime, true crime documentary, historic crimes, famous heists, unsolved cases, art theft, fraud cases, crime history",
   "titles": [
@@ -1351,6 +1376,26 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-7.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
+   },
+   {
+    "step": "design",
+    "field": "font",
+    "from": "FreeMono 700",
+    "to": "Old Standard TT 700 (bundled, OFL)",
+    "reason": "Owner's reviewer (Claude) on the 13-channel contact sheet: channels 7 and 12 both set their names in a typewriter face, which made two crime channels read as one series. Old Standard TT, modelled on 19th-century printing, suits Victorian rogues and separates 7 from 12's ledger mono.",
+    "sources": [
+     "design/previews/kit-art.png"
+    ]
    }
   ],
   "sources": [
@@ -1415,11 +1460,6 @@
   ],
   "niche": "Legal, insurance and real-estate explainers",
   "tagline": "Contracts, cover and closings, in plain English.",
-  "bg": "#F7F7F4",
-  "fg": "#14213D",
-  "ac": "#2A9D8F",
-  "font": "Inter",
-  "mark": "<circle cx=\"42\" cy=\"42\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"6\"/><path d=\"M61 61L86 86\" stroke=\"currentColor\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M30 36H54M30 46H54M30 56H44\" stroke=\"var(--ac)\" stroke-width=\"4\" stroke-linecap=\"round\"/>",
   "description": "The fine print, in plain English.\n\nWhat a deductible is. What \"escrow\" means. What you are actually agreeing to in a lease. Each video explains one term or one document with a simple worked example.\n\nThis channel is general education only. It is not legal, insurance or financial advice, rules differ from place to place, and it can't tell you what to do in your own situation. For that, talk to a licensed professional.",
   "keywords": "insurance explained, deductible explained, legal terms explained, real estate terms, escrow explained, how insurance works, lease explained, plain english law",
   "titles": [
@@ -1503,6 +1543,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-8.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "sources": [
@@ -1562,11 +1612,6 @@
   ],
   "niche": "Ambient, lofi and sleep sound",
   "tagline": "Long, quiet sound for sleep and focus.",
-  "bg": "#1F2A30",
-  "fg": "#E6EEF0",
-  "ac": "#7FB7BE",
-  "font": "Inter",
-  "mark": "<path d=\"M10 40L50 14L90 40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M28 54V66M42 60V78M56 54V70M70 60V82\" stroke=\"var(--ac)\" stroke-width=\"6\" stroke-linecap=\"round\"/>",
   "description": "Long, quiet sound for sleep, study and focus.\n\nRain, wind, distant thunder, a fire, a slow piano. Every recording runs for hours with no sudden noises, no voice and no change of scene, so nothing pulls you back.\n\nAll sound here is recorded or mixed for this channel. Each video's description says where it was recorded, what is layered in it, and credits any licensed sound.",
   "keywords": "rain sounds for sleep, sleep sounds, ambient sounds, study music, focus sounds, relaxing rain, white noise, lofi ambient, thunderstorm sounds",
   "titles": [
@@ -1666,6 +1711,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-9.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "audience": "not made for kids"
@@ -1681,11 +1736,6 @@
   ],
   "niche": "Wordless animated Shorts for adults: tiny original characters, grown-up problems",
   "tagline": "Tiny characters. Grown-up problems.",
-  "bg": "#FFE9D6",
-  "fg": "#2D1E2F",
-  "ac": "#F25F5C",
-  "font": "Inter",
-  "mark": "<circle cx=\"50\" cy=\"56\" r=\"26\" fill=\"var(--ac)\"/><circle cx=\"41\" cy=\"52\" r=\"5\" fill=\"currentColor\"/><circle cx=\"59\" cy=\"52\" r=\"5\" fill=\"currentColor\"/><path d=\"M42 66Q50 73 58 66\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M50 30V16M50 16L62 20L50 25\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
   "description": "Tiny characters. Grown-up problems.\n\nWordless animated shorts about very small heroes having very adult days: the commute, the job interview, the rent, the night before the big presentation. No words, so anyone, anywhere, can watch.\n\nMade for grown-ups. Every character and story is original to this channel, and every episode has its own story and its own ending.",
   "keywords": "animated short film, adult animation, 3d animation, wordless animation, no dialogue animation, relatable animation, office humor, deadpan comedy, short film",
   "titles": [
@@ -1770,6 +1820,16 @@
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
     ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-10.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
+    ]
    }
   ],
   "audience": "not made for kids"
@@ -1791,11 +1851,6 @@
   "titles": [],
   "scriptTitle": "",
   "script": "",
-  "bg": "#111111",
-  "fg": "#EEEEEE",
-  "ac": "#C8372D",
-  "font": "Inter",
-  "mark": "",
   "network": "investigative documentaries",
   "history": [
    {
@@ -1813,6 +1868,16 @@
     "reason": "Naming agent pick (panel 8.0): street crews almost always fall when an insider turns. Human and tense without glamorising crime. Concept from the owner's brief (network/briefs.json).",
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-11.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
     ]
    }
   ],
@@ -1837,11 +1902,6 @@
   "titles": [],
   "scriptTitle": "",
   "script": "",
-  "bg": "#111111",
-  "fg": "#EEEEEE",
-  "ac": "#C8372D",
-  "font": "Inter",
-  "mark": "",
   "network": "investigative documentaries",
   "history": [
    {
@@ -1859,6 +1919,16 @@
     "reason": "Naming agent pick (panel 6.5): cooked books and doctored numbers are the heart of white-collar fraud. Runners-up Tailored Larceny and Respectable Larceny also cleared; Respectable Larceny would have clashed with channel 13. Concept from the owner's brief (network/briefs.json).",
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-12.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
     ]
    }
   ],
@@ -1883,11 +1953,6 @@
   "titles": [],
   "scriptTitle": "",
   "script": "",
-  "bg": "#111111",
-  "fg": "#EEEEEE",
-  "ac": "#C8372D",
-  "font": "Inter",
-  "mark": "",
   "network": "investigative documentaries",
   "history": [
    {
@@ -1905,6 +1970,16 @@
     "reason": "Naming agent pick (panel 6.75): names the channel's core subject, crime run through legitimate businesses and respectable people, in a dry, restrained, briefing-room tone. Concept from the owner's brief (network/briefs.json).",
     "sources": [
      "YouTube (ytcheck), .com (RDAP) and live US trademarks (USPTO) checked on 17 Nov 2026; see names/final-brandcheck*.json and names/spares-*.json"
+    ]
+   },
+   {
+    "step": "design",
+    "field": "look",
+    "from": "placeholder look fields bg, fg, ac, font, mark",
+    "to": "design/ch-13.json",
+    "reason": "Designed by the design team (designer, critic at real YouTube sizes, art director across all 13); approved 17 Nov 2026. The look now lives only in design/ch-<n>.json so there is one source for it.",
+    "sources": [
+     "results/design-team.json"
     ]
    }
   ],

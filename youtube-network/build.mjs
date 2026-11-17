@@ -2,7 +2,7 @@
 // proof sheets use) and one phone-friendly page with everything to paste into YouTube Studio.
 //   CHECKED_ON="17 November 2026" NODE_PATH=$(npm root -g) node build.mjs
 // Reads channels.json (the source of truth) and design/ch-<n>.json (each channel's approved look, if any).
-// Refuses to build if any banner's name overflows the phone-safe area, or CHECKED_ON is missing: the page promises the
+// Refuses to build if any banner's name overflows the phone-safe area, any channel's font isn't really rendering, or CHECKED_ON is missing: the page promises the
 // names were checked on that date, so it must be stated, never assumed.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,15 +23,20 @@ const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').re
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
-const overflowing = [];
+const overflowing = [], fontless = [];
 for (const c of channels) {
   const stem = `${String(c.n).padStart(2, '0')}-${c.slug}`;
   const files = await render(page, c, out, stem);
   c.logo = path.basename(files.logo);
   c.banner = path.basename(files.banner);
   if (files.overflow) overflowing.push(c.name);
+  if (files.fontMissing) fontless.push(`${c.name} (${c.font})`);
 }
-if (overflowing.length) { await browser.close(); throw new Error('Banner name overflows the phone-safe area: ' + overflowing.join(', ')); }
+if (overflowing.length || fontless.length) {
+  await browser.close();
+  throw new Error([overflowing.length && 'Banner name overflows the phone-safe area: ' + overflowing.join(', '),
+    fontless.length && 'Font not rendering, so the banner would silently use another face: ' + fontless.join(', ')].filter(Boolean).join('; '));
+}
 
 const b64 = f => 'data:image/png;base64,' + fs.readFileSync(path.join(out, f)).toString('base64');
 const field = (label, text, cls = '') => `<div class="f"><div class="fh"><span>${label}</span><button type="button" class="cp">Copy</button></div><pre class="${cls}">${esc(text)}</pre></div>`;

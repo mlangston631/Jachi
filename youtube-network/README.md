@@ -33,10 +33,14 @@ Boundaries between overlapping channels are in `network/briefs.json`.
 
 | Path | What it is |
 |---|---|
-| `channels.json` | **The single source of truth** for all 13 channels: name, handle, description, keywords, titles, first script, sources, and a `history` of every change with its reason. Edit this, never the built outputs. |
+| `channels.json` | **The single source of truth** for all 13 channels' content: name, handle, description, keywords, audience, titles, first script, sources, and a `history` of every change with its reason. Edit this, never the built outputs. |
+| `design/ch-<n>.json` | **The single source of each channel's look**: colours, font, mark and banner backdrop, as approved by the design team. |
+| `fonts/` | Open-licence fonts (SIL OFL 1.1) bundled so the pictures render the same anywhere; `fonts/fonts.json` lists them. |
+| `kit/` | The built kit: `index.html` (everything to paste, with pictures), each channel's picture and banner, and `paste-into-claude-in-chrome.txt`. Rebuilt by `build.mjs` and `handoff.mjs`. |
 | `data.mjs` | The first, unchecked drafts. Kept only as the starting point that `history` refers back to. |
 | `network/briefs.json` | The owner's brief for channels 11-13, which every documentary agent reads. |
 | `agents/naming-agent.js` | The naming agent: research, invent, judge, clear. Use it for every new channel. |
+| `agents/design-team.js` | The design team: designer and critic per channel at real YouTube sizes, then an art director across all channels. Use it for every new or changed look. |
 | `agents/runs/` | The exact scripts of every agent team run so far, kept as a record of how each result was produced. They point at the session folder they ran in. |
 | `results/` | What those teams returned, raw. |
 | `names/`, `factcheck/`, `growth/`, `plan/` | Working files and findings, per step. |
@@ -53,10 +57,12 @@ Run them from this folder. Each one's header explains how it works and why.
 | `thumbsheet.mjs scout.json sheet.png` | One image of the top outliers' thumbnails, for study only. |
 | `readpage.py URL` | Text of a trusted page, labelled by tier: YouTube's rules, primary court records, or Wikipedia as a lead only. Refuses every other site and reports bot checks rather than getting around them. |
 | `apply_factcheck.py` | Applies fact-checkers' corrections to `channels.json` only where the wording matches exactly once, recording reason and sources. |
-| `build.mjs` | Renders the kit page, logos and banners from `channels.json`. Needs `CHECKED_ON` set to the date the names last passed the checks. |
+| `art.mjs` | Draws a channel's picture (800x800, shown as a circle) and banner (2560x1440, name kept in the 1546x423 phone-safe centre). Used by both tools below, so what is approved is what ships. Reports a name that overflows the phone-safe area, and a font that isn't really rendering. |
+| `preview.mjs <n> [design.json]` | A designer's proof sheet: the picture at 176-32 px on YouTube's dark and light, the banner as TV, desktop and phone crop it. Exit 3 = overflow, 5 = font not rendering. |
+| `build.mjs` | Builds the kit from `channels.json` and `design/`. Needs `CHECKED_ON` (the date the names last passed the checks); refuses to build on overflow or a missing font. |
 | `handoff.mjs` | Writes the instructions Claude in Chrome follows to create the channels in YouTube Studio. |
 
-The tools need `curl`, Node and (for `build.mjs` and `thumbsheet.mjs`) Playwright with Chromium. Network access they use:
+The tools need `curl`, Node and (for `build.mjs`, `preview.mjs` and `thumbsheet.mjs`) Playwright with Chromium; run those with `NODE_PATH=$(npm root -g)` if Playwright is installed globally. Network access they use:
 www.youtube.com, i.ytimg.com, support.google.com, blog.youtube, www.courtlistener.com, en.wikipedia.org,
 rdap.verisign.com, tmsearch.uspto.gov.
 
@@ -73,6 +79,7 @@ survives is used.
 | Growth (1-10) | `agents/runs/growth-engine-*` | paused until channels exist |
 | Moonshot | `agents/runs/moonshot-playbook-*` | done: `plan/moonshot.md` |
 | Documentary network (11-13) | `agents/runs/documentary-network-*` | paused until channels exist |
+| Design | `agents/design-team.js` (first run in `agents/runs/`) | done for all 13 (every critic score 7+); channel 2 being redesigned (no architecture, so it can't be mistaken for 13) |
 
 ## Decisions and why
 
