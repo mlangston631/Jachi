@@ -1453,29 +1453,29 @@
    "@TheTinyBraveThings",
    "@TinyBraveThingsShorts"
   ],
-  "niche": "3D animated story Shorts",
-  "tagline": "Very small heroes. Very short stories.",
+  "niche": "Wordless animated Shorts for adults: tiny original characters, grown-up problems",
+  "tagline": "Tiny characters. Grown-up problems.",
   "bg": "#FFE9D6",
   "fg": "#2D1E2F",
   "ac": "#F25F5C",
   "font": "Inter",
   "mark": "<circle cx=\"50\" cy=\"56\" r=\"26\" fill=\"var(--ac)\"/><circle cx=\"41\" cy=\"52\" r=\"5\" fill=\"currentColor\"/><circle cx=\"59\" cy=\"52\" r=\"5\" fill=\"currentColor\"/><path d=\"M42 66Q50 73 58 66\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M50 30V16M50 16L62 20L50 25\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
-  "description": "Very small heroes. Very short stories.\n\nAnimated stories about tiny characters and their big days: a snail who finds a friend at the end of a long road, a candle who is scared of the dark, a paper boat that meets the sea. Every episode is a new story with its own ending. No words, so anyone can watch.\n\nAll characters and stories are original to this channel.",
-  "keywords": "animated shorts, 3d animation, short stories, cute animation, animated short film, wholesome shorts, no dialogue animation, family friendly shorts",
+  "description": "Tiny characters. Grown-up problems.\n\nWordless animated shorts about very small heroes having very adult days: the commute, the job interview, the rent, the night before the big presentation. No words, so anyone, anywhere, can watch.\n\nMade for grown-ups. Every character and story is original to this channel, and every episode has its own story and its own ending.",
+  "keywords": "animated short film, adult animation, 3d animation, wordless animation, no dialogue animation, relatable animation, office humor, deadpan comedy, short film",
   "titles": [
-   "The Snail Who Crossed the Road",
-   "A Pebble Climbs a Hill",
-   "The Raindrop Trying to Get Home",
-   "The Last Leaf Refuses to Fall",
-   "An Ant and One Very Large Crumb",
-   "The Candle Who Was Afraid of the Dark",
-   "A Paper Boat Meets the Sea",
-   "The Button That Rolled Away",
-   "A Seed Under the Pavement",
-   "The Little Cloud That Couldn't Rain"
+   "The Snail Who Was Late for Work",
+   "A Pebble's First Job Interview",
+   "The Raindrop Who Missed the Last Train Home",
+   "The Leaf That Stayed Late at the Office",
+   "An Ant Moves Into a Studio Apartment",
+   "The Candle Who Could Not Sleep",
+   "A Paper Boat Goes to a Wedding Alone",
+   "The Button Who Got Let Go",
+   "A Seed Pays Rent Under the Pavement",
+   "The Little Cloud With Nothing Left to Give"
   ],
-  "scriptTitle": "The Snail Who Crossed the Road (30-second storyboard)",
-  "script": "No dialogue. Music: one soft marimba line that grows.\n\n0-2s  HOOK. Ground level. A tiny snail with a small red flag on its shell looks across a huge grey road. On the far side: one green leaf.\n\n2-6s  It takes a breath and sets off. A wide shot shows how far it is. Almost nothing has changed.\n\n6-11s  A bicycle wheel rolls past, enormous. The snail ducks into its shell. A pause. One eye comes back out.\n\n11-16s  Rain starts. The snail brightens: the road is wet, so it glides faster. Its first small smile.\n\n16-21s  A puddle blocks the way. It looks left, then right, then climbs onto a floating leaf and paddles with its flag.\n\n21-26s  The far kerb: a wall, from down here. It tries. Slides back. Tries again. Slides back. Plants the flag in a crack and pulls itself up.\n\n26-29s  It reaches the green leaf, and stops. Another, smaller snail is already there, waiting. They share the leaf.\n\n29-30s  END CARD. The red flag, planted beside the leaf. Loop point: the camera tilts up to the road, matching the first frame.\n\nNotes: keep this snail and its flag in every episode so the channel has one character people recognise. Design it yourself; don't base it on an existing character.",
+  "scriptTitle": "The Snail Who Was Late for Work (30-second storyboard)",
+  "script": "No dialogue. Sound: a ticking clock, traffic, one muted trumpet line. Cinematic, muted colours: early-morning blue, office fluorescent.\n\n0-2s  HOOK. Extreme close-up: a phone the size of a billboard lights up beside a sleeping snail. 08:52. Its eye stalks shoot up.\n\n2-6s  It throws on a tiny tie, grabs a coffee cup the size of its shell, and slides out of the door. Wide shot: the office building is across a six-lane road.\n\n6-11s  It sets off. A bus thunders past. The coffee wobbles. A pigeon lands, looks at it, and leaves, unimpressed.\n\n11-16s  Rain. Every other commuter runs for cover; the snail, for once, speeds up on the wet tarmac. A small, private smile.\n\n16-22s  The lift is out of order. It looks up the stairwell, sighs, and starts climbing.\n\n22-27s  It reaches the meeting room, damp and triumphant, and pushes the door open. Empty chairs. On the screen: \"MEETING MOVED TO 08:30\".\n\n27-30s  END. It sets the coffee down, takes the best chair, and puts its feet up. Loop point: the phone lights up again: \"Saturday\".\n\nNotes: keep this snail as the channel's recurring face, but give every episode its own situation and its own ending. YouTube refuses to monetize characters \"put in the same situation over and over again with the same outcome\". Write one line per episode (concept and ending) before animating, and check that no two share an arc. Keep thumbnails, titles and tags free of kid-targeted wording, toy-like styling and nursery colours.",
   "history": [
    {
     "step": "draft",
@@ -1491,7 +1491,37 @@
      "https://support.google.com/youtube/answer/1311392"
     ],
     "confidence": null
+   },
+   {
+    "step": "owner-decision",
+    "field": "concept",
+    "from": {
+     "niche": "3D animated story Shorts",
+     "tagline": "Very small heroes. Very short stories.",
+     "description": "Very small heroes. Very short stories.\n\nAnimated stories about tiny characters and their big days: a snail who finds a friend at the end of a long road, a candle who is scared of the dark, a paper boat that meets the sea. Every episode is a new story with its own ending. No words, so anyone can watch.\n\nAll characters and stories are original to this channel.",
+     "keywords": "animated shorts, 3d animation, short stories, cute animation, animated short film, wholesome shorts, no dialogue animation, family friendly shorts",
+     "titles": [
+      "The Snail Who Crossed the Road",
+      "A Pebble Climbs a Hill",
+      "The Raindrop Trying to Get Home",
+      "The Last Leaf Refuses to Fall",
+      "An Ant and One Very Large Crumb",
+      "The Candle Who Was Afraid of the Dark",
+      "A Paper Boat Meets the Sea",
+      "The Button That Rolled Away",
+      "A Seed Under the Pavement",
+      "The Little Cloud That Couldn't Rain"
+     ],
+     "scriptTitle": "The Snail Who Crossed the Road (30-second storyboard)",
+     "script": "No dialogue. Music: one soft marimba line that grows.\n\n0-2s  HOOK. Ground level. A tiny snail with a small red flag on its shell looks across a huge grey road. On the far side: one green leaf.\n\n2-6s  It takes a breath and sets off. A wide shot shows how far it is. Almost nothing has changed.\n\n6-11s  A bicycle wheel rolls past, enormous. The snail ducks into its shell. A pause. One eye comes back out.\n\n11-16s  Rain starts. The snail brightens: the road is wet, so it glides faster. Its first small smile.\n\n16-21s  A puddle blocks the way. It looks left, then right, then climbs onto a floating leaf and paddles with its flag.\n\n21-26s  The far kerb: a wall, from down here. It tries. Slides back. Tries again. Slides back. Plants the flag in a crack and pulls itself up.\n\n26-29s  It reaches the green leaf, and stops. Another, smaller snail is already there, waiting. They share the leaf.\n\n29-30s  END CARD. The red flag, planted beside the leaf. Loop point: the camera tilts up to the road, matching the first frame.\n\nNotes: keep this snail and its flag in every episode so the channel has one character people recognise. Design it yourself; don't base it on an existing character."
+    },
+    "to": "adult redesign (see current fields)",
+    "reason": "17 Nov 2026: owner chose to redesign channel 10 for adults. As first designed (cute wordless shorts about tiny heroes) it met YouTube's made-for-kids factors, which under COPPA would switch off personalised ads, comments, the notification bell, memberships and Super Thanks. Redesigned so that 'not made for kids' is true: adult situations, dry humour, muted cinematic look, no child-targeted wording or styling.",
+    "sources": [
+     "https://support.google.com/youtube/answer/9528076"
+    ]
    }
-  ]
+  ],
+  "audience": "not made for kids"
  }
 ]
