@@ -79,7 +79,7 @@ survives is used.
 | Growth (1-10) | `agents/runs/growth-engine-*` | paused until channels exist |
 | Moonshot | `agents/runs/moonshot-playbook-*` | done: `plan/moonshot.md` |
 | Documentary network (11-13) | `agents/runs/documentary-network-*` | paused until channels exist |
-| Design | `agents/design-team.js` (first run in `agents/runs/`) | done for all 13 (every critic score 7+); channel 2 being redesigned (no architecture, so it can't be mistaken for 13) |
+| Design | `agents/design-team.js` (first run in `agents/runs/`) | done for all 13 (every critic score 7+). Channel 2 redesigned 17 Nov 2026 as a tipping crown (`design/ch-2-crown.py`), so it can't be mistaken for 13's doorway |
 
 ## Decisions and why
 
