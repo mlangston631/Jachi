@@ -1,0 +1,1730 @@
+{
+ "_about": "Written by plans.py; section 4 of the shot list.",
+ "section": 4,
+ "narration": "narration/section4.wav",
+ "paras": [
+  [
+   {
+    "w": 4.4,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "value": "1999",
+      "head": "THE WEAK POINT",
+      "source": null,
+      "caption": null,
+      "roll": 1.0,
+      "hit": false
+     }
+    }
+   },
+   {
+    "w": 4.4,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "po": {
+        "label": "PURCHASE ORDER",
+        "x": 0.32,
+        "y": 0.5,
+        "w": 420
+       },
+       "bs": {
+        "label": "BANK STATEMENT?",
+        "x": 0.68,
+        "y": 0.5,
+        "w": 420,
+        "state": "hollow",
+        "at": 0.8
+       }
+      },
+      "edges": [
+       {
+        "a": "po",
+        "b": "bs",
+        "at": 1.2,
+        "dashed": true,
+        "color": "grey"
+       }
+      ],
+      "captions": [
+       {
+        "text": "A CAREFUL INVESTOR WANTS TO SEE THE MONEY MOVING",
+        "x": 0.5,
+        "y": 0.72,
+        "at": 1.8,
+        "size": 32
+       }
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.4,
+    "src": "assets/gen/R09b.png",
+    "label": "Recreation",
+    "zoom": [
+     1.08,
+     1.0
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   }
+  ],
+  [
+   {
+    "w": 4.7,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "text": "\"verify\"",
+      "hl": "verify",
+      "size": 140,
+      "hl_at": 0.8,
+      "hl_dur": 0.5
+     }
+    }
+   },
+   {
+    "w": 4.7,
+    "src": {
+     "mg": {
+      "kind": "wall",
+      "cards": [
+       {
+        "name": "TOM PETTERS",
+        "role": "Founder and owner of PCI; 52, of Wayzata, at sentencing",
+        "src": "(DOJ, 8 Apr 2010)",
+        "at": 0
+       },
+       {
+        "name": "DEANNA COLEMAN",
+        "role": "Hired 1993 as office manager; later an officer of PCI",
+        "src": "(DOJ)",
+        "at": 0
+       },
+       {
+        "name": "ROBERT WHITE",
+        "role": "A friend; false bank statements from 1999; titled CFO",
+        "src": "(DOJ)",
+        "at": 0.5
+       }
+      ],
+      "cols": 3
+     }
+    }
+   },
+   {
+    "w": 4.7,
+    "src": "assets/gen/R07.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "w": 4.7,
+    "src": {
+     "mg": {
+      "kind": "wall",
+      "cards": [
+       {
+        "name": "TOM PETTERS",
+        "role": "Founder and owner of PCI; 52, of Wayzata, at sentencing",
+        "src": "(DOJ, 8 Apr 2010)",
+        "at": 0
+       },
+       {
+        "name": "DEANNA COLEMAN",
+        "role": "Hired 1993 as office manager; later an officer of PCI",
+        "src": "(DOJ)",
+        "at": 0
+       },
+       {
+        "name": "ROBERT WHITE",
+        "role": "A friend; false bank statements from 1999; titled CFO",
+        "src": "(DOJ)",
+        "at": 0,
+        "stamp": "CFO",
+        "stamp_at": 0.9
+       }
+      ],
+      "cols": 3,
+      "zoom": [
+       1.0,
+       1.2,
+       0.85,
+       0.5
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.7,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "FABRICATING",
+        "size": 58
+       },
+       {
+        "text": "RETAILER PURCHASE ORDERS",
+        "size": 58
+       },
+       {
+        "text": "+ PCI'S FINANCIAL RECORDS",
+        "size": 58
+       }
+      ],
+      "credit": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "hl": "FABRICATING"
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.2,
+    "src": {
+     "mg": {
+      "kind": "wall",
+      "cards": [
+       {
+        "name": "ROBERT WHITE",
+        "role": "A friend; false bank statements from 1999; titled CFO",
+        "src": "(DOJ)",
+        "at": 0
+       }
+      ],
+      "cols": 1,
+      "zoom": [
+       1.0,
+       1.08,
+       0.5,
+       0.5
+      ]
+     }
+    },
+    "label": "Remember the name"
+   },
+   {
+    "w": 4.2,
+    "src": {
+     "mg": {
+      "kind": "wall",
+      "cards": [
+       {
+        "name": "ROBERT WHITE",
+        "role": "Pleaded guilty; testified against Petters at trial",
+        "src": "(DOJ; U.S. v. White, D. Minn. 2011)",
+        "at": 0,
+        "stamp": "TESTIFIED",
+        "stamp_at": 0.8
+       }
+      ],
+      "cols": 1
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "WEAK POINT 2: THE MONEY",
+        "size": 84
+       }
+      ],
+      "cps": 18,
+      "mark_at": 2.0
+     }
+    }
+   },
+   {
+    "w": 4.3,
+    "src": "assets/clips/R15.mp4",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ],
+    "text": [
+     {
+      "text": "MONEY HAD TO GO TO SUPPLIERS",
+      "rel": 0.6,
+      "size": 30,
+      "x": "80",
+      "y": "90",
+      "box": true
+     }
+    ]
+   },
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.18
+       },
+       "s": {
+        "label": "SUPPLIER",
+        "x": 0.2,
+        "y": 0.62
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.5,
+        "y": 0.62
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.8,
+        "y": 0.62
+       }
+      },
+      "edges": [
+       {
+        "a": "p",
+        "b": "s",
+        "at": 0.2,
+        "sa": "l",
+        "sb": "r",
+        "tokens": 2
+       },
+       {
+        "a": "r",
+        "b": "p",
+        "at": 1.0,
+        "sa": "l",
+        "sb": "r",
+        "dashed": true,
+        "color": "grey",
+        "label": "money must come back?"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.18
+       },
+       "s": {
+        "label": "VENDOR?",
+        "x": 0.2,
+        "y": 0.62,
+        "state": "hollow"
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.5,
+        "y": 0.62
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.8,
+        "y": 0.62
+       },
+       "s2": {
+        "label": "VENDOR?",
+        "x": 0.2,
+        "y": 0.86,
+        "state": "hollow",
+        "at": 0.6
+       }
+      },
+      "captions": [
+       {
+        "text": "2001: TWO BUSINESS ASSOCIATES",
+        "x": 0.5,
+        "y": 0.86,
+        "at": 1.2,
+        "size": 36,
+        "weight": "ExtraBold",
+        "color": "ac"
+       }
+      ]
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.1,
+    "src": {
+     "mg": {
+      "kind": "wall",
+      "cards": [
+       {
+        "name": "TOM PETTERS",
+        "role": "Founder and owner of PCI; 52, of Wayzata, at sentencing",
+        "src": "(DOJ, 8 Apr 2010)",
+        "at": 0
+       },
+       {
+        "name": "LARRY REYNOLDS",
+        "role": "Ran Nationwide International Resources (NIR)",
+        "src": "(DOJ)",
+        "at": 0.4
+       }
+      ],
+      "cols": 2
+     }
+    }
+   },
+   {
+    "w": 4.1,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "text": "\"previously had conducted deals involving shoes and clothing with retailers\"",
+      "hl": "shoes and clothing",
+      "size": 52,
+      "hl_at": 0.8,
+      "hl_dur": 2.533333333333333
+     }
+    }
+   },
+   {
+    "w": 4.1,
+    "src": "assets/gen/R10.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "w": 4.1,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "p": {
+        "label": "PETTERS / PCI",
+        "x": 0.18,
+        "y": 0.5,
+        "w": 360
+       },
+       "n": {
+        "label": "NIR",
+        "x": 0.5,
+        "y": 0.5
+       },
+       "q": {
+        "label": "PCI",
+        "x": 0.82,
+        "y": 0.5
+       }
+      },
+      "edges": [
+       {
+        "a": "p",
+        "b": "n",
+        "at": 0.2,
+        "tokens": 2
+       },
+       {
+        "a": "n",
+        "b": "q",
+        "at": 0.8,
+        "tokens": 2
+       }
+      ],
+      "captions": [
+       {
+        "text": "a \"commission\" (DOJ)",
+        "x": 0.5,
+        "y": 0.66,
+        "at": 1.6,
+        "size": 34,
+        "color": "ac"
+       }
+      ]
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "wall",
+      "cards": [
+       {
+        "name": "LARRY REYNOLDS",
+        "role": "Ran Nationwide International Resources (NIR)",
+        "src": "(DOJ)",
+        "at": 0
+       },
+       {
+        "name": "MICHAEL CATAIN",
+        "role": "Created Enchanted Family Buying Co. (EFBC), 2002",
+        "src": "(DOJ)",
+        "at": 0.4
+       }
+      ],
+      "cols": 2
+     }
+    }
+   },
+   {
+    "w": 4.3,
+    "src": "assets/gen/R11.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.7,
+     0.5
+    ]
+   },
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "p": {
+        "label": "PETTERS",
+        "x": 0.18,
+        "y": 0.5
+       },
+       "e": {
+        "label": "EFBC ACCOUNT",
+        "x": 0.5,
+        "y": 0.5,
+        "w": 360
+       },
+       "q": {
+        "label": "PETTERS / PCI",
+        "x": 0.82,
+        "y": 0.5,
+        "w": 360
+       }
+      },
+      "edges": [
+       {
+        "a": "p",
+        "b": "e",
+        "at": 0.2,
+        "tokens": 2
+       },
+       {
+        "a": "e",
+        "b": "q",
+        "at": 0.8,
+        "tokens": 2,
+        "label": "less a commission"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "text": "\"EFBC did no real business.\"",
+      "hl": "EFBC did no real business.",
+      "size": 70,
+      "hl_at": 0.8,
+      "hl_dur": 0.9333333333333333
+     }
+    }
+   },
+   {
+    "w": 4.3,
+    "src": "assets/clips/R12.mp4",
+    "label": "Recreation: not the actual building",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "c": {
+        "label": "CATAIN'S CAR WASH",
+        "x": 0.27,
+        "y": 0.5,
+        "w": 460,
+        "sub": "EFBC headquarters (DOJ)"
+       },
+       "h": {
+        "label": "PETTERS'S HQ",
+        "x": 0.75,
+        "y": 0.5,
+        "w": 400,
+        "at": 0.5
+       }
+      },
+      "edges": [
+       {
+        "a": "c",
+        "b": "h",
+        "at": 0.9,
+        "dashed": true,
+        "color": "fg",
+        "label": "a few miles (DOJ)"
+       }
+      ],
+      "size": 30
+     }
+    },
+    "label": "Diagram, not to scale"
+   }
+  ],
+  [
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "checks",
+      "header": "WHAT AN INVESTOR SAW",
+      "items": [
+       {
+        "text": "PURCHASE ORDER (FAMOUS RETAILER)",
+        "at": 0.2
+       },
+       {
+        "text": "SUPPLIER INVOICE",
+        "at": 0.8
+       },
+       {
+        "text": "BANK STATEMENT",
+        "at": 1.4
+       },
+       {
+        "text": "MONEY OUT \u00b7 MONEY BACK",
+        "at": 2.2
+       }
+      ],
+      "size": 44
+     }
+    }
+   },
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.18
+       },
+       "s": {
+        "label": "NIR / EFBC",
+        "x": 0.2,
+        "y": 0.62,
+        "sub": "\"suppliers\""
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.5,
+        "y": 0.62
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.8,
+        "y": 0.62
+       }
+      },
+      "size": 32,
+      "edges": [
+       {
+        "a": "i",
+        "b": "p",
+        "at": 0,
+        "d": 0.4,
+        "sa": "b",
+        "sb": "t",
+        "tokens": 2
+       },
+       {
+        "a": "p",
+        "b": "s",
+        "at": 0.4,
+        "sa": "l",
+        "sb": "r",
+        "tokens": 2
+       },
+       {
+        "a": "s",
+        "b": "p",
+        "at": 1.0,
+        "sa": "b",
+        "sb": "b",
+        "bend": 0.3,
+        "tokens": 2
+       }
+      ],
+      "captions": [
+       {
+        "text": "CLEARED",
+        "x": 0.8,
+        "y": 0.25,
+        "at": 2.2,
+        "size": 64,
+        "weight": "ExtraBold",
+        "color": "ac"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.18
+       },
+       "s": {
+        "label": "NIR / EFBC",
+        "x": 0.2,
+        "y": 0.62,
+        "sub": "\"suppliers\""
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.5,
+        "y": 0.62
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.8,
+        "y": 0.62,
+        "state": "hollow"
+       }
+      },
+      "size": 32,
+      "edges": [
+       {
+        "a": "i",
+        "b": "p",
+        "at": 0,
+        "d": 0,
+        "sa": "b",
+        "sb": "t",
+        "tokens": 3
+       },
+       {
+        "a": "p",
+        "b": "s",
+        "at": 0,
+        "d": 0,
+        "sa": "l",
+        "sb": "r",
+        "tokens": 3
+       },
+       {
+        "a": "s",
+        "b": "p",
+        "at": 0,
+        "d": 0,
+        "sa": "b",
+        "sb": "b",
+        "bend": 0.3,
+        "tokens": 3
+       }
+      ],
+      "marks": [
+       {
+        "x": 0.8,
+        "y": 0.85,
+        "at": 1.6
+       }
+      ],
+      "zoom": [
+       1.15,
+       0.92,
+       0.5,
+       0.55
+      ],
+      "captions": [
+       {
+        "text": "PCI \u2192 PCI",
+        "x": 0.5,
+        "y": 0.85,
+        "at": 1.2,
+        "size": 56,
+        "weight": "ExtraBold",
+        "color": "ac"
+       }
+      ]
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "TWO DETAILS",
+        "size": 84
+       }
+      ],
+      "cps": 18,
+      "mark_at": null
+     }
+    }
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "p": {
+        "label": "PCI",
+        "x": 0.25,
+        "y": 0.5
+       },
+       "s": {
+        "label": "SUPPLIER",
+        "x": 0.75,
+        "y": 0.5
+       }
+      },
+      "edges": [
+       {
+        "a": "p",
+        "b": "s",
+        "at": 0.3,
+        "tokens": 2,
+        "label": "PCI's own money?"
+       }
+      ],
+      "captions": [
+       {
+        "text": "FALSE RECORDS OF PCI WIRING ITS OWN FUNDS (DOJ)",
+        "x": 0.5,
+        "y": 0.72,
+        "at": 1.4,
+        "size": 32
+       }
+      ]
+     }
+    },
+    "label": "Illustration"
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "text": "\"false records indicating that PCI had wired its own funds to vendors\"",
+      "hl": "false records",
+      "size": 52,
+      "hl_at": 0.8,
+      "hl_dur": 2.3333333333333335
+     }
+    }
+   },
+   {
+    "w": 4.6,
+    "src": "assets/gen/R26.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "OWED BY RETAILERS:",
+        "size": 80
+       },
+       {
+        "text": "BILLIONS",
+        "size": 80
+       }
+      ],
+      "credit": "What PCI's financial statements showed (DOJ)",
+      "hl": "BILLIONS"
+     }
+    }
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "THOSE STATEMENTS",
+        "size": 84
+       },
+       {
+        "text": "WERE FALSE",
+        "size": 84
+       }
+      ],
+      "credit": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "hl": null,
+      "mark_at": 1.8
+     }
+    }
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "NO SALES.",
+        "size": 84
+       },
+       {
+        "text": "NOTHING OWED.",
+        "size": 84
+       }
+      ],
+      "credit": null,
+      "hl": null,
+      "sfx": [
+       {
+        "rel": 0.3,
+        "kind": "hit"
+       }
+      ]
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.9,
+    "src": "assets/gen/R10b.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ],
+    "text": [
+     {
+      "text": "BANK RECORDS  \u00b7  JAN 2003 \u2013 SEPT 2008",
+      "rel": 0.6,
+      "size": 30,
+      "x": "80",
+      "y": "90",
+      "box": true
+     }
+    ]
+   },
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "value": "$12 BILLION",
+      "head": "NIR ACCOUNT \u2192 PCI, ABOUT",
+      "source": "Jan 2003 \u2013 Sept 2008 \u00b7 U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "caption": "Gross money moved, not losses",
+      "color": "ac"
+     }
+    }
+   },
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "value": "ROUGHLY THE SAME",
+      "head": "EFBC ACCOUNT \u2192 PCI",
+      "source": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "caption": "Gross money moved, not losses",
+      "size": 110,
+      "hit": false
+     }
+    }
+   },
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "checks",
+      "header": "\"SUPPLIERS\" SELLING HUNDREDS OF MILLIONS OF MERCHANDISE",
+      "items": [
+       {
+        "text": "INCOME FROM THOSE SALES",
+        "at": 0.5,
+        "strike_at": 1.4
+       }
+      ],
+      "size": 56
+     }
+    }
+   },
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "\"only flowed one way.\"",
+        "size": 72,
+        "weight": "Medium"
+       }
+      ],
+      "hl": "one way",
+      "credit": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "credit_at": 1.6
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.8,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "value": "APRIL 2001",
+      "head": "A NEW BANK ACCOUNT",
+      "source": null,
+      "caption": null,
+      "size": 130,
+      "hit": false
+     }
+    }
+   },
+   {
+    "w": 4.8,
+    "src": {
+     "mg": {
+      "kind": "wall",
+      "cards": [
+       {
+        "name": "TOM PETTERS",
+        "role": "Authorized on the account",
+        "src": "(DOJ, 8 Apr 2010)",
+        "at": 0.2
+       },
+       {
+        "name": "DEANNA COLEMAN",
+        "role": "Authorized on the account",
+        "src": "(DOJ)",
+        "at": 0.6
+       }
+      ],
+      "cols": 2
+     }
+    },
+    "label": "The only two people authorized to use it (DOJ)"
+   },
+   {
+    "w": 4.8,
+    "src": "assets/clips/R15.mp4",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "w": 4.8,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "value": "$35 BILLION",
+      "head": "WIRED IN, 2003 \u2013 SEPT 2008, ABOUT",
+      "source": "From investors and the two so-called suppliers \u00b7 U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "caption": "Gross money moved, not losses",
+      "color": "ac"
+     }
+    }
+   },
+   {
+    "w": 4.8,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTORS",
+        "x": 0.18,
+        "y": 0.3
+       },
+       "n": {
+        "label": "NIR",
+        "x": 0.18,
+        "y": 0.55
+       },
+       "e": {
+        "label": "EFBC",
+        "x": 0.18,
+        "y": 0.8
+       },
+       "a": {
+        "label": "THE ACCOUNT",
+        "x": 0.6,
+        "y": 0.55,
+        "w": 360
+       },
+       "r": {
+        "label": "RETAILERS",
+        "x": 0.88,
+        "y": 0.25,
+        "state": "grey",
+        "at": 1.2
+       }
+      },
+      "edges": [
+       {
+        "a": "i",
+        "b": "a",
+        "at": 0.1,
+        "tokens": 2
+       },
+       {
+        "a": "n",
+        "b": "a",
+        "at": 0.3,
+        "tokens": 2
+       },
+       {
+        "a": "e",
+        "b": "a",
+        "at": 0.5,
+        "tokens": 2
+       }
+      ],
+      "captions": [
+       {
+        "text": "DEPOSITS FROM A RETAILER: NONE",
+        "x": 0.6,
+        "y": 0.85,
+        "at": 2.0,
+        "size": 36,
+        "weight": "ExtraBold",
+        "color": "ac"
+       }
+      ]
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.8,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "a": {
+        "label": "THE ACCOUNT",
+        "x": 0.5,
+        "y": 0.5,
+        "w": 360,
+        "state": "grey"
+       },
+       "r": {
+        "label": "RETAILERS",
+        "x": 0.5,
+        "y": 0.2,
+        "state": "solid"
+       }
+      },
+      "edges": [
+       {
+        "a": "r",
+        "b": "a",
+        "at": 0.4,
+        "dashed": true,
+        "color": "grey",
+        "label": "$0"
+       }
+      ],
+      "zoom": [
+       1.0,
+       1.15,
+       0.5,
+       0.3
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.8,
+    "src": {
+     "mg": {
+      "kind": "versus",
+      "a": "$35 BILLION IN",
+      "b": "$0 FROM RETAILERS",
+      "size": 58,
+      "caption": "The customers never paid a cent into the account (DOJ)"
+     }
+    }
+   },
+   {
+    "w": 4.8,
+    "src": "assets/gen/A03.png",
+    "label": "Illustration",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   }
+  ],
+  [
+   {
+    "w": 5.0,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "a": {
+        "label": "THE ACCOUNT",
+        "x": 0.18,
+        "y": 0.5,
+        "w": 330
+       },
+       "b1": {
+        "label": "BACK TO INVESTORS",
+        "x": 0.68,
+        "y": 0.18,
+        "w": 560,
+        "at": 0.6
+       }
+      },
+      "edges": [
+       {
+        "a": "a",
+        "b": "b1",
+        "at": 0.8,
+        "tokens": 2
+       }
+      ],
+      "size": 30
+     }
+    }
+   },
+   {
+    "w": 5.0,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "a": {
+        "label": "THE ACCOUNT",
+        "x": 0.18,
+        "y": 0.5,
+        "w": 330
+       },
+       "b1": {
+        "label": "BACK TO INVESTORS",
+        "x": 0.68,
+        "y": 0.18,
+        "w": 560
+       },
+       "b2": {
+        "label": "BONUSES",
+        "x": 0.68,
+        "y": 0.38,
+        "w": 560,
+        "sub": "most did not even work for PCI (DOJ)",
+        "at": 0.5
+       }
+      },
+      "edges": [
+       {
+        "a": "a",
+        "b": "b1",
+        "at": 0,
+        "d": 0
+       },
+       {
+        "a": "a",
+        "b": "b2",
+        "at": 0.7,
+        "tokens": 2
+       }
+      ],
+      "size": 30
+     }
+    }
+   },
+   {
+    "w": 5.0,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "a": {
+        "label": "THE ACCOUNT",
+        "x": 0.18,
+        "y": 0.5,
+        "w": 330
+       },
+       "b1": {
+        "label": "BACK TO INVESTORS",
+        "x": 0.68,
+        "y": 0.18,
+        "w": 560
+       },
+       "b2": {
+        "label": "BONUSES",
+        "x": 0.68,
+        "y": 0.38,
+        "w": 560
+       },
+       "b3": {
+        "label": "HIS OTHER COMPANIES",
+        "x": 0.68,
+        "y": 0.58,
+        "w": 560,
+        "sub": "hundreds of millions (DOJ)",
+        "at": 0.3
+       },
+       "b4": {
+        "label": "REAL ESTATE",
+        "x": 0.68,
+        "y": 0.78,
+        "w": 560,
+        "sub": "for family members (DOJ)",
+        "at": 1.4
+       }
+      },
+      "edges": [
+       {
+        "a": "a",
+        "b": "b1",
+        "at": 0,
+        "d": 0
+       },
+       {
+        "a": "a",
+        "b": "b2",
+        "at": 0,
+        "d": 0
+       },
+       {
+        "a": "a",
+        "b": "b3",
+        "at": 0.5,
+        "tokens": 2
+       },
+       {
+        "a": "a",
+        "b": "b4",
+        "at": 1.6,
+        "tokens": 2
+       }
+      ],
+      "size": 30
+     }
+    }
+   },
+   {
+    "w": 5.0,
+    "src": "assets/clips/R15.mp4",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ],
+    "text": [
+     {
+      "text": "MILLIONS \u2192 COLEMAN AND WHITE  (DOJ)",
+      "rel": 0.6,
+      "size": 30,
+      "x": "80",
+      "y": "90",
+      "box": true
+     }
+    ]
+   },
+   {
+    "w": 5.0,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "value": "TENS OF MILLIONS",
+      "head": "TO PETTERS HIMSELF",
+      "source": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "caption": null,
+      "size": 110,
+      "color": "ac",
+      "hit": false
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 3.4,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "HE BOUGHT",
+        "size": 90
+       },
+       {
+        "text": "FAMOUS COMPANIES",
+        "size": 90
+       }
+      ],
+      "credit": null,
+      "hl": "FAMOUS",
+      "sfx": [
+       {
+        "rel": 1.4,
+        "kind": "hit"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "w": 3.4,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "HARDER TO SEE",
+        "size": 90
+       }
+      ],
+      "credit": null,
+      "hl": null,
+      "mark_at": 1.0
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 3.9,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "FINGERHUT",
+        "size": 120
+       }
+      ],
+      "credit": "the catalog retailer",
+      "hl": null
+     }
+    }
+   },
+   {
+    "w": 3.9,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "POLAROID",
+        "size": 120
+       }
+      ],
+      "credit": "the camera brand",
+      "hl": null
+     }
+    }
+   },
+   {
+    "w": 3.9,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "SUN COUNTRY AIRLINES",
+        "size": 96
+       }
+      ],
+      "credit": null,
+      "hl": null
+     }
+    }
+   },
+   {
+    "w": 3.9,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "PETTERS GROUP WORLDWIDE",
+        "size": 76
+       }
+      ],
+      "credit": "bought with proceeds of the PCI fraud, according to the Justice Department",
+      "hl": "WORLDWIDE"
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "t": {
+        "label": "TOM PETTERS",
+        "x": 0.5,
+        "y": 0.2,
+        "w": 380
+       },
+       "g": {
+        "label": "PETTERS GROUP WORLDWIDE",
+        "x": 0.27,
+        "y": 0.62,
+        "w": 600,
+        "at": 0.4,
+        "sub": "household names"
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.78,
+        "y": 0.62,
+        "at": 0.8,
+        "state": "grey"
+       }
+      },
+      "edges": [
+       {
+        "a": "t",
+        "b": "g",
+        "at": 0.5,
+        "sa": "b",
+        "sb": "t",
+        "color": "fg"
+       },
+       {
+        "a": "t",
+        "b": "p",
+        "at": 0.9,
+        "sa": "b",
+        "sb": "t",
+        "color": "grey"
+       }
+      ],
+      "size": 30
+     }
+    }
+   },
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "versus",
+      "a": "PUBLIC IMAGE",
+      "b": "THE LEDGER",
+      "size": 64,
+      "caption": "To a lender deciding whether to put money into PCI, that was reassurance"
+     }
+    }
+   },
+   {
+    "w": 4.9,
+    "src": "assets/gen/R26b.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "w": 4.9,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "\"the appearance he needed to keep the scam going.\"",
+        "size": 54,
+        "weight": "Medium"
+       }
+      ],
+      "hl": "to keep the scam going",
+      "credit": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "credit_at": 2.6
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 5.2,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "p": {
+        "label": "PCI",
+        "x": 0.3,
+        "y": 0.5
+       },
+       "g": {
+        "label": "PETTERS GROUP WORLDWIDE",
+        "x": 0.7,
+        "y": 0.5,
+        "w": 600
+       }
+      },
+      "edges": [
+       {
+        "a": "p",
+        "b": "g",
+        "at": 0.3,
+        "tokens": 3,
+        "label": "losses written off every year (DOJ)"
+       }
+      ],
+      "size": 30
+     }
+    }
+   },
+   {
+    "w": 5.2,
+    "src": {
+     "mg": {
+      "kind": "versus",
+      "a": "LOOKED SOLID",
+      "b": "DRAINING IT",
+      "size": 70
+     }
+    }
+   },
+   {
+    "w": 5.2,
+    "src": "assets/gen/R09.png",
+    "label": "Recreation",
+    "zoom": [
+     1.1,
+     1.0
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ],
+    "text": [
+     {
+      "text": "MORE INVESTORS NEEDED EVERY YEAR",
+      "rel": 0.8,
+      "size": 30,
+      "x": "80",
+      "y": "90",
+      "box": true
+     }
+    ]
+   },
+   {
+    "insert": 3.0,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "THEN THE NEW MONEY SLOWED.",
+        "size": 76
+       }
+      ],
+      "mark_at": 1.8
+     }
+    }
+   }
+  ]
+ ]
+}

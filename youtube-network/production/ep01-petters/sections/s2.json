@@ -1,0 +1,875 @@
+{
+ "_about": "Written by plans.py; section 2 of the shot list.",
+ "section": 2,
+ "narration": "narration/section2.wav",
+ "paras": [
+  [
+   {
+    "w": 4.6,
+    "src": "assets/clips/A01.mp4",
+    "label": "Illustration",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ],
+    "text": [
+     {
+      "text": "TWIN CITIES, MINNESOTA",
+      "rel": 0.4,
+      "size": 34,
+      "x": "80",
+      "y": "90",
+      "box": true
+     }
+    ]
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "PETTERS COMPANY, INC.",
+        "size": 80
+       },
+       {
+        "text": "(PCI)",
+        "size": 80
+       }
+      ],
+      "credit": "Twin Cities, Minnesota \u00b7 U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "hl": null
+     }
+    }
+   },
+   {
+    "w": 4.6,
+    "src": "assets/gen/R09.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.1
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.2
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.8,
+        "y": 0.5
+       },
+       "g": {
+        "label": "GOODS",
+        "x": 0.5,
+        "y": 0.8
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.2,
+        "y": 0.5
+       }
+      },
+      "edges": [
+       {
+        "a": "i",
+        "b": "p",
+        "sa": "r",
+        "sb": "t",
+        "bend": -0.12,
+        "at": 0.3,
+        "d": 0.6
+       },
+       {
+        "a": "p",
+        "b": "g",
+        "sa": "b",
+        "sb": "r",
+        "bend": -0.12,
+        "at": 0.75,
+        "d": 0.6
+       },
+       {
+        "a": "g",
+        "b": "r",
+        "sa": "l",
+        "sb": "b",
+        "bend": -0.12,
+        "at": 1.2,
+        "d": 0.6
+       },
+       {
+        "a": "r",
+        "b": "i",
+        "sa": "t",
+        "sb": "l",
+        "bend": -0.12,
+        "at": 1.6500000000000001,
+        "d": 0.6
+       }
+      ],
+      "marks": [],
+      "captions": [
+       {
+        "text": "electronics, bought and sold on at a profit: the pitch",
+        "x": 0.5,
+        "y": 0.9,
+        "at": 2.8,
+        "size": 28
+       }
+      ],
+      "zoom": [
+       1.0,
+       1.03,
+       0.5,
+       0.5
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.2,
+        "at": 0
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.8,
+        "y": 0.5,
+        "at": 0
+       },
+       "g": {
+        "label": "GOODS",
+        "x": 0.5,
+        "y": 0.8,
+        "at": 0
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.2,
+        "y": 0.5,
+        "at": 0
+       }
+      },
+      "edges": [
+       {
+        "a": "i",
+        "b": "p",
+        "sa": "r",
+        "sb": "t",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "p",
+        "b": "g",
+        "sa": "b",
+        "sb": "r",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "g",
+        "b": "r",
+        "sa": "l",
+        "sb": "b",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "r",
+        "b": "i",
+        "sa": "t",
+        "sb": "l",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       }
+      ],
+      "marks": [],
+      "captions": [
+       {
+        "text": "SHOWN THE PAPERWORK",
+        "x": 0.5,
+        "y": 0.06,
+        "at": 0.4,
+        "size": 30
+       },
+       {
+        "text": "PAID",
+        "x": 0.5,
+        "y": 0.33,
+        "at": 2.4,
+        "size": 40,
+        "color": "ac"
+       }
+      ],
+      "zoom": [
+       1.0,
+       1.03,
+       0.5,
+       0.5
+      ]
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 3.7,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.2,
+        "at": 0
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.8,
+        "y": 0.5,
+        "at": 0
+       },
+       "g": {
+        "label": "GOODS",
+        "x": 0.5,
+        "y": 0.8,
+        "at": 0
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.2,
+        "y": 0.5,
+        "at": 0
+       }
+      },
+      "edges": [
+       {
+        "a": "i",
+        "b": "p",
+        "sa": "r",
+        "sb": "t",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "p",
+        "b": "g",
+        "sa": "b",
+        "sb": "r",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "g",
+        "b": "r",
+        "sa": "l",
+        "sb": "b",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "r",
+        "b": "i",
+        "sa": "t",
+        "sb": "l",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       }
+      ],
+      "marks": [],
+      "captions": [],
+      "zoom": [
+       1.0,
+       1.25,
+       0.5,
+       0.95
+      ]
+     }
+    }
+   },
+   {
+    "w": 3.7,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.2,
+        "at": 0
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.8,
+        "y": 0.5,
+        "at": 0
+       },
+       "g": {
+        "label": "GOODS",
+        "x": 0.5,
+        "y": 0.8,
+        "hollow_at": 0.5,
+        "at": 0
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.2,
+        "y": 0.5,
+        "at": 0
+       }
+      },
+      "edges": [
+       {
+        "a": "i",
+        "b": "p",
+        "sa": "r",
+        "sb": "t",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "p",
+        "b": "g",
+        "sa": "b",
+        "sb": "r",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "g",
+        "b": "r",
+        "sa": "l",
+        "sb": "b",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       },
+       {
+        "a": "r",
+        "b": "i",
+        "sa": "t",
+        "sb": "l",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 3
+       }
+      ],
+      "marks": [
+       {
+        "x": 0.66,
+        "y": 0.8,
+        "at": 1.0
+       }
+      ],
+      "captions": [],
+      "zoom": [
+       1.25,
+       1.25,
+       0.5,
+       0.95
+      ]
+     }
+    }
+   },
+   {
+    "w": 3.7,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "text": "\"no such purchases were made.\"",
+      "hl": "no such purchases were made.",
+      "size": 70,
+      "hl_at": 0.8,
+      "hl_dur": 1.0
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.5,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "a": {
+        "label": "INDIVIDUALS",
+        "x": 0.3,
+        "y": 0.5,
+        "w": 380
+       },
+       "b": {
+        "label": "AN INVESTMENT FIRM",
+        "x": 0.7,
+        "y": 0.5,
+        "w": 460,
+        "at": 0.8
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.5,
+        "y": 0.82,
+        "at": 1.4
+       }
+      },
+      "edges": [
+       {
+        "a": "a",
+        "b": "p",
+        "at": 1.6,
+        "tokens": 2,
+        "sa": "b",
+        "sb": "l",
+        "bend": 0.1
+       },
+       {
+        "a": "b",
+        "b": "p",
+        "at": 1.8,
+        "tokens": 2,
+        "sa": "b",
+        "sb": "r",
+        "bend": -0.1
+       }
+      ],
+      "captions": [
+       {
+        "text": "WHO LENT THE MONEY",
+        "x": 0.5,
+        "y": 0.18,
+        "at": 0.2,
+        "size": 44,
+        "weight": "ExtraBold"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.5,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, D. Minn. \u00b7 8 Apr 2010",
+      "text": "\"hundreds of millions of dollars in promissory notes\"",
+      "hl": "hundreds of millions of dollars in promissory notes",
+      "size": 60,
+      "hl_at": 0.8,
+      "hl_dur": 1.7666666666666666
+     }
+    }
+   },
+   {
+    "w": 4.5,
+    "src": "assets/gen/R25.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ],
+    "text": [
+     {
+      "text": "HUNDREDS OF MILLIONS  (DOJ)",
+      "rel": 1.0,
+      "size": 30,
+      "x": "80",
+      "y": "90",
+      "box": true
+     }
+    ]
+   },
+   {
+    "w": 4.5,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "THE LARGEST FINANCIAL CRIME",
+        "size": 70
+       },
+       {
+        "text": "IN MINNESOTA HISTORY",
+        "size": 70
+       }
+      ],
+      "credit": "U.S. Attorney, D. Minn. \u00b7 2 Sept 2010",
+      "hl": null,
+      "mark_at": 2.6
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.0,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "QUESTION 1: THE MONEY",
+        "size": 84
+       }
+      ],
+      "cps": 18,
+      "mark_at": 2.2
+     }
+    }
+   },
+   {
+    "w": 4.0,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.2,
+        "at": 0
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.8,
+        "y": 0.5,
+        "at": 0
+       },
+       "g": {
+        "label": "GOODS",
+        "x": 0.5,
+        "y": 0.8,
+        "state": "hollow",
+        "at": 0
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.2,
+        "y": 0.5,
+        "at": 0
+       }
+      },
+      "edges": [
+       {
+        "a": "i",
+        "b": "p",
+        "sa": "r",
+        "sb": "t",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 2
+       },
+       {
+        "a": "p",
+        "b": "g",
+        "sa": "b",
+        "sb": "r",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0
+       },
+       {
+        "a": "g",
+        "b": "r",
+        "sa": "l",
+        "sb": "b",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0
+       },
+       {
+        "a": "r",
+        "b": "i",
+        "sa": "t",
+        "sb": "l",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 2
+       }
+      ],
+      "marks": [],
+      "captions": [
+       {
+        "text": "BANKS",
+        "x": 0.2,
+        "y": 0.36,
+        "at": 0.5,
+        "size": 32,
+        "weight": "Bold"
+       },
+       {
+        "text": "INVESTORS",
+        "x": 0.5,
+        "y": 0.06,
+        "at": 1.0,
+        "size": 32,
+        "weight": "Bold"
+       },
+       {
+        "text": "FAMOUS COMPANIES",
+        "x": 0.8,
+        "y": 0.36,
+        "at": 1.5,
+        "size": 32,
+        "weight": "Bold"
+       }
+      ],
+      "zoom": [
+       1.0,
+       1.03,
+       0.5,
+       0.5
+      ]
+     }
+    }
+   },
+   {
+    "w": 4.0,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "value": "MORE THAN A DECADE",
+      "head": "HOW DO YOU KEEP A LIE THAT SIZE AFLOAT?",
+      "source": null,
+      "caption": null,
+      "hit": false
+     }
+    }
+   },
+   {
+    "w": 4.0,
+    "src": {
+     "mg": {
+      "kind": "flow",
+      "nodes": {
+       "i": {
+        "label": "INVESTOR",
+        "x": 0.5,
+        "y": 0.2,
+        "at": 0
+       },
+       "p": {
+        "label": "PCI",
+        "x": 0.8,
+        "y": 0.5,
+        "at": 0
+       },
+       "g": {
+        "label": "GOODS",
+        "x": 0.5,
+        "y": 0.8,
+        "state": "hollow",
+        "at": 0
+       },
+       "r": {
+        "label": "RETAILER",
+        "x": 0.2,
+        "y": 0.5,
+        "at": 0
+       }
+      },
+      "edges": [
+       {
+        "a": "i",
+        "b": "p",
+        "sa": "r",
+        "sb": "t",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 4
+       },
+       {
+        "a": "p",
+        "b": "g",
+        "sa": "b",
+        "sb": "r",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0
+       },
+       {
+        "a": "g",
+        "b": "r",
+        "sa": "l",
+        "sb": "b",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0
+       },
+       {
+        "a": "r",
+        "b": "i",
+        "sa": "t",
+        "sb": "l",
+        "bend": -0.12,
+        "at": 0,
+        "d": 0,
+        "tokens": 4
+       }
+      ],
+      "marks": [],
+      "captions": [
+       {
+        "text": "WHERE DID THE MONEY GO?",
+        "x": 0.5,
+        "y": 0.46,
+        "at": 1.2,
+        "size": 50,
+        "weight": "ExtraBold",
+        "color": "ac"
+       }
+      ],
+      "zoom": [
+       1.12,
+       0.95,
+       0.5,
+       0.5
+      ]
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "QUESTION 2: A PERSON",
+        "size": 84
+       }
+      ],
+      "cps": 18,
+      "mark_at": 2.2
+     }
+    }
+   },
+   {
+    "w": 4.6,
+    "src": {
+     "mg": {
+      "kind": "wall",
+      "cards": [
+       {
+        "name": "INSIDER",
+        "role": "there almost from the start; touched the paperwork; knew",
+        "src": "",
+        "at": 0.4
+       }
+      ],
+      "cols": 1
+     }
+    }
+   },
+   {
+    "w": 4.6,
+    "src": "assets/clips/R02.mp4",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ],
+    "text": [
+     {
+      "text": "8 SEPTEMBER 2008",
+      "rel": 0.6,
+      "size": 34,
+      "x": "80",
+      "y": "90",
+      "box": true
+     }
+    ]
+   },
+   {
+    "w": 4.6,
+    "src": "assets/clips/R03.mp4",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "insert": 5.0,
+    "src": {
+     "mg": {
+      "kind": "title",
+      "lines": [
+       "THE $3.7 BILLION EMPIRE",
+       "BUILT ON FAKE PURCHASE ORDERS"
+      ],
+      "channel": "CROOKED ARITHMETIC"
+     }
+    }
+   }
+  ]
+ ]
+}

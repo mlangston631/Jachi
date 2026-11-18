@@ -1,0 +1,194 @@
+{
+ "_about": "Cold open (shot list 1-13). Quotes are S1 word for word (DOJ, U.S. Attorney D. Minn., 8 Apr 2010).",
+ "section": 1,
+ "narration": "narration/section1.wav",
+ "paras": [
+  [
+   {
+    "w": 3.7,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, District of Minnesota \u00b7 8 April 2010",
+      "text": "\"fake\"",
+      "size": 150,
+      "hl": "fake",
+      "hl_at": 0.5,
+      "hl_dur": 0.6,
+      "bug": false
+     }
+    }
+   },
+   {
+    "w": 3.7,
+    "src": "assets/gen/R01b.png",
+    "label": "Recreation: setting not known",
+    "zoom": [
+     1.0,
+     1.07
+    ],
+    "focus": [
+     0.5,
+     0.45
+    ],
+    "text": [
+     {
+      "text": "MINNESOTA  \u00b7  SEPTEMBER 2008",
+      "rel": 0.4,
+      "size": 34,
+      "x": "80",
+      "y": "90",
+      "box": true
+     }
+    ]
+   },
+   {
+    "w": 3.7,
+    "src": {
+     "mg": {
+      "kind": "dot",
+      "word": "RECORDED",
+      "bug": false
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "ACCORDING TO THE",
+        "size": 52,
+        "weight": "Medium"
+       },
+       {
+        "text": "DEPARTMENT OF JUSTICE",
+        "size": 84
+       }
+      ],
+      "credit": "U.S. Attorney, District of Minnesota \u00b7 8 April 2010",
+      "credit_at": 1.6
+     }
+    }
+   },
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, District of Minnesota \u00b7 8 April 2010",
+      "text": "\"fake\"",
+      "size": 120,
+      "hl": "fake",
+      "hl_at": 0.8,
+      "hl_dur": 0.5
+     }
+    }
+   },
+   {
+    "w": 4.3,
+    "src": "assets/gen/R04.png",
+    "label": "Recreation",
+    "zoom": [
+     1.0,
+     1.08
+    ],
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "excerpt",
+      "source": "U.S. Attorney, District of Minnesota \u00b7 8 April 2010",
+      "text": "\"divine intervention\"",
+      "size": 96,
+      "hl": "divine intervention",
+      "hl_at": 0.8,
+      "hl_dur": 1.0
+     }
+    }
+   },
+   {
+    "w": 4.3,
+    "src": "assets/clips/R04b.mp4",
+    "label": "Recreation"
+   },
+   {
+    "w": 4.3,
+    "src": {
+     "mg": {
+      "kind": "type",
+      "lines": [
+       {
+        "text": "\"could of got away with this for so long.\"",
+        "size": 58,
+        "weight": "Medium"
+       }
+      ],
+      "hl": "so long",
+      "credit": "[sic], as published \u00b7 U.S. Attorney, D. Minn., 8 Apr 2010",
+      "credit_at": 2.4
+     }
+    }
+   }
+  ],
+  [
+   {
+    "w": 3.7,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "head": "HOW LONG WAS \"SO LONG\"?",
+      "value": "14 YEARS",
+      "source": "About fourteen years, by the government's account",
+      "roll": 1.4,
+      "hit": false
+     }
+    }
+   },
+   {
+    "w": 3.7,
+    "src": {
+     "mg": {
+      "kind": "counter",
+      "head": "SIZE OF THE PONZI SCHEME",
+      "value": "$3.7 BILLION",
+      "source": "By the government's count \u00b7 U.S. Attorney, D. Minn., 8 Apr 2010",
+      "at": 0.6,
+      "roll": 1.6
+     }
+    }
+   },
+   {
+    "w": 3.7,
+    "src": {
+     "mg": {
+      "kind": "form",
+      "stamp": "PAPER",
+      "stamp_at": 1.2
+     }
+    }
+   },
+   {
+    "insert": 3.0,
+    "src": {
+     "mg": {
+      "kind": "dot",
+      "sub": "WHO WAS HOLDING THE RECORDER?",
+      "sub_at": 0.3,
+      "dy": -60,
+      "bug": false
+     }
+    }
+   }
+  ]
+ ]
+}

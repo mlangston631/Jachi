@@ -16,3 +16,6 @@ production/**/build/
 production/**/*-test.mp4
 production/**/render/
 production/**/final.mp4
+# The joined narration is rebuilt from the section files; over GitHub's size limit.
+production/**/narration/full.wav
+__pycache__/

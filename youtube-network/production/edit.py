@@ -10,11 +10,16 @@ sequence carries no third-party music. The final encode is capped at about 12 Mb
 1080p30), since grain inflates file size at high quality settings. Shots marked "recreation" get a "Recreation" label, as the channel's rules
 require for illustrative scenes.
 """
-import json, os, subprocess, sys
+import hashlib, json, os, subprocess, sys
+from concurrent.futures import ThreadPoolExecutor
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import mg
 
 W, H, FPS = 1920, 1080, 30
+LOOK_VERSION = 2
 MONO = '/usr/share/fonts/truetype/jetbrains-mono/JetBrainsMono-Bold.ttf'
 SANS = '/usr/share/fonts/opentype/inter/Inter-SemiBold.otf'
+MONO_M = '/usr/share/fonts/truetype/jetbrains-mono/JetBrainsMono-Medium.ttf'
 
 def run(args):
     r = subprocess.run(['ffmpeg', '-v', 'error', '-y'] + args, capture_output=True, text=True)
@@ -32,8 +37,10 @@ def look(chain):
 def overlays(shot, start):
     """drawtext filters for a shot; times in the EDL are on the narration clock, converted to shot time."""
     out = []
-    if shot.get('recreation'):
-        out.append(f"drawtext=fontfile={SANS}:text='RECREATION':fontsize=26:fontcolor=0xF4F2EA@0.85:x=60:y=h-80:box=1:boxcolor=0x1C1D20@0.55:boxborderw=12")
+    lab = shot.get('label') or ('Recreation' if shot.get('recreation') else None)
+    if lab and not isinstance(shot['src'], dict):
+        # The channel's label: bottom-left, mono 500, 28 px, paper white on a 60% near-black bar (shot list 1.9).
+        out.append(f"drawtext=fontfile={MONO_M}:text='{esc(lab)}':fontsize=28:fontcolor=0xF4F2EA@0.9:x=74:y=h-96:box=1:boxcolor=0x1C1D20@0.6:boxborderw=14")
     for t in shot.get('text', []):
         a = max(0.0, t.get('at', start) - start)
         fade = f"alpha='if(lt(t,{a}),0,min(1,(t-{a})/0.35))'"
@@ -44,14 +51,29 @@ def overlays(shot, start):
     return ','.join(out)
 
 def render_shot(i, shot, start, dur, base, tmp):
-    out = os.path.join(tmp, f'shot{i:02d}.mp4')
-    src = os.path.join(base, shot['src'])
+    key = hashlib.sha1(json.dumps([shot, round(start, 3), round(dur, 3), LOOK_VERSION], sort_keys=True).encode()).hexdigest()[:12]
+    out = os.path.join(tmp, f'shot{i:03d}-{key}.mp4')
+    if os.path.exists(out):          # unchanged shot: reuse the earlier render
+        return out
+    if isinstance(shot['src'], dict):  # a motion graphic, drawn to the exact length of the shot
+        spec = dict(shot['src']['mg'])
+        if shot.get('label'):
+            spec['label'] = shot['label']
+        src = os.path.join(tmp, f'mg-{key}.mp4')
+        mg.render(spec, dur, src)
+    else:
+        src = os.path.join(base, shot['src'])
     frames = int(round(dur * FPS))
     if src.endswith('.mp4'):
-        stretch = dur / float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', src],
-                                             capture_output=True, text=True).stdout)
-        chain = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setpts={max(1.0, stretch):.4f}*PTS,fps={FPS}"
-        inp = ['-i', src]
+        clip = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', src],
+                                    capture_output=True, text=True).stdout) - shot.get('from', 0)
+        # A clip slows by at most 30% to fill its shot; past that its last frame holds (a slow-motion crawl reads as fake).
+        stretch = min(1.3, max(1.0, dur / clip))
+        z = shot.get('zoom', [1.0])[0]; fx, fy = shot.get('focus', [0.5, 0.5])
+        crop = f",crop=iw/{z}:ih/{z}:(iw-iw/{z})*{fx}:(ih-ih/{z})*{fy},scale={W}:{H}" if z != 1.0 else ''
+        chain = (f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}{crop},setpts={stretch:.4f}*PTS,fps={FPS},"
+                 f"tpad=stop_mode=clone:stop_duration={max(0.0, dur - clip * stretch) + 0.2:.3f}")
+        inp = (['-ss', str(shot['from'])] if shot.get('from') else []) + ['-i', src]
     else:
         # Slow push-in (or pull-out) about the chosen point, on a 2x upscale so the move doesn't jitter.
         z0, z1 = shot.get('zoom', [1.0, 1.10])
@@ -61,6 +83,10 @@ def render_shot(i, shot, start, dur, base, tmp):
         inp = ['-loop', '1', '-framerate', str(FPS), '-t', f'{dur:.3f}', '-i', src]
     if shot.get('darken'):
         chain += f",eq=brightness=-{shot['darken']}"
+    for j, (bx, by, bw, bh) in enumerate(shot.get('blur', [])):
+        # Softens a region (fractions of the frame) beyond recognition: a face that a generated scene let through.
+        x, y, w, h = int(bx * W), int(by * H), int(bw * W) // 2 * 2, int(bh * H) // 2 * 2
+        chain += f",split[m{j}][c{j}];[c{j}]crop={w}:{h}:{x}:{y},boxblur=28:4[b{j}];[m{j}][b{j}]overlay={x}:{y}"
     ov = overlays(shot, start)
     chain = look(chain + (',' + ov if ov else '') + f",fade=t=in:st=0:d=0.12,trim=duration={dur:.3f}")
     run(inp + ['-vf', chain, '-an', '-frames:v', str(frames), '-r', str(FPS), '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', out])
@@ -74,18 +100,23 @@ def main(edl_path):
     total = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', narr],
                                  capture_output=True, text=True).stdout) + edl.get('tail', 0.0)
     cuts = [s['at'] for s in edl['shots']] + [total]
-    parts = [render_shot(i, s, cuts[i], cuts[i + 1] - cuts[i], base, tmp) for i, s in enumerate(edl['shots'])]
-    lst = os.path.join(tmp, 'list.txt')
+    with ThreadPoolExecutor(int(os.environ.get('EDIT_JOBS', '4'))) as ex:
+        parts = list(ex.map(lambda i: render_shot(i, edl['shots'][i], cuts[i], cuts[i + 1] - cuts[i], base, tmp), range(len(edl['shots']))))
+    lst = os.path.join(tmp, os.path.splitext(os.path.basename(edl['output']))[0] + '-list.txt')
     open(lst, 'w').write(''.join(f"file '{p}'\n" for p in parts))
-    picture = os.path.join(tmp, 'picture.mp4')
+    picture = os.path.join(tmp, os.path.splitext(os.path.basename(edl['output']))[0] + '-picture.mp4')
     run(['-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy', picture])
     out = os.path.join(base, edl['output'])
-    # Sound: narration up front; under it a low brown-noise drone made here (no licence needed), ducked well below.
-    run(['-i', picture, '-i', narr, '-f', 'lavfi', '-t', f'{total:.3f}', '-i', 'anoisesrc=color=brown:amplitude=0.6',
+    # Sound: narration up front; under it a low brown-noise drone made here (no licence needed), ducked well below,
+    # and the synthesised effects track (sfx.py) for the cues in the edit list.
+    import sfx
+    fx = sfx.track(edl.get('sfx', []), total, os.path.join(tmp, os.path.splitext(os.path.basename(edl['output']))[0] + '-sfx.wav'))
+    run(['-i', picture, '-i', narr, '-f', 'lavfi', '-t', f'{total:.3f}', '-i', 'anoisesrc=color=brown:amplitude=0.6', '-i', fx,
          '-filter_complex',
          f"[2:a]lowpass=f=180,volume=0.10,afade=t=in:d=1.5,afade=t=out:st={total-1.5:.2f}:d=1.5[d];"
-         f"[1:a]apad=whole_dur={total:.3f},volume=1.0[n];[n][d]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-16:TP=-1.5[a]",
-         '-map', '0:v', '-map', '[a]', '-c:v', 'libx264', '-preset', 'slow', '-crf', '21', '-maxrate', '12M', '-bufsize', '24M', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-c:a', 'aac', '-b:a', '192k', '-shortest', out])
+         f"[3:a]volume={edl.get('sfx_gain', 0.32)}[f];"
+         f"[1:a]apad=whole_dur={total:.3f},volume=1.0[n];[n][d][f]amix=inputs=3:duration=first:normalize=0,loudnorm=I=-16:TP=-1.5[a]",
+         '-map', '0:v', '-map', '[a]', '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-maxrate', '12M', '-bufsize', '24M', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-c:a', 'aac', '-b:a', '192k', '-shortest', out])
     print(out)
 
 if __name__ == '__main__':
