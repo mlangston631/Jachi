@@ -3,7 +3,8 @@
 Narration script, first upload. Written 17 Nov 2026 from `verification.md` (which overrides `stories.md`), the
 `stories.md` Petters entry and beat sheet, and `market.md`. The two DOJ releases that `verification.md` marks
 **[OPENED]** were re-read in full for this script (URLs in the source list); every quotation below appears in one of
-them word for word, including their original spelling.
+them word for word, including their original spelling. Fact pass, 18 Nov 2026: all ten [UNVERIFIED] items settled
+against court records on CourtListener, or cut, or replaced by their fallback lines (log: `ep01-factpass.md`).
 
 ## Title
 
@@ -36,15 +37,21 @@ ORDERS", same palette, text **"FAKE"** in quotation marks, marked as an illustra
   $3.7 billion Ponzi scheme", 8 Apr 2010 (econ0413.pdf). `verification.md` rows P6 to P16, P21, P24: **[OPENED]**.
 - **[S2]** DOJ, U.S. Attorney D. Minn., "Deanna Coleman sentenced for her role in the Tom Petters Ponzi scheme",
   2 Sept 2010 (econ0460.pdf). `verification.md` P9, P13: **[OPENED]**.
-- **[S3]** FBI Minneapolis verdict release, 3 Dec 2009. `verification.md`: title seen in search only.
-- **[S4]** US v. Petters, 8th Cir. No. 10-1843, 663 F.3d 375, 9 Dec 2011. `verification.md` P19: search only.
-- **[S5]** MPR, 5 Nov 2009, "Witness says he forged 10,000 documents for Tom Petters". `verification.md` P5: search only.
-- **[S6]** MPR, 20 Nov 2009 (defence rests; Petters's testimony). `verification.md` P18: search only.
-- **[S7]** Star Tribune, 26 Sept 2008, report of the search-warrant affidavit. `verification.md` P14: search only.
-- **[S8]** Court records listed in `stories.md` (Key sources) and `cases.md` entry 2: In re Petters Co. (Bankr. D.
-  Minn.), SEC v. Petters (D. Minn.), In re GE Capital Corp. / Thomas Petters Investment Litigation (J.P.M.L. 2015).
-  Dockets not read.
-- **[S9]** Dirks v. SEC, 463 U.S. 646 (1983). `verification.md` E4: search only (teaser for episode 2).
+- **[S3]** FBI Minneapolis verdict release, 3 Dec 2009. `verification.md`: title seen in search only. Not relied on
+  for anything S1 doesn't also say.
+- **[S4]** US v. Petters, 8th Cir. No. 10-1843, 663 F.3d 375, filed 9 Dec 2011 ("We affirm"). Case record and
+  opinion text read through CourtListener's search index, 18 Nov 2026 (fact pass, `ep01-factpass.md`).
+- **[S5]** United States v. White, 779 F. Supp. 2d 984 (D. Minn. 19 Apr 2011) and United States v. Reynolds, 643 F.3d
+  1130 (8th Cir. 24 June 2011): both say the defendant testified against Petters at trial. CourtListener, 18 Nov 2026.
+  (Replaces MPR, 5 Nov 2009, which could not be opened; its "10,000 documents" figure is cut.)
+- **[S6]** Not used. (MPR, 20 Nov 2009, on Petters's testimony could not be opened; the line resting on it is cut.)
+- **[S7]** Not used. (Star Tribune, 26 Sept 2008, on the affidavit could not be opened; the Wal-Mart line is cut.)
+- **[S8]** PCI and Polaroid bankruptcy court opinions on CourtListener, 18 Nov 2026: In re Petters Co. (Bankr. D.
+  Minn. 2009, 2013), the trustee's fraudulent-transfer suits (Bankr. D. Minn. 2016, 2019; 8th Cir. 2020) and In re
+  Polaroid Corp. (Bankr. D. Minn.; petitions filed 18 Dec 2008). SEC v. Petters and the J.P.M.L. litigation were not
+  read and are not mentioned.
+- **[S9]** Dirks v. SEC, 463 U.S. 646 (1983). Opinion text searched on CourtListener, 18 Nov 2026 (teaser for
+  episode 2).
 
 Visual source types: **[GOV]** public-domain US government or court record; **[ARCH]** licensed archival (news photo
 or footage, licence logged per `plan/production-tools.md` section 2); **[GFX]** chart or motion graphic made for the
@@ -65,7 +72,8 @@ He did not know the conversation was being recorded.
 
 [VISUAL] [RECON] An office corridor at dusk, lights off in most rooms, one door ajar; slow push-in. On-screen label
 "Recreation". No people shown.
-[SOURCE] S1 (Coleman "wore a recording device to tape conversations with Petters and others"); S2 (hired 1993).
+[SOURCE] S1 (Coleman "wore a recording device to tape conversations with Petters and others"); S2 (hired 1993); S4
+("she secretly recorded multiple conversations with Petters").
 
 According to the Department of Justice, within the first few hours of those recordings, he was heard admitting that
 purchase orders were "fake". And he offered an explanation for why nobody had caught on. The only explanation, he
@@ -138,14 +146,16 @@ Wayzata marked on Lake Minnetonka.
 
 He was a dealmaker in consumer goods. He owned real businesses that sold real products, among them a company called
 Petters Warehouse Direct and another called RedTag. That matters, because it is part of why the paperwork that came
-later looked believable. He was known as someone who moved merchandise.
+later looked believable. The federal appeals court that later heard his case called him a prominent Minneapolis
+businessman.
 
 [VISUAL] [ARCH] Licensed photos or news footage of the companies' signage or premises, if available; otherwise
 [GFX] the two company names set as plain text cards. No logos beyond what appears in licensed footage.
-[SOURCE] S1 (names Petters Warehouse Direct and RedTag as "Petters's companies"). [UNVERIFIED - check before
-recording: the line "He was known as someone who moved merchandise" rests on stories.md's note to verify his
-background from the trial record or Star Tribune. Phrased so it is true of the businesses the DOJ names; cut it if the
-biography check finds otherwise.]
+[SOURCE] S1 (names Petters Warehouse Direct and RedTag as "Petters's companies"); S4 (8th Cir.: "Petters was a
+prominent Minneapolis, Minnesota businessman. He owned numerous businesses, including Petters Group Worldwide LLC
+(PGW), Sun Country Airlines, Polaroid Corporation, Fingerhut, and Petters Company, Inc. (PCI)"), read on
+CourtListener 18 Nov 2026. The earlier line "He was known as someone who moved merchandise" was replaced: no record
+read supports it.
 
 In 1993, he hired an office manager. Her name was Deanna Coleman. Remember the name.
 
@@ -225,13 +235,13 @@ and "For her efforts, Coleman received millions of dollars."
 Exposure.
 
 Over the years, she rose from office manager to an officer of the company. Keep her in mind. Of everyone in this
-story, she is the one who was closest to the paper, and closest to Tom Petters.
+story, she was among the closest to the paper, and to Tom Petters.
 
 [VISUAL] [GFX] Her name card updates: "office manager" crossed through, "officer of PCI" written beneath (DOJ).
 [SOURCE] S2 ("hired by Petters as an office manager and later became an officer of PCI"); S1 (the account only
 Petters and Coleman could use). verification.md P9.
 
-### 05:52 Expansion
+### 05:54 Expansion
 
 By the late 1990s the paper had a weak point. A careful investor might not be satisfied with a purchase order. They
 might want to see the money moving, in a bank statement.
@@ -251,14 +261,15 @@ purchase orders and PCI's financial records.
 financial officer"; "responsible for fabricating retailer purchase orders and PCI financial records");
 verification.md P17.
 
-Remember the name White, too. At Petters's trial, a co-conspirator testified that he had forged about ten thousand
-documents for Tom Petters. Ten thousand pieces of paper, each one standing in for something that was never there.
+Remember the name White, too. He later pleaded guilty, and when Tom Petters went on trial, Robert White testified
+against him.
 
-[VISUAL] [GFX] A slow, quiet counter rises to "about 10,000", credited on screen: "Trial testimony, as reported by
-MPR News, 5 Nov 2009". No faces.
-[SOURCE] S5. [UNVERIFIED - check before recording: the MPR report or the transcript; confirm the witness was Robert
-White and the exact number. verification.md P5 allows it only as attributed testimony, with the date, after
-checking. Until then this paragraph says "a co-conspirator" so it does not name White as the witness.]
+[VISUAL] [GFX] White's name card gains a second line: "Pleaded guilty; testified against Petters at trial (court
+record)". No faces.
+[SOURCE] S1 (White pleaded guilty); United States v. White, 779 F. Supp. 2d 984 (D. Minn. 19 Apr 2011) ("He pled
+guilty and testified against Petters at trial"), read on CourtListener 18 Nov 2026. The "about 10,000 documents"
+figure (MPR, 5 Nov 2009) was cut: the article could not be opened from this session and was seen only in search
+results.
 
 The next weak point was money itself. If PCI said it was buying goods from suppliers, then money had to go to
 suppliers. And a careful investor might expect money to come back from retailers. So in 2001, Petters recruited
@@ -377,7 +388,7 @@ drawn as an illustration with no numbers. Caption: "Illustration, not to scale".
 these other companies"). The chart is labelled as an illustration because no year-by-year figures are in the record
 read.
 
-### 11:06 Turning point
+### 11:01 Turning point
 
 By the end of 2007, the arithmetic was turning against them. The government says the conspirators were struggling
 to find new investors. And PCI was slow to pay hundreds of millions of dollars in promissory notes held by one of its
@@ -395,7 +406,7 @@ so the notes wouldn't go into default.
 [SOURCE] S1 ("Petters told Bell the slow payments were due to his retailers, who were late in paying him. As a
 result, Bell agreed to an extension").
 
-Then, in February 2008, the two men went further. They agreed that Bell would take replacement purchase orders, from
+Then, in February 2008, according to the government, the two men went further. They agreed that Bell would take replacement purchase orders, from
 other retailers, in place of the ones Lancelot already held. And Bell suggested they also swap money back and forth,
 so it would look as if PCI was paying what it owed. Between late February 2008 and the day federal agents arrived,
 the two men made more than eighty of these "round trip" transactions. Bell later pleaded guilty for his role.
@@ -485,7 +496,7 @@ sixteen days.
 [VISUAL] [GFX] A calendar running from 8 September 2008; the days tick past and stop at 24.
 [SOURCE] S1 (8 Sept to 24 Sept 2008 is 16 days).
 
-### 15:07 Exposure
+### 15:04 Exposure
 
 On the twenty-fourth of September 2008, agents from the FBI, the Internal Revenue Service's criminal investigators
 and the U.S. Postal Inspection Service executed search warrants at Petters's headquarters in Minnetonka, at his home,
@@ -506,18 +517,8 @@ money", "U.S. Postal Inspection Service: the mail". Each links with a thin line 
 [SOURCE] S1 (the three agencies; Postal Inspector in Charge Shawn S. Tiller: "the criminal misuse of the U.S. mail";
 counts of mail fraud and wire fraud). The description of each agency's remit is explanatory.
 
-Investigators also checked the paperwork against the retailers it named. According to the Star Tribune's report of
-the FBI's search-warrant affidavit, agents approached Wal-Mart, the parent of Sam's Club, and were told the orders
-were fictitious.
-
-[VISUAL] [ARCH] Licensed image of the Star Tribune page of 26 Sept 2008 (newspaper licence logged), with the
-relevant line enlarged. No retailer logos.
-[SOURCE] S7. [UNVERIFIED - check before recording: verification.md P14 says use this only after reading the affidavit
-itself (MPR copy, blocked) or the Star Tribune article. If it cannot be confirmed, cut this paragraph; the next one
-still stands on S1 and S2 ("those transactions were fictitious").]
-
-Whatever the agents expected to find, the government's later summary was blunt. The sales to big-box retailers that
-appeared in Coleman's documents were, in its words, "fictitious".
+The government's later summary of the paperwork was blunt. The sales to big-box retailers that appeared in Coleman's
+documents were, in its words, "fictitious".
 
 [VISUAL] [GOV] The 2 Sept 2010 release line highlighted: "Coleman also created documents highlighting the sale of PCI
 merchandise to big-box retailers, such as Costco and Sam's Club. Again, those transactions were fictitious."
@@ -531,16 +532,17 @@ release line: "Petters continued to lull investors even after law enforcement ex
 [SOURCE] S1 ("Within days, PCI filed for bankruptcy"; "Petters continued to lull investors even after law enforcement
 executed search warrants on September 24, 2008").
 
-Then, on the first of October, he suggested to Robert White and Larry Reynolds that they flee before they could be
-prosecuted. Two days later, on the third of October 2008, Tom Petters was arrested and detained, after the
-authorities learned he had been talking about fleeing. He has been in custody ever since.
+Then, the government says, on the first of October he suggested to Robert White and Larry Reynolds that they flee
+before they could be prosecuted. Two days later, on the third of October 2008, Tom Petters was arrested and detained,
+after the authorities learned he had been talking about fleeing. At his sentencing in 2010, the government said he had
+been in custody ever since.
 
 [VISUAL] [GFX] Timeline strip continues: 1 Oct ("suggested White and Reynolds flee", DOJ), 3 Oct ("arrested and
 detained"). [ARCH] licensed news footage of the federal courthouse in Minneapolis or St. Paul, exterior.
 [SOURCE] S1 ("on October 1, 2008, Petters suggested to White and Reynolds that they flee prior to prosecution"; "On
 October 3, Petters was arrested and detained after authorities learned he had been discussing fleeing the
-jurisdiction. He has been in custody since that time"); verification.md P24. [UNVERIFIED - check before recording:
-"ever since" is true as of the 2010 release; confirm on the Bureau of Prisons locator before release.]
+jurisdiction. He has been in custody since that time"); verification.md P24. "In custody ever since" is dated to the
+8 Apr 2010 release because the Bureau of Prisons locator (bop.gov) could not be reached from this session.
 
 And the people around him began to plead guilty. Deanna Coleman was charged on the sixth of October 2008 and
 pleaded guilty two days later, to one count of conspiracy to commit mail fraud. By the time Petters was sentenced,
@@ -557,26 +559,21 @@ Petters did not. He was indicted in December 2008, and he went to trial.
 [VISUAL] [GOV] Text card: "Indicted December 2008 (DOJ)". [ARCH] licensed courthouse exterior, fall 2009.
 [SOURCE] S1 ("His indictment on these charges occurred in December of 2008").
 
-The trial lasted about a month, in the fall of 2009. The jury heard from people who had been inside the scheme. It
-heard the recordings. And it heard from Tom Petters himself.
+The trial lasted about a month, in the fall of 2009. The government built its case on the recordings and the
+documents. The jury heard from people who had been inside the scheme, among them Robert White and Larry Reynolds.
+And it heard from Tom Petters himself, who testified in his own defense.
 
 [VISUAL] [ARCH] Licensed courtroom sketch from the trial, if available and licensable; otherwise the courthouse
 exterior. [GFX] a card: "Trial: about one month, ended 2 Dec 2009".
 [SOURCE] S1 ("Following a month-long trial"; Judge Kyle "referring to the lack of believability in Petters's trial
-testimony"); S2 (tapes formed part of the basis for the prosecution). [UNVERIFIED - check before recording: the DOJ
-releases say the tapes formed the basis of the prosecution and that Petters testified. That the recordings were
-played to the jury, and that insiders testified, rest on stories.md's beat sheet, MPR's 5 Nov 2009 report (S5) and
-the Star Tribune "hidden recorders" story (none read). If they can't be confirmed, replace the second and third
-sentences with "The government built its case on the recordings and the documents."]
-
-He testified in his own defense. According to MPR News's coverage of the trial, he told the jury he had planned to
-go to the government himself.
-
-[VISUAL] [ARCH] Licensed image of the MPR News report (licence logged), headline enlarged, credited "MPR News,
-20 Nov 2009".
-[SOURCE] S6. [UNVERIFIED - check before recording: MPR, 20 Nov 2009, read in full or the transcript. verification.md
-P18: present only as his testimony, paired with the judge's remark below. If it can't be confirmed, cut this
-paragraph and keep the next one, which stands on S1.]
+testimony"); S2 (tapes formed part of the basis for the prosecution); S4 ("she secretly recorded multiple
+conversations with Petters. Based on these conversations and ..."; "a month-long trial and five days of
+deliberations"; Coleman and Reynolds were "cooperating witnesses"); United States v. Reynolds, 643 F.3d 1130 (8th Cir.
+24 June 2011) ("Reynolds testified against Petters at trial"); United States v. White, 779 F. Supp. 2d 984 (D. Minn.
+2011) (White "testified against Petters at trial"); all read on CourtListener 18 Nov 2026. That the recordings were
+played to the jury is reported (MPR, Star Tribune) but those pages could not be opened, so the script uses the
+fallback line. MPR's 20 Nov 2009 report that Petters told the jury he had planned to go to the government himself
+was cut for the same reason.
 
 The judge, Richard Kyle, later gave his view of Petters's testimony in a single sentence. "It just didn't pass the
 smell test."
@@ -603,7 +600,7 @@ Family's, and back to Petters and PCI.
 [SOURCE] Explanatory. The link to the NIR and EFBC accounts: S1 (Reynolds and Catain asked "to launder billions of
 dollars of investor funds through their business accounts and back to Petters and PCI").
 
-### 18:36 Consequences
+### 18:19 Consequences
 
 On the eighth of April 2010, in St. Paul, Judge Kyle sentenced Tom Petters to fifty years in federal prison. The
 government called it the longest prison term ever ordered in a financial fraud case in Minnesota history.
@@ -648,42 +645,48 @@ That gap shows how much a cooperating witness can matter to a prosecution.
 [VISUAL] [GFX] Two bars side by side, drawn to scale: "50 years" and "1 year and 1 day". Hold.
 [SOURCE] S1, S2. The last sentence is the film's own observation, not a claim about any official's reasoning.
 
-Petters appealed. The Eighth Circuit Court of Appeals upheld his conviction in December 2011.
+Petters appealed, challenging his conviction and his sentence. On the ninth of December 2011, the Eighth Circuit
+Court of Appeals upheld both.
 
 [VISUAL] [GOV] The first page of the 8th Circuit opinion (public domain), case number visible.
-[SOURCE] S4. [UNVERIFIED - check before recording: verification.md P19 says the opinion (No. 10-1843, 663 F.3d 375,
-9 Dec 2011) was seen only in search results. Read it and confirm that it affirmed the conviction and the date before
-recording, and before putting its first page on screen.]
+[SOURCE] S4: United States v. Petters, No. 10-1843, 663 F.3d 375 (8th Cir. filed 9 Dec 2011): "Petters appeals,
+challenging his conviction and sentence. We affirm." Read on CourtListener 18 Nov 2026 (case record and opinion
+text in its search index). Cleared for the on-screen first page.
 
-In September 2010, the government said he was being held at the federal penitentiary in Leavenworth, Kansas. He is
-serving his sentence.
+In September 2010, the government said he was being held at the federal penitentiary in Leavenworth, Kansas.
 
 [VISUAL] [ARCH] Licensed exterior still of the Leavenworth facility from public, non-restricted vantage, or omit and
-use a [GFX] text card.
+use a [GFX] text card. On-screen date: "As of Sept 2010 (DOJ)".
 [SOURCE] S2 ("He is presently incarcerated in the federal penitentiary in Leavenworth, Kansas"); verification.md P23.
-[UNVERIFIED - check before recording: "He is serving his sentence" (present tense) must be checked on the Bureau of
-Prisons inmate locator just before release. Where he is held now is not stated in the script.]
+The present-tense line "He is serving his sentence" was cut: the Bureau of Prisons locator (bop.gov) could not be
+reached from this session. Where he is held now is not stated.
 
-And the money? Court records from PCI's bankruptcy case, from a securities case brought by the SEC, and from investor litigation gathered before a
-single federal judge, run on for years after the conviction. Lenders, funds and investors fought over what was left,
-and over money that had been paid out before the collapse.
+And the money? PCI's bankruptcy case, in the federal bankruptcy court in Minnesota, ran on for years after the
+conviction. As late as 2019 and 2020, the trustee for PCI was still in court, suing to recover money that had been
+paid out before the collapse.
 
-[VISUAL] [GOV] Case captions only, set as clean text on a dark background: "In re Petters Company, Inc. (Bankr. D.
-Minn.)", "SEC v. Petters (D. Minn.)", "In re GE Capital Corp. / Thomas Petters Investment Litigation (J.P.M.L.)".
-No dollar figures.
-[SOURCE] S8 (stories.md Key sources; cases.md entry 2: In re Petters Co., Bankr. D. Minn., 2010 to 2019; SEC v.
-Petters, D. Minn., 2023; J.P.M.L. 2015). [UNVERIFIED - check before recording: the dockets were not read. "Run on for
-years after the conviction" rests on the case years listed in cases.md. "Fought over money that had been paid out before the collapse"
-describes clawback suits named in cases.md (Kelley v. Hofer); confirm from the docket. State no recovery figure
-until the trustee's reports are read.]
+[VISUAL] [GOV] One case caption only, set as clean text on a dark background: "In re Petters Company, Inc. (Bankr. D.
+Minn.)", with a year counter running 2008 to 2020. No defendants' names (a fraudulent-transfer suit says nothing about
+what a defendant knew) and no dollar figures.
+[SOURCE] Court opinions read on CourtListener 18 Nov 2026: In re Petters Co., 401 B.R. 391 (Bankr. D. Minn. 26 Feb
+2009) and 506 B.R. 784 (22 Nov 2013); Kelley v. Opportunity Finance, LLC (In re Petters Co.) (Bankr. D. Minn. Dec
+2016: "commenced by Douglas A. Kelley, in his capacity as the court-appointed Chapter ..."); Kelley v. Kanios
+(20 May 2019: "Defendants Lend Millions of Dollars to Petters Company, Inc., Between 1997 and 2006, and Receive
+Millions ..."); Kelley v. BMO Harris Bank N.A. (In re Petters Co.) (Bankr. D. Minn. 27 June 2019: "Liquidating
+Trustee Douglas A. Kelley ... filed this adversary proceeding"); Douglas A. Kelley v. Gus Boosalis (8th Cir. 11 Sept
+2020); all returned for "fraudulent transfer". SEC v. Petters and the J.P.M.L. investor litigation were dropped from
+the narration: no record of them was read. No recovery figure is stated.
 
-Petters Group Worldwide did not outlast the scheme either. The household names that had once made the scheme look solid
-went through bankruptcy proceedings of their own.
+The famous companies were caught up in the collapse too. Polaroid, one of the household names that had made the
+scheme look solid, filed for bankruptcy in December 2008, in the same Minnesota court.
 
-[VISUAL] [ARCH] Licensed archival footage of the brands, slowed, colour drained slightly.
-[SOURCE] stories.md beat sheet, Consequences ("the companies Petters bought go into bankruptcy"). [UNVERIFIED - check
-before recording: not in either DOJ release. Confirm from court records or news reports which Petters Group
-Worldwide companies filed, and when, and name them only if confirmed. Otherwise cut this paragraph.]
+[VISUAL] [ARCH] Licensed archival footage of the Polaroid brand, slowed, colour drained slightly. [GFX] caption
+"In re Polaroid Corporation (Bankr. D. Minn.), petitions filed 18 Dec 2008".
+[SOURCE] In re Polaroid Corporation (Bankr. D. Minn.), and Stoebner v. Ritchie Capital Management (In re Polaroid
+Corp.) (Bankr. D. Minn. 30 Apr 2012): Polaroid's "ownership ... traceable through an intermediate holding entity to
+Petters Group Worldwide, LLC"; the debtors filed "voluntary petitions for relief under Chapter 11 on December 18,
+2008". Read on CourtListener 18 Nov 2026. Sun Country and Fingerhut are not said to have filed: no court record of
+their filings was read.
 
 It is worth going back to the government's own summary of the scheme. Investors were shown purchase orders, invoices,
 bank records and financial statements. Each one was a document someone had made. For about fourteen years, the
@@ -711,20 +714,21 @@ paper herself, deciding to walk into a room and tell the authorities, and then l
 [SOURCE] S1, S2 (the investigation "began on September 8, 2008, when ... Coleman and her attorney reported to
 authorities"). (S1: "The investigation of this case began on September 8, 2008".)
 
-She was not the first. In March 1973, in a very different company, a former officer walked out with a secret of his
-own, and took it to a stock analyst in New York. What he said sounded impossible: that one of the most admired
-financial companies in America had been selling insurance on people who did not exist. The analyst set out to find out if it was true. And
-the person who ended up in trouble with the regulators was not the one who had run the fraud. That's the next film.
+She was not the first. In March 1973, in a very different company, a former officer took a secret of his own to an
+investment analyst. What he said sounded impossible: that the assets of a big life insurance and mutual fund company
+were vastly overstated, the result of fraud. The analyst set out to find out if it was true. And the person who ended
+up in trouble with the regulators was not the one who had run the fraud. That's the next film.
 
 [VISUAL] [ARCH] Licensed 1970s stock-exchange footage, a ticker strip, a period office. [GFX] end card linking
 episode 2. No names on screen yet.
-[SOURCE] S9 (Dirks v. SEC: on 6 March 1973 Dirks "received information from Ronald Secrist, a former officer of
-Equity Funding"); stories.md Equity Funding entry ("tens of thousands of fictitious policies"); verification.md E2,
-E3, E4 (SEC censure, not prosecution; "the one the regulators came after"). [UNVERIFIED - check before recording: the
-March 1973 date is from the Supreme Court opinion seen in search results only (E4). "One of the most admired
-financial companies in America" is the film's framing: confirm against the Fortune archive piece or cut "most
-admired". "Walked out with a secret" says nothing about whether he was fired (E12). "Selling insurance on people who
-did not exist" describes fictitious policies (stories.md, reported) and must match what episode 2's sources support.]
+[SOURCE] S9, Dirks v. SEC, 463 U.S. 646 (1 July 1983), searched on CourtListener 18 Nov 2026: Dirks "received
+information from Ronald Secrist, a former officer of Equity Funding of America"; Equity Funding's assets, as a company
+"selling life insurance and mutual funds, were vastly overstated as the result of fraudulent corporate practices";
+Secrist, "a former Equity Funding employee, on March 7, 1973" (verification.md E4 had 6 March from search results,
+so the script says only "March 1973"); the opinion records the SEC's censure of Dirks. verification.md E2, E3, E4. Cut as unconfirmed: "one
+of the most admired financial companies in America", "selling insurance on people who did not exist" (fictitious
+policies are reported, not read in a record) and "in New York". "Took a secret" says nothing about whether he was
+fired (E12).
 
 ---
 
@@ -737,15 +741,16 @@ did not exist" describes fictitious policies (stories.md, reported) and must mat
 |---|---|---|
 | Cold open | 00:00 | 120 |
 | The central mystery | 00:48 | 217 |
-| Origins | 02:15 | 544 |
-| Expansion | 05:52 | 783 |
-| Turning point | 11:06 | 603 |
-| Exposure | 15:07 | 523 |
-| Consequences | 18:36 | 600 |
-| **Total** | ends 22:36 | **3390** |
+| Origins | 02:15 | 548 |
+| Expansion | 05:54 | 767 |
+| Turning point | 11:01 | 607 |
+| Exposure | 15:04 | 488 |
+| Consequences | 18:19 | 593 |
+| **Total** | ends 22:16 | **3340** |
 
-Total spoken words: **3390**. Estimated runtime at 150 words a minute: **22:36** (about 22.6 minutes of
-narration; with the title card, pauses on documents and the end card, expect roughly 24 to 25 minutes).
+Total spoken words: **3340** (3390 before the 18 Nov 2026 fact pass; the cuts removed 50 words, about 20 seconds).
+Estimated runtime at 150 words a minute: **22:16** (about 22.3 minutes of narration; with the title card, pauses on
+documents and the end card, expect roughly 24 minutes).
 
 ---
 
@@ -762,16 +767,13 @@ Primary records (public domain, US government):
   2009: https://www.fbi.gov/minneapolis/press-releases/2009/mp120309.htm (the film uses the DOJ's later $3.7 billion
   figure throughout)
 - United States v. Petters, No. 10-1843 (8th Cir. 9 Dec 2011), 663 F.3d 375:
-  https://ecf.ca8.uscourts.gov/opndir/11/12/101843P.pdf (list only after it is read and confirmed)
-- In re Petters Company, Inc. (Bankr. D. Minn.); SEC v. Petters (D. Minn.); In re GE Capital Corp. / Thomas Petters
-  Investment Litigation (J.P.M.L. 2015) (list only the ones whose dockets are read before release)
+  https://ecf.ca8.uscourts.gov/opndir/11/12/101843P.pdf
+- United States v. Reynolds, 643 F.3d 1130 (8th Cir. 2011); United States v. White, 779 F. Supp. 2d 984 (D. Minn.
+  2011) (both on CourtListener)
+- In re Petters Company, Inc. (Bankr. D. Minn.) and its adversary proceedings, including Kelley v. BMO Harris Bank
+  N.A. (2019); In re Polaroid Corporation (Bankr. D. Minn.) (on CourtListener)
 
-Journalism (list only those confirmed before release):
-- MPR News, 5 Nov 2009, "Witness says he forged 10,000 documents for Tom Petters":
-  https://www.mprnews.org/story/2009/11/05/petters-trial
-- MPR News, 20 Nov 2009: https://www.mprnews.org/story/2009/11/20/petters-defenserests
-- Star Tribune, 26 Sept 2008, report of the search-warrant affidavit:
-  https://www.startribune.com/sept-26-federal-officials-petters-tied-to-multi-billion-dollar-fraud-scheme/29817604
+Journalism: none cited (the MPR and Star Tribune reports could not be opened, and the lines resting on them are cut).
 
 Teaser for the next episode:
 - Dirks v. SEC, 463 U.S. 646 (1983): https://www.law.cornell.edu/supremecourt/text/463/646
@@ -782,37 +784,37 @@ $35 billion figures are money that moved through bank accounts, not losses. Scen
 illustrations. Tom Petters was convicted on all 20 counts; the other people named pleaded guilty. This video explains
 how the scheme was uncovered and is not financial or legal advice."
 
-Licence record: log every [ARCH] item (news photos and footage, the MPR and Star Tribune pages, brand footage) in the
+Licence record: log every [ARCH] item (news photos and footage, brand footage) in the
 per-video licence record described in `plan/production-tools.md` section 2 before upload.
 
 ---
 
 ## Every [UNVERIFIED] item
 
-1. **Petters's background** (Origins, "He was known as someone who moved merchandise"): stories.md asks for his
-   biography to be verified from the trial record or the Star Tribune. Phrased to rest on the businesses DOJ names;
-   cut if the check disagrees.
-2. **"About 10,000" forged documents** (Expansion): MPR, 5 Nov 2009, seen in search only (verification.md P5).
-   Confirm the number and that the witness was Robert White from the article or transcript. The script says
-   "a co-conspirator" until then.
-3. **Wal-Mart told agents the orders were "fictitious"** (Exposure): Star Tribune report of the search-warrant
-   affidavit, search only (P14). Read the affidavit or article, or cut.
-4. **"The jury heard from people who had been inside the scheme. It heard the recordings."** (Exposure): the DOJ
-   releases say the tapes formed the basis of the prosecution, not that they were played at trial, and don't say
-   which insiders testified. Confirm (Star Tribune "hidden recorders" or MPR trial coverage) or use the fallback line.
-5. **Petters testified he had planned to go to the government himself** (Exposure): MPR, 20 Nov 2009, search only
-   (P18). Confirm, or cut and keep only the judge's remark.
-6. **8th Circuit affirmance, December 2011** (Consequences): opinion seen in search only (P19). Read it; confirm the
-   result and the date.
-7. **"He is serving his sentence"** (Consequences) and **"He has been in custody ever since"** (Exposure): check the Bureau of Prisons locator just before release (P23). His
-   present prison is not named.
-8. **The bankruptcy and investor litigation paragraph** (Consequences): dockets not read; the years the cases ran and the
-   clawback description need the dockets. No recovery figures.
-9. **Petters Group Worldwide companies' own bankruptcies** (Consequences): not in either DOJ release; confirm which
-   companies filed and when, or cut.
-10. **Episode 2 teaser** (Consequences): the March 1973 date (Dirks v. SEC, search only, E4); "one of the most admired
-    financial companies in America"; "selling insurance on people who did not exist" (fictitious policies,
-    reported). Confirm against episode 2's sources or trim.
+None left. All ten were settled in the fact pass of 18 Nov 2026 (log: `ep01-factpass.md`):
+
+1. **Petters's background** (Origins): replaced with the 8th Circuit's description, "a prominent Minneapolis,
+   Minnesota businessman" (S4). "Known as someone who moved merchandise" is cut.
+2. **"About 10,000" forged documents** (Expansion): cut. White's guilty plea and his testimony against Petters at
+   trial are confirmed (United States v. White, D. Minn. 2011); the figure is only reported (MPR, not opened).
+3. **Wal-Mart told agents the orders were "fictitious"** (Exposure): cut (Star Tribune and the affidavit not opened).
+   The next paragraph stands on S2.
+4. **Insiders and recordings at trial** (Exposure): insiders confirmed (White and Reynolds testified against Petters:
+   court opinions). That the tapes were played is only reported, so the fallback line is used: "The government built
+   its case on the recordings and the documents."
+5. **Petters testified he had planned to go to the government himself** (Exposure): cut (MPR not opened). That he
+   testified stays, on S1.
+6. **8th Circuit affirmance** (Consequences): confirmed, 9 Dec 2011, conviction and sentence affirmed (S4).
+7. **Custody** (Exposure, Consequences): bop.gov could not be reached. "In custody ever since" is now dated to the
+   government's 2010 statement; "He is serving his sentence" is cut.
+8. **Bankruptcy and litigation** (Consequences): rewritten to what court opinions show (PCI's Chapter 11 case; the
+   trustee's suits to recover money paid out, still in court in 2019 and 2020). SEC v. Petters and the J.P.M.L.
+   litigation are dropped. No recovery figures.
+9. **Petters Group Worldwide companies' bankruptcies** (Consequences): Polaroid confirmed (Chapter 11 petitions
+   filed 18 Dec 2008, Bankr. D. Minn.) and named alone; no other company is said to have filed.
+10. **Episode 2 teaser** (Consequences): "March 1973", "a former officer" and the overstated assets of a life
+    insurance and mutual fund company confirmed from Dirks v. SEC; "most admired", "people who did not exist" and
+    "in New York" cut.
 
 Checked and safe (no tag needed): $3.7 billion (DOJ, 8 Apr 2010 and 2 Sept 2010); 8 Sept 2008; the "fake" and
 "divine intervention" quotes; 24 Sept 2008 search by FBI, IRS-CI and USPIS; 1 and 3 Oct 2008; December 2008
@@ -820,7 +822,9 @@ indictment; 2 Dec 2009 verdict on 20 counts with the breakdown; 50 years on 8 Ap
 charge (6 Oct 2008), plea (8 Oct 2008, one count of conspiracy to commit mail fraud) and sentence (a year and a day,
 2 Sept 2010); the White, Reynolds, Catain and Bell pleas; NIR, EFBC, the car wash, the $12 billion and $35 billion
 flows; Fingerhut, Polaroid and Sun Country bought with fraud proceeds; Lancelot and the 80-plus round trips;
-Leavenworth as of Sept 2010. All are in the two DOJ releases, re-read in full for this script.
+Leavenworth as of Sept 2010. All are in the two DOJ releases, re-read in full for this script. Petters's present
+custody could not be checked (bop.gov unreachable from the fact-pass session), so the script states it only as of
+2010.
 
 ---
 
@@ -847,6 +851,6 @@ From `plan/production-tools.md` section 5 (YouTube advertiser-friendly guideline
   No lender, fund, auditor or retailer is said or implied to have known about the fraud (verification.md legal notes
   for upload 1). Lancelot appears only through Bell's role as the DOJ describes it. Frank Vennes and "First Regional
   Bank" are left out.
-- Brands (Fingerhut, Polaroid, Sun Country, Costco, Sam's Club, Wal-Mart) appear in editorial context only, as named
+- Brands (Fingerhut, Polaroid, Sun Country, Costco, Sam's Club) appear in editorial context only, as named
   in the record, with no logos except as they appear in licensed footage.
 - Answer YouTube's self-certification questionnaire honestly on upload.

@@ -10,3 +10,9 @@ ytscout-subs.json
 *.err
 # Designers' proof sheets: rebuilt by preview.mjs at any time.
 design/previews/
+# Intermediate renders: rebuilt by production/edit.py.
+production/**/build/
+# Rendered episodes and test cuts: rebuilt from their edit lists by production/edit.py; too large for git.
+production/**/*-test.mp4
+production/**/render/
+production/**/final.mp4
