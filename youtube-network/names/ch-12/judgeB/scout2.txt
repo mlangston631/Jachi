@@ -1,0 +1,264 @@
+[
+ {
+  "query": "tailored larceny",
+  "period": "year",
+  "videos": []
+ },
+ {
+  "query": "respectable larceny",
+  "period": "year",
+  "videos": []
+ },
+ {
+  "query": "larceny",
+  "period": "year",
+  "videos": [
+   {
+    "title": "ALLRIGHT(박재훈) | Man on a Mission - On The Larceny",
+    "id": "ufX1FxabC7Y",
+    "views": 584574,
+    "age_days": 270,
+    "length_s": 213,
+    "channel": "HERO TAPE",
+    "channel_id": "UCKu9DGLe3k3SbXHgceJNFIw",
+    "subs": 655,
+    "outlier": 892.48,
+    "views_per_day": 2165
+   },
+   {
+    "title": "Target Employee Caught Stealing $26,000 on Her Last Day",
+    "id": "3bC0led4XC8",
+    "views": 154578,
+    "age_days": 90,
+    "length_s": 1298,
+    "channel": "Sgt. Consequences",
+    "channel_id": "UCp_SghtcHR9VZEO71YOGn7A",
+    "subs": 3790,
+    "outlier": 40.79,
+    "views_per_day": 1718
+   },
+   {
+    "title": "Indian Theft Aura Simulator | Lightning McQueen & Police Car Driving 3D - Android Gameplay",
+    "id": "2BkYKNPZeIQ",
+    "views": 30806551,
+    "age_days": 330,
+    "length_s": 710,
+    "channel": "MYLTIMYLT",
+    "channel_id": "UChhs18W6Mp4MSB3FskumnXw",
+    "subs": 3680000,
+    "outlier": 8.37,
+    "views_per_day": 93353
+   },
+   {
+    "title": "Oh The Larceny - \"This Is It\" (Official Lyric Video)",
+    "id": "FtX0XdPSd1Y",
+    "views": 330849,
+    "age_days": 180,
+    "length_s": 170,
+    "channel": "Oh The Larceny",
+    "channel_id": "UCMdAszonr36CygUZKlkOmVg",
+    "subs": 60600,
+    "outlier": 5.46,
+    "views_per_day": 1838
+   },
+   {
+    "title": "Oh The Larceny - \"Man On A Mission\" (Official Lyric Video)",
+    "id": "rE_mh5I4P0s",
+    "views": 212587,
+    "age_days": 180,
+    "length_s": 209,
+    "channel": "Oh The Larceny",
+    "channel_id": "UCMdAszonr36CygUZKlkOmVg",
+    "subs": 60600,
+    "outlier": 3.51,
+    "views_per_day": 1181
+   },
+   {
+    "title": "Target Manager Caught Stealing $27,663 Cash",
+    "id": "pCnAnbeWg7M",
+    "views": 496353,
+    "age_days": 120,
+    "length_s": 1170,
+    "channel": "Sheriff Lamb",
+    "channel_id": "UClpN1KGwKTTbnCNBdqL5pfQ",
+    "subs": 590000,
+    "outlier": 0.84,
+    "views_per_day": 4136
+   },
+   {
+    "title": "MARNEUS vs SISAY vs ETALI vs KINNAN - LARCENY ROARS PLAYS cEDH WITH PLAY TO WIN!",
+    "id": "XFWmn4U2EH0",
+    "views": 117262,
+    "age_days": 240,
+    "length_s": 1468,
+    "channel": "Play to Win",
+    "channel_id": "UC7339iJMCETmek3jdx9LOkg",
+    "subs": 151000,
+    "outlier": 0.78,
+    "views_per_day": 489
+   },
+   {
+    "title": "Suspect Thinks He's in Grand Theft Auto",
+    "id": "xaGKt6MQAWE",
+    "views": 3094788,
+    "age_days": 120,
+    "length_s": 1006,
+    "channel": "Midwest Safety",
+    "channel_id": "UCazRf1jcMNZEL1MS5i_rWQQ",
+    "subs": 4970000,
+    "outlier": 0.62,
+    "views_per_day": 25790
+   },
+   {
+    "title": "JPMorgan Exec FIRED After Brazenly Stealing Knicks Trash Can in Viral Video",
+    "id": "hlEoBLG0xSw",
+    "views": 135329,
+    "age_days": 120,
+    "length_s": 121,
+    "channel": "New York Post",
+    "channel_id": "UCrvhNP_lWuPIP6QZzJmM-bw",
+    "subs": 2640000,
+    "outlier": 0.05,
+    "views_per_day": 1128
+   },
+   {
+    "title": "GTA 6 - Biggest Gameplay Changes From Grand Theft Auto 5",
+    "id": "Y-U2tdh5hgw",
+    "views": 597203,
+    "age_days": 60,
+    "length_s": 481,
+    "channel": "IGN",
+    "channel_id": "UCKy1dAqELo0zrOtPkf0eTMw",
+    "subs": 20000000,
+    "outlier": 0.03,
+    "views_per_day": 9953
+   }
+  ]
+ },
+ {
+  "query": "crooked",
+  "period": "year",
+  "videos": [
+   {
+    "title": "[#MMA2025] G-DRAGON - DRAMA+POWER+HOME SWEET HOME+TOO BAD+삐딱하게(Crooked) (4K) | #GD #지드래곤 #20251220",
+    "id": "prNrCKE_Chk",
+    "views": 6385917,
+    "age_days": 300,
+    "length_s": 1025,
+    "channel": "멜론 Melon",
+    "channel_id": "UCpBlDSUyOpP1WqWVJxZpGLg",
+    "subs": 1240000,
+    "outlier": 5.15,
+    "views_per_day": 21286
+   },
+   {
+    "title": "Elite Ex-CIA Operative Brutally Punishes Crooked Cops Who Killed His Friend",
+    "id": "Yt9SGKW8fCI",
+    "views": 808439,
+    "age_days": 120,
+    "length_s": 1785,
+    "channel": "MrRecapFromYouTube",
+    "channel_id": "UC51E1-oUjUATOtQ_NeuZScw",
+    "subs": 377000,
+    "outlier": 2.14,
+    "views_per_day": 6737
+   },
+   {
+    "title": "Crooked City: PILOT",
+    "id": "DMbTtnr8HEY",
+    "views": 2233719,
+    "age_days": 60,
+    "length_s": 1276,
+    "channel": "Rare Americans",
+    "channel_id": "UCzCTW3k3_ItdqxdVaeXn2IA",
+    "subs": 1220000,
+    "outlier": 1.83,
+    "views_per_day": 37229
+   },
+   {
+    "title": "DEMOCRATS WIN EVERYWHERE as Massive BLUE TSUNAMI Sweeps the Nation",
+    "id": "Ca6XflqGbt8",
+    "views": 1222889,
+    "age_days": 12,
+    "length_s": 3371,
+    "channel": "Pod Save America",
+    "channel_id": "UCKRoXz3hHAu2XL_k3Ef4vJQ",
+    "subs": 1330000,
+    "outlier": 0.92,
+    "views_per_day": 101907
+   },
+   {
+    "title": "[2025 MMA GD-DRAGON 무대] 아이돌 리액션 직캠 (에스파,ALLDAY PROJECT,아이브, ALPHA DRIVE ONE,보이넥스트도어, NCT WISH,RIIZE)",
+    "id": "olZtCq3TbZM",
+    "views": 1483799,
+    "age_days": 300,
+    "length_s": 1045,
+    "channel": "Rock Music",
+    "channel_id": "UC8yPhlmo-4MY5ZfF-cw3JRg",
+    "subs": 1900000,
+    "outlier": 0.78,
+    "views_per_day": 4946
+   },
+   {
+    "title": "Rare Americans - Crooked City | Official Show Opening song",
+    "id": "ZKHdQmwKs6Y",
+    "views": 820234,
+    "age_days": 90,
+    "length_s": 170,
+    "channel": "Rare Americans",
+    "channel_id": "UCzCTW3k3_ItdqxdVaeXn2IA",
+    "subs": 1220000,
+    "outlier": 0.67,
+    "views_per_day": 9114
+   },
+   {
+    "title": "Pod Save America Live Election Results with Alex Wagner!",
+    "id": "MGO3r1r7gdc",
+    "views": 849352,
+    "age_days": 12,
+    "length_s": 10761,
+    "channel": "Pod Save America",
+    "channel_id": "UCKRoXz3hHAu2XL_k3Ef4vJQ",
+    "subs": 1330000,
+    "outlier": 0.64,
+    "views_per_day": 70779
+   },
+   {
+    "title": "Assistant and Dog Wiggles Take on Batboy Ryan and the Crooked Convicts",
+    "id": "fVitH32ieaI",
+    "views": 3030744,
+    "age_days": 210,
+    "length_s": 3504,
+    "channel": "TheEngineeringFamily",
+    "channel_id": "UC44eGZ76AJLHAxPaJ_MW2RA",
+    "subs": 6320000,
+    "outlier": 0.48,
+    "views_per_day": 14432
+   },
+   {
+    "title": "Pod Save America Hosts on Midterm Results, Trump’s Final Two Years & 2028 Presidential Candidates",
+    "id": "sdw-9wFMT1A",
+    "views": 2027417,
+    "age_days": 12,
+    "length_s": 1238,
+    "channel": "Jimmy Kimmel Live",
+    "channel_id": "UCa6vGFO9ty8v5KZJXQxdhaw",
+    "subs": 22300000,
+    "outlier": 0.09,
+    "views_per_day": 168951
+   },
+   {
+    "title": "This Crooked Cop is in Prison Now",
+    "id": "mQpBvW7CiFQ",
+    "views": 1082258,
+    "age_days": 300,
+    "length_s": 491,
+    "channel": "Ray William Johnson",
+    "channel_id": "UCGt7X90Au6BV8rf49BiM6Dg",
+    "subs": 18600000,
+    "outlier": 0.06,
+    "views_per_day": 3608
+   }
+  ]
+ }
+]

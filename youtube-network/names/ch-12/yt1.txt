@@ -1,0 +1,23 @@
+TAKEN    Material Weakness  (@MaterialWeakness; search returned 24 channels)
+           - handle @MaterialWeakness is taken by "materialweakness"
+           - same-name channel: "Material Weakness" @Materialweaknessdoc @Materialweaknessdoc, 3 subscribers
+           - same-name channel: "Material Weakness" @MaterlalWeakness @MaterlalWeakness
+           - contains-name channel: "Material Weakness - How Companies Fall Apart" @MaterialWeakness-YT @MaterialWeakness-YT
+           - same-name channel: "Material Weakness" @material.weakness @material.weakness
+           - same-name channel: "Material Weakness" @Materialweaknes @Materialweaknes, 7 subscribers
+TAKEN    Mark to Myth  (@MarktoMyth; search returned 21 channels)
+           - handle @MarktoMyth is taken by "Jüri Lotman"
+           - same-name channel: "mark ToMyth" @WatchMarkToMyth @WatchMarkToMyth, 2 subscribers
+CROWDED  Milled Edge  (@MilledEdge; search returned 25 channels)
+           - contains-name channel: "Milled Edge Coins" @MilledEdgeCoins @MilledEdgeCoins
+TAKEN    Brass Plate  (@BrassPlate; search returned 34 channels)
+           - handle @BrassPlate is taken by "Joeri Wauters"
+           - same-name channel: "The Brass Plate" @nature-t6t-p4b @nature-t6t-p4b, 2 subscribers
+           - contains-name channel: "American Brassplate" @AmericanBrassplateUS @AmericanBrassplateUS, 1 subscriber
+           - same-name channel: "BrassPlate" @BrassPlate1 @BrassPlate1, 139 subscribers
+           - contains-name channel: "Brass Plates Chronicles" @BrassPlatesChronicles-p1z @BrassPlatesChronicles-p1z, 35 subscribers
+           - near-name channel: "Brass Plates" @BrassPlates-lds @BrassPlates-lds, 15 subscribers
+           - contains-name channel: "Jed Manwaring Brass Plates of Home Movies" @BrassPlatesofHomesMovies @BrassPlatesofHomesMovies, 220 subscribers
+TAKEN    A Full Accounting  (@AFullAccounting; search returned 39 channels)
+           - near-name channel: "Full Accounting" @fullaccounting4965 @fullaccounting4965, 2 subscribers
+CLEAR    Collar and Cuff  (@CollarandCuff; search returned 36 channels)

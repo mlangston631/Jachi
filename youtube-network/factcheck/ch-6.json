@@ -1,0 +1,19 @@
+{
+ "channel": 6,
+ "niche": "Sleep history (long, calm narration)",
+ "description": "Quiet history for falling asleep.\n\nLong, slow, softly told stories about ordinary life in the past: a night in a monastery, a day in a Roman bakery, a winter on a medieval farm. No sudden sounds, no music changes, no adverts in the middle of the story where we can avoid them.\n\nPut one on, turn the screen down, and let it go on without you.",
+ "titles": [
+  "A Quiet Night in a Medieval Monastery (2 Hours)",
+  "A Slow Day in a Roman Bakery",
+  "Winter on a Medieval Farm",
+  "The Long Walk of a Silk Road Caravan",
+  "A Night Watch on Hadrian's Wall",
+  "How a Medieval Book Was Made, Page by Page",
+  "A Day at a Viking Harbour",
+  "The Lighthouse Keeper's Year",
+  "An Evening in an Ancient Egyptian Village",
+  "How a Cathedral Was Built, Very Slowly"
+ ],
+ "scriptTitle": "A Quiet Night in a Medieval Monastery (opening)",
+ "script": "[Slow fade in: a stone corridor, one candle. Voice low and unhurried. Pause where the lines break.]\n\nGood evening. There is nothing you need to remember tonight, and nothing you need to follow. If you drift off partway through, that is exactly what this is for.\n\nTonight we are going to spend one night in a monastery, somewhere in Europe, a little under a thousand years ago.\n\nThe day here follows a rule written in the sixth century by a man named Benedict. It divides the day, and the night, into work, reading and prayer. It has been followed, more or less, ever since.\n\nIt is evening. The last meal has been eaten in silence, while one brother read aloud. The bowls have been wiped and put away.\n\nThe brothers walk to the church for the last prayers of the day. The light is going. Nobody hurries.\n\nAfter this, nobody speaks until morning. It is called the great silence. Doors are closed gently. Sandals are set down side by side.\n\nIn the dormitory there is a long row of narrow beds. A straw mattress. A wool blanket. One small lamp is left burning through the night, as the rule asks.\n\nOutside, it is cold, and very dark, in a way that is hard to picture now. There are no lights on the hills. Only stars, and a great many of them.\n\nThe brothers sleep in their habits, so that they are ready.\n\nBecause in a few hours, in the middle of the night, a bell will ring. Softly. And they will get up, in the dark, and walk back down the cold stairs to sing.\n\nBut that is not yet.\n\nFor now, the lamp burns low. The stone holds the last of the day's warmth. And one by one, along the row, breathing slows.\n\n[Continue at the same pace: the night office, the bakehouse before dawn, the scriptorium at first light.]"
+}

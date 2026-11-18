@@ -1,0 +1,386 @@
+[
+ {
+  "query": "forged figures",
+  "period": "year",
+  "videos": [
+   {
+    "title": "INSANE WWE Figure BACKSTAGE PLAYSET!",
+    "id": "pA1h8PQrLGA",
+    "views": 51987,
+    "age_days": 180,
+    "length_s": 642,
+    "channel": "BrettO Live",
+    "channel_id": "UCQKpbDZIkIxxYGL0yPvHNsA",
+    "subs": 408000,
+    "outlier": 0.13,
+    "views_per_day": 289
+   },
+   {
+    "title": "Michelangelo - The Vatican War That Forged a Masterpiece Documentary",
+    "id": "o2cigajWgz4",
+    "views": 209346,
+    "age_days": 270,
+    "length_s": 4240,
+    "channel": "The People Profiles",
+    "channel_id": "UCD6TPU-PvTMvqgzC_AM7_uA",
+    "subs": 1680000,
+    "outlier": 0.12,
+    "views_per_day": 775
+   },
+   {
+    "title": "Magnetic Metal Lego Style Figures from The Forged Legion Review",
+    "id": "6IT4bMEfGFo",
+    "views": 3910,
+    "age_days": 300,
+    "length_s": 237,
+    "channel": "LuckySpots7",
+    "channel_id": "UCo_9uRyvAkbr-fGdcfmfWkA",
+    "subs": 15,
+    "outlier": null,
+    "views_per_day": 13
+   },
+   {
+    "title": "Forged, Not Fallen - Mismatched Menace | Challenge Song",
+    "id": "KgOsKsGjuB4",
+    "views": 571,
+    "age_days": 300,
+    "length_s": 341,
+    "channel": "MisMatched Menace",
+    "channel_id": "UCvNaK0oCIyYabacKef772Lw",
+    "subs": 12700,
+    "outlier": null,
+    "views_per_day": 2
+   },
+   {
+    "title": "How Two Wars Forged America’s Westward Expansion: Texas Revolution to the Mexican-American War",
+    "id": "1bQx4xjSGKQ",
+    "views": 174,
+    "age_days": 330,
+    "length_s": 3015,
+    "channel": "Top History ",
+    "channel_id": "UC2Rzg2Rh2wDGBC7BMpXiRHQ",
+    "subs": 1680,
+    "outlier": null,
+    "views_per_day": 1
+   },
+   {
+    "title": "Scipio at Cannae: The Battle That Forged a Legend",
+    "id": "7qEyQHJ8itw",
+    "views": 136,
+    "age_days": 330,
+    "length_s": 285,
+    "channel": "C&C Animated History",
+    "channel_id": "UCAkVGbKEBeYttxHEU0uFdvw",
+    "subs": 15,
+    "outlier": null,
+    "views_per_day": 0
+   },
+   {
+    "title": "6. Hanuman: Forged in Kishkindha The Anatomy of an Ancient Hero | हनुमान महान किष्किंधा पुत्र",
+    "id": "_Os1GQWiBPw",
+    "views": 96,
+    "age_days": 120,
+    "length_s": 598,
+    "channel": "NAS100 Veda",
+    "channel_id": "UCnwE_UfYwCQ3ZHAqwDE30EQ",
+    "subs": 250,
+    "outlier": null,
+    "views_per_day": 1
+   },
+   {
+    "title": "Bullied, Rejected and Hospitalized. The Trials That Forged The Worlds Richest Legend!",
+    "id": "C41ayrzjMWg",
+    "views": 76,
+    "age_days": 150,
+    "length_s": 2785,
+    "channel": "Legend Origins",
+    "channel_id": "UCsq2AJ0DQVmMmLMfIT8OnFw",
+    "subs": 45,
+    "outlier": null,
+    "views_per_day": 1
+   },
+   {
+    "title": "Savage He-Man & Orko 2-Pack Review | Forged in Plastic. Tested by Power.",
+    "id": "y7tPjxBN2Zg",
+    "views": 73,
+    "age_days": 120,
+    "length_s": 799,
+    "channel": "MOTU Review",
+    "channel_id": "UCgWEwRTT1930IyyHQbElzlg",
+    "subs": 64,
+    "outlier": null,
+    "views_per_day": 1
+   },
+   {
+    "title": "Mehmed vs Dracula: The Brotherhood Forged in Hate",
+    "id": "IHuQUhAPDM4",
+    "views": 38,
+    "age_days": 270,
+    "length_s": 2816,
+    "channel": "Shadow of the Sultans",
+    "channel_id": "UChOaLL3GpWhK6HCwU9tpX8Q",
+    "subs": 25,
+    "outlier": null,
+    "views_per_day": 0
+   },
+   {
+    "title": "Hundred Years’ War: The 116-Year Conflict That Forged England and France",
+    "id": "4eWaTUuiHLc",
+    "views": 35,
+    "age_days": 240,
+    "length_s": 644,
+    "channel": "History Tales ",
+    "channel_id": "UC-zOLoodT4HThixzQIwMC2A",
+    "subs": 150,
+    "outlier": null,
+    "views_per_day": 0
+   },
+   {
+    "title": "Blossom Moses - Figures (Forged In Bolton 012)",
+    "id": "MarYV2lf0CU",
+    "views": 26,
+    "age_days": 270,
+    "length_s": 165,
+    "channel": "Forged In Bolton",
+    "channel_id": "UCTtf7HzjsOGtA1F5rEGUFSg",
+    "subs": 48,
+    "outlier": null,
+    "views_per_day": 0
+   }
+  ]
+ },
+ {
+  "query": "materially false",
+  "period": "year",
+  "videos": [
+   {
+    "title": "Australia Study Visa Update 2026: One False Document Can Ruin It",
+    "id": "7Q2XoGj2PB0",
+    "views": 104,
+    "age_days": 90,
+    "length_s": 262,
+    "channel": "Exploria Global Education",
+    "channel_id": "UCJDTuY6qTMY1SoRd6gliPPQ",
+    "subs": 3650,
+    "outlier": null,
+    "views_per_day": 1
+   },
+   {
+    "title": "Hub Group (HUBG) Investigated Over $77M Accounting Errors",
+    "id": "Xk19qZOOCqE",
+    "views": 42,
+    "age_days": 120,
+    "length_s": 236,
+    "channel": "Robbins LLP",
+    "channel_id": "UCCzSZWFPskqtMUEO38gmFQw",
+    "subs": 7,
+    "outlier": null,
+    "views_per_day": 0
+   },
+   {
+    "title": "‘Ang delikado sa framing na ito kung ano ang interpretation sa materially assist’",
+    "id": "YoS7wPqXWbw",
+    "views": 24,
+    "age_days": 90,
+    "length_s": 450,
+    "channel": "105.9 True FM",
+    "channel_id": "UCjUrQJqEIfO1e52faNzt04g",
+    "subs": 201000,
+    "outlier": null,
+    "views_per_day": 0
+   },
+   {
+    "title": "Delhi High Court Orders Perjury Complaint Against CBI Officers Over False SLP Statement",
+    "id": "8igCFsEuDVw",
+    "views": 42,
+    "age_days": 30,
+    "length_s": 843,
+    "channel": "Advocate Gandhi",
+    "channel_id": "UCXudxcoTvFx7MWlOMFygTSQ",
+    "subs": 209,
+    "outlier": null,
+    "views_per_day": 1
+   },
+   {
+    "title": "The AD 118-2 Petition Contains Materially False Legal Claims | Gary Steinberg Public Comment",
+    "id": "_KVdqELa9fA",
+    "views": 5,
+    "age_days": 30,
+    "length_s": 187,
+    "channel": "No Undergrounding Newport Heights",
+    "channel_id": "UCFKtSqfCWmC3RysL7jRnxWA",
+    "subs": 2,
+    "outlier": null,
+    "views_per_day": 0
+   }
+  ]
+ },
+ {
+  "query": "trial by audit",
+  "period": "year",
+  "videos": [
+   {
+    "title": "Cop Arrests a 1st Amendment Auditor and Ends Up in Court!",
+    "id": "AAJokyIHNKE",
+    "views": 499319,
+    "age_days": 150,
+    "length_s": 2718,
+    "channel": "Court Review",
+    "channel_id": "UCWgIMRYjqKXbj10CX_1o_sA",
+    "subs": 12200,
+    "outlier": 40.93,
+    "views_per_day": 3329
+   },
+   {
+    "title": "Detect Duplicate SAP Transactions in KNIME | Automated Audit Reports",
+    "id": "KefnMeAG3QA",
+    "views": 1616646,
+    "age_days": 330,
+    "length_s": 75,
+    "channel": "DVW Analytics",
+    "channel_id": "UC9j80WUcLcsJ4qaglirnT4A",
+    "subs": 63900,
+    "outlier": 25.3,
+    "views_per_day": 4899
+   },
+   {
+    "title": "When a Raging Narcissist Takes the Stand in Court",
+    "id": "ZnTZOqsxAL0",
+    "views": 631708,
+    "age_days": 300,
+    "length_s": 1565,
+    "channel": "Audit the Court",
+    "channel_id": "UCmc4biDadYIwhBctWd1ESuA",
+    "subs": 207000,
+    "outlier": 3.05,
+    "views_per_day": 2106
+   },
+   {
+    "title": "'Dude, I Blew Zero!' Trial Day 3: Tayvin Speaks. Judge Rips Cops Defense.",
+    "id": "6oStAFO1C7w",
+    "views": 420329,
+    "age_days": 150,
+    "length_s": 764,
+    "channel": "America's Attorney",
+    "channel_id": "UCyMHxf61yTwmNh_SXCpV7eQ",
+    "subs": 147000,
+    "outlier": 2.86,
+    "views_per_day": 2802
+   },
+   {
+    "title": "Corrupt Trial Gets EXPOSED by the Judge!",
+    "id": "Y_icHo71J9A",
+    "views": 392535,
+    "age_days": 270,
+    "length_s": 1359,
+    "channel": "Audit the Court",
+    "channel_id": "UCmc4biDadYIwhBctWd1ESuA",
+    "subs": 207000,
+    "outlier": 1.9,
+    "views_per_day": 1454
+   },
+   {
+    "title": "When a 30 Day Case Turns Into 558 Days in Jail!  IMMEDIATELY",
+    "id": "runVqdJnKj4",
+    "views": 301491,
+    "age_days": 270,
+    "length_s": 1262,
+    "channel": "Audit the Court",
+    "channel_id": "UCmc4biDadYIwhBctWd1ESuA",
+    "subs": 207000,
+    "outlier": 1.46,
+    "views_per_day": 1117
+   },
+   {
+    "title": "Togi Is Worth -$10,000,000 | Financial Audit",
+    "id": "aDkj0WHVSdk",
+    "views": 3960562,
+    "age_days": 210,
+    "length_s": 6392,
+    "channel": "Caleb Hammer",
+    "channel_id": "UCLe_q9axMaeTbjN0hy1Z9xA",
+    "subs": 4100000,
+    "outlier": 0.97,
+    "views_per_day": 18860
+   },
+   {
+    "title": "I Took The Stand & DESTROYED The Prosecution! Fahey Trial Finale",
+    "id": "La4q9Y6_KNQ",
+    "views": 488722,
+    "age_days": 90,
+    "length_s": 6479,
+    "channel": "Long Island Audit",
+    "channel_id": "UCe1IA5kmY578O_Qo7Skr-TQ",
+    "subs": 1050000,
+    "outlier": 0.47,
+    "views_per_day": 5430
+   },
+   {
+    "title": "FULL: Prosec witness Roderick Wamil’s cross-examination by Defense on Day 12 of impeachment trial",
+    "id": "NShahFaY0BA",
+    "views": 319904,
+    "age_days": 90,
+    "length_s": 2922,
+    "channel": "UNTV News and Rescue",
+    "channel_id": "UC3XaG-7UVi2vD8ZZEMNnnpw",
+    "subs": 5520000,
+    "outlier": 0.06,
+    "views_per_day": 3554
+   },
+   {
+    "title": "Chiz Escudero, natawa nang mag-'hoy' si Lorna Kapunan kay ex-COA auditor Roderick Wamil | GMA News",
+    "id": "L9jdjE4O2b8",
+    "views": 628412,
+    "age_days": 90,
+    "length_s": 543,
+    "channel": "GMA News",
+    "channel_id": "UCqYw-CTd1dU2yGI71sEyqNw",
+    "subs": 18300000,
+    "outlier": 0.03,
+    "views_per_day": 6982
+   },
+   {
+    "title": "When a Corrupt Cop Gets Called Out in Court!",
+    "id": "Erp-3xi04uY",
+    "views": 701933,
+    "age_days": 300,
+    "length_s": 2391,
+    "channel": "Audit the Court and Audit the Audit",
+    "channel_id": "",
+    "subs": null,
+    "outlier": null,
+    "views_per_day": 2340
+   },
+   {
+    "title": "Cop ILLEGALLY Arrests a Man and REGRETS It in Court [AtA x AtC]",
+    "id": "lzOg8heXmV0",
+    "views": 568916,
+    "age_days": 150,
+    "length_s": 2302,
+    "channel": "Audit the Court and Audit the Audit",
+    "channel_id": "",
+    "subs": null,
+    "outlier": null,
+    "views_per_day": 3793
+   }
+  ]
+ },
+ {
+  "query": "crooked arithmetic",
+  "period": "year",
+  "videos": [
+   {
+    "title": "Real Math vs. The Crooked Ruler: Decoding Your Actual Financial Reality",
+    "id": "6qu4Xk3hAdI",
+    "views": 4,
+    "age_days": 90,
+    "length_s": 583,
+    "channel": "MR grue",
+    "channel_id": "UCGx0rQl2YH9Hj6mFGhhkxVw",
+    "subs": 1,
+    "outlier": null,
+    "views_per_day": 0
+   }
+  ]
+ }
+]

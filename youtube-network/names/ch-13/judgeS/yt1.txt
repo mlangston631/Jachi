@@ -1,0 +1,5 @@
+CLEAR    Flags of Convenience  (@FlagsofConvenience; search returned 25 channels)
+CROWDED  Overseas Interests  (@OverseasInterests; search returned 22 channels)
+           - contains-name channel: "Overseas" @overseas171 @overseas171, 20 subscribers
+CLEAR    Secrecy Jurisdiction  (@SecrecyJurisdiction; search returned 11 channels)
+CLEAR    Diplomatic Cover  (@DiplomaticCover; search returned 7 channels)

@@ -1,0 +1,1600 @@
+[
+ {
+  "channel": 1,
+  "topic": "compound interest, with worked figures",
+  "first_pass_claims": 25,
+  "first_pass_flagged": [
+   {
+    "quote": "Total at the end: about five hundred and twenty-five thousand.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "Computed in Python. The figure is exact only under one unstated convention: 7% a year split into monthly steps (7%/12 per month) with each $200 paid in at the end of the month, which is Excel's FV(7%/12, 480, -200) = $524,962.68. That convention is really 7.23% a year (1.0058333^12 = 1.07229). If the return is literally \"seven percent a year\", as spoken and as the script's own explanation (\"then next year...\") implies, the total is $494,308 with monthly deposits, or $479,124 / $512,663 with one $2,400 deposit at the end / start of each year. That is a 6% gap from the spoken figure, and the channel description promises viewers can check the maths themselves. Microsoft's FV documentation confirms the monthly convention (rate/12, type 0 = end of period).",
+    "sources": [
+     "https://support.microsoft.com/en-us/excel/fv-function",
+     "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator"
+    ],
+    "fix": "Keep the number and state the convention on screen. Change the picture direction to: [Timeline: 40 years vs 30 years. Small print: 7% a year, added monthly, $200 paid in at the end of each month]. (Alternative if strict once-a-year growth is preferred: \"about four hundred and ninety-four thousand\".)"
+   },
+   {
+    "quote": "Total at the end: about two hundred and forty-four thousand.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "Computed: FV(7%/12, 360, -200) = $243,994.20, so \"about two hundred and forty-four thousand\" is right under the same monthly convention as Early Sam's total. Under a literal 7% a year it is $233,891 (monthly deposits), or $226,706 / $242,575 with yearly deposits at the end / start of the year. Same issue and same single fix as the $525,000 line.",
+    "sources": [
+     "https://support.microsoft.com/en-us/excel/fv-function"
+    ],
+    "fix": "No change to the spoken number if the on-screen small print from the previous fix is added. (Alternative under strict once-a-year growth: \"about two hundred and thirty-four thousand\".)"
+   },
+   {
+    "quote": "Next time: where money actually comes from. It isn't the printer.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "The main point is right: the Bank of England's 2014 Quarterly Bulletin article says the majority of money in the modern economy is created by commercial banks making loans, and its current explainer says banks create around 80% of money as electronic deposits while notes and coins are only 3%. In the US, currency in circulation was about $2.44 trillion (FRED, March 2026) against M2 of about $23.4 trillion (FRED, September 2026), roughly a tenth, and the Fed says as much as half of that cash by value is held abroad. But stated flatly it is not true: banknotes are real money and are printed, by the Treasury's Bureau of Engraving and Printing on a yearly print order from the Federal Reserve Board. \"Mostly\" makes it exact.",
+    "sources": [
+     "https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy",
+     "https://www.bankofengland.co.uk/explainers/how-is-money-created",
+     "https://www.stlouisfed.org/open-vault/2017/november/does-federal-reserve-print-money",
+     "https://www.federalreserve.gov/paymentsystems/2026_currency_print_order.htm",
+     "https://www.federalreserve.gov/faqs/currency_12773.htm",
+     "https://fred.stlouisfed.org/series/WCURCIR",
+     "https://fred.stlouisfed.org/series/M2SL"
+    ],
+    "fix": "Next time: where money actually comes from. Mostly, it isn't the printer."
+   },
+   {
+    "quote": "Where Does Money Come From? (It Isn't the Printer)",
+    "where": "title",
+    "verdict": "oversimplified",
+    "evidence": "Same premise as the script's closing line. Bank of England: the majority of money is created by commercial banks making loans; about 80% of money is bank-created electronic deposits and 3% is notes and coins. In the US, cash is roughly a tenth of M2 ($2.44 trillion of about $23.4 trillion). So most money is not printed, but some is: the Bureau of Engraving and Printing prints Federal Reserve notes to the Fed's yearly order. As an absolute, the bracket is not accurate; one word fixes it.",
+    "sources": [
+     "https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy",
+     "https://www.bankofengland.co.uk/explainers/how-is-money-created",
+     "https://www.stlouisfed.org/open-vault/2017/november/does-federal-reserve-print-money",
+     "https://www.federalreserve.gov/paymentsystems/2026_currency_print_order.htm",
+     "https://fred.stlouisfed.org/series/M2SL"
+    ],
+    "fix": "Where Does Money Come From? (Mostly Not the Printer)"
+   },
+   {
+    "quote": "Tax Brackets: The Mistake Almost Everyone Makes",
+    "where": "title",
+    "verdict": "wrong",
+    "evidence": "The mistake is real (believing a higher bracket taxes all of your income at the higher rate), but \"almost everyone\" is not supported. In the Tax Foundation's 2024 National Tax Literacy Poll (with Public Policy Polling, more than 2,700 US taxpayers), asked how much income is taxed at 22% for someone in the 22% bracket, 48% correctly said just some of it, 34% said all of it and 18% were not sure. The Tax Foundation's own summary is \"over half did not know or were unsure of how tax brackets work\". So about one in three make the mistake and about half cannot give the right answer. The 48/34/18 split was seen in two secondary reports of the poll, not in the Tax Foundation's own table, which could not be opened in this session.",
+    "sources": [
+     "https://taxfoundation.org/blog/national-tax-poll-understanding-taxes/",
+     "https://taxfoundation.org/research/all/federal/us-tax-literacy-poll-knowledge-perceptions/",
+     "https://njbia.org/poll-finds-most-americans-misunderstand-basic-tax-code-concepts/"
+    ],
+    "fix": "Tax Brackets: The Mistake So Many People Make"
+   }
+  ],
+  "final": {
+   "confirmed_claims": 20,
+   "edits": [
+    {
+     "where": "script",
+     "quote": "[Timeline: 40 years vs 30 years]",
+     "replace_with": "[Timeline: 40 years vs 30 years. Small print, kept on screen through both totals: $200 paid in at the end of each month; 7% a year, compounded monthly (7% \u00f7 12 each month).]",
+     "reason": "I recomputed this in Python and agree with the first checker. The two spoken totals hold only under one convention: 7%/12 growth each month with each $200 paid in at the end of the month. That gives $524,962.68 and $243,994.20, which is the same as Excel's FV(7%/12, n, -200). Other readings of 'seven percent a year' give different totals, and the channel promises viewers can check the maths. With 7% as a true yearly rate and monthly deposits, the totals are $494,308 and $233,891. With one $2,400 deposit at the end of each year they are $479,124 and $226,706. With the deposit at the start of each year they are $512,663 and $242,575. If the monthly deposit lands at the start of the month instead of the end, the totals are $528,025 and $245,417, so the end-of-month detail matters too. The first checker's wording '7% a year, added monthly' is ambiguous: it could be read as 7% added every month, or as the $200 being what is added. 'Compounded monthly (7% \u00f7 12 each month)' is the standard phrase and matches the figures exactly. With this note on screen, no spoken number needs to change. The line 'then next year, interest is paid on...' still describes compounding once a year, but that is acceptable as a simplified explanation once the note is visible.",
+     "confidence": "medium",
+     "sources": [
+      "https://support.microsoft.com/en-us/office/fv-function-2eef9f44-a084-4c61-bdd8-4fe4bb1b71b3",
+      "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "Next time: where money actually comes from. It isn't the printer.",
+     "replace_with": "Next time: where money actually comes from. Mostly, it isn't the printer.",
+     "reason": "As an absolute statement this is false. Banknotes are real money and are printed: in the US by the Treasury's Bureau of Engraving and Printing, to the Federal Reserve's yearly order. In its 2014 Quarterly Bulletin, the Bank of England says the majority of money, not all of it, is created by commercial banks making loans. Central banks also create money in the form of reserves, which is part of what people mean by 'the money printer'. Adding 'Mostly' makes the line accurate and keeps the teaser. I agree with the first checker's fix; it introduces no new error.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy",
+      "https://www.stlouisfed.org/open-vault/2017/november/does-federal-reserve-print-money",
+      "https://www.bep.gov/"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "Where Does Money Come From? (It Isn't the Printer)",
+     "replace_with": "Where Does Money Come From? (Mostly Not the Printer)",
+     "reason": "Same premise and same problem as the script's closing line. Cash is printed and is a real, if small, part of the money supply, and the Bank of England's own wording is 'the majority' of money, not all of it. The first checker's fix is accurate.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy",
+      "https://www.stlouisfed.org/open-vault/2017/november/does-federal-reserve-print-money"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "Tax Brackets: The Mistake Almost Everyone Makes",
+     "replace_with": "Tax Brackets: The Mistake So Many People Make",
+     "reason": "The mistake is real: people think moving into a higher bracket taxes all of their income at the higher rate. But nothing supports 'almost everyone'. In the Tax Foundation's 2024 tax literacy poll, as relayed by the first checker, about a third gave the wrong answer, about one in five were unsure and about half were right. I could not open the poll myself (my search budget ran out and taxfoundation.org did not resolve). I know of no survey that finds the mistake is nearly universal, so the superlative is an overstatement. 'So Many People' is true under any reading of the poll.",
+     "confidence": "medium",
+     "sources": [
+      "https://taxfoundation.org/blog/national-tax-poll-understanding-taxes/",
+      "https://taxfoundation.org/research/all/federal/us-tax-literacy-poll-knowledge-perceptions/"
+     ]
+    }
+   ],
+   "missed_by_first_pass": [
+    "Their proposed small print, '7% a year, added monthly', is ambiguous: it could mean 7% added each month, or the $200 being what is added. 'Compounded monthly (7% \u00f7 12 each month)' says exactly what produces $524,963 and $243,994.",
+    "The 'end of each month' part of the small print is needed, not optional. With deposits at the start of each month, the totals are $528,025 and $245,417, and 528k is not 'about 525k'.",
+    "The note has to stay on screen while both totals are spoken, not only when the 7% is introduced. Otherwise a viewer checking the Late Sam figure won't see it.",
+    "Independent check of 'one whole extra doubling' (stronger than their version): every deposit Late Sam makes has a matching Early Sam deposit that grows ten years longer, which multiplies it by 2.0097. So Early Sam's total is 2.0097 x $243,994 plus $34,617 from his last ten years of deposits, which is $524,963. The line is exactly right under the script's own convention.",
+    "Investor.gov's compound interest calculator is the obvious tool for a viewer to check with, but by default it may compound once a year and so give a different total. Run it with $0 to start, $200 a month, 40 years and 7%, compounded monthly, before linking it under the video.",
+    "Two of their source addresses are uncertain. The Microsoft FV address (support.microsoft.com/en-us/excel/fv-function) is not the usual form; the known one is support.microsoft.com/en-us/office/fv-function-2eef9f44-a084-4c61-bdd8-4fe4bb1b71b3. The Investor.gov glossary address ending 'compound-interest-and-time' was never opened by either checker. Neither should be listed under the video until it has been opened."
+   ],
+   "publish_sources": [
+    {
+     "title": "Compound Interest Calculator (U.S. SEC, Investor.gov)",
+     "url": "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator",
+     "supports": "Lets viewers rerun the totals; set $200 a month, 7%, 40 and 30 years, compounded monthly"
+    },
+    {
+     "title": "Rule of 72 (U.S. SEC, Investor.gov glossary)",
+     "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/rule-72",
+     "supports": "72 divided by the yearly rate is roughly the years needed to double"
+    },
+    {
+     "title": "What is compound interest? (Consumer Financial Protection Bureau)",
+     "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-compound-interest-en-1683/",
+     "supports": "Definition: interest on your savings plus interest on the interest already earned"
+    },
+    {
+     "title": "Compound interest (Cornell Law School, Legal Information Institute, Wex)",
+     "url": "https://www.law.cornell.edu/wex/compound_interest",
+     "supports": "Definition: interest earned on prior interest as well as on the principal"
+    },
+    {
+     "title": "FV function (Microsoft Support)",
+     "url": "https://support.microsoft.com/en-us/office/fv-function-2eef9f44-a084-4c61-bdd8-4fe4bb1b71b3",
+     "supports": "How to reproduce the totals in a spreadsheet: =FV(7%/12, 480, -200) gives $524,963 and =FV(7%/12, 360, -200) gives $243,994"
+    },
+    {
+     "title": "Historical Returns on Stocks, Bonds and Bills (Aswath Damodaran, NYU Stern)",
+     "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html",
+     "supports": "'Real life is bumpier': yearly US stock returns since 1928, including large losing years"
+    }
+   ],
+   "remaining_doubts": [
+    "My own web checks were cut short. The shared web search budget for this run was used up before my first search, and direct fetches of bankofengland.co.uk, taxfoundation.org and support.microsoft.com failed because those hosts are not allowed in this session's network settings. So my checks rest on exact Python arithmetic and well-established facts, not on new pages. Every figure in the script was recomputed and matches.",
+    "Before recording, check the Tax Foundation poll split (48% right, 34% wrong, 18% unsure) on the Tax Foundation's own page. Neither checker saw the primary table, though the title fix stands either way.",
+    "Read the Bank of England figures ('around 80%' of money is bank-created deposits, notes and coins about 3%) on the Bank's own page before quoting them in the money video. The safe wording to quote is the 2014 Quarterly Bulletin's 'the majority of money ... is created by commercial banks making loans'.",
+    "The first checker's Freddie Mac rate (7.18% for the week of November 5, 2026) is after my knowledge and I could not verify it. Nothing in the current text quotes it, but read it off freddiemac.com/pmms before it appears in the loan video.",
+    "Before linking the SEC calculator, confirm what it returns for these inputs and that it treats deposits as end-of-month, so the on-screen note matches what viewers will see.",
+    "Optional, not an error: the script never says whether the 7% is before or after inflation. If it is a nominal return, $525,000 in 40 years buys much less than it would today, and a short line saying so would head off a common comment. Fees and taxes are also left out, which is fine given 'made-up return' and 'this is only to show the maths'."
+   ]
+  }
+ },
+ {
+  "channel": 2,
+  "topic": "Kodak and the first digital camera",
+  "first_pass_claims": 33,
+  "first_pass_flagged": [
+   {
+    "quote": "It was the first digital camera.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "Sasson's camera is credited as the first self-contained, portable digital still camera. The IEEE Milestone calls it the first hand-held solid-state still camera, and his 2009 National Medal of Technology and Innovation was 'for the invention of the digital camera.' But the Cromemco Cyclops was published in Popular Electronics in February 1975, before Sasson's December 1975 picture. It used a 32x32 MOS memory chip as its sensor, went on sale in January 1976 as a computer peripheral, and is often called the first commercial all-digital camera. Knowledgeable viewers raise it.",
+    "sources": [
+     "https://ethw.org/Milestones:Handheld_Digital_Camera%2C_1975",
+     "https://www.uspto.gov/learning-and-resources/ip-programs-and-awards/national-medal-technology-and-innovation/recipients/2009",
+     "https://en.wikipedia.org/wiki/Cromemco_Cyclops",
+     "https://www.swtpc.com/mholley/popularelectronics/feb1975/pe_feb1975.html"
+    ],
+    "fix": "It was the first self-contained digital camera."
+   },
+   {
+    "quote": "Sasson showed it to the people who ran the company.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "IEEE Spectrum says Sasson gave a round of demos to 'groups of Kodak engineers and executives' in a conference room. He photographed one of them and played the picture back on a TV. Sasson's own accounts mention technical, marketing and business managers. No source has a single showing to the company's top leadership or board.",
+    "sources": [
+     "https://spectrum.ieee.org/first-digital-camera-history",
+     "https://petapixel.com/how-steve-sasson-invented-the-digital-camera/"
+    ],
+    "fix": "Sasson showed it to Kodak's managers and executives."
+   },
+   {
+    "quote": "Every photograph taken in America was, in some way, a small payment to Kodak.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "The widely cited figure is that in 1976 Kodak had about 90% of US film sales and 85% of US camera sales. That is dominant but not total: Polaroid instant pictures, Fuji, Agfa and others did not pay Kodak.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Kodak",
+     "https://learn.saylor.org/mod/page/view.php?id=73241"
+    ],
+    "fix": "Almost every photograph taken in America was, in some way, a small payment to Kodak."
+   },
+   {
+    "quote": "[Text: \"Keep it quiet.\"]",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "In quotation marks on screen, this reads as something someone said. Nobody is recorded saying it. The words Sasson attributes to management are 'that's cute \u2014 but don't tell anyone about it' (NYT, 2008). He was barred from discussing the camera outside Kodak until October 2001.",
+    "sources": [
+     "https://www.forbes.com/sites/chunkamui/2012/01/18/how-kodak-failed/",
+     "https://www.digitalcameraworld.com/cameras/digital-cameras/kodak-didnt-want-you-to-see-this-and-kept-this-revolutionary-camera-secret-for-25-years"
+    ],
+    "fix": "[Text: \"That's cute \u2014 but don't tell anyone about it.\"] (Sasson's recollection of management's words)"
+   },
+   {
+    "quote": "So the invention stayed in the lab.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "True of the 1975 prototype: Kodak never made it as a product, and the first public photo of it appeared on 16 October 2001 (Rochester Democrat and Chronicle). But the invention itself was not kept secret. Kodak filed a patent in May 1977, granted on 26 December 1978 (US 4,131,919, Lloyd and Sasson), and patents are public. Kodak's digital work also continued: a 1.4-megapixel sensor (1986), a Sasson/Hills digital SLR prototype (1989), and the DCS 100 (1991), the first commercially sold digital SLR.",
+    "sources": [
+     "https://patents.google.com/patent/US4131919",
+     "https://www.digitalcameraworld.com/cameras/digital-cameras/kodak-didnt-want-you-to-see-this-and-kept-this-revolutionary-camera-secret-for-25-years",
+     "https://en.wikipedia.org/wiki/Kodak_DCS_100",
+     "https://www.snopes.com/fact-check/eastman-kodak-invented-first-digital-camera/"
+    ],
+    "fix": "So the camera stayed in the lab. Kodak patented it, and kept quiet."
+   },
+   {
+    "quote": "Then they moved into phones, and people stopped buying cameras at all.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "Global camera shipments (CIPA) peaked at about 121.5 million in 2010, fell to 35.4 million by 2015 (about 71% down, computed) and were about 94% down by 2023. That is a collapse, but people still buy cameras. Kodak announced its exit from making digital cameras on 9 February 2012, citing the shift to smartphones.",
+    "sources": [
+     "https://www.weforum.org/stories/emerging-technologies/impact-smartphones-had-camera-industry/",
+     "https://statista.com/chart/5782/digital-camera-shipments",
+     "https://money.cnn.com/2012/02/09/technology/kodak_digital_cameras/index.htm"
+    ],
+    "fix": "Then they moved into phones, and most people stopped buying separate cameras."
+   },
+   {
+    "quote": "It built the future, in its own lab, thirty-seven years early.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "The arithmetic is right: 2012 - 1975 = 37 (computed). But 37 years is the gap to Kodak's bankruptcy, not how far ahead the camera was. Digital cameras outsold film cameras in the US in 2003, 28 years after 1975. Kodak's own first commercial digital camera, the DCS 100, came in 1991, 16 years after. Sasson himself predicted 15 to 20 years.",
+    "sources": [
+     "https://www.nbcnews.com/id/wbna6741802",
+     "https://en.wikipedia.org/wiki/Kodak_DCS_100",
+     "https://petapixel.com/how-steve-sasson-invented-the-digital-camera/"
+    ],
+    "fix": "It built the future, in its own lab, thirty-seven years before it went bankrupt."
+   },
+   {
+    "quote": "Kodak didn't miss the future. ... What it couldn't do was choose the new thing over the thing that was already paying the bills.",
+    "where": "script",
+    "verdict": "disputed",
+    "evidence": "This is the popular 'innovator's dilemma' reading, and business historians contest it. Kodak did choose digital: it made the DCS line from 1991, built Apple's QuickTake, sold EasyShare cameras and was #1 in US digital camera sales in 2005. Willy Shih (MIT Sloan Management Review, 2016; he joined Kodak in 1997) calls the idea that management held digital back to protect film 'overblown'. He argues that digital was modular, low-margin and outside Kodak's skills. Scott Anthony (HBR, 2016) argues Kodak invested in digital but missed that online sharing, not printing, was the new business. Snopes rates 'Kodak invented the digital camera and buried it' a 'Mixture'. 'Didn't miss the future' is supported; the stated cause is contested.",
+    "sources": [
+     "https://sloanreview.mit.edu/article/the-real-lessons-from-kodaks-decline/",
+     "https://hbr.org/2016/07/kodaks-downfall-wasnt-about-technology",
+     "https://www.snopes.com/fact-check/eastman-kodak-invented-first-digital-camera/",
+     "https://www.nbcnews.com/id/wbna11258928"
+    ],
+    "fix": "What it couldn't do was make the new thing pay the way the old thing did."
+   },
+   {
+    "quote": "Kodak Invented the Digital Camera. Then Hid It.",
+    "where": "title",
+    "verdict": "disputed",
+    "evidence": "The first half holds: Kodak engineer Steven Sasson built the first self-contained digital camera in 1975. 'Then Hid It' is the contested part. Snopes rates 'Kodak invented it and buried it' a 'Mixture'. Kodak patented the design publicly (filed 1977, granted 1978), sold the first commercial digital SLR in 1991 and led US digital camera sales in 2005. On the other side, Sasson says management told him not to tell anyone, the prototype was never sold, and it was first shown publicly in 2001. The script also uses this as its title.",
+    "sources": [
+     "https://www.snopes.com/fact-check/eastman-kodak-invented-first-digital-camera/",
+     "https://patents.google.com/patent/US4131919",
+     "https://www.forbes.com/sites/chunkamui/2012/01/18/how-kodak-failed/",
+     "https://www.nbcnews.com/id/wbna11258928"
+    ],
+    "fix": "Kodak Invented the Digital Camera. It Still Went Bankrupt."
+   }
+  ],
+  "final": {
+   "confirmed_claims": 22,
+   "edits": [
+    {
+     "where": "title",
+     "quote": "Kodak Invented the Digital Camera. Then Hid It.",
+     "replace_with": "Kodak Invented the Digital Camera. It Still Went Bankrupt.",
+     "reason": "'Then Hid It' states a contested story as fact. Kodak patented the design publicly (filed 1977, granted 26 Dec 1978). It sold the first commercial digital SLR (DCS 100, 1991) and was the top US digital camera seller in 2005. Snopes rates 'invented it and buried it' a Mixture. The same string is also the scriptTitle, so change both. The first checker's replacement is accurate.",
+     "confidence": "high",
+     "sources": [
+      "https://www.snopes.com/fact-check/eastman-kodak-invented-first-digital-camera/",
+      "https://patents.google.com/patent/US4131919",
+      "https://en.wikipedia.org/wiki/Kodak_DCS_100",
+      "https://www.nbcnews.com/id/wbna11258928"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "It built the future, in its own lab, thirty-seven years early.",
+     "replace_with": "It built the future, in its own lab, thirty-six years before it went bankrupt.",
+     "reason": "Thirty-seven years is the gap to the bankruptcy, not how early the camera was: digital outsold film cameras in the US in 2003, 28 years later. The first checker's fix ('thirty-seven years before it went bankrupt') adds an off-by-one error. The first picture was taken in December 1975 and the Chapter 11 filing was on 19 January 2012, which is 36 years and about one month apart (computed in Python: about 36.1 years). 2012 minus 1975 only gives 37 if you count from the start of 1975.",
+     "confidence": "high",
+     "sources": [
+      "https://petapixel.com/how-steve-sasson-invented-the-digital-camera/",
+      "https://www.engadget.com/2012-01-19-kodak-chapter-11-bankruptcy.html",
+      "https://www.nbcnews.com/id/wbna6741802"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "What it couldn't do was choose the new thing over the thing that was already paying the bills.",
+     "replace_with": "What it couldn't do was make the new thing pay the way the old thing did.",
+     "reason": "The current line states the contested 'innovator's dilemma' cause as settled. Kodak did choose digital: the DCS line from 1991, EasyShare cameras, and number one in US digital camera sales in 2005. Shih (MIT Sloan Management Review, 2016) calls the 'protected film' explanation overblown, and Anthony (HBR, 2016) also disputes it. Nobody disputes that digital cameras earned far thinner margins than film. The first checker's fix is accurate and keeps the voice.",
+     "confidence": "high",
+     "sources": [
+      "https://sloanreview.mit.edu/article/the-real-lessons-from-kodaks-decline/",
+      "https://hbr.org/2016/07/kodaks-downfall-wasnt-about-technology",
+      "https://www.nbcnews.com/id/wbna11258928"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "So the invention stayed in the lab.",
+     "replace_with": "So the camera stayed in the lab. Kodak patented it, but never sold it.",
+     "reason": "The 1975 prototype was never made into a product, and it was first shown publicly in 2001. The invention itself was not hidden: patent US 4,131,919 (Lloyd and Sasson) was filed in 1977 and granted in December 1978, which made it public, and Kodak's digital work went on. The first checker's fix, 'Kodak patented it, and kept quiet', contradicts itself, because a granted patent is a public document.",
+     "confidence": "medium",
+     "sources": [
+      "https://patents.google.com/patent/US4131919",
+      "https://www.snopes.com/fact-check/eastman-kodak-invented-first-digital-camera/",
+      "https://www.digitalcameraworld.com/cameras/digital-cameras/kodak-didnt-want-you-to-see-this-and-kept-this-revolutionary-camera-secret-for-25-years"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "Then they moved into phones, and people stopped buying cameras at all.",
+     "replace_with": "Then they moved into phones, and camera sales began to fall.",
+     "reason": "Placed just before 'In January 2012, Kodak filed...', the line puts the camera-sales collapse ahead of the bankruptcy, which gets the order of events wrong. CIPA's global shipments peaked at about 121.5 million in 2010 and were still about 115 million in 2011. Most of the collapse (to 35.4 million by 2015, about 71% down, computed) came after the filing. 'At all' also overstates, because people still buy cameras. The first checker's fix ('most people stopped buying separate cameras') removes 'at all' but keeps the wrong order.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.weforum.org/stories/emerging-technologies/impact-smartphones-had-camera-industry/",
+      "https://statista.com/chart/5782/digital-camera-shipments",
+      "https://money.cnn.com/2012/02/09/technology/kodak_digital_cameras/index.htm"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "Then digital cameras got good enough. Then they got cheap.",
+     "replace_with": "Then digital cameras got good enough. Kodak sold them too, and by 2005 it sold more of them in America than anyone else. Then they got cheap.",
+     "reason": "Leaving this out is misleading. With the title and 'stayed in the lab', viewers will assume Kodak stayed out of digital cameras. In fact Kodak was America's top digital camera seller in 2005 (IDC: about 24.9% unit share; Kodak's 8-K also claims the number one US position). The first checker marked this optional. It should go in, because the film's argument depends on it.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.nbcnews.com/id/wbna11258928",
+      "https://www.imaging-resource.com/NEWS/1139584490.html",
+      "https://www.sec.gov/Archives/edgar/data/0000031235/000115752305006273/a4934250ex99_2.txt"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "It was the first digital camera.",
+     "replace_with": "It was the first self-contained digital camera.",
+     "reason": "An unqualified 'first' invites the standard correction. The Cromemco Cyclops, a 32x32 MOS-sensor digital camera, was published in Popular Electronics in February 1975, before Sasson's December 1975 picture. Sasson's camera is credited as the first self-contained, portable digital still camera, the one that recorded its own image. The first checker's fix is accurate.",
+     "confidence": "medium",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Cromemco_Cyclops",
+      "https://www.swtpc.com/mholley/popularelectronics/feb1975/pe_feb1975.html",
+      "https://www.uspto.gov/learning-and-resources/ip-programs-and-awards/national-medal-technology-and-innovation/recipients/2009"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "Every photograph taken in America was, in some way, a small payment to Kodak.",
+     "replace_with": "Most photographs taken in America were, in some way, a small payment to Kodak.",
+     "reason": "'Every' is false. In 1976 Kodak had about 90% of US film sales, and Polaroid's instant pictures (a business of roughly $800 million a year in the mid-1970s), Fuji, GAF and others paid Kodak nothing. The first checker's 'Almost every' is defensible against the 90% film figure, but that figure is film sales, not photographs, and it comes from secondary sources. 'Most' cannot be challenged.",
+     "confidence": "medium",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Kodak",
+      "https://learn.saylor.org/mod/page/view.php?id=73241"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "[Text: \"Keep it quiet.\"]",
+     "replace_with": "[Text: \"That's cute \u2014 but don't tell anyone about it.\" (Steven Sasson, recalling management's reaction)]",
+     "reason": "Shown on screen straight after 'as he later told it', the line reads as a quotation, but nobody is recorded saying 'Keep it quiet.' The words Sasson attributes to management (New York Times, 2 May 2008, quoted by Forbes) are 'that's cute \u2014 but don't tell anyone about it.' Use his words with attribution. The first checker's fix is accurate.",
+     "confidence": "low",
+     "sources": [
+      "https://www.forbes.com/sites/chunkamui/2012/01/18/how-kodak-failed/"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "Sasson showed it to the people who ran the company.",
+     "replace_with": "Sasson showed it to Kodak's managers and executives.",
+     "reason": "IEEE Spectrum and Sasson's own accounts describe several demonstrations in a conference room to groups of Kodak engineers, managers and executives. No source has him showing it to the company's top leadership or board. The '[Boardroom illustration]' cue adds to that impression, so a conference-room image would be more accurate. The first checker's fix is accurate.",
+     "confidence": "low",
+     "sources": [
+      "https://spectrum.ieee.org/first-digital-camera-history",
+      "https://petapixel.com/how-steve-sasson-invented-the-digital-camera/"
+     ]
+    }
+   ],
+   "missed_by_first_pass": [
+    "The first checker's fix 'thirty-seven years before it went bankrupt' adds an error. December 1975 (first picture) to 19 January 2012 (Chapter 11) is about 36.1 years (computed), so the gap is thirty-six years.",
+    "Order of events: 'people stopped buying cameras' comes just before the January 2012 filing, but global camera shipments peaked in 2010 (CIPA, about 121.5M) and were still about 115M in 2011. The collapse came mostly after the bankruptcy. The first checker's fix keeps this wrong order.",
+    "The first checker's fix 'Kodak patented it, and kept quiet' contradicts itself, because a patent granted in 1978 is a public document.",
+    "Kodak's own digital camera business (number one in US sales in 2005) needs to be in the script, not optional. Otherwise the title and 'stayed in the lab' tell viewers Kodak never sold digital cameras.",
+    "'Almost every photograph' (the first checker's fix) may still overstate. The roughly 90% figure is Kodak's share of US film sales, and Polaroid's large instant-picture business in 1975 paid Kodak nothing. 'Most' is safe.",
+    "The '[Boardroom illustration]' cue suggests a board meeting. The documented demonstrations were held in a conference room for groups of engineers, managers and executives.",
+    "Blockbuster title: Randolph's own book says Antioco was 'struggling not to laugh', which is weaker than 'laughed at'. The story rests only on the Netflix founders' accounts, and the video should say so."
+   ],
+   "publish_sources": [
+    {
+     "title": "US Patent 4,131,919, Electronic still camera (Lloyd and Sasson, Eastman Kodak; filed 1977, granted 26 Dec 1978)",
+     "url": "https://patents.google.com/patent/US4131919",
+     "supports": "How the camera worked, recording to magnetic tape with no film, and the fact that Kodak patented it publicly"
+    },
+    {
+     "title": "USPTO: National Medal of Technology and Innovation, 2009 recipients (Steven Sasson)",
+     "url": "https://www.uspto.gov/learning-and-resources/ip-programs-and-awards/national-medal-technology-and-innovation/recipients/2009",
+     "supports": "Official US recognition of Sasson's invention of the digital camera"
+    },
+    {
+     "title": "IEEE Spectrum: history of the first digital camera",
+     "url": "https://spectrum.ieee.org/first-digital-camera-history",
+     "supports": "How the prototype was built, the 100x100 black-and-white image, recording time, and the demonstrations to Kodak engineers and executives"
+    },
+    {
+     "title": "AP via NBC News (2005): Sasson on the toaster-sized first digital camera",
+     "url": "https://www.nbcnews.com/id/wbna9261340",
+     "supports": "Toaster size, weight, and Sasson's own account"
+    },
+    {
+     "title": "Willy Shih, 'The Real Lessons From Kodak's Decline', MIT Sloan Management Review (2016)",
+     "url": "https://sloanreview.mit.edu/article/the-real-lessons-from-kodaks-decline/",
+     "supports": "Why Kodak's digital business could not replace film's profits, and the case against the 'buried it' story"
+    },
+    {
+     "title": "Scott Anthony, 'Kodak's Downfall Wasn't About Technology', Harvard Business Review (2016)",
+     "url": "https://hbr.org/2016/07/kodaks-downfall-wasnt-about-technology",
+     "supports": "Kodak invested in digital; a competing explanation of its decline"
+    },
+    {
+     "title": "ABC News: Kodak files for Chapter 11 bankruptcy (19 Jan 2012)",
+     "url": "https://abcnews.com/Business/kodak-files-chapter-11-bankruptcy/story?id=15392485",
+     "supports": "January 2012 bankruptcy date and the figures in the filing"
+    },
+    {
+     "title": "Snopes: Did Eastman Kodak invent the first digital camera and bury it?",
+     "url": "https://www.snopes.com/fact-check/eastman-kodak-invented-first-digital-camera/",
+     "supports": "An assessment of the 'invented it and hid it' story (rated Mixture)"
+    }
+   ],
+   "remaining_doubts": [
+    "My own verification was limited. The shared web-search budget was used up before my first query ran, and direct fetches of ethw.org and en.wikipedia.org failed because those hosts are outside this session's allowed network. So I rechecked the first checker's evidence against what I already know and recomputed the arithmetic in Python, but I could not run new searches or open any of the listed URLs myself. Before publishing, open each source under the video to confirm the link works and says what is claimed. To search further, the owner can send a follow-up message, or raise the search limit and allow those hosts.",
+    "Kodak's number one position in US digital camera sales in 2005 (IDC, about 24.9%) comes from the first checker's sources. I did not re-verify it independently.",
+    "The 'about 90% of US film sales in 1976' figure traces only to secondary write-ups.",
+    "The 'that's cute \u2014 but don't tell anyone about it' quote was checked only through Forbes's citation of the NYT (2 May 2008), not the original article.",
+    "The IEEE Milestone the first checker cites (ethw.org, 'Handheld Digital Camera, 1975') could not be opened. Its exact wording, including whether it says 'first', is unverified, so I left it out of the publish sources.",
+    "'First self-contained digital camera' is the usual qualifier, but some historians may still argue for the Cromemco Cyclops (1975) or earlier space-probe imaging systems. Saying 'widely credited as' would be even safer.",
+    "Blockbuster title: the story comes only from the Netflix founders (Randolph's book says Antioco was 'struggling not to laugh'; Randolph and Hastings have also said Blockbuster laughed them out of the room). I left the title as is, but the video should attribute the account to them.",
+    "Nokia title: 'five years' holds if it is measured from the 2007 iPhone launch to Samsung overtaking Nokia in Q1 2012. Measured to the Microsoft sale (2013 to 2014), it is six to seven years. The script should name its endpoints.",
+    "For the rest of the film: Sasson's 1978 patent would have expired around 1995 (17-year term). Kodak's later licensing income came from later patents, so don't credit it to the 1975 camera. The 1989 Sasson/Hills digital SLR prototype, which Kodak reportedly declined to sell, is stronger evidence for a 'held back' story than the 1975 prototype, but I did not verify it here."
+   ]
+  }
+ },
+ {
+  "channel": 3,
+  "topic": "how a language model chooses its next word",
+  "first_pass_claims": 25,
+  "first_pass_flagged": [
+   {
+    "quote": "So: no thinking ahead in sentences,",
+    "where": "script",
+    "verdict": "wrong",
+    "evidence": "Anthropic's interpretability study (\"Tracing the thoughts of a large language model\", 27 March 2025, on Claude 3.5 Haiku) found the opposite. It says the model writes one word at a time but plans ahead. When writing a rhyming couplet, it picked the rhyme word (\"rabbit\") before it started writing the line. When researchers removed that planned word, it rewrote the line to end in \"habit\". Anthropic sums this up as Claude planning what it will say \"many words ahead\". The team had expected to show that the model did not plan ahead. Separately, today's 'reasoning' chatbots (OpenAI o1 onward) are described as models that 'think before they answer', producing a long hidden chain of thought before the reply. Output still comes one piece at a time, but 'no thinking ahead' contradicts published research, and knowledgeable viewers would notice.",
+    "sources": [
+     "https://www.anthropic.com/research/tracing-thoughts-language-model",
+     "https://venturebeat.com/ai/anthropic-scientists-expose-how-ai-actually-thinks-and-discover-it-secretly-plans-ahead-and-sometimes-lies",
+     "https://developers.openai.com/api/docs/models/o1.md",
+     "https://simonwillison.net/2024/Sep/12/openai-o1/"
+    ],
+    "fix": "So: it can plan a little ahead inside, but it writes one piece at a time, and it doesn't look things up unless it's given a tool to do so."
+   },
+   {
+    "quote": "A long answer is this one small step, repeated hundreds of times.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "OpenAI's rule of thumb is that 1 token is about 4 characters, or about 0.75 of an English word (100 tokens is about 75 words). Computed in Python: 500 words is about 667 tokens, 1,000 words about 1,333 tokens and 2,000 words about 2,667 tokens. So a long answer often takes thousands of steps, not just hundreds. Reasoning models also produce hidden reasoning tokens on top of that; OpenAI advised setting aside up to 25,000 tokens for o1's reasoning. 'Hundreds' understates it.",
+    "sources": [
+     "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them",
+     "https://simonwillison.net/2024/Sep/12/openai-o1/"
+    ],
+    "fix": "A long answer is this one small step, repeated hundreds or even thousands of times."
+   },
+   {
+    "quote": "This also explains its strangest habit. It is built to produce text that sounds likely. Likely and true usually overlap. Not always. When they don't, you get a confident sentence that's simply wrong.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "This is broadly supported, but it states as settled something researchers still argue about. OpenAI's September 2025 paper (Kalai, Nachum, Vempala, Zhang, 'Why Language Models Hallucinate') agrees that pretraining is next-word prediction with no true/false labels, so rare, arbitrary facts can't be predicted from patterns and come out as plausible errors. It also says hallucinations persist because training and grading reward confident guessing over saying 'I don't know'. And chatbots aren't built only to sound likely: after pretraining they are tuned with human feedback (InstructGPT, 2022), which changes what they produce. 'Explains' is too strong; 'helps explain' or 'at its core' keeps the point accurate. That also fits the channel's promise to say where something is still argued over.",
+    "sources": [
+     "https://openai.com/index/why-language-models-hallucinate/",
+     "https://arxiv.org/pdf/2509.04664",
+     "https://openai.com/research/instruction-following",
+     "https://arxiv.org/pdf/2203.02155v1.pdf"
+    ],
+    "fix": "This also helps explain its strangest habit. At its core, it is built to produce text that sounds likely. Likely and true usually overlap. Not always. When they don't, you get a confident sentence that's simply wrong."
+   },
+   {
+    "quote": "which is why the same question can get a different answer twice.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "Random picking (sampling with temperature or top-p) is the main reason, and it is correctly explained. But it isn't the only one. Thinking Machines Lab's September 2025 post 'Defeating Nondeterminism in LLM Inference' showed that answers vary even with randomness switched off (temperature 0, always take the top choice), because GPU calculations change slightly with how many requests are processed together. In one reported test, the same prompt run 1,000 times at temperature 0 gave 80 different completions. 'The main reason' covers this without adding detail.",
+    "sources": [
+     "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/",
+     "https://huyenchip.com/2024/01/16/sampling",
+     "https://community.openai.com/t/defeating-nondeterminism-in-llm-inference/1358623"
+    ],
+    "fix": "which is the main reason the same question can get a different answer twice."
+   },
+   {
+    "quote": "[A dice icon picks one]",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "Sampling is a weighted random draw: each piece's chance of being picked equals its probability (the softmax output, reshaped by temperature, top-k or top-p). A normal die gives every face the same chance, which goes against the spoken line 'usually a likely one'. A weighted picture (a spinner or wheel with slices sized like the bars) shows the idea correctly.",
+    "sources": [
+     "https://huyenchip.com/2024/01/16/sampling",
+     "https://machinelearningmastery.com/how-llms-choose-their-words-a-practical-walk-through-of-logits-softmax-and-sampling/"
+    ],
+    "fix": "[A spinner whose slices match the bars picks one]"
+   },
+   {
+    "quote": "[Out comes a list with percentages] ... \"Mat\", high. \"Sofa\", lower. \"Volcano\", nearly zero.",
+    "where": "script",
+    "verdict": "unverifiable",
+    "evidence": "The ranking is a plausible illustration, but the actual percentages depend on the model and the exact text. Any figures shown on screen will be read as measured from a real model unless they are labelled. Either take them from a real model or mark them as illustrative.",
+    "sources": [
+     "https://huyenchip.com/2024/01/16/sampling"
+    ],
+    "fix": "[Out comes a list with percentages, labelled \"illustrative\"]"
+   },
+   {
+    "quote": "What Is a \"Token\"? AI's Smallest Piece, Explained",
+    "where": "title",
+    "verdict": "oversimplified",
+    "evidence": "A token is the unit of text a language model reads and writes. It isn't 'AI's smallest piece' in general: a token can be split into characters or bytes, and many AI systems aren't language models. OpenAI describes tokens as pieces that can be a character, part of a word, a whole word or punctuation. A knowledgeable viewer might wince at 'AI's smallest piece'.",
+    "sources": [
+     "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them"
+    ],
+    "fix": "What Is a \"Token\"? The Pieces AI Reads and Writes, Explained"
+   },
+   {
+    "quote": "How Image Generators Turn Noise Into Pictures",
+    "where": "title",
+    "verdict": "oversimplified",
+    "evidence": "Diffusion models, which start from random noise and remove it step by step, are behind Stable Diffusion, Midjourney, DALL\u00b7E 2/3 and others. But OpenAI's March 2025 system card addendum says its image generator built into ChatGPT (4o image generation) is, 'unlike DALL\u00b7E, which operates as a diffusion model', an autoregressive model. It builds the image piece by piece, much as a chatbot writes text. So not all image generators start from noise. Either add 'Most' or keep the title and say clearly in the video that some, including ChatGPT's own image generator, work differently.",
+    "sources": [
+     "https://openai.com/index/gpt-4o-image-generation-system-card-addendum/",
+     "https://www.infoq.com/news/2025/04/gpt-4o-images",
+     "https://andrewkchan.dev/posts/diffusion.html"
+    ],
+    "fix": "How Most Image Generators Turn Noise Into Pictures"
+   },
+   {
+    "quote": "What \"The Cloud\" Really Is (It's a Building)",
+    "where": "title",
+    "verdict": "oversimplified",
+    "evidence": "'The cloud' is computers in data centres, so the point is right, but it isn't one building. Microsoft describes Azure as 'hundreds of datacenters' in 60+ regions linked by its own global network, each data centre being a physical building full of networked servers. 'A building' (singular) would make a knowledgeable viewer wince.",
+    "sources": [
+     "https://learn.microsoft.com/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure",
+     "https://datacenters.microsoft.com/globe/the-building-blocks-of-azure"
+    ],
+    "fix": "What \"The Cloud\" Really Is (It's Buildings Full of Computers)"
+   }
+  ],
+  "final": {
+   "confirmed_claims": 15,
+   "edits": [
+    {
+     "where": "script",
+     "quote": "So: no thinking ahead in sentences, no looking things up unless it's given a tool to do so. One piece at a time.",
+     "replace_with": "So: it writes one piece at a time, though research suggests it can plan ahead inside, like picking a rhyme before writing the line. And it doesn't look things up unless it's given a tool to do so.",
+     "reason": "'No thinking ahead' contradicts published research. Anthropic's interpretability team says they 'had set out to show that the model didn't plan ahead, and found instead that it did'. In their poetry example, Claude chose the rhyme ('rabbit') before writing the line, and when that word was removed it wrote a line ending in 'habit'. Anthropic also says Claude 'writes text one word at a time', so 'one piece at a time' still holds. Reasoning chatbots also 'think' before answering, though that thinking is written one piece at a time too. The first checker's fix replaces only the fragment 'So: no thinking ahead in sentences,', but its new text repeats the looking-things-up clause. Applied as given, it would leave 'no looking things up unless it's given a tool to do so' in the script twice, so the whole sentence has to be replaced. Their wording 'plan a little ahead' also states as settled what comes from one study of one model (Claude 3.5 Haiku), and it undersells Anthropic's own phrase, 'many words ahead'. 'Research suggests' plus the concrete rhyme example is accurate and keeps the channel's promise to flag what is still uncertain.",
+     "confidence": "high",
+     "sources": [
+      "https://www.anthropic.com/research/tracing-thoughts-language-model"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "This also explains its strangest habit. It is built to produce text that sounds likely.",
+     "replace_with": "This also helps explain its strangest habit. At its core, it is built to produce text that sounds likely.",
+     "reason": "The script states one cause of hallucination as if it were the whole, settled explanation. OpenAI's 2025 paper 'Why Language Models Hallucinate' (Kalai et al.) agrees that next-word pretraining can't learn arbitrary rare facts from patterns. It also blames training and benchmark grading that reward confident guessing over 'I don't know'. And chat models are not trained only to sound likely: after pretraining they are tuned with human feedback (InstructGPT). The first checker's fix is accurate and introduces no new error.",
+     "confidence": "high",
+     "sources": [
+      "https://openai.com/index/why-language-models-hallucinate/",
+      "https://arxiv.org/abs/2509.04664",
+      "https://arxiv.org/abs/2203.02155"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "A long answer is this one small step, repeated hundreds of times.",
+     "replace_with": "A long answer is this one small step, repeated hundreds or even thousands of times.",
+     "reason": "Each step makes one token, not one word. At OpenAI's rule of thumb of about 0.75 words per token (computed in Python): 750 words is about 1,000 tokens, 1,000 words about 1,333 and 1,500 words about 2,000. A long answer often takes thousands of steps, and reasoning models add hidden reasoning tokens on top. 'Hundreds' understates it.",
+     "confidence": "medium",
+     "sources": [
+      "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "which is why the same question can get a different answer twice.",
+     "replace_with": "which is the main reason the same question can get a different answer twice.",
+     "reason": "Random sampling is the main cause but not the only one. Thinking Machines Lab (Sept 2025) showed that answers vary even at temperature 0, because the GPU's arithmetic changes with how many requests are batched together. It reported 1,000 runs of one prompt at temperature 0 producing 80 different completions. Chat products also vary with memory, system prompts and model updates. 'The main reason' is accurate without extra detail.",
+     "confidence": "medium",
+     "sources": [
+      "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/",
+      "https://huyenchip.com/2024/01/16/sampling.html"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "[A dice icon picks one]",
+     "replace_with": "[A spinner whose slices match the bars picks one]",
+     "reason": "Sampling is a weighted draw: each piece's chance equals its probability. A normal die gives every face the same chance, which shows the opposite of the spoken line 'usually a likely one'. A spinner with slices sized like the bars (or a visibly loaded die) shows it correctly.",
+     "confidence": "medium",
+     "sources": [
+      "https://huyenchip.com/2024/01/16/sampling.html",
+      "https://arxiv.org/abs/1904.09751"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "[Out comes a list with percentages]",
+     "replace_with": "[Out comes a list with percentages, labelled \"illustrative\"]",
+     "reason": "Viewers will read exact percentages as measured from a real model. Real figures depend on the model and the exact text, and a real model may well rank 'floor' or another word above 'mat'. Either label the numbers as illustrative, or take them from a real model and make the spoken ranking ('Mat', high...) match what is shown.",
+     "confidence": "medium",
+     "sources": [
+      "https://huyenchip.com/2024/01/16/sampling.html"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "That word is added to the sentence. And the whole thing runs again, for the next word.",
+     "replace_with": "That piece is added to the sentence. And the whole thing runs again, for the next piece.",
+     "reason": "The script has just taught that the model works in tokens, which can be parts of words. Going back to 'word' suggests each step makes a whole word. That is not true for longer or rarer words, and it also feeds the undercount in 'hundreds of times'. 'Mat' happens to be a single token, so this is minor.",
+     "confidence": "low",
+     "sources": [
+      "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "How Image Generators Turn Noise Into Pictures",
+     "replace_with": "How Most Image Generators Turn Noise Into Pictures",
+     "reason": "Diffusion and flow models (Stable Diffusion, Midjourney, DALL\u00b7E 3, Imagen, Flux) do start from noise. But OpenAI's system card addendum describes ChatGPT's 4o image generation, probably the most-used generator, as an autoregressive model, 'unlike DALL\u00b7E, which operates as a diffusion model'. 'Most' is true whatever the exact 4o architecture turns out to be. The alternative is to keep the title and say clearly in the video that some generators work differently.",
+     "confidence": "low",
+     "sources": [
+      "https://openai.com/index/gpt-4o-image-generation-system-card-addendum/"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "What Is a \"Token\"? AI's Smallest Piece, Explained",
+     "replace_with": "What Is a \"Token\"? The Pieces of Text AI Reads and Writes",
+     "reason": "'AI's smallest piece' can be read as if a token were a part of the AI, when it is a piece of text. It also isn't the smallest piece of text, since tokens are built from characters or bytes. OpenAI describes a token as a character, part of a word, a whole word or punctuation.",
+     "confidence": "low",
+     "sources": [
+      "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "What \"The Cloud\" Really Is (It's a Building)",
+     "replace_with": "What \"The Cloud\" Really Is (It's Buildings Full of Computers)",
+     "reason": "The point is right, but the cloud is not one building. Each provider runs many data centres in many regions, linked by networks. Microsoft describes Azure as hundreds of datacenters in 60+ regions. The singular would make a knowledgeable viewer wince.",
+     "confidence": "low",
+     "sources": [
+      "https://learn.microsoft.com/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure"
+     ]
+    }
+   ],
+   "missed_by_first_pass": [
+    "Their fix for 'no thinking ahead' would leave duplicate text in the script. It quotes only 'So: no thinking ahead in sentences,' but its replacement also contains the looking-things-up clause, so the next clause ('no looking things up unless it's given a tool to do so.') would be spoken twice. The whole sentence, including 'One piece at a time.', has to be replaced.",
+    "Their replacement 'it can plan a little ahead inside' states as settled a finding from one interpretability study of one model (Claude 3.5 Haiku). It also undersells Anthropic's own phrase, 'many words ahead'. It needs a hedge such as 'research suggests', in line with the channel's promise to flag what's uncertain.",
+    "'That word is added... for the next word' goes back to 'word' right after the script defines tokens, which suggests one step makes one whole word. This also underlies the 'hundreds of times' undercount.",
+    "If the on-screen percentages are taken from a real model, 'floor' or another word may rank above 'mat'. The spoken ranking must then match the screen, and labelling them illustrative alone is not enough.",
+    "Minor error in their evidence (not in the script): OpenAI's reasoning guide recommends reserving 'at least' 25,000 tokens for reasoning and output when starting out, not 'up to' 25,000."
+   ],
+   "publish_sources": [
+    {
+     "title": "Anthropic: Tracing the thoughts of a large language model (2025)",
+     "url": "https://www.anthropic.com/research/tracing-thoughts-language-model",
+     "supports": "Models write one word at a time but can plan ahead (the rhyme example); researchers expected no planning and found it"
+    },
+    {
+     "title": "OpenAI Help Center: What are tokens and how to count them?",
+     "url": "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them",
+     "supports": "What a token is; about 4 characters or 0.75 English words per token"
+    },
+    {
+     "title": "Kalai, Nachum, Vempala, Zhang (OpenAI): Why Language Models Hallucinate (2025)",
+     "url": "https://arxiv.org/abs/2509.04664",
+     "supports": "How next-word training and grading that rewards guessing lead to confident wrong answers"
+    },
+    {
+     "title": "Holtzman et al.: The Curious Case of Neural Text Degeneration (2019)",
+     "url": "https://arxiv.org/abs/1904.09751",
+     "supports": "Why models sample from the probability list instead of always taking the top choice"
+    },
+    {
+     "title": "Ouyang et al. (OpenAI): Training language models to follow instructions with human feedback (2022)",
+     "url": "https://arxiv.org/abs/2203.02155",
+     "supports": "Chat models are tuned with human feedback after next-word pretraining"
+    },
+    {
+     "title": "Thinking Machines Lab: Defeating Nondeterminism in LLM Inference (2025)",
+     "url": "https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/",
+     "supports": "Answers can differ even with randomness switched off"
+    },
+    {
+     "title": "Chip Huyen: Generation configurations (temperature, top-k, top-p)",
+     "url": "https://huyenchip.com/2024/01/16/sampling.html",
+     "supports": "Plain explanation of the probability list and weighted sampling"
+    }
+   ],
+   "remaining_doubts": [
+    "My web search budget was already used up when this check started (the limit is shared across the workflow), so I could not run fresh independent searches. Of the direct fetches, only Anthropic's page loaded. It confirmed 'set out to show that the model didn't plan ahead, and found instead that it did', 'many words ahead', 'writes text one word at a time' and 'may think on much longer horizons'. openai.com and thinkingmachines.ai are not allowed in this session's network settings, so those pages could not be read. The Thinking Machines figure (80 different completions out of 1,000 at temperature 0) and the exact wording of OpenAI's 4o system card come from the first checker's search results and my own recollection, not from fresh verification.",
+    "Image generators: OpenAI officially calls 4o image generation autoregressive, but OpenAI's launch materials hinted at a diffusion stage in decoding, and the full architecture isn't published. 'Most' is true either way. If the title stays unchanged, the video should say that some generators work differently.",
+    "The planning finding comes from one study of one Claude model, using a new method (attribution graphs). It is reasonable to present it as 'research suggests', not as settled for all chatbots.",
+    "The URL https://huyenchip.com/2024/01/16/sampling.html was not checked live; the first checker cited it without '.html'.",
+    "Picture directions to check before recording: the '[A confident-looking but wrong sentence appears]' sentence must really be false and clearly marked wrong (keep a source if it's a real chatbot error). '[The sentence breaks into small chunks]' should split 'The cat sat on the' along word lines, because real tokenizers keep these common words whole, with the space attached. Save part-word splits for a longer or rarer word.",
+    "'Hundreds or even thousands' assumes OpenAI's English rule of thumb. Token counts differ by model and are higher for many other languages."
+   ]
+  }
+ },
+ {
+  "channel": 4,
+  "topic": "what a light-year is",
+  "first_pass_claims": 26,
+  "first_pass_flagged": [
+   {
+    "quote": "[Night sky] ... You see that star as it was more than four years ago.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "The light-travel time is correct (about 4.25 years). But 'that star' is Proxima Centauri, which nobody can see in the night sky without a telescope. Its visual magnitude is about 11.1, roughly 100 times too faint for the naked eye. It needs a telescope of about 8 cm aperture and is only visible from south of about latitude 27\u00b0N. Paired with a night-sky shot, the line implies viewers can look up and see it, which a knowledgeable viewer would catch. Its neighbour Alpha Centauri (4.37 ly, third-brightest star in the sky) can be seen with the naked eye, but only from far southern latitudes.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Proxima_Centauri",
+     "https://www.astronomy.com/science/101-must-see-cosmic-objects-alpha-and-proxima-centauri/",
+     "https://earthsky.org/brightest-stars/alpha-centauri-is-the-nearest-bright-star"
+    ],
+    "fix": "\"Point a telescope at Proxima Centauri, and you see it as it was more than four years ago.\" (In the [Night sky] shot, don't show Proxima as a bright naked-eye star.)"
+   },
+   {
+    "quote": "How Big Is the Biggest Star We Know?",
+    "where": "title",
+    "verdict": "disputed",
+    "evidence": "The title assumes there is a known 'biggest star', and there isn't a settled one. Stephenson 2-18 (about 2,150 solar radii) is often cited, but its figures are very uncertain and exceed the usual theoretical limit of about 1,500 solar radii. UY Scuti (once 1,708) was revised down after Gaia parallaxes gave a shorter distance. WOH G64 (about 1,540 to 1,730) was reported in 2024 to have turned into a yellow hypergiant, and a 2026 MNRAS paper (Keele) argues it is still a red supergiant. The title can work only if the video says plainly that the ranking is uncertain.",
+    "sources": [
+     "https://www.star-facts.com/stephenson-2-18/",
+     "https://arxiv.org/abs/2411.19329",
+     "https://www.keele.ac.uk/about/news/2026/january/cosmic-mystery/woh-g64-magellanic.php",
+     "https://www.livescience.com/space/astronomy/behemoth-star-previously-thought-to-be-dying-is-rising-from-the-ashes-like-a-pheonix"
+    ],
+    "fix": "\"How Big Are the Biggest Stars We Know?\" (or keep the title and say in the video that no single star's size is settled)"
+   }
+  ],
+  "final": {
+   "confirmed_claims": 24,
+   "edits": [
+    {
+     "where": "script",
+     "quote": "You see that star as it was more than four years ago.",
+     "replace_with": "Every star you see at night, you see as it was more than four years ago. Most of them, far longer.",
+     "reason": "'That star' is Proxima Centauri, and this line sits over a [Night sky] shot, so it implies viewers can look up and see it. They can't. Proxima is about magnitude 11.1, around 100 times too faint for the naked eye (computed: 10^(0.4 x 5.1) = 112). At declination -62.7 degrees it also never rises anywhere north of about 27 degrees N. The first checker's fix ('Point a telescope at Proxima Centauri...') is true, but it still fails for most of Europe, the US and China, where Proxima never rises, and it clashes with the night-sky shot. The replacement is true everywhere. The nearest stars you can see without a telescope are Alpha Centauri A and B at about 4.37 light-years, and every star beyond the Sun is at least 4.25 light-years away, so every star in the night sky is seen as it was more than four years ago. Most naked-eye stars are tens to hundreds of light-years away.",
+     "confidence": "high",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Proxima_Centauri",
+      "https://en.wikipedia.org/wiki/Alpha_Centauri",
+      "https://earthsky.org/brightest-stars/alpha-centauri-is-the-nearest-bright-star"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "How Big Is the Biggest Star We Know?",
+     "replace_with": "How Big Are the Biggest Stars We Know?",
+     "reason": "The title takes for granted that one star is known to be the biggest. There isn't one. Stephenson 2-18 (about 2,150 solar radii) is very uncertain and larger than the usual theoretical limit of about 1,500. UY Scuti was revised down. WOH G64's state is disputed (2024 yellow-hypergiant claim, later counter-claim). The fix adds no new error. Keeping the title is also acceptable if the video says plainly that no single star's size is settled, so this is optional.",
+     "confidence": "low",
+     "sources": [
+      "https://arxiv.org/abs/2411.19329",
+      "https://en.wikipedia.org/wiki/List_of_largest_stars"
+     ]
+    }
+   ],
+   "missed_by_first_pass": [
+    "The first checker's fix for the night-sky line ('Point a telescope at Proxima Centauri') causes a new problem. Proxima (declination -62.7 degrees) never rises north of about 27 degrees N, so most of Europe, the US and China can't point anything at it, and the fix still clashes with the [Night sky] shot. 'Every star you see at night...' is true for every viewer and fits the visual.",
+    "The optional 'heading' rewording isn't needed. Voyager 1's direction of travel (about RA 17.2h, Dec +12 degrees) is about 81 degrees from Proxima (computed), and its dish, aimed back toward Earth, is about 99 degrees from Proxima. 'Isn't even pointed that way' is true however it's read.",
+    "For the future speed-of-light video: the first checker credits Romer (1676) with the roughly 220,000 km/s figure. Romer showed light's speed is finite and gave a light-time across Earth's orbit (about 22 minutes); Huygens turned that into a speed (Traite de la lumiere, 1690). The script for that title shouldn't credit the km/s figure to Romer.",
+    "One of the first checker's sources is malformed ('https://en.wikipedia.com/wiki/Lightspeed'). Don't list it under the video.",
+    "The sign-off 'if there are that many stars' points back to a star count the script never gives. That's a wording problem, not a factual one, so it isn't listed as an edit."
+   ],
+   "publish_sources": [
+    {
+     "title": "International Astronomical Union: Measuring the Universe (definition of the light-year)",
+     "url": "https://iauarchive.eso.org/public/themes/measuring/",
+     "supports": "1 light-year = 9,460,730,472,580.8 km, the distance light travels in one Julian year"
+    },
+    {
+     "title": "NIST CODATA: speed of light in vacuum",
+     "url": "https://physics.nist.gov/cgi-bin/cuu/Value?c",
+     "supports": "c = 299,792,458 m/s exactly"
+    },
+    {
+     "title": "NASA: Where are Voyager 1 and Voyager 2 now?",
+     "url": "https://science.nasa.gov/mission/voyager/where-are-voyager-1-and-voyager-2-now/",
+     "supports": "Voyager 1's current distance and speed (about 17 km/s)"
+    },
+    {
+     "title": "NASA JPL: Voyager 1 now most distant human-made object in space (1998)",
+     "url": "https://www.jpl.nasa.gov/news/voyager-1-now-most-distant-human-made-object-in-space/",
+     "supports": "Voyager 1 is the farthest spacecraft, since passing Pioneer 10 in February 1998"
+    },
+    {
+     "title": "NASA Webb: How does Webb see back in time?",
+     "url": "https://science.nasa.gov/mission/webb/science-overview/science-explainers/how-does-webb-see-back-in-time",
+     "supports": "Light from the Moon takes about 1.3 s; looking far away is looking back in time"
+    },
+    {
+     "title": "NASA Glenn Research Center: How fast is the speed of light?",
+     "url": "https://www.grc.nasa.gov/www/K-12/Numbers/Math/Mathematical_Thinking/how_fast_is_the_speed.htm",
+     "supports": "About 300,000 km/s; about 7.5 trips round the Earth per second"
+    },
+    {
+     "title": "NASA Space Place: What is a light-year?",
+     "url": "https://spaceplace.nasa.gov/light-year/en/",
+     "supports": "A light-year is a distance, not a time"
+    },
+    {
+     "title": "Proxima Centauri (Wikipedia, citing Gaia DR3)",
+     "url": "https://en.wikipedia.org/wiki/Proxima_Centauri",
+     "supports": "Nearest star to the Sun, about 4.25 light-years; magnitude about 11, too faint for the naked eye"
+    }
+   ],
+   "remaining_doubts": [
+    "I couldn't search or open any web page in this session: the shared search budget was used up and direct fetches (science.nasa.gov, physics.nist.gov) were blocked. My checks rest on my own Python arithmetic, my own knowledge up to mid-2026, and what the first checker's searches returned. Every figure in the script matches by my arithmetic: 7.48 laps of the equator per second; 1.28 s to the Moon (1.19 to 1.36 s); 8 min 19 s to the Sun (8:11 to 8:27); 9,460,730,472,580.8 km per light-year; 74,886 years to Proxima at 17.0 km/s (75,330 years at 16.9 km/s). Nothing I know of contradicts them. Open the publish_sources links before listing them, especially the NASA Voyager status page and the IAU archive address, which I couldn't reach.",
+    "Voyager 1 reaching one light-day from Earth (25.9 billion km, 173.1 AU by my arithmetic) in November 2026 is from the first checker's searches, and I couldn't confirm NASA's exact date. If the video mentions it, check NASA's own page and give a date.",
+    "The sign-off 'if there are that many stars' has no star count to point back to. It's a wording choice for the owner, not a factual error. The first checker's alternative ('with so many stars out there') is fine.",
+    "For the later title videos: in the speed-of-light video, credit the first km/s figure to Huygens working from Romer's timing, and quote Fizeau's 1849 result carefully (sources give about 313,000 to 315,000 km/s). In the Voyager title, 'thing' is fine (NASA says 'most distant human-made object'), though a pedant could point out that radio signals we've sent have gone much farther. The biggest-star video needs dated, hedged figures, because the candidates' sizes keep being revised."
+   ]
+  }
+ },
+ {
+  "channel": 5,
+  "topic": "how the Roman Empire came to be divided",
+  "first_pass_claims": 37,
+  "first_pass_flagged": [
+   {
+    "quote": "[Map: the Roman Empire at full size, one colour]",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "The empire's greatest extent was in AD 117 under Trajan (with Armenia, Assyria and Mesopotamia). Hadrian gave up most of those eastern conquests right after 117, and Dacia was abandoned in the 270s. A 'full size' map shown under 'By the third century' would show land Rome no longer held. Note: the search did not confirm the Dacia date; it is from general knowledge (Aurelian, c. 271-275).",
+    "sources": [
+     "https://www.thecollector.com/maps/map-roman-empire-peak",
+     "https://www.bu.edu/mzank/Jerusalem/mp/roman.htm"
+    ],
+    "fix": "[Map: the Roman Empire around AD 250, one colour]"
+   },
+   {
+    "quote": "One empire, one emperor.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "Rome already had co-emperors. Marcus Aurelius and Lucius Verus ruled jointly from 161 to 169, 'the first time Rome was ruled by two emperors'. Septimius Severus made his sons co-Augusti at the start of the third century. In 253-260 Valerian took the East and his son Gallienus the West. In 283 Carus left Carinus in charge of the West and went east with Numerian. And in 260-274 the empire was split three ways (Gallic Empire, Palmyrene Empire).",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Lucius_Verus",
+     "https://en.wikipedia.org/wiki/Gallienus",
+     "https://www.worldhistory.org/Valerian/",
+     "https://en.wikipedia.org/wiki/Carus",
+     "https://www.worldhistory.org/Crisis_of_the_Third_Century/"
+    ],
+    "fix": "One empire, usually one emperor."
+   },
+   {
+    "quote": "And one very large problem: it was too big to run.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "As worded it is false: the empire had been run for over two centuries. The mainstream view is narrower. With threats on several frontiers at once (Persians in the east, Germanic peoples on the Rhine and Danube), one emperor could not be everywhere, and armies proclaimed their own commanders. That is what the next lines describe.",
+    "sources": [
+     "https://www.worldhistory.org/Crisis_of_the_Third_Century/",
+     "https://courses.lumenlearning.com/suny-worldhistory/chapter/diocletian-and-the-tetrarchy/"
+    ],
+    "fix": "And one very large problem: it was too big for one man to run."
+   },
+   {
+    "quote": "tried a new answer. Don't hold it all yourself. Share it.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "Sharing power, and even splitting East and West, was not new. Valerian (East) and Gallienus (West) did it in 253-260; one source calls it 'foreshadowing Emperor Diocletian's tetrarchy a century later'. Carus did it in 283. Diocletian's innovation was making it a lasting system, with a colleague who was not a relative and, from 293, four rulers.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Gallienus",
+     "https://www.worldhistory.org/Valerian/",
+     "https://en.wikipedia.org/wiki/Carus"
+    ],
+    "fix": "took an old answer and made it a system. Don't hold it all yourself. Share it."
+   },
+   {
+    "quote": "[Map splits into two shades, then four]",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "The tetrarchs' zones were areas of responsibility within one empire, not formally separate states, and their edges were not fixed borders. Coloured zones are a common way to show this, but solid frontier lines would suggest a formal partition.",
+    "sources": [
+     "https://www.Britannica.Com/place/ancient-Rome/Diocletian",
+     "https://Www.Wikipedia.org/wiki/Tetrachy"
+    ],
+    "fix": "[Map splits into two shades, then four, with soft dashed edges]"
+   },
+   {
+    "quote": "the four fought each other, and one man came out on top: Constantine.",
+    "where": "script",
+    "verdict": "wrong",
+    "evidence": "The original four did not fight each other. Diocletian stayed retired and refused to return at Carnuntum in 308. Constantius died in 306 and Galerius died of illness in 311. The civil wars of 306-324 were fought among their successors and sons: Constantine, Maxentius, Severus, Maximinus Daia, Licinius, plus Maximian, who came back. Constantine beat Maxentius at the Milvian Bridge in 312 and Licinius at Chrysopolis on 18 September 324, becoming sole emperor. Constantine winning is correct. 1 May 305 to September 324 is 19 years.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Civil_wars_of_the_Tetrarchy",
+     "https://www.worldhistory.org/Constantine_I/",
+     "https://www.historyhit.com/emperor-constantines-victories-and-re-unification-of-the-roman-empire/",
+     "https://Livius.org/articles/concept/tetrarchy/"
+    ],
+    "fix": "After he retired, his successors fought each other for nearly twenty years, and one man came out on top: Constantine."
+   },
+   {
+    "quote": "Constantine did something that mattered more than any battle.",
+    "where": "script",
+    "verdict": "unverifiable",
+    "evidence": "This is the narrator's judgement, clearly framed as opinion, not a factual claim. It is defensible: the new eastern capital is widely seen as decisive for the later East-West division.",
+    "sources": [],
+    "fix": ""
+   },
+   {
+    "quote": "Rome didn't split because of one decision. It split because one line on the map kept turning out to be useful.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "The conclusion fits the evidence: the split came in stages (253, 286, 293, 337, 364, 395). But the line was not one fixed line. In the Balkans it moved between divisions; eastern Illyricum, for example, went to Theodosius in 379 and the prefecture of Illyricum changed hands. The narration is fine as a summary; the map should not animate a single fixed border through every era.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Valentinian_dynasty",
+     "https://en.wikipedia.org/wiki/Theodosius_I"
+    ],
+    "fix": "Rome didn't split because of one decision. It split because one rough line on the map kept turning out to be useful."
+   },
+   {
+    "quote": "How Mongolia Conquered Half the World in One Lifetime",
+    "where": "title",
+    "verdict": "wrong",
+    "evidence": "'Mongolia' is the modern state; the conquerors were the Mongols and their Mongol Empire. 'Half the world' is far too high. At its peak (about 1279, under Kublai) Guinness gives about 24 million km\u00b2 and about 110 million people. That is the largest contiguous land empire ever, but 24 / 148.9 million km\u00b2 of world land = 16.1% (computed), about a sixth, not half. 'One lifetime' is defensible: from Genghis Khan's founding in 1206 to the 1279 peak is 73 years (computed). But Genghis himself (died 1227) conquered much less.",
+    "sources": [
+     "https://www.guinnessworldrecords.com/world-records/86621-largest-empire-contiguous",
+     "https://www.britannica.com/place/Mongol-empire",
+     "https://www.britannica.com/summary/Mongol-Empire-Timeline",
+     "https://www.thecollector.com/largest-empires-history/"
+    ],
+    "fix": "How the Mongols Built History's Biggest Land Empire in One Lifetime"
+   },
+   {
+    "quote": "Why Egypt Is Shaped Like a River",
+    "where": "title",
+    "verdict": "wrong",
+    "evidence": "The country is roughly a square with long straight borders: the 22nd parallel with Sudan and the 25th meridian with Libya. What is river-shaped is where people live. The CIA World Factbook says about 95% of the population lives on the narrow Nile strip, about 5% of the land. The FAO says about 97% of the population lives on about 4% of the land.",
+    "sources": [
+     "https://www.cia.gov/the-world-factbook/about/archives/2022/countries/egypt",
+     "https://www.fao.org/fileadmin/user_upload/aquastat/pdf_files/EGY_egypt_cp.pdf",
+     "https://www.wikipedia.com/wiki/Egypt-Sudan_border",
+     "https://Www.Wikipedia.org/wiki/25th_meridian_east"
+    ],
+    "fix": "Why Almost Everyone in Egypt Lives Along One River"
+   },
+   {
+    "quote": "Why Africa's Borders Are So Straight",
+    "where": "title",
+    "verdict": "oversimplified",
+    "evidence": "Many African borders are straight, but how many is disputed. Barbour (1961) estimated 44% are parallels or meridians plus 30% other straight lines. Alesina, Easterly and Matuszeski say 80% follow latitude or longitude lines. Paine, Qiu and Ricart-Huguet (American Political Science Review, 2024/2025) find that earlier political frontiers shaped 62% of bilateral borders and that water was the main border feature far more often than straight lines. Press coverage reports latitude or longitude lines in only 37% of bilateral borders; that figure wasn't confirmed in the paper itself. As worded, the title implies Africa's borders are generally straight.",
+    "sources": [
+     "https://www.nber.org/papers/w12328.pdf",
+     "https://static.cambridge.org/content/id/urn%3Acambridge.org%3Aid%3Aarticle%3AS0003055424000054/resource/name/S0003055424000054sup001.pdf",
+     "https://www.engineeringnews.co.za/article/myth-of-arbitrary-boundaries-2024-05-24",
+     "https://www.news24.com/world/africa/not-so-arbitrary-colonists-used-existing-borders-and-rivers-to-draw-africas-map-new-paper-argues-20240311"
+    ],
+    "fix": "Why So Many of Africa's Borders Are Straight"
+   }
+  ],
+  "final": {
+   "confirmed_claims": 25,
+   "edits": [
+    {
+     "where": "script",
+     "quote": "After he retired, the four fought each other, and one man came out on top: Constantine.",
+     "replace_with": "After he retired, rival emperors fought each other for nearly twenty years, and one man came out on top: Constantine.",
+     "reason": "The original four tetrarchs did not fight it out among themselves. Diocletian stayed retired and refused to come back at Carnuntum in 308. Constantius died at York in 306, and Galerius died of illness in 311. The civil wars of 306-324 were fought mainly by Constantine, Maxentius, Severus, Maximinus Daia and Licinius. Constantine beat Maxentius at the Milvian Bridge in 312 and Licinius at Chrysopolis in 324. The first checker's fix, 'his successors fought each other', is close but slightly off. Maximian, one of the original four, came out of retirement and fought (alongside Maxentius in 307, then against Constantine in 310), and Galerius invaded Italy in 307. Neither of them was Diocletian's 'successor'. 'Rival emperors' covers everyone involved. Computed: 324 - 305 = 19 years, so 'nearly twenty years' is right.",
+     "confidence": "high",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Civil_wars_of_the_Tetrarchy",
+      "https://www.livius.org/articles/concept/tetrarchy/",
+      "https://www.worldhistory.org/Constantine_I/",
+      "https://www.historyhit.com/emperor-constantines-victories-and-re-unification-of-the-roman-empire/"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "One empire, one emperor.",
+     "replace_with": "One empire.",
+     "reason": "Shared rule was normal before Diocletian. Marcus Aurelius and Lucius Verus ruled jointly from 161. In the third century many emperors made their sons co-Augusti: Septimius Severus with Caracalla and Geta, Philip with Philip II, Decius with Herennius Etruscus, Gallus with Volusianus, Carus with Carinus. Valerian and Gallienus had already split the empire East/West in 253-260, and in 260-274 it broke into three. The first checker's fix, 'usually one emperor', brings in a new problem: for much of the third century there was more than one Augustus at a time. Cutting the clause keeps the rhythm ('One empire. And one very large problem...') and still echoes 'four courts, one empire' later. The list of co-emperors comes from general knowledge, because my own searches were blocked this turn. The Valerian/Gallienus and Carus examples come from the first checker's sources.",
+     "confidence": "high",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Lucius_Verus",
+      "https://en.wikipedia.org/wiki/Gallienus",
+      "https://www.worldhistory.org/Valerian/",
+      "https://en.wikipedia.org/wiki/Carus",
+      "https://www.worldhistory.org/Crisis_of_the_Third_Century/"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "tried a new answer.",
+     "replace_with": "turned an old stopgap into a system.",
+     "reason": "Sharing power, and even an East/West split, was not new. Valerian took the East while Gallienus held the West (253-260), and Carus left Carinus in the West in 283. What Diocletian added was a lasting, organised arrangement: a colleague who was not a relative (Maximian, Caesar 285, Augustus 286), then from 293 four rulers with set ranks and regions. Calling it 'a new answer' would make a knowledgeable viewer wince. The first checker's fix ('took an old answer and made it a system') is accurate too; this wording is a little plainer. Avoid 'permanent': the system collapsed within a few years of 305.",
+     "confidence": "medium",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Gallienus",
+      "https://www.worldhistory.org/Valerian/",
+      "https://en.wikipedia.org/wiki/Carus",
+      "https://www.britannica.com/place/ancient-Rome/Diocletian"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "And one very large problem: it was too big to run.",
+     "replace_with": "And one very large problem: it was too big for one man to run.",
+     "reason": "As written it is false: Rome had run the empire for more than two centuries. The usual explanation for Diocletian's reform is narrower. With wars on several frontiers at once, one emperor could not be everywhere, and armies raised their own commanders. That is what the next lines describe. The first checker's fix is right and adds no new error.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.worldhistory.org/Crisis_of_the_Third_Century/",
+      "https://www.britannica.com/place/ancient-Rome/Diocletian"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "[Map: the Roman Empire at full size, one colour]",
+     "replace_with": "[Map: the Roman Empire around AD 250, one colour]",
+     "reason": "A 'full size' map means the AD 117 maximum under Trajan. That includes Armenia, Assyria and southern Mesopotamia down to the Persian Gulf, which Hadrian gave up in 117-118. The narration says 'By the third century', so the map should show third-century borders: Severan northern Mesopotamia, with Dacia still held until the 270s. A map dated around AD 250 fits and comes before the Gallic and Palmyrene breakaways (260-274), so one colour is still right. The Dacia abandonment date (Aurelian, c. 271-275) is general knowledge; neither checker confirmed it by search.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.thecollector.com/maps/map-roman-empire-peak",
+      "https://www.bu.edu/mzank/Jerusalem/mp/roman.htm"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "It split because one line on the map kept turning out to be useful.",
+     "replace_with": "It split because the same rough line on the map kept turning out to be useful.",
+     "reason": "The East/West dividing line moved a long way in the Balkans. Under the Tetrarchy, Galerius's eastern share included Pannonia (his seat was Sirmium). After 337 and again after 364, all of Illyricum went with the West. In 379 eastern Illyricum passed to Theodosius, and after 395 Pannonia was western while Dacia and Macedonia were eastern. 'One line' is fair as a metaphor, but the animation must not show one fixed border through every era, and 'rough' says so in the narration. This is a minor point; the first checker's fix is fine too. The Balkan details are general knowledge, not confirmed by search this turn.",
+     "confidence": "low",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Valentinian_dynasty",
+      "https://en.wikipedia.org/wiki/Theodosius_I"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "How Mongolia Conquered Half the World in One Lifetime",
+     "replace_with": "How the Mongols Built History's Biggest Land Empire in One Lifetime",
+     "reason": "'Mongolia' is the modern state; the conquerors were the Mongols. At its peak the Mongol Empire covered about 24 million km\u00b2. Computed: 24 / 148.9 million km\u00b2 of world land = 16.12%, about a sixth, not half. It is the largest contiguous empire on record (Guinness), so 'biggest land empire' holds. The British Empire was larger in total, but it was not a contiguous land empire. 'One lifetime' is defensible. Computed: 1206 (Genghis Khan proclaimed) to the c. 1279 peak = 73 years. Kublai, born 1215, lived through nearly all of it.",
+     "confidence": "high",
+     "sources": [
+      "https://www.guinnessworldrecords.com/world-records/86621-largest-empire-contiguous",
+      "https://www.britannica.com/place/Mongol-empire",
+      "https://www.britannica.com/summary/Mongol-Empire-Timeline"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "Why Egypt Is Shaped Like a River",
+     "replace_with": "Why Almost Everyone in Egypt Lives Along One River",
+     "reason": "The country itself is roughly square, with long straight borders: the 22nd parallel with Sudan and the 25th meridian with Libya. What is river-shaped is where people live. The CIA World Factbook puts about 95% of the population on the Nile valley and delta, about 5% of the land, and the FAO gives a similar figure (about 97% on about 4%). The new title is true at those figures.",
+     "confidence": "high",
+     "sources": [
+      "https://www.cia.gov/the-world-factbook/about/archives/2022/countries/egypt",
+      "https://www.fao.org/fileadmin/user_upload/aquastat/pdf_files/EGY_egypt_cp.pdf"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "Why Africa's Borders Are So Straight",
+     "replace_with": "Why So Many of Africa's Borders Are Straight",
+     "reason": "The title takes as settled something that is disputed. Estimates of how many African borders are straight lines range widely: Barbour (1961) about 44% along parallels or meridians, Alesina, Easterly and Matuszeski 80%. Paine, Qiu and Ricart-Huguet (American Political Science Review, 2024) argue that rivers, watersheds and earlier states shaped far more of the borders than the 'straight lines' story allows. Every estimate agrees that a large share are straight, more than on other continents, so 'so many' is safe. The channel promises to show both sides, and the video should present that research.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.nber.org/papers/w12328.pdf",
+      "https://static.cambridge.org/content/id/urn%3Acambridge.org%3Aid%3Aarticle%3AS0003055424000054/resource/name/S0003055424000054sup001.pdf",
+      "https://www.news24.com/world/africa/not-so-arbitrary-colonists-used-existing-borders-and-rivers-to-draw-africas-map-new-paper-argues-20240311"
+     ]
+    }
+   ],
+   "missed_by_first_pass": [
+    "The first checker's fix 'One empire, usually one emperor' brings in a new error: in the third century co-Augusti were the norm for many reigns (Severus with Caracalla and Geta, Philip and Philip II, Decius and Herennius Etruscus, Gallus and Volusianus, Valerian and Gallienus, Carus and Carinus). Cutting the clause is safer.",
+    "The first checker said 'the original four did not fight each other' and proposed 'his successors fought each other'. Two of the original four were drawn in: Maximian came out of retirement (with Maxentius against Severus and Galerius in 307, then his revolt against Constantine in 310), and Galerius invaded Italy in 307. Maximian was not a 'successor', so 'rival emperors' is the accurate wording.",
+    "The East/West line moved a long way in the Balkans: Pannonia and Sirmium were in Galerius's eastern share under the Tetrarchy but western after 395, and all of Illyricum went with the West in 337-350 and after 364. This matters most for the map animations ('[Map splits into two shades, then four]', '[West fades; East stays]'): they should use era-specific boundaries, not one fixed line.",
+    "Whether Constantinople was a 'capital' in 330 is debated. Encyclopedias and popular accounts call it Constantine's new capital. Some historians argue it was first an imperial residence among several, that its senate ranked below Rome's until Constantius II, and that emperors lived there permanently only from the 380s and 390s. Not an edit, but a 'both sides' note for the description box.",
+    "'It was never ruled by one man again' is fine for actual rule. Legally, though, after 480 (the death of Julius Nepos) Zeno was the only Roman emperor, and Justinian later retook Italy and Africa. A knowledgeable viewer may raise this; a description-box line would cover it."
+   ],
+   "publish_sources": [
+    {
+     "title": "Britannica: Ancient Rome, the reign of Diocletian (284-305)",
+     "url": "https://www.britannica.com/place/ancient-Rome/Diocletian",
+     "supports": "Diocletian's accession, Maximian as co-emperor, the 293 Tetrarchy, each ruler's own residence"
+    },
+    {
+     "title": "Britannica: Istanbul, Constantinople",
+     "url": "https://www.britannica.com/place/Istanbul/Constantinople",
+     "supports": "Foundation rites 324, official inauguration 11 May 330 on the site of Byzantium, 'New Rome'"
+    },
+    {
+     "title": "Britannica: Diocletian",
+     "url": "https://www.britannica.com/biography/Diocletian",
+     "supports": "Diocletian's origins, army acclamation in 284, abdication in 305"
+    },
+    {
+     "title": "De Imperatoribus Romanis (Loyola University Chicago): Diocletian",
+     "url": "https://roman-emperors.sites.luc.edu/dioclet.htm",
+     "supports": "Scholarly biography: dates of the dyarchy, Tetrarchy and abdication"
+    },
+    {
+     "title": "World History Encyclopedia: Crisis of the Third Century",
+     "url": "https://www.worldhistory.org/Crisis_of_the_Third_Century/",
+     "supports": "Frontier pressure, army-made emperors, the Gallic and Palmyrene breakaways, Aurelian's reunification"
+    },
+    {
+     "title": "Livius.org: Tetrarchy",
+     "url": "https://www.livius.org/articles/concept/tetrarchy/",
+     "supports": "How the Tetrarchy worked and broke down after 305; the civil wars ending with Constantine"
+    },
+    {
+     "title": "Wikipedia: Theodosius I",
+     "url": "https://en.wikipedia.org/wiki/Theodosius_I",
+     "supports": "Death in January 395; Arcadius in the East, Honorius in the West; last ruler of both halves"
+    },
+    {
+     "title": "World History Encyclopedia: The Fall of Constantinople in 1453",
+     "url": "https://www.worldhistory.org/article/1180/the-fall-of-constantinople-in-1453/",
+     "supports": "End of the eastern empire on 29 May 1453"
+    }
+   ],
+   "remaining_doubts": [
+    "My first search hit the session's web-search limit (200 per turn, shared by every agent), so no searches ran. I could not re-check the first checker's confirmations independently online. This review rests on their cited sources, my own general knowledge and my own arithmetic (1453-476 = 977; 324-305 = 19; 24/148.9 = 16.12%; 35.5/148.9 = 23.84%; 1279-1206 = 73; 2026-966 = 1060). A follow-up message would let the search continue, and the points below would be the first to re-search.",
+    "Constantinople as a 'new capital' in 330: mainstream encyclopedias say so, but some scholars argue it became the permanent capital only gradually. Consider a description-box note.",
+    "476 vs 480 (Julius Nepos) for the end of the West, and whether Diocletian's abdication was voluntary (Lactantius says Galerius pressured him): both belong in the description box under the channel's 'both sides' promise.",
+    "The Tetrarchy's four zones were areas of responsibility, not formal states, and scholars disagree about how fixed the Caesars' regions were in 293-305. The '[Map splits into two shades, then four]' visual should avoid hard frontier lines.",
+    "Mongol Empire peak: the 24 million km\u00b2 figure is usually dated c. 1270-1279, after the 1260 break-up into khanates. Whether to count that as 'one empire' should be handled in that video.",
+    "The '37% of bilateral borders' figure attributed to Paine, Qiu and Ricart-Huguet comes from press coverage and was not confirmed in the paper itself. Check it before putting it on screen.",
+    "'How Britain Ended Up With a Quarter of the Map': the c. 1920 figure (about 35.5 million km\u00b2, about 24% of land) includes League of Nations mandates, and 'of the map' should be understood as 'of the world's land'. Acceptable as a hook; I made no edit.",
+    "'The Empire You've Never Heard Of: Khwarazm' overlaps heavily with the Mongol video (Khwarazm's fall in 1219-1221 is part of that story). Not an error, but a planning note.",
+    "Unconfirmed by any search in either pass: Dacia abandoned c. 271-275; the 337/340/350/353 dates for Constantine's sons; eastern Illyricum passing to Theodosius in 379; Galerius's exact appointment date (1 March vs 21 May 293)."
+   ]
+  }
+ },
+ {
+  "channel": 6,
+  "topic": "a night in a medieval Benedictine monastery",
+  "first_pass_claims": 27,
+  "first_pass_flagged": [
+   {
+    "quote": "Sandals are set down side by side.",
+    "where": "script",
+    "verdict": "unverifiable",
+    "evidence": "This is scene-setting, not a fact the sources can settle. Rule ch. 55 provides two kinds of footwear (pedules et caligas). Translations render them as 'footwraps and footwear' or 'sandals and shoes', and the Rule says to use what can be found locally. In northern Europe around 1100, monks mostly wore shoes or boots, and later customaries mention felt night-boots. 'Sandals' is defensible, but it leans on the popular image of monks.",
+    "sources": [
+     "https://eriebenedictines.org/spirituality/rule-of-benedict.html/event/2025/08/07/1754542800/clothing-and-footwear",
+     "https://pressbooks.palni.org/ruleofbenedict/?p=203",
+     "https://www.medievalists.net/2025/04/daily-life-medieval-monastery/"
+    ],
+    "fix": "Optional, to avoid the stereotype: \"Shoes are set down side by side.\""
+   },
+   {
+    "quote": "Because in a few hours, in the middle of the night, a bell will ring.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "The bell and the night rising are right. Rule ch. 8 has monks rise in winter at 'the eighth hour of the night', about 1 to 2 a.m. by commentators' estimates. Benedict says they should sleep a little more than half the night and rise fully rested. The 11th-century horarium puts the rising at about 2:30 a.m., and Cistercian sites describe the bell for night Vigils. 'In a few hours' is the problem. The scene is a cold winter evening, and in winter the brothers went to bed soon after Compline, around 5:15 to 6:30 p.m., and rose at about 2 to 2:30 a.m. That is about 8 to 8.75 hours of sleep (computed), which Benedict planned on purpose. 'A few hours' feeds the common myth that monks barely slept, and someone who knows the period may notice.",
+    "sources": [
+     "https://pressbooks.palni.org/ruleofbenedict/?p=78",
+     "https://christdesert.org/?p=1988",
+     "https://mason.gmu.edu/~rutledge/medfc/monkday.htm",
+     "https://hridigital.shef.ac.uk/cistercians/glossary/horarium.php",
+     "https://cistercians.shef.ac.uk/kirkstall/buildings/dormitory/"
+    ],
+    "fix": "Because later, in the middle of the night, a bell will ring."
+   },
+   {
+    "quote": "[Continue at the same pace: the night office, the bakehouse before dawn, the scriptorium at first light.]",
+    "where": "script",
+    "verdict": "unverifiable",
+    "evidence": "This is a plan for script not yet written, so there is nothing to check yet. The parts are plausible. Rule ch. 46 lists the bakery among the monastery's workplaces, and writing was done by daylight. One caution for the next section: in Benedict's winter timetable, the time between Vigils and dawn is for study of the psalms and readings (ch. 8), not work. By the 11th century, much heavy work such as baking was done by servants, or later by lay brothers. If monks are shown baking before dawn, check that the timetable allows it.",
+    "sources": [
+     "https://pressbooks.palni.org/ruleofbenedict/?p=179",
+     "https://pressbooks.palni.org/ruleofbenedict/?p=78"
+    ],
+    "fix": ""
+   },
+   {
+    "quote": "A Quiet Night in a Medieval Monastery (2 Hours)",
+    "where": "title",
+    "verdict": "unverifiable",
+    "evidence": "The premise is sound: the script describes a Benedictine night that matches the Rule. '(2 Hours)' depends on the finished video, and only the opening exists so far. Make sure the upload really runs about two hours.",
+    "sources": [],
+    "fix": ""
+   }
+  ],
+  "final": {
+   "edits": [
+    {
+     "where": "script",
+     "quote": "Because in a few hours, in the middle of the night, a bell will ring.",
+     "replace_with": "Because later, in the middle of the night, a bell will ring.",
+     "reason": "The scene is a cold, dark night (the Rule's winter half of the year, 1 November to Easter). In winter, Rule ch. 8 has the monks get up 'at the eighth hour of the night' so that they sleep 'a little more than half the night' and get up rested. I computed that at 46 to 54 degrees north the eighth night hour starts at about 1:10 to 1:25 a.m. solar time, which is 8.3 to 9.8 hours after sunset. The monks went to bed soon after Compline at dusk, so they slept about 8 hours, and Benedict meant them to. 'A few hours' feeds the myth that monks barely slept. The phrase would only fit the short summer nights (about 5 to 6 hours, plus a midday rest in ch. 48), and the script never says it is summer. The first checker's replacement is true in every season and adds no new error, so I accept it.",
+     "confidence": "medium",
+     "sources": [
+      "https://pressbooks.palni.org/ruleofbenedict/?p=78",
+      "https://sourcebooks.web.fordham.edu/source/rul-benedict-excerp.asp",
+      "https://mason.gmu.edu/~rutledge/medfc/monkday.htm",
+      "https://hridigital.shef.ac.uk/cistercians/glossary/horarium.php"
+     ]
+    }
+   ],
+   "confirmed_claims": 23,
+   "missed_by_first_pass": [
+    "The season is never stated. Rule ch. 41 wants everything finished by daylight in every season, so 'The light is going' fits both summer and winter. 'A few hours' is wrong only in the winter half of the year, which the cold scene suggests. The replacement avoids the question.",
+    "'Nobody hurries' looks at first like it contradicts Rule ch. 43, which tells monks to drop everything at the signal and hasten 'with the greatest speed, yet with gravity'. It holds up because ch. 42 has the whole community already sitting together for the evening reading, and they go to Compline together. No edit needed, but the first checker didn't consider it.",
+    "Rule ch. 22 says the monks sleep 'clothed', with belts or cords. It doesn't name the habit. 'In their habits' is a fair spoken version.",
+    "The stage direction's 'scriptorium at first light' needs the same timetable check as the bakehouse. In the Rule's winter timetable (ch. 48), the first hours of daylight are for reading, and work comes after Terce. In summer, work comes first in the morning.",
+    "The first checker's Silk Road note (an 1874 German use) may not be the earliest. From memory, the Mertens article it cites traces the German 'Seidenstra\u00dfe' to before Richthofen, possibly Carl Ritter in 1838. Neither date could be confirmed this session, so the future script should not credit anyone with coining the term without checking.",
+    "Title 'A Night Watch on Hadrian's Wall': it is still debated whether there was a walkway along the top of the Wall for sentries. The future script shouldn't show soldiers patrolling along the top as settled fact.",
+    "Title 'How a Cathedral Was Built, Very Slowly': fine as a title, but some cathedrals went up fast. Salisbury's main body took about 38 years (1220 to 1258), and Chartres was largely rebuilt in about 25 to 30 years after the 1194 fire. The script shouldn't suggest every cathedral took centuries."
+   ],
+   "publish_sources": [
+    {
+     "title": "Saint Benedict of Nursia (Encyclopaedia Britannica)",
+     "url": "https://www.britannica.com/biography/Saint-Benedict-of-Nursia",
+     "supports": "Benedict's dates (c. 480 to c. 547) and that he wrote the Rule in the sixth century"
+    },
+    {
+     "title": "Benedictines (Encyclopaedia Britannica)",
+     "url": "https://www.britannica.com/topic/Benedictines",
+     "supports": "The Rule became standard in Western monasteries by the ninth century, and Benedictine dominance through the 11th and 12th centuries"
+    },
+    {
+     "title": "Rule of Saint Benedict, chapter 22: How the Monks Are to Sleep (Palni Pressbooks edition)",
+     "url": "https://pressbooks.palni.org/ruleofbenedict/chapter/rb-22",
+     "supports": "Common dormitory, a light burning until morning, sleeping clothed and ready to rise at the signal"
+    },
+    {
+     "title": "Rule of Saint Benedict, chapter 42: That No One Speak After Compline (Palni Pressbooks edition)",
+     "url": "https://pressbooks.palni.org/ruleofbenedict/chapter/rb-42/",
+     "supports": "The evening reading before Compline and the silence after it"
+    },
+    {
+     "title": "Rule of Saint Benedict, chapter 8: The Divine Office at Night (Palni Pressbooks edition)",
+     "url": "https://pressbooks.palni.org/ruleofbenedict/?p=78",
+     "supports": "Rising at the eighth hour of the night in winter, after a little more than half the night's sleep"
+    },
+    {
+     "title": "Medieval Sourcebook: The Rule of St. Benedict, excerpts (Fordham University)",
+     "url": "https://sourcebooks.web.fordham.edu/source/rul-benedict-excerp.asp",
+     "supports": "Reading at meals, sleeping arrangements, the daily timetable"
+    },
+    {
+     "title": "Fountains Abbey: the dormitory (Cistercians in Yorkshire, University of Sheffield)",
+     "url": "https://cistercians.shef.ac.uk/fountains/buildings/dormitory/dormitory2.php",
+     "supports": "Long common dormitories, monks sleeping clothed, the bell for the night office"
+    },
+    {
+     "title": "The Night Stair (Hexham Abbey)",
+     "url": "https://hexhamabbey.org.uk/heritage/Articles/NightStair.html",
+     "supports": "Stairs from the dormitory straight into the church for the night office"
+    }
+   ],
+   "remaining_doubts": [
+    "I couldn't run any new searches. The shared web-search limit for this turn (200 searches) was already used up when I started, and direct fetches failed because hridigital.shef.ac.uk and www.thelatinlibrary.com aren't allowed in this session's network settings. My review rests on the first checker's sources, my own knowledge of the Rule's Latin text and Python arithmetic. If you want the open points below searched, send a follow-up message to continue, or raise CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION.",
+    "The Sheffield horarium page (hridigital.shef.ac.uk), listed as a source for the edit, comes from the first checker's list and couldn't be loaded here. Check it opens before relying on it.",
+    "'Sandals': Rule ch. 55 gives monks 'pedules et caligas', which at least one English translation renders 'sandals and shoes', so the line is defensible. My recollection, which I couldn't check this session, is that 11th-century customaries from northern houses describe day shoes and felt night shoes. 'Shoes are set down side by side' would be safer, but it's optional, not a correction.",
+    "'The great silence': the custom comes from Rule ch. 42, but I couldn't confirm that the phrase itself (magnum silentium) was used around 1050. It reads fine as the narrator's present-day name for it. Don't present it as what the monks themselves called it.",
+    "The Rule's sixth-century date and Benedict's authorship are the mainstream view. Most of what we know of Benedict's life comes from Gregory the Great's Dialogues, and a minority of scholars (notably Francis Clark) have argued Gregory didn't write them. That doesn't affect anything the script says.",
+    "'(2 Hours)' in the first title must match the finished upload. Only the opening exists so far.",
+    "The future bakehouse section: under the Rule's winter timetable, the time after the night office is for study, and by the 11th century much everyday baking was done by servants. If monks are shown baking before dawn, it needs a source (baking the communion bread is the likeliest exception)."
+   ]
+  }
+ },
+ {
+  "channel": 7,
+  "topic": "the 1911 theft of the Mona Lisa",
+  "first_pass_claims": 32,
+  "first_pass_flagged": [
+   {
+    "quote": "He served a short sentence. The painting went back to Paris in early 1914.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "There are two problems. (1) The order is reversed. The painting was back in the Louvre on 4 January 1914, after being shown at the Uffizi, in Rome and in Milan. Peruggia was not tried until June 1914. Putting the sentence first suggests it came before the return. (2) \"Paris in early 1914\" is shaky. The Louvre's own text and History.com date the rehanging in the Louvre to 4 January 1914. The train is widely reported to have reached Paris at the very end of December 1913, but I could not confirm that here. One source (La Libre Belgique) even gives 20 December 1913. Anchoring to the Louvre in January 1914 is safe.",
+    "sources": [
+     "https://api-www.louvre.fr/sites/default/files/2021-11/Transcription%20textuelle%20Joconde.pdf",
+     "https://www.history.com/articles/the-heist-that-made-the-mona-lisa-famous",
+     "https://www.herodote.net/21_aout_1911-evenement-19110821.php",
+     "https://www.lalibre.be/culture/arts/2018/12/29/la-folle-histoire-du-vol-de-la-joconde-le-tableau-le-plus-connu-du-monde-il-y-a-plus-dun-siecle-IOABR5GS6JFPHLGL5MPQAZLSZI/"
+    ],
+    "fix": "\"Peruggia said he had done it to bring her home to Italy. The painting was back on the wall of the Louvre in January 1914. That summer, he was tried in Florence and served a short sentence.\""
+   },
+   {
+    "quote": "The Man Who Sold the Eiffel Tower. Twice.",
+    "where": "title",
+    "verdict": "wrong",
+    "evidence": "From background knowledge only (the search budget ran out before this could be searched; check before publishing). In the standard account, Victor Lustig \"sold\" the tower as scrap in 1925 to the dealer Andr\u00e9 Poisson, who was too embarrassed to report it. Lustig then came back and tried the same trick on another dealer, but that dealer went to the police before any deal was done, and Lustig fled. So the second sale never happened. The whole episode also rests on later retellings (notably a 1961 book), not on French police or court records. That matters for a channel that promises \"told from the record\".",
+    "sources": [],
+    "fix": "\"The Man Who Sold the Eiffel Tower (and Tried Again)\""
+   },
+   {
+    "quote": "The Piltdown Man: Science's Longest Hoax",
+    "where": "title",
+    "verdict": "disputed",
+    "evidence": "From background knowledge, not searched this session. Piltdown Man was presented in December 1912 and exposed as a forgery in 1953, so it lasted about 41 years (computed in Python). It is usually called the most famous scientific hoax, not the longest, and no authority I know of ranks it the longest. Other fakes stood longer: the Vinland Map was published in 1965 and only confirmed a forgery by Yale in 2021, and the Calaveras Skull was found in 1866 and dated much later. \"Longest\" is an unsupported superlative.",
+    "sources": [],
+    "fix": "\"The Piltdown Man: The Fake Fossil That Lasted 40 Years\" (or \"Science's Most Famous Hoax\")"
+   }
+  ],
+  "final": {
+   "confirmed_claims": 27,
+   "edits": [
+    {
+     "where": "script",
+     "quote": "He served a short sentence. The painting went back to Paris in early 1914.",
+     "replace_with": "The painting was back in the Louvre in January 1914. That June, a court in Florence gave him a short prison sentence.",
+     "reason": "The order of events is wrong, and the date is shaky. The painting was rehung in the Louvre on 4 January 1914, after being shown in Florence, Rome and Milan. Peruggia was not tried until 4 to 5 June 1914 in Florence (1 year 15 days, cut on appeal to about 7 months 9 days). The current wording puts the sentence before the return. 'Back to Paris in early 1914' may also be literally wrong: the special train is usually said to have reached Paris on 31 December 1913 (I could not confirm this). Anchoring on the Louvre in January 1914 avoids that. I agree with the first checker's diagnosis but not their wording. 'That summer, he was tried in Florence and served a short sentence' suggests he served the time after the trial. In fact he had been in custody since his arrest on 11 or 12 December 1913 and was freed in July 1914, mostly on time already served (custody plus 7 months 9 days ends about 20 to 21 July 1914, computed in Python). 'Gave him a short prison sentence' is accurate either way.",
+     "confidence": "high",
+     "sources": [
+      "https://api-www.louvre.fr/sites/default/files/2021-11/Transcription%20textuelle%20Joconde.pdf",
+      "https://www.history.com/articles/the-heist-that-made-the-mona-lisa-famous",
+      "https://en.wikipedia.org/wiki/Vincenzo_Peruggia",
+      "https://theamericanmag.com/one-patriots-games/"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "The police needed suspects, and found famous ones.",
+     "replace_with": "The police needed suspects. A separate theft of small statues from the Louvre led them to two famous ones.",
+     "reason": "This gets the cause wrong by leaving it out. The line suggests the police picked Apollinaire and Picasso because they were famous. In fact they followed a real lead. G\u00e9ry Pieret, Apollinaire's former secretary, had stolen Iberian statuettes from the Louvre, sold two to Picasso and boasted about it to Paris-Journal on 29 August 1911. That trail led to Apollinaire's arrest on 7 September. The first checker's own evidence records this link but still passed the line. Also, in 1911 Picasso was known in the art world, not to the public at large.",
+     "confidence": "medium",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Guillaume_Apollinaire",
+      "https://europeana.eu/en/blog/did-picasso-steal-the-mona-lisa",
+      "https://www.openculture.com/2019/01/when-pablo-picasso-and-guillaume-apollinaire-were-accused-of-stealing-the-mona-lisa-1911.html"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "Neither had anything to do with it.",
+     "replace_with": "Neither had anything to do with the Mona Lisa.",
+     "reason": "This goes with the edit above. Once the statuettes are mentioned, 'it' becomes ambiguous, and it would be false about the statuettes: Picasso had bought two of them, and Apollinaire had one. Naming the Mona Lisa keeps the exoneration exactly true, which matters for a channel that promises 'no guessing about guilt'.",
+     "confidence": "medium",
+     "sources": [
+      "https://europeana.eu/en/blog/did-picasso-steal-the-mona-lisa",
+      "https://en.wikipedia.org/wiki/Guillaume_Apollinaire"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "The Man Who Sold the Eiffel Tower. Twice.",
+     "replace_with": "The Man Who Sold the Eiffel Tower. Then Tried Again.",
+     "reason": "In the standard account, Victor Lustig's 1925 con worked once, on the scrap dealer Andr\u00e9 Poisson. On his second attempt the target went to the police before any money changed hands, and Lustig fled. 'Twice' is a popular embellishment, which clashes with the channel's 'told from the record' promise. The first checker's '(and Tried Again)' is also accurate. My wording just keeps the original's rhythm. I could not search this in this session, so it rests on background knowledge shared by both checkers.",
+     "confidence": "medium",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Victor_Lustig"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "The Piltdown Man: Science's Longest Hoax",
+     "replace_with": "The Piltdown Man: The Fake Fossil That Lasted 40 Years",
+     "reason": "'Longest' is an unsupported superlative. Piltdown is usually called the most famous scientific hoax, not the longest. The Vinland Map, for example, was published in 1965 and only confirmed as a forgery by Yale in 2021. Piltdown ran from its unveiling on 18 December 1912 to its exposure on 21 November 1953, which is 40.9 years (computed in Python), so '40 Years' is a safe round figure. I'd avoid 'fooled science for 40 years': some scientists, such as David Waterston in 1913, doubted it from the start.",
+     "confidence": "medium",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Piltdown_Man"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "After it, she was the most famous painting in the world.",
+     "replace_with": "After it, she was on her way to becoming the most famous painting in the world.",
+     "reason": "This states a contested interpretation as settled fact. Popular accounts (Smithsonian, History.com) credit the theft with making her the world's most famous painting. Donald Sassoon's standard history argues that she was already among the most celebrated paintings by the late 19th century, and that her global status built up over decades: the theft, then Duchamp's L.H.O.O.Q. in 1919, the 1963 US tour and mass reproduction. The small change keeps the closing punch without overclaiming. This one is optional if the owner accepts the mainstream framing.",
+     "confidence": "low",
+     "sources": [
+      "https://www.smithsonianmag.com/arts-culture/stolen-how-the-mona-lisa-became-the-worlds-most-famous-painting-16406234/",
+      "Donald Sassoon, Mona Lisa: The History of the World's Most Famous Painting (HarperCollins, 2001)"
+     ]
+    }
+   ],
+   "missed_by_first_pass": [
+    "'The police needed suspects, and found famous ones' leaves out the real reason the police went to Apollinaire and Picasso: the stolen Louvre statuettes traced to G\u00e9ry Pieret. The first checker recorded the link in their evidence but still passed the framing.",
+    "Once that context is added, 'Neither had anything to do with it' becomes ambiguous. It is true of the Mona Lisa but not of the statuettes, which Picasso and Apollinaire had in their possession.",
+    "The first checker's own fix, 'That summer, he was tried in Florence and served a short sentence', implies he served the time after the trial. He was in custody from December 1913 and freed in July 1914, mostly on time already served.",
+    "'Went back to Paris in early 1914' may be wrong as well as out of order: the train is usually said to have reached Paris on 31 December 1913, a Wednesday. Only the rehanging in the Louvre (Sunday 4 January 1914) falls in 1914.",
+    "The closing line 'After it, she was the most famous painting in the world' was confirmed while being called an interpretation. It is a contested claim stated as settled fact (see Sassoon).",
+    "'Next: how he got it out of the building' promises a follow-up video that isn't among the ten titles. How he got out is itself disputed: Peruggia's own accounts changed (whether he hid overnight from Sunday or came in on Monday morning), and the Lancelotti brothers were suspected of helping him.",
+    "Minor, no edit needed: Peruggia first offered the painting to Geri by letter from Paris in late November 1913, signed 'Leonardo', before bringing it to Florence. 'Took it to Florence and offered it' is a fair compression.",
+    "The channel description promises reconstruction 'from court files, police reports and newspapers of the time', but every source gathered so far is secondary. The source list should add at least one primary source: a 1911 Paris newspaper on Gallica (BnF), or the Louvre's own archive text.",
+    "Title 'D. B. Cooper: What the Files Actually Say' is fine as the case name, but the hijacker bought his ticket as 'Dan Cooper'. 'D. B.' came from a press mix-up, and a script built on 'the files' must say so."
+   ],
+   "publish_sources": [
+    {
+     "title": "Mus\u00e9e du Louvre: The making of reputations (Louvre masterpieces visitor trail)",
+     "url": "https://louvre.fr/en/explore/visitor-trails/the-louvre-s-masterpieces/the-making-of-reputations",
+     "supports": "The museum's own account of the 1911 theft, B\u00e9roud finding the empty wall, and the painting's fame"
+    },
+    {
+     "title": "Mus\u00e9e du Louvre: La Joconde, text transcription (PDF)",
+     "url": "https://api-www.louvre.fr/sites/default/files/2021-11/Transcription%20textuelle%20Joconde.pdf",
+     "supports": "Return to the Louvre on 4 January 1914 (open the link to check it works before listing it; it could not be fetched in this session)"
+    },
+    {
+     "title": "Encyclopaedia Britannica: Vincenzo Peruggia",
+     "url": "https://www.britannica.com/biography/Vincenzo-Peruggia",
+     "supports": "Who Peruggia was, his glazing work at the Louvre, the recovery in Florence"
+    },
+    {
+     "title": "Smithsonian Magazine: Stolen: How the Mona Lisa Became the World's Most Famous Painting",
+     "url": "https://www.smithsonianmag.com/arts-culture/stolen-how-the-mona-lisa-became-the-worlds-most-famous-painting-16406234/",
+     "supports": "Monday closure, the slow discovery, the press frenzy, the theft's effect on her fame"
+    },
+    {
+     "title": "History.com: The Heist That Made the Mona Lisa Famous",
+     "url": "https://www.history.com/articles/the-heist-that-made-the-mona-lisa-famous",
+     "supports": "Timeline from 21 August 1911 to the arrest in Florence, the trial and the 1914 return"
+    },
+    {
+     "title": "Europeana: Did Picasso steal the Mona Lisa?",
+     "url": "https://europeana.eu/en/blog/did-picasso-steal-the-mona-lisa",
+     "supports": "Apollinaire's arrest, Picasso's questioning, and the Pieret statuettes"
+    },
+    {
+     "title": "Wikipedia: Vincenzo Peruggia (with its cited references)",
+     "url": "https://en.wikipedia.org/wiki/Vincenzo_Peruggia",
+     "supports": "Hiding place at rue de l'H\u00f4pital-Saint-Louis, the arrest in December 1913, trial, sentence and appeal"
+    }
+   ],
+   "remaining_doubts": [
+    "This pass could not search: the shared web-search budget was already used up, and en.wikipedia.org, fr.wikipedia.org and api-www.louvre.fr do not resolve in this session. Where my verdicts go beyond the first checker's search evidence, they rest on background knowledge plus Python arithmetic: 21 Aug 1911 a Monday, 22 Aug a Tuesday, Louvre reopened Tuesday 29 Aug (7 days), Apollinaire held 5 days (7 to 12 Sep), Picasso 29, theft to recovery 842 days, Piltdown 40.9 years. A follow-up search session should confirm the items below before recording.",
+    "When the painting reached Paris: usually given as 31 December 1913, but one source says 20 December, and that is probably its handover in Rome. The suggested fix avoids the question by citing the rehanging in the Louvre in January 1914.",
+    "Peruggia's trial dates (4 to 5 June 1914), first sentence (1 year 15 days), appeal result (7 months 8 or 9 days) and release date (July 1914) come from secondary sources. Contemporary Italian newspapers would settle them.",
+    "Peruggia's arrest is dated 11 December 1913 by History.com and 12 December by Wikipedia. The script rightly gives no day; keep it that way unless a primary source settles it.",
+    "Whether the painting stayed in Peruggia's own room the whole time: some accounts say he first left it with a friend (Vincenzo Lancelotti) for a while. 'It was in Paris, in the lodgings of an Italian workman' is still broadly right, but the next video ('how he got it out') must handle the accomplice question and Peruggia's changing versions as contested.",
+    "Whether Apollinaire was formally charged over the Mona Lisa or only over harbouring Pieret and receiving the statuettes. The script says only 'arrested', which is safe.",
+    "Title checks resting only on background knowledge: Lustig's second attempt failing (and the thin record for the whole episode, mostly from a 1961 book); the Gardner Museum's own '81 minutes' figure (confirm on gardnermuseum.org); G\u00f6ring's trade of 137 paintings for van Meegeren's fake; the Antwerp loot value and Notarbartolo's insurance-fraud claim (both contested).",
+    "'Next: how he got it out of the building' promises a video that isn't in the first ten titles. Either add it to the list or change the closing line.",
+    "'Cleaners and workmen had the building to themselves' leaves out the guards on duty. I treated it as acceptable relative to the public, but a stricter reading would add 'and a few guards'."
+   ]
+  }
+ },
+ {
+  "channel": 8,
+  "topic": "what an insurance deductible is",
+  "first_pass_claims": 24,
+  "first_pass_flagged": [
+   {
+    "quote": "A deductible is the part of a covered loss that you pay yourself before the insurance pays anything.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "This is the standard textbook definition. NAIC: 'A deductible is the amount of loss paid by the policyholder before any loss is paid by the insurer.' HealthCare.gov (archived): 'The amount you owe for health care services your health insurance or plan covers before your health insurance or plan begins to pay.' It holds for car and home policies. But the script later applies the word to health plans too, and there 'before the insurance pays anything' isn't true: HealthCare.gov says all Marketplace plans pay the full cost of certain preventive benefits before you meet your deductible, and many plans pay for things like check-ups (or charge only a copay) before it. The simplest fix is a short caveat in the health-plan line (see that claim), not a rewrite here.",
+    "sources": [
+     "https://content.naic.org/insurance-topics/hurricane-deductibles",
+     "https://webarchive.library.unt.edu/web/20170118214452/https://www.healthcare.gov/glossary/deductible",
+     "https://healthcare.gov/glossary/deductible",
+     "https://www.coverme.gov/sites/default/files/documents/Health%20Insurance%20Basics%20-%20PreDeductible.pdf"
+    ],
+    "fix": "Keep this sentence, and add the health-plan caveat to the Calendar section (wording given under \"On many health plans, it adds up across a year.\")."
+   },
+   {
+    "quote": "and there's usually no point in claiming.",
+    "where": "script",
+    "verdict": "oversimplified",
+    "evidence": "For a car or home repair under a per-claim deductible, there is nothing to collect, and consumer sources agree it usually isn't worth filing. Two cases where a knowledgeable viewer would object. (1) Car accidents: most policies require prompt notice of an accident whether or not you claim, and insurers can deny later coverage (for example, if the other driver claims against you) when you didn't report it. Sources separate 'filing a claim' from 'reporting'. (2) Health plans, which the video brings up next: a bill under the deductible still goes through the plan, so the negotiated rate applies and the amount counts toward the yearly deductible. Saying 'no point in claiming' without a qualifier could mislead on both.",
+    "sources": [
+     "https://www.nerdwallet.com/insurance/auto/learn/when-to-file-car-insurance-claim",
+     "https://www.cheapinsurance.com/?p=77201",
+     "https://www.priorityhealth.com/individual-family-health-insurance/using-your-plan/paying-for-care/meeting-your-deductible"
+    ],
+    "fix": "That's under your deductible, so the insurer pays nothing, and for a repair like this there's usually no point in claiming. (After a car accident, though, your policy may still require you to report it.)"
+   },
+   {
+    "quote": "How to Read a Lease: The Six Parts",
+    "where": "title",
+    "verdict": "oversimplified",
+    "evidence": "'The Six Parts' suggests leases have a standard six-part structure. They don't: there is no legal or industry standard division, and guides list a dozen or more common sections (parties, term, rent, security deposit, occupancy, use rules, maintenance and repairs, landlord entry, insurance, default and termination, indemnification, boilerplate), with state landlord-tenant law overriding some clauses. Picking six to focus on is fine; presenting them as 'the' six parts is not.",
+    "sources": [
+     "https://www.findlaw.com/realestate/landlord-tenant-law/standard-lease-provisions.html",
+     "https://www.superlawyers.com/resources/landlord-and-tenant/residential-lease-review/"
+    ],
+    "fix": "How to Read a Lease: Six Parts to Check First"
+   }
+  ],
+  "final": {
+   "confirmed_claims": 21,
+   "edits": [
+    {
+     "where": "script",
+     "quote": "That's under your deductible, so the insurer pays nothing, and there's usually no point in claiming.",
+     "replace_with": "That's under your deductible, so the insurer pays nothing. On a car or home policy, there's usually no point in claiming, though after a car accident your policy may still require you to report it.",
+     "reason": "As written, this applies to every kind of policy. Two sections later the script says health-plan deductibles add up across a year. On those plans a $400 bill does matter: put through the plan, it gets the plan's negotiated rate and counts toward the yearly deductible. A viewer could take 'no point in claiming' as a reason to skip using their health insurance, which would cost them money. On car policies, the standard ISO personal auto policy (Part E, Duties After an Accident or Loss) makes prompt notice of 'how, when and where the accident or loss happened' a condition of coverage. Someone who stays silent after a small bump can lose coverage if the other driver claims later. 'Claiming' and 'reporting' are different things, and this line blurs them. The first checker's fix said 'a repair like this' and added a note in brackets. That doesn't name health plans and can't be read aloud cleanly. This version says which policies it means and gives the reporting point as a spoken clause.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.healthcare.gov/glossary/deductible/",
+      "https://www.nerdwallet.com/insurance/auto/learn/when-to-file-car-insurance-claim",
+      "https://www.priorityhealth.com/individual-family-health-insurance/using-your-plan/paying-for-care/meeting-your-deductible",
+      "https://cluballiance.aaa.com/the-extra-mile/advice/budget/insurance-basics-understanding-deductibles"
+     ]
+    },
+    {
+     "where": "script",
+     "quote": "On many health plans, it adds up across a year.",
+     "replace_with": "On many health plans, it adds up across a year, so smaller bills for covered care still count toward it, and some care, like a check-up, is often paid for by the plan before you reach it.",
+     "reason": "The script's definition says the deductible is paid 'before the insurance pays anything'. HealthCare.gov uses nearly the same wording, so the definition can stay. HealthCare.gov's own glossary then adds that many plans pay for some services, like a checkup, before the deductible is met, and that all Marketplace plans pay the full cost of certain preventive benefits even before it's met. Since the video applies the word to health plans, it should say so here. Saying small bills count toward the yearly deductible also explains why the $400 rule above doesn't carry over to health plans. The first checker's wording said check-ups are 'covered before you reach it'. In insurance terms all covered care is 'covered' before the deductible; the question is who pays. 'Paid for by the plan' is the precise version, so the fix doesn't add a new error.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.healthcare.gov/glossary/deductible/",
+      "https://www.healthcare.gov/coverage/preventive-care-benefits/",
+      "https://www.priorityhealth.com/individual-family-health-insurance/using-your-plan/paying-for-care/meeting-your-deductible"
+     ]
+    },
+    {
+     "where": "title",
+     "quote": "How to Read a Lease: The Six Parts",
+     "replace_with": "How to Read a Lease: Six Parts to Check",
+     "reason": "'The Six Parts' says leases have a fixed six-part structure. There's no legal or industry standard like that. Guides list a dozen or more usual sections (parties, term, rent, deposit, occupancy, use rules, repairs, landlord entry, insurance, default and termination, and so on), and state landlord-tenant law overrides some clauses. Choosing six to focus on is fine; calling them 'the' six parts isn't. I dropped 'First' from the first checker's version, because it would add a claim about what order to read a lease in.",
+     "confidence": "medium",
+     "sources": [
+      "https://www.findlaw.com/realestate/landlord-tenant-law/standard-lease-provisions.html",
+      "https://www.superlawyers.com/resources/landlord-and-tenant/residential-lease-review/"
+     ]
+    }
+   ],
+   "missed_by_first_pass": [
+    "The first checker's health-plan fix says check-ups are 'covered before you reach it'. In insurance terms every covered service is covered before the deductible; what changes is who pays. HealthCare.gov says plans 'pay for' those services before the deductible is met. Their wording would have added an inaccuracy an expert would notice.",
+    "Their fix for the $400 line ('for a repair like this', plus a note in brackets) still lets a viewer apply 'no point in claiming' to health bills, which the very next section says add up across the year. The note in brackets also can't be spoken naturally.",
+    "The difference between claiming and reporting has a primary basis, not just the consumer sites they cited: the standard ISO personal auto policy (Part E) makes prompt notice of any accident or loss a condition of coverage. Their supporting source (cheapinsurance.com) is weak.",
+    "In the $3,000 example the insurer pays everything above the deductible. That's right for a car or home repair, but on most health plans you keep paying coinsurance or copays after the deductible until you reach the out-of-pocket maximum. The script doesn't say otherwise, but the follow-up video ('one picture') mustn't reuse the $500/$2,500 split for a health bill.",
+    "'How much is the deductible?' can have more than one answer. Car policies often have separate collision and comprehensive deductibles. Home policies in storm areas often add a hurricane or wind deductible set as a percentage of the dwelling's insured value, which can be many thousands of dollars. This bears on the 'could I pay it tomorrow' question. It isn't wrong as written, so it's not an edit.",
+    "Not every health deductible is yearly: Medicare Part A's deductible applies per benefit period, which can happen more than once a year. The script's 'many' covers this.",
+    "Some of the first pass's citations aren't good enough to publish (cheapinsurance.com, a miscapitalised Wikipedia link). Keep them out of the description."
+   ],
+   "publish_sources": [
+    {
+     "title": "HealthCare.gov Glossary: Deductible",
+     "url": "https://www.healthcare.gov/glossary/deductible/",
+     "supports": "Definition of a deductible; health-plan deductibles are yearly; some care (checkups, preventive benefits) is paid before the deductible is met; higher premiums usually mean lower deductibles and vice versa"
+    },
+    {
+     "title": "NAIC: Hurricane Deductibles",
+     "url": "https://content.naic.org/insurance-topics/hurricane-deductibles",
+     "supports": "Regulator's definition of a deductible as the part of a loss the policyholder pays before the insurer pays; percentage deductibles on home policies"
+    },
+    {
+     "title": "Insurance Information Institute: Understanding your insurance deductibles",
+     "url": "https://www.iii.org/article/understanding-your-insurance-deductibles",
+     "supports": "Deductibles share risk between you and the insurer; on car and home policies they apply to each claim; higher deductible, lower premium"
+    },
+    {
+     "title": "Insurance Information Institute: Nine ways to lower your auto insurance costs",
+     "url": "https://www.iii.org/article/nine-ways-to-lower-your-auto-insurance-costs",
+     "supports": "Raising the deductible lowers the collision and comprehensive premium; keep enough money set aside to pay the deductible"
+    },
+    {
+     "title": "HealthCare.gov Glossary: Premium",
+     "url": "https://www.healthcare.gov/glossary/premium/",
+     "supports": "The premium is what you pay to have the coverage, separate from the deductible and copays"
+    },
+    {
+     "title": "HealthCare.gov: Preventive health services",
+     "url": "https://www.healthcare.gov/coverage/preventive-care-benefits/",
+     "supports": "Marketplace plans cover certain preventive services at no cost, even before the deductible is met"
+    },
+    {
+     "title": "Progressive: How does a car insurance deductible work?",
+     "url": "https://www.progressive.com/answers/car-insurance-deductible/",
+     "supports": "An insurer's own explanation that a car deductible is paid each time you file a claim"
+    }
+   ],
+   "remaining_doubts": [
+    "I couldn't search again: the 200-search limit, shared by every agent in this run, had already been used up when my pass began. Fetching www.healthcare.gov and www.iii.org also failed because those hosts aren't allowed in this session's network settings; they would need to be allowed before anyone fetches them directly. My checks of the HealthCare.gov glossary wording, the ISO auto-policy notice clause and Florida's yearly hurricane deductible therefore rest on my own knowledge plus the first checker's search results, not on new independent searches. Before recording, the owner should open the HealthCare.gov deductible page and confirm the 'checkup' and 'preventive benefits' sentences are still there.",
+    "The definition the first checker quoted ('the amount of loss paid by the policyholder before any loss is paid by the insurer') is attributed to NAIC's hurricane-deductibles page. I couldn't confirm the sentence is on that page. If it isn't, cite NAIC's glossary of insurance terms instead.",
+    "The car-accident reporting clause in edit 1 is a judgement call. The ISO standard form requires prompt notice, but insurers' forms vary and some state rules differ. 'May still require' is hedged to match. If the owner wants the shortest version, 'On a car or home policy, there's usually no point in claiming' alone still fixes the health-plan problem.",
+    "The lease title is about tone as much as fact. Some viewers will read 'The Six Parts' as the six parts the video chose rather than a fixed legal structure.",
+    "The first checker's figures (15 to 30 percent and 40 percent savings from a higher car deductible, and Florida's hurricane deductible applying once a year under Fla. Stat. 627.701(5)(a)) aren't in the script, so they don't affect this video. I couldn't re-check them myself."
+   ]
+  }
+ }
+]

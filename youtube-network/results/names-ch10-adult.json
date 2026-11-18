@@ -1,0 +1,535 @@
+{
+  "summary": "The portfolio's naming agent: research competitors, invent names checked on YouTube as they go, score them with two independent judges, then clear the top three on YouTube, .com, US trademarks and the web, and recommend one per channel",
+  "agentCount": 5,
+  "logs": [],
+  "result": [
+    {
+      "channel": 10,
+      "label": "wordless animated Shorts for adults (tiny characters, grown-up problems)",
+      "research": {
+        "competitors": [
+          {
+            "channel": "Minuscule",
+            "subs": 1850000,
+            "naming_style": "Single size-word (Latin-ish 'tiny'). Wordless insect comedy; topped 'ant', 'snail', 'cgi short', 'silent animation' queries. Owns the tiny-creature, no-dialogue idea outright, so tiny/mini/minuscule wording is closed."
+          },
+          {
+            "channel": "The Very Small Creatures",
+            "subs": 12300,
+            "naming_style": "Descriptive size phrase ('The Very Small ...'). Aardman preschool claymation. Exactly the cute/kids register this channel must avoid."
+          },
+          {
+            "channel": "Shaun the Sheep Official",
+            "subs": 14000000,
+            "naming_style": "Character name. Wordless farm comedy for families; ranks for 'animated short no dialogue' and 'silent animation'."
+          },
+          {
+            "channel": "Mr Bean",
+            "subs": 36200000,
+            "naming_style": "Character name. The reference point for wordless physical comedy; 'Mr Bean style' searches go straight to it."
+          },
+          {
+            "channel": "KIS KIS - keep it short",
+            "subs": 835000,
+            "naming_style": "Curator label: a nonsense duplicated word plus a tagline. Posts festival shorts, including adult and mental-health ones ('A Girl Nobody Sees', 'Balcony Cacophony')."
+          },
+          {
+            "channel": "TheCGBros",
+            "subs": 4700000,
+            "naming_style": "Curator label: technique ('CG') plus 'Bros'."
+          },
+          {
+            "channel": "ESMA Movies",
+            "subs": 1420000,
+            "naming_style": "School name plus 'Movies'. 'Quack!' ranks across the 3D, CGI, silent and emotional queries."
+          },
+          {
+            "channel": "GOBELINS Paris",
+            "subs": 1130000,
+            "naming_style": "School name plus city."
+          },
+          {
+            "channel": "SkyeWei",
+            "subs": 1120000,
+            "naming_style": "Creator name. '[Animation] I'll Start Tomorrow...' (9.1M) shows procrastination and adult-life themes travel."
+          },
+          {
+            "channel": "PolyFilms",
+            "subs": 45600,
+            "naming_style": "Short coined prefix plus 'Films'. 'One Brave Trunk' had 6.3M views, a huge outlier for its size."
+          },
+          {
+            "channel": "Day One Films",
+            "subs": 101000,
+            "naming_style": "Phrase plus 'Films'. Abstract-theme shorts ('DISCIPLINE', 'DOPAMINE', 'Loneliness'), self-improvement tone."
+          },
+          {
+            "channel": "AJ Jefferies",
+            "subs": 14300,
+            "naming_style": "Creator name. 'DUCKS' (2.2M) ranks on the adult, sad, no-dialogue, stop-motion and Blender queries."
+          },
+          {
+            "channel": "Awesome3D",
+            "subs": 120000,
+            "naming_style": "Adjective plus technique ('3D'). Generic, Blender comedy shorts."
+          },
+          {
+            "channel": "GULU Animation",
+            "subs": 85200,
+            "naming_style": "Coined two-syllable word plus 'Animation'. Wordless food-object shorts ('Banana', 'Donut Adventure'), close to the brief's object characters but kid-leaning."
+          },
+          {
+            "channel": "Avocado Animations",
+            "subs": 3130000,
+            "naming_style": "Food noun plus 'Animations'. 'Punch the Lonely Monkey'."
+          },
+          {
+            "channel": "Gossip Goblin",
+            "subs": 1600000,
+            "naming_style": "Alliterative quirky creature name. Adult sci-fi and cosmic horror ('WOODNUTS', 9.5M)."
+          },
+          {
+            "channel": "Dead Sound",
+            "subs": 1230000,
+            "naming_style": "Moody two-word compound. Dinosaur animated series."
+          },
+          {
+            "channel": "Elen Pebble Animations",
+            "subs": 52600,
+            "naming_style": "Personal name plus 'Pebble' plus 'Animations'. Mordillo-style wordless gag cartoons. 'Pebble' is already in use in wordless gag animation."
+          },
+          {
+            "channel": "The Thick Necks",
+            "subs": 91300,
+            "naming_style": "'The' plus a comic plural body-trait. Short gag cartoons."
+          },
+          {
+            "channel": "Lord Wojak",
+            "subs": 266000,
+            "naming_style": "Meme character with a title. 'Life of a Burnout at 30' covers adult burnout and malaise, with words."
+          },
+          {
+            "channel": "Low Budget Stories",
+            "subs": 1270000,
+            "naming_style": "Self-deprecating descriptor plus 'Stories'. 'Being Lonely in your 30's', adult loneliness with dialogue."
+          },
+          {
+            "channel": "latenightmavie",
+            "subs": 33600,
+            "naming_style": "Lowercase handle. 'SUICIDELAND' (1.2M), dark adult short."
+          },
+          {
+            "channel": "Crafty Short Films",
+            "subs": 69900,
+            "naming_style": "Adjective plus 'Short Films'. British dark comedy shorts."
+          },
+          {
+            "channel": "Thakur Animation",
+            "subs": 151000,
+            "naming_style": "Surname plus 'Animation'. 'Dark Humor 3D Animation' meme compilations."
+          },
+          {
+            "channel": "Andrea Love",
+            "subs": 174000,
+            "naming_style": "Creator name. Stop-motion short 'Tulip'."
+          },
+          {
+            "channel": "Warm Quiet Days",
+            "subs": 14400,
+            "naming_style": "Cozy mood triad (warm/quiet/days). Part of the huge cozy-Ghibli ambience wave, with HanaQ Ghibli (14.5K), Anime Kitchen (19.3K), Anichill, Quiet Echoes, Soft Ghibli Stories and Cozy animated days."
+          },
+          {
+            "channel": "RICE BRAIN",
+            "subs": 11400,
+            "naming_style": "Odd food-plus-body compound in caps. AI 'Mini-World vs Spoon' ultra-macro videos (2.9M). The AI mini-world niche also has Miniature Tiny World, Tiny Shroom and Bloom Stories."
+          },
+          {
+            "channel": "Studio S Films",
+            "subs": 40,
+            "naming_style": "'Studio' plus a letter plus 'Films'. Its 'Whimsy Creatures Wordless Animated Series' shows the wordless-creature-series idea exists only as tiny, kid-leaning attempts."
+          },
+          {
+            "channel": "Adult Swim",
+            "subs": 8420000,
+            "naming_style": "Network brand. 'Smiling Shorts' and Smiling Friends own the label 'adult animated shorts'."
+          },
+          {
+            "channel": "BBC (The Close)",
+            "subs": 15700000,
+            "naming_style": "Broadcaster. 'The Close | Adult Animation Comedy Short Film' (4.2M) appears on six queries."
+          }
+        ],
+        "crowded_words": [
+          "Tiny / Mini / Miniature / Minuscule / Small / Little / Very Small (Minuscule, The Very Small Creatures, Miniature Tiny World, Tiny Shroom, RICE BRAIN's 'Mini-World'): the obvious size words are owned and read as kids or AI slop",
+          "Creatures / Critters / Whimsy (The Very Small Creatures, 'Whimsy Creatures'): cute and preschool",
+          "World / Planet / Village / Land (Tiny World, Vegetable Planet, The Quiet Village, Peppa's 'Tiny Land')",
+          "Cozy / Quiet / Soft / Warm / Silent / Chill / Rain (Warm Quiet Days, Quiet Echoes, Soft Ghibli Stories, Anichill, Ghibli Rainroom): the Ghibli ambience wave has used these up",
+          "Ghibli / Pixar-style as name parts",
+          "Tales / Stories / Toons / Toon (Low Budget Stories, Soft Ghibli Stories, Ssoftoons, MiddleClassToons, KiraNeeluToons)",
+          "Studio / Studios / Films / Movies / Animation / Animations / 3D / CG / Shorts as suffixes (PolyFilms, Day One Films, GULU Animation, Awesome3D, Avocado Animations, Chaisu Studios, Veldara Studios, TheCGBros, Crafty Short Films): the default pattern, and it makes a name generic",
+          "Short / Keep it short (KIS KIS - keep it short, Crafty Short Films)",
+          "Relatable / Adulting / Life of ... / Every ... Ever (adulting and relatable Shorts are full of tiny low-effort channels)",
+          "Lonely / Burnout / Existential / Dread (Lord Wojak's 'Burnout', Low Budget Stories, The Existential Dreadniks; 'Burnout' search is swamped by a Forsaken game meme and the band BURNOUT SYNDROMES)",
+          "Pebble (Elen Pebble Animations), Snail (Immortal Snail meme, Turbo, SpongeBob's Gary), Ant (Minuscule, Antiks, Ant and Grasshopper kids' stories): the brief's own example characters already carry other brands' associations",
+          "Goblin / Lord / quirky-creature alliteration (Gossip Goblin, Lord Wojak)",
+          "Dark Humor as a label (Thakur Animation, Late Night Brandon)",
+          "Errand / Pluck / Gumption / Thimble (the earlier kids'-concept candidates lean storybook and toy-like for an adult brand)"
+        ],
+        "open_territory": "No channel owns deadpan, cinematic, adult small-life comedy without words. The scout (five batches: 23 queries, 22 returned results) shows four naming camps. (1) Size words, owned by Minuscule and the AI mini-world and doll channels, which read as kids or AI. (2) Cozy mood words (quiet, soft, warm, rain, Ghibli), owned by the ambience wave. (3) Studio or school labels (X Films, X Animation, X 3D, X Studios) and curators (KIS KIS, TheCGBros, ESMA, GOBELINS). (4) Creator names (AJ Jefferies, SkyeWei, Aaron Blaise). Adult relatable animation (Lord Wojak, Low Budget Stories, SkyeWei's 'I'll Start Tomorrow') uses dialogue and meme or self-help framing. The wordless channels that have reached scale are all-ages (Minuscule, Shaun the Sheep, Mr Bean), and the few explicit wordless-creature series are tiny and kid-leaning (Studio S 'Whimsy Creatures', Pajama Moon). Open: names drawn from adult paperwork and the workday rather than from size or cuteness. Examples: forms, notices, ledgers, minutes, overtime, the night shift, the small hours, waiting rooms, rent day, the last bus, the 9-to-5, the lease, the payslip, the bureau or department, the out-of-office. Also open: dry, mock-official or cinematic phrasing (a deadpan title card, a film-noir or weather-report register) that implies smallness by understatement or scale contrast rather than saying 'tiny'. Coined compounds that pair one plain adult noun with one quiet scale hint (no Films, Animation, Studio, 3D, Tales or Toons suffix) would stand alone; nothing in the niche reads like that. Keep everything out of the storybook register (no whimsy, critters, little, pocket, pluck), since a child-appealing brand creates made-for-kids problems. Keep the brief's example characters (snail, pebble, ant) out of the name too, because each is already tied to Minuscule, Elen Pebble Animations, Turbo or the Immortal Snail meme. Spanish check: avoid words that turn diminutive or cute in Spanish (-ito/-ita forms, 'chiquito')."
+      },
+      "table": [
+        {
+          "name": "Modest Catastrophes",
+          "why": "Handle @ModestCatastrophes (18 characters). The name pairs a big word with a small one, which is the channel's whole idea: disasters on a small scale for very small characters, like the commute, the interview or being let go. It hints at size through understatement, not through 'tiny'. Dry and adult with no cute tone, nothing bad in Spanish, and easy to spell after hearing it once. The handle is near the 20-character limit.",
+          "avg": 8,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 8,
+              "reason": "Best fit. My own brandcheck run printed CLEAR: YouTube CLEAR with 24 channels in search and none matching, modestcatastrophes.com available, and 0 live US marks. A web search for the exact phrase found no book, show, podcast or channel. The understatement carries the whole concept: a big word made small, adult and deadpan with nothing toy-like, so it stays safe under the made-for-kids rules. It suggests tiny scale without the word 'tiny', reads as a cinematic short-film anthology, and covers every episode type (rent, the interview, being let go, the wedding alone), so it will still fit in ten years. It is memorable and easy to spell after one hearing, and 'catástrofes modestas' is harmless in Spanish. It shares no word with any sister channel. Small minuses: it is wry rather than warm; 'catastrophe' in a feed could briefly suggest fail compilations, though 'Modest' undercuts that; it shares only one word with the UK sitcom 'Catastrophe', also adult comedy, which is not confusing; and the handle is 18 characters."
+            },
+            {
+              "lens": "language",
+              "score": 8,
+              "reason": "brandcheck: CLEAR (YouTube CLEAR, .com available, 0 live US marks). This is the best fit. The understatement is itself deadpan, it signals scale without a cute size word, and it reads plainly as adult, with an echo of Swift's 'A Modest Proposal'. Nothing bad in Spanish ('catástrofes modestas'). Risks are small: people may type 'catastrophies' (consider registering that spelling too), the handle has 18 of 20 characters, and the word 'catastrophes' sits near disaster and weather content in search (a ytscout run for the phrase returned a typhoon video). It is unlikely to be confused with a show or brand, apart from a faint echo of the band Modest Mouse."
+            }
+          ]
+        },
+        {
+          "name": "Petty Indignities",
+          "why": "Handle @PettyIndignities (16). A familiar adult phrase ('the petty indignities of daily life') that names the show's material exactly: rent day, the job interview, the wedding alone. 'Petty' (from French 'petit') hints at size quietly. Deadpan and wry, typeable because it is a real phrase, and YouTube search found just one channel. No problems in Spanish.",
+          "avg": 6.75,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 6.5,
+              "reason": "My brandcheck printed CLEAR: YouTube CLEAR with only 1 channel in search, pettyindignities.com available, and 0 live US marks. The web search found no work with this exact title. The nearest names were the podcasts 'Talk Petty To Me' and 'Let's Talk Petty!', which are not close enough to confuse. It is a real adult phrase, instantly wry and very ownable. Two drawbacks hold it back. In current slang 'petty' means spiteful, and 'petty revenge' Reddit narration is a huge faceless genre on YouTube, so a scroller may expect story narration rather than wordless animation. 'Petty' also belittles some of the brief's material (burnout, being let go, a wedding alone), which works against the warmth. The size hint is too faint to notice, and 'indignities' is a harder word for non-native viewers of a wordless channel meant to travel worldwide."
+            },
+            {
+              "lens": "language",
+              "score": 7,
+              "reason": "brandcheck: CLEAR (ytcheck found 1 channel; .com available; 0 marks). It is a real phrase, so it is easy to spell after one hearing and names the material exactly in a dry, adult voice. Linguistic risks: on YouTube, 'petty' now mostly means spiteful ('being petty') and the Reddit 'petty revenge' narration genre, which is narrated and wordy, the opposite of this channel, and it makes the tone sour rather than warm. As a stock phrase it is harder to own in search over time. The size hint through 'petit' will be lost on most viewers. 'Petty' means nothing to Spanish speakers but is harmless."
+            }
+          ]
+        },
+        {
+          "name": "Lesser Heroics",
+          "why": "Handle @LesserHeroics (13). This is the warm one: small, unglamorous bravery in grown-up days, with 'lesser' as a quiet size hint. Adult and slightly cinematic, with no toy-like register. One small risk: 'heroics' may make some people expect a superhero-parody channel.",
+          "avg": 6,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 6,
+              "reason": "My brandcheck printed CLEAR: YouTube CLEAR with 23 channels in search and none matching, lesserheroics.com available, and 0 live US marks. The web search found no conflict. It is the warmest idea, small and unglamorous bravery, with an adult, slightly literary feel. But 'heroics' points to superhero parody or gaming, and 'lesser' can read as second-rate rather than small. Nothing in it signals grown-up problems, and the phrase is fairly flat, so it is less memorable than the top two. Choose either this or Baseboard Heroics, not both."
+            },
+            {
+              "lens": "language",
+              "score": 6,
+              "reason": "brandcheck: CLEAR. Short handle, warm and easy to type. But 'lesser' plus 'heroics' sounds like gaming or fantasy role-playing tiers ('lesser demon', 'lesser healing potion') and superhero parody, so it may draw the wrong audience. People may hear it as 'Lesser Heroes'. It only weakly signals small characters and does not say 'grown-up problems'. No problems in Spanish."
+            }
+          ]
+        },
+        {
+          "name": "Unsung Tuesdays",
+          "why": "Handle @UnsungTuesdays (14). A wordless pun ('unsung' means unvoiced and also overlooked) on the dullest day of the week: everyday adult life nobody notices, treated warmly. Easy to say and spell. Caution: TV One's music documentary series 'Unsung' shares the first word, a mild overlap in documentaries.",
+          "avg": 6,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 6,
+              "reason": "My brandcheck printed CLEAR: YouTube CLEAR with 26 channels in search and none matching, unsungtuesdays.com available, and 0 live US marks. A web search for the exact phrase found nothing. It is warm and adult, Tuesday is a good shorthand for the dull grown-up week, and 'unsung' quietly works as wordless. That second layer is clever but most people will miss it. It says nothing about tiny characters or animation, so it reads as a lifestyle, vlog or poetry channel as easily as this one. A weekday in the name suggests an upload schedule that daily Shorts will not keep. There is a mild echo of TV One's 'Unsung' and 'Tuesdays with Morrie'. It is easy to say and spell."
+            },
+            {
+              "lens": "language",
+              "score": 6,
+              "reason": "brandcheck: CLEAR. The wordless pun on 'unsung' is clever and the tone is warm and adult. Downsides: 'Tuesdays' echoes the well-known book 'Tuesdays with Morrie', and 'Unsung' is shared with TV One's documentary series. A weekday in the name suggests a weekly Tuesday upload, which works against a daily Shorts schedule. It says nothing about tiny characters. In Spanish, 'martes' brings to mind 'martes 13' (the unlucky day), which is mild and not offensive."
+            }
+          ]
+        },
+        {
+          "name": "Cubicle Moss",
+          "why": "Handle @CubicleMoss (11). A deadpan picture of a slow, small, overlooked life growing in an office. It is adult, a little melancholy and warm, and uses a scale image rather than a size word. Only 5 channels came back in the search, so it is very ownable. The drawback is that it leans towards office life, while the brief also covers rent, insomnia and weddings.",
+          "avg": 5.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5.5,
+              "reason": "My brandcheck printed CLEAR: YouTube CLEAR with only 5 channels in search, cubiclemoss.com available, and 0 live US marks. The web search found no conflict. It is the most evocative and ownable picture of the lot, deadpan and gently melancholy. But it ties the channel to office life when the brief also covers rent, insomnia and weddings. Cubicles are already dated and will look more so in ten years. Out of context it could pass for a houseplant, terrarium or lo-fi music channel, and it does not signal tiny characters or stories."
+            },
+            {
+              "lens": "language",
+              "score": 5.5,
+              "reason": "brandcheck: CLEAR (ytcheck found 5 channels), so it is very ownable and has a nice melancholy picture. Linguistic risk: 'cubicle' and 'cubical' sound the same and are commonly confused, so people who hear it will often type @CubicalMoss. It sounds like a lo-fi or indie band, or an office-plant channel, not animation. It narrows the channel to office life when the brief also covers rent, insomnia and weddings. 'Moss' is also a known VR game whose hero is a tiny mouse, a mild echo."
+            }
+          ]
+        },
+        {
+          "name": "Underfoot Epics",
+          "why": "Handle @UnderfootEpics (14). The scale contrast is in the name: epic, cinematic stories told at floor level, among the things people step over. 'Underfoot' implies smallness without a cute size word, and 'epics' matches the cinematic lighting. It signals adulthood less clearly than the names above, so the tagline should carry the grown-up problems.",
+          "avg": 5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5,
+              "reason": "My brandcheck printed CLEAR: YouTube CLEAR with 20 channels in search and none matching, underfootepics.com available, and 0 live US marks. The scale contrast is real and 'epics' suits the cinematic lighting. But the name is grand rather than deadpan and says nothing about adult life. 'Epic adventures of creatures underfoot' sounds like a kids' bug-adventure series or a macro nature channel, which is the child-appeal risk the brief warns against. In gaming and meme language 'epic' also points to 'epic fails'."
+            },
+            {
+              "lens": "language",
+              "score": 5,
+              "reason": "brandcheck: CLEAR. Easy to type, and the scale contrast is there. But 'epic' or 'epics' is a gamer and kid word on YouTube ('epic fails', Epic Games), which works against the adult-only requirement, and 'underfoot' suggests an insect or macro nature channel, or flooring. Nothing signals grown-up problems. No problems in Spanish."
+            }
+          ]
+        },
+        {
+          "name": "Baseboard Heroics",
+          "why": "Handle @BaseboardHeroics (16). Grown-up courage at baseboard height: a scale image plus mock-heroic understatement, not cute. YouTube search found 0 channels, the most ownable result in this run. Drawbacks: 'baseboard' is the American word (the British say skirting board) and may need a beat for Spanish speakers, and it shares 'Heroics' with Lesser Heroics, so pick only one of the two.",
+          "avg": 5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5.5,
+              "reason": "My brandcheck printed CLEAR: YouTube CLEAR with 0 channels in search, baseboardheroics.com available, and 0 live US marks. That makes it the most ownable name here. The scale image works, but 'baseboard' is American only (the British say skirting board) and opaque to many Spanish speakers and other global viewers, which hurts a wordless channel built to travel. Mice heroes behind the skirting board lean towards kids' adventure stories like The Borrowers, the made-for-kids risk the brief warns about, and it can also evoke pest control. It shares 'Heroics' with Lesser Heroics and inherits the same superhero-parody reading."
+            },
+            {
+              "lens": "language",
+              "score": 4.5,
+              "reason": "brandcheck: CLEAR (ytcheck found 0 channels). But 'baseboard' is an American word (British 'skirting board'; Spanish 'zócalo' or 'rodapié'), so it is unclear to UK and Spanish audiences. On YouTube it mostly brings up cleaning, heater and DIY content ('how to clean baseboards'), so it could be mistaken for a home channel. It shares 'Heroics' with Lesser Heroics and doesn't signal adult life."
+            }
+          ]
+        },
+        {
+          "name": "Shown Enlarged",
+          "why": "Handle @ShownEnlarged (13). A deadpan packaging or catalogue caption that implies a tiny subject seen through a macro lens, which suits the close-up 3D look. It is mock-official, unusual and easy to type. Two cautions: 'enlarged' has a faint medical or spam-ad meaning in English, and the name says nothing about adult problems, so the tagline has to.",
+          "avg": 4.25,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 4.5,
+              "reason": "My brandcheck printed CLEAR: YouTube CLEAR with 28 channels in search and none matching, shownenlarged.com available, and 0 live US marks. The packaging-caption joke is clever, deadpan and fits the macro 3D look, with a wink at the 'enlarged to show texture' meme. But 'enlarged' carries the spam meaning of 'male enhancement' in English, which is bad for a channel that must look trustworthy. Nothing in it signals story, characters or grown-up problems, so it reads as a macro-photography or product channel. It depends entirely on a tagline."
+            },
+            {
+              "lens": "language",
+              "score": 4,
+              "reason": "brandcheck: CLEAR. Mock-catalogue wit that suits the macro look, but 'enlarged' carries medical meanings (enlarged prostate or heart) and male-enhancement spam meanings that invite jokes and comment-section trouble. Americans say 'shown' and 'shone' the same way, so people may mishear it. It reads like a product-photography or microscopy channel and says nothing about grown-up problems."
+            }
+          ]
+        }
+      ],
+      "taken": [
+        "Not to Scale (TAKEN)",
+        "Actual Size (TAKEN)",
+        "Uncredited (TAKEN)",
+        "Spare Button (CROWDED)",
+        "Bit Part (TAKEN)",
+        "Fully Grown (TAKEN)",
+        "Inchmeal (TAKEN)",
+        "Sighs Heavily (TAKEN)",
+        "Mild Peril (TAKEN)",
+        "Contents May Settle (TAKEN)",
+        "Beneath Notice (TAKEN)",
+        "Shoebox Rent (CROWDED)",
+        "Easily Missed (TAKEN)",
+        "Ankle Weather (CROWDED)",
+        "Room Tone (TAKEN)",
+        "Prefer Not To (TAKEN)",
+        "Any Inconvenience (TAKEN)",
+        "Mildly Doomed (TAKEN)",
+        "Life in Lowercase (TAKEN)",
+        "Under the Fridge (TAKEN)",
+        "Left Luggage (TAKEN)",
+        "Inchwork (CROWDED)",
+        "Cogwork (TAKEN)",
+        "Plus None (TAKEN)",
+        "Pilot Light (TAKEN)",
+        "Isolated Showers (TAKEN)",
+        "Moderate Peril (CROWDED)",
+        "CLEAR but scored below 8, so left out: Partly Fine, Linoleum Noir, Molehill Summit, Lint and Longing, Office Fauna, Petty Epics (readers may think of Reddit 'petty revenge' story channels), Gainfully Employed, Errata Slip, Unsung Underfoot, Lesser Tragedies, Workaday Epics, Commuter Moss, Countertop Noir"
+      ],
+      "cleared": {
+        "checked": [
+          {
+            "name": "Modest Catastrophes",
+            "brandcheck": "CLEAR: Modest Catastrophes (YouTube CLEAR; modestcatastrophes.com available; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Modest Catastrophes\"",
+              "\"Modest Catastrophes\" YouTube",
+              "\"Modest Catastrophes\" documentary OR podcast OR series OR book",
+              "\"Manmade Catastrophes\" podcast Tailspin Media YouTube (follow-up on a similar name)",
+              "\"a modest catastrophe\" OR \"modest catastrophe\" book OR album OR film (singular and 'a' versions)"
+            ],
+            "web_conflicts": [],
+            "verdict": "clean"
+          },
+          {
+            "name": "Petty Indignities",
+            "brandcheck": "CLEAR: Petty Indignities (YouTube CLEAR; pettyindignities.com available; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Petty Indignities\"",
+              "\"Petty Indignities\" YouTube",
+              "\"Petty Indignities\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [],
+            "verdict": "clean"
+          },
+          {
+            "name": "Lesser Heroics",
+            "brandcheck": "CLEAR: Lesser Heroics (YouTube CLEAR; lesserheroics.com available; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Lesser Heroics\"",
+              "\"Lesser Heroics\" YouTube",
+              "\"Lesser Heroics\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [],
+            "verdict": "clean"
+          }
+        ],
+        "recommended": "Modest Catastrophes",
+        "reason": "My recommendation is Modest Catastrophes (@ModestCatastrophes, 18 characters), the panel's top pick. It cleared every check.\n\n- **Clearance check:** brandcheck printed CLEAR. YouTube is clear, modestcatastrophes.com is available, and there are no live US trademarks with the same name.\n- **Web searches:** All three searches (the exact name, the name plus YouTube, and the name plus documentary/podcast/series/book) found nobody using it. I also searched the singular and \"A Modest Catastrophe\" and found no title with either.\n- **Closest similar name:** Manmade Catastrophes, a small disaster-history podcast from Tailspin Media (about 13 episodes, 2024 to 2026, manmadecatastrophes.com; https://podcasts.apple.com/us/podcast/manmade-catastrophes/id1724660870). The first words are different and sound different, so I don't count it as a conflict. Another loose relative is the poetry book \"A Modest Apocalypse\" by Hassan Melehy.\n- **Fit:** The name reads dry and adult, not cute. The Spanish meaning (\"catástrofes modestas\") is harmless.\n\nThe other two names are safe backups if the owner prefers one. Petty Indignities and Lesser Heroics were both CLEAR in brandcheck (both .com addresses available, no US trademarks), and web searches found nobody using either.\n- **Petty Indignities:** The near-names are unrelated comedy podcasts: \"Talk Petty To Me\" (buzzsprout.com/2423069), \"The Petty Agenda\" and \"Let's Talk Petty!\". There is also a documentary called \"The Tyranny of Petty Things\".\n- **Lesser Heroics:** The near-names are fiction about superheroes: the ebook \"A Lesser Hero\" and the comic \"Less Than Heroes\" by David Yurkovich. That supports the panel's worry that this name may suggest a superhero parody.\n\nSpare handles: @ModestCatastrophe (17 characters) and @AModestCatastrophe (18) both printed CLEAR in the YouTube check. A third option, @TheModestCatastrophe (exactly 20 characters), was also CLEAR.",
+        "spare_handles": [
+          "@ModestCatastrophe",
+          "@AModestCatastrophe"
+        ],
+        "manual_checks": [
+          "Instagram: check that @modestcatastrophes is free (18 characters, under the 30-character limit) and claim @modestcatastrophe as a spare.",
+          "TikTok: check that @modestcatastrophes is free (under the 24-character limit).",
+          "X/Twitter: handles can be at most 15 characters, so @ModestCatastrophes (18) cannot be registered there. Pick and check a shorter form, such as @ModestCatastro, or a name like @ModestCatShorts.",
+          "Threads, Facebook page and Bluesky: check that the name is free.",
+          "Trademarks outside the US: search EUIPO (TMview), the UK IPO, WIPO's Global Brand Database (Madrid), Canada's CIPO, and Mexico's IMPI and Spain's OEPM for the Spanish-speaking markets, in Nice classes 41 (entertainment, animated videos) and 9 (downloadable media).",
+          "Register modestcatastrophes.com now (RDAP showed it available), and think about modestcatastrophes.net as well.",
+          "Have a native Spanish speaker confirm the name lands well, and is not just harmless, for a Spanish-speaking audience. It is a wordless channel that will travel worldwide."
+        ]
+      }
+    }
+  ],
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Research"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Invent"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 3,
+      "title": "Judge"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 4,
+      "title": "Clear"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "research:10",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "a5d1ebf0c1dca7e37",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794873752033,
+      "queuedAt": 1794873752014,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "No channel owns deadpan, cinematic, adult small-life comedy…",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /home/user/Jachi/youtube-network/names/ch-10/.\n\nYou are naming channel 10 (wordless animated Shorts for adults (tiny characters, grown-up problems)) of a portfolio of faceless YouTube channels built to last for years. Read …",
+      "promptFramed": true,
+      "lastProgressAt": 1794874234556,
+      "tokens": 103608,
+      "toolCalls": 10,
+      "durationMs": 482522,
+      "resultPreview": "{\"competitors\":[{\"channel\":\"Minuscule\",\"subs\":1850000,\"naming_style\":\"Single size-word (Latin-ish 'tiny'). Wordless insect comedy; topped 'ant', 'snail', 'cgi short', 'silent animation' queries. Owns the tiny-creature, no-dialogue idea outright, so tiny/mini/minuscule wording is closed.\"},{\"channel\":\"The Very Small Creatures\",\"subs\":12300,\"naming_style\":\"Descriptive size phrase ('The Very Small ..…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "invent:10",
+      "phaseIndex": 2,
+      "phaseTitle": "Invent",
+      "agentId": "af0fa95619a61f6b0",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794874234581,
+      "queuedAt": 1794874234560,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /home/user/Jachi/youtube-network/names/ch-10/.\n\nYou are naming channel 10 (wordless animated Shorts for adults (tiny characters, grown-up problems)) of a portfolio of faceless YouTube channels built to last for years. Read …",
+      "promptFramed": true,
+      "lastProgressAt": 1794874938425,
+      "tokens": 126738,
+      "toolCalls": 15,
+      "durationMs": 703844,
+      "resultPreview": "{\"candidates\":[{\"name\":\"Modest Catastrophes\",\"why\":\"Handle @ModestCatastrophes (18 characters). The name pairs a big word with a small one, which is the channel's whole idea: disasters on a small scale for very small characters, like the commute, the interview or being let go. It hints at size through understatement, not through 'tiny'. Dry and adult with no cute tone, nothing bad in Spanish, and …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "judge:10:brand",
+      "phaseIndex": 3,
+      "phaseTitle": "Judge",
+      "agentId": "a17b1e6ff14aca2a9",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794874938450,
+      "queuedAt": 1794874938430,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /home/user/Jachi/youtube-network/names/ch-10/.\n\nYou are naming channel 10 (wordless animated Shorts for adults (tiny characters, grown-up problems)) of a portfolio of faceless YouTube channels built to last for years. Read …",
+      "promptFramed": true,
+      "lastProgressAt": 1794875093581,
+      "tokens": 91596,
+      "toolCalls": 14,
+      "durationMs": 155130,
+      "resultPreview": "{\"scores\":[{\"name\":\"Modest Catastrophes\",\"score\":8,\"reason\":\"Best fit. My own brandcheck run printed CLEAR: YouTube CLEAR with 24 channels in search and none matching, modestcatastrophes.com available, and 0 live US marks. A web search for the exact phrase found no book, show, podcast or channel. The understatement carries the whole concept: a big word made small, adult and deadpan with nothing to…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "judge:10:language",
+      "phaseIndex": 3,
+      "phaseTitle": "Judge",
+      "agentId": "a603434cc51d65d4a",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794874938451,
+      "queuedAt": 1794874938430,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /home/user/Jachi/youtube-network/names/ch-10/.\n\nYou are naming channel 10 (wordless animated Shorts for adults (tiny characters, grown-up problems)) of a portfolio of faceless YouTube channels built to last for years. Read …",
+      "promptFramed": true,
+      "lastProgressAt": 1794875074817,
+      "tokens": 81381,
+      "toolCalls": 9,
+      "durationMs": 136363,
+      "resultPreview": "{\"scores\":[{\"name\":\"Modest Catastrophes\",\"score\":8,\"reason\":\"brandcheck: CLEAR (YouTube CLEAR, .com available, 0 live US marks). This is the best fit. The understatement is itself deadpan, it signals scale without a cute size word, and it reads plainly as adult, with an echo of Swift's 'A Modest Proposal'. Nothing bad in Spanish ('catástrofes modestas'). Risks are small: people may type 'catastrop…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "clear:10",
+      "phaseIndex": 4,
+      "phaseTitle": "Clear",
+      "agentId": "a206bd147e3ffa0ac",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794875093605,
+      "queuedAt": 1794875093584,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Modest Catastrophes",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /home/user/Jachi/youtube-network/names/ch-10/.\n\nYou are naming channel 10 (wordless animated Shorts for adults (tiny characters, grown-up problems)) of a portfolio of faceless YouTube channels built to last for years. Read …",
+      "promptFramed": true,
+      "lastProgressAt": 1794875194537,
+      "tokens": 95449,
+      "toolCalls": 18,
+      "durationMs": 100931,
+      "resultPreview": "{\"checked\":[{\"name\":\"Modest Catastrophes\",\"brandcheck\":\"CLEAR: Modest Catastrophes (YouTube CLEAR; modestcatastrophes.com available; live same-name US marks: 0)\",\"searches_run\":[\"\\\"Modest Catastrophes\\\"\",\"\\\"Modest Catastrophes\\\" YouTube\",\"\\\"Modest Catastrophes\\\" documentary OR podcast OR series OR book\",\"\\\"Manmade Catastrophes\\\" podcast Tailspin Media YouTube (follow-up on a similar name)\",\"\\\"a mo…"
+    }
+  ],
+  "totalTokens": 498772,
+  "totalToolCalls": 66
+}

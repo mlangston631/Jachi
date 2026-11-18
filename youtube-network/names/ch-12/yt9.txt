@@ -1,0 +1,15 @@
+CLEAR    Forged Figures  (@ForgedFigures; search returned 4 channels)
+TAKEN    Clean Opinion  (@CleanOpinion; search returned 24 channels)
+           - handle @CleanOpinion is taken by "Clean Opinion"
+TAKEN    Pen and Plunder  (@PenandPlunder; search returned 20 channels)
+           - handle @PenandPlunder is taken by "Pen And Plunder"
+           - same-name channel: "Pen And Plunder" @PenAndPlunder @PenAndPlunder, 1 subscriber
+CROWDED  Hollow Earnings  (@HollowEarnings; search returned 24 channels)
+           - contains-name channel: "Hollow" @HollowPoiint @HollowPoiint, 5.23M subscribers
+           - contains-name channel: "earnings" @earnings5747 @earnings5747, 7 subscribers
+CLEAR    Respectable Larceny  (@RespectableLarceny; search returned 28 channels)
+TAKEN    Adverse Opinion  (@AdverseOpinion; search returned 23 channels)
+           - handle @AdverseOpinion is taken by "Conner"
+           - same-name channel: "Adverse Opinion" @adverse.opinion @adverse.opinion
+           - contains-name channel: "AdVerse:)" @AdVerseFxJR @AdVerseFxJR, 7 subscribers
+           - contains-name channel: "Adverse" @magicadverse @magicadverse

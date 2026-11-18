@@ -1,0 +1,698 @@
+{
+  "summary": "Establish the real YouTube growth records to beat, how each was achieved, and a playbook and pace targets for beating them with faceless channels",
+  "agentCount": 4,
+  "logs": [
+    "36 records found; verifying"
+  ],
+  "result": {
+    "verified": {
+      "records": [
+        {
+          "channel": "UR · Cristiano (Cristiano Ronaldo)",
+          "record": "Fastest channel ever to 1 million subscribers (news reports; I found no Guinness listing for this one)",
+          "value": "1 million subscribers about 90 minutes after launch (some outlets say 1 hour 29 minutes). The previous fastest was BLACKPINK singer Jennie's channel at about 7 hours (January 2021, Gulf News).",
+          "when": "21 August 2024",
+          "driver": "Existing fame. The channel opened with 19 videos at once (several outlets; one early report said 12). Ronaldo passed 1 billion followers across all social platforms on 12 September 2024, three weeks after launch, and the new YouTube channel's roughly 60M was part of that total.",
+          "faceless": false,
+          "replicable": "Cannot copy: the audience he already had. Can copy: opening with a batch of videos instead of one, announcing the launch date ahead of time, and pointing an audience on other platforms at the launch.",
+          "sources": [
+            "https://tribune.com.pk/story/2489919/entertainment",
+            "https://gulfnews.com/sport/football/cristiano-ronaldo-breaks-world-record-with-new-youtube-channel-1.1724306414865",
+            "https://www.cbssports.com/soccer/news/cristiano-ronaldo-starts-youtube-channel-breaks-record-for-fastest-to-one-million-subscribers",
+            "https://www.aljazeera.com/amp/sports/2024/8/21/footballer-cristiano-ronaldo-breaks-new-youtube-channel-record",
+            "https://hypebeast.com/2024/8/cristiano-ronaldo-starts-youtube-channel-becomes-fastest-one-million-subscribers-news",
+            "https://www.aljazeera.com/amp/sports/2024/9/13/ronaldo-becomes-first-individual-with-one-billion-social-media-followers"
+          ]
+        },
+        {
+          "channel": "UR · Cristiano (Cristiano Ronaldo)",
+          "record": "Fastest channel ever to 10 million subscribers",
+          "value": "10 million in under a day. beIN Sports says 11.5 hours; other outlets say 'less than 12 hours' or 'within a day', so the exact hour count varies by source. The previous fastest was Hamster Kombat at about 6.5 days (6 days 13 hours 15 minutes, the Hamster Kombat team's own claim).",
+          "when": "21 to 22 August 2024",
+          "driver": "Existing fame (see the 1 million record).",
+          "faceless": false,
+          "replicable": "Not replicable without fame.",
+          "sources": [
+            "https://www.beinsports.com/en-us/soccer/articles-video/cristiano-s-channel-breaks-records-on-youtube-2024-10-10",
+            "https://rpp.pe/virales/youtube/no-deja-de-hacer-historia-en-menos-de-12-horas-cristiano-ronaldo-le-arrebata-este-record-a-mrbeast-en-youtube-noticia-1578711",
+            "https://techzim.co.zw/2024/08/ronaldo-hits-10-million-youtube-subscribers-in-a-day",
+            "https://www.latestly.com/agency-news/sports-news-cristiano-ronaldo-breaks-hamster-kombats-record-of-hitting-fastest-10m-subscribers-on-youtube-6207661.html"
+          ]
+        },
+        {
+          "channel": "UR · Cristiano (Cristiano Ronaldo)",
+          "record": "Most YouTube subscribers gained in 24 hours (Guinness World Records)",
+          "value": "19,729,827 subscribers in 24 hours. YouTube supplied this official count to Guinness. Press snapshots taken at different times on launch day gave higher and lower figures; use the Guinness number.",
+          "when": "21 to 22 August 2024 (the details block on the Guinness record page says 2023, but its own text and all news coverage say 2024)",
+          "driver": "Existing fame.",
+          "faceless": false,
+          "replicable": "Not replicable without fame.",
+          "sources": [
+            "https://www.guinnessworldrecords.com/world-records/655853-most-youtube-subscribers-gained-in-24-hours",
+            "https://www.guinnessworldrecords.com/news/2024/8/cristiano-ronaldo-extends-social-media-domination-as-youtube-channel-smashes-record",
+            "https://www.sportskeeda.com/football/news-cristiano-ronaldo-earns-official-guinness-world-record-incredible-feat-youtube"
+          ]
+        },
+        {
+          "channel": "UR · Cristiano (Cristiano Ronaldo)",
+          "record": "Fastest to 20 million and 50 million, and the most subscribers in a channel's first week",
+          "value": "More than 20M within about a day (beIN Sports). Guinness reported more than 48M after six days. The channel passed 50M on 28 August 2024, six to seven days after launch (ETV Bharat says six days; Sportskeeda counted 50.3M and 23 videos on 28 August). Guinness's separate 'most YouTube subscribers gained in one week' page still lists MrBeast's 7M from 5 October 2023, so it has not been updated for this.",
+          "when": "21 to 28 August 2024",
+          "driver": "Existing fame.",
+          "faceless": false,
+          "replicable": "Not replicable without fame.",
+          "sources": [
+            "https://www.beinsports.com/en-us/soccer/articles-video/cristiano-s-channel-breaks-records-on-youtube-2024-10-10",
+            "https://www.guinnessworldrecords.com/news/2024/8/cristiano-ronaldo-extends-social-media-domination-as-youtube-channel-smashes-record",
+            "https://etvbharat.com/en/!sports/cristiano-ronaldo-becomes-fastest-to-reach-50-million-subscribers-on-youtube-after-achieving-it-in-just-six-days-enn24082805813",
+            "https://routenote.com/blog/cristiano-ronaldo-on-youtube/",
+            "https://www.asiae.co.kr/en/article/2024083109420942529",
+            "https://www.guinnessworldrecords.com/world-records/655855-most-youtube-subscribers-gained-in-one-week"
+          ]
+        },
+        {
+          "channel": "UR · Cristiano (Cristiano Ronaldo)",
+          "record": "Most subscribers gained in a channel's first month",
+          "value": "About 60 million in roughly three weeks. The channel was at about 60M (one outlet says 60.7M) when Ronaldo passed 1 billion total social followers on 12 to 13 September 2024, and at about 63.9M in October 2024 coverage. For comparison, MrBeast said in mid-June 2024 that he had gained over 20M in a month, which he believed no channel had done before; his full June 2024 came to about 28M (Tubefilter). MrBeast said Ronaldo 'tripled' his record, and later told him on camera that he had expected '20-30 million in the first month' (TMZ).",
+          "when": "21 August to about 13 September 2024",
+          "driver": "Existing fame.",
+          "faceless": false,
+          "replicable": "Not replicable without fame.",
+          "sources": [
+            "https://www.aljazeera.com/amp/sports/2024/9/13/ronaldo-becomes-first-individual-with-one-billion-social-media-followers",
+            "https://www.sportskeeda.com/football/news-ronaldo-mr-rizz-mrbeast-makes-feelings-clear-cristiano-ronaldo-breaking-youtube-subscriber-record",
+            "https://www.tmz.com/2024/11/21/cristiano-ronaldo-mr-beast-youtube-video/",
+            "https://sportskeeda.com/us/streamers/news-mrbeast-reveals-gained-20-million-youtube-subscribers-last-month",
+            "https://www.tubefilter.com/2024/07/15/mrbeast-300-million-youtube-subscribers-50-creator-collab/amp/"
+          ]
+        },
+        {
+          "channel": "UR · Cristiano (Cristiano Ronaldo)",
+          "record": "What happened after the launch spike",
+          "value": "Channel page on 16 Nov 2026: 83.8M subscribers, 152 videos, 1,682,171,122 views (account created 8 Jul 2024, public launch 21 Aug 2024). Bolavip reported 77.6M in late December 2025, so the channel added about 6M in roughly 11 months, against about 60M in its first three weeks. Dexerto counted about 60M gained in 2024, and Tubefilter wrote that after its hot start the channel had 'cooled off considerably'.",
+          "when": "August 2024 to 16 November 2026",
+          "driver": "The fame-driven spike flattened. The channel has about 20 lifetime views per subscriber (1.68B / 83.8M), against more than 1,100 for KIMPRO (156.9B / 135M, channel pages on 16 Nov 2026).",
+          "faceless": false,
+          "replicable": "Lesson for the plan: a launch spike without steady, widely watched uploads levels off.",
+          "sources": [
+            "https://www.youtube.com/@cristiano/about",
+            "https://bolavip.com/mx/futbol-internacional/mientras-cristiano-ronaldo-tiene-776-millones-de-suscriptores-la-cifra-que-alcanzo-lamine-yamal-en-su-canal-de-youtube",
+            "https://dexerto.com/youtube/mrbeast-dominates-as-youtubes-fastest-growing-channel-for-2024-with-mind-blowing-number-3020838",
+            "https://www.tubefilter.com/?p=184149",
+            "https://www.youtube.com/@kimpro828/about"
+          ]
+        },
+        {
+          "channel": "Hamster Kombat (official channel of a Telegram crypto clicker game)",
+          "record": "Fastest to 10 million before Ronaldo; 30M+ in about five weeks",
+          "value": "10M in 6 days, 13 hours and 15 minutes. This is the team's own claim; it applied to Guinness, and I found no Guinness approval. More than 22M after three weeks, 30.2M on 28 June 2024, and more than 34.4M by the end of July 2024 (crypto-news reports). The channel page showed 32.8M on 16 Nov 2026, slightly below that mid-2024 peak, so growth stopped more than two years ago.",
+          "when": "Channel created 24 May 2024 (channel page); 10M around 30 to 31 May 2024; 30M+ by 28 June 2024",
+          "driver": "Rewards. Players earned in-game coins for watching its YouTube videos, joining its Telegram group and following it on X (Sherwood News), across a player base reported at more than 200M (Cointelegraph). Most coverage comes from crypto outlets.",
+          "faceless": true,
+          "replicable": "Not replicable, and banned now. YouTube's spam policy prohibits 'offering rewards in exchange for likes, views, or subscribers', and its fake engagement policy prohibits content that 'solely exists to incentivize viewers for engagement'. Channels that break these rules can be terminated. The stalled count also shows that subscribers gained through rewards don't stay engaged.",
+          "sources": [
+            "https://beincrypto.com/hamster-kombat-guinness-world-record",
+            "https://cointelegraph.com/news/hamster-kombat-guinness-world-record-200m-users",
+            "https://invezz.com/news/2024/06/28/hamster-kombat-youtube-channel-is-breaking-records",
+            "https://invezz.com/news/2024/07/30/top-hamster-kombat-statistics-ahead-of-the-hmstr-airdrop/",
+            "https://sherwood.news/crypto/hamster-kombat-crypto-game-youtube-social-media-growth-hack/",
+            "https://www.youtube.com/@HamsterKombat_Official/about",
+            "https://support.google.com/youtube/answer/2801973?hl=en",
+            "https://support.google.com/youtube/answer/3399767?hl=en"
+          ]
+        },
+        {
+          "channel": "MrBeast",
+          "record": "Most YouTube subscribers gained in one week (Guinness World Records page)",
+          "value": "7,000,000 subscribers in one week. Ronaldo's new channel gained far more in its first six days (more than 48M, also per Guinness), but this Guinness page still lists MrBeast.",
+          "when": "Dated 5 October 2023 by Guinness",
+          "driver": "An established channel with big-budget uploads.",
+          "faceless": false,
+          "replicable": "Weekly gains on this scale need an audience already in the hundreds of millions.",
+          "sources": [
+            "https://www.guinnessworldrecords.com/world-records/655855-most-youtube-subscribers-gained-in-one-week",
+            "https://www.guinnessworldrecords.com/news/2024/8/cristiano-ronaldo-extends-social-media-domination-as-youtube-channel-smashes-record"
+          ]
+        },
+        {
+          "channel": "MrBeast",
+          "record": "Most subscribers gained in a calendar month by an established channel",
+          "value": "About 28 million in June 2024 (Tubefilter), roughly 24M of it after he passed T-Series as the most-subscribed channel on 1 to 2 June 2024. He went from 270M to 300M in 38 days and reached 300M on 10 July 2024. In mid-June he said he had gained over 20M in a month, which he believed no channel had done before. Ronaldo's new channel later gained about 60M in its first three weeks.",
+          "when": "June 2024",
+          "driver": "News coverage from passing T-Series, a 50-creator challenge video to mark 300M, and dubbed audio tracks.",
+          "faceless": false,
+          "replicable": "Can copy: using a milestone event or a collaboration to create a growth spike. Cannot copy: the size of his audience.",
+          "sources": [
+            "https://www.tubefilter.com/2024/07/15/mrbeast-300-million-youtube-subscribers-50-creator-collab/amp/",
+            "https://9to5google.com/2024/06/03/youtube-mrbeast-subscribers-record",
+            "https://sportskeeda.com/us/streamers/news-mrbeast-reveals-gained-20-million-youtube-subscribers-last-month",
+            "https://dexerto.com/youtube/mrbeast-becomes-first-youtuber-ever-to-reach-300m-subscribers-2816062"
+          ]
+        },
+        {
+          "channel": "MrBeast",
+          "record": "Most subscribers gained in a calendar year",
+          "value": "2025: about 117M, from the fan-run tracker MrBeast Statistics (via Net Influencer and Influence Weekly); Forbes Argentina, citing 'Global Statistics', gives +117.3M. 2024: 115,966,562 from the same fan tracker; Dexerto says about 115M, from just over 225M to about 340M. 2023: about 99.3M (same fan tracker). YouTube and Guinness have not confirmed any of these yearly figures. Cross-check: Guinness counted 449M on 31 Oct 2025.",
+          "when": "Calendar years 2023, 2024 and 2025",
+          "driver": "1) Dubbed audio tracks: Google's India blog says his channel gained more than 47M subscribers from India in 2025, helped by seven audio tracks. 2) Paid promotion: a fan analysis reported by Net Influencer counted 428 Google ads in 2025 run by CreatorGlobal, his dubbing company, about 40% of them aimed at India (90 of the 98 videos advertised were Shorts), and said daily growth fell from about 220,000 to 230,000 a day to about 120,000 when the ads paused briefly in April. 3) Shorts.",
+          "faceless": false,
+          "replicable": "Can copy: multi-language audio tracks on one channel instead of separate language channels (in YouTube's 2023 test, creators got more than 15% of their watch time from viewers using a non-primary-language track), and small Google Ads campaigns that promote real videos. Cannot copy: his budgets and fame. Ads must promote the content, not offer prizes or rewards for subscribing, which YouTube's spam policy prohibits.",
+          "sources": [
+            "https://www.netinfluencer.com/inside-mrbeast-youtube-ad-campaign-that-helped-him-gain-117m-subscribers-in-2025/",
+            "https://influenceweekly.beehiiv.com/p/influence-weekly-431-inside-mrbeast-s-youtube-ad-campaign-that-helped-him-gain-117m-subscribers-in-2",
+            "https://www.forbesargentina.com/negocios/de-youtube-escenario-como-alejo-igoa-convirtio-mas-100-millones-seguidores-siete-shows-movistar-arena-n88635",
+            "https://dexerto.com/youtube/mrbeast-dominates-as-youtubes-fastest-growing-channel-for-2024-with-mind-blowing-number-3020838",
+            "https://www.sportskeeda.com/us/streamers/news-mrbeast-gives-one-word-response-fastest-growing-youtube-channel-4-times-row",
+            "https://blog.google/intl/en-in/products/platforms/2025s-biggest-trends-on-youtube-that-gave-india-a-new-shared-vernacular/",
+            "https://blog.youtube/news-and-events/multi-language-audio-mrbeast-interview/",
+            "https://www.guinnessworldrecords.com/world-records/most-subscribers-on-youtube",
+            "https://support.google.com/youtube/answer/2801973?hl=en"
+          ]
+        },
+        {
+          "channel": "MrBeast",
+          "record": "Fastest 100 million subscribers gained (milestone to milestone) and the most-subscribed channel",
+          "value": "100M on 28 Jul 2022. 200M on 14 or 15 Oct 2023 (sources differ by a day), about 443 days later (Tubefilter: '15 months'). 300M on 10 Jul 2024, 269 to 270 days later, his fastest 100M. 400M on 1 Jun 2025 (one outlet says 2 Jun), about 326 days later. 500M on 12 Jun 2026, about 376 days later; he was the first individual creator to reach it (YouTube's blog). The day counts are my own arithmetic from these dated reports. Channel page on 16 Nov 2026: 527M subscribers, 147,097,896,428 views, 1,014 videos.",
+          "when": "28 July 2022 to 16 November 2026",
+          "driver": "Big-budget videos, dubbing, Shorts and, in 2025, paid ads.",
+          "faceless": false,
+          "replicable": "Not directly. Useful as a ceiling for comparison. I found no Guinness record for 'fastest from zero to 100M'.",
+          "sources": [
+            "https://au.variety.com/2022/digital/news/mrbeast-100-million-youtube-subscribers-4572",
+            "https://tubefilter.com/2022/07/29/mrbeast-youtube-100-million-subscribers/",
+            "https://www.benzinga.com/general/entertainment/23/10/35279106/youtube-giant-mrbeast-surpasses-200m-subscribers-breaks-his-own-24-hour-view-record-and-sha",
+            "https://tubefilter.com/2023/10/16/mrbeast-gained-100-million-subscribers-in-15-months-heres-why/",
+            "https://dexerto.com/youtube/mrbeast-becomes-first-youtuber-ever-to-reach-300m-subscribers-2816062",
+            "https://hypebeast.com/2025/6/mrbeast-first-youtuber-surpass-400-million-subscribers-news",
+            "https://blog.youtube/creator-and-artist-stories/mrbeast-500-million-youtube-subscribers/",
+            "https://www.thewrap.com/media-platforms/tv/mrbeast-500-million-youtube-subscribers/",
+            "https://www.youtube.com/@MrBeast/about"
+          ]
+        },
+        {
+          "channel": "KIMPRO (김프로KIMPRO, South Korea)",
+          "record": "Fastest from first upload to 100 million subscribers that I could document (not an official record); most-viewed channel in the world in 2025",
+          "value": "100M on 17 April 2025 (the channel's announcement; some sources date it 18 April), about 2 years 8 months after its first upload in August 2022. The YouTube account itself was created on 11 Nov 2017, so measured from account creation it took about 7 years 5 months. For comparison, measured from channel creation: PewDiePie about 9 years 4 months (29 Apr 2010 to 24-25 Aug 2019), MrBeast about 10 years 5 months (Feb 2012 to 28 Jul 2022), and T-Series about 13 years 2 months (13 Mar 2006 to 29 May 2019, the first channel to 100M, per Guinness). No outlet I found calls KIMPRO's time a record, and I could not rule out a faster channel. Most-viewed channel of 2025: about 77.53B views (Playboard, via The Korea Times), against about 61.5B for Double Date and about 38.1B for MrBeast. Channel page on 16 Nov 2026: 135M subscribers, 156,933,113,328 views, 4,626 videos.",
+          "when": "August 2022 to 17 April 2025; the 2025 views ranking was published 7 to 8 January 2026",
+          "driver": "Dialogue-free Shorts ('100 million subscribers without saying a word', The Star), made by KIMPRO with his cousin.",
+          "faceless": false,
+          "replicable": "Can copy: the format, meaning short, dialogue-free videos anyone can follow in any country. A faceless channel can do that with animation or hands-only footage. Cannot copy: the on-camera duo's personalities.",
+          "sources": [
+            "https://www.allkpop.com/article/2025/04/kimpro-becomes-the-first-korean-youtubers-to-hit-100-million-subscribers",
+            "https://www.asiae.co.kr/en/article/2025041820014678282",
+            "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/01/21/how-a-south-korean-youtuber-racked-up-100-million-subscribers-without-saying-a-word",
+            "https://koreatimes.co.kr/entertainment/others/20260108/korean-youtuber-kimpro-takes-no-1-spot-for-annual-global-views",
+            "https://www.asiae.co.kr/en/article/life-general/2026010709573085189",
+            "https://www.youtube.com/@kimpro828/about",
+            "https://www.youtube.com/@PewDiePie/about",
+            "https://www.techspot.com/news/81607-pewdiepie-becomes-first-solo-youtube-creator-hit-100.html",
+            "https://au.variety.com/2022/digital/news/mrbeast-100-million-youtube-subscribers-4572",
+            "https://www.guinnessworldrecords.com/world-records/575767-first-youtube-channel-to-reach-100-million-subscribers"
+          ]
+        },
+        {
+          "channel": "Fastest-growing channels of 2024: MrBeast, UR · Cristiano, Hamster Kombat",
+          "record": "Fastest-growing channels of 2024 (subscribers gained in the year)",
+          "value": "MrBeast was the fastest-growing channel of 2024 with about 115M to 116M (fan tracker, via Dexerto). Dexerto puts UR · Cristiano at about 60M from its launch on 21 Aug but does not rank it second. Hamster Kombat gained more than 30M between 24 May and 28 Jun 2024, then stalled. I found no official YouTube ranking of 2024 subscriber gains.",
+          "when": "Calendar 2024",
+          "driver": "Content scale plus dubbing (MrBeast); fame (Ronaldo); rewards for subscribing (Hamster Kombat).",
+          "faceless": false,
+          "replicable": "Of the three, only MrBeast's methods (dubbing, Shorts, ads) are open to a new channel, and only at a far smaller scale.",
+          "sources": [
+            "https://dexerto.com/youtube/mrbeast-dominates-as-youtubes-fastest-growing-channel-for-2024-with-mind-blowing-number-3020838",
+            "https://invezz.com/news/2024/06/28/hamster-kombat-youtube-channel-is-breaking-records"
+          ]
+        },
+        {
+          "channel": "Fastest-growing channels of 2025: MrBeast, KIMPRO, Alejo Igoa",
+          "record": "Fastest-growing channels of 2025 (subscribers gained in the year)",
+          "value": "1. MrBeast, about 117M (fan tracker; Forbes Argentina gives +117.3M). 2. KIMPRO, about 50M (implied by Net Influencer, which says MrBeast beat KIMPRO, the second-fastest grower, by 67M). 3. Alejo Igoa (Argentina), 43.7M (Forbes Argentina and Misiones Online, both citing 'Global Statistics', put him third behind MrBeast and KIMPRO; Canal 12 Misiones says second). Alejo Igoa passed 100M in late December 2025, the first Spanish-speaking creator to do so. Channel page on 16 Nov 2026: 126M subscribers; channel created 17 Jan 2014. All yearly figures are third-party estimates, not YouTube's.",
+          "when": "Calendar 2025",
+          "driver": "MrBeast: dubbing and paid ads. KIMPRO: dialogue-free Shorts. Alejo Igoa: family-friendly videos (I did not re-check his format).",
+          "faceless": false,
+          "replicable": "What a faceless network can copy: short, visual videos that need little or no language, made for a global Shorts audience. All three are on-camera creators.",
+          "sources": [
+            "https://www.netinfluencer.com/inside-mrbeast-youtube-ad-campaign-that-helped-him-gain-117m-subscribers-in-2025/",
+            "https://www.forbesargentina.com/negocios/de-youtube-escenario-como-alejo-igoa-convirtio-mas-100-millones-seguidores-siete-shows-movistar-arena-n88635",
+            "https://misionesonline.net/2026/01/12/el-misionero-alejo-igoa-fue-el-tercer-creador-de-youtube-que-mas-seguidores-sumo-en-2025/",
+            "https://www.hola.com/actualidad/20251230875485/alejo-igoa-primer-youtuber-hispanohablante-alcanzar100-millones-suscriptores/",
+            "https://blog.youtube/creator-and-artist-stories/alejo-igoa-100-million-subscribers/",
+            "https://www.youtube.com/@AlejoIgoa/about"
+          ]
+        },
+        {
+          "channel": "Fastest-growing channels of 2026 so far: MrBeast, BRUNO, Alejo Igoa, Natan por Aí, Lucan Pevidor; SASHA SHOW and CazéTV for single weeks and months",
+          "record": "Fastest-growing channels of 2026 (1 January to 12 November) and the biggest monthly and weekly gains I could confirm",
+          "value": "vidIQ, year to date as of 12 Nov 2026: MrBeast about 68M, BRUNO about 26.2M and Alejo Igoa about 25M, with Natan por Aí and Lucan Pevidor completing the top five. SASHA SHOW gained about 9.47M in October 2026 (vidIQ), including 1.92M (12 to 18 Oct), 3.8M (19 to 25 Oct) and 2.0M (26 Oct to 1 Nov) in Tubefilter's weekly charts. Channel page on 16 Nov 2026: 18.5M subscribers from 187 videos; channel created 23 Mar 2022. CazéTV gained 3.5M (15 to 21 Jun), 1.9M (22 to 28 Jun) and 2.9M (29 Jun to 5 Jul 2026) while streaming the World Cup (Tubefilter). vidIQ's and Tubefilter's figures are third-party estimates, not YouTube's.",
+          "when": "1 January to 12 November 2026 (vidIQ); October 2026 (SASHA SHOW); June to July 2026 (CazéTV)",
+          "driver": "Mostly on-camera, family-friendly Shorts creators. BRUNO and SASHA SHOW run Russian-language channels (Tubefilter calls BRUNO's creator Ukrainian; YouTube lists BRUNO's country as Japan and SASHA SHOW's as Türkiye). Natan por Aí and Lucan Pevidor are Brazilian. The exception is CazéTV, which held the rights to stream all 104 World Cup matches in Brazil.",
+          "faceless": false,
+          "replicable": "Can copy: the Shorts-first, low-dialogue, kid-friendly format. Cannot copy: the personalities on camera, or exclusive sports rights.",
+          "sources": [
+            "https://vidiq.com/youtube-stats/top/fastest-growing-youtube-channels/this-year/",
+            "https://vidiq.com/youtube-stats/channel/@sashashowbro",
+            "https://tubefilter.com/2026/10/19/top-50-most-subscribed-youtube-channels-week-of-10-18-2026",
+            "https://www.tubefilter.com/?p=194856",
+            "https://www.tubefilter.com/?p=194974",
+            "https://www.youtube.com/@sashashowbro/about",
+            "https://www.tubefilter.com/2026/04/27/top-50-most-subscribed-youtube-channels-week-of-04-26-2026/",
+            "https://www.youtube.com/@vilyambruno/about",
+            "https://www.tubefilter.com/2026/06/29/top-50-most-subscribed-youtube-channels-week-of-06-28-2026/",
+            "https://newsletter.tubefilter.com/p/caz-tv-is-winning-the-world-cup",
+            "https://www.tubefilter.com/2025/07/15/caze-tv-brazil-2026-fifa-world-cup-broadcast/"
+          ]
+        },
+        {
+          "channel": "Super Cat League and the other AI-only channels in the Guardian's July 2025 analysis",
+          "record": "9 of YouTube's 100 fastest-growing channels in July 2025 showed only AI-generated video (Guardian analysis of Playboard data)",
+          "value": "Super Cat League had 3.9M subscribers (Guardian, 11 Aug 2025; other outlets said 4M to 4.3M). After the Guardian contacted YouTube about the channels, YouTube removed three and stopped two more from earning ad income. In the January 2026 purge, Super Cat League (about 4.21M subscribers, seventh on Kapwing's list) had all its videos removed but the channel was not deleted. On 16 Nov 2026 the @SuperCatLeague handle belongs to a 15-subscriber channel created 11 Jan 2026.",
+          "when": "July 2025 (growth); 11 to 12 Aug 2025 (Guardian report); late January 2026 (videos removed)",
+          "driver": "Mass-produced, fully AI-generated Shorts (cat soap operas, babies in space) picked up by the Shorts feed.",
+          "faceless": true,
+          "replicable": "Technically easy to copy, but this is the kind of channel YouTube now removes or demonetizes. Since 15 July 2025, the Partner Program's 'inauthentic content' rule says content must not be 'mass-produced, generic, repetitive, or manipulative'. For a network, each channel needs original, varied work with real creative input, or it risks losing pay or being removed.",
+          "sources": [
+            "https://www.inkl.com/news/cat-soap-operas-and-babies-trapped-in-space-the-ai-slop-taking-over-youtube",
+            "https://eco.sapo.pt/2025/08/12/um-em-cada-dez-canais-do-youtube-que-mais-crescem-exibem-apenas-conteudo-de-ia/",
+            "https://arynews.tv/youtube-deletes-viral-ai-slop-channels-with-millions-of-subscribers",
+            "https://www.netinfluencer.com/youtube-removes-major-ai-slop-channels-with-combined-9-8m-in-estimated-annual-revenue/",
+            "https://www.youtube.com/@SuperCatLeague/about",
+            "https://support.google.com/youtube/answer/1311392?hl=en"
+          ]
+        },
+        {
+          "channel": "CuentosFacianantes, Imperio de Jesus and 14 other AI channels on Kapwing's list",
+          "record": "The largest AI channels removed in YouTube's January 2026 purge",
+          "value": "In late January 2026, 16 channels from Kapwing's November 2025 list of the most-subscribed AI-slop channels were deleted (11) or emptied of videos (5): about 35M subscribers and 4.7B lifetime views combined, and about $9.8M a year in estimated ad revenue (Kapwing's estimate from Social Blade midpoints). The largest, CuentosFacianantes, had about 5.95M subscribers and 1.2B views; Imperio de Jesus had about 5.8M. A YouTube spokesperson said: 'We terminated several channels for violating our spam policies.' On 16 Nov 2026 the handles @CuentosFacinantes and @Imperio_de_Jesus belong to different, tiny channels (2 and 25 subscribers). Kapwing, which compiled the list, sells AI video tools.",
+          "when": "Grew in 2025; removed about 28 to 30 January 2026",
+          "driver": "Mass-produced AI videos, including AI religious quizzes and stories, and in some cases other companies' characters (for example Dragon Ball).",
+          "faceless": true,
+          "replicable": "No. Mass-produced AI output got these channels terminated under the spam policies, and they lost all their subscribers.",
+          "sources": [
+            "https://www.netinfluencer.com/youtube-removes-major-ai-slop-channels-with-combined-9-8m-in-estimated-annual-revenue/",
+            "https://arynews.tv/youtube-deletes-viral-ai-slop-channels-with-millions-of-subscribers",
+            "https://tribune.com.pk/story/2589917/youtube-deletes-47-billion-views-worth-of-ai-spam-videos-in-major-platform-crackdown",
+            "https://boingboing.net/2026/01/28/slop.html",
+            "https://www.kapwing.com/blog/ai-slop-report-the-global-rise-of-low-quality-ai-videos/",
+            "https://www.youtube.com/@CuentosFacinantes/about",
+            "https://www.youtube.com/@Imperio_de_Jesus/about"
+          ]
+        },
+        {
+          "channel": "Pouty Frenchie (renamed Poppy & Pizza, Singapore; AI pets)",
+          "record": "About 2B views within about 7 months of creation; one of the top AI-only channels in Kapwing's 2025 report",
+          "value": "Channel created 7 Mar 2025. Kapwing's report (data to about October 2025) put it at about 2B views; coverage estimated it earns nearly $4M a year, which is an estimate, not reported earnings. Channel page on 16 Nov 2026 (now 'Poppy & Pizza', @Poppy-Pizza): 1.34M subscribers, 2,457,377,005 views, 115 videos. That is only about 0.46B more views in the following 13 months (my own arithmetic). Its description still begins 'Welcome to [Pouty Frenchie]! Here, AI brings you the funniest moments of our furry friends.'",
+          "when": "March to October 2025; checked 16 Nov 2026",
+          "driver": "Fully AI-generated, wordless short pet comedy that works in any country.",
+          "faceless": true,
+          "replicable": "Technically copyable in days, which is the problem: it is the mass-produced pattern that YouTube's July 2025 'inauthentic content' rule and its January 2026 purge target. It is still live, but growth has flattened. Monetization status unknown.",
+          "sources": [
+            "https://the-decoder.com/one-in-five-youtube-shorts-shown-to-new-users-is-ai-generated-slop-study-finds/",
+            "https://www.kapwing.com/blog/ai-slop-report-the-global-rise-of-low-quality-ai-videos/",
+            "https://www.youtube.com/@PoutyFrenchie/about"
+          ]
+        },
+        {
+          "channel": "Bandar Apna Dost (India; AI monkey)",
+          "record": "Most-viewed AI-only channel in Kapwing's study (data to about October 2025)",
+          "value": "Kapwing: 2.07B views and an estimated $4,251,500 a year (Kapwing's model, not reported earnings); other outlets later cited about 2.4B views. Channel page on 16 Nov 2026: 3.97M subscribers but only about 915M views and 68 videos; channel created 3 Nov 2020. So more than 1.1B views' worth of videos are no longer on the channel. I found no report saying who removed them or why. Coverage of the January 2026 purge said this channel did not appear to have been penalized.",
+          "when": "Growth in 2025; Kapwing data to about October 2025; checked 16 Nov 2026",
+          "driver": "Wordless, realistic AI-generated monkey stories in Shorts, which need no language and so travel across borders.",
+          "faceless": true,
+          "replicable": "Not a safe model. The channel is still up, but its catalog has shrunk sharply. Its description now says every video comes from 'my own creative process', with original prompts and careful editing, which is the line YouTube's inauthentic-content rule draws.",
+          "sources": [
+            "https://www.kapwing.com/blog/ai-slop-report-the-global-rise-of-low-quality-ai-videos/",
+            "https://www.business-standard.com/technology/tech-news/india-youtube-bandar-apna-dost-channel-global-ai-video-charts-slop-content-125123100396_1.html",
+            "https://www.ibtimes.com/indian-ai-monkey-channel-bandar-apna-dost-pulls-425m-ai-slop-floods-youtube-3793922",
+            "https://letsdatascience.com/news/youtube-removes-popular-ai-slop-channels-6d157385",
+            "https://www.youtube.com/@BandarApnaDost/about"
+          ]
+        },
+        {
+          "channel": "Screen Culture (India) and KH Studio (Georgia): AI fake movie trailers",
+          "record": "Demonetized in March 2025, briefly earning again, then terminated in December 2025",
+          "value": "Screen Culture had about 1.4M subscribers and KH Studio about 600,000 to 685,000 (reports differ), with more than 1B views combined. Screen Culture posted 23 fake trailers for 'The Fantastic Four: First Steps', and two of them ranked above Marvel's real trailer in search. YouTube removed both channels from the Partner Program days after Deadline's investigation (late March 2025). Deadline also found Warner Bros. Discovery and Sony claiming the ad revenue on some of these videos. The channels earned again after adding 'fan trailer' and 'parody' labels, then were terminated; YouTube said they had 'reverted to clear violations of our spam and misleading metadata policies'. On 16 Nov 2026, @screenculturetrailers is a different channel with 1.04K subscribers.",
+          "when": "Demonetized late March 2025; terminated about 19 to 23 December 2025",
+          "driver": "AI imagery spliced with official studio footage, titled to look like official trailers for anticipated films, so the videos ranked in search.",
+          "faceless": true,
+          "replicable": "No. Misleading titles and metadata, plus other companies' footage, got them terminated.",
+          "sources": [
+            "https://www.tubefilter.com/2025/03/31/youtube-kh-studio-screen-culture-ai-trailers/",
+            "https://www.techspot.com/news/107350-youtube-demonetizes-fake-movie-trailer-channels-after-investigation.html",
+            "https://www.thewrap.com/industry-news/tech/youtube-terminates-screen-culture-kh-studio-over-ai-fake-movie-trailers/",
+            "https://www.digitalmusicnews.com/2025/12/26/youtube-ai-film-trailers-takedowns/",
+            "https://filmstories.co.uk/news/youtube-has-deleted-two-major-channels-which-specialised-in-fake-film-trailers/",
+            "https://www.youtube.com/@screenculturetrailers/about"
+          ]
+        },
+        {
+          "channel": "True Crime Case Files (AI 'documentary')",
+          "record": "Viral faceless AI true-crime channel terminated after a press inquiry",
+          "value": "More than 150 videos made with ChatGPT scripts, AI images and AI narration, telling made-up crimes as if they were real cases. Its most popular video drew nearly 2M views. YouTube terminated the channel in January 2025 after 404 Media asked about it (Tubefilter reported it on 14 Feb 2025). YouTube said it terminated the channel 'for multiple violations of our Community Guidelines, including our policies covering child safety that prohibit the sexualization of minors'.",
+          "when": "Terminated January 2025",
+          "driver": "Made-up crimes presented as real cases in the true-crime documentary style.",
+          "faceless": true,
+          "replicable": "No. The lesson for faceless documentary channels: label fiction clearly, fact-check anything presented as real, and keep well clear of content involving minors.",
+          "sources": [
+            "https://www.tubefilter.com/2025/02/14/youtube-true-crime-case-files-ai-crime-channel-terminated/",
+            "https://futurism.com/true-crime-youtube-ai-slop",
+            "https://www.creatorhandbook.net/youtube-terminates-ai-generated-channel-for-faking-crime-stories-that-were-presented-as-factual/"
+          ]
+        },
+        {
+          "channel": "AI 'Diddy trial' fake-news channels (26 channels identified by Indicator, e.g. Celeb Buzz)",
+          "record": "Fast-growing AI news channels removed or demonetized after Indicator's investigation",
+          "value": "Indicator found 26 channels that posted about 900 videos about the Sean 'Diddy' Combs trial and drew nearly 70M views in 12 months. After the report, YouTube said it had removed 16 channels and demonetized others. Celeb Buzz was demonetized after drawing more than 1M views in about three weeks (Storyboard18).",
+          "when": "Mid-2024 to June 2025; reported late June to early July 2025",
+          "driver": "AI thumbnails, fake quotes and AI narration, all hung on a trending celebrity trial.",
+          "faceless": true,
+          "replicable": "No: misleading AI news about real people.",
+          "sources": [
+            "https://indicator.media/p/youtube-diddy-trial-ai-slop-bieber-50cent-jamie-foxx-wendy-williams",
+            "https://tech.yahoo.com/ai/articles/ai-slop-intensifies-fake-youtube-191127574.html",
+            "https://www.storyboard18.com/digital/diddy-drama-goes-viral-ai-powered-youtube-videos-fuel-misinformation-boom-72318.htm",
+            "https://www.malaymail.com/news/tech-gadgets/2025/07/02/researchers-viral-ai-generated-videos-distort-sean-combs-trial-racking-up-millions-of-views-and-fuelling-misinformation-on-youtube/182491"
+          ]
+        },
+        {
+          "channel": "'Elsagate' kids channels (2017) and their 2025 AI successors (e.g. Go Cat)",
+          "record": "Largest earlier purge of fast-growing faceless kids channels",
+          "value": "In the week to about 27 to 28 Nov 2017, YouTube terminated more than 270 accounts, removed more than 150,000 videos, and removed ads from nearly 2M videos and more than 50,000 channels 'masquerading as family-friendly content'. In May 2025, after WIRED asked about AI-made 'Elsagate'-style cartoons, YouTube terminated 2 channels and suspended monetization on 3 more. Go Cat (nearly 25,000 subscribers, more than 7M views) was not one of those at first; WIRED found it still active, and it went offline soon after, with no report saying whether its owner or YouTube removed it.",
+          "when": "November 2017; May 2025",
+          "driver": "Cheap animated videos aimed at kids' search and recommendation traffic, with disturbing themes.",
+          "faceless": true,
+          "replicable": "No. Kids' content gets the strictest enforcement.",
+          "sources": [
+            "https://9to5google.com/2017/11/28/youtube-sexualised-child-imagery-response/",
+            "https://www.buzzfeednews.com/article/blakemontgomery/youtube-has-deleted-hundreds-of-thousands-of-disturbing",
+            "https://news.vice.com/story/youtube-kills-ads-on-50000-channels-as-advertisers-flee-over-disturbing-child-content",
+            "https://www.tubefilter.com/2025/05/02/ai-elsagate-videos-minion-go-cat-child-safety-content/"
+          ]
+        },
+        {
+          "channel": "JENNIE (jennierubyjane, BLACKPINK)",
+          "record": "Fastest to 1 million before Ronaldo",
+          "value": "1M about 7 hours after the channel opened (about 6 hours after her announcement, per allkpop); one outlet says 11 hours. About 1.75M in 24 hours, the second-most in YouTube history at the time, behind Marília Mendonça. Channel page on 16 Nov 2026: 18.7M subscribers, 4,120,152,081 views; account created 12 Jan 2021.",
+          "when": "Launched 16 January 2021 (her birthday)",
+          "driver": "Existing K-pop fame.",
+          "faceless": false,
+          "replicable": "Not replicable without fame.",
+          "sources": [
+            "https://www.allkpop.com/article/2021/01/blackpinks-jennie-hits-1m-subscribers-on-youtube-within-a-few-hours",
+            "https://www.allkpop.com/article/2021/01/jennies-youtube-channel-gains-the-2nd-most-subscribers-in-24-hours-in-youtube-history",
+            "https://abs-cbn.com/entertainment/01/17/21/blackpinks-jennie-launches-youtube-channel-on-birthday",
+            "https://www.youtube.com/@jennierubyjane/about"
+          ]
+        },
+        {
+          "channel": "Lamine Yamal",
+          "record": "The biggest footballer launch since Ronaldo that I found (not a record)",
+          "value": "About 870,000 subscribers in under 24 hours. 1M came after two days (VnExpress) or within four days (Jang); Fox Sports Mexico counted 1.32M on 26 Dec 2025. Channel page on 16 Nov 2026: 4.22M subscribers, 11 videos; account created 2 Dec 2025.",
+          "when": "Launched 22 to 23 December 2025 (outlets differ by a day)",
+          "driver": "Existing football fame, with a house-tour first video.",
+          "faceless": false,
+          "replicable": "Not replicable without fame. It also shows that a famous athlete can launch far slower than Ronaldo.",
+          "sources": [
+            "https://e.vnexpress.net/news/sports/football/lamine-yamal-launches-youtube-channel-gains-over-one-million-subscribers-after-two-days-4997659.html",
+            "https://jang.com.pk/en/55833-lamine-yamal-proudly-flaunts-youtube-awards-after-historic-channel-debut-news",
+            "https://www.foxsports.com.mx/2025/12/26/lamine-yamal-canal-youtube-1-millon-suscriptores-cuantos-tiene-cristiano-video/",
+            "https://www.youtube.com/@lamineyamal/about"
+          ]
+        },
+        {
+          "channel": "Bebefinn (Pinkfong / The Pinkfong Company; animated)",
+          "record": "1M subscribers within 100 days and 10M in 14 months: the fastest channel The Pinkfong Company has launched",
+          "value": "Launched April 2022 (the YouTube page shows the account created 29 Mar 2022). 100,000 subscribers within three weeks, 1M within 100 days (reported 14 Jul 2022), about 2.9M by December 2022, and 10M in 14 months (announced 20 Jun 2023, with 3B views), the company's fastest. The company said in July 2022 that subscribers had grown 92% a month on average. A December 2023 company release said more than 24M. These milestones come from company announcements. Channel page on 16 Nov 2026: 37.3M subscribers, 25,134,683,129 views, 1,087 videos. Cocomelon, also animated, has 203M.",
+          "when": "April 2022 to December 2023; checked 16 Nov 2026",
+          "driver": "A spinoff of Baby Shark: an existing brand with Pinkfong's Baby Shark channel to promote it from (85.4M subscribers today), 3D-animated nursery rhymes for toddlers who rewatch, and versions in several languages.",
+          "faceless": true,
+          "replicable": "Copyable: the format (3D-animated toddler songs, a recurring baby character, versions in several languages). Not copyable: launch traffic from Baby Shark and Pinkfong's catalog. Preschool videos are 'made for kids', which turns off personalized ads, comments and some features, and lowers income.",
+          "sources": [
+            "https://mb.com.ph/2022/7/14/pinkfongs-bebefinn-youtube-channel-reaches-one-million-subscribers",
+            "https://www.animationxpress.com/?p=1508459",
+            "https://licensinginternational.org/news/pinkfongs-bebefinn-surpasses-10-million-youtube-subscribers-setting-new-company-record/",
+            "https://www.kedglobal.com/newsView/ked202306200015",
+            "https://www.thepinkfongcompany.com/en/news/pr/74",
+            "https://www.youtube.com/@Bebefinn/about",
+            "https://www.youtube.com/@pinkfong/about",
+            "https://www.youtube.com/@CoComelon/about"
+          ]
+        },
+        {
+          "channel": "Skibidi Toilet (DaFuq!?Boom!, now @skibidi)",
+          "record": "Fastest faceless breakout of 2023: nearly 12M new subscribers in about six weeks",
+          "value": "Nearly 12M new subscribers in about a month and a half, after taking nearly 7 years to reach its first 5M (Cartoon Brew, summer 2023). The channel led Tubefilter's chart for all of May 2023 with 2.8B views that month. It had passed 36M subscribers by 10 Dec 2023, and Skibidi videos drew more than 65B views on YouTube in 2023, fan uploads included (Washington Post, syndicated by the Anchorage Daily News). Channel page on 16 Nov 2026: 47.8M subscribers, 21,388,331,427 views, 335 videos; account created 6 Jun 2016.",
+          "when": "Breakout May to December 2023; checked 16 Nov 2026",
+          "driver": "An original serialized animated series (toilets against camera-headed agents) told in very short episodes that end on cliffhangers, with a Gen Alpha audience, Shorts distribution and fan remixes. A viral series, not existing fame.",
+          "faceless": true,
+          "replicable": "Copyable: an original recurring cast and a continuing plot with cliffhangers on Shorts, made with cheap 3D tools. Not copyable on demand: the meme moment. Risks: Know Your Meme reported that the creator doesn't own the song or the 3D models in his videos, and the creator later assigned the rights to Invisible Narratives, which then fought legal battles over the IP. A network should own its characters, music and assets outright.",
+          "sources": [
+            "https://www.cartoonbrew.com/animators/dafuqboom-youtube-alexey-gerasimov-skibidi-toilet-230239.html",
+            "https://adn.com/nation-world/2023/12/10/how-a-toilet-themed-youtube-series-became-the-biggest-thing-online",
+            "https://www.cartoonbrew.com/law/skibidi-toilet-ip-battle-invisible-narratives-dafuqboom-263954.html",
+            "https://knowyourmeme.com/news/skibidi-toilet-creator-sends-copyright-strikes-to-gametoons-despite-not-owning-the-song-or-models-in-his-videos",
+            "https://www.courthousenews.com/skibidi-toilet-studio-prevails-in-copyright-fight-over-multimillion-dollar-ip/",
+            "https://www.youtube.com/@skibidi/about"
+          ]
+        },
+        {
+          "channel": "Zack D. Films",
+          "record": "Faceless explainer-Shorts benchmark, not a record: about 29.7M subscribers in about 5.4 years",
+          "value": "Channel created 7 Jun 2021. Channel page on 16 Nov 2026: 29.7M subscribers, 83,344,459,771 views, 4,232 videos. vidIQ, a third-party estimate, puts its gain at about 800K subscribers between 24 Sep and 21 Oct 2026. I found no reliable dated milestones (10M, 20M), so its year-by-year pace is unverified.",
+          "when": "2021 to 2026; checked 16 Nov 2026",
+          "driver": "High-volume, narrated 3D-animated Shorts on everyday curiosities (current titles include 'How Baseball Gloves Are Made' and 'How Strong Are Different Drywall Anchors'). Tubefilter has noted it entering its U.S. Top 50 chart.",
+          "faceless": true,
+          "replicable": "Mostly copyable by a new faceless channel: voiceover plus short 3D explainer animation on lasting 'how it works' and 'what if' topics, posted daily. The barrier is the cost of 3D animation for each video. Each video needs real scripting and animation, not templates, to stay clear of YouTube's 'inauthentic content' rule.",
+          "sources": [
+            "https://www.youtube.com/@zackdfilms/about",
+            "https://www.youtube.com/@zackdfilms/shorts",
+            "https://vidiq.com/pt/youtube-stats/channel/UCvz84_Q0BbvZThy75mbd-Dg/",
+            "https://www.tubefilter.com/tag/zack-d-films/"
+          ]
+        },
+        {
+          "channel": "Cocomelon - Nursery Rhymes",
+          "record": "About 36M subscribers gained in 2019, one of the largest yearly gains that year (T-Series gained more)",
+          "value": "About 35.9M to 36.1M subscribers gained in 2019 (36,063,045 in one Social Blade-based list; 35.9M in SocialBook's; Business Insider's list of the 21 biggest 2019 gainers also draws on Social Blade). It reached 100M on 12 Dec 2020, the third channel to do so. Channel page on 16 Nov 2026: 203M subscribers, 229,945,356,050 views, 2,186 videos.",
+          "when": "2019 to 2020; checked 16 Nov 2026",
+          "driver": "3D-animated nursery rhymes, long compilations that toddlers replay, and a catalog built over years. Moonbug bought it in July 2020.",
+          "faceless": true,
+          "replicable": "The format is copyable. The scale took years of catalog plus later company and streaming backing. It is made-for-kids content.",
+          "sources": [
+            "https://www.businessinsider.in/advertising/news/the-21-youtube-channels-that-gained-the-most-subscribers-in-2019-from-t-series-to-mrbeast/articleshow/72946011.cms",
+            "https://medium.com/socialbook/top-10-youtube-channels-gained-the-most-subscribers-of-2019-968c1474826f",
+            "https://www.digitalinformationworld.com/2019/12/fastest-growing-youtube-channels-of-2019.html",
+            "https://animationmagazine.net/2020/12/cocomelon-caps-a-record-breaking-2020",
+            "https://www.bloomberg.com/news/articles/2020-07-30/blippi-cocomelon-purchased-by-kids-media-giant-moonbug",
+            "https://www.youtube.com/@CoComelon/about"
+          ]
+        },
+        {
+          "channel": "T-Series",
+          "record": "First YouTube channel to 100M subscribers (Guinness World Records), and the most subscribers gained in 2019",
+          "value": "Passed 100M on 29 May 2019 (Guinness). Gained about 42.7M to 43.7M subscribers in 2019 (42,651,839 in one Social Blade-based list; 43.7M in SocialBook's). Channel page on 16 Nov 2026: 316M subscribers, 364,063,397,103 views, 27,551 videos; account created 13 Mar 2006.",
+          "when": "2018 to 2019; checked 16 Nov 2026",
+          "driver": "A Bollywood music label's catalog, India's fast-growing mobile internet audience, and the 2018 to 2019 subscriber race with PewDiePie.",
+          "faceless": true,
+          "replicable": "Not copyable. It has no host, but its videos are film songs starring actors, and its growth comes from a film and music catalog and decades of brand. It shows that a no-host channel can hold the top spot, not how to grow one.",
+          "sources": [
+            "https://www.guinnessworldrecords.com/world-records/575767-first-youtube-channel-to-reach-100-million-subscribers",
+            "https://guinnessworldrecords.com/news/2019/5/t-series-becomes-the-first-youtube-channel-to-surpass-100-million-subscribers",
+            "https://www.businessinsider.in/advertising/news/the-21-youtube-channels-that-gained-the-most-subscribers-in-2019-from-t-series-to-mrbeast/articleshow/72946011.cms",
+            "https://medium.com/socialbook/top-10-youtube-channels-gained-the-most-subscribers-of-2019-968c1474826f",
+            "https://www.youtube.com/@tseries/about"
+          ]
+        },
+        {
+          "channel": "Chief Brioso (Spain; Geometry Dash and meme Shorts)",
+          "record": "2025 trend breakout: 100K to 1M subscribers in 59 days, then about a year for the second million",
+          "value": "Milestones the channel lists on its own page: 100K on 12 Apr 2025, 1M on 10 Jun 2025 (59 days later), 1B views on 9 Jun 2025, 2B views on 4 Jul 2025, 2M subscribers on 29 Jun 2026 and 3B views on 15 Aug 2026. Channel page on 16 Nov 2026: 2.18M subscribers, 3,019,459,487 views, 346 videos.",
+          "when": "April to July 2025 (breakout); checked 16 Nov 2026",
+          "driver": "A trend: Geometry Dash gameplay Shorts with meme characters laid over them (the 2025 breakout used Italian Brainrot characters; I did not re-check that). Its current Shorts put Simpsons characters on Geometry Dash paths.",
+          "faceless": true,
+          "replicable": "Copyable: jumping on a trend fast with faceless gameplay and meme overlays. The lesson is that a trend gives a burst, not lasting growth (the first million took 2 months, the second about 12). Using other people's characters and game footage brings reuse and copyright risk.",
+          "sources": [
+            "https://www.youtube.com/@chiefbrioso/about",
+            "https://www.youtube.com/@chiefbrioso/shorts"
+          ]
+        }
+      ],
+      "struck": [
+        {
+          "record": "Sameko Saba (VTuber): fastest VTuber to 1M subscribers, about 66 hours (debut 28 Jun 2025, 1M on 1 Jul 2025), and the Gawr Gura and Hyakumantenbara Salome comparisons",
+          "reason": "I could not re-confirm the 66-hour figure, the debut date or the earlier VTuber times from a credible source: Siliconera and the other cited outlets could not be fetched here, and the shared web-search limit ran out before I reached this record. Only the channel page is confirmed (16 Nov 2026: 1.47M subscribers, 33,138,696 views, 59 videos, account created 4 May 2025). The 'new persona of Gawr Gura' driver is fan belief, unconfirmed. This can be re-checked in a follow-up."
+        },
+        {
+          "record": "Dream (Minecraft): one of the fastest-growing channels of 2020, peak month August 2020 with about 2.6M subscribers (Business Insider), and the fan-wiki growth path",
+          "reason": "Not re-confirmed: Business Insider could not be fetched and the search limit ran out first. The fan-wiki figures were already marked weaker. Only the channel page is confirmed (16 Nov 2026: 34.8M subscribers, 4,505,382,162 views, 311 videos). Can be re-checked in a follow-up."
+        },
+        {
+          "record": "Mischief Time (@Mtime4): AI-assisted channel in Tubefilter's Global Top 50 most-viewed during the 2026 World Cup (405.4M to about 583M weekly views)",
+          "reason": "The Tubefilter weekly view figures, chart positions and the 'AI football-star parody' driver could not be confirmed. Only the channel page is confirmed (16 Nov 2026: 9.88M subscribers, 18,107,540,090 views, 3,829 videos, created 7 Jun 2022, country Japan; it describes itself as '3D CGI, advanced AI synthesis' and 'transformative parodies'). Can be re-checked in a follow-up."
+        },
+        {
+          "record": "Duplicate Bebefinn record ('Faceless benchmark: a durable animated channel')",
+          "reason": "Merged into the single Bebefinn record."
+        },
+        {
+          "record": "'AI-only faceless channels (Super Cat League, CuentosFacianantes)' summary record",
+          "reason": "Duplicate. Merged into the Guardian/Super Cat League record and the Kapwing January 2026 purge record. Its unconfirmed details were dropped: 'three of the new channels gained nearly all their subscribers within July' and the 1.6M 'space baby' channel."
+        },
+        {
+          "record": "MrBeast 2025 gain 'about 114M (Siasat)'",
+          "reason": "Siasat's article gives a total of about 454M in mid-December 2025, not a 114M yearly gain; I found no source for 114M."
+        },
+        {
+          "record": "MrBeast 'fastest 100M in a 263-day rolling window' (fan wiki)",
+          "reason": "Unverified fan-wiki claim; dropped. The milestone-to-milestone best (269 to 270 days, 200M to 300M) stays."
+        },
+        {
+          "record": "MrBeast June 2024: exact figure 28,749,540 (EssentiallySports)",
+          "reason": "Could not confirm the exact figure; kept Tubefilter's 'about 28 million'."
+        },
+        {
+          "record": "MrBeast's reported 'subscribe to win an iPhone' ads",
+          "reason": "No source found; dropped. The policy point (rewards for subscribing break the spam policy) stays, sourced to YouTube's policy page."
+        },
+        {
+          "record": "Ronaldo first-month details: 'about 63M by 24 September' and the fan wiki's 54.5M for August 2024",
+          "reason": "Not confirmed. Replaced with about 60M by 12 to 13 September (Al Jazeera) and about 63.9M in October 2024 coverage. The 'early press snapshots ranged from 14.2M to 20.8M' line was also dropped as unconfirmed."
+        },
+        {
+          "record": "KIMPRO duo 'started on TikTok first' and the cross-channel comparison as originally written",
+          "reason": "The TikTok origin was not confirmed. The original comparison set KIMPRO's time from first upload against the others' times from channel creation; it now gives both bases."
+        },
+        {
+          "record": "Alejo Igoa: 'Forbes only says on the podium behind MrBeast'",
+          "reason": "Corrected: the Forbes Argentina coverage places him third behind MrBeast and KIMPRO, citing 'Global Statistics'. One local outlet (Canal 12 Misiones) says second."
+        },
+        {
+          "record": "vidIQ 2026 year-to-date figures for places 4 to 9 (Natan por Aí 22.2M, Lucan Pevidor 22M, Jasmin and James 20.1M, Аришнев 20M, CazéTV 18.2M, Nick DiGiovanni 17.9M) and 'SASHA SHOW: biggest single month of 2026'",
+          "reason": "Only the top three figures (68M, 26.2M, 25M) and the fact that Natan por Aí and Lucan Pevidor round out the top five could be confirmed. Nothing confirms that SASHA SHOW's 9.47M was the largest month of 2026; BRUNO and CazéTV had multi-million weeks too. CazéTV's World Cup gain was corrected: its largest week was 3.5M (15 to 21 June), not 1.9M. Describing SASHA SHOW and BRUNO as 'Russian-speaking creators' was narrowed to 'Russian-language channels', with their listed countries."
+        },
+        {
+          "record": "Bebefinn: '14M subscribers and 5.5B views by late Oct 2023', '185M+ views in its first 100 days' and 'an 85M-subscriber parent channel'",
+          "reason": "No source confirms the October 2023 or 100-day view figures; a December 2023 company release says more than 24M. Pinkfong's Baby Shark channel has 85.4M today (channel page, 16 Nov 2026), not in 2022 when Bebefinn launched."
+        },
+        {
+          "record": "Cocomelon: Guinness count of 147,482,207 (Nov 2022), 'most subscribers for an educational channel', '67.4M at the end of 2019' and 'second-largest gain of 2019'",
+          "reason": "Could not confirm these (Guinness pages could not be opened and the search limit ran out). The 2019 gain of about 36M, the 12 Dec 2020 100M date and the live figures stay."
+        },
+        {
+          "record": "Skibidi Toilet: 'about 1M subscribers in 2021', the Washington Post quote 'one of the fastest-growing channels on the platform', Wikipedia's July 3, 2023 article date, and 'made in Source Filmmaker with Steam Workshop and SFMLab assets'",
+          "reason": "Not confirmed in this pass. The record keeps Cartoon Brew's 'nearly 7 years to the first 5M', the 36M and 65B figures as syndicated by ADN, and Know Your Meme's report that the creator doesn't own the song or the models."
+        },
+        {
+          "record": "Chief Brioso: +353,000 subscribers in the week of 2 to 8 June 2025 (43rd in Tubefilter's Global Top 50)",
+          "reason": "Tubefilter's weekly chart could not be confirmed. The channel's own milestone list (on its YouTube page) stays."
+        },
+        {
+          "record": "Zack D. Films entering Tubefilter's global Top 50 most-viewed in July 2025, and the 'biggest faceless explainer-Shorts channel of the Shorts era' framing",
+          "reason": "The July 2025 chart entry was not confirmed, and 'biggest' is an unverifiable superlative. The record is relabelled as a benchmark."
+        },
+        {
+          "record": "Bandar Apna Dost: about 2.76M subscribers and over 500 videos in Kapwing's data",
+          "reason": "Not confirmed; dropped. Kapwing's 2.07B views and $4,251,500 estimate stay."
+        },
+        {
+          "record": "True Crime Case Files: 'the creator disputes this'",
+          "reason": "No source found; dropped."
+        },
+        {
+          "record": "Elsagate 2025: 'One of them, Go Cat, went offline soon after'",
+          "reason": "Wrong as worded. WIRED found Go Cat still active after the 2 terminations and 3 demonetizations; it went offline later, and no report says whether its owner or YouTube removed it. Corrected in the record."
+        },
+        {
+          "record": "Hamster Kombat: 'growth flat for more than two years' and 'one commentator suspected referral-link inflation'",
+          "reason": "Corrected: the channel peaked above 34.4M in July 2024 and is now 32.8M, slightly down. The referral-inflation remark was unconfirmed and was dropped."
+        }
+      ]
+    },
+    "playbook": "## 1. The target\n\nThe goal is the fastest growth in YouTube history, and the network should aim at it on purpose. These are the records it is measured against.\n\n**The all-time record. It came from fame.** UR · Cristiano launched on 21 Aug 2024:\n- **1M subscribers about 90 minutes after launch.** This comes from news reports ([CBS Sports](https://www.cbssports.com/soccer/news/cristiano-ronaldo-starts-youtube-channel-breaks-record-for-fastest-to-one-million-subscribers), [Gulf News](https://gulfnews.com/sport/football/cristiano-ronaldo-breaks-world-record-with-new-youtube-channel-1.1724306414865)). Guinness doesn't list it.\n- **10M in under a day.** beIN Sports says 11.5 hours; other outlets say \"under 12 hours\" ([beIN](https://www.beinsports.com/en-us/soccer/articles-video/cristiano-s-channel-breaks-records-on-youtube-2024-10-10)).\n- **19,729,827 in 24 hours.** This is the one Guinness certifies, using YouTube's own count ([Guinness](https://www.guinnessworldrecords.com/world-records/655853-most-youtube-subscribers-gained-in-24-hours)).\n- **More than 48M after six days** ([Guinness news](https://www.guinnessworldrecords.com/news/2024/8/cristiano-ronaldo-extends-social-media-domination-as-youtube-channel-smashes-record)), and **50M on 28 Aug 2024, day 7** ([ETV Bharat](https://etvbharat.com/en/!sports/cristiano-ronaldo-becomes-fastest-to-reach-50-million-subscribers-on-youtube-after-achieving-it-in-just-six-days-enn24082805813)).\n- **About 60M by 12–13 Sep 2024, days 22–23** ([Al Jazeera](https://www.aljazeera.com/amp/sports/2024/9/13/ronaldo-becomes-first-individual-with-one-billion-social-media-followers)).\n\n**The faceless record on the books. It came from rewards that are now banned.** Hamster Kombat's channel was created on 24 May 2024.\n- It reached **10M in 6 days, 13 hours and 15 minutes.** That is the team's own claim; it applied to Guinness and I found no approval ([BeInCrypto](https://beincrypto.com/hamster-kombat-guinness-world-record)).\n- It had **30.2M by 28 Jun 2024, day 35** ([Invezz](https://invezz.com/news/2024/06/28/hamster-kombat-youtube-channel-is-breaking-records)).\n- Players earned in-game coins for subscribing ([Sherwood News](https://sherwood.news/crypto/hamster-kombat-crypto-game-youtube-social-media-growth-hack/)). YouTube's spam policy now prohibits \"offering rewards in exchange for likes, views, or subscribers\" ([Spam policy](https://support.google.com/youtube/answer/2801973?hl=en), read 16 Nov 2026).\n- Its growth stopped. The channel page showed 32.8M on 16 Nov 2026 ([channel](https://www.youtube.com/@HamsterKombat_Official/about)), below the more than 34.4M it had at the end of July 2024 ([Invezz](https://invezz.com/news/2024/07/30/top-hamster-kombat-statistics-ahead-of-the-hmstr-airdrop/)).\n\n**The clean faceless marks: no fame and no rewards.**\n- **Skibidi Toilet: nearly 12M new subscribers in about six weeks** in mid-2023 ([Cartoon Brew](https://www.cartoonbrew.com/animators/dafuqboom-youtube-alexey-gerasimov-skibidi-toilet-230239.html)).\n  - It came from an original serialized Shorts series. The first episode went up on 7 Feb 2023 ([Mental Floss](https://www.mentalfloss.com/language/what-does-skibidi-mean); [Know Your Meme](https://knowyourmeme.com/memes/skibidi-toilet) says February 2023).\n  - The channel passed 36M by 10 Dec 2023 ([ADN/Washington Post](https://adn.com/nation-world/2023/12/10/how-a-toilet-themed-youtube-series-became-the-biggest-thing-online)).\n- **Bebefinn: 1M within 100 days and 10M in 14 months** after launching in April 2022 ([Manila Bulletin, 14 Jul 2022](https://mb.com.ph/2022/7/14/pinkfongs-bebefinn-youtube-channel-reaches-one-million-subscribers); [Licensing International, 20 Jun 2023](https://licensinginternational.org/news/pinkfongs-bebefinn-surpasses-10-million-youtube-subscribers-setting-new-company-record/)). Pinkfong's Baby Shark brand was behind it.\n- **Largest yearly gain by an animated channel that I have: Cocomelon, about 36M in 2019.** This comes from lists built on Social Blade data ([Business Insider](https://www.businessinsider.in/advertising/news/the-21-youtube-channels-that-gained-the-most-subscribers-in-2019-from-t-series-to-mrbeast/articleshow/72946011.cms)).\n\n**The long line.** KIMPRO reached **100M on 17 Apr 2025, about 2 years 8 months after its first upload** in Aug 2022 ([allkpop](https://www.allkpop.com/article/2025/04/kimpro-becomes-the-first-korean-youtubers-to-hit-100-million-subscribers)). It is the fastest from first upload to 100M that I could document. It isn't an official record, and the channel isn't faceless, but its videos have no dialogue.\n\n**The 2026 bar for \"fastest-growing channel in the world\".** From 1 Jan to 12 Nov 2026, the top three were MrBeast with about 68M, BRUNO with about 26.2M and Alejo Igoa with about 25M ([vidIQ](https://vidiq.com/youtube-stats/top/fastest-growing-youtube-channels/this-year/), third-party estimates).\n\n**The network's goal, as a number and a clock:**\n- **Headline: 10,000,000 subscribers on one faceless channel, faster than any faceless channel has done it cleanly.**\n  - Rung 1: beat Bebefinn's 14 months.\n  - Rung 2: a breakout at or above Skibidi's ~12M in six weeks.\n  - Rung 3: beat 6 days 13 hours, the faceless mark that was set with rewards that are now banned.\n- **Calendar year: 25M or more**, which would have been top three in the world in 2026.\n- **Long line: 100M in under 2 years 8 months.**\n- **All-time ceiling: 19,729,827 in 24 hours.**\n\n## 2. How the records were actually set\n\n**Came from fame, rewards or money. None of this is available here.**\n- **Fame.** The same pattern shows up for Ronaldo, for JENNIE (1M in about 7 hours, January 2021, [allkpop](https://www.allkpop.com/article/2021/01/blackpinks-jennie-hits-1m-subscribers-on-youtube-within-a-few-hours)) and for Lamine Yamal (about 870K in his first 24 hours, December 2025, [VnExpress](https://e.vnexpress.net/news/sports/football/lamine-yamal-launches-youtube-channel-gains-over-one-million-subscribers-after-two-days-4997659.html)).\n  - Fame without strong uploads levels off. UR · Cristiano gained about 60M in its first three weeks, then about 6M in roughly the 11 months to late December 2025, when it had 77.6M ([Bolavip](https://bolavip.com/mx/futbol-internacional/mientras-cristiano-ronaldo-tiene-776-millones-de-suscriptores-la-cifra-que-alcanzo-lamine-yamal-en-su-canal-de-youtube)).\n- **Rewards.** Hamster Kombat paid coins to a player base reported at more than 200M. That method is banned (section 6).\n- **A parent brand.**\n  - Bebefinn launched with Pinkfong's Baby Shark channel behind it, which has 85.4M subscribers today ([channel](https://www.youtube.com/@pinkfong/about)).\n  - Cocomelon was bought by Moonbug in July 2020.\n- **Paid ads.**\n  - A fan analysis counted 428 Google ads in 2025 run by MrBeast's dubbing company. His daily growth fell from about 220K–230K to about 120K a day when the ads paused in April ([Net Influencer](https://www.netinfluencer.com/inside-mrbeast-youtube-ad-campaign-that-helped-him-gain-117m-subscribers-in-2025/)).\n  - Ads that promote real videos are allowed. But views from ad campaigns don't count toward the Partner Program thresholds ([YPP help](https://support.google.com/youtube/answer/72851?hl=en)). YouTube also adds some ad views to public view counts ([metrics help](https://support.google.com/youtube/answer/2991785?hl=en)).\n\n**Came from format and packaging. All of this is available.**\n\n1. **No language needed.**\n   - KIMPRO makes dialogue-free Shorts ([The Star](https://www.thestar.com.my/aseanplus/aseanplus-news/2026/01/21/how-a-south-korean-youtuber-racked-up-100-million-subscribers-without-saying-a-word)). It was the most-viewed channel in the world in 2025 with about 77.53B views (Playboard, via [Korea Times](https://koreatimes.co.kr/entertainment/others/20260108/korean-youtuber-kimpro-takes-no-1-spot-for-annual-global-views)).\n   - Alan Becker's channel says: \"There is no dialogue, but a lot of humor and emotion.\" It has 34.4M subscribers and 10.1B views ([channel](https://www.youtube.com/@alanbecker/about), 16 Nov 2026).\n\n2. **A recurring cast and a serial people binge.**\n   - Skibidi was built from numbered episodes that end on cliffhangers.\n   - Tiny Eraser Studio is the closest live match to our tiny-characters channel. It joined on 1 Jan 2025 and had 932K subscribers, 1,211,883,152 views and 121 videos on 16 Nov 2026 ([channel](https://www.youtube.com/@TinyEraserStudio/about)). It makes wordless Shorts starring stationery characters.\n   - Its serial, \"Paper's Journey to Defeat Scissors — Part 1–12\", shows how a hit works ([Shorts tab](https://www.youtube.com/@TinyEraserStudio/shorts), 16 Nov 2026):\n     - Parts 6–8 drew about 0.9M views each.\n     - Part 10 drew 21M.\n     - Parts 11–12 then drew 1.7M–2.6M, so the hit lifted the floor.\n     - A standalone episode, \"Eraser's Autograph\", has 90M.\n   - Serial character channels turn viewers into subscribers more often. Here are lifetime views per subscriber, my arithmetic from channel pages on 16 Nov 2026 (lower means more subscribers per view):\n\n     | Channel | Views per subscriber |\n     |---|---|\n     | Alan Becker | 294 |\n     | Skibidi | 447 |\n     | Bebefinn | 674 |\n     | KIMPRO | 1,162 |\n     | Tiny Eraser Studio | 1,300 |\n     | Chief Brioso | 1,385 |\n     | Poppy & Pizza (AI pets) | 1,834 |\n     | Zack D. Films (one-off curiosity Shorts) | 2,806 |\n\n3. **Shorts volume, but quality carries more.**\n   - KIMPRO has 4,626 videos since Aug 2022, about 3 a day. Zack D. Films has 4,234 since Jun 2021, about 2.1 a day.\n   - Tiny Eraser Studio posted about 1.2 videos a week and still averages about 10M views per video.\n   - In vidIQ's study of 10.2M channels (July 2026), median growth was highest (0.91% a month) for channels posting 12 or more times a month. That is a correlation, not proof of cause ([vidIQ](https://vidiq.com/research/youtube-upload-frequency-study/)).\n\n4. **A format nobody else had.** Skibidi broke out about three months after its first episode. The channel led Tubefilter's chart for May 2023 with 2.8B views that month (per Cartoon Brew).\n\n5. **Riding a trend gives a burst, not lasting growth.** Chief Brioso went from 100K to 1M in 59 days. The second million then took 384 days ([channel milestones](https://www.youtube.com/@chiefbrioso/about)).\n\n6. **Other languages.**\n   - YouTube says creators who upload multi-language audio tracks get over 25% of their watch time, on average, in the video's non-primary language. It expanded the feature to millions of creators on 10 Sep 2025 ([YouTube blog](https://blog.youtube/news-and-events/multi-language-audio/)).\n   - MrBeast gained more than 47M subscribers from India in 2025, helped by seven audio tracks ([Google India](https://blog.google/intl/en-in/products/platforms/2025s-biggest-trends-on-youtube-that-gave-india-a-new-shared-vernacular/)).\n\n**Speed through mass-produced AI is not available either.** Pouty Frenchie reached about 2B views within about 7 months of creation. The large AI-only channels were then removed, emptied of videos, or flattened (section 6).\n\n## 3. Which channel has the best shot\n\n| Channel | No language needed | Shorts-native | Recurring cast / serial | Record path | Role |\n|---|---|---|---|---|---|\n| Wordless tiny-character Shorts | Yes | Yes | Yes | **Best** | Moonshot #1 |\n| Space and science | No: narration, but can be dubbed | Yes (\"what if\" Shorts) | Possible (numbered series) | Outside chance | Moonshot #2; largest steady channel |\n| Map-based history | Partly: maps are visual, labels and voice aren't | Possible | Series possible | Low | Steady growth, long-form |\n| AI and tech explainers | No | Partly | No | Low | Steady income; spikes around news |\n| Money explainers | No | Partly | No | None realistic | Steady income, search |\n| Company documentaries | No | Weak | Series by company | None realistic | Watch hours, income |\n| Historic true crime | No | Weak | Series | None realistic | Watch hours; highest policy risk |\n| Sleep history | No | No | Format series | None | Watch hours |\n| Insurance and legal terms | No | Weak | No | None | Search, income |\n| Ambient rain | Yes | No | No | None | Watch hours; repetitive-content risk |\n\n**Why tiny characters is first.** It is the only one of the ten that matches every available mechanic: no language, Shorts-native, a recurring cast, and a serial that turns viewers into subscribers.\n- Tiny Eraser Studio proves the format works for a channel started in 2025.\n- It also shows the gap. At 932K after about 98 weeks it is a strong channel, but it is far from record pace.\n- A tiny-world premise alone is not enough. Minuscule, a wordless TV series about insects, has 1.85M subscribers on an account created in 2006 ([channel](https://www.youtube.com/@Minuscule/about)).\n\n**Why space and science is second.** It can follow the Zack D. Films pattern of 3D \"what if\" Shorts: 29.7M subscribers in about 5.4 years ([channel](https://www.youtube.com/@zackdfilms/about)).\n- Narration needs dubbing to travel.\n- One-off fact Shorts turn few viewers into subscribers (2,806 views per subscriber). Long-form science does far better: Kurzgesagt has 25.8M subscribers at 156 views each ([channel](https://www.youtube.com/@kurzgesagt/about)).\n\n**The other eight carry the income.** They earn through long watch time and search.\n- From 1 Feb 2027, new Partner Program applicants need 8,000 qualified long-form watch hours in 365 days. Watch hours from the Shorts feed don't count ([YouTube blog, 10 Aug 2026](https://blog.youtube/news-and-events/youtube-partner-program-updates-2027-new-opportunities-earn/); [YPP help](https://support.google.com/youtube/answer/72851?hl=en)).\n- Sleep history and rain sound build those hours fastest. Money, AI and tech, company documentaries and insurance and legal terms bring search traffic that keeps coming.\n\n## 4. The moonshot play\n\n### Channel 1: wordless tiny characters\n\n**Format.**\n- Wordless animated Shorts, using sound effects and music instead of words.\n- A cast of 3–5 tiny characters. Each one has a single want and a silhouette you can read at phone size.\n- One home world everyone recognizes, such as a kitchen counter, a desk drawer or a garden bed. Pick a world that Tiny Eraser Studio (stationery) and Minuscule (insects) don't use.\n- Own every character, rig, model, song and sound outright. Skibidi's creator didn't own the song or the models he used ([Know Your Meme](https://knowyourmeme.com/news/skibidi-toilet-creator-sends-copyright-strikes-to-gametoons-despite-not-owning-the-song-or-models-in-his-videos)), and the rights later ended up in court ([Cartoon Brew](https://www.cartoonbrew.com/law/skibidi-toilet-ip-battle-invisible-narratives-dafuqboom-263954.html)).\n\n**Series concept.** Run two tracks.\n- **Standalone gags.** Each one must be a different story. YouTube's policy explicitly allows \"a series following a set of characters across episodes… in which each video has a distinct storyline\". It explicitly bars \"characters put in the same situation over and over again with the same outcome\" ([monetization policies](https://support.google.com/youtube/answer/1311392?hl=en)).\n- **A numbered serial quest of 10–20 parts.** Each part ends on a cliffhanger, and the next arc starts the day the last one ends. Skibidi's numbered episodes and Tiny Eraser Studio's Part 10 (21M views) are the evidence for this.\n\n**Shorts strategy.**\n- Gags run 20–60 seconds. Serial parts can run longer, since Shorts may be up to 3 minutes from 15 Oct 2024 ([Tubefilter](https://www.tubefilter.com/2024/10/03/youtube-shorts-three-minutes-max-length-redesign-trends-templates/)).\n- Use the same serial title plus the part number on every episode, and point every episode back to Part 1 with a pinned comment and a playlist.\n- Post a \"Best of\" long-form compilation every month. Tiny Eraser Studio's 514-second \"Best of Rock Paper Scissors Animation\" had 8.9M views at about 300 days old (YouTube search, 16 Nov 2026). Compilations build the long-form hours that Shorts can't.\n- Set the audience honestly. YouTube lists \"animated content that appeals to everyone\" as general audience. It also counts \"animated characters or cartoon figures\" that appeal to children as a sign of made-for-kids content ([made-for-kids help](https://support.google.com/youtube/answer/9528076?hl=en)). Write the humor for adults and children alike.\n- The \"wordless\" label is not the hook. In a YouTube search on 16 Nov 2026, almost every recent upload titled \"A Wordless Animated Short Film\" had under 1,000 views. The exception was an Oscar-nominated film.\n\n**Upload pace a human-edited team can keep.**\n- Launch with a bank of 12–20 finished episodes. Ronaldo opened with 19 videos, and depth matters when a viewer arrives and wants more.\n- Post 3 Shorts a week, which is 12 or more a month, vidIQ's top band.\n- Keep about two weeks of finished episodes in reserve at all times, so a breakout can be fed every day for six weeks without dropping quality.\n- Go to daily only while every episode stays a distinct story.\n\n**When to pour effort in.**\n1. **Now until 1 Feb 2027 (77 days).**\n   - Today's bar to join the Partner Program through Shorts is 1,000 subscribers plus 10M qualified Shorts views in 90 days.\n   - Creators who apply from 1 Feb 2027 need 20M Shorts views in 90 days. Creators already in the program aren't affected ([YouTube blog](https://blog.youtube/news-and-events/youtube-partner-program-updates-2027-new-opportunities-earn/)).\n   - Aim the launch at clearing today's bar before that date.\n2. **The breakout trigger.** Watch for a Short running at 10 times or more the channel's median views within 48 hours. When it happens:\n   - publish the next part within 24–48 hours, then one a day from the reserve;\n   - pin Part 1;\n   - cut a compilation within the week;\n   - make the next arc about the character that broke out.\n   - The window lasts weeks. Skibidi's ran about six weeks and Chief Brioso's 59 days.\n3. **Calendar moments, but only as a supplement.** Tiny Eraser Studio's Halloween Shorts drew 149K–281K views, while its football Short drew 4.7M. The serial is the main bet. Use only your own characters, never a league's or a tournament's marks.\n\n### Channel 2: space and science\n\n**Format.**\n- 3D \"what if\", \"how big\" and \"how it works\" Shorts under one numbered series name.\n- Optionally one recurring non-human character, such as a tiny probe.\n- One long-form deep dive every two weeks, because long-form turns viewers into subscribers (Kurzgesagt's 156 views per subscriber).\n\n**Language.** Add multi-language audio tracks to the best Shorts and to all long-form videos (over 25% of watch time, on average, in non-primary languages, per YouTube).\n\n**Accuracy.** Check every fact. Disclose realistic AI scenes of real places or events. YouTube's own example of what needs a label is \"a tornado moving toward a real town\" ([YouTube blog](https://blog.youtube/news-and-events/disclosing-ai-generated-content)).\n\n**Pace.** Post 3–5 Shorts a week and 2 long-form videos a month. Zack D. Films' 2.1 a day shouldn't be copied with templates, because that runs into the inauthentic-content rule (section 6).\n\n**When to pour effort in.** Sky events and launches are scheduled months ahead, so prepare for them. For example, the total solar eclipse of 2 Aug 2027 crosses southern Spain and has over six minutes of totality near Luxor ([IGN Spain](https://astronomia.ign.es/en/web/guest/eclipses-de-sol-y-luna/eclipse-total-sol-de-2-de-agosto-2027)).\n\n## 5. Pace targets\n\n**Day by day.** The last column is my target for Channel 1. It is derived from Bebefinn's marks, the best clean faceless launch from zero, and from today's 10M-views-in-90-days Partner Program bar.\n\n| Day | Overall record: UR · Cristiano (fame) | Faceless record on the books: Hamster Kombat (rewards, now banned) | Best clean faceless launch: Bebefinn (parent brand) | Strong normal new channel (vidIQ) | Record-pace checkpoint for Channel 1 (target) |\n|---|---|---|---|---|---|\n| 7 | 48M+ after 6 days; 50M on day 7 | 10M at 6d 13h | Not published | First Short averages ~1,362 views; best of the first ten ~8,832 ([vidIQ, July 2026](https://vidiq.com/research/youtube-first-10-videos-study/), 448,413 channels created Jan–Jun 2025) | ~780K Shorts views total; on course for 100K subscribers by day 21 |\n| 30 | ~60M by days 22–23 | 22M+ at ~day 21; 30.2M at day 35 | 100K within ~3 weeks | 86.5% of channels posting 10+ Shorts had one pass 1,000 views within 30 days | 100K subscribers; 3.3M+ Shorts views |\n| 60 | ~63.9M around day 50 (Oct 2024 coverage) | 34.4M+ by day 68 | Not published | No reliable figure | ~545K subscribers; 6.7M Shorts views |\n| 90 | ~60–64M (exact figure not published) | ~34M, then flat | 1M within 100 days | Mostly-Shorts channels that reached 1,000 did so at a median of ~90 uploads (secondary reports of a vidIQ study of ~200,000 channels created in 2025) | ~890K subscribers; 10M Shorts views (today's Partner Program bar) |\n| 365 | Not published: ~60M by end-2024 (day 132), 77.6M in late Dec 2025 (~day 494) | Not published: 32.8M on 16 Nov 2026 (day 906) | ~2.9M at ~month 8; 10M at month 14 | 30.77% of under-1,000 channels that added 52+ videos reached 1,000 within 360 days; 1.5% of all 32.9M tracked ([vidIQ, Sept 2026](https://vidiq.com/research/youtube-uploads-1000-subscribers/)). 10,000 subscribers puts a channel ahead of 92.1% of all channels ([vidIQ, July 2026](https://vidiq.com/research/youtube-subscriber-benchmarks-2026/)) | 10M (two months ahead of Bebefinn); 25M+ would be top three in the world on 2026's numbers |\n\n**Week by week.** Find the channel's subscriber gain for the week on this ladder (my arithmetic from the sources above):\n\n| Gain per week | What it matches |\n|---|---|\n| ~20 | 1,000 subscribers in the first year, already above normal |\n| ~9.5K | Tiny Eraser Studio's average since 1 Jan 2025: a strong channel in this exact format |\n| ~33K | Bebefinn's first three weeks |\n| ~70K | Bebefinn's first 100 days |\n| ~105K | Zack D. Films' average over 5.4 years: best in format for science |\n| ~273K | Bebefinn, months 8–14 |\n| ~555K–582K | 2026's #3 and #2 fastest-growing channels in the world |\n| ~2M | Skibidi's six-week breakout. Best single weeks in 2026: SASHA SHOW 3.8M (October), CazéTV 3.5M during the World Cup ([Tubefilter](https://www.tubefilter.com/2026/06/29/top-50-most-subscribed-youtube-channels-week-of-06-28-2026/)) |\n| 10M | Hamster Kombat's first week (rewards) |\n| ~50M | UR · Cristiano's first week (fame) |\n\n**Notes on the numbers.**\n- Keep score in subscribers, using YouTube Studio's exact count, not the abbreviated public one.\n- Don't use views to compare channels across years. Since 31 Mar 2025 a Shorts view counts every time a Short starts or replays ([YouTube help](https://support.google.com/youtube/answer/2991785?hl=en); [Digital Music News](https://www.digitalmusicnews.com/2025/03/27/how-does-youtube-shorts-count-views-2025/)), and some ad views count in public totals.\n- I could open YouTube's and Google's own pages from here but not vidiq.com, Guinness, Tubefilter or Cartoon Brew. vidIQ figures come from search extracts of vidIQ's research pages. The others come from the verified records.\n\n## 6. The rules that can't be broken on the way\n\n1. **No rewards for engagement, and no sub-for-sub.**\n   - YouTube bans \"content that solely exists to incentivize viewers for engagement\", and \"channels that don't follow this policy may be terminated\". A hired promoter's methods count against the channel ([fake engagement policy](https://support.google.com/youtube/answer/3399767?hl=en)).\n   - Hamster Kombat's method is banned now. Its subscribers stopped growing in 2024.\n2. **No mass-produced or templated episodes.**\n   - Since 15 Jul 2025, monetized content must not be \"mass-produced, generic, repetitive, or manipulative\" ([monetization policies](https://support.google.com/youtube/answer/1311392?hl=en)).\n   - The policy also names \"repetitive scenarios of animals in exaggerated distress or peril\" and \"AI-generated content made with generic or unoriginal templates\".\n   - It does allow \"using AI to visualize a unique character and narrative you invented\".\n   - In late January 2026, 16 AI channels with about 35M subscribers combined were deleted or emptied of videos ([Net Influencer](https://www.netinfluencer.com/youtube-removes-major-ai-slop-channels-with-combined-9-8m-in-estimated-annual-revenue/)). Super Cat League lost all its videos.\n3. **No misleading titles, and no one else's footage or characters.** Screen Culture and KH Studio were terminated in December 2025 for \"spam and misleading metadata\" ([TheWrap](https://www.thewrap.com/industry-news/tech/youtube-terminates-screen-culture-kh-studio-over-ai-fake-movie-trailers/)).\n4. **Never present invented events as real, and no fake news about real people.**\n   - True Crime Case Files was terminated in January 2025 ([Tubefilter](https://www.tubefilter.com/2025/02/14/youtube-true-crime-case-files-ai-crime-channel-terminated/)).\n   - YouTube removed 16 of the AI channels that posted about the \"Diddy\" trial ([Indicator](https://indicator.media/p/youtube-diddy-trial-ai-slop-bieber-50cent-jamie-foxx-wendy-williams)).\n   - Label all fiction clearly.\n5. **Children.**\n   - Set made-for-kids honestly. It is a legal duty under COPPA, and Google and YouTube paid $170M in 2019 over it ([FTC](https://www.ftc.gov/news-events/news/press-releases/2019/09/google-youtube-will-pay-record-170-million-alleged-violations-childrens-privacy-law)).\n   - Never put disturbing themes into animation that appeals to children. In November 2017 YouTube terminated more than 270 accounts and removed more than 150,000 videos ([9to5Google](https://9to5google.com/2017/11/28/youtube-sexualised-child-imagery-response/)), and in 2025 it terminated AI channels that copied the pattern ([Tubefilter](https://www.tubefilter.com/2025/05/02/ai-elsagate-videos-minion-go-cat-child-safety-content/)).\n6. **Disclose realistic AI.** Since May 2026 YouTube adds the label itself when it detects undisclosed photorealistic AI, and some disclosures can't be removed ([YouTube blog, 27 May 2026](https://blog.youtube/news-and-events/improving-ai-labels-for-viewers-and-creators/)).\n7. **Income channels.**\n   - Sleep history must not be \"readings of other materials you did not originally create\".\n   - Rain sound must not be content that \"feels interchangeable from video to video\" (both quotes from the monetization policies).\n8. **Paid promotion: real videos only.** Views from ad campaigns don't count toward the Partner Program thresholds.\n9. **Money floor from 1 Feb 2027.** Shorts ad revenue requires 10M qualified Shorts views in the last 90 days. Below that, a channel stays in the program but earns only from long-form until it crosses 10M again.\n\n## 7. One line on odds\n\nNo channel in these records reached record pace without fame, a parent brand or paid rewards. In vidIQ's data only 30.77% of new channels that add 52 or more videos in a year even reach 1,000 subscribers. So the odds of beating the all-time record are close to zero and the odds of beating the clean faceless marks are long. The goal stands either way: the work it needs is the same work that makes the network pay."
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Records"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 3,
+      "title": "Playbook"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "records:all-time",
+      "phaseIndex": 1,
+      "phaseTitle": "Records",
+      "agentId": "ab675343cfbde44c8",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794871863231,
+      "lastProgressAt": 1794871863231,
+      "cached": true,
+      "resultPreview": "{\"records\":[{\"channel\":\"UR · Cristiano (Cristiano Ronaldo)\",\"record\":\"Fastest channel ever to 1 million subscribers\",\"value\":\"1 million subscribers in about 90 minutes after launch (some reports say 1 hour 29 minutes). The previous best was BLACKPINK singer Jennie's channel at about 7 hours in January 2021.\",\"when\":\"21 August 2024\",\"driver\":\"Existing fame. Ronaldo had about 1 billion followers acr…",
+      "promptPreview": "You are researching YouTube growth records for an owner who has set the goal of the fastest growth in YouTube history with a network of faceless channels.\n\nFind YouTube's real growth records: fastest channels ever to 1 million, 10 million and 100 million subscribers; most subscribers gained in a day, week, month and year; fastest-growing channels of 2024, 2025 and 2026. Include celebrity launches …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "records:faceless",
+      "phaseIndex": 1,
+      "phaseTitle": "Records",
+      "agentId": "ada1b20e36697da56",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794871863232,
+      "lastProgressAt": 1794871863232,
+      "cached": true,
+      "resultPreview": "{\"records\":[{\"channel\":\"Skibidi Toilet (DaFuq!?Boom!, now @skibidi)\",\"record\":\"Fastest faceless breakout of 2023: nearly 12M subscribers in about six weeks. The Washington Post called it 'one of the fastest-growing channels on the platform'.\",\"value\":\"Nearly 12M new subscribers in about 1.5 months, after taking nearly 7 years to reach its first 5M (Cartoon Brew; Wikipedia dates the article July 3,…",
+      "promptPreview": "You are researching YouTube growth records for an owner who has set the goal of the fastest growth in YouTube history with a network of faceless channels.\n\nFind the fastest-growing FACELESS channels (no on-camera host): animated series, explainer channels, documentary channels, compilation-free original formats, AI-assisted channels that stayed monetized. For each: how fast it grew (subscribers or…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "verify",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "aa8e8f2df06f5839c",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794871863234,
+      "lastProgressAt": 1794871863234,
+      "cached": true,
+      "resultPreview": "{\"records\":[{\"channel\":\"UR · Cristiano (Cristiano Ronaldo)\",\"record\":\"Fastest channel ever to 1 million subscribers (news reports; I found no Guinness listing for this one)\",\"value\":\"1 million subscribers about 90 minutes after launch (some outlets say 1 hour 29 minutes). The previous fastest was BLACKPINK singer Jennie's channel at about 7 hours (January 2021, Gulf News).\",\"when\":\"21 August 2024\"…",
+      "promptPreview": "You are the skeptic. Researchers collected the YouTube growth records below. The owner will plan around them, so every number must be right.\n\n[\n {\n  \"channel\": \"UR · Cristiano (Cristiano Ronaldo)\",\n  \"record\": \"Fastest channel ever to 1 million subscribers\",\n  \"value\": \"1 million subscribers in about 90 minutes after launch (some reports say 1 hour 29 minutes). The previous best was BLACKPINK sing…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "playbook",
+      "phaseIndex": 3,
+      "phaseTitle": "Playbook",
+      "agentId": "a45bcbb8603352b7e",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794871863241,
+      "queuedAt": 1794871863234,
+      "attempt": 1,
+      "lastToolName": "SubagentHandback",
+      "lastToolSummary": "## 1. The target The goal is the fastest growth in YouTube …",
+      "promptPreview": "You are writing the moonshot section of a growth plan. The owner of ten new faceless YouTube channels (money explainers, company documentaries, AI and tech explainers, space and science, map-based history, sleep history, historic true crime, insurance and legal terms, ambient rain sound, and wordless animated Shorts about tiny characters) has set this goal: the fastest growth in YouTube history. W…",
+      "promptFramed": true,
+      "lastProgressAt": 1794872586129,
+      "tokens": 209369,
+      "toolCalls": 48,
+      "durationMs": 722888,
+      "resultPreview": "## 1. The target\n\nThe goal is the fastest growth in YouTube history, and the network should aim at it on purpose. These are the records it is measured against.\n\n**The all-time record. It came from fame.** UR · Cristiano launched on 21 Aug 2024:\n- **1M subscribers about 90 minutes after launch.** This comes from news reports ([CBS Sports](https://www.cbssports.com/soccer/news/cristiano-ronaldo-star…"
+    }
+  ],
+  "totalTokens": 209369,
+  "totalToolCalls": 48
+}

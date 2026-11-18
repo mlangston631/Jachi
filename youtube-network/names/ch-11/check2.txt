@@ -1,0 +1,50 @@
+TAKEN    Night Whistle  (@NightWhistle; search returned 33 channels)
+           - handle @NightWhistle is taken by "Nightwhistle"
+           - @TheNightWhistle is taken by "TheNightwhistle"
+           - same-name channel: "Night Whistle" @Night_Whistle @Night_Whistle, 292 subscribers
+           - same-name channel: "Night whistle " @SoothLoops @SoothLoops, 6 subscribers
+           - same-name channel: "Night Whistle" @nightwhistle4107 @nightwhistle4107, 1 subscriber
+           - contains-name channel: "Night Whistle Tales - English " @NightWhistleTales-English @NightWhistleTales-English
+           - same-name channel: "Night Whistle" @youtubeGiriOfficial @youtubeGiriOfficial
+TAKEN    Count Room  (@CountRoom; search returned 38 channels)
+           - handle @CountRoom is taken by "coutroom_of"
+           - @TheCountRoom is taken by "the count room"
+TAKEN    Gutterlight  (@Gutterlight; search returned 30 channels)
+           - same-name channel: "Gutterlight" @gutterlight.inc1 @gutterlight.inc1
+           - contains-name channel: "GutterLightComics" @GutterLightComics @GutterLightComics
+           - contains-name channel: "Gutterlight - Topic" channel/UC3cMPA5tVKnN8fZPLQzaSEw 
+           - contains-name channel: "Gutterlight - Topic" channel/UCRPZkFc019yE63liFhs9QXw 
+           - contains-name channel: "Gutterlight Chronicles" @GutterlightChronicles @GutterlightChronicles, 11 subscribers
+           - contains-name channel: "Gutterlight Whisper" channel/UChSW8nguathHFeOv7091X5g 
+           - contains-name channel: "Gutter Light Hours" @GutterlightHours @GutterlightHours, 2 subscribers
+           - contains-name channel: "Gutter light - Topic" channel/UCKB2qvSqCNgquHIqomDfn0A 
+TAKEN    Engine Running  (@EngineRunning; search returned 34 channels)
+           - same-name channel: "Engine Running" @enginerunning502 @enginerunning502
+           - contains-name channel: "Leave the Engine Running" channel/UCSG11Uel2XTTTXCyML2pQ2g 
+           - contains-name channel: "Leave the Engine Running" channel/UCPnOsnyOgoRhg_kf_xEwS3g 
+           - contains-name channel: "Keep Yo Engine Running" channel/UCm4NftzyS1r5sb_QVJQwRgg 
+           - contains-name channel: "JUST KEEP THE ENGINE RUNNING" channel/UCp8VUGzpvGBxcxQ4RWGyRdw 
+           - contains-name channel: "Stuart steam engine running" @stuartsteamenginerunning6445 @stuartsteamenginerunning6445
+           - contains-name channel: "keep your mx-engine running 339" @keepyourmx-enginerunning3338 @keepyourmx-enginerunning3338, 1 subscriber
+           - contains-name channel: "Engine Run" @enginerun1808 @enginerun1808, 2 subscribers
+           - contains-name channel: "Engine Run" @EngineRun @EngineRun, 5 subscribers
+           - contains-name channel: "engine run" channel/UC3EpvWP0KZNglnc09UDAoSw 
+TAKEN    Plainclothes  (@Plainclothes; search returned 34 channels)
+           - handle @Plainclothes is taken by "P1aincloth3sM4n"
+           - same-name channel: "PlainClothes" @PlainClothe @PlainClothe, 1 subscriber
+           - contains-name channel: "Plainclothes - Topic" channel/UCGgsBlDG699Xuh4Di9iYS8w 116 subscribers
+           - contains-name channel: "Plainclothes Cupid " @PlainclothesCupid @PlainclothesCupid, 3 subscribers
+           - contains-name channel: "Plainclothes - Topic" channel/UCewWUA5a2qScBLNhtsylLcw 
+           - contains-name channel: "Plainclothes Supervillain" @hazakaza @hazakaza, 4 subscribers
+           - contains-name channel: "Plainclothes Tracy - Topic" channel/UCX2GLruFMrat9JHulBYYoyA 3 subscribers
+           - contains-name channel: "shifuku plainclothes" @shifukuplainclothes740 @shifukuplainclothes740, 7 subscribers
+           - contains-name channel: "plainclothes disaster" @plainclothesdisaster @plainclothesdisaster, 1 subscriber
+           - contains-name channel: "Plainclothes Man" @jaggayjobbie @jaggayjobbie, 1 subscriber
+           - contains-name channel: "PlainClothes Man" @plainclothesman3609 @plainclothesman3609, 1 subscriber
+           - contains-name channel: "Plainclothes Radio Worldwide" @plainclothesradioworldwide @plainclothesradioworldwide, 1 subscriber
+           - contains-name channel: "Bearcat Plainclothes PO" @bearcatplainclothespo239 @bearcatplainclothespo239
+           - contains-name channel: "The Plainclothes God Dialogue" @The.Plainclothes.God.Dialogue @The.Plainclothes.God.Dialogue, 7 subscribers
+           - contains-name channel: "Plainclothes Bandit" @PlainclothesBandit @PlainclothesBandit, 3 subscribers
+           - same-name channel: "P1aincloth3sM4n" @Plainclothes @Plainclothes, 3 subscribers
+           - near-name channel: "In Plain Clothes" @inplainclothespod @inplainclothespod, 53 subscribers
+CLEAR    Corner to Courtroom  (@CornertoCourtroom; search returned 25 channels)

@@ -1,0 +1,34 @@
+CLEAR    Nobody Retires  (@NobodyRetires; search returned 40 channels)
+TAKEN    Local Chapter  (@LocalChapter; search returned 25 channels)
+           - handle @LocalChapter is taken by "localchapter"
+           - @TheLocalChapter is taken by "the local chapter"
+           - contains-name channel: "AAPC Hyderabad Local Chapter" @AAPCHyderabadLocalChapter @AAPCHyderabadLocalChapter, 2.98K subscribers
+           - same-name channel: "The Local Chapter" @The_Local_Chapter_media @The_Local_Chapter_media, 217 subscribers
+           - same-name channel: "Local Chapter" @waspmeat @waspmeat, 56 subscribers
+           - contains-name channel: "Local Chapter - Topic" channel/UC5iU_S96Yh1wuDafgW3QUYg 12 subscribers
+           - contains-name channel: "ALSA Local Chapter Universitas Airlangga" @alsaunair @alsaunair, 12 subscribers
+           - contains-name channel: "OWASP Poland Local Chapter" @owasppolandlocalchapter5001 @owasppolandlocalchapter5001, 275 subscribers
+           - same-name channel: "the local chapter" @thelocalchapter @thelocalchapter, 1 subscriber
+           - contains-name channel: "AAPC Hyderabad Local Chapter" @aapchyderabadlocalchapter8904 @aapchyderabadlocalchapter8904, 39 subscribers
+           - same-name channel: "Local Chapter" @localchapter8765 @localchapter8765, 2 subscribers
+           - contains-name channel: "MetallicolombiA Local Chapter" @MetallicolombiALocalChapter @MetallicolombiALocalChapter, 3.44K subscribers
+           - same-name channel: "The Local Chapter - বাংলা" @The.LocalChapter-%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE @The.LocalChapter-বাংলা, 10 subscribers
+           - contains-name channel: "SIGCHI Local Chapter Korea" @sigchilocalchapterkorea9482 @sigchilocalchapterkorea9482, 3 subscribers
+           - same-name channel: "The Local Chapter" @thelocalchapter4098 @thelocalchapter4098, 2 subscribers
+           - contains-name channel: "SydCHI - Sydney's ACM SIGCHI Local Chapter" @sydchi-sydneysacmsigchiloc9347 @sydchi-sydneysacmsigchiloc9347, 6 subscribers
+           - contains-name channel: "SPOC NPTEL WIT Local Chapter" @spocnptelwitlocalchapter7697 @spocnptelwitlocalchapter7697, 50 subscribers
+           - contains-name channel: "Omdena Berlin Local Chapter" @OmdenaBerlinLocalChapter @OmdenaBerlinLocalChapter, 10 subscribers
+           - contains-name channel: "Houston Omdena Local Chapter" @Houston_Omdena_Local_Chapter @Houston_Omdena_Local_Chapter, 1 subscriber
+           - contains-name channel: "Prof.Sekar-CRSI Chennai Local Chapter" @prof.sekar-crsichennailoca8750 @prof.sekar-crsichennailoca8750, 1 subscriber
+           - contains-name channel: "ALSA Local Chapter Universitas Mulawarman" @alsalcunmul @alsalcunmul, 9 subscribers
+           - contains-name channel: "IYOIN Local Chapter Bandung" @iyoinlocalchapterbandung6757 @iyoinlocalchapterbandung6757, 4 subscribers
+           - contains-name channel: "AAPC Local Chapters Abu Dhabi" @AAPCLocalChaptersAbuDhabi @AAPCLocalChaptersAbuDhabi, 585 subscribers
+           - same-name channel: "local chapter" @manojmanoj7034 @manojmanoj7034
+           - contains-name channel: "EAGE Local Chapter Kuwait" @EAGELocalChapterKuwait @EAGELocalChapterKuwait, 68 subscribers
+CLEAR    Rust Under Paint  (@RustUnderPaint; search returned 23 channels)
+TAKEN    After the Score  (@AftertheScore; search returned 39 channels)
+           - handle @AftertheScore is taken by "After The Score"
+           - same-name channel: "After The Score" @AfterTheScore @AfterTheScore, 8 subscribers
+TAKEN    Somebody Always Talks  (@SomebodyAlwaysTalks; search returned 0 channels)
+           - handle @SomebodyAlwaysTalks is taken by "Somebody Always Talks"
+CLEAR    Freight and Fallout  (@FreightandFallout; search returned 22 channels)

@@ -1,0 +1,149 @@
+{
+ "_about": "Edit decision list for the Petters cold open (Crooked Arithmetic ep 1). Times are seconds on the narration clock; cuts land in the pauses found by silencedetect. Facts on screen are from the DOJ release of 8 Apr 2010 (see network/ch-12/ep01-petters-script.md).",
+ "narration": "assets/narration-coldopen-arthur.wav",
+ "tail": 1.6,
+ "output": "coldopen-test.mp4",
+ "shots": [
+  {
+   "at": 0.0,
+   "src": "assets/skyline.png",
+   "zoom": [
+    1.0,
+    1.08
+   ],
+   "focus": [
+    0.4,
+    0.5
+   ],
+   "text": [
+    {
+     "text": "MINNESOTA  /  SEPTEMBER 2008",
+     "at": 0.6,
+     "size": 34,
+     "x": "80",
+     "y": "h-150",
+     "box": true
+    }
+   ]
+  },
+  {
+   "at": 3.0,
+   "src": "assets/rec-steps.mp4",
+   "recreation": true
+  },
+  {
+   "at": 8.2,
+   "src": "assets/rec-recorder.png",
+   "recreation": true,
+   "zoom": [
+    1.0,
+    1.22
+   ],
+   "focus": [
+    0.42,
+    0.85
+   ]
+  },
+  {
+   "at": 12.2,
+   "src": "assets/rec-hands.png",
+   "recreation": true,
+   "zoom": [
+    1.05,
+    1.18
+   ],
+   "focus": [
+    0.55,
+    0.45
+   ]
+  },
+  {
+   "at": 16.5,
+   "src": "assets/orders.png",
+   "zoom": [
+    1.0,
+    1.06
+   ],
+   "darken": 0.28,
+   "text": [
+    {
+     "text": "\"FAKE\"",
+     "at": 19.3,
+     "size": 150,
+     "color": "0xEDE04A",
+     "box": true
+    },
+    {
+     "text": "U.S. ATTORNEY, DISTRICT OF MINNESOTA  /  8 APRIL 2010",
+     "at": 19.3,
+     "size": 26,
+     "y": "h-120",
+     "box": true
+    }
+   ]
+  },
+  {
+   "at": 21.7,
+   "src": "assets/warehouse.png",
+   "zoom": [
+    1.0,
+    1.12
+   ],
+   "focus": [
+    0.5,
+    0.6
+   ],
+   "text": [
+    {
+     "text": "14 YEARS",
+     "at": 24.6,
+     "size": 120,
+     "color": "0xF4F2EA",
+     "y": "h*0.30"
+    }
+   ]
+  },
+  {
+   "at": 26.4,
+   "src": "assets/orders.png",
+   "zoom": [
+    1.12,
+    1.0
+   ],
+   "darken": 0.32,
+   "text": [
+    {
+     "text": "$3.7 BILLION",
+     "at": 29.6,
+     "size": 170,
+     "color": "0xEDE04A",
+     "box": true
+    },
+    {
+     "text": "PONZI SCHEME  /  BY THE GOVERNMENT'S COUNT",
+     "at": 30.4,
+     "size": 30,
+     "y": "h*0.66",
+     "box": true
+    }
+   ]
+  },
+  {
+   "at": 35.4,
+   "src": "../../kit/12-crooked-arithmetic-banner.png",
+   "zoom": [
+    1.0,
+    1.04
+   ],
+   "text": [
+    {
+     "text": "BUILT ON PAPER.",
+     "at": 35.9,
+     "size": 44,
+     "color": "0xF4F2EA",
+     "y": "h*0.80"
+    }
+   ]
+  }
+ ]
+}

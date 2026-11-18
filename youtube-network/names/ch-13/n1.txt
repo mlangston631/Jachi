@@ -1,0 +1,18 @@
+TAKEN    Politically Exposed  (@PoliticallyExposed; search returned 35 channels)
+           - handle @PoliticallyExposed is taken by "Politically Exposed "
+           - same-name channel: "Politically Exposed " @PoliticallyExposed @PoliticallyExposed, 1 subscriber
+           - same-name channel: "Politically Exposed" @politicallyexposed3909 @politicallyexposed3909
+           - near-name channel: "Political Exposed" @politicalexposedtv @politicalexposedtv, 13 subscribers
+TAKEN    Beneficial Owner  (@BeneficialOwner; search returned 34 channels)
+           - handle @BeneficialOwner is taken by "Beneficial Owner"
+           - same-name channel: "Beneficial Owner" @BeneficialOwner @BeneficialOwner, 364 subscribers
+           - same-name channel: "Beneficial Owner" @3goldrush @3goldrush, 9 subscribers
+           - contains-name channel: "Beneficial Ownership" @beneficialownership @beneficialownership, 114 subscribers
+           - contains-name channel: "Central Register of Beneficial Ownership" @centralRBO @centralRBO, 70 subscribers
+           - contains-name channel: "Beneficial Ownership" @BeneficialOwnership-ib5oe @BeneficialOwnership-ib5oe, 3 subscribers
+TAKEN    Honest Graft  (@HonestGraft; search returned 27 channels)
+           - same-name channel: "Honest Graft" @honestgraft1931 @honestgraft1931, 10 subscribers
+CLEAR    Utmost Discretion  (@UtmostDiscretion; search returned 23 channels)
+CLEAR    Flags of Convenience  (@FlagsofConvenience; search returned 23 channels)
+TAKEN    Diplomatic Pouch  (@DiplomaticPouch; search returned 20 channels)
+           - same-name channel: "The Diplomatic Pouch" @The_diplomatic_pouch @The_diplomatic_pouch, 4 subscribers

@@ -1,0 +1,21 @@
+CLEAR    Crew and Consequence  (@CrewandConsequence; search returned 26 channels)
+TAKEN    State's Evidence  (@StatesEvidence; search returned 39 channels)
+           - near-name channel: "state evidence" @stateevidenceUS @stateevidenceUS, 3 subscribers
+           - near-name channel: "State Evidence" @State_Evidence @State_Evidence, 22 subscribers
+           - near-name channel: "State Evidence" @StateEvidence @StateEvidence
+           - contains-name channel: "Evidence HQ" @EvidenceFileHQ @EvidenceFileHQ, 6.09K subscribers
+TAKEN    Marked Bills  (@MarkedBills; search returned 34 channels)
+           - handle @MarkedBills is taken by "Matthew "
+           - same-name channel: "Marked Bills" @markedbills-tv @markedbills-tv, 6 subscribers
+           - same-name channel: "MARKED BILLS" @marked_bills @marked_bills, 5 subscribers
+           - same-name channel: "Marked Bills" @MarkedBillsTV @MarkedBillsTV, 1 subscriber
+           - same-name channel: "Marked Bills" @MarkedBills_1 @MarkedBills_1, 224 subscribers
+           - same-name channel: "Marked Bills" @MarkedBillsDocs @MarkedBillsDocs, 14.7K subscribers
+           - contains-name channel: "Marked" @Marked-How-It-Works @Marked-How-It-Works
+TAKEN    Out of Plumb  (@OutofPlumb; search returned 35 channels)
+           - handle @OutofPlumb is taken by "Andrej Ogris"
+           - contains-name channel: "Out of Plumb - Topic" channel/UCEziE90M6i03THkolmoSiZw 
+           - same-name channel: "Andrej Ogris" @Outofplumb @Outofplumb, 17 subscribers
+CLEAR    Dock and Docket  (@DockandDocket; search returned 20 channels)
+CROWDED  Hiring Hall  (@HiringHall; search returned 29 channels)
+           - contains-name channel: "Mission Hiring Hall" @missionhiringhall3899 @missionhiringhall3899, 22 subscribers

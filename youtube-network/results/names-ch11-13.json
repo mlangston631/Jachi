@@ -1,0 +1,1845 @@
+{
+  "summary": "The portfolio's naming agent: research competitors, invent names checked on YouTube as they go, score them with two independent judges, then clear the top three on YouTube, .com, US trademarks and the web, and recommend one per channel",
+  "agentCount": 15,
+  "logs": [],
+  "result": [
+    {
+      "channel": 11,
+      "label": "A: blue-collar crime",
+      "research": {
+        "competitors": [
+          {
+            "channel": "fern",
+            "naming_style": "Single abstract lowercase word, no crime signal; premium generalist documentary imprint (El Mencho, bank heist of the century, cocaine in Europe)",
+            "subs": 5690000
+          },
+          {
+            "channel": "Tommy G",
+            "naming_style": "Host personal name; on-the-ground 'Inside...' hood, jail and cartel visits",
+            "subs": 3820000
+          },
+          {
+            "channel": "Soft White Underbelly",
+            "naming_style": "Evocative metaphor phrase; interviews with gang members and bikers",
+            "subs": 7150000
+          },
+          {
+            "channel": "Insider (How Crime Works series)",
+            "naming_style": "Media brand plus plain descriptive series title",
+            "subs": 9630000
+          },
+          {
+            "channel": "FRONTLINE PBS | Official",
+            "naming_style": "Legacy broadcast brand",
+            "subs": 4880000
+          },
+          {
+            "channel": "Investigation",
+            "naming_style": "Generic one-word category noun (cartels, Haiti gangs, 'Ndrangheta)",
+            "subs": 5400000
+          },
+          {
+            "channel": "Best Documentary",
+            "naming_style": "Generic descriptor",
+            "subs": 8450000
+          },
+          {
+            "channel": "HISTORY (American Godfathers: The Five Families)",
+            "naming_style": "Legacy TV brand; series titles use Godfather/Mob/Families vocabulary",
+            "subs": 15500000
+          },
+          {
+            "channel": "National Geographic (Inside the American Mob)",
+            "naming_style": "Legacy TV brand; 'Inside the...' series",
+            "subs": 26600000
+          },
+          {
+            "channel": "VICE TV (United Gangs of America)",
+            "naming_style": "Media brand; gang-word series",
+            "subs": 2780000
+          },
+          {
+            "channel": "Our History",
+            "naming_style": "Generic possessive phrase (Frank Lucas, Escobar, El Chapo)",
+            "subs": 1020000
+          },
+          {
+            "channel": "Real Crime",
+            "naming_style": "Adjective + Crime",
+            "subs": 2190000
+          },
+          {
+            "channel": "Absolute Crime",
+            "naming_style": "Adjective + Crime (Hells Angels vs Mongols)",
+            "subs": 631000
+          },
+          {
+            "channel": "All Crime",
+            "naming_style": "Adjective + Crime (Britain's Biggest Heists)",
+            "subs": 29300
+          },
+          {
+            "channel": "Crime Dynasty",
+            "naming_style": "Crime + power noun",
+            "subs": 433000
+          },
+          {
+            "channel": "Crime Pulse TV",
+            "naming_style": "Crime + noun + TV suffix",
+            "subs": 312000
+          },
+          {
+            "channel": "The FBI Files",
+            "naming_style": "Agency name + Files",
+            "subs": 1090000
+          },
+          {
+            "channel": "FBI Investigates",
+            "naming_style": "Agency name + verb; strongest small-channel outlier for crew heists (The Town, Heat)",
+            "subs": 79800
+          },
+          {
+            "channel": "FBI Uncovered",
+            "naming_style": "Agency name + reveal verb",
+            "subs": 12000
+          },
+          {
+            "channel": "Blackfiles",
+            "naming_style": "Dark colour + Files compound (heists, FBI infiltrating the Mafia)",
+            "subs": 465000
+          },
+          {
+            "channel": "Lume",
+            "naming_style": "Short abstract invented-feeling word (genius heists, cocaine island)",
+            "subs": 358000
+          },
+          {
+            "channel": "World's Greatest Heists",
+            "naming_style": "Superlative descriptive",
+            "subs": 14700
+          },
+          {
+            "channel": "Uncovering",
+            "naming_style": "Gerund reveal word (NYC and LA gang wars, mapped)",
+            "subs": 396000
+          },
+          {
+            "channel": "Pure Declassified",
+            "naming_style": "Adjective + 'Declassified' reveal word",
+            "subs": 133000
+          },
+          {
+            "channel": "The Life Outline",
+            "naming_style": "Explainer phrase; 'every cartel / MS-13 rank' format, big outliers",
+            "subs": 92100
+          },
+          {
+            "channel": "Hypothetically",
+            "naming_style": "Single adverb; 'every rank in the Mafia' format",
+            "subs": 343000
+          },
+          {
+            "channel": "Life Through Time (Underworld Histories series)",
+            "naming_style": "Abstract phrase; uses 'Underworld' for its mob series",
+            "subs": 24400
+          },
+          {
+            "channel": "The Connect: With Johnny Mitchell",
+            "naming_style": "Street slang + host name (drug lords, smuggling rings)",
+            "subs": 1490000
+          },
+          {
+            "channel": "Trap Lore Ross",
+            "naming_style": "Street slang + host name (gang wars, El Mencho)",
+            "subs": 1510000
+          },
+          {
+            "channel": "Hood Edition",
+            "naming_style": "Street slang",
+            "subs": 518000
+          },
+          {
+            "channel": "Block Archives",
+            "naming_style": "Street slang + Archives",
+            "subs": 107000
+          },
+          {
+            "channel": "Traphouse Lab",
+            "naming_style": "Street slang + noun (Hells Angels informant)",
+            "subs": 52400
+          },
+          {
+            "channel": "GREENLIT GANG TV",
+            "naming_style": "Gang word + TV suffix",
+            "subs": 33900
+          },
+          {
+            "channel": "Life of A Gangster",
+            "naming_style": "Literal gangster phrase",
+            "subs": 148000
+          },
+          {
+            "channel": "Rap News & Street Politics",
+            "naming_style": "Literal descriptive (crew robberies, federal indictments)",
+            "subs": 222000
+          },
+          {
+            "channel": "The Family",
+            "naming_style": "Crime-family idiom (informant stories)",
+            "subs": 456000
+          },
+          {
+            "channel": "Demons Row",
+            "naming_style": "Biker imagery phrase",
+            "subs": 993000
+          },
+          {
+            "channel": "On the other side of the law",
+            "naming_style": "Idiom phrase (Aryan Brotherhood)",
+            "subs": 72100
+          },
+          {
+            "channel": "Matthew Cox | Inside True Crime",
+            "naming_style": "Host name + 'Inside True Crime'",
+            "subs": 1310000
+          },
+          {
+            "channel": "The Taboo Room With Aaron S",
+            "naming_style": "Edgy noun + host",
+            "subs": 586000
+          },
+          {
+            "channel": "Witness",
+            "naming_style": "Single legal/testimony word (Mafia betrayal)",
+            "subs": 268000
+          },
+          {
+            "channel": "DEADLY SINS",
+            "naming_style": "Dark moral phrase, all caps",
+            "subs": 44400
+          },
+          {
+            "channel": "Sam Ellis and Bellingcat",
+            "naming_style": "Host name + investigative outlet (Irish cartel bosses)"
+          }
+        ],
+        "crowded_words": [
+          "crime (Real Crime, Absolute Crime, All Crime, Crime Dynasty, Crime Pulse TV; 'Crime Empire' handle TAKEN)",
+          "FBI / agency names (FBI Investigates, The FBI Files, FBI Uncovered)",
+          "files / archives / declassified / uncovered / uncovering / investigation (Blackfiles, Block Archives, Pure Declassified, Uncovering, Investigation; 'Street Files' and 'Heist Files' TAKEN, Heist Files has 29 same-name channels)",
+          "gang / gangster / gangland (Gangland is TAKEN and is also a History series and the Gangland Wire podcast; GREENLIT GANG TV, Life of A Gangster; American Gangster is a BET series)",
+          "mob / mafia / godfather / family / omerta ('Mob Stories' and 'Omerta' TAKEN; The Family; American Godfathers; Inside the American Mob)",
+          "cartel / narco / kingpin / drug lord ('Cartel Chronicles' and 'Kingpin Stories' TAKEN; Narcos is a Netflix brand)",
+          "syndicate / racket / takedown (all TAKEN; syndicate also overlaps sister channel 13)",
+          "underworld (TAKEN; Underworld Histories series; The Underworld Podcast)",
+          "heist / robbery (World's Greatest Heists, Heist Files; Money Heist, The Town, Heat, How To Rob A Bank are film/TV brands)",
+          "empire / dynasty / rise and fall / most dangerous / deadliest (title cliches across every top video, and sister channel 13's elite register)",
+          "street-slang register: trap, hood, block, the connect, plug, OG (Trap Lore Ross, Hood Edition, Block Archives, Traphouse Lab, The Connect); reads as glamorising, which the brief forbids",
+          "'Inside...' and 'The Real/True Story of...' formulas",
+          "dark / black / shadow / deadly / sins colour-and-menace words (Blackfiles, DEADLY SINS)",
+          "Chronicles / Stories / Files / Archives / Uncovered as a suffix on any crime noun",
+          "TV suffix and host-name-plus-slang patterns",
+          "wire (The Wire) and witness (Witness channel) for the informant angle"
+        ],
+        "open_territory": "The niche splits into three naming camps and leaves the middle empty. (1) Generic labels: Crime + adjective, FBI + verb, X Files, Investigation, Best Documentary. They describe the topic but can't be owned, and every literal crime noun I probed (Underworld, Gangland, Crime Empire, The Racket, Street Files, Heist Files, Kingpin Stories, Cartel Chronicles, Mob Stories, Omerta, The Takedown, Syndicate) came back TAKEN. (2) Street-slang and host-name channels (Trap Lore Ross, Hood Edition, Block Archives, The Connect, Tommy G). Their register glamorises the life, which this channel must avoid. (3) Generalist documentary imprints with short abstract names (fern, Lume, Soft White Underbelly). They win the biggest views, which shows that a non-literal, ownable name works when the packaging is strong. Nobody in street-level and organised crime owns a premium imprint name of that kind.\n\nOpen imagery nobody uses:\n(a) The working-class physical world the crews came from and operated in, in plain concrete nouns: night shifts, loading docks, freight yards, waterfronts, overpasses, sodium streetlights, the corner, the count room, toolboxes and workwear. This gives grit and humanity without menace words.\n(b) The investigator's and court's paper trail beyond the worn-out 'files': surveillance logs, the proffer and the cooperator, the docket, the exhibit, the indictment's language. This matches the brief's research-led tone and its informants-and-betrayal angle, and nobody in the niche uses legal vocabulary as a brand.\n(c) Metaphors of slow build and collapse from nature or material: fault lines, undertow, rust, embers, tinder, cracks spreading through concrete. These fit the series shape (origins, expansion, betrayal, collapse) and stay grounded rather than sensational.\n\nThe name should also sit apart from the sister channels. Channel 12 will draw on finance vocabulary (ledgers, balance sheets) and channel 13 on elite and power vocabulary (dynasty, empire, syndicate). This channel's register should therefore be blue-collar, tactile and human. It should also avoid channel 7's antique-archive lightness, so no 'archive', 'files' or old-paper conceits. Avoid 'narco', 'trap', 'hood' and similar loaded or slang words, which also read badly in Spanish."
+      },
+      "table": [
+        {
+          "name": "Until Someone Talked",
+          "why": "Handle @UntilSomeoneTalked (18). Sounds like the last line of a crew's story: it ran for years until someone talked. That covers the informant-and-betrayal turning point that most of these stories hinge on, and the past tense reads as documentary. Human and tense, with no slang, no menace words and no glamour. Fine in Spanish ('hasta que alguien habló'). It sets a mood rather than promising an informant in every episode. Small risk: a channel already holds @SomebodyAlwaysTalks (TAKEN in my check), so secure @UntilSomebodyTalked as well. Score 8.5.",
+          "avg": 8,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 8,
+              "reason": "My full check came back CLEAR (YouTube clear, .com available, no live US marks), and a web search found no book, show or podcast with this title. It's the only candidate that carries the series arc: a crew that ran for years, then a betrayal, then the fall. It sounds human and tense, doesn't glamorise anything, and the past tense reads as documentary. A true-crime viewer gets 'talked = informant' at once, and the name stands apart from the many 'X and Y' names across the portfolio. Two weaknesses. 'Someone' and 'somebody' are easy to swap when heard once: my run showed Somebody Talked and Someone Talked both TAKEN on YouTube, while @UntilSomebodyTalked was CLEAR, so secure that handle too. And it doesn't name crews outright, so the logo and tagline have to do that."
+            },
+            {
+              "lens": "language",
+              "score": 8,
+              "reason": "My brandcheck: CLEAR (YouTube CLEAR, untilsomeonetalked.com available, 0 live US marks). The likeliest mishearing is someone/somebody: 'Until Somebody Talked' was CLEAR in my ytcheck, so secure it too. 'Someone Talked' and 'Somebody Talked' came back TAKEN, but only by tiny channels. No video owns the exact phrase in search. It's easy to type in US and UK accents, and the past tense reads as documentary. It carries the series arc (it ran until it collapsed), with no slang, menace or glamour, and it's fine in Spanish. Small risks: it signals crime and secrets in general rather than street crews in particular, so it could also fit channels 12 or 13. It also leans on informant ('snitch') framing, so episodes should not be built around naming cooperators. It's the only candidate here with real spark."
+            }
+          ]
+        },
+        {
+          "name": "Then Someone Talked",
+          "why": "Handle @ThenSomeoneTalked (17). The same idea as Until Someone Talked, phrased as the narrator's turn at the midpoint of an episode. Worth securing as a defensive handle if Until Someone Talked is chosen, or as the alternative if the owner prefers it. Score 8.",
+          "avg": 6.25,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 6.5,
+              "reason": "CLEAR on my full check. It's the same informant idea, but 'Then' turns it into a single beat in the middle of a story. It loses the 'ran for years until' arc that makes the other version a brand rather than a line of narration. It also sounds more like a sentence fragment out of context. Better kept as a defensive handle than chosen as the name."
+            },
+            {
+              "lens": "language",
+              "score": 6,
+              "reason": "My brandcheck: CLEAR (thensomeonetalked.com available, 0 marks). Same idea as Until Someone Talked but weaker on its own: 'Then...' sounds like the middle of a sentence rather than a title. Writers often type 'than' for 'then', a real misspelling risk, and someone/somebody is heard both ways. Best kept as a defensive handle, not as the name."
+            }
+          ]
+        },
+        {
+          "name": "Workboots and Wiretaps",
+          "why": "Handle @WorkbootsandWiretaps (exactly 20, at the limit). Pairs the working-class world the crews came from with the investigation that brought them down: the series arc in two objects. The W-W alliteration makes it stick, it's concrete and tactile, and it stays clear of the finance (channel 12) and power or elite (channel 13) vocabularies. Score 8.",
+          "avg": 5.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5.5,
+              "reason": "CLEAR on my full check. 'Wiretaps' is a strong, accurate signal, since wiretaps brought down many crews. But 'Workboots' reads 'blue-collar' literally, as tradesmen and workplace crime, when the channel covers gangs, trafficking empires, robbery crews and biker clubs. The handle sits at the 20-character limit, and 'workboots' or 'work boots' is easy to mistype. The W-W wire alliteration also echoes 'Wire and Watermark', a channel 12 candidate, so the two could read as sub-brands of each other."
+            },
+            {
+              "lens": "language",
+              "score": 5.5,
+              "reason": "My brandcheck: CLEAR, and the 'Work Boots and Wiretaps' variant was CLEAR on YouTube. No video uses the phrase in search. 'Wiretaps' is a strong investigation signal, and the W-W alliteration helps. Risks: the listener can't tell whether it's 'Workboots' or 'Work Boots', or whether it's 'and', '&' or 'n'. The handle is exactly at the 20-character limit. 'Workboots' ties working people's gear to crime, a class stereotype the 'never glamorise, respect victims' tone should avoid. It also points to union and dockside cases, not the brief's cartels, street gangs, bikers and heist crews. The register is light, like a podcast."
+            }
+          ]
+        },
+        {
+          "name": "Concrete Testimony",
+          "why": "Handle @ConcreteTestimony (17). Has two meanings at once: concrete is hard proof, and concrete is the blue-collar city of sidewalks, loading docks and overpasses. That suits a research-led channel built on court records and cooperators' testimony, told with street-level grit. It's an unusual pairing nobody in the niche uses, and it's easy to type after hearing it once. It avoids crime, files, gang, mob and dark words entirely. Score 8.5.",
+          "avg": 5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5.5,
+              "reason": "CLEAR on my full check, and the name is unique. But the double meaning needs explaining. At a glance it reads as a legal phrase, concrete testing (web results for the phrase are all construction testing and expert witnesses) or a faith 'testimony' video. It doesn't carry the tension or the sense of crews and the street that the target viewer would click on. The 'concrete shoes' mob echo is the only part with grit."
+            },
+            {
+              "lens": "language",
+              "score": 4.5,
+              "reason": "My brandcheck: CLEAR, but my scouting shows it isn't ownable. Searching 'testimony' on YouTube returns mostly Christian testimony content. The exact phrase already titles several rap uploads: '2pac & Scarface ... \"Concrete Testimony\"' (labelled as not a real song), 'Ice Cube ft. Scarface – Concrete Testimony', a Christian rap track 'CONCRETE TESTIMONY' and a boom-bap album. That ties it to gangsta-rap glamour. 'Concrete' also brings to mind mob body disposal ('cement shoes'). A listener won't catch the double meaning (hard proof and city concrete). It's easy to type and fine in Spanish."
+            }
+          ]
+        },
+        {
+          "name": "Who Talked First",
+          "why": "Handle @WhoTalkedFirst (14). A question hook built on the informant dilemma at the heart of crew stories: who cooperated first and what it cost the rest. Short, tense and typeable. Slight risk: out of context it could read as reality-TV gossip, so the logo and tagline need to carry the crime signal. Score 8.",
+          "avg": 4.75,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5.5,
+              "reason": "CLEAR on my full check, short and typeable, and no conflicting title turned up on the web. Out of context, though, it sounds like gossip, a reality-TV recap or a 'first to talk loses' challenge or negotiation saying, not premium documentary. It also narrows every episode to an informant race, and a question name ages less well than a statement."
+            },
+            {
+              "lens": "language",
+              "score": 4,
+              "reason": "My brandcheck: CLEAR, but 'Who Talked' came back CROWDED. Searching the phrase returns toddler first-words videos (Miss Katie, Lucas & Friends), with nothing about crime. It reads like gossip, a reality show or 'who texted first'. The question invites viewers to work out which real person cooperated with the police, which risks pointing at real people and putting them in danger, and it makes snitching the attraction. It is short and easy to type."
+            }
+          ]
+        },
+        {
+          "name": "Crew and Consequence",
+          "why": "Handle @CrewandConsequence (18). Names the subject (crews and organisations, which is this channel's boundary with channel 7) and the moral weight (consequence) in three words. A built-in promise not to glamorise, it reads like a premium series title rather than a content-farm label. Note: it uses the same 'X and Y' shape as several portfolio names (for example channel 7's 'Wax and Warrant' option), so if channel 7 chooses one of those, prefer a non-'and' name here. Score 8.",
+          "avg": 4.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5.5,
+              "reason": "CLEAR on my full check, and it names the subject (crews) and the refusal to glamorise. But spoken aloud it is one sound away from 'Crime and Consequence', which my YouTube check found TAKEN and crowded with true-crime channels. Near-name channels include 'Crimeandconsequence-01' (28.9K subscribers), 'Crime & Consequence' (11.6K) and 'Crimes and Consequences' (4.53K). That's exactly the confusion the brief warns against. Its 'X and Y' shape also echoes Rise & Ruin Files and many sister-channel candidates."
+            },
+            {
+              "lens": "language",
+              "score": 3.5,
+              "reason": "My brandcheck: CLEAR for the exact wording. But heard once, it turns into 'Crime and Consequence', which my ytcheck showed TAKEN by several crime channels with that name or close to it: 'Crimeandconsequence-01' (28.9K), 'Crime & Consequence' (11.6K), 'Crimes and Consequences' (4.53K) and more. That is direct confusion in exactly this niche. Searching the phrase returns GTA heist crews and the 'Choice & Consequence' game trailers. The 'X and Consequence' pattern is generic, so it has no spark."
+            }
+          ]
+        },
+        {
+          "name": "Steel Toe Testimony",
+          "why": "Handle @SteelToeTestimony (17). A more openly blue-collar sibling of Concrete Testimony: steel-toe boots, hard work, and the testimony that broke the crew. The T-T alliteration helps, and it's unique. Offer it as an alternative to Concrete Testimony, not alongside it. Score 8.",
+          "avg": 4.25,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 4.5,
+              "reason": "CLEAR on my full check, but the name gets the channel's world wrong. Steel-toe boots signal construction workers, and 'testimony' strongly suggests Christian testimony videos, so a scrolling viewer could expect a tradesman's faith story. My YouTube check also found 'Steel Toe' TAKEN and crowded (Steel Toe Morning Show, 14.6K subscribers, and many others). It has none of the crew or crime signal that Concrete Testimony at least suggests."
+            },
+            {
+              "lens": "language",
+              "score": 4,
+              "reason": "My brandcheck: CLEAR. The spelling is uncertain (Steel Toe, Steel-Toe or Steeltoe), and it has the same YouTube problem with 'testimony' as Concrete Testimony (Christian testimony content). Out of context it sounds like a construction worker's faith channel or a workplace-injury law firm, so the crime signal is weak. It also carries the same working-class-equals-crime stereotype."
+            }
+          ]
+        },
+        {
+          "name": "Grease and Gavel",
+          "why": "Handle @GreaseandGavel (14, the shortest here). Moves from the shop floor to the sentencing: mechanic's grease (and greased palms) to the judge's gavel. The G-G alliteration makes it easy to say and type, with a gritty register and no menace words. It has the same 'material and legal object' shape as channel 7's 'Wax and Warrant' option, so don't pair the two. Score 8.",
+          "avg": 4,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 4.5,
+              "reason": "CLEAR on my full check, and it's the shortest handle here. But 'Grease' suggests the musical, an auto shop, or greased palms, which is bribery and channel 12's white-collar territory. 'Gavel' reads as a law or court-news channel. Neither word signals crews, the street or betrayal. It also has the same 'material and legal object' shape as channel 7's candidates (Wax and Warrant, Writ and Ruse, Hand and Seal), so it wouldn't stand on its own as a brand."
+            },
+            {
+              "lens": "language",
+              "score": 3.5,
+              "reason": "My brandcheck: CLEAR, and no videos use the phrase. 'Grease' calls up 'greaser' and 'greaseball', historic slurs for Mexican Americans and Italian Americans, the very groups that cartel and Mafia episodes would cover. That's a real offence risk. Otherwise it sounds like an auto shop, a diner or a courtroom-law podcast, or the musical Grease. It can be misheard as 'Grease and Gravel', and the crime signal is weak."
+            }
+          ]
+        }
+      ],
+      "taken": [
+        "Known Associates (TAKEN)",
+        "Crewfall (TAKEN)",
+        "Long Lens (TAKEN)",
+        "Back Booth (TAKEN)",
+        "Night Whistle (TAKEN)",
+        "Count Room (TAKEN)",
+        "Gutterlight (TAKEN)",
+        "Engine Running (TAKEN)",
+        "Plainclothes (TAKEN)",
+        "State's Evidence (TAKEN)",
+        "Marked Bills (TAKEN; a 14.7K-subscriber documentary channel already uses it)",
+        "Out of Plumb (TAKEN)",
+        "No Clean Getaway (TAKEN)",
+        "Somebody Talks (TAKEN)",
+        "Local Chapter (TAKEN)",
+        "After the Score (TAKEN)",
+        "Somebody Always Talks (TAKEN)",
+        "Gravel and Gavel (TAKEN)",
+        "Tool Marks (TAKEN)",
+        "Sodium and Static (CROWDED)",
+        "Hiring Hall (CROWDED)",
+        "Loyal Until (CROWDED)",
+        "Wrench and Witness (CROWDED)",
+        "Cracks in the Crew (CROWDED)",
+        "Lunch Pails and Lineups (CROWDED)"
+      ],
+      "cleared": {
+        "checked": [
+          {
+            "name": "Until Someone Talked",
+            "brandcheck": "CLEAR (printed in my run: YouTube CLEAR; untilsomeonetalked.com available; live same-name US marks: 0). Saved to /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/gate_brand1.txt",
+            "searches_run": [
+              "\"Until Someone Talked\"",
+              "\"Until Someone Talked\" YouTube",
+              "\"Until Someone Talked\" documentary OR podcast OR series OR book",
+              "\"Somebody Always Talks\" YouTube channel (the nearby name the panel flagged)",
+              "\"Until Someone Talks\" (present-tense variant)",
+              "\"Someone Talked\" podcast (the shorter phrase inside the name)",
+              "ytscout --top 20 \"until someone talked\" \"until someone talks\": no channel or video uses the phrase; results are unrelated drama and ASMR titles",
+              "brandcheck \"Someone Talked\": BLOCKED (\"Someone Talked!\" @someonetalked3119, 67 subscribers; someonetalked.com registered)",
+              "ytcheck \"Until Someone Talks\": TAKEN by \"UNTIL SOMEONE TALKS\" @UNTILSOMEONETALKS, 4 subscribers, content unknown"
+            ],
+            "web_conflicts": [
+              "None for the exact name: all three searches found no brand, show, podcast, book or channel called \"Until Someone Talked\".",
+              "Minor: \"Someone Talked!\", a WWII history podcast described as from the National D-Day Memorial, hosted by historian John C. McManus (https://podnews.net/podcast/iepwe), with a 67-subscriber YouTube channel @someonetalked3119. It is a different genre (WWII history, not crime), and its name is the well-known 1942 wartime poster slogan, so a shared phrase is unlikely to confuse anyone.",
+              "Minor: the YouTube channel \"UNTIL SOMEONE TALKS\" (@UNTILSOMEONETALKS, present tense, 4 subscribers, content unknown). YouTube's search for \"Until Someone Talked\" doesn't surface it, and it appears in none of this year's top results.",
+              "Minor: @SomebodyAlwaysTalks is taken on YouTube (ytcheck: TAKEN). Web search found nothing about it, so it's not a known brand."
+            ],
+            "verdict": "minor"
+          },
+          {
+            "name": "Then Someone Talked",
+            "brandcheck": "CLEAR (printed in my run: YouTube CLEAR; thensomeonetalked.com available; live same-name US marks: 0). Saved to /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/gate_brand23.txt",
+            "searches_run": [
+              "\"Then Someone Talked\"",
+              "\"Then Someone Talked\" YouTube",
+              "\"Then Someone Talked\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [
+              "None for the exact name.",
+              "Minor: the same nearby \"Someone Talked!\" WWII history podcast (https://podnews.net/podcast/iepwe; Audible listing https://origin-www.audible.com/podcast/Someone-Talked/episodes/B09XC5DQXD)."
+            ],
+            "verdict": "minor"
+          },
+          {
+            "name": "Workboots and Wiretaps",
+            "brandcheck": "CLEAR (printed in my run: YouTube CLEAR; workbootsandwiretaps.com available; live same-name US marks: 0). Saved to /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/gate_brand23.txt",
+            "searches_run": [
+              "\"Workboots and Wiretaps\"",
+              "\"Workboots and Wiretaps\" YouTube",
+              "\"Workboots and Wiretaps\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [
+              "None: all three searches found no user of the name, only general articles on labour surveillance and wiretapping."
+            ],
+            "verdict": "clean"
+          }
+        ],
+        "recommended": "Until Someone Talked (@UntilSomeoneTalked, 18 characters)",
+        "reason": "It is the panel's top-ranked name, and it passed both gates in my own run. Brandcheck printed CLEAR: no YouTube channel uses it, untilsomeonetalked.com is available, and there are no live same-name US trademarks. All three web searches found no one using the exact name, so the web verdict is minor, not a conflict. The only nearby names are small and mostly in other fields: the WWII history podcast \"Someone Talked!\" (named after the 1942 wartime poster slogan, with a 67-subscriber YouTube channel), a 4-subscriber YouTube channel called \"UNTIL SOMEONE TALKS\" in the present tense, and an unknown @SomebodyAlwaysTalks. A YouTube scan of this year's top videos for the phrase shows no crime or documentary channel using it. The name fits the brief: crews that run for years until an informant or insider breaks, told in a grounded, human, documentary past tense without glamorising anyone. It has no unfortunate meaning in English or Spanish (\"hasta que alguien habló\"), and it isn't confusable with a known true-crime, news or finance brand. Because it is a sentence rather than a topic word, it won't read as a sub-brand of channels 12 or 13 (their names weren't final in the scratchpad, so check this once they are). The one typing risk is that listeners may hear \"Somebody\" instead of \"Someone\", so take @UntilSomebodyTalked as well. Names 2 and 3 also passed (Then Someone Talked: CLEAR, minor; Workboots and Wiretaps: CLEAR, clean) and can serve as fallbacks.",
+        "spare_handles": [
+          "@UntilSomebodyTalked (\"Until Somebody Talked\", 19 characters): ytcheck printed CLEAR in my run. It catches the likely mishearing.",
+          "@ThenSomeoneTalked (\"Then Someone Talked\", 17 characters): ytcheck and brandcheck both printed CLEAR in my run. It covers the panel's second choice.",
+          "Also CLEAR in my run, but longer than 20 characters: @UntilSomeoneTalkedDocs (22) and @UntilSomeoneTalkedFiles (24). The present-tense @UntilSomeoneTalks is TAKEN, so it can't be secured."
+        ],
+        "manual_checks": [
+          "Instagram, TikTok and X: check that @untilsomeonetalked is free on each, plus @untilsomebodytalked as the defensive handle. X allows at most 15 characters, so the full name won't fit there; pick a short form such as @UntilSomeone or @UntilItTalked and check it.",
+          "Facebook page and Threads: check the same handle.",
+          "Register untilsomeonetalked.com (brandcheck reported it available) before announcing the name; consider the .co and .tv variants.",
+          "Trademarks outside the US: search UK IPO, EUIPO (TMview), Canada (CIPO) and WIPO's Global Brand Database for \"Until Someone Talked\" and \"Someone Talked\", in classes 9 and 41.",
+          "Optionally, open youtube.com/@UNTILSOMEONETALKS (4 subscribers) to confirm it isn't a crime channel. Listen to the \"Someone Talked!\" WWII podcast's branding to confirm the genre difference.",
+          "Once channels 12 and 13 have final names, check that none of them also uses \"talked\", \"until\" or \"someone\", so the three channels stay independent."
+        ]
+      }
+    },
+    {
+      "channel": 12,
+      "label": "B: white-collar crime",
+      "research": {
+        "competitors": [
+          {
+            "channel": "Coffeezilla",
+            "subs": 4770000,
+            "naming_style": "Creator persona coinage (coffee + -zilla). The on-camera investigator who leads fraud on YouTube: Exposing a $300,000,000 Scam got 4.76M views, I Investigated $100 Billion in Healthcare Fraud got 5.33M."
+          },
+          {
+            "channel": "fern",
+            "subs": 5690000,
+            "naming_style": "One lowercase nature word, abstract faceless documentary brand. Topped scam and fraud queries: China's Biggest Scammer 3.31M, $1.9B Pharma Company 3.84M."
+          },
+          {
+            "channel": "Lume",
+            "subs": 358000,
+            "naming_style": "One soft abstract word (light). Faceless documentaries: The Man Who Stole $4.5 Billion 994K, the $1.5B hack 560K, the McDonald's Monopoly scam 175K."
+          },
+          {
+            "channel": "Gloam",
+            "subs": 8380,
+            "naming_style": "One evocative archaic word (twilight). Breakout outlier: How Binance Lost $6,300,000,000 in One Night got 2.55M views on 8.4K subscribers."
+          },
+          {
+            "channel": "Crumb",
+            "subs": 431000,
+            "naming_style": "One everyday noun. Crypto theft and kidnapping story, 2.12M views."
+          },
+          {
+            "channel": "Brew",
+            "subs": 2890000,
+            "naming_style": "One everyday noun. The Perfect Crime That's Too Insane to Believe, 1.46M views."
+          },
+          {
+            "channel": "The Wall Street Journal",
+            "subs": 6740000,
+            "naming_style": "Legacy newspaper brand. WSJ Documentary on North Korean operatives inside US companies, 10.4M views."
+          },
+          {
+            "channel": "Bloomberg Originals",
+            "subs": 5230000,
+            "naming_style": "Legacy finance brand plus 'Originals'. Ponzi, scam and anti-corruption investigations."
+          },
+          {
+            "channel": "FRONTLINE PBS | Official",
+            "subs": 4880000,
+            "naming_style": "Legacy public-TV documentary strand. Scammed and The Warning (full documentaries)."
+          },
+          {
+            "channel": "DW Documentary",
+            "subs": 6530000,
+            "naming_style": "Broadcaster + 'Documentary'. Money laundering, cyber-mafia and corruption films."
+          },
+          {
+            "channel": "Insider",
+            "subs": 9630000,
+            "naming_style": "Publication brand; recurring series 'How Crime Works' (How Bank Fraud Actually Works, 349K)."
+          },
+          {
+            "channel": "More Perfect Union",
+            "subs": 4250000,
+            "naming_style": "Civic phrase from the US Constitution. Investigations: $25 Billion Airline Scam 1.45M, Polymarket 5.2M."
+          },
+          {
+            "channel": "Patrick Boyle",
+            "subs": 1370000,
+            "naming_style": "Personal name; finance commentary."
+          },
+          {
+            "channel": "Hamish Hodder",
+            "subs": 394000,
+            "naming_style": "Personal name. Hilariously Bad Insider Trading Attempts 4.73M, 9/11 Stock Market Conspiracy 2.38M."
+          },
+          {
+            "channel": "Joe Bartolozzi",
+            "subs": 6260000,
+            "naming_style": "Personal name. The Worst Insider Trading Busts 2.29M, The Honey Scam 5.91M."
+          },
+          {
+            "channel": "Nick Shirley",
+            "subs": 2060000,
+            "naming_style": "Personal name, on-camera 'I investigated' fraud videos (Minnesota billion-dollar fraud 4.34M)."
+          },
+          {
+            "channel": "Michael Girdley",
+            "subs": 392000,
+            "naming_style": "Personal name; business rise-and-fall (FTX, NFTs)."
+          },
+          {
+            "channel": "Mighty Monk",
+            "subs": 1590000,
+            "naming_style": "Alliterative adjective + noun. Charles Ponzi: The Greatest Financial Fraudster in History, 457K."
+          },
+          {
+            "channel": "Penguin History",
+            "subs": 320000,
+            "naming_style": "Animal + genre word. The Trillion Dollar Scam, 1.23M."
+          },
+          {
+            "channel": "ENDEVR",
+            "subs": 1520000,
+            "naming_style": "Vowel-dropped word ('endeavour'), documentary aggregator. Biggest crypto scam film, 365K."
+          },
+          {
+            "channel": "FINAiUS",
+            "subs": 806000,
+            "naming_style": "Finance + AI portmanteau. Wells Fargo - The $2 Trillion Criminal Empire, 428K."
+          },
+          {
+            "channel": "True Crime Central",
+            "subs": 1460000,
+            "naming_style": "Genre + generic noun. Timid accountant stole $45 Million, 905K."
+          },
+          {
+            "channel": "Unreal True Crime",
+            "subs": 151000,
+            "naming_style": "Adjective + genre; clickbait ALL-CAPS titles ranking on Ponzi and corporate-fraud queries."
+          },
+          {
+            "channel": "JunkBondInvestor",
+            "subs": 79500,
+            "naming_style": "Finance-jargon compound. Corporate rise-and-fall and FTX collapse."
+          },
+          {
+            "channel": "Old Money Documentaries",
+            "subs": 119000,
+            "naming_style": "Stock phrase + genre word (sibling channel Old Money Allure, 77.7K)."
+          },
+          {
+            "channel": "Findicate",
+            "subs": 17800,
+            "naming_style": "Finance + syndicate portmanteau. Steve Cohen - The Final Boss of Insider Trading, 114K."
+          },
+          {
+            "channel": "The Dossier Room",
+            "subs": 13800,
+            "naming_style": "Intelligence noun + 'Room'. Mafia documentaries; sits near channel 13's organised-crime territory."
+          },
+          {
+            "channel": "Federal Desk",
+            "subs": 7520,
+            "naming_style": "Newsroom 'desk' framing. $53M embezzlement over 22 years, 1.58M views (large outlier)."
+          },
+          {
+            "channel": "Fraud Watch HQ",
+            "subs": 11000,
+            "naming_style": "Literal crime word + 'Watch' + 'HQ'."
+          },
+          {
+            "channel": "Built on Lies",
+            "subs": 2450,
+            "naming_style": "Stock idiom. Enron and Madoff documentaries (Madoff 93K)."
+          },
+          {
+            "channel": "The Wall Street Files",
+            "subs": 480,
+            "naming_style": "Place + 'Files'. Enron: The System That Built the Fraud, 74K."
+          },
+          {
+            "channel": "American Greed Files13",
+            "subs": 6020,
+            "naming_style": "Re-uploads trading on CNBC's American Greed, plus 'Files' and digits (sibling American Greed Exposed, 1.3K)."
+          },
+          {
+            "channel": "Capital Case",
+            "subs": 12000,
+            "naming_style": "Legal/finance pun. FTX Collapse Explained Like You're 5."
+          },
+          {
+            "channel": "The Empire Inside",
+            "subs": 22400,
+            "naming_style": "'Empire' framing. The Entire Collapse of the Madoff Empire."
+          },
+          {
+            "channel": "Hidden Capital",
+            "subs": 7100,
+            "naming_style": "'Hidden' + finance word. The $32 Billion Collapse of FTX."
+          },
+          {
+            "channel": "Fireball",
+            "subs": 8810,
+            "naming_style": "One punchy noun. Insider series on the $1B DC Solar Ponzi scheme (315K)."
+          },
+          {
+            "channel": "The Forge",
+            "subs": 4780,
+            "naming_style": "'The' + one noun. Everyone Is Lying to You for Money trailer, 1.59M."
+          },
+          {
+            "channel": "Gangland Chronicles",
+            "subs": 22500,
+            "naming_style": "Crime word + 'Chronicles'; organised-crime neighbour."
+          },
+          {
+            "channel": "RICOS Y MALDITOS",
+            "subs": 28200,
+            "naming_style": "Spanish 'Rich and Cursed' (sibling Fortunas Malditas, 127). Spanish-language Madoff and billionaire-scandal stories."
+          },
+          {
+            "channel": "Detrás del Enigma",
+            "subs": 596000,
+            "naming_style": "Spanish 'Behind the Enigma'. Navinder Sarao flash-crash story, 490K."
+          },
+          {
+            "channel": "The Cooked Books (@TheBlackCapital)",
+            "subs": 779000,
+            "naming_style": "Accounting-fraud idiom used as a display name; found when testing 'Cooked Books' (TAKEN)."
+          },
+          {
+            "channel": "Fine Print (@TheFinePrintYT)",
+            "subs": 106000,
+            "naming_style": "Contract idiom; found when testing 'Fine Print' (TAKEN)."
+          },
+          {
+            "channel": "The Fraud Files (@thefraudfilestv)",
+            "subs": 6180,
+            "naming_style": "Crime word + 'Files'; found when testing 'Fraud Files' (TAKEN)."
+          },
+          {
+            "channel": "Follow The Money (@FollowTheMoneyTH)",
+            "subs": 45900,
+            "naming_style": "Investigative idiom. At least six same-name channels plus the Dutch outlet FTM; 'Follow the Money' tested TAKEN."
+          }
+        ],
+        "crowded_words": [
+          "Files (The Wall Street Files, The Fraud Files, The Heist Files, The Corporate Files, American Greed Files, The FBI Files, The Fat Files)",
+          "Exposed / Exposing (American Greed Exposed, The Corporate Files: Exposed, Coffeezilla titles)",
+          "Greed (owned by CNBC's American Greed; re-upload channels use it)",
+          "Fraud / Scam / Con / Ponzi as the brand word (Fraud Watch HQ, The Fraud Verdict, Mega Fraudes, Charles Ponzi titles)",
+          "Money (Dirty Money is Netflix's and TAKEN; Follow the Money is TAKEN; Money Chuck, Money Motion)",
+          "Wall Street (The Wall Street Files; Wolf of Wall Street)",
+          "Empire / Rise and Fall / Collapse (The Empire Inside, near-universal title formula)",
+          "Billion and $-figure framing ($65 Billion Lie, Billion Dollar ...)",
+          "Decoded / Explained / Explained Like You're 5",
+          "Dark / Hidden / Untold / Secret / Truth (Hidden Capital, Dark Truth Africa, Untold Story)",
+          "Dossier / Room / Desk / Watch / HQ / Verdict (newsroom and intel framing)",
+          "Lies (Built on Lies, Everyone Is Lying to You for Money)",
+          "Wealth / Capital / Old Money (The Wealth Code, Hidden Capital, Old Money Documentaries, Old Money Allure)",
+          "Heist (also Money Heist / La casa de papel for Spanish speakers)",
+          "White Collar (USA Network show; @WhiteCollar TAKEN; White Collar Advice, White Collar Business)",
+          "Accounting idioms are all taken as handles: Cooked Books, Off the Books, Paper Trail, Shell Game, Fine Print, Smoke and Mirrors, Red Flags, Red Ink (TAKEN in my runs)",
+          "Single audit-jargon words are taken as bare handles: Tick Mark, Going Concern, Restatement (TAKEN)",
+          "Ledger (the crypto wallet brand, and the network already used Stick Ledger)",
+          "Papers (Panama, Pandora and Paradise Papers belong to ICIJ)",
+          "Insider (Insider's How Crime Works series; insider trading)",
+          "True Crime X / Crime X / X Crime (True Crime Central, Unreal True Crime, Crime Lens, Elisa True Crime)",
+          "Chronicles / Documentaries / Docs / Doc as a suffix",
+          "Spanish Malditos / Fortunas / Estafa / Fraude (RICOS Y MALDITOS, Fortunas Malditas)",
+          "At the top end, one-word soft abstract nouns are now a pattern too (fern, Lume, Gloam, Crumb, Brew), and none of them signals money",
+          "Brand collisions to avoid: Coffeezilla, Bad Blood, The Dropout, Lying for Money, Smartest Guys in the Room, Inside Job, Margin Call, The Big Short, Billions, Scam 1992, Swindled, Bad Bets (WSJ), Business Wars, Hindenburg, Muddy Waters"
+        ],
+        "open_territory": "The niche splits four ways. Legacy news brands (WSJ, Bloomberg Originals, FRONTLINE, DW, Insider). Personal-name investigators (Coffeezilla, Patrick Boyle, Hamish Hodder, Joe Bartolozzi, Nick Shirley). One-word faceless documentary brands (fern, Lume, Gloam, Crumb, Brew), which are strong but say nothing about money. A long tail of small channels that stack the same literal words: Files, Exposed, Greed, Fraud, Empire, Hidden, Capital, Wealth, Lies, Decoded. No channel owns a calm, premium, finance-specific name that sounds like a documentary label rather than a clickbait feed. That is the main gap, and the brief's tone (sharp, forensic, clear about money) fits it.\n\nMy checks show bare idioms and bare single jargon words are gone as handles: Paper Trail, Follow the Money, Cooked Books, Off the Books, Shell Game, Fine Print, Smoke and Mirrors, Red Flags, Red Ink, Tick Mark, Going Concern and Restatement are all TAKEN. Open names will be fresh two-word pairings, not stock phrases.\n\nImagery nobody in the niche uses:\n(1) Physical money and its paper as evidence, the forensic accountant's view: the wire, the watermark, the signature, the seal, the stub, the carbon copy, the footnote, the decimal point, the audit opinion, the vault, the ticker tape.\n(2) Old forms of money fraud as metaphor: coin clipping, debasement, counterfeit, alloy, gilt over lead, the false bottom, the scale with a thumb on it. All read as financial deception without saying 'fraud' or 'scam'.\n(3) Exposure as a precise instrument rather than 'Exposed': cutting, weighing, assaying, x-raying, holding a note up to the light. This matches 'forensic'. Avoid 'Lens' (Crime Lens) and 'Decoded'.\n(4) Measured, literary tone: a name that could sit on a book spine or a film studio card, which none of the small competitors attempt.\n\nConstraints for sister channels: channel 11 (blue-collar crime) and channel 13 (organised crime) need devices of their own. Avoid a shared 'Files' / 'Dossier' / 'Chronicles' / 'Ledger' frame. Channel 13's neighbours already use Dossier Room and Gangland Chronicles. Spanish-speaking viewers see Malditos, Fortunas, Estafa and Fraude everywhere, and 'Heist' calls up La casa de papel. A neutral English coinage that reads cleanly in Spanish is open.\n\nScout data is in /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-12/scout1.json through scout4.json (17 queries)."
+      },
+      "table": [
+        {
+          "name": "Crooked Arithmetic",
+          "why": "Handle @CrookedArithmetic (17). 'Crooked' means dishonest, and arithmetic is where every one of these schemes is finally caught: numbers that can't add up. It names money and crime together without the overused Fraud, Scam, Greed or Files words, and it sounds like a documentary label, not a clickbait feed. The tone fits the brief (sharp, forensic, clear about money). Easy to type after one hearing, and no bad meaning in Spanish (aritmética). It shares no device with the sister channels. Watch-outs: seven syllables, and without the logo and tagline it could hint at a maths channel. My score: 8.5.",
+          "avg": 6.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 6,
+              "reason": "My run: brandcheck CLEAR (YouTube CLEAR, 22 channels; .com available; 0 marks). The phrase is almost empty on YouTube (one video with 4 views), so it is highly ownable, and it puts dishonesty and numbers together without the overused genre words. But 'arithmetic' sounds like school maths and small sums, which undersells billion-dollar fraud, crypto collapses and espionage. A scrolling viewer is as likely to guess a channel about bad statistics or political numbers as a crime documentary. 'Crooked' in the news and podcast world also calls up Crooked Media: a 'crooked' search surfaced Pod Save America with 1.3M subscribers. Seven syllables with a clunky rhythm. Clever, but more like an essay channel than a gripping documentary brand."
+            },
+            {
+              "lens": "language",
+              "score": 7,
+              "reason": "Best of the set as a linguist sees it. It is a fresh pairing, not an idiom that already belongs to someone. It says money and dishonesty together in a forensic, explain-the-numbers tone that fits the brief, and nothing in it accuses a real person or makes crime look appealing. Spanish 'aritmética torcida' is harmless. My run: brandcheck CLEAR (YouTube CLEAR, 29 channels searched, none close; crookedarithmetic.com available; 0 live US marks), and a web search found no book, show or product with this name. Risks: (1) 'Crooked' is the house word of Crooked Media, a news and politics podcast network whose shows are active on YouTube (Pod Save America 1.33M, Hysteria 571K, which in my scout covered 'Kushner fraud'-type stories), and @CrookedMedia is taken. A channel called 'Crooked X' covering political or financial scandal can read as one of their shows, or as politically coded (it also echoes 'Crooked Hillary'). (2) 'Arithmatic' is one of the most common English misspellings, though YouTube's fuzzy search softens that. (3) It is 6 syllables, and out of context it can sound like a maths channel. Below 8 because of the Crooked Media association in the news and podcast space."
+            }
+          ]
+        },
+        {
+          "name": "Tailored Larceny",
+          "why": "Handle @TailoredLarceny (15). Theft in a tailored suit, and schemes tailored to their marks. It puts the viewer in the white-collar world straight away, has a literary, premium feel, and is short and visual. Nothing unfortunate in English or Spanish, and it isn't confusable with the 'White Collar' show. Watch-out: it shares 'Larceny' with Respectable Larceny below, so take one of the two, not both. My score: 8.",
+          "avg": 6.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 7.5,
+              "reason": "My run: brandcheck CLEAR (YouTube CLEAR, 28 channels returned; tailoredlarceny.com available; 0 live US marks). ytscout found no videos this year for the phrase, so it is very ownable. It is the quickest of the six to place a scrolling viewer in white-collar crime: a suit plus theft, with a second meaning in schemes tailored to their marks. Short, visual and premium, and it will still fit in ten years. Weaknesses: out of context it could pass for a menswear label or a cocktail bar, and Larceny is also a well-known Heaven Hill bourbon, though that is a different class of goods. It says crime and class more than forensic money work, and Spanish speakers won't know 'larceny' (no bad meaning, though). It stands on its own beside Stick Ledger, Paper Trail Cases and the ch-11/13 shortlists. Pick it or Respectable Larceny, not both."
+            },
+            {
+              "lens": "language",
+              "score": 5.5,
+              "reason": "Short, visual and typeable (handle 15). Clean in Spanish, and my run showed brandcheck CLEAR (YouTube CLEAR with 34 channels and none close, .com available, 0 live marks). The web shows no product with this name. But it scores worst of the set on the glamorising test. 'Tailored' makes theft sound bespoke, stylish and luxurious, which suits a heist film, a menswear label or a cocktail bar ('Larceny' is also a known bourbon brand). That conflicts with a sober, forensic documentary tone and with advertiser suitability. 'Larceny' brings a small spelling risk and is legally narrower than fraud. US and UK listeners hear it the same way ('LAR-/LAH-suh-nee'), so no accent problem. It shares 'Larceny' with Respectable Larceny, so choose one or the other."
+            }
+          ]
+        },
+        {
+          "name": "Respectable Larceny",
+          "why": "Handle @RespectableLarceny (18). Edwin Sutherland coined 'white-collar crime' (1939) as crime by 'a person of respectability and high social status'. This name is that definition in two words: theft by the respectable. It's ironic and measured, and would sit well on a book spine. Watch-outs: a mouthful and close to the 20-character handle limit, and it's an alternative to Tailored Larceny, not a second name to use alongside it. My score: 8.",
+          "avg": 6.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 7,
+              "reason": "My run: brandcheck CLEAR (YouTube CLEAR, 25 channels; .com available; 0 live US marks); ytscout found no videos this year for the phrase. It is a smart, book-spine name: Sutherland's definition of white-collar crime in two words, ironic and measured, and right for a premium documentary label. It is less visual and slower than Tailored Larceny: seven syllables and an 18-character handle. To the average viewer the irony comes across as wry more than sharp or forensic. Sister risk: 'Respectable Front' is on channel 13's checked list, and if both went through the two channels would read as a pair. It shares 'Larceny' with Tailored Larceny, so the two are alternatives."
+            },
+            {
+              "lens": "language",
+              "score": 6,
+              "reason": "The strongest concept. Sutherland's definition of white-collar crime turned into an ironic two-word label. It blames respectability rather than glamorising the theft, and it avoids the overused Fraud, Scam and Greed words. My run: brandcheck CLEAR (YouTube CLEAR, .com available, 0 live US marks), and the web shows no work with this title. Hard to type after one hearing: 7 syllables, an 18-character handle, and two spelling traps ('respectible' is a frequent misspelling, and 'larceny' trips some people). Some listeners will miss the irony and hear 'acceptable theft'. 'Larceny' is also a well-known Heaven Hill bourbon brand (from memory). Overlap within the network: the ch-13 (elite syndicates) shortlist includes 'Respectable Front'. If that one is picked, the two channels would read as a matched pair, so this name only works if ch-13 avoids 'Respectable'. Strictly, larceny is narrower than fraud in law, which a careful viewer may notice."
+            }
+          ]
+        },
+        {
+          "name": "Materially False",
+          "why": "Handle @MateriallyFalse (15). The exact words of securities-fraud indictments and SEC complaints ('materially false and misleading statements'). It's cool and forensic, and it tells the viewer the channel works from court documents and filings, which matches the brief's research rules. Typeable, no bad Spanish meaning, not a known brand. Watch-outs: it could be read as a fact-check or debunking channel, the brand word is a negative one, and the .com is registered. My score: 8.",
+          "avg": 5.25,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5.5,
+              "reason": "My run: brandcheck CAUTION (YouTube CLEAR, 20 channels; materiallyfalse.com registered; 0 marks). The search space is nearly empty (a handful of law-firm and legal-news clips), and to finance insiders it is a cool, forensic nod to SEC complaints. To the general viewer it reads as a fact-checking or debunking channel. It is also a trust problem: a documentary network whose quality gate is factual accuracy would print 'False' under every video title. Its legal register sits close to sisters Fine Print, Plainly (ch 8) and Paper Trail Cases (ch 7), and it says little about money or crime on its own. Missing .com."
+            },
+            {
+              "lens": "language",
+              "score": 5,
+              "reason": "Exact and forensic: the wording of securities-fraud complaints signals a channel that works from court filings, and 'materialmente falso' is harmless legal Spanish. My run: YouTube CLEAR (@MateriallyFalse; 20 channels searched), but brandcheck gave CAUTION because materiallyfalse.com is registered. Web search found no podcast, book or newsletter by this name. Risks: (1) It carries the most risk of reading as an accusation. The phrase is the legal allegation itself, so 'Materially False' above a named executive's face in a thumbnail reads as a claim of securities fraud even where a case is unproven or settled. (2) The brand word is 'False', so viewers will expect a fact-check or debunk channel, and it invites the jibe that the channel calls itself false. (3) The weak first syllables of 'Materially' can be misheard as 'Maternally', and some people will type 'Material False'. (4) Within the network it uses the same device as the ch-13 shortlist (legal and press boilerplate such as 'Denies Wrongdoing', 'Significant Control', 'Connected Persons'), so the two could read as sister brands."
+            }
+          ]
+        },
+        {
+          "name": "Forged Figures",
+          "why": "Handle @ForgedFigures (13). A double meaning: forged numbers, and the figures (people) who forged them. Alliterative, typeable, clear about money, and very ownable: YouTube search returned only 4 channels for it. Nothing bad in Spanish. Watch-outs: out of context 'forged' can suggest blacksmithing or sculpted miniatures, and the .com is registered. My score: 8.",
+          "avg": 5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5,
+              "reason": "My run: brandcheck CAUTION (YouTube CLEAR, but search returned 24 channels, not the 4 claimed; forgedfigures.com registered; 0 marks). The double meaning (fake numbers, and the people who faked them) is neat on paper. But YouTube results for the phrase are action figures and toys (a WWE playset, Lego-style figures, He-Man reviews) and 'forged in...' history titles. A scrolling viewer would first think collectibles or miniatures, the brand drowns in search, and 'forged' narrows the world towards forgery and counterfeiting. No .com."
+            },
+            {
+              "lens": "language",
+              "score": 5,
+              "reason": "Alliterative and easy to say, with a real double meaning (forged numbers, and the people who forged them). My run: YouTube CLEAR (24 channels searched), but brandcheck gave CAUTION because forgedfigures.com is registered. The main linguistic problem is that in normal speech the 'd' of 'forged' disappears before 'figures', so many listeners will type 'Forge Figures'. My ytcheck shows @ForgeFigures is TAKEN by an existing channel called 'forge figures', so a one-hearing mistake sends viewers to someone else. Out of context, 'figures' reads as action figures or miniatures: my YouTube scout for the phrase returned WWE figure playsets and 'The Forged Legion' Lego-style figures, and the web search returned Marvel 'Forge' figures, blacksmith figurines and art forgery. 'Forged' also points to bladesmithing (History's 'Forged in Fire', from memory). It fits accounting and document fraud well but crypto and espionage less well. Nothing bad in Spanish."
+            }
+          ]
+        },
+        {
+          "name": "Trial by Audit",
+          "why": "Handle @TrialbyAudit (12). A twist on 'trial by fire': the audit is where a scheme gets tested and burns, and 'trial' points to the court ending of every story. Witty without being jokey, short, typeable on one hearing, nothing bad in Spanish. Watch-outs: it could read as an accounting-education channel, and it leans towards accounting cases more than crypto or espionage. My score: 8.",
+          "avg": 4.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 4.5,
+              "reason": "My run: brandcheck CLEAR (YouTube CLEAR, 20 channels; .com available; 0 marks), and the 12-character handle is excellent. But on YouTube, 'audit' means First Amendment auditors and court-watching: my ytscout for the phrase was led by Audit the Court (several videos with 300-630K views), Long Island Audit, and Caleb Hammer's 'Financial Audit' series. So it is easily mistaken for a known YouTube genre right next to this channel's legal and crime space, or taken for accounting education. The 'trial by fire' pun is mild. It leans towards accounting fraud and misses crypto, laundering and espionage."
+            },
+            {
+              "lens": "language",
+              "score": 4.5,
+              "reason": "The shortest and easiest name to type (handle 12). It twists 'trial by fire', has nothing bad in Spanish, and my run showed brandcheck CLEAR (YouTube CLEAR with 20 channels and none close, .com available, 0 live marks). The web shows no work with this name. But on YouTube, 'audit' plus a legal word sits right next to a large existing brand: my ytcheck shows 'Audit the Audit' (@AuditTheAudit) at 2.99M subscribers, a legal-analysis channel, plus a whole genre of 'First Amendment auditor' channels that film police. Viewers who hear 'Trial by Audit' may expect police-encounter or courtroom content, or an accounting or tax-audit lesson channel. It also narrows the subject. Many cases in the brief were exposed by journalists, short-sellers, whistleblowers or the FBI, not auditors, and auditors failed in several of them (Enron/Arthur Andersen, Wirecard/EY). So the name's premise is often untrue to the story."
+            }
+          ]
+        }
+      ],
+      "taken": [
+        "TAKEN Material Weakness (also a 'Material Weakness - How Companies Fall Apart' channel exists)",
+        "TAKEN Mark to Myth",
+        "CROWDED Milled Edge",
+        "TAKEN Brass Plate",
+        "TAKEN A Full Accounting",
+        "TAKEN Called to Account",
+        "TAKEN Held to the Light",
+        "TAKEN Gilded Lead",
+        "TAKEN Clipped Coin (17.1K-sub channel)",
+        "TAKEN Qualified Opinion",
+        "CROWDED Fictitious Profits",
+        "TAKEN Unjust Enrichment (6.25K-sub channel)",
+        "TAKEN Mahogany Row",
+        "TAKEN Teller's Cage",
+        "TAKEN Unreconciled",
+        "TAKEN Balance Sheet Noir",
+        "TAKEN Pennyweight",
+        "TAKEN Counterfoil",
+        "TAKEN False Balance",
+        "TAKEN Undue Diligence (1.57K-sub channel)",
+        "TAKEN Gold Wash",
+        "TAKEN Unfair Value",
+        "TAKEN Count One",
+        "TAKEN Thirty Pieces",
+        "TAKEN Statement of Facts",
+        "TAKEN Gilt and Guilt",
+        "TAKEN Overdrawn",
+        "CROWDED Short Weight",
+        "TAKEN Cold Arithmetic",
+        "CROWDED Cufflinks to Cuffs",
+        "TAKEN Golden Handcuffs",
+        "TAKEN Phantom Revenue",
+        "TAKEN Hollow Vault",
+        "CROWDED Self Dealing",
+        "TAKEN Glass Vault",
+        "TAKEN Spreadsheet Noir",
+        "TAKEN Fire Assay",
+        "TAKEN Clean Opinion",
+        "TAKEN Pen and Plunder",
+        "CROWDED Hollow Earnings",
+        "TAKEN Adverse Opinion",
+        "Printed CLEAR but scored below 8, not returned: Collar and Cuff (7; 'collars and cuffs' is a crude English joke)",
+        "Printed CLEAR but scored below 8, not returned: Velvet Larceny (7.5; a third 'Larceny' variant, and 'velvet' reads sensual or jewel-thief)",
+        "Printed CLEAR but scored below 8, not returned: Pinstripe Noir (7.5; pinstripes also mean 1920s gangsters, which is channel 13's ground)",
+        "Printed CLEAR but scored below 8, not returned: Wire and Watermark (7.5; 'wire' brings The Wire and wiretaps, street-crime ground, and the X-and-Y pattern echoes channel 7's candidates)",
+        "Printed CLEAR but scored below 8, not returned: Grain and Scruple (7; doesn't say money)",
+        "Printed CLEAR but scored below 8, not returned: Weighed and Wanting (7; doesn't say money)",
+        "Printed CLEAR but scored below 8, not returned: Booked Revenue (7; too jargon-heavy, the double meaning is too subtle)",
+        "Note: only 6 CLEAR names reached 8 after 54 checks, past the ~45 cap. Raw output is in /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-12/yt1.txt to yt9.txt and brand1.txt"
+      ],
+      "cleared": {
+        "checked": [
+          {
+            "name": "Crooked Arithmetic",
+            "brandcheck": "CLEAR: Crooked Arithmetic (YouTube CLEAR; crookedarithmetic.com available; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Crooked Arithmetic\"",
+              "\"Crooked Arithmetic\" YouTube",
+              "\"Crooked Arithmetic\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [
+              "None found. The exact-phrase searches returned only general maths pages (modular arithmetic, Numberphile, Breaking Math Podcast and similar). None of them is a brand, show, podcast, book or channel called Crooked Arithmetic.",
+              "Unverified: a Mastodon post at https://qoto.org/@internic/113482743713981654 came up in the exact-phrase search, but the search summary found no page using the term. I couldn't open it because this session's network blocks qoto.org. A single social post isn't a brand.",
+              "Watch-out, not a conflict: 'Crooked' is also the name of Crooked Media, the US politics podcast network. It has no show by this name, but a viewer might briefly link the two."
+            ],
+            "verdict": "clean"
+          },
+          {
+            "name": "Tailored Larceny",
+            "brandcheck": "CLEAR: Tailored Larceny (YouTube CLEAR; tailoredlarceny.com available; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Tailored Larceny\"",
+              "\"Tailored Larceny\" YouTube",
+              "\"Tailored Larceny\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [
+              "None found. The results were general larceny law pages and loosely related titles such as The Tailor of Sin City (https://hollywoodgodfatherpodcast.podbean.com/e/season-16-episode-289-behind-the-seams-sal-manna-on-the-tailor-of-sin-city-the-book-the-tailor) and Dean Jobb's A Gentleman and a Thief. Neither uses this name."
+            ],
+            "verdict": "clean"
+          },
+          {
+            "name": "Respectable Larceny",
+            "brandcheck": "CLEAR: Respectable Larceny (YouTube CLEAR; respectablelarceny.com available; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Respectable Larceny\"",
+              "\"Respectable Larceny\" YouTube",
+              "\"Respectable Larceny\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [
+              "None found. The results were academic work on 'respectable crime' (for example https://www.ojp.gov/ncjrs/virtual-library/abstracts/respectable-crime-criminology-p-219-239-1991-joseph-f-sheley-ed) and heist podcasts or books with different titles. None uses this name."
+            ],
+            "verdict": "clean"
+          }
+        ],
+        "recommended": "Crooked Arithmetic",
+        "reason": "Crooked Arithmetic is the highest-ranked name on the shortlist, and every check came back clear. Brandcheck printed CLEAR: the YouTube name is clear, crookedarithmetic.com is available and there are no live same-name US trademarks. The three web searches found no documentary, true-crime, news or finance brand, show, podcast, book or channel using the name. The one unopened hit is a social post. Both runner-ups, Tailored Larceny and Respectable Larceny, also cleared brandcheck and web search, so either is a ready fallback (take one, not both, since they share 'Larceny'). Two minor watch-outs. Crooked Media, the politics podcast network, uses the word 'Crooked', though it has no show by this name. And without the logo and tagline, the name could hint at a maths channel. The main handle @CrookedArithmetic is 17 characters, but X caps usernames at 15, so X needs a shorter handle (see the manual checks).",
+        "spare_handles": [
+          "@TheCrookedArithmetic (20 characters; ytcheck: CLEAR)",
+          "@CrookedArithmeticDoc (20 characters; ytcheck: CLEAR)",
+          "@CrookedArithmeticCo (19 characters; ytcheck: CLEAR; extra backup)",
+          "@CrookedArithmetics (18 characters; ytcheck: CLEAR; protects a likely misspelling)"
+        ],
+        "manual_checks": [
+          "Instagram: check that @crookedarithmetic is free (30-character limit, so it fits).",
+          "TikTok: check that @crookedarithmetic is free (24-character limit, so it fits).",
+          "X/Twitter: usernames max out at 15 characters, so @CrookedArithmetic (17) can't be registered. Check a shorter one such as @CrookedArith (12) or @CrookedArithm (14).",
+          "Also check Threads (follows the Instagram handle), Facebook page, Reddit and Bluesky if he plans to use them.",
+          "Trademarks outside the US: EUIPO (EU), UKIPO (UK), CIPO (Canada) and IP Australia, plus the WIPO Global Brand Database, in Nice classes 41 (entertainment and education) and 38/9 (broadcasting and recorded media).",
+          "Consider registering crookedarithmetic.com now, since RDAP showed it as available. This is a live lookup and can change.",
+          "Open https://qoto.org/@internic/113482743713981654 in a normal browser to confirm it is just a passing mention (this session's network blocks the site)."
+        ]
+      }
+    },
+    {
+      "channel": 13,
+      "label": "C: elite syndicates and organised crime",
+      "research": {
+        "competitors": [
+          {
+            "channel": "fern",
+            "subs": 5690000,
+            "naming_style": "Lowercase, single short word with no genre meaning; the dominant faceless crime/cartel/mafia doc channel (El Mencho, FBI agent, cocaine in Europe), so it wins on story quality, not on its name"
+          },
+          {
+            "channel": "Dr Insanity",
+            "subs": 6290000,
+            "naming_style": "Persona nickname, shock tone"
+          },
+          {
+            "channel": "Investigation",
+            "subs": 5400000,
+            "naming_style": "Bare generic genre noun ('Ndrangheta, Sinaloa, Mossad full docs); unownable in search, survives only on distributor scale"
+          },
+          {
+            "channel": "Best Documentary",
+            "subs": 8450000,
+            "naming_style": "Generic format descriptor ('Best/Free Documentary')"
+          },
+          {
+            "channel": "Free Documentary",
+            "subs": 5850000,
+            "naming_style": "Generic format descriptor"
+          },
+          {
+            "channel": "DW Documentary",
+            "subs": 6530000,
+            "naming_style": "Broadcaster initials + format"
+          },
+          {
+            "channel": "FRONTLINE PBS | Official",
+            "subs": 4880000,
+            "naming_style": "Institutional broadcaster brand, journalistic metaphor (front line)"
+          },
+          {
+            "channel": "National Geographic",
+            "subs": 26600000,
+            "naming_style": "Institutional brand (Inside the American Mob series)"
+          },
+          {
+            "channel": "HISTORY",
+            "subs": 15500000,
+            "naming_style": "Institutional brand (American Godfathers: The Five Families)"
+          },
+          {
+            "channel": "Bloomberg Originals",
+            "subs": 5230000,
+            "naming_style": "News brand + 'Originals'"
+          },
+          {
+            "channel": "Financial Times",
+            "subs": 1480000,
+            "naming_style": "News brand; owns the elite-finance-crime documentary register (triads, scam empires)"
+          },
+          {
+            "channel": "Insider",
+            "subs": 9630000,
+            "naming_style": "Single access word; 'How Crime Works' series"
+          },
+          {
+            "channel": "Johnny Harris",
+            "subs": 8020000,
+            "naming_style": "Host's personal name (on-camera explainer, China dirty money, oligarchy)"
+          },
+          {
+            "channel": "Tommy G",
+            "subs": 3820000,
+            "naming_style": "Host's personal name (on-camera cartel access)"
+          },
+          {
+            "channel": "Channel 5 with Andrew Callaghan",
+            "subs": 3760000,
+            "naming_style": "Mock-broadcaster name + host"
+          },
+          {
+            "channel": "Michael Franzese",
+            "subs": 2040000,
+            "naming_style": "Ex-mob insider's personal name"
+          },
+          {
+            "channel": "Banijay Crime - Crime Documentary",
+            "subs": 1030000,
+            "naming_style": "Distributor + genre; 'The Invisibles' series on global crime networks"
+          },
+          {
+            "channel": "ENDEVR",
+            "subs": 1520000,
+            "naming_style": "Stylised coined word (vowel-dropped 'endeavour')"
+          },
+          {
+            "channel": "Mighty Monk",
+            "subs": 1590000,
+            "naming_style": "Alliterative persona (Mumbai underworld)"
+          },
+          {
+            "channel": "Our History",
+            "subs": 1020000,
+            "naming_style": "Generic possessive + subject (Frank Lucas, Escobar)"
+          },
+          {
+            "channel": "FINAiUS",
+            "subs": 806000,
+            "naming_style": "Coined finance word with odd capitalisation (dynasty wealth docs)"
+          },
+          {
+            "channel": "Blackfiles",
+            "subs": 465000,
+            "naming_style": "Dark colour + 'files' closed compound; the template most copycats follow"
+          },
+          {
+            "channel": "Hussain Zaidi Files",
+            "subs": 415000,
+            "naming_style": "Author name + Files"
+          },
+          {
+            "channel": "Lume",
+            "subs": 358000,
+            "naming_style": "Short abstract one-word coinage (light), crime-finance docs"
+          },
+          {
+            "channel": "Crime Vault",
+            "subs": 288000,
+            "naming_style": "Genre + container noun; dozens of 'Crime Vault' / 'True Crime Vault' clones"
+          },
+          {
+            "channel": "Hypothetically",
+            "subs": 343000,
+            "naming_style": "Single adverb; 'Your life as every rank in the Mafia' format"
+          },
+          {
+            "channel": "Witness",
+            "subs": 268000,
+            "naming_style": "Single evocative noun (Mafia in Italy, Tokyo underworld)"
+          },
+          {
+            "channel": "103 mob stories",
+            "subs": 215000,
+            "naming_style": "Number + genre + stories"
+          },
+          {
+            "channel": "Alex H. Cremades",
+            "subs": 206000,
+            "naming_style": "Personal name, on-the-ground narco reporter"
+          },
+          {
+            "channel": "Organized Crime and Corruption Reporting Project",
+            "subs": 181000,
+            "naming_style": "Descriptive institutional name (OCCRP), the real-world authority on kleptocracy"
+          },
+          {
+            "channel": "Old Money Documentaries",
+            "subs": 119000,
+            "naming_style": "Wealth idiom + format"
+          },
+          {
+            "channel": "Hidden Ops India",
+            "subs": 115000,
+            "naming_style": "'Hidden' + covert-ops jargon + region"
+          },
+          {
+            "channel": "The Life Outline",
+            "subs": 92100,
+            "naming_style": "Generic phrase; 'every cartel rank' format (huge outliers)"
+          },
+          {
+            "channel": "FBI Investigates",
+            "subs": 79800,
+            "naming_style": "Agency name + verb (borrowed authority)"
+          },
+          {
+            "channel": "Magic Lantern Pictures",
+            "subs": 76400,
+            "naming_style": "Production-company style name"
+          },
+          {
+            "channel": "Hardy Graves",
+            "subs": 62400,
+            "naming_style": "Pseudonymous persona with a grim pun (graves)"
+          },
+          {
+            "channel": "SEGRETO PUBBLICO",
+            "subs": 56000,
+            "naming_style": "Italian paradox 'public secret' (camorra broker docs, strong outliers); the one ironic, literary name in the niche"
+          },
+          {
+            "channel": "Bloody Reports",
+            "subs": 48600,
+            "naming_style": "Gore adjective + news noun (Capone-era Chicago)"
+          },
+          {
+            "channel": "Underworld Chronicles",
+            "subs": 48400,
+            "naming_style": "Genre noun + Chronicles; many same-name clones"
+          },
+          {
+            "channel": "Dark Ledger",
+            "subs": 31800,
+            "naming_style": "Dark adjective + accounting noun; 20+ same-name channels"
+          },
+          {
+            "channel": "The Circle of Syndicates",
+            "subs": 26200,
+            "naming_style": "Genre word spelled out (Albanian mafia full docs)"
+          },
+          {
+            "channel": "Life Through Time",
+            "subs": 24400,
+            "naming_style": "Generic history phrase; 'Underworld History' series (Philly mob, big outlier)"
+          },
+          {
+            "channel": "GS Villaseta AG",
+            "subs": 21400,
+            "naming_style": "Company name; Italian clan series (Ndranghetisti, Camorristi)"
+          },
+          {
+            "channel": "Hidden Empire",
+            "subs": 21200,
+            "naming_style": "'Hidden' + Empire; several 20-50K same-name channels"
+          },
+          {
+            "channel": "Syndicate Files",
+            "subs": 19900,
+            "naming_style": "Genre noun + Files; @SyndicateFiles and @TheSyndicateFiles both taken"
+          },
+          {
+            "channel": "The Narco Files",
+            "subs": 15000,
+            "naming_style": "Genre noun + Files"
+          },
+          {
+            "channel": "Eastern Shadows",
+            "subs": 10900,
+            "naming_style": "Region + Shadows (Burning Sun investigation, big outlier)"
+          },
+          {
+            "channel": "Cartel Files",
+            "subs": 6460,
+            "naming_style": "Genre noun + Files; many clones"
+          },
+          {
+            "channel": "Econ in a Nutshell",
+            "subs": 6060,
+            "naming_style": "Explainer idiom; 1.38M views on 'Every Money Laundering Technique Explained'"
+          },
+          {
+            "channel": "Endless Night Files",
+            "subs": 3130,
+            "naming_style": "Mood phrase + Files (Albanian mafia, 108x outlier)"
+          },
+          {
+            "channel": "Echelon Files",
+            "subs": 1950,
+            "naming_style": "Signals-intelligence word + Files (Chinese triad explainer, 234x outlier); the only small channel already using intelligence vocabulary"
+          },
+          {
+            "channel": "Syndicate",
+            "subs": 9510000,
+            "naming_style": "Gaming channel that owns the @Syndicate handle; makes 'Syndicate' unownable"
+          },
+          {
+            "channel": "Vanishing Billions / Empire Of Money / Fraudonomics / The Dark Ledger (1MDB) / People Dossier",
+            "subs": 300,
+            "naming_style": "Faceless AI-farm defaults (money + dark + empire + dossier) on kleptocracy topics; all under 300 subs and under 10K views, i.e. the topic is open and the vocabulary is already cheapened"
+          }
+        ],
+        "crowded_words": [
+          "Files (Underworld/Syndicate/Cartel/Narco/Kingpin/Godfather/Organized Crime/Secret Files: every one I checked came back TAKEN with many same-name clones)",
+          "Underworld (also a film franchise; 'Underworld Files' and 'Underworld Chronicles' TAKEN, plus Mumbai-underworld Hindi channels)",
+          "Syndicate (@Syndicate held by a 9.51M gaming channel; 'Inside the Syndicate' CROWDED)",
+          "Cartel, Narco, Mafia, Mob, Kingpin, Godfather, Gangster: literal genre nouns, also flooded by 'mafia boss' romance short-drama channels with tens of millions of views",
+          "Empire (Hidden/Shadow/Crime Empire all TAKEN; 'Empire of Money')",
+          "Shadow / Shadows (Shadow Empire, Shadow Network 109K, Eastern Shadows)",
+          "Dark / Black / Blood(y) colour-and-gore adjectives (Blackfiles, Dark Ledger, Black Ledger, Bloody Reports)",
+          "Ledger (Dark Ledger 31.8K, Black Ledger, Cold Ledger, plus 1MDB AI channels)",
+          "Vault (Crime Vault 288K, True Crime Vault 139K, dozens more)",
+          "Dossier (The Dossier TAKEN with 20+ clones, Mafia Dossier, People Dossier, Dossier Room)",
+          "Secret / Hidden / Exposed / Inside / Uncovered",
+          "Chronicles, Stories, Reports, History",
+          "Investigation / Investigates / Investigations (the 5.4M 'Investigation' channel owns the bare word)",
+          "Money / Billions / Dirty Money ('Dirty Money Files' TAKEN; Netflix's 'Dirty Money' series)",
+          "Pattern: [dark adjective] + [Files/Ledger/Empire/Vault]",
+          "Pattern: [genre noun] + Files/Chronicles/Stories",
+          "Pattern: The ___ Dossier / Hidden ___ / Shadow ___",
+          "Pattern: generic format names (Best Documentary, Free Documentary, Our History, Notre Histoire)",
+          "Pattern: 'Your life as every rank in the ___' (formats get copied, names don't help)",
+          "Show/brand collisions to steer clear of: Narcos, McMafia, Gomorrah, Ozark, Dirty Money, The Invisibles (Banijay), Echelon (surveillance programme, and Echelon Files exists), Kingpin (Marvel)"
+        ],
+        "open_territory": "The niche is split between broadcasters with institutional names (FT, Bloomberg, DW, FRONTLINE, OCCRP), on-camera hosts using their own names (Johnny Harris, Tommy G, Franzese), and a long tail of faceless channels that all use the same kit: a genre noun (Mafia/Cartel/Syndicate/Underworld) or a dark adjective (Dark/Black/Shadow/Hidden) plus a container (Files/Ledger/Empire/Vault/Dossier/Chronicles). Every one of those combinations I checked came back TAKEN, and the kleptocracy/1MDB AI channels using money-plus-darkness names have almost no subscribers, so that vocabulary now reads as content farm. The biggest faceless winner, fern, has a name that says nothing about crime, which suggests a distinctive name beats a descriptive one here.\n\nUnclaimed: (1) The real vocabulary of financial intelligence and investigators' tradecraft (correspondent banking, beneficial ownership, nominees, shells, wires, cables, cut-outs, red notices, the evidence board's link chart). It is cool and precise, signals cross-border money and power rather than street crime, and only Echelon Files and Hidden Ops dabble in it, both crudely. (2) Calm, literary or ironic names in the vein of SEGRETO PUBBLICO ('public secret'): paradoxes and understated phrases about power hiding in plain sight. There is nothing like it in English, and it fits the brief's 'restraint over hype'. (3) Cartographic and route imagery: maps, routes, ports, borders, the connecting threads between cities. This matches the brief's animated maps and international reach, and no competitor name uses it. (4) Imagery of elite settings rather than gangland: boardrooms, private banks, embassies, yachts, a seat at the table, the quiet room. It sets the channel apart from street-crime channels (channel 11's lane) and from mafia-romance spam.\n\nOn topics, elite money laundering, oligarch networks and kleptocracy are under-served by quality faceless channels. Searches return big outlets plus near-empty AI channels, so a name that signals power + money + crime (rather than 'mafia' or 'cartel') can own the upmarket lane. Constraints: avoid the 'X Files' shape the sister channels may also reach for, so channel 13 doesn't read as a sub-brand; avoid Latin-crime loanwords (narco, capo, cosa) that sound pulpy or collide with Narcos/Gomorrah; prefer words that read cleanly in Spanish too."
+      },
+      "table": [
+        {
+          "name": "Respectable Front",
+          "why": "Names the brief's core subject, criminal networks run through legitimate businesses and respectable people, in two plain, ironic words. Easy to type, and the handle is 16 characters. Nothing bad in Spanish. Caveat: channel 12's shortlist includes 'Respectable Larceny'. If both were chosen they would read as sub-brands of each other, so choose at most one of them. I score it 8.",
+          "avg": 6.75,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 7,
+              "reason": "The best fit of the eight. 'Front' says crime with no explanation, and 'respectable' captures the brief's core subject (criminal networks behind legitimate businesses and respectable people) with the cool irony the tone asks for. Two plain words, easy to type after one hearing, handle 16. My brandcheck run printed CLEAR (YouTube CLEAR, .com available, 0 live US marks), and ytscout found only 3 unrelated videos this year, so it is very ownable. No known show or book with this title turned up. 'Frente respetable' is harmless in Spanish. Drawbacks: it doesn't say international, 'front' can briefly read as a political front, and if channel 12 takes 'Respectable Larceny' the two become sub-brands of each other, so it depends on that choice."
+            },
+            {
+              "lens": "language",
+              "score": 6.5,
+              "reason": "Points straight at the brief's core subject: crime run through legitimate businesses and respectable people. It is easy to hear once and spell (US or UK), the handle is 16 characters, and its tone is dry irony with no glamour or accusation. My run: brandcheck CLEAR (YouTube CLEAR, .com available, 0 live US marks), and the scout search for the phrase came back almost empty, so it is very ownable. Risks: in the UK, '<X> Front' reads like a political group (National Front, Popular Front), and in Spanish 'frente' is also 'forehead'. Both are mild. The real problem is channel 12's 'Respectable Larceny': if that is chosen, this one becomes a sub-brand and should drop to about 4. It is a little wry next to the 'intelligence briefing' tone."
+            }
+          ]
+        },
+        {
+          "name": "Flags of Convenience",
+          "why": "Ships fly a foreign flag to hide who really owns them, and the name turns that into a picture of how elite networks hide ownership across borders. It fits the channel's cross-border reach and animated maps, and it gives the logo an obvious mark (a flag). Spanish has the same phrase, 'banderas de conveniencia', and it carries no bad meaning. Handle @FlagsofConvenience is 18 characters. Caveats: an obscure 1980s punk band was called 'Flag of Convenience' (singular), and the .com is registered. I score it 8.5.",
+          "avg": 6,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 6,
+              "reason": "A clever metaphor with a ready-made logo mark, and fine in Spanish. My ytcheck run printed CLEAR; brandcheck printed CAUTION (.com registered). But the phrase is not ownable. In 2026 it is tied to the shadow-fleet and shipping story: ytscout's top results are maritime explainers and big news outlets (Al Jazeera, ThePrint, Firstpost). It is already an episode title on Al Jazeera's 'Loch Ness Mobster' and on the 'Bribe, Swindle or Steal' podcast, and there is Steve Diggle's band. A scrolling viewer would take it for a shipping or geopolitics channel. Three words, so slower to say and type."
+            },
+            {
+              "lens": "language",
+              "score": 6,
+              "reason": "The best picture of hidden cross-border ownership. It fits the maps-and-flags visuals and the cool briefing tone, and the Spanish 'banderas de conveniencia' is clean. My run: brandcheck CAUTION (YouTube CLEAR, flagsofconvenience.com registered, 0 marks). But it is a live term of art: the scout search is all shadow-fleet and shipping news (ThePrint, Al Jazeera, Bridged), so the channel would be buried. Al Jazeera English's organised-crime podcast 'Loch Ness Mobster' titles an episode 'Flag of Convenience'. The singular is CROWDED on YouTube (the Steve Diggle & Flag Of Convenience topic channel), and 'flags of' easily sounds like 'flag of'. 'Convenience' is a common misspelling ('convienence'). Six syllables in three words. It reads as shipping before it reads as crime."
+            }
+          ]
+        },
+        {
+          "name": "Diplomatic Cover",
+          "why": "An intelligence term for agents working under embassy status. It also suggests immunity for the powerful and a respectable 'cover' for crime, so it signals international, elite and investigative at once. Fits the intelligence-documentary angle. Nothing bad in Spanish. Handle is 15 characters. Caveat: the .com is registered. I score it 8.",
+          "avg": 5.75,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 6.5,
+              "reason": "The strongest intelligence-briefing feel, short (handle 15), and ytscout found 0 videos this year. My web search found no show, book or podcast with this title. My brandcheck run printed CAUTION only because diplomaticcover.com is registered (YouTube CLEAR, 0 marks). The problem is what it signals: espionage (agents posted under embassy status), not syndicates, trafficking or laundering. The right viewer may expect CIA/KGB stories, and the organised-crime viewer gets no cue. It works as a mood but misdirects the subject."
+            },
+            {
+              "lens": "language",
+              "score": 5,
+              "reason": "Easy to say and type, cool in tone, 15-character handle. My run: brandcheck CAUTION (YouTube CLEAR, diplomaticcover.com registered, 0 marks). The phrase belongs to espionage: the scout search is led by 'What Happens When Russia's Spies Lose Diplomatic Cover?' (Institute of World Politics) and BELPOL's KGB and GRU spy stories, so viewers will expect a spy channel, not syndicates and laundering. It also hints that diplomats as a group are covering for crime, which is broad but carries some accusation risk. Its neighbours are 'Diplomatic Immunity', 'Deep Cover' and The Diplomat. In Spanish, 'cover' is a loanword for a cover song or a club's cover charge, which is harmless but muddy."
+            }
+          ]
+        },
+        {
+          "name": "Utmost Discretion",
+          "why": "What private banks, fixers and luxury hotels promise their richest clients, turned into an ironic name. Elite, whispered and restrained, it sets the channel well apart from the dark-adjective plus Files/Ledger/Vault crowd. Like 'fern', it wins on distinctiveness rather than describing the genre. Easy to type, nothing bad in Spanish ('discreción'), and the handle is 17 characters. I score it 8.",
+          "avg": 5.75,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5.5,
+              "reason": "Distinctive, and the elite whispered register is right. My brandcheck run printed CLEAR, and ytscout found almost nothing (3 stray videos). But on its own it signals luxury service, not crime. 'Discretion' is also the stock promise of escort, private-detective and discreet-shipping ads, and 'máxima discreción' is a fixture of Spanish-language contact ads. That is an unfortunate association in both languages for a channel that must look advertiser-safe and authoritative. The irony only works once the viewer already knows what the channel is."
+            },
+            {
+              "lens": "language",
+              "score": 6,
+              "reason": "Has the most wit and elite whisper of the set, and is cleanly available. My run: brandcheck CLEAR (YouTube CLEAR, .com available, 0 marks), and the scout search for the phrase is almost empty. Linguistic risks: 'utmost' is very often heard and written as 'upmost', especially with the American flapped or glottal t, and @UpmostDiscretion is unclaimed, so people who type it that way won't find the channel. 'Discretion assured' is also stock wording in escort, massage and private-investigator ads. On its own the name signals a luxury concierge or private bank, not crime, so the irony depends on the thumbnails. Nothing bad in Spanish."
+            }
+          ]
+        },
+        {
+          "name": "Secrecy Jurisdiction",
+          "why": "The investigators' own term for a tax haven. It is cool, precise and sounds like an intelligence briefing, which matches the brief's 'restraint over hype', and it puts the channel in the upmarket offshore-money lane, well away from mafia and cartel clichés. In Spanish it reads as 'jurisdicción del secreto', with no bad meaning. Handle is 19 characters. A little dry and academic. I score it 8.",
+          "avg": 5.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 6,
+              "reason": "Precise insider vocabulary and a restrained, briefing-room sound. 'Secrecy' gives it some pull. My brandcheck run printed CLEAR (YouTube CLEAR, .com available, 0 marks), and search results are thin and unrelated (bank-secrecy news), so it is ownable. But it is dry and legalistic. It narrows the channel to tax havens and leaves out mafia families, cartels and trafficking networks, and many viewers won't know the term. It reads like a tax-policy or legal explainer more than a documentary series people would binge. Handle 19 is near the limit."
+            },
+            {
+              "lens": "language",
+              "score": 5,
+              "reason": "Has the cleanest clearance of the set. My run: brandcheck CLEAR (YouTube CLEAR with 0 channels returned, .com available, 0 marks). It is precise, restrained and correct, but seven syllables of policy jargon (the Tax Justice Network's term) with little spark. It sounds like a white paper. It narrows the channel to offshore tax and finance, leaving out trafficking networks and crime families. The scout search for the phrase mostly brings up bank-secrecy news. Spellable after hearing it once ('secresy' is a small risk). The Spanish is fine."
+            }
+          ]
+        },
+        {
+          "name": "Certain Arrangements",
+          "why": "A calm, literary euphemism for corrupt deals between powerful people ('certain arrangements were made'). It is the kind of ironic, understated name the colleague found missing in English (in the vein of SEGRETO PUBBLICO), and it is broad enough for syndicates, politics and finance. Nothing bad in Spanish. Handle is 19 characters. I score it 8.",
+          "avg": 5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 4.5,
+              "reason": "A literary euphemism with a nice ironic tone, and my brandcheck run printed CLEAR. But 'arrangements' is swamped in search: ytscout's top results were bank-exam seating-arrangement lessons, flower arrangements and ASMR vlogs. It also brushes against sugar-dating language ('Seeking Arrangement'). It signals neither organised crime nor an international scope, and it is easy to forget or misremember as 'Private/Special Arrangements'."
+            },
+            {
+              "lens": "language",
+              "score": 5.5,
+              "reason": "A sly, literary euphemism, and the Spanish 'ciertos arreglos' even backs up the idea of a corrupt deal. My run: brandcheck CLEAR (YouTube CLEAR, .com available, 0 marks). In English, though, 'arrangement' is the sugar-dating word (Seeking Arrangement, 'mutually beneficial arrangement') and also brings flower, music and funeral arrangements to mind. The scout search for the phrase is drowned in 'seating arrangement' exam videos and vlogs. The name gives no signal of crime or borders without context. The 19-character handle, with its double r and double n, is the hardest of the set to type after hearing it once."
+            }
+          ]
+        },
+        {
+          "name": "Overseas Interests",
+          "why": "The understated phrase used when someone powerful holds wealth abroad ('he has overseas interests'). It says money, borders and politics without any crime clichés, and it covers trafficking, laundering and elite networks alike. Easy to type after hearing it once. Only 4 channels came back in the search, so it is very ownable. Nothing bad in Spanish. Handle is 17 characters. I score it 8.",
+          "avg": 4.5,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 5,
+              "reason": "Understated and broad, but it has no spark and reads like an expat, trade or foreign-affairs channel. Nothing in it says crime, secrecy or investigation. My ytcheck run printed CROWDED with 22 channels returned, not the 4 claimed, though the only hit was a generic 'Overseas' channel with 20 subscribers. My brandcheck run printed CLEAR, and ytscout found 0 videos this year, so it is available, but available is all it has."
+            },
+            {
+              "lens": "language",
+              "score": 4,
+              "reason": "The candidate note's claim that 'only 4 channels came back' does not match my run. ytcheck returned 22 channels and marked it CROWDED (an 'Overseas' channel, @overseas171), and brandcheck gave CAUTION (.com available, 0 marks). The bigger problem is meaning: 'interests' is read as interest rates, and the scout search is all NRI deposits, interest-free loans for overseas Pakistanis, Indian Overseas Bank and 'protecting British interests overseas'. It sounds like an expat-banking or foreign-policy channel, it is a generic phrase that search results drown, and it says nothing about crime. Typeable, and nothing bad in Spanish."
+            }
+          ]
+        },
+        {
+          "name": "Denies Wrongdoing",
+          "why": "The stock line every investigative report prints about a powerful subject. It is wry and memorable, and it reflects the channel's discipline of separating allegations from convictions. Nothing bad in Spanish. Handle is 16 characters. Caveats: its tone is more newsroom-sardonic than intelligence-briefing, and its legal-phrase shape echoes channel 12's 'Materially False' shortlist. I score it 8.",
+          "avg": 3.75,
+          "by_lens": [
+            {
+              "lens": "brand",
+              "score": 4,
+              "reason": "Wry, but wrong for this channel. ytscout shows the phrase is a daily news-headline formula (ABC, NBC, Sky, LBC, CBC clips about Gates, Clinton and Farage), so a channel with this name would be buried by news uploads. Its tone is newsroom-sardonic, not cool briefing, and it echoes channel 12's legal-phrase names ('Materially False'). Worse, a brand built on 'they all deny it' frames named living people as presumptively guilty. That is the opposite of what this channel needs, given its highest-in-network defamation exposure and need to look advertiser-safe. My brandcheck run printed CLEAR, but availability is not the issue."
+            },
+            {
+              "lens": "language",
+              "score": 3.5,
+              "reason": "Witty and easy to type, and my run gave brandcheck CLEAR (YouTube CLEAR, .com available, 0 marks). But it is a newsroom headline phrase, and this year's scout search for it is full of real, named, living people denying allegations (Bill Gates, Bill Clinton, Farage, Man City). This is the network's highest-defamation channel, and a brand that smirks at denials suggests the people it covers are guilty whatever the legal outcome. That cuts against the brief's rule of separating allegations from convictions. It also leaves the channel unable to own its own name in search, and the shape echoes channel 12's 'Materially False'. Sardonic rather than an intelligence briefing."
+            }
+          ]
+        }
+      ],
+      "taken": [
+        "Politically Exposed (TAKEN)",
+        "Beneficial Owner (TAKEN)",
+        "Honest Graft (TAKEN)",
+        "Diplomatic Pouch (TAKEN)",
+        "Numbered Account (TAKEN)",
+        "Source of Wealth (TAKEN)",
+        "Strictly Private (TAKEN)",
+        "Smoke Filled Room (TAKEN)",
+        "Declined to Comment (CROWDED)",
+        "Private Terminal (TAKEN)",
+        "Cable Traffic (TAKEN)",
+        "Quiet Partners (TAKEN)",
+        "Specially Designated (CROWDED)",
+        "Close Associates (TAKEN)",
+        "Directing Mind (TAKEN)",
+        "Fit and Proper (TAKEN)",
+        "Upperworld (TAKEN)",
+        "Higher Circles (TAKEN)",
+        "Good Families (TAKEN)",
+        "Grey List (TAKEN)",
+        "Everyone Knew (TAKEN)",
+        "Polite Company (TAKEN)",
+        "Legitimate Business (TAKEN)",
+        "Bill of Lading (TAKEN)",
+        "Seating Plan (TAKEN)",
+        "At Arms Length (TAKEN)",
+        "Reasons of State (TAKEN)",
+        "Diplomatic Bag (TAKEN)",
+        "Bearer Shares (CROWDED)",
+        "Mutual Interests (TAKEN)",
+        "Neutral Waters (TAKEN)",
+        "Pattern of Life (TAKEN)",
+        "Plain Envelope (TAKEN)",
+        "Diplomatic Plates (TAKEN)",
+        "Grey Cardinal (TAKEN)",
+        "Unnamed Official (TAKEN)",
+        "Cloakroom (TAKEN)",
+        "Unexplained Wealth (CROWDED)",
+        "Any Other Business (TAKEN)",
+        "By Introduction Only (CROWDED)",
+        "Respectable Distance (CROWDED)",
+        "Independent Means (TAKEN)",
+        "Ultimate Beneficiary (TAKEN)",
+        "Official Cover (TAKEN)",
+        "Valued Client (CLEAR in ytcheck, then TAKEN in the brandcheck rerun because of near-name 'Valued Clients' channels; dropped)",
+        "CLEAR but scored below 8, not returned: Key Judgments, Letters Rogatory, Connected Persons, Significant Control, Threat Finance, Kleptocene, Correspondent Account, Private Means, Consulting Fees, Silent Signatory, Provenance Unclear, Registered Abroad, Generous Donor"
+      ],
+      "cleared": {
+        "checked": [
+          {
+            "name": "Respectable Front",
+            "brandcheck": "CLEAR    Respectable Front  (YouTube CLEAR; respectablefront.com available; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Respectable Front\"",
+              "\"Respectable Front\" YouTube",
+              "\"Respectable Front\" documentary OR podcast OR series OR book",
+              "ytscout --top 20 \"respectable front\" (YouTube: only unrelated videos, no channel with the name)"
+            ],
+            "web_conflicts": [
+              "None found. No brand, show, podcast, book or channel uses 'Respectable Front' in any of the three searches.",
+              "Near misses with different names, not conflicts: Mel & Kim's song 'Respectable' (https://www.stockaitkenwaterman.co.uk/mel-and-kim-respectable); XTC's song 'Respectable Street' (https://www.wikiwand.com/en/articles/Respectable_Street); Popular Front, Jake Hanrahan's conflict-journalism outlet, shares only the '[adjective] Front' pattern (https://thetvdb.com/series/popular-front/allseasons/official)."
+            ],
+            "verdict": "clean"
+          },
+          {
+            "name": "Flags of Convenience",
+            "brandcheck": "CAUTION  Flags of Convenience  (YouTube CLEAR; flagsofconvenience.com registered; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Flags of Convenience\"",
+              "\"Flags of Convenience\" YouTube",
+              "\"Flags of Convenience\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [
+              "Podcast episode 'Flags of Convenience' on Bribe, Swindle or Steal, an anti-corruption and financial-crime podcast (https://www.everand.com/podcast/594495800/Flags-of-Convenience-Tom-Cardamone-President-and-CEO-of-Global-Financial-Integrity-joins-the-podcast-to-discuss-the-regulatory-and-enforcement-chal ; https://poddtoppen.se/podcast/1231612850/bribe-swindle-or-steal/flags-of-convenience). It is an episode title, not a brand.",
+              "Everything Everywhere Daily episode 'Flags of Convenience: The Hidden System Behind Global Shipping' (https://everything-everywhere.com/flags-of-convenience-the-hidden-system-behind-global-shipping/). An episode title, not a brand.",
+              "A widely used maritime term that fills the search results (https://en.wikipedia.org/wiki/Flag_of_convenience ; https://www.itfglobal.org/en/sector/seafarers/flags-of-convenience), so the name is hard to own in search.",
+              "flagsofconvenience.com is registered (brandcheck)."
+            ],
+            "verdict": "minor"
+          },
+          {
+            "name": "Diplomatic Cover",
+            "brandcheck": "CAUTION  Diplomatic Cover  (YouTube CLEAR; diplomaticcover.com registered; live same-name US marks: 0)",
+            "searches_run": [
+              "\"Diplomatic Cover\"",
+              "\"Diplomatic Cover\" YouTube",
+              "\"Diplomatic Cover\" documentary OR podcast OR series OR book"
+            ],
+            "web_conflicts": [
+              "A one-off press release headed 'Diplomatic Cover: How Immunity Delays Capture' from a consulting firm (https://www.newstrail.com/diplomatic-cover-how-immunity-delays-capture/). An article title, not a brand.",
+              "A common espionage term that fills the search results (https://en.wikipedia-on-ipfs.org/wiki/Official_cover ; https://www.bloomberg.com/news/articles/2018-03-26/from-east-to-west-long-history-of-spies-posing-as-diplomats), so the name is hard to own in search.",
+              "diplomaticcover.com is registered (brandcheck)."
+            ],
+            "verdict": "minor"
+          }
+        ],
+        "recommended": "Respectable Front",
+        "reason": "Respectable Front is the panel's top pick, and it passed every check in my own runs. Brandcheck printed CLEAR: YouTube is clear, respectablefront.com is available and there are no live same-name US marks. None of the three web searches found anyone using the name, and the YouTube scout showed only unrelated videos. It names the channel's core subject, crime run through legitimate businesses and respectable people, in a dry, restrained way that suits the intelligence-briefing tone. It is easy to type after hearing it once, and the handle @RespectableFront is 16 characters. In Spanish it reads as 'frente respetable', which has no bad meaning.\n\nTwo small cautions. First, English names ending in 'Front' sometimes read as political groups (Popular Front, National Front). The ironic 'Respectable' makes the meaning clear, but the logo and banner should show the business-facade idea. Second, the panel warned about 'Respectable Larceny' on channel 12's shortlist. Channel 12's scratch files show its final brandcheck and spare-handle checks were run on 'Crooked Arithmetic', so channel 12 appears to have picked that name, and there is no clash. If channel 12 did take 'Respectable Larceny' after all, use Flags of Convenience here instead.\n\nI also checked the other two as fallbacks. Both printed CAUTION because their .com is registered. Both are common terms (shipping, espionage) whose search results are full of other uses, so they are harder to own. Flags of Convenience is also already an episode title on a financial-crime podcast.\n\nThe raw outputs are in /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-13/gate/ (brand1.txt, brand23.txt, yt_spares.txt, scout.txt).",
+        "spare_handles": [
+          "@TheRespectableFront (ytcheck: CLEAR, 19 characters)",
+          "@RespectableFrontDocs (ytcheck: CLEAR, 20 characters)"
+        ],
+        "manual_checks": [
+          "X/Twitter: @RespectableFront is 16 characters, and X allows at most 15. Check a shorter handle, such as @RespectableFrnt or @RespectFront.",
+          "Instagram: check that @respectablefront is free; if not, try @therespectablefront.",
+          "TikTok: check that @respectablefront is free; if not, try @therespectablefront.",
+          "Register respectablefront.com now; brandcheck shows it is available.",
+          "Trademarks outside the US: search UK IPO, EUIPO (covers Spain), WIPO Global Brand Database (Madrid filings) and Canada's CIPO for 'Respectable Front' in classes 38 and 41 (broadcasting and entertainment).",
+          "Before launch, confirm channel 12 did not end up with 'Respectable Larceny'. If it did, use Flags of Convenience for this channel instead."
+        ]
+      }
+    }
+  ],
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Research"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Invent"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 3,
+      "title": "Judge"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 4,
+      "title": "Clear"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "research:11",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "a82a2d22835173488",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794872557470,
+      "queuedAt": 1794872557441,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "The niche splits into three naming camps and leaves the mid…",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/.\n\nYou are naming channel 11 (A: blue-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read its…",
+      "promptFramed": true,
+      "lastProgressAt": 1794873059718,
+      "tokens": 104800,
+      "toolCalls": 13,
+      "durationMs": 502248,
+      "resultPreview": "{\"competitors\":[{\"channel\":\"fern\",\"naming_style\":\"Single abstract lowercase word, no crime signal; premium generalist documentary imprint (El Mencho, bank heist of the century, cocaine in Europe)\",\"subs\":5690000},{\"channel\":\"Tommy G\",\"naming_style\":\"Host personal name; on-the-ground 'Inside...' hood, jail and cartel visits\",\"subs\":3820000},{\"channel\":\"Soft White Underbelly\",\"naming_style\":\"Evocati…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "research:12",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "a41354ccc5e817ee2",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794872557470,
+      "queuedAt": 1794872557441,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "The niche splits four ways. Legacy news brands (WSJ, Bloomb…",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-12/.\n\nYou are naming channel 12 (B: white-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read it…",
+      "promptFramed": true,
+      "lastProgressAt": 1794873167373,
+      "tokens": 110866,
+      "toolCalls": 14,
+      "durationMs": 609189,
+      "resultPreview": "{\"competitors\":[{\"channel\":\"Coffeezilla\",\"subs\":4770000,\"naming_style\":\"Creator persona coinage (coffee + -zilla). The on-camera investigator who leads fraud on YouTube: Exposing a $300,000,000 Scam got 4.76M views, I Investigated $100 Billion in Healthcare Fraud got 5.33M.\"},{\"channel\":\"fern\",\"subs\":5690000,\"naming_style\":\"One lowercase nature word, abstract faceless documentary brand. Topped sca…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "research:13",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "a5c8f2b0bf26f8240",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794873059727,
+      "queuedAt": 1794872557442,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "The niche is split between broadcasters with institutional …",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-13/.\n\nYou are naming channel 13 (C: elite syndicates and organised crime) of a portfolio of faceless YouTube channels built to last …",
+      "promptFramed": true,
+      "lastProgressAt": 1794873461022,
+      "tokens": 127088,
+      "toolCalls": 11,
+      "durationMs": 401295,
+      "resultPreview": "{\"competitors\":[{\"channel\":\"fern\",\"subs\":5690000,\"naming_style\":\"Lowercase, single short word with no genre meaning; the dominant faceless crime/cartel/mafia doc channel (El Mencho, FBI agent, cocaine in Europe), so it wins on story quality, not on its name\"},{\"channel\":\"Dr Insanity\",\"subs\":6290000,\"naming_style\":\"Persona nickname, shock tone\"},{\"channel\":\"Investigation\",\"subs\":5400000,\"naming_sty…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "invent:11",
+      "phaseIndex": 2,
+      "phaseTitle": "Invent",
+      "agentId": "a41382eb761107e6c",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794873167408,
+      "queuedAt": 1794873059742,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/.\n\nYou are naming channel 11 (A: blue-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read its…",
+      "promptFramed": true,
+      "lastProgressAt": 1794873879896,
+      "tokens": 130050,
+      "toolCalls": 16,
+      "durationMs": 712487,
+      "resultPreview": "{\"candidates\":[{\"name\":\"Until Someone Talked\",\"why\":\"Handle @UntilSomeoneTalked (18). Sounds like the last line of a crew's story: it ran for years until someone talked. That covers the informant-and-betrayal turning point that most of these stories hinge on, and the past tense reads as documentary. Human and tense, with no slang, no menace words and no glamour. Fine in Spanish ('hasta que alguien…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "invent:12",
+      "phaseIndex": 2,
+      "phaseTitle": "Invent",
+      "agentId": "a8b8bc96115ef9d04",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794873461051,
+      "queuedAt": 1794873167436,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-12/.\n\nYou are naming channel 12 (B: white-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read it…",
+      "promptFramed": true,
+      "lastProgressAt": 1794874076102,
+      "tokens": 130128,
+      "toolCalls": 15,
+      "durationMs": 615050,
+      "resultPreview": "{\"candidates\":[{\"name\":\"Crooked Arithmetic\",\"why\":\"Handle @CrookedArithmetic (17). 'Crooked' means dishonest, and arithmetic is where every one of these schemes is finally caught: numbers that can't add up. It names money and crime together without the overused Fraud, Scam, Greed or Files words, and it sounds like a documentary label, not a clickbait feed. The tone fits the brief (sharp, forensic,…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "invent:13",
+      "phaseIndex": 2,
+      "phaseTitle": "Invent",
+      "agentId": "ab7bfb93f56b47e55",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794873879916,
+      "queuedAt": 1794873461081,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-13/.\n\nYou are naming channel 13 (C: elite syndicates and organised crime) of a portfolio of faceless YouTube channels built to last …",
+      "promptFramed": true,
+      "lastProgressAt": 1794874801624,
+      "tokens": 136307,
+      "toolCalls": 23,
+      "durationMs": 921707,
+      "resultPreview": "{\"candidates\":[{\"name\":\"Flags of Convenience\",\"why\":\"Ships fly a foreign flag to hide who really owns them, and the name turns that into a picture of how elite networks hide ownership across borders. It fits the channel's cross-border reach and animated maps, and it gives the logo an obvious mark (a flag). Spanish has the same phrase, 'banderas de conveniencia', and it carries no bad meaning. Hand…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 7,
+      "label": "judge:11:brand",
+      "phaseIndex": 3,
+      "phaseTitle": "Judge",
+      "agentId": "a25dd3902389c18ba",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794874076131,
+      "queuedAt": 1794873879947,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/.\n\nYou are naming channel 11 (A: blue-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read its…",
+      "promptFramed": true,
+      "lastProgressAt": 1794874280737,
+      "tokens": 109601,
+      "toolCalls": 14,
+      "durationMs": 204606,
+      "resultPreview": "{\"scores\":[{\"name\":\"Until Someone Talked\",\"score\":8,\"reason\":\"My full check came back CLEAR (YouTube clear, .com available, no live US marks), and a web search found no book, show or podcast with this title. It's the only candidate that carries the series arc: a crew that ran for years, then a betrayal, then the fall. It sounds human and tense, doesn't glamorise anything, and the past tense reads …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 8,
+      "label": "judge:11:language",
+      "phaseIndex": 3,
+      "phaseTitle": "Judge",
+      "agentId": "a6f59894d442fd59b",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794874280741,
+      "queuedAt": 1794873879947,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/.\n\nYou are naming channel 11 (A: blue-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read its…",
+      "promptFramed": true,
+      "lastProgressAt": 1794874579118,
+      "tokens": 93618,
+      "toolCalls": 10,
+      "durationMs": 298377,
+      "resultPreview": "{\"scores\":[{\"name\":\"Until Someone Talked\",\"score\":8,\"reason\":\"My brandcheck: CLEAR (YouTube CLEAR, untilsomeonetalked.com available, 0 live US marks). The likeliest mishearing is someone/somebody: 'Until Somebody Talked' was CLEAR in my ytcheck, so secure it too. 'Someone Talked' and 'Somebody Talked' came back TAKEN, but only by tiny channels. No video owns the exact phrase in search. It's easy t…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 9,
+      "label": "judge:12:brand",
+      "phaseIndex": 3,
+      "phaseTitle": "Judge",
+      "agentId": "a01608e3ca8569973",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794874579124,
+      "queuedAt": 1794874076164,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-12/.\n\nYou are naming channel 12 (B: white-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read it…",
+      "promptFramed": true,
+      "lastProgressAt": 1794874812014,
+      "tokens": 92027,
+      "toolCalls": 12,
+      "durationMs": 232890,
+      "resultPreview": "{\"scores\":[{\"name\":\"Tailored Larceny\",\"score\":7.5,\"reason\":\"My run: brandcheck CLEAR (YouTube CLEAR, 28 channels returned; tailoredlarceny.com available; 0 live US marks). ytscout found no videos this year for the phrase, so it is very ownable. It is the quickest of the six to place a scrolling viewer in white-collar crime: a suit plus theft, with a second meaning in schemes tailored to their mark…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 10,
+      "label": "judge:12:language",
+      "phaseIndex": 3,
+      "phaseTitle": "Judge",
+      "agentId": "a9b7eb1c7205440d4",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794874801631,
+      "queuedAt": 1794874076164,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-12/.\n\nYou are naming channel 12 (B: white-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read it…",
+      "promptFramed": true,
+      "lastProgressAt": 1794875091013,
+      "tokens": 114800,
+      "toolCalls": 24,
+      "durationMs": 289381,
+      "resultPreview": "{\"scores\":[{\"name\":\"Crooked Arithmetic\",\"score\":7,\"reason\":\"Best of the set as a linguist sees it. It is a fresh pairing, not an idiom that already belongs to someone. It says money and dishonesty together in a forensic, explain-the-numbers tone that fits the brief, and nothing in it accuses a real person or makes crime look appealing. Spanish 'aritmética torcida' is harmless. My run: brandcheck C…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 11,
+      "label": "clear:11",
+      "phaseIndex": 4,
+      "phaseTitle": "Clear",
+      "agentId": "aa03239a5187b2b5c",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794874812033,
+      "queuedAt": 1794874579158,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Until Someone Talked (@UntilSomeoneTalked, 18 characters)",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/.\n\nYou are naming channel 11 (A: blue-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read its…",
+      "promptFramed": true,
+      "lastProgressAt": 1794875048815,
+      "tokens": 110226,
+      "toolCalls": 27,
+      "durationMs": 236782,
+      "resultPreview": "{\"checked\":[{\"name\":\"Until Someone Talked\",\"brandcheck\":\"CLEAR (printed in my run: YouTube CLEAR; untilsomeonetalked.com available; live same-name US marks: 0). Saved to /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-11/gate_brand1.txt\",\"searches_run\":[\"\\\"Until Someone Talked\\\"\",\"\\\"Until Someone Talked\\\" YouTube\",\"\\\"Until Someone Talked\\\" documentary OR …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 12,
+      "label": "judge:13:brand",
+      "phaseIndex": 3,
+      "phaseTitle": "Judge",
+      "agentId": "a34168fa357de3109",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794875048820,
+      "queuedAt": 1794874801670,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-13/.\n\nYou are naming channel 13 (C: elite syndicates and organised crime) of a portfolio of faceless YouTube channels built to last …",
+      "promptFramed": true,
+      "lastProgressAt": 1794875345691,
+      "tokens": 112546,
+      "toolCalls": 20,
+      "durationMs": 296871,
+      "resultPreview": "{\"scores\":[{\"name\":\"Respectable Front\",\"score\":7,\"reason\":\"The best fit of the eight. 'Front' says crime with no explanation, and 'respectable' captures the brief's core subject (criminal networks behind legitimate businesses and respectable people) with the cool irony the tone asks for. Two plain words, easy to type after one hearing, handle 16. My brandcheck run printed CLEAR (YouTube CLEAR, .co…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 13,
+      "label": "judge:13:language",
+      "phaseIndex": 3,
+      "phaseTitle": "Judge",
+      "agentId": "ab8f9096bcb3a4c86",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794875091018,
+      "queuedAt": 1794874801670,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-13/.\n\nYou are naming channel 13 (C: elite syndicates and organised crime) of a portfolio of faceless YouTube channels built to last …",
+      "promptFramed": true,
+      "lastProgressAt": 1794875392233,
+      "tokens": 96457,
+      "toolCalls": 11,
+      "durationMs": 301215,
+      "resultPreview": "{\"scores\":[{\"name\":\"Respectable Front\",\"score\":6.5,\"reason\":\"Points straight at the brief's core subject: crime run through legitimate businesses and respectable people. It is easy to hear once and spell (US or UK), the handle is 16 characters, and its tone is dry irony with no glamour or accusation. My run: brandcheck CLEAR (YouTube CLEAR, .com available, 0 live US marks), and the scout search fo…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 14,
+      "label": "clear:12",
+      "phaseIndex": 4,
+      "phaseTitle": "Clear",
+      "agentId": "a6e9ecb800d97bd8c",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794875345697,
+      "queuedAt": 1794875091044,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Crooked Arithmetic",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-12/.\n\nYou are naming channel 12 (B: white-collar crime) of a portfolio of faceless YouTube channels built to last for years. Read it…",
+      "promptFramed": true,
+      "lastProgressAt": 1794875472746,
+      "tokens": 95132,
+      "toolCalls": 18,
+      "durationMs": 127049,
+      "resultPreview": "{\"checked\":[{\"name\":\"Crooked Arithmetic\",\"brandcheck\":\"CLEAR: Crooked Arithmetic (YouTube CLEAR; crookedarithmetic.com available; live same-name US marks: 0)\",\"searches_run\":[\"\\\"Crooked Arithmetic\\\"\",\"\\\"Crooked Arithmetic\\\" YouTube\",\"\\\"Crooked Arithmetic\\\" documentary OR podcast OR series OR book\"],\"web_conflicts\":[\"None found. The exact-phrase searches returned only general maths pages (modular a…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 15,
+      "label": "clear:13",
+      "phaseIndex": 4,
+      "phaseTitle": "Clear",
+      "agentId": "a6b6a44ed9b0e121a",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794875392244,
+      "queuedAt": 1794875392239,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Respectable Front",
+      "promptPreview": "This task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. Do not write files except under /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/names/ch-13/.\n\nYou are naming channel 13 (C: elite syndicates and organised crime) of a portfolio of faceless YouTube channels built to last …",
+      "promptFramed": true,
+      "lastProgressAt": 1794875558799,
+      "tokens": 106015,
+      "toolCalls": 19,
+      "durationMs": 166554,
+      "resultPreview": "{\"checked\":[{\"name\":\"Respectable Front\",\"brandcheck\":\"CLEAR    Respectable Front  (YouTube CLEAR; respectablefront.com available; live same-name US marks: 0)\",\"searches_run\":[\"\\\"Respectable Front\\\"\",\"\\\"Respectable Front\\\" YouTube\",\"\\\"Respectable Front\\\" documentary OR podcast OR series OR book\",\"ytscout --top 20 \\\"respectable front\\\" (YouTube: only unrelated videos, no channel with the name)\"],\"we…"
+    }
+  ],
+  "totalTokens": 1669661,
+  "totalToolCalls": 247
+}

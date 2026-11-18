@@ -1,0 +1,37 @@
+TAKEN    Counterfoil  (@Counterfoil; search returned 20 channels)
+           - handle @Counterfoil is taken by "Counterfoil"
+           - contains-name channel: "Counterfoil Stories" @counterfoilstories @counterfoilstories, 12 subscribers
+           - contains-name channel: "Counterfoil Chanel" @counterfoilchanel8804 @counterfoilchanel8804, 558 subscribers
+           - near-name channel: "MrCounterfoil" @MrCounterfoil @MrCounterfoil, 4 subscribers
+TAKEN    False Balance  (@FalseBalance; search returned 32 channels)
+           - handle @FalseBalance is taken by "False Balance"
+           - same-name channel: "False Balance" @FalseBalance-b3f @FalseBalance-b3f, 32 subscribers
+           - contains-name channel: "False Balance Institute" @falsebalanceorg @falsebalanceorg, 4 subscribers
+           - same-name channel: "False Balance" channel/UCNIr3rtGY9VA38LtXJCbEiw 
+TAKEN    Undue Diligence  (@UndueDiligence; search returned 5 channels)
+           - handle @UndueDiligence is taken by "Undue Diligence "
+           - same-name channel: "Undue Diligence " @UndueDiligence @UndueDiligence, 1.57K subscribers
+CLEAR    Trial by Audit  (@TrialbyAudit; search returned 20 channels)
+TAKEN    Gold Wash  (@GoldWash; search returned 27 channels)
+           - handle @GoldWash is taken by "Triggy Abandon"
+           - contains-name channel: "ORO WASH GOLD WASH" @OROWASHGOLDWASH @OROWASHGOLDWASH, 8 subscribers
+           - contains-name channel: "LAVA JATO GOLD WASH " @LAVAJATOGOLDWASH @LAVAJATOGOLDWASH, 1 subscriber
+           - same-name channel: "Gold Wash" channel/UCL1Wx-OJYf4kVTRaEq-uRDg 
+           - contains-name channel: "LAVACAR GOLD WASH  " @LAVACARGOLDWASH @LAVACARGOLDWASH
+           - contains-name channel: "Gold Wash Plants" @goldwatchproject @goldwatchproject, 2.46K subscribers
+           - contains-name channel: "出張洗車のJAPAN GOLD WASH" @japangoldwash9212 @japangoldwash9212
+           - same-name channel: "The Gold Wash" @thegoldwash9614 @thegoldwash9614, 26 subscribers
+           - contains-name channel: "JAPAN GOLD WASH | 高級車の塗装管理ブランド" @japangoldwash @japangoldwash, 2 subscribers
+           - contains-name channel: "Gold Wash Estética Automotiva" @goldwashesteticaautomotiva1529 @goldwashesteticaautomotiva1529, 1 subscriber
+           - contains-name channel: "Gold Wash Plants" @GoldWashPlants @GoldWashPlants
+           - contains-name channel: "GOLD WASH BD" @goldwashbd538 @goldwashbd538, 2 subscribers
+           - contains-name channel: "Paulo Gold Wash" @paulogoldwash9982 @paulogoldwash9982, 1 subscriber
+           - contains-name channel: "zubair gold wash mekr" @zubairgoldwashmekr167 @zubairgoldwashmekr167, 10 subscribers
+           - same-name channel: "Goldwash" @goldwash3589 @goldwash3589, 2.98K subscribers
+           - contains-name channel: "Goldwash - Topic" channel/UCs4UDQ6UtQwC1nXkCOqpF5w 
+           - same-name channel: "Goldwash" @Goldwash-i9i @Goldwash-i9i, 3 subscribers
+           - same-name channel: "Goldwash" @Goldwashsofa @Goldwashsofa, 2 subscribers
+TAKEN    Unfair Value  (@UnfairValue; search returned 23 channels)
+           - handle @UnfairValue is taken by "Unfair Value"
+           - same-name channel: "Unfair Value" @unfairvalue @unfairvalue, 6 subscribers
+           - contains-name channel: "Unfair Value Gap" @unfairvaluegap @unfairvaluegap, 13 subscribers

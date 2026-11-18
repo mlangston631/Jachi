@@ -1,0 +1,15 @@
+CLEAR    Secrecy Jurisdiction  (@SecrecyJurisdiction; search returned 11 channels)
+CROWDED  Declined to Comment  (@DeclinedtoComment; search returned 37 channels)
+           - contains-name channel: "Declined" @IamDeclined @IamDeclined, 281 subscribers
+CLEAR    Denies Wrongdoing  (@DeniesWrongdoing; search returned 29 channels)
+TAKEN    Private Terminal  (@PrivateTerminal; search returned 31 channels)
+           - @ThePrivateTerminal is taken by "The Private Terminal"
+           - same-name channel: "The Private Terminal" @ThePrivateTerminal @ThePrivateTerminal
+           - contains-name channel: "aether - the Private Terminal" @experienceaether @experienceaether, 11 subscribers
+           - contains-name channel: "Private Terminal Stories" @PrivateTerminalStories @PrivateTerminalStories, 20 subscribers
+TAKEN    Cable Traffic  (@CableTraffic; search returned 2 channels)
+           - handle @CableTraffic is taken by "Cable Traffic"
+TAKEN    Quiet Partners  (@QuietPartners; search returned 20 channels)
+           - handle @QuietPartners is taken by "Tubi Or Not Tubi"
+           - same-name channel: "Quiet Partners" @QuietPartnersStudios @QuietPartnersStudios
+           - near-name channel: "The Quiet Partner" @TheQuietPartner @TheQuietPartner, 1 subscriber

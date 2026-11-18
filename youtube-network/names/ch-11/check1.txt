@@ -1,0 +1,46 @@
+TAKEN    Known Associates  (@KnownAssociates; search returned 30 channels)
+           - @TheKnownAssociates is taken by "TheKnownAssociates"
+           - contains-name channel: "Known Associates - Topic" channel/UCptYdXNfvAVbAzU-fxNiJ5w 56 subscribers
+           - same-name channel: "Known Associates" @knownassociates6331 @knownassociates6331, 34 subscribers
+           - contains-name channel: "Known Associates - Topic" channel/UCv0MwzCyXpNCnnvMf_KYOzA 7 subscribers
+           - contains-name channel: "Known Associates - Topic" channel/UCR-imW0_1DJfRcKxIdcDuaA 4 subscribers
+           - same-name channel: "Known Associates" @KnownAssociatesGame @KnownAssociatesGame, 2 subscribers
+           - same-name channel: "Known Associates" @knownassociates5603 @knownassociates5603, 8 subscribers
+           - contains-name channel: "Known Associates Entertainment" @KnownAssociatesEntertainmet @KnownAssociatesEntertainmet, 381 subscribers
+           - same-name channel: "Known Associates" @knownassociates166 @knownassociates166, 1 subscriber
+           - contains-name channel: "Known Associates Distribution" @KnownAssociatesDistribution @KnownAssociatesDistribution, 402 subscribers
+           - same-name channel: "TheKnownAssociates" @TheKnownAssociates @TheKnownAssociates
+           - near-name channel: "No Known Associates" @noknownassociates6026 @noknownassociates6026, 14 subscribers
+CLEAR    Concrete Testimony  (@ConcreteTestimony; search returned 34 channels)
+CROWDED  Sodium and Static  (@SodiumandStatic; search returned 27 channels)
+           - contains-name channel: "Sodium" @SodiumCake @SodiumCake, 106 subscribers
+TAKEN    Crewfall  (@Crewfall; search returned 20 channels)
+           - handle @Crewfall is taken by "Crew"
+           - same-name channel: "Crewfall" @Thelegalmuse @Thelegalmuse, 5 subscribers
+           - same-name channel: "CREWFALL" @crewfallyt @crewfallyt, 46 subscribers
+TAKEN    Long Lens  (@LongLens; search returned 29 channels)
+           - handle @LongLens is taken by "longlens"
+           - @TheLongLens is taken by "The Long Lens"
+           - same-name channel: "The long lens" @thelonglens-f6v @thelonglens-f6v, 2 subscribers
+           - same-name channel: "The Long lens" @TheLonglensdocs @TheLonglensdocs, 6 subscribers
+           - contains-name channel: "Long-Lens ProducHer" @Long-LensProducHer @Long-LensProducHer, 9 subscribers
+           - same-name channel: "The Long Lens" @TheLongLens001 @TheLongLens001, 12 subscribers
+           - contains-name channel: "Long Lens Photography" @littlespoonfit7669 @littlespoonfit7669, 318 subscribers
+           - same-name channel: "Long Lens" @Long-Lens @Long-Lens, 21 subscribers
+           - same-name channel: "The Long Lens" @OfftheRecord001 @OfftheRecord001, 15 subscribers
+           - same-name channel: "Long LENS" @LongLENS360 @LongLENS360
+           - contains-name channel: "Mamy long lens" @Ahmetaladag341 @Ahmetaladag341, 2 subscribers
+           - contains-name channel: "Cody Long Lens" @supfat12 @supfat12, 246 subscribers
+           - contains-name channel: "Long Lens Media Video Production" @longlensmediavideoproducti5027 @longlensmediavideoproducti5027, 4 subscribers
+           - contains-name channel: "tee long lens" @teelonglens2005 @teelonglens2005, 2 subscribers
+           - contains-name channel: "Pitbull Domínguez mommy long lens" @pitbulldominguez @pitbulldominguez, 41 subscribers
+           - same-name channel: "LongLens" @getlonglens @getlonglens, 1 subscriber
+           - contains-name channel: "Longlens Production" @longlensproduction5706 @longlensproduction5706, 246 subscribers
+           - contains-name channel: "LongLens Film Production" @longlensfilmproduction9589 @longlensfilmproduction9589, 2 subscribers
+TAKEN    Back Booth  (@BackBooth; search returned 20 channels)
+           - handle @BackBooth is taken by "Back Booth"
+           - @TheBackBooth is taken by "The Back Booth"
+           - contains-name channel: "Back Booth Bully" @BackBoothBully @BackBoothBully, 96 subscribers
+           - contains-name channel: "Back Booth | Jazz · Blues · Soul" @BackBoothMusic @BackBoothMusic, 8 subscribers
+           - same-name channel: "Back Booth" @BackBooth @BackBooth, 34 subscribers
+           - same-name channel: "The Back Booth" @TheBackBooth @TheBackBooth, 1 subscriber

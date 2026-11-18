@@ -1,0 +1,7 @@
+{
+ "_about": "Open-licence fonts bundled with the project (SIL Open Font License 1.1, from the @fontsource packages on npm, version 5.3.0; each folder keeps its LICENSE). art.mjs embeds them into the pictures, so a design can use any of these families by name, alongside the system fonts.",
+ "Old Standard TT": { "400": "old-standard-tt/old-standard-tt-latin-400-normal.woff2", "700": "old-standard-tt/old-standard-tt-latin-700-normal.woff2" },
+ "Libre Baskerville": { "400": "libre-baskerville/libre-baskerville-latin-400-normal.woff2", "700": "libre-baskerville/libre-baskerville-latin-700-normal.woff2" },
+ "DM Serif Display": { "400": "dm-serif-display/dm-serif-display-latin-400-normal.woff2" },
+ "Space Grotesk": { "400": "space-grotesk/space-grotesk-latin-400-normal.woff2", "700": "space-grotesk/space-grotesk-latin-700-normal.woff2" }
+}

@@ -1,0 +1,44 @@
+[
+ {
+  "name": "Crooked Arithmetic",
+  "handle": "@CrookedArithmetic",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 29
+ },
+ {
+  "name": "Tailored Larceny",
+  "handle": "@TailoredLarceny",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 23
+ },
+ {
+  "name": "Trial by Audit",
+  "handle": "@TrialbyAudit",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 20
+ },
+ {
+  "name": "Respectable Larceny",
+  "handle": "@RespectableLarceny",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 26
+ },
+ {
+  "name": "Forged Figures",
+  "handle": "@ForgedFigures",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 24
+ },
+ {
+  "name": "Materially False",
+  "handle": "@MateriallyFalse",
+  "verdict": "CLEAR",
+  "reasons": [],
+  "searched": 20
+ }
+]

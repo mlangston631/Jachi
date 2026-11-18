@@ -1,0 +1,24 @@
+CROWDED  Unexplained Wealth  (@UnexplainedWealth; search returned 35 channels)
+           - contains-name channel: "Unexplained " @Unexplained-2402 @Unexplained-2402, 19 subscribers
+           - contains-name channel: "Unexplained  TV" @Unexplained-m7v @Unexplained-m7v, 57 subscribers
+TAKEN    Any Other Business  (@AnyOtherBusiness; search returned 32 channels)
+           - handle @AnyOtherBusiness is taken by "Any Other Business"
+           - same-name channel: "Any Other Business" @AnyOtherBusinessClub @AnyOtherBusinessClub, 3 subscribers
+           - same-name channel: "Any Other Business" @AnyOtherBusiness @AnyOtherBusiness, 1.72K subscribers
+           - same-name channel: "Any Other Business" @AnyOtherBusinessTV @AnyOtherBusinessTV, 1 subscriber
+           - contains-name channel: "Reds AOB (Any Other Business)" @redsaob @redsaob, 19.8K subscribers
+           - same-name channel: "Any Other Business" @anyotherbusiness2096 @anyotherbusiness2096, 3 subscribers
+           - contains-name channel: "Any Other Business AOB" @anyotherbusinessaob1058 @anyotherbusinessaob1058, 1 subscriber
+           - same-name channel: "Any Other Business" @anyotherbusiness3230 @anyotherbusiness3230
+           - same-name channel: "Any Other Business" @anyotherbusiness639 @anyotherbusiness639, 20 subscribers
+           - contains-name channel: "One Basket - Any Other Business" @onebasket_AOB @onebasket_AOB
+           - contains-name channel: "Children's Channel Sun" @anyotherbusiness557 @anyotherbusiness557
+           - contains-name channel: "The Other Business" @TheOtherBusinessShow @TheOtherBusinessShow, 2 subscribers
+CROWDED  By Introduction Only  (@ByIntroductionOnly; search returned 26 channels)
+           - contains-name channel: "Introduction" @introduction1 @introduction1
+           - contains-name channel: "INTRODUCTION تعارف  واقفِیَّت" @introduction4697 @introduction4697, 6 subscribers
+CROWDED  Respectable Distance  (@RespectableDistance; search returned 32 channels)
+           - contains-name channel: "The Distance" @TheDistanceDuo @TheDistanceDuo, 10.1K subscribers
+CLEAR    Provenance Unclear  (@ProvenanceUnclear; search returned 3 channels)
+TAKEN    Independent Means  (@IndependentMeans; search returned 20 channels)
+           - near-name channel: "The Independent Man" @Johnscarborough1 @Johnscarborough1, 7.36K subscribers

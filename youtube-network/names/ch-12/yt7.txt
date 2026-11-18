@@ -1,0 +1,35 @@
+TAKEN    Cold Arithmetic  (@ColdArithmetic; search returned 33 channels)
+           - handle @ColdArithmetic is taken by "Cold Arithmetic"
+           - same-name channel: "Cold Arithmetic" @ColdArithmetic @ColdArithmetic
+CLEAR    Crooked Arithmetic  (@CrookedArithmetic; search returned 23 channels)
+CROWDED  Cufflinks to Cuffs  (@CufflinkstoCuffs; search returned 21 channels)
+           - contains-name channel: "Cufflinks" @cufflinks7231 @cufflinks7231, 20 subscribers
+TAKEN    Golden Handcuffs  (@GoldenHandcuffs; search returned 27 channels)
+           - handle @GoldenHandcuffs is taken by "stejn"
+           - @TheGoldenHandcuffs is taken by "The Truth"
+           - same-name channel: "Golden Handcuffs" @goldenhandcuffspod @goldenhandcuffspod, 185 subscribers
+           - same-name channel: "Golden Handcuffs" @goldenhandcuffss @goldenhandcuffss, 8 subscribers
+           - same-name channel: "Golden Handcuffs" @GoldenHandcuffs777 @GoldenHandcuffs777, 3 subscribers
+           - same-name channel: "Golden handcuffs " @richardfranc8512 @richardfranc8512, 10 subscribers
+           - contains-name channel: "Unlocking The Golden Handcuffs" @UnlockingTheGoldenHandcu-vs8uu @UnlockingTheGoldenHandcu-vs8uu, 4 subscribers
+           - same-name channel: "The Golden Handcuffs " @DreamWeaverTales-v6w @DreamWeaverTales-v6w
+           - contains-name channel: "Golden Handcuffs Guy" @goldenhandcuffsguy2885 @goldenhandcuffsguy2885, 7 subscribers
+           - contains-name channel: "Break the Golden Handcuffs" @breakthegoldenhandcuffs4690 @breakthegoldenhandcuffs4690
+           - contains-name channel: "Break Your Golden Handcuffs" @breakyourgoldenhandcuffs @breakyourgoldenhandcuffs, 99 subscribers
+TAKEN    Phantom Revenue  (@PhantomRevenue; search returned 23 channels)
+           - handle @PhantomRevenue is taken by "Phantom Revenue"
+TAKEN    Hollow Vault  (@HollowVault; search returned 29 channels)
+           - handle @HollowVault is taken by "Hollow Vault"
+           - @TheHollowVault is taken by "The Hollow Vault"
+           - same-name channel: "Hollow Vault" @hollowvault190 @hollowvault190, 52 subscribers
+           - near-name channel: "Mr.Hollow Vault" @Mr.HOLLOWVAULT @Mr.HOLLOWVAULT, 6 subscribers
+           - same-name channel: "Hollow Vault" @hollowvaultt @hollowvaultt, 27 subscribers
+           - same-name channel: "Hollow Vault" @HollowVault2025 @HollowVault2025, 127 subscribers
+           - same-name channel: "Hollow Vault" @HollowVault @HollowVault
+           - same-name channel: "Hollow Vault" @HollowVaultGames @HollowVaultGames, 31 subscribers
+           - same-name channel: "HOLLOW VAULT" @hollowvaul @hollowvaul, 11 subscribers
+           - same-name channel: "The Hollow Vault" @TheHollowVault-1 @TheHollowVault-1, 14 subscribers
+           - same-name channel: "The Hollow Vault" @TheHollowVault @TheHollowVault, 22 subscribers
+           - contains-name channel: "Hollow Vault Ent." @hollowvaultent. @hollowvaultent., 8 subscribers
+           - contains-name channel: "RSC.005 Hollow Vault" channel/UCXA4MFUIFyjLFIFRfVZTZWQ 
+           - same-name channel: "Hollow Vault" @HollowVault-x2n @HollowVault-x2n, 19 subscribers

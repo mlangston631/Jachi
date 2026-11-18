@@ -1,0 +1,43 @@
+{
+ "_about": "Owner's brief for the three investigative documentary channels added on 16-17 Nov 2026, as channels 11-13 of the portfolio. Every agent working on them reads this file. Working labels A/B/C are not names: the naming agent chooses the names.",
+ "network": {
+  "goal": "A premium investigative documentary network: three distinct audiences and identities, professionally structured documentaries that make viewers emotionally invested, recurring series that bring them back. Think premium documentary production company building a long-term media network, not a content farm.",
+  "episode_length": "18-30 minutes, adapted to the story",
+  "episode_structure": ["00:00-00:45 cold open: an extraordinary event, discovery, betrayal, disappearance, collapse or revelation", "00:45-02:00 the central mystery: the main question and why it matters", "02:00-06:00 origins: people, organisations, circumstances, background", "06:00-12:00 expansion: how the operation grew", "12:00-17:00 turning point: conflict, betrayal, investigation or revelation", "17:00-23:00 exposure: how investigators, journalists, victims or others uncovered the truth", "23:00-30:00 consequences: outcome, convictions where applicable, open questions, broader implications"],
+  "structure_note": "A flexible starting structure. Adapt to the actual story; never force every documentary into one formula.",
+  "storytelling": ["powerful opening hook", "a central mystery or unanswered question", "strong character development", "compelling chronological narrative", "escalating tension", "unexpected developments", "betrayals and conflicts only where the case supports them", "investigative discoveries", "meaningful revelations", "a satisfying conclusion", "a natural transition into a related investigation", "strategic reveals, open loops, foreshadowing, contrasting perspectives, unexpected connections", "never reveal the whole story in the opening; every revelation builds on what was established"],
+  "not_wanted": "Generic AI true-crime videos; Wikipedia summaries; repetitive slideshows; generic AI imagery; visuals that don't match the narration; misleading clickbait; artificially split stories; publishing just because an automated workflow finished.",
+  "research_rules": ["prioritise indictments, court documents, FBI and DOJ material, SEC filings, congressional investigations, official records, credible investigative journalism, established news organisations, archives, books and firsthand accounts", "never fabricate dialogue, evidence, statistics, events or quotations", "verify important claims with multiple sources", "distinguish allegations from proven facts; identify convictions and legal outcomes", "keep source references for every documentary", "fact-check before publication", "find details beyond a surface-level search"],
+  "visuals": "Licensed archival and stock footage, cinematic establishing shots, AI atmospheric scenes, animated maps, geographic timelines, historical photographs, newspaper headlines, court documents, financial records, evidence boards, motion graphics, subtle animation, documentary transitions. Visual direction for every section of every script; label illustrative recreations.",
+  "voice": "Natural, authoritative, engaging, emotionally controlled, suspenseful when appropriate, professional, consistent; no robotic delivery, excessive pauses or exaggerated AI voices. Music and sound design never overwhelm narration.",
+  "thumbnails_titles": "Curiosity, strong contrast, emotional relevance, intrigue, clear subject, minimal powerful text, accurate to the story; several concepts before choosing; the three channels consistent but distinct.",
+  "quality_gate": ["factual accuracy", "source reliability", "narrative quality", "opening hook", "pacing", "retention potential", "audio quality", "visual consistency", "editing", "thumbnail", "title accuracy", "copyright and licensing", "advertiser suitability"]
+ },
+ "channels": [
+  {
+   "n": 11, "label": "A: blue-collar crime",
+   "concept": "Street-level criminal activity and criminal organisations: street gangs and organised crews, drug trafficking empires, bank robberies and sophisticated heists, prison gangs, motorcycle clubs in organised crime, smuggling operations, criminal families, notorious robbery crews, informants and betrayals, the rise and collapse of street-level empires, famous investigations, historical organised crime cases.",
+   "angle": "The people, origins, internal hierarchy, expansion, rivalries, betrayals, investigations and eventual consequences.",
+   "series_shape": "An organisation's origins, expansion, rivalries, internal betrayal, investigation and collapse.",
+   "tone": "gritty, grounded, human, tense; respects victims; never glamorises",
+   "boundary_with_existing": "Channel 7 (historic true crime from court records: art thefts, cons, hoaxes, mostly pre-1950, lighter and archival) keeps lone thieves, hoaxers and con artists. This channel takes organisations and crews of any era. A heist belongs here when it was done by a crew or organisation and the story is about the crew."
+  },
+  {
+   "n": 12, "label": "B: white-collar crime",
+   "concept": "Financial, corporate and institutional crime: billion-dollar fraud, Ponzi schemes, corporate corruption, money laundering, insider trading, crypto scandals, corporate espionage, insurance fraud, accounting manipulation, financial deception, empires built on fraud, major business scandals, executive misconduct, institutional corruption.",
+   "angle": "How each scheme developed, who benefited, how the deception was kept up, what exposed it, and the consequences.",
+   "series_shape": "The creation of a financial empire, its business model, expansion, warning signs, exposure and fallout.",
+   "tone": "sharp, forensic, clear about money; makes complex finance gripping and understandable",
+   "boundary_with_existing": "Channel 2 (how companies were built and collapsed) keeps business failures with no crime at their centre (Kodak, Nokia, Blockbuster). This channel takes collapses where fraud, deception or crime is the story (Enron, Wirecard, FTX). Channel 1 (money explainers) never covers crimes; channel 8 (legal and insurance terms) never covers cases."
+  },
+  {
+   "n": 13, "label": "C: elite syndicates and organised crime",
+   "concept": "Sophisticated international criminal organisations and where wealth, influence, politics and organised crime meet: international syndicates, powerful criminal families, transnational trafficking networks, international money laundering, organised crime involving political and business elites, corrupt institutions, criminal networks run through legitimate businesses, international investigations, illicit financial networks, historical organisations and their successors, organisations with documented connections to influential people.",
+   "angle": "Should feel like an exclusive investigative intelligence documentary series: sophisticated, mysterious, investigative, cinematic, authoritative. Clearly distinguish documented facts, allegations, convictions and speculation.",
+   "series_shape": "An international organisation's origins, leadership, financial networks, international reach, investigations and eventual disruption.",
+   "tone": "cool, precise, intelligence-briefing authority; restraint over hype",
+   "boundary_with_existing": "Street crews and domestic gangs belong to channel 11; one-company frauds belong to channel 12. This channel takes networks that cross borders or reach into politics, finance and institutions.",
+   "legal_note": "Highest defamation exposure of the network: living, wealthy, litigious people. Every claim about a named living person must be a documented conviction, a court finding, an official record, or an allegation clearly attributed to a named credible source."
+  }
+ ]
+}

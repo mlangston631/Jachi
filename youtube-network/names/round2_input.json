@@ -1,0 +1,1284 @@
+[
+ {
+  "n": 1,
+  "niche": "Stick-figure money and economics explainers",
+  "tagline": "Money, explained with stick figures.",
+  "round1": [
+   {
+    "name": "Cave Wall Street",
+    "why": "Stick figures are the oldest drawings there are, on cave walls; this is money and markets explained in that same language. The stick figure holding a coin reads as a cave painting, and the name is easy to say and hard to forget. \"Wall Street\" leans towards markets, so the tagline should say money and economics.",
+    "skeptic_score": 6,
+    "concerns": [
+     "Can't confirm it's safe: the web search for books, podcasts, companies and trademarks couldn't run, so under the 'unsure means out' rule it doesn't survive",
+     "'Wall Street' means the stock market and trading. That pulls the channel towards investing and can look like advice, which goes against 'education, never advice'. It's narrower than money and economics",
+     "'Cave' also means to collapse or give in ('the market caved'), a mild bad sense for a money brand",
+     "Strong on merit: easy to type after one hearing, a clear picture (a cave painting with a coin), nothing bad in Spanish"
+    ]
+   },
+   {
+    "name": "Gross Domestic Pencil",
+    "why": "GDP with a pencil in it, and the initials still spell GDP, which makes a natural nickname. The most openly jokey option; funny, but longer and less timeless than the names above.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Web conflict check couldn't run, so it doesn't survive",
+     "19-character handle. People who half-hear it may type 'Gross Domestic Product'",
+     "The 'GDP' nickname can't be found in search because it is GDP itself",
+     "Opens with 'Gross'. The most openly jokey name, so it may age badly"
+    ]
+   },
+   {
+    "name": "Monetary, My Dear",
+    "why": "\"Elementary, my dear\" with money swapped in: warm, a little cheeky, and it promises that the basics will be made obvious. It has no drawing hint, so the logo would carry that.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Web conflict check couldn't run, so it doesn't survive",
+     "'My dear' can sound patronising to some viewers",
+     "Has a comma in it, and nothing in it says drawing",
+     "'Monetary' leans towards central-bank policy and leaves out everyday personal money topics"
+    ]
+   },
+   {
+    "name": "Scribble Standard",
+    "why": "The gold standard, redrawn by hand. It is playful, alliterative and pleasant to say, hints at money history, and \"standard\" suggests quality.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Web conflict check couldn't run, so it doesn't survive",
+     "Without the word 'gold', most listeners won't hear the gold-standard joke",
+     "'Scribble' suggests careless or messy, which undercuts trust for a money channel",
+     "Can be misheard as 'Scribbled Standard'"
+    ]
+   },
+   {
+    "name": "Noted with Interest",
+    "why": "A polite everyday phrase that hides three money words: banknotes, taking notes, and interest, which is the channel's flagship topic. It sounds calm and trustworthy, promises nothing, and leaves room for any economics subject.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Web conflict check couldn't run, and an everyday phrase is the kind most likely to be in use already, so it doesn't survive",
+     "The channel can't own it in search: searching it brings up countless ordinary uses of the phrase",
+     "In diplomatic and office talk, 'noted with interest' is a polite brush-off",
+     "Nothing in it says drawing or stick figures"
+    ]
+   },
+   {
+    "name": "Marginal Figures",
+    "why": "Little figures drawn in the margins of a notebook, and \"marginal\", the economist's favourite word (thinking at the margin). Self-deprecating and clever, best if the audience leans towards economics.",
+    "skeptic_score": 4,
+    "concerns": [
+     "Economics fans would link an economics explainer channel starting with 'Marginal' to MRU",
+     "'Marginal' also means unimportant",
+     "Web check couldn't run"
+    ]
+   },
+   {
+    "name": "Drawn on Demand",
+    "why": "Cheques are \"drawn on\" a bank and banknotes are payable \"on demand\"; here it also means hand-drawn, plus the demand of supply and demand. It could be misread as a drawing-commissions service, so the tagline matters.",
+    "skeptic_score": 4,
+    "concerns": [
+     "Web conflict check couldn't run, so it doesn't survive",
+     "Reads as a drawing-commission service, so people will ask it for commissions",
+     "The banking senses ('drawn on' a bank, 'payable on demand') are too subtle for most viewers"
+    ]
+   },
+   {
+    "name": "Sketches and Balances",
+    "why": "\"Checks and balances\" with sketches in place of checks: hand-drawn explanations of bank balances, balance sheets and how things even out. Friendly and understood on first hearing.",
+    "skeptic_score": 4,
+    "concerns": [
+     "Web conflict check couldn't run, so it doesn't survive",
+     "'Checks and balances' is a government and civics idea, so the name reads as political cartoons, not money",
+     "A 20-character handle"
+    ]
+   },
+   {
+    "name": "Art Supply and Demand",
+    "why": "Art supplies meet supply and demand: the whole channel in one line, and probably the name people would smile at most. Listed last only because it is four words, one more than the brief allows; the handle is 18 characters and it passes the radio test.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "Four words, more than the brief allows",
+     "Reads as an art-supply shop or a channel about the art market",
+     "Web conflict check couldn't run"
+    ]
+   },
+   {
+    "name": "Coin Flipbook",
+    "why": "A flipbook is drawing step by step, page by page, which is how the videos are made, and the coin matches the logo. Plain words that anyone can type after hearing them once.",
+    "skeptic_score": 3,
+    "concerns": [
+     "'Coin flip' means a 50/50 gamble, the wrong message for trustworthy money education",
+     "Sounds crypto-flavoured",
+     "'Flip' also suggests flipping money or houses, which sounds like get-rich-quick"
+    ]
+   },
+   {
+    "name": "Sketching Account",
+    "why": "A checking account turned into a sketching account, where \"account\" also means an explanation of how something works. Short, clean and bank-flavoured without sounding like advice, though the pun is quiet and could first read as an art account.",
+    "skeptic_score": 3,
+    "concerns": [
+     "Said quickly, it sounds like 'sketchy account', slang for a shady or fraudulent account: a bad sense for a money brand",
+     "At first it reads as an art account, as the proposer noted",
+     "Web check couldn't run"
+    ]
+   },
+   {
+    "name": "Ballpoint Figures",
+    "why": "Figures drawn in pen, and figures as in numbers, with a wink at \"ballpark figures\". It describes the channel exactly without the word stick. One caution: a 35.6K-subscriber channel called \"Ballpark Figures\" sounds similar when spoken.",
+    "skeptic_score": 3,
+    "concerns": [
+     "Fails the radio test: people who hear 'Ballpoint Figures' will type 'Ballpark Figures' and land on an existing channel",
+     "Viewers and search would keep mixing the two channels up",
+     "Web check couldn't run"
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "Scrawl Street (TAKEN)",
+   "Ballpark Figure (TAKEN)",
+   "Tidy Sum (TAKEN)",
+   "Pay the Bearer (TAKEN)",
+   "Stock and Foil (TAKEN)",
+   "Freehand Market (TAKEN)",
+   "Slightly Overdrawn (TAKEN)",
+   "Withdrawings (TAKEN)",
+   "Coin of Vantage (TAKEN)",
+   "Counterfoil (TAKEN)",
+   "Economy of Line (TAKEN)",
+   "Medium of Exchange (TAKEN)",
+   "All Else Equal (TAKEN)",
+   "Thin Margins (TAKEN)",
+   "Value Study (TAKEN)",
+   "Pencil Mint (TAKEN)",
+   "Note of Hand (TAKEN)",
+   "Moneyer (TAKEN)",
+   "Shavings Account (TAKEN)",
+   "Mint Marker (TAKEN)",
+   "Invisible Hand Drawn (CROWDED)",
+   "Bottom Line Drawing (CROWDED)",
+   "With Drawings (CROWDED)",
+   "Scratch Paper Money (CROWDED)",
+   "Nickel Picture Show (CROWDED)",
+   "Change Alley (CROWDED)",
+   "Balanced Sketchbook (CROWDED)"
+  ],
+  "best": 6
+ },
+ {
+  "n": 2,
+  "niche": "Business and company story documentaries",
+  "tagline": "How companies are built. How they fall.",
+  "round1": [
+   {
+    "name": "On This Site Stood",
+    "why": "It is how roadside plaques begin: \"On this site stood the ... works.\" It says in four plain words that something large was built here and is gone, sounds like a film title, and every episode can open on its own marker.",
+    "skeptic_score": 6.5,
+    "concerns": [
+     "The web check was not done. The shared web-search budget for this turn ran out before my first query, so books, podcasts, blogs, Instagram accounts and trademarks under this name are unverified. Under the 'unsure means out' rule it cannot survive yet.",
+     "It reads as local history or lost buildings (demolished factories, vanished landmarks), a crowded YouTube genre, so new viewers may expect architecture rather than corporate investigations.",
+     "Four words and a long handle, but it is spelled the way it sounds and is easy to type after hearing it once.",
+     "The marker metaphor fits physical works like Kodak Park, but a little less well for companies like Nokia or Blockbuster that had no single site."
+    ]
+   },
+   {
+    "name": "Founded and Foundered",
+    "why": "Companies are founded; ships founder (fill and sink). The name is the channel's whole premise in three words, how they were built and how they went under, without any of the worn-out words. Slightly tongue-twisting but spelled exactly as heard.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified.",
+     "Many English speakers confuse 'founder' with 'flounder', so people will type 'Founded and Floundered' and land somewhere else. The proposer's claim that it is 'spelled exactly as heard' overstates it.",
+     "Said aloud, 'founded' and 'foundered' blur together, so it sounds like a stutter and does poorly by word of mouth.",
+     "It is a natural pun, so articles and papers have probably used it as a headline. That is unverified."
+    ]
+   },
+   {
+    "name": "By Order of the Board",
+    "why": "The formal line that ends company notices and filings, so it points straight at the public-record source material and has a cold, cinematic ring. Note it contains \"board\" (not the worn-out \"boardroom\").",
+    "skeptic_score": 5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified. The phrase is the stock sign-off on company notices, so search results will be swamped by real filings and the name is hard to own in search.",
+     "Strong echo of the 'By order of the Peaky Blinders' meme, which pulls toward a TV-fan reading.",
+     "'Board' alone could suggest board games or skateboards out of context.",
+     "Five words; the handle is long."
+    ]
+   },
+   {
+    "name": "Here Once Stood",
+    "why": "A shorter sibling of \"On This Site Stood\" with the same marker feel; YouTube's search returned only one loosely related channel for it. Choose one of the two, not both.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified.",
+     "The word order is easy to scramble when typing from memory ('Once Stood Here', 'Here Stood Once').",
+     "Same lost-buildings genre reading as On This Site Stood, and less distinctive. The two cannot both be used."
+    ]
+   },
+   {
+    "name": "Nine Hundred Camels",
+    "why": "Legend says that when the fallen Colossus of Rhodes was finally sold for scrap, it took nine hundred camels to carry the bronze away. Unforgettable and fully ownable, with a ready-made origin story; the one weakness is that a listener might type \"900\".",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified.",
+     "Nothing in the name says business, companies or collapse. First-time viewers will guess a travel, Middle East or animal channel, and the legend has to be explained every time.",
+     "People who hear it will type '900 Camels' or '900Camels'. Both handles need securing.",
+     "Echoes of Camel cigarettes. In Spanish, 'camello' is slang for a small-time drug dealer in Spain (and for a job in Colombia). That matters only if the name is translated."
+    ]
+   },
+   {
+    "name": "Once the Largest",
+    "why": "The phrase every business obituary uses: \"once the largest maker of...\", \"once the largest employer in...\". Instantly tells a viewer the subject is fallen giants, in a sober, journalistic voice.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified. The phrase appears in countless news stories, so it is hard to own in search.",
+     "It feels like a fragment rather than a title, and out of context it could be read as being about physical size (animals, ships, buildings).",
+     "It is flat. It describes the subject without any of the cinematic pull the brief asks for."
+    ]
+   },
+   {
+    "name": "Another Record Year",
+    "why": "The line printed on annual reports at the very top of the curve, just before the drop, so it sits right on the logo's peak. \"Record\" also nods to the public records the films are built from. Ominous without saying anything negative.",
+    "skeptic_score": 4,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified. The exact phrase appears in thousands of press releases and annual reports, so the name cannot own its search results.",
+     "'Record year' reads naturally as music (record labels, vinyl), so it is likely to be confused with a music channel.",
+     "The irony only works once you already know the format. Cold, it sounds like a celebration."
+    ]
+   },
+   {
+    "name": "Dry Moat",
+    "why": "A moat is the business term for the advantage that protects a company; a dry moat is a castle still standing with its defence gone, which is Kodak, Blockbuster and Nokia in two words. Seven letters, punchy, easy to brand.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified. 'Moat' is heavily used in investing media (Morningstar moat ratings, VanEck's MOAT ETF, many 'Wide Moat' brands), so confusion with finance channels and newsletters is likely.",
+     "The metaphor is wrong. A dry moat is a deliberately built defensive ditch, common in castles and zoo enclosures, not a defence that has failed. Informed viewers will notice.",
+     "Heard once, it can be misheard as 'dry mote'. It also reads as an investing channel, not a documentary one."
+    ]
+   },
+   {
+    "name": "Slipway and Seabed",
+    "why": "The slipway is where a ship is built and launched; the seabed is where a lost one ends up. Built and collapsed told as two places, with zero channels of any similar name on YouTube.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified.",
+     "It will be taken for a shipwreck or maritime-history channel, a large and established YouTube genre. Nothing in it suggests companies.",
+     "'Slipway' is not a word many people know, so it is hard to spell from hearing it, and it is long.",
+     "Zero search results is a sign of low name recognition as much as availability."
+    ]
+   },
+   {
+    "name": "Ribbon and Padlock",
+    "why": "The ribbon cut on opening day and the padlock on the gate on the last one: a company's first and final object. Very visual for intros and thumbnails, and leaves room to cover any kind of company.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified. The pairing sounds like the kind of name craft shops, gift boutiques, wedding and love-lock sellers and Etsy stores use, so small-business conflicts are likely.",
+     "The tone is wrong. It reads as cute or decorative, not serious, cinematic or investigative.",
+     "It is easy to confuse with ribbon-and-lock gift and jewelry imagery."
+    ]
+   },
+   {
+    "name": "Pomp of Yesterday",
+    "why": "From \"Lo, all our pomp of yesterday / Is one with Nineveh and Tyre\", a poem about great powers passing. Elegant and serious, and says faded grandeur without any of the overused words.",
+    "skeptic_score": 3,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified. A Kipling line is a likely title for books, essays and history blogs.",
+     "It reads as royalty, empire or ceremony, not business. Few viewers know the 'Recessional' allusion.",
+     "'Pomp' sounds slightly comic and old-fashioned, and it can be misheard as 'Pomp' and Circumstance or typed as 'Pump'."
+    ]
+   },
+   {
+    "name": "Century Plant",
+    "why": "The century plant (an agave) grows quietly for decades, sends up one towering flower stalk, then dies, which is the logo's line exactly. \"Plant\" also means factory, so it reads as a great industrial works of its century. Shortest and easiest to say of the set.",
+    "skeptic_score": 2.5,
+    "concerns": [
+     "Web check not done (search budget exhausted), so it is unverified. As the common name of Agave americana it is used by nurseries, gardening content, and very likely agave spirits, bars and restaurants, so search results will be dominated by botany and the name cannot be owned.",
+     "Almost nobody will hear 'plant' as 'factory' without explanation. The name tells viewers it is a gardening channel.",
+     "The botany is loose: the plant usually flowers after 10 to 30 years, not a century."
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "Substantial Doubt (TAKEN)",
+   "Mahogany Row (TAKEN)",
+   "Top of Descent (TAKEN)",
+   "The Registrant (TAKEN)",
+   "Foundered (TAKEN)",
+   "Material Weakness (TAKEN)",
+   "Cold Foundry (TAKEN)",
+   "Lost With All Hands (TAKEN)",
+   "Hammer Price (TAKEN)",
+   "Look On My Works (TAKEN)",
+   "Found Wanting (TAKEN)",
+   "Falsework (TAKEN)",
+   "Out of True (TAKEN)",
+   "Recorder of Deeds (CROWDED)",
+   "Wreck Register (TAKEN)",
+   "Ledger Stone (TAKEN)",
+   "Paper Colossus (TAKEN)",
+   "Nothing Beside Remains (TAKEN)",
+   "At Its Height (CROWDED)",
+   "High Plateau (TAKEN)",
+   "Strandline (TAKEN)",
+   "No Longer in Service (TAKEN)",
+   "Dead Storage (TAKEN)",
+   "Topping Out (TAKEN)",
+   "Wax and Feathers (TAKEN)",
+   "Last Known Heading (TAKEN)",
+   "Index Fossil (TAKEN)"
+  ],
+  "best": 6.5
+ },
+ {
+  "n": 3,
+  "niche": "AI and tech explainers",
+  "tagline": "AI and tech, in plain words.",
+  "round1": [
+   {
+    "name": "Legible Machines",
+    "why": "The channel's promise in two words: it makes machines, from chips to AI models, readable to ordinary people. It sounds calm and exact, it doesn't depend on any trend, and 'legible' means the same in Spanish. A web search found only academic uses of 'legibility'. No brand uses the name.",
+    "skeptic_score": 7,
+    "concerns": [
+     "Knocked out only because the web check couldn't be done: no search for the exact phrase, or with podcast, company, book, app or trademark",
+     "'Legible' is a slightly formal word. Some listeners may hear or type 'ledgible' or 'legable'",
+     "'Machines' is broad, though that leaves room to grow"
+    ]
+   },
+   {
+    "name": "Unhurried Machines",
+    "why": "It names the 'no hype' tone directly: technology usually sells itself on speed, and this channel slows it down so you can watch it work. The pairing is a bit of a paradox, which makes it stick, and it can grow to cover any technology.",
+    "skeptic_score": 6,
+    "concerns": [
+     "Knocked out because the web check couldn't be done",
+     "Easy to misspell (unhuried, unhurryed) and hard for Spanish speakers to say or type",
+     "'Unhurried' can suggest slow or long videos, which may hurt clicks",
+     "It names the tone, not the subject"
+    ]
+   },
+   {
+    "name": "Copper Grammar",
+    "why": "Copper wires plus 'grammar', the rules of a language, so the name means learning the language machines speak. It's quiet and precise, and it fits a series that teaches the basics in order, but it's more abstract than the names above.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Knocked out because the web check couldn't be done",
+     "Abstract: someone hearing it once won't know it's about AI and technology",
+     "'Grammar' can make it read as a language-learning or English-grammar channel"
+    ]
+   },
+   {
+    "name": "Chalk and Copper",
+    "why": "Chalk is the teaching and the simple drawings; copper is the wiring inside every device. The two hard C sounds give it rhythm, it's easy to say once and type, and the four copper leads on the chip logo fit it well.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Knocked out because the web check couldn't be done",
+     "Reads like a furniture-painting or home-decor brand (chalk paint), not technology",
+     "Unclear whether it's spelled 'and', '&' or 'n' (on YouTube the main alternatives are free)",
+     "'Chalk' is crowded in education branding (Chalkbeat, Chalk Talk)"
+    ]
+   },
+   {
+    "name": "Lever and Lamp",
+    "why": "The lever stands for mechanism (how things move and work) and the lamp for understanding. The alliteration makes it easy to remember, and it's broad enough to cover AI, phones, the power grid or anything else.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Knocked out because the web check couldn't be done",
+     "Sounds like a pub, bookshop, letterpress studio or lighting store, a style of name common among small businesses",
+     "'Lever' is said differently in US and UK English; 'and' versus '&' is unclear",
+     "Weak tie to AI and modern technology; 'lamp' doesn't say 'technology'"
+    ]
+   },
+   {
+    "name": "Skeleton Clock",
+    "why": "A skeleton clock is a clock with its case cut away so every gear is visible while it runs, which is exactly what this channel does with technology. The drawbacks: it's also the name of a common type of clock people shop for, so searching for it brings up products, and 'skeleton' can feel a little spooky.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "A generic product name the channel could never own; YouTube and Google results are dominated by clocks",
+     "Hard to defend as a trademark and hard to find",
+     "'Skeleton' feels spooky; in Spanish it becomes 'reloj esqueleto'",
+     "Suggests a horology channel, not AI"
+    ]
+   },
+   {
+    "name": "Chalk Foundry",
+    "why": "Chips are made in foundries. Here the foundry works in chalk, so the channel 'makes' chips out of simple drawings. It suits the chip logo closely. A web search found no business with this name.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "Reads like a font studio selling chalkboard fonts",
+     "Both words already belong to other brands in this channel's own field",
+     "Unverified: a design or font business may already use this exact name"
+    ]
+   },
+   {
+    "name": "Chalk Engine",
+    "why": "Chalk stands for the simple hand-drawn pictures and the blackboard. Engine stands for the machinery, with a nod to Babbage's Analytical Engine. The chip logo reads naturally as the 'engine'. A small catch: chalk-engine is also the name of a little-known Rust programming library, and there is a data company called Chalk AI, but neither runs a consumer brand or a YouTube channel under this name.",
+    "skeptic_score": 3,
+    "concerns": [
+     "Two existing uses in AI and programming, the channel's own subject",
+     "Developers searching it will find the Rust crate and Chalk AI",
+     "'Chalk' is crowded in education branding"
+    ]
+   },
+   {
+    "name": "Glass Loom",
+    "why": "The punched-card loom is the ancestor of the computer, and glass means you can see inside it. Together they say 'the machinery of computing, made see-through'. It's short and unusual.",
+    "skeptic_score": 3,
+    "concerns": [
+     "Easy to confuse with Loom and with Glassdoor",
+     "Only a narrow history-buff audience will get the Jacquard-loom reference"
+    ]
+   },
+   {
+    "name": "Patient Lightning",
+    "why": "Electricity, the lightning in every chip, explained patiently. The contradiction makes it memorable and matches the calm, precise tone. One caution: a web search for the exact phrase returns medical pages about people struck by lightning, but as a name 'patient' reads as the adjective, not a medical patient.",
+    "skeptic_score": 2.5,
+    "concerns": [
+     "'Patient' reads first as a medical patient, and search results confirm it",
+     "'Lightning' is often misspelled 'lightening', so many who hear it once will type the wrong handle",
+     "Electricity is too narrow a picture for a channel about AI and everyday technology"
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "Working Model",
+   "Weights and Measures",
+   "Gentle Gradient",
+   "Hand Lens",
+   "Wheelwork",
+   "Fridge Light",
+   "Escapement",
+   "Armillary",
+   "Tracery",
+   "Wherefore",
+   "Copper Orchard",
+   "Tame Lightning",
+   "Fathomable",
+   "Paper Foundry",
+   "Standby Light",
+   "Glass Abacus",
+   "Sand and Lightning",
+   "Patient Machine",
+   "Lantern Slide",
+   "Quiet Voltage",
+   "Sandmind",
+   "Clockwork Lantern",
+   "Inkwell Engine",
+   "Machine Almanac",
+   "Copper Almanac",
+   "Lightning Primer (CROWDED)"
+  ],
+  "best": 7
+ },
+ {
+  "n": 4,
+  "niche": "Science and space",
+  "tagline": "Space and science, one question at a time.",
+  "round1": [
+   {
+    "name": "Measured Awe",
+    "why": "'Measured' means both calm and actually measured, so the name holds the channel's two promises: quiet wonder and real numbers with sources. It is short, easy to type and carries the tone exactly.",
+    "skeptic_score": 7,
+    "concerns": [
+     "Not checked on the web. The shared web-search budget for this turn ran out before my first search, so I couldn't look for podcasts, companies, books, apps or trademarks named Measured Awe. Under the rule that a doubtful name doesn't survive, it fails until that check is done.",
+     "'Measured' can also mean restrained or lukewarm, so some people may read the name as 'awe, but not much of it'.",
+     "It's abstract and has no space imagery, so it says less about the topic than Paper Orrery or Glass Plate Sky. That does leave room to grow beyond space.",
+     "Easy to type after hearing it once. I know of no bad slang meaning in English or Spanish."
+    ]
+   },
+   {
+    "name": "Glass Plate Sky",
+    "why": "For a century astronomers photographed the sky on glass plates, and those plates are where the first real measurements of distance and scale came from. The name fits a sources-first channel and has a quiet, archival feel, though fewer people will catch the reference.",
+    "skeptic_score": 6,
+    "concerns": [
+     "Not checked on the web (search budget used up), so I couldn't rule out a photography studio, archive project, album or book with this name. Astronomical glass-plate archives exist, and a project or exhibition with a similar title is plausible.",
+     "Most viewers won't catch the reference, so the name needs explaining at first.",
+     "Three words. Heard aloud, it could become 'Glass Plates Guy' or 'Glass Plate Skies'.",
+     "The archival feel fits a sources-first channel well. It's less natural for non-space science topics."
+    ]
+   },
+   {
+    "name": "Paper Orrery",
+    "why": "An orrery is the clockwork model of the solar system, and a paper one is built by hand to show how it works, much like an explainer built from real numbers. It matches the ringed-planet logo and leaves room to cover any space or science question. Tagline idea: 'The sky, built one question at a time.'",
+    "skeptic_score": 6,
+    "concerns": [
+     "Not checked on the web (search budget used up).",
+     "From general knowledge, not confirmed this run: 'paper orrery' is a common description for printable and cut-out orrery kits and craft projects. Searches for the name would be crowded with craft results, and the name would be weak as a trademark.",
+     "Many people don't know the word 'orrery' and can't spell it after hearing it once (orery, orrary, ornery, aury).",
+     "The handmade image might make people expect a craft or model-building channel."
+    ]
+   },
+   {
+    "name": "Attic Planetarium",
+    "why": "A homemade planetarium under the roof suggests intimate, hand-made wonder: big questions explained in a small, quiet room. The image is easy to picture and easy to say.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Not checked on the web (search budget used up). Home-built planetarium projects, a DIY blog or a small business could use this phrase.",
+     "Sounds like a DIY or maker channel (building a planetarium in your attic) rather than a numbers-and-sources explainer.",
+     "'Planetarium' ties it to space, which leaves less room for wider science questions.",
+     "Easy to say and picture. 'Attic' could be misheard as 'Arctic'."
+    ]
+   },
+   {
+    "name": "Exact Wonder",
+    "why": "Puts precision and awe side by side: the wonder comes from getting the numbers right. A web search found no brand, book or show with this name.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Not checked on the web in my run (search budget used up). The proposer says its search found nothing, but I couldn't confirm that myself.",
+     "The phrase is a little stiff. Heard aloud, it could become 'Exactly Wonder' or 'Exact Wander'.",
+     "It's generic enough that a product, agency or app could use it, which I couldn't rule out.",
+     "Says the same thing as Measured Awe less elegantly."
+    ]
+   },
+   {
+    "name": "Pocket Parsec",
+    "why": "The parsec is astronomy's own unit of distance, and 'pocket' suggests one short question per video. It is memorable and easy to type, though it sounds a little more playful than quiet.",
+    "skeptic_score": 4,
+    "concerns": [
+     "Not checked on the web (search budget used up). The name sounds like a mobile game or app, a kind of product that often has small itch.io or app-store titles, and I couldn't check for any.",
+     "From general knowledge, not confirmed this run: 'Parsec' is a well-known remote desktop and game-streaming app owned by Unity, and 'Pocket' was a well-known read-later app. People could think the channel is related to either.",
+     "'Parsec' is famously misused in Star Wars ('Kessel Run in less than 12 parsecs'), which invites jokes and comments that drift off topic.",
+     "Playful and alliterative, which doesn't fit the quiet, awed tone."
+    ]
+   },
+   {
+    "name": "Small Hours Almanac",
+    "why": "Almanacs were the old books of sky tables (moon phases, sunrise, planets), and the small hours are the deep part of the night when the questions come. It feels warm and timeless and fits one question per episode.",
+    "skeptic_score": 4,
+    "concerns": [
+     "Not checked on the web (search budget used up).",
+     "From general knowledge, not confirmed this run: 'Small Hours' / 'The Small Hours' is a widely used name for bands, albums, podcasts and venues, so the core of the name is crowded off YouTube even though the YouTube handle is free.",
+     "'Almanac' brings to mind the Old Farmer's Almanac and yearly reference books.",
+     "Long (17 letters in the handle) and hard to type correctly after hearing it once. 'Small Hours' may not translate clearly for Spanish speakers ('madrugada')."
+    ]
+   },
+   {
+    "name": "Slow Parallax",
+    "why": "Parallax is how astronomers first measured the distance to a star, which is exactly the 'how far is it?' kind of question the channel answers. 'Slow' adds the patient, unhurried tone. Note: 'Parallax' on its own is used by many channels, and 'Quiet Parallax' is taken, but this exact name cleared.",
+    "skeptic_score": 1,
+    "concerns": [
+     "The proposer said this exact name had cleared, but my run found an existing music artist with the identical name. That knocks it out.",
+     "'Parallax' alone is very crowded, as the proposer noted."
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "Averted Vision (TAKEN)",
+   "Standard Candle (TAKEN)",
+   "Hour Angle (TAKEN)",
+   "Night Arithmetic (CROWDED)",
+   "Lookback Time (TAKEN)",
+   "Good Seeing (TAKEN)",
+   "Night Soundings (TAKEN)",
+   "Starfathom (TAKEN)",
+   "Distance Ladder (TAKEN)",
+   "Deep Field Notes (TAKEN)",
+   "Midnight Abacus (TAKEN)",
+   "Chalk and Comet (TAKEN)",
+   "Tellurion (TAKEN)",
+   "Wonder Ledger (TAKEN)",
+   "Patient Telescope (TAKEN)",
+   "Unhurried Sky (CROWDED)",
+   "Sounding Line (TAKEN)",
+   "Gibbous Hour (CROWDED)",
+   "Starchalk (TAKEN)",
+   "Plenilune (TAKEN)",
+   "Volvelle (TAKEN)",
+   "Skyreckon (TAKEN)",
+   "Brass Orrery (TAKEN)",
+   "Quiet Parallax (TAKEN)",
+   "Saturn Porch (CROWDED)",
+   "Paper Planetarium (TAKEN)",
+   "Kettle Comet (TAKEN)"
+  ],
+  "best": 7
+ },
+ {
+  "n": 5,
+  "niche": "History documentaries with maps",
+  "tagline": "History, told by the map.",
+  "round1": [
+   {
+    "name": "Ink Tectonics",
+    "why": "Pictures borders as tectonic plates drawn in ink that grind, split and drift across the centuries, which is exactly what animated border maps show. It sounds scholarly but has a hook, and a web search found nothing else using the name.",
+    "skeptic_score": 7.5,
+    "concerns": [
+     "Web check NOT done: this turn's web search limit was already used up before my first search, so I could not look for books, podcasts, companies or trademarks using the name. Under the 'unsure means out' rule, it does not survive yet.",
+     "Heard once, many people will type 'Techtonics' (a very common misspelling). Grab @InkTechtonics too, or make sure the spelling is clear on screen.",
+     "'Tectonics' points to geology. People may expect plate-tectonics content until the tagline explains it.",
+     "It is a little abstract, so the tagline has to say 'history' and 'maps'."
+    ]
+   },
+   {
+    "name": "The Moving Border",
+    "why": "It says the whole idea: borders are not fixed lines but things that travel over time. It fits the folded map with a dashed route, and it has room for any period or continent. I re-checked it in this run.",
+    "skeptic_score": 7,
+    "concerns": [
+     "Web check NOT done (web search limit used up), so it does not survive yet.",
+     "It is an everyday phrase that journalists and academics use for disputed or 'creeping' borders. That makes it hard to own, hard to trademark and hard to find in search, where it competes with news articles.",
+     "'Moving' can also mean touching, or moving house, so it is a little ambiguous.",
+     "The leading 'The' can get dropped when people search or type the handle."
+    ]
+   },
+   {
+    "name": "Border Strata",
+    "why": "Treats history as layers of borders laid one on top of another, the way animated maps stack eras. It sounds scholarly and has room to grow, though it is a little drier than the names above.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Web check NOT done (web search limit used up).",
+     "Dry. It sounds like a GIS or geology product rather than a gripping documentary channel.",
+     "'Strata' is pronounced two ways (STRAY-ta / STRAH-ta), and some people will type 'Stratum' or 'Stratas'.",
+     "It leans toward geology, like Ink Tectonics but with less hook."
+    ]
+   },
+   {
+    "name": "Ink and Erosion",
+    "why": "Ink is how borders get drawn and erosion is how powers wear away. That fits the channel's 'grew, split and vanished' arc and sounds scholarly. The web shows no channel, book or brand with the name.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Web check NOT done (web search limit used up).",
+     "'Erosion' is mostly about decline and points to geology or landscape content.",
+     "'X and Y' names are hard to own: people mix up '&' and 'and', and the pattern is common among small shops and art studios, so collisions are likely.",
+     "It sounds like an art or printmaking studio more than a history channel."
+    ]
+   },
+   {
+    "name": "Wax and Vellum",
+    "why": "Treaties sealed in wax redraw lines drawn on vellum. It gives the old-map, archive feel the tone asks for and suggests diplomacy and conquest without using any of the worn-out words. The web shows only a sealing-wax colour called 'vellum', not a brand.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Web check NOT done (web search limit used up). I could not confirm the proposer's claim that only a sealing-wax colour called 'vellum' turns up.",
+     "Sealing wax and vellum paper are staples of wedding stationery and calligraphy. The name reads like an Etsy stationery or wax-seal shop, which brings a high risk of small-business collisions and audience confusion.",
+     "Many viewers don't know the word 'vellum'. Heard once, it may be typed 'velum' or 'vellam'. Spanish speakers may hear 'vello' (body hair).",
+     "It doesn't mention maps or borders. It suits an archive or manuscripts channel better."
+    ]
+   },
+   {
+    "name": "The Ebbing Line",
+    "why": "A boundary that pulls back the way the sea does, which suits stories of decline and collapse. It is a quieter cousin of The Moving Border, so it works as a close backup.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Web check NOT done (web search limit used up).",
+     "It covers only decline. Empires that grow don't fit, and half the channel's 'grew, split and vanished' arc is about growth.",
+     "Out of context it sounds like poetry, tides or fishing.",
+     "It is a weaker copy of The Moving Border."
+    ]
+   },
+   {
+    "name": "Route and Ruin",
+    "why": "The dashed route in the logo, and the ruin where states and empires end. It is gripping and story-led. One small risk: some listeners say 'route' as 'root', so the tagline or logo should show the spelling.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Web check NOT done (web search limit used up).",
+     "Fails the 'hear it once and type it' test. 'Route' sounds like 'root' or 'rout' (a military defeat, which fits the theme), so 'Root and Ruin' and 'Rout and Ruin' are both likely typos. It also echoes the idiom 'rack and ruin'.",
+     "It sounds like a travel, ruins-exploring or urban-exploration channel, or a fantasy game.",
+     "In Spanish, 'ruin' is an adjective meaning mean or despicable."
+    ]
+   },
+   {
+    "name": "Vellum Tide",
+    "why": "Borders rising and falling like a tide across old parchment. Calm and literary with an old-map texture, and the web shows no other use of the name.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Web check NOT done (web search limit used up). I could not confirm the proposer's 'no other use' claim.",
+     "Vague. It sounds like a fantasy novel, a band or an ambient-music channel, and says nothing about history, maps or borders.",
+     "Same 'vellum' spelling and familiarity problem as Wax and Vellum, plus the Spanish 'vello' echo."
+    ]
+   },
+   {
+    "name": "Parchment Weather",
+    "why": "History as weather moving across an old chart: fronts, storms and pressure systems of power. Evocative and ownable, but more poetic than descriptive, so the tagline would need to do more work.",
+    "skeptic_score": 4,
+    "concerns": [
+     "Web check NOT done (web search limit used up).",
+     "'Weather' will make people expect a weather, climate or ambient/ASMR channel, and it may be filed with weather content.",
+     "The weakest link to borders and empires. The proposer agrees the tagline would have to carry it."
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "Merestone (TAKEN)",
+   "Marchstone (TAKEN)",
+   "Thalweg (TAKEN)",
+   "The Tidemark (TAKEN)",
+   "Seamline (TAKEN)",
+   "The Folded World (TAKEN)",
+   "Restless Ink (TAKEN)",
+   "The Dashed Line (TAKEN)",
+   "Borderlore (TAKEN)",
+   "Ink Weather (TAKEN)",
+   "Borderwake (TAKEN)",
+   "Sovereign Ink (TAKEN)",
+   "Itinerarium (TAKEN)",
+   "The Wandering Line (TAKEN)",
+   "The Redrawn World (CROWDED)",
+   "Graticule (TAKEN)",
+   "Hachure (TAKEN)",
+   "The Ninth Fold (TAKEN)",
+   "Seal and Survey (TAKEN)",
+   "Ink Meridian (CROWDED)"
+  ],
+  "best": 7.5
+ },
+ {
+  "n": 6,
+  "niche": "Sleep history (long, calm narration)",
+  "tagline": "Quiet history for falling asleep.",
+  "round1": [
+   {
+    "name": "Chamberstick",
+    "why": "A chamberstick is the short candle holder with a ring handle that people carried up the stairs to bed for centuries. It matches the single-candle logo exactly, means 'the light you take to bed in the old days', is one easy word, and leaves room for any era.",
+    "skeptic_score": 7,
+    "concerns": [
+     "The web check was not run because the shared web search budget for this turn ran out (200 searches). Books, podcasts, companies, apps and trademarks using this name are unknown. By the rules, an unverified name does not survive.",
+     "It is a common antiques word, so a web search for it will show antique candle holders for sale before the channel. That is mostly a discoverability problem, not a legal one, but the channel will have to earn the top result.",
+     "Many people do not know the word. Heard once, it may be typed as 'Chamber Stick' or 'Chamberstik'. Getting the spaced handle as well would help.",
+     "Small businesses such as antique, candle and gift shops may well use it. A web search should look for these before the name is used."
+    ]
+   },
+   {
+    "name": "Banked Embers",
+    "why": "Banking the fire, covering the coals with ash so they last till morning, was the last job of the night in old homes. It feels warm and hushed and suggests something that glows slowly for hours, like the videos.",
+    "skeptic_score": 6.5,
+    "concerns": [
+     "The web check was not run because the web search budget ran out. This is a natural phrase that is likely already used as a novel or story title, a candle scent, a band or album name, or a bar or restaurant name. None of these could be ruled out.",
+     "'Banked' also brings banks and money to mind, which pulls slightly against the cosy meaning.",
+     "It works more as a mood than as a history channel name; on its own it says sleep or cosiness, not the past."
+    ]
+   },
+   {
+    "name": "Lantern Clock",
+    "why": "The lantern clock was the household clock of the 1600s, a brass clock with a slow single hand. It joins time and soft light, suits multi-hour videos, and fits a candle logo without using the word.",
+    "skeptic_score": 5,
+    "concerns": [
+     "The web check was not run because the web search budget ran out.",
+     "It is a standard term for a type of antique clock, so web and YouTube searches will fill with clock dealers, auction listings and clock-repair videos. The channel would struggle to own the name.",
+     "A generic product term is weak to defend as a brand. Clock, watch and app makers could also use it.",
+     "'Clock' suggests alarms and waking up, which pulls against sleep."
+    ]
+   },
+   {
+    "name": "Thatch and Tallow",
+    "why": "Thatched roofs and tallow lights, the stuff of ordinary homes before electricity. It says 'everyday life in the past' without the worn words, sounds soft, is easy to remember, and stretches from a Roman bakery to a medieval cottage. A web search found no business or title with this name.",
+    "skeptic_score": 5,
+    "concerns": [
+     "The web check was not run because the web search budget ran out. The proposer's claim that the name is unused could not be confirmed. 'X & Tallow' is a very common pattern for tallow skincare, soap and candle makers, so a small shop with this name is quite likely.",
+     "'Tallow' is rendered animal fat. Some listeners will find that unappealing, and it suggests skincare products more than bedtime stories.",
+     "The 'and' makes people unsure how to type it (&, 'n', and), and the handle runs together as ThatchandTallow.",
+     "It sounds like a pub, a craft shop or a homesteading channel more than a sleep channel."
+    ]
+   },
+   {
+    "name": "Ages Abed",
+    "why": "'Ages' for history, 'abed' (old English for 'in bed') for sleep: the whole idea in two short words, said in one breath. Small risk: Abed is also a given name, so a few people may first read it as a name.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "The web check was not run because the web search budget ran out.",
+     "Many people will read 'Abed' as a name, and in English-speaking media it is best known as the character Abed in the sitcom Community. 'Ages, Abed' can read like a line spoken to him.",
+     "Heard aloud it is easily misheard as 'Ages Ahead', which means the opposite (the future) and sends people to other searches.",
+     "'Abed' is an archaic word that many viewers will not know. Run together as 'agesabed', the handle is hard to read."
+    ]
+   },
+   {
+    "name": "Sandglass Hours",
+    "why": "Sandglass is the old word for an hourglass. With 'hours' it suggests time running slowly and long videos, and it is calm and easy to say. It points less clearly to history than the names above.",
+    "skeptic_score": 4,
+    "concerns": [
+     "The web check was not run because the web search budget ran out. 'Sandglass' is used by several products and businesses, which a search would need to rule out.",
+     "It hardly suggests history and sounds more like a meditation, focus-timer or productivity app.",
+     "The image of sand running out suggests deadlines and time slipping away more than rest.",
+     "People may type 'Hourglass Hours' or 'Sand Glass Hours'."
+    ]
+   },
+   {
+    "name": "Wax and Wattle",
+    "why": "Wattle-and-daub walls and wax lights: humble materials of old homes, so it points to ordinary life in the past. It is a gentle sound pair and easy to type.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "The web check was not run because the web search budget ran out. Wattle is Australia's national flower, and 'Wax & Wattle' sounds very much like an Australian candle or soap shop, so a clash with a small business is likely.",
+     "'Wattle' is also the loose skin under a turkey's (or a person's) neck, an unflattering image.",
+     "Few people know wattle-and-daub. As with Thatch and Tallow, the 'and' makes it unclear how to type it.",
+     "It reads as a craft or candle brand, not a sleep history channel."
+    ]
+   },
+   {
+    "name": "Curfew Embers",
+    "why": "'Curfew' comes from the medieval couvre-feu, the evening bell that told every house to cover its fire for the night. That makes a lovely tagline story. Small drawback: 'curfew' also has a modern 'rules' feel.",
+    "skeptic_score": 3,
+    "concerns": [
+     "The web check was not run because the web search budget ran out.",
+     "'Curfew' now means police curfews, lockdowns, unrest and teenagers grounded. Those are rules and punishment, the opposite of a soothing bedtime.",
+     "The couvre-feu story needs explaining before the name makes sense; without it the words just sit side by side.",
+     "It could be read as a game, a band or a dystopian novel title."
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "The Long Wick (TAKEN)",
+   "Night Stair (TAKEN)",
+   "Rushlight (TAKEN, over 20 channels)",
+   "The Warming Room (TAKEN)",
+   "After Compline (TAKEN)",
+   "Tallow Hours (TAKEN)",
+   "Nightertale (TAKEN, 597 subscribers)",
+   "Noctuary (TAKEN, over 20 channels including sleep and history ones)",
+   "The Warming Pan (TAKEN)",
+   "Aforetime (TAKEN)",
+   "Hours Ago (TAKEN)",
+   "The Slow Past (TAKEN)",
+   "Firecover (TAKEN)",
+   "Wick and Wool (CROWDED)",
+   "Horarium (TAKEN)",
+   "Stillwick (TAKEN)",
+   "The Smooring (TAKEN, near-name 'The Mooring')",
+   "Pillow Archive (TAKEN)",
+   "Rushwick (TAKEN)",
+   "Nightward (TAKEN, many sleep and history channels)",
+   "Hearthward (TAKEN, including a history-stories channel)",
+   "Nightlong (TAKEN, including 'Nightlong History')",
+   "Erewhile (TAKEN)",
+   "Moth Hour (TAKEN)",
+   "Quiet Millennia (CROWDED)",
+   "Low Wick (TAKEN)",
+   "Ember Abbey (TAKEN)",
+   "Hearth and Hourglass (TAKEN)"
+  ],
+  "best": 7
+ },
+ {
+  "n": 7,
+  "niche": "True crime (historic, well-documented cases)",
+  "tagline": "Real cases. Told from the record.",
+  "round1": [
+   {
+    "name": "Wax Impression",
+    "why": "It means the mark a seal leaves in wax, which is your red-seal logo. It is also the old thief's trick of pressing a key into wax to copy it, which is how the 1855 Great Gold Robbery was done. It sounds sober and archival, and it is quietly about heists.",
+    "skeptic_score": 6,
+    "concerns": [
+     "Fails the 'unsure means out' rule only because the web check could not be done; this is the best name of the eight on merit",
+     "'Wax impression' is an everyday term in dentistry, locksmithing and jewellery casting, so web and Google results will be crowded with those and the phrase is hard to own as a trademark",
+     "From memory, not verified: wax-seal stamp shops and vinyl record sellers ('wax' is slang for records) plausibly trade as 'Wax Impression(s)'; this needs checking",
+     "'Impression' can also suggest comedy impressions or 'first impressions'"
+    ]
+   },
+   {
+    "name": "Ink and Gall",
+    "why": "Iron gall ink is the ink most old court records were written in. Gall also means brazen nerve, the thing every swindler and hoaxer needs. Half the name is the record and half is the crook.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Not web-checked, so it is out under the 'unsure means out' rule",
+     "Weak radio test: heard once, it can come out as 'Ink and Gaul', 'Inc and Gal' or 'Ink and Gold', and people won't know whether to write 'and', '&' or 'n'",
+     "The iron-gall-ink meaning is obscure, so most viewers will only get the 'gall' (nerve) half",
+     "From memory, not verified: calligraphy-ink makers and tattoo studios often use 'ink' and 'gall' names, so a small business conflict is likely"
+    ]
+   },
+   {
+    "name": "Wax and Warrant",
+    "why": "Sealing wax and the warrant stand for the document and the law catching up. It suits the logo, has a firm sound for a sober brand and leaves room for any era or crime type.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Not web-checked, so it is out under the 'unsure means out' rule",
+     "Echoes 'wax and wane', so listeners may hear or remember it as 'Wax and Wane'; 'Warrant' can be heard as 'Warren'",
+     "The 'X and Y' pattern sounds like a candle shop, barber or bar, so it is generic and easy to confuse with small businesses (likely ones exist; unverified)",
+     "'Warrant' is also the name of a well-known 1980s glam-metal band; a minor overlap"
+    ]
+   },
+   {
+    "name": "Hand and Seal",
+    "why": "It comes from 'given under my hand and seal', the formula that made old deeds and depositions official. It describes the logo exactly, a signed document with a red seal. It is short and passes the radio test easily. A small risk is that it could be mistaken for a notary business.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Not web-checked, so it is out under the 'unsure means out' rule",
+     "It is a standard legal formula, so notary, apostille and document-signing businesses very plausibly use it (the proposer flagged this too); a legal-services brand under the same name would knock it out",
+     "'Hand seals' is a very well-known term in the anime Naruto (ninja hand signs), which will crowd search results; 'seal' also brings up the animal",
+     "Says nothing about crime, frauds or heists; a viewer would not guess the genre"
+    ]
+   },
+   {
+    "name": "Court Hand",
+    "why": "Court hand was the handwriting used in English legal records for centuries. It is a deep-cut archival name with a second reading: the hand of the court. Its weakness is that some people may hear it as a sports or job term at first.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Not web-checked, so it is out under the 'unsure means out' rule",
+     "An obscure palaeography term: few viewers will know it, and many will hear a sports term (tennis or basketball court) or a job title (like 'farm hand'), as the proposer admits",
+     "As a historical script it is likely used for fonts and archive teaching material, so it is generic and hard to own (unverified)",
+     "The handle 'CourtHand' can be misread as 'Cour Thand'"
+    ]
+   },
+   {
+    "name": "Sealed and Sworn",
+    "why": "Every source the channel uses was sealed or sworn. It is calm and trustworthy, it suits the red seal, and it signals that this is a record-based retelling rather than sensational.",
+    "skeptic_score": 4,
+    "concerns": [
+     "Not web-checked, so it is out under the 'unsure means out' rule",
+     "Listeners will easily swap the order ('Sworn and Sealed') and look up the wrong handle",
+     "Echoes 'Signed, Sealed, Delivered' and sounds like a romance or fantasy novel title or a legal-services firm; such titles plausibly exist (unverified)",
+     "Generic and doesn't signal frauds, heists or hoaxes"
+    ]
+   },
+   {
+    "name": "Witness Whereof",
+    "why": "It comes from 'In witness whereof', the line at the end of sworn and sealed documents, just before the signature and seal. It is exact and archival, it suits the wax-seal logo, and it promises testimony on the record rather than gore.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "Not web-checked, so it is out under the 'unsure means out' rule; 'In Witness Whereof' is a stock legal phrase likely used for book titles and legal blogs (unverified)",
+     "Without 'In' the name reads like a cut-off phrase",
+     "'Whereof' is archaic and easily misspelled ('Wherof', 'Where of', 'Wearof')",
+     "'Witness' is heavily used in true-crime titles and suggests murder testimony rather than frauds and hoaxes"
+    ]
+   },
+   {
+    "name": "Writ and Ruse",
+    "why": "A writ is the court's paper and a ruse is the con. Together they describe every episode: a fraud or hoax rebuilt from the documents. YouTube's channel search returned no channels at all for it.",
+    "skeptic_score": 3,
+    "concerns": [
+     "Not web-checked, so it is out under the 'unsure means out' rule",
+     "Fails the radio test: the silent W and 'ruse' make it sound like 'Rit and Roos' or 'Rit and Rues', so someone who hears it once can't type it",
+     "Sounds like a weaker 'Rhyme and Reason'",
+     "The empty search result shows it is unused, not that it is good"
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "Iron Gall",
+   "Wax Jack",
+   "Muniment Room",
+   "Onionskin",
+   "Deed Box",
+   "True Copy",
+   "Gold Brick",
+   "Writ Large",
+   "Foolscap",
+   "Hereunto",
+   "Quarter Sessions",
+   "Larceny by Lamplight (CROWDED)"
+  ],
+  "best": 6
+ },
+ {
+  "n": 8,
+  "niche": "Legal, insurance and real-estate explainers",
+  "tagline": "Contracts, cover and closings, in plain English.",
+  "round1": [
+   {
+    "name": "Paperwork Atlas",
+    "why": "It presents the channel as a map of confusing paperwork, one term or document per page, which leaves plenty of room to grow into new document types. It's plain to type and reassuring in tone.",
+    "skeptic_score": 6.5,
+    "concerns": [
+     "Web check (step 2) not done, so it can't be trusted completely yet and doesn't survive under the 'unsure means out' rule.",
+     "'Atlas' appears in a great many brand names (software, publishing, travel), so the name may be hard to own in search and trademark, and it may sound like a document-management app.",
+     "'Paperwork' suggests drudgery, though the channel exists to ease it.",
+     "Strengths: easy to type after hearing it once, no bad meaning in English or Spanish, covers legal, insurance and real-estate papers, and leaves room to grow."
+    ]
+   },
+   {
+    "name": "Deeds and Deductibles",
+    "why": "It names a real-estate document and an insurance term together, so viewers know the subject at once, and the alliteration makes it easy to remember and say. It's a bit more literal than the names above, and legal topics such as liens and leases sit under it comfortably.",
+    "skeptic_score": 6.5,
+    "concerns": [
+     "Web check not done, so it doesn't survive.",
+     "Reads like the name of an insurance agency or title company, so a small local firm may already use it (unverified), and it could imply the channel sells a service.",
+     "'Deeds' also means good deeds, a small ambiguity.",
+     "19-character handle; viewers may type an '&' or 'Deductables'."
+    ]
+   },
+   {
+    "name": "Whereas and Wherefore",
+    "why": "'Whereas' opens the background section of contracts and 'wherefore' means 'why', so the name promises the background and the reason behind every term. It sounds tidy and well-read, it's easy to spell after hearing it once, and it covers legal, insurance and real-estate papers alike.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Web check not done, so it doesn't survive.",
+     "Easily misheard as the common idiom 'the whys and wherefores', which other blogs, podcasts or businesses probably use (unverified), so viewers may type the wrong name.",
+     "Many people think 'wherefore' means 'where' (from Romeo and Juliet), so the meaning behind the name is lost on most of them.",
+     "Archaic legalese is at odds with a plain-English promise."
+    ]
+   },
+   {
+    "name": "The Signing Table",
+    "why": "It's the table where people sign a lease, a closing packet or an insurance policy, and that's the moment they most need the terms made clear. It reassures without giving advice ('pull up a chair before you sign'), fits all three subjects, and suits a magnifying glass over a page.",
+    "skeptic_score": 5.5,
+    "concerns": [
+     "Web check not done, so it doesn't survive.",
+     "Generic phrase also used for wedding guest-book tables and book signings, and a likely name for notary or loan-signing-agent businesses (unverified). It's descriptive, so it's hard to own in search or trademark.",
+     "Could suggest the channel attends closings or acts as a notary, which blurs the 'education only, never advice' line.",
+     "35 channels in search shows a crowded result space."
+    ]
+   },
+   {
+    "name": "Termwright",
+    "why": "A wright is a skilled maker, so a termwright is someone who crafts terms into something readable. It's distinctive and fully ownable (YouTube search returned no channels). Radio risk: a listener may type 'Termright', so the second-choice handle should be claimed as well.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Web check not done, so it doesn't survive.",
+     "Fails the 'hear it once, type it' test: 'Termright', 'Termwrite' and 'Term Rite' are all likely spellings, so you'd need to defend several handles.",
+     "Sounds like a surname-based law firm ('Wright'), which may suggest legal services.",
+     "'Term' also suggests term life insurance or school terms."
+    ]
+   },
+   {
+    "name": "Now Therefore",
+    "why": "'NOW, THEREFORE' is the turn in a contract where the background ends and the actual terms begin. As a name it says 'now you understand it, so you can read on with confidence'. It sounds calm and orderly, and it isn't tied to any one subject.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Web check not done, so it doesn't survive.",
+     "'Now therefore' is a frequent Bible and sermon phrase, so search results will likely be crowded with religious content and ministries may use it (unverified).",
+     "Sounds like a sentence fragment, and newcomers can't tell the subject from it.",
+     "Viewers may type 'Now Therefor'."
+    ]
+   },
+   {
+    "name": "Glossworthy",
+    "why": "A gloss is an explanatory note written between the lines of a text, which is exactly what the logo shows, and the '-worthy' ending echoes 'trustworthy'. It's short, easy to say and spell, ownable (YouTube search returned no channels at all), and it doesn't tie the channel to one kind of document. One risk: some people may think of lip gloss at first.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Web check not done, so it doesn't survive.",
+     "Bad meaning for this channel: to 'gloss over' means to skim past or hide something, the opposite of a channel built on clarity and trust.",
+     "The lip gloss and 'glossy' (superficial) associations are strong, and it sounds like a cosmetics, nail or detailing brand, so beauty businesses may well use it (unverified).",
+     "The scholarly meaning of 'gloss' is unknown to most viewers."
+    ]
+   },
+   {
+    "name": "Terms and Teacups",
+    "why": "It sets dry terms beside a calming cup of tea, which signals that the explanations are unhurried and friendly. 'Terms' covers legal, insurance and real-estate vocabulary alike. It's warmer and more playful than the others, which some owners will prefer and some won't.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Web check not done, so it doesn't survive.",
+     "Sounds like a cozy lifestyle or tea channel; the requested tone is 'tidy, trustworthy', not whimsical.",
+     "Could be typed as 'Terms and Tea Cups' or 'Terms & T-Cups'.",
+     "The tea theme feels British and may not suit a US insurance and real-estate audience."
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "The Glossator",
+   "Hereinafter",
+   "Initial Here",
+   "Silcrow",
+   "Legibly",
+   "Loupe and Ledger",
+   "Ironed Out",
+   "Lamp and Lexicon",
+   "Paper Compass",
+   "Before the Pen",
+   "The Reading Glass",
+   "Ledger Lantern",
+   "Termlight",
+   "The Undersigned",
+   "Notwithstanding",
+   "Paper Lighthouse",
+   "Recto Verso",
+   "Kitchen Table Terms",
+   "The Folded Corner",
+   "Be It Known",
+   "The Paper Shepherd",
+   "Yellow Highlighter",
+   "The Fair Copy",
+   "The Margin Lamp"
+  ],
+  "best": 6.5
+ },
+ {
+  "n": 9,
+  "niche": "Ambient, lofi and sleep sound",
+  "tagline": "Long, quiet sound for sleep and focus.",
+  "round1": [
+   {
+    "name": "Cloister Weather",
+    "why": "A cloister is the covered walk around an open courtyard: you sit under the roof and watch the rain fall just past its edge, which is the drawn logo. It also suggests quiet, cool stone and long stretches of focus, and it can cover wind, thunder, fire and piano as well as rain.",
+    "skeptic_score": 7,
+    "concerns": [
+     "Fails only because the web check could not be done. Under the 'unsure means out' rule it cannot be trusted yet",
+     "'Cloister' is a less common word. A listener may type 'Cloyster' or 'Closter'",
+     "It has a monastic, church feel that some viewers may read as religious",
+     "Best mood fit of the set: still, cool stone, sheltered, and broad enough for wind, fire and piano"
+    ]
+   },
+   {
+    "name": "Pewter Hours",
+    "why": "Pewter is the cool grey of an overcast sky, and 'Hours' promises the long runtimes. It sets a still, cool mood without being tied to any one sound, so the channel has room to grow.",
+    "skeptic_score": 6.5,
+    "concerns": [
+     "Unverified on the web, so it does not survive",
+     "'Pewter' can be typed 'Puter' or 'Pewder'. Spanish speakers may not know the word (in Spanish it is 'peltre')",
+     "It says nothing about sound, rest or sleep, so thumbnails and the logo have to carry the meaning",
+     "'Hours' is common in ambient video titles ('10 Hours of Rain'), so it may blend into them in search"
+    ]
+   },
+   {
+    "name": "Wide Eaves",
+    "why": "Eaves are the roof edge the rain runs off, so the name matches the roof-line logo, and 'wide' gives the spacious, sheltered feeling the tone asks for. It is short and plain, and works as one listen, one place to stay.",
+    "skeptic_score": 6,
+    "concerns": [
+     "Unverified on the web, so it does not survive",
+     "Said aloud it is close to 'wide eyes', the opposite of falling asleep",
+     "'Eaves' is unfamiliar to many non-native speakers and may be typed 'Wide Eves'",
+     "As a generic building phrase it is hard to own in Google results"
+    ]
+   },
+   {
+    "name": "Gable Weather",
+    "why": "The gable is the peaked roof line in the logo. 'Weather' takes in rain, wind, thunder and fire, not rain alone. It is simple to say and spell and reads like a place you could stay for hours.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Unverified on the web, so it does not survive",
+     "'Gable' reads as a surname, and it may be typed 'Gabel'",
+     "The hard 'G' and the peaked-roof image feel more like a farmhouse than still and spacious; flatter than Cloister Weather"
+    ]
+   },
+   {
+    "name": "Linen Thunder",
+    "why": "Cool, soft linen set against a far-off rumble: thunder heard muffled and from a distance, the way this channel uses it. The texture word makes it distinctive and easy to remember without saying 'rain'.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Unverified on the web, so it does not survive",
+     "Unfortunate reading: 'thunder' under the bed linen invites a fart joke (the 'Dutch oven' gag), which is a real risk for a sleep channel with open comments",
+     "Sounds like a bedding brand or a band, not an ambient channel",
+     "'Thunder' works against the still, cool tone and ties the brand to one sound"
+    ]
+   },
+   {
+    "name": "Long Eaves",
+    "why": "Long roof edges dripping rain, and spoken aloud it also sounds like 'long eves', long evenings, which fits hours-long night listening. The catch: a listener might type 'Long Eves', so it is a little weaker on the radio test than Wide Eaves.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Unverified on the web, so it does not survive",
+     "Fails the heard-once test: easily heard as 'Long Eves' or 'Long Leaves', so listeners type the wrong handle",
+     "Generic building phrase, hard to own in search"
+    ]
+   },
+   {
+    "name": "Eaves and Thunder",
+    "why": "Close shelter set against a distant storm, the same contrast as the logo. It reads like the title of an album and has a nice rhythm, but at three words it is a little long.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Unverified on the web, so it does not survive",
+     "Three words: people will type 'and', '&' or 'n'. The handle reads 'Eavesand Thunder' in lowercase",
+     "'Eaves' heard as 'Eves' ('Eves and Thunder')",
+     "'Thunder' again pulls against the still tone and ties the name to one sound"
+    ]
+   },
+   {
+    "name": "Under Gable",
+    "why": "It says the logo plainly: under the roof, out of the weather. Short and clean, but flatter than the names above, and 'Gable' could be heard as a surname. A backup.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "Unverified on the web, so it does not survive",
+     "Flat; reads as 'under (Clark) Gable', a surname",
+     "Heard as one word, 'Undergable', with no clear meaning",
+     "Says nothing about sound, rest or the mood"
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "Eavesdrip (TAKEN)",
+   "Impluvium (TAKEN)",
+   "Brontide (TAKEN)",
+   "Attic Weather (TAKEN)",
+   "Low Ceiling (TAKEN)",
+   "Indoor Weather (TAKEN)",
+   "Loggia Hours (CROWDED)",
+   "Felt Thunder (TAKEN)",
+   "Weatherside (TAKEN)",
+   "Shelterbelt (TAKEN)",
+   "Clearstory (TAKEN)",
+   "Lantern Weather (TAKEN)",
+   "Stillroom (TAKEN)",
+   "Northlight Room (TAKEN)",
+   "Paper Thunder (TAKEN)",
+   "Rooms Without Clocks (TAKEN)",
+   "Weatherkeep (TAKEN)",
+   "Fenlight (TAKEN)",
+   "Leeward Hours (CROWDED)"
+  ],
+  "best": 7
+ },
+ {
+  "n": 10,
+  "niche": "3D animated story Shorts",
+  "tagline": "Very small heroes. Very short stories.",
+  "round1": [
+   {
+    "name": "Errandlings",
+    "why": "'The small ones sent on big errands' names the whole cast in one easy word, and the logo creature could be called the first Errandling. YouTube's search found no channels with this name.",
+    "skeptic_score": 7,
+    "concerns": [
+     "Knocked out only because the web check couldn't run. Under the rule that an unsure name does not survive, it can't pass until someone searches the web for it.",
+     "Spelling: someone who hears it once may type 'Erandlings' or 'Errandlins'. It also sounds a little like 'Earthlings'.",
+     "An 'errand' means being sent to do something, a bit like a chore. A snail crossing a road is more of a quest than an errand, so the idea needs a tagline to come across.",
+     "Invented words are the easiest to trademark, but they are also the kind an indie game, a webcomic or fan fiction might already use quietly. Only a web search will show that."
+    ]
+   },
+   {
+    "name": "Tall Errands",
+    "why": "Each Short is a tall order given to someone very short: a snail's road crossing, a raindrop's trip home. It works for any character or task, so the channel can grow, and it suggests a tagline like 'Tall errands for very short heroes.' The singular 'Tall Errand' (@TallErrand) also came back CLEAR and is worth claiming too.",
+    "skeptic_score": 6.5,
+    "concerns": [
+     "Knocked out because the web check couldn't run, so it can't be called safe.",
+     "The 'tall order' joke takes a moment to land. Heard once, it may be taken for 'Toll Errands', or simply sound like everyday chores.",
+     "'Errands' sounds like a chore and doesn't hint at animation, warmth or humour. The name relies on the suggested tagline."
+    ]
+   },
+   {
+    "name": "Thimble Summit",
+    "why": "For a creature this size, the top of a thimble is a mountain peak, and planting a flag there is a victory. That matches the logo's flag and the warm, funny sense of scale in every episode.",
+    "skeptic_score": 6,
+    "concerns": [
+     "Knocked out because the web check couldn't run.",
+     "It sounds like a place or an event (a 'summit' can be a conference), and it ties the channel to climbing and peaks. That gives less room to grow than names about the characters.",
+     "Children may not know the word 'thimble' any more."
+    ]
+   },
+   {
+    "name": "Pluck and Pennant",
+    "why": "Pluck is old-fashioned courage and a pennant is the little flag on the logo creature's head. It sounds like the title of a storybook, and YouTube's search found no channels with this name at all.",
+    "skeptic_score": 5,
+    "concerns": [
+     "Knocked out because the web check couldn't run.",
+     "Hard to type after hearing it once: 'and', '&' or 'n'? 'Pennant' or 'Pennent'? The handle buries the 'and'.",
+     "Two old-fashioned words most children won't know. In the US, 'pennant' first brings baseball to mind.",
+     "'Pluck' rhymes with a swear word, which can invite playground jokes. That's a small risk, but it is a family brand."
+    ]
+   },
+   {
+    "name": "Doorstep Odyssey",
+    "why": "An epic voyage at doorstep scale, which is exactly what crossing a road is for a snail. YouTube's search found only one channel, and it has a different name.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Knocked out because the web check couldn't run.",
+     "People often misspell 'Odyssey' ('Odessy', 'Odyssy'), which hurts search and handle typing.",
+     "'Doorstep' suggests deliveries and doorstep journalism. The name is long, and 'Odyssey' is a worn-out title word."
+    ]
+   },
+   {
+    "name": "Gumption Lane",
+    "why": "An imaginary street where small, stubborn, determined creatures live. As a place name it can grow into a whole world of recurring characters, and it has a homely storybook warmth.",
+    "skeptic_score": 4.5,
+    "concerns": [
+     "Knocked out because the web check couldn't run.",
+     "Sounds like an address, an estate agent or a café rather than a cartoon. It says nothing about small characters, animation or humour.",
+     "A place-name structure ('___ Lane') is crowded and hard to own."
+    ]
+   },
+   {
+    "name": "Pinch of Pluck",
+    "why": "A pinch is a tiny amount and pluck is courage, so the name says 'a small amount of courage goes a long way' without using any of the worn-out words. It is gentle, funny and easy to say aloud.",
+    "skeptic_score": 3.5,
+    "concerns": [
+     "Knocked out because the web check couldn't run, and weak as a brand anyway.",
+     "The 'Pinch of ___' pattern is strongly tied to food brands, so people will think it's a recipe channel.",
+     "Awkward to say: 'pinch of pluck' runs the p sounds together, and 'Pluck' rhymes with a swear word.",
+     "Describes a quality, not the characters or the world, so it has little room to grow."
+    ]
+   }
+  ],
+  "tried_and_taken": [
+   "Inchmeal (TAKEN)",
+   "Doorstep Everest (CROWDED)",
+   "Pluckling (TAKEN)",
+   "Molehill Mountain (TAKEN)",
+   "Mettlesome (TAKEN)",
+   "Hardihood (TAKEN)",
+   "Uphill Both Ways (TAKEN)",
+   "Inchward (CROWDED)",
+   "Puddle Epic (CROWDED)",
+   "Thimblefolk (TAKEN)",
+   "Teacup Odyssey (TAKEN)",
+   "Lionheart Lane (CROWDED)",
+   "Inchmile (TAKEN)",
+   "Long Inch (TAKEN)"
+  ],
+  "best": 7
+ }
+]

@@ -1,0 +1,258 @@
+[
+ {
+  "query": "fraud documentary",
+  "period": "year",
+  "videos": [
+   {
+    "title": "Inside Las Vegas’ Underground Sex Trade | High Class (Full Documentary)",
+    "id": "kvEypYGj2D8",
+    "views": 3638733,
+    "age_days": 150,
+    "length_s": 2906,
+    "channel": "Magic Lantern Pictures",
+    "channel_id": "UCGbzYPBELX4g5yHY_juHZlw",
+    "subs": 76400,
+    "outlier": 47.63,
+    "views_per_day": 24258
+   },
+   {
+    "title": "You Can See Everything | Official Trailer HD | A24",
+    "id": "HvW_N5p1q44",
+    "views": 22770269,
+    "age_days": 30,
+    "length_s": 149,
+    "channel": "A24",
+    "channel_id": "UCuPivVjnfNo4mb3Oog_frZg",
+    "subs": 1990000,
+    "outlier": 11.44,
+    "views_per_day": 759009
+   },
+   {
+    "title": "How We Tracked a ‘Fake Prince’ Scammer to his Nigerian Mansion",
+    "id": "ysuaxtzVnic",
+    "views": 1943390,
+    "age_days": 270,
+    "length_s": 779,
+    "channel": "Organized Crime and Corruption Reporting Project",
+    "channel_id": "UCAdFen-6WQOxmDHK3saMD8A",
+    "subs": 181000,
+    "outlier": 10.74,
+    "views_per_day": 7198
+   },
+   {
+    "title": "The Video You Need To See Before The Elizabeth Holmes Doc (Did She Really Lie?)",
+    "id": "xXF1NDn9I5o",
+    "views": 2474939,
+    "age_days": 30,
+    "length_s": 6187,
+    "channel": "Coffee and Cults",
+    "channel_id": "UCnpOlzpWAjg03o8sOd6K1xw",
+    "subs": 444000,
+    "outlier": 5.57,
+    "views_per_day": 82498
+   },
+   {
+    "title": "Tarnished the Badge: the Jamey Noel Story | FULL DOCUMENTARY",
+    "id": "uSA8msFR8XU",
+    "views": 1668028,
+    "age_days": 120,
+    "length_s": 3342,
+    "channel": "WHAS11",
+    "channel_id": "UCTvZcgH_rsvaGuZ8mU5jpnA",
+    "subs": 391000,
+    "outlier": 4.27,
+    "views_per_day": 13900
+   },
+   {
+    "title": "The North Korean Operatives Hiding Inside U.S. Companies | WSJ Documentary",
+    "id": "RUhdmIFpb-w",
+    "views": 10430583,
+    "age_days": 90,
+    "length_s": 1920,
+    "channel": "The Wall Street Journal",
+    "channel_id": "UCK7tptUDHh-RYDsdxO1-5QQ",
+    "subs": 6740000,
+    "outlier": 1.55,
+    "views_per_day": 115895
+   },
+   {
+    "title": "The Theranos Trap",
+    "id": "d9EaqyoA29E",
+    "views": 4553988,
+    "age_days": 28,
+    "length_s": 5079,
+    "channel": "Hank Green",
+    "channel_id": "UCOT2iLov0V7Re7ku_3UBtcQ",
+    "subs": 3200000,
+    "outlier": 1.42,
+    "views_per_day": 162642
+   },
+   {
+    "title": "Investigating Jared Kushner's Empire of Fraud & Corruption",
+    "id": "MM7QGccszUU",
+    "views": 4201040,
+    "age_days": 14,
+    "length_s": 4518,
+    "channel": "Channel 5 with Andrew Callaghan",
+    "channel_id": "UC-AQKm7HUNMmxjdS371MSwg",
+    "subs": 3760000,
+    "outlier": 1.12,
+    "views_per_day": 300074
+   },
+   {
+    "title": "How the Internet Exposed a $10,000,000 Scam",
+    "id": "oc8G53Tbsvs",
+    "views": 5779299,
+    "age_days": 11,
+    "length_s": 2890,
+    "channel": "fern",
+    "channel_id": "UCODHrzPMGbNv67e84WDZhQQ",
+    "subs": 5690000,
+    "outlier": 1.02,
+    "views_per_day": 525391
+   },
+   {
+    "title": "How China's 'Perfect' Spy Got Caught | Bloomberg Investigates",
+    "id": "Ox8HVWjboww",
+    "views": 4525491,
+    "age_days": 240,
+    "length_s": 1539,
+    "channel": "Bloomberg Originals",
+    "channel_id": "UCUMZ7gohGI9HcU9VNsr2FJQ",
+    "subs": 5230000,
+    "outlier": 0.87,
+    "views_per_day": 18856
+   },
+   {
+    "title": "Inside the Dark World of Poker Cheating",
+    "id": "EkLmxmUfgBU",
+    "views": 4382875,
+    "age_days": 120,
+    "length_s": 1731,
+    "channel": "fern",
+    "channel_id": "UCODHrzPMGbNv67e84WDZhQQ",
+    "subs": 5690000,
+    "outlier": 0.77,
+    "views_per_day": 36524
+   },
+   {
+    "title": "FIFA’s Decades of Corruption EXPOSED | Ep 3",
+    "id": "7t5nIRvqNVU",
+    "views": 1713944,
+    "age_days": 90,
+    "length_s": 2006,
+    "channel": "Zeteo",
+    "channel_id": "UCVG72F2Q5yCmLQfctNK6M2A",
+    "subs": 2310000,
+    "outlier": 0.74,
+    "views_per_day": 19044
+   },
+   {
+    "title": "Exposing a $1,900,000,000 Pharma Company",
+    "id": "Eo0JQLIG6hA",
+    "views": 3841613,
+    "age_days": 90,
+    "length_s": 2682,
+    "channel": "fern",
+    "channel_id": "UCODHrzPMGbNv67e84WDZhQQ",
+    "subs": 5690000,
+    "outlier": 0.68,
+    "views_per_day": 42685
+   },
+   {
+    "title": "What is Bruno Mars HIDING? | Documentary",
+    "id": "E9sWkB1re4s",
+    "views": 3017252,
+    "age_days": 120,
+    "length_s": 2081,
+    "channel": "Dieck Docs",
+    "channel_id": "UCGWh7JC2whurOf1rLrlaHIQ",
+    "subs": 4660000,
+    "outlier": 0.65,
+    "views_per_day": 25144
+   },
+   {
+    "title": "Inside a Teenage Crime Empire (This is a Billion Dollar Theft Ring)",
+    "id": "ujQ73x8wNEU",
+    "views": 2430928,
+    "age_days": 300,
+    "length_s": 1964,
+    "channel": "Tommy G",
+    "channel_id": "UCakIVH4t7k4vZe1AWPpewgA",
+    "subs": 3820000,
+    "outlier": 0.64,
+    "views_per_day": 8103
+   },
+   {
+    "title": "Catch Her if You Can | Full Episode",
+    "id": "lC4fKQ6-dl4",
+    "views": 1616793,
+    "age_days": 300,
+    "length_s": 2513,
+    "channel": "48 Hours",
+    "channel_id": "UC7htuVs06oduI3xSfTdcxPA",
+    "subs": 2590000,
+    "outlier": 0.62,
+    "views_per_day": 5389
+   },
+   {
+    "title": "The Insane Hunt for China's Biggest Scammer",
+    "id": "a4EcjsnM6ro",
+    "views": 3308320,
+    "age_days": 90,
+    "length_s": 1800,
+    "channel": "fern",
+    "channel_id": "UCODHrzPMGbNv67e84WDZhQQ",
+    "subs": 5690000,
+    "outlier": 0.58,
+    "views_per_day": 36759
+   },
+   {
+    "title": "Before the Great Recession, “The Warning” (full documentary)",
+    "id": "ZZ25uZtey34",
+    "views": 2027873,
+    "age_days": 270,
+    "length_s": 3275,
+    "channel": "FRONTLINE PBS | Official",
+    "channel_id": "UC3ScyryU9Oy9Wse3a8OAmYQ",
+    "subs": 4880000,
+    "outlier": 0.42,
+    "views_per_day": 7511
+   },
+   {
+    "title": "How Trump's Visa Crackdown Triggered a Texas Housing Bust",
+    "id": "HUnh1vwrFV8",
+    "views": 2884379,
+    "age_days": 150,
+    "length_s": 572,
+    "channel": "Bloomberg Television and Bloomberg Originals",
+    "channel_id": "",
+    "subs": null,
+    "outlier": null,
+    "views_per_day": 19229
+   },
+   {
+    "title": "The TRUE STORY of Delta Force Operator John \"Shrek\" McPhee | Full Documentary",
+    "id": "xaXvZ1qisXM",
+    "views": 2286389,
+    "age_days": 330,
+    "length_s": 3391,
+    "channel": "MulliganBrothers and Sheriff of Baghdad | John \"Shrek\" McPhee",
+    "channel_id": "",
+    "subs": null,
+    "outlier": null,
+    "views_per_day": 6928
+   }
+  ]
+ },
+ {
+  "query": "ponzi scheme documentary",
+  "period": "year",
+  "videos": []
+ },
+ {
+  "query": "corporate scandal explained",
+  "period": "year",
+  "videos": []
+ }
+]

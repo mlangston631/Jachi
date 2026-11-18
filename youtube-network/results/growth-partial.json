@@ -1,0 +1,2977 @@
+{
+  "summary": "Scrape what is winning on YouTube in each niche, build an evidence-based growth and monetization plan per channel, strip anything misleading or risky, then plan the ten as one portfolio",
+  "agentCount": 15,
+  "logs": [
+    "[scout:4] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scout:5] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scout:6] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scout:7] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scout:8] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scout:9] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scout:10] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[strategy:2] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[strategy:1] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scrutiny:2] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scrutiny:1] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "[scout:3] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)",
+    "No finished plan for channels: 3, 4, 5, 6, 7, 8, 9, 10",
+    "[portfolio] failed: You've hit your 5-hour limit · resets 11:30pm (UTC)"
+  ],
+  "result": {
+    "channels": [
+      {
+        "channel": 1,
+        "what": "stick-figure money and economics explainers",
+        "scout": {
+          "videos_examined": 1176,
+          "queries_run": [
+            "economics explained (year, month)",
+            "how money works (year, month)",
+            "stick figure explained finance (year, month)",
+            "inflation explained (year, month)",
+            "why is everything so expensive (year, month)",
+            "how banks make money (year, month)",
+            "every level of wealth explained (year, month)",
+            "every money laundering technique explained (year, month)",
+            "how the rich avoid taxes (year, month)",
+            "why you feel broke economy (year: 0 results, month)",
+            "explained like you're 5 economy (year, month)",
+            "stickman money explained (year, month)",
+            "who does america owe national debt explained (year, month)",
+            "ai bubble explained (year, month)",
+            "how does costco make money (year, month)",
+            "2008 financial crisis explained (year, month)",
+            "what happens if the dollar collapses (year, month)",
+            "old money vs new money explained (year, month)",
+            "how airlines make money (year, month)",
+            "ponzi scheme explained (year, month)",
+            "tariffs explained (year, month)",
+            "history of money explained (year, month)",
+            "why are houses so expensive (year, month)",
+            "how credit card companies make money (year: 0 results, month)",
+            "every type of rich person explained (year, month)",
+            "how casinos make money (year, month)",
+            "why can't we just print more money (year, month)",
+            "every financial scam explained (year, month)",
+            "how the stock market works explained simply (year, month: 0 results)",
+            "economics animated cartoon (year, month)",
+            "the economics of owning a (year, month)",
+            "how much does a business actually make (year, month)",
+            "who owns the federal reserve (year, month)",
+            "where does your money go (year, month: 0 results)",
+            "explained in 10 minutes economy (year, month)",
+            "the real reason prices keep rising (year, month)"
+          ],
+          "patterns": [
+            {
+              "pattern": "TOPIC: the money behind one specific thing. 'The Economics of Owning a ___' and 'How X Actually Makes Money' explainers break out on brand-new channels again and again, across more than 20 channels. The subject is one concrete asset or business (a semi-truck, hotel, ship, casino, holding company, EV, airport, sleeper bus or cinema ticket), not 'the economy'. The data has no stick-figure channel doing it.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "The Economics of Owning ONE Semi-Truck",
+                  "views": 233499,
+                  "channel": "Notably.",
+                  "subs": 1410,
+                  "outlier": 165.6,
+                  "age_days": 90,
+                  "length_min": 17.2
+                },
+                {
+                  "title": "The Economics Of Owning a Holding Company",
+                  "views": 421782,
+                  "channel": "Useless Money",
+                  "subs": 4890,
+                  "outlier": 86.25,
+                  "age_days": 90,
+                  "length_min": 13.3
+                },
+                {
+                  "title": "The Economics of Owning an Electric Vehicle in America",
+                  "views": 26156,
+                  "channel": "Wealth Thread",
+                  "subs": 394,
+                  "outlier": 66.39,
+                  "age_days": 1,
+                  "length_min": 12.8
+                },
+                {
+                  "title": "The Economics of Owning a Software Company",
+                  "views": 416404,
+                  "channel": "Cost Anatomy",
+                  "subs": 10400,
+                  "outlier": 40.04,
+                  "age_days": 30,
+                  "length_min": 24.9
+                },
+                {
+                  "title": "The Economics of Owning a Casino",
+                  "views": 700743,
+                  "channel": "Millionaire Problems",
+                  "subs": 29100,
+                  "outlier": 24.08,
+                  "age_days": 180,
+                  "length_min": 16.4
+                },
+                {
+                  "title": "The Economics of Owning a Hotel",
+                  "views": 292222,
+                  "channel": "The Profit Problem",
+                  "subs": 12600,
+                  "outlier": 23.19,
+                  "age_days": 150,
+                  "length_min": 10.8
+                },
+                {
+                  "title": "How Airports Actually Make Money?",
+                  "views": 690856,
+                  "channel": "Jet Crumbs",
+                  "subs": 36400,
+                  "outlier": 18.98,
+                  "age_days": 90,
+                  "length_min": 9.2
+                },
+                {
+                  "title": "The Economics of Owning A Ship",
+                  "views": 652106,
+                  "channel": "Neu",
+                  "subs": 40500,
+                  "outlier": 16.1,
+                  "age_days": 210,
+                  "length_min": 8.2
+                },
+                {
+                  "title": "The Economics of Owning a Private Boeing 747",
+                  "views": 106712,
+                  "channel": "THE OWNERS",
+                  "subs": 9360,
+                  "outlier": 11.4,
+                  "age_days": 9,
+                  "length_min": 22.8
+                },
+                {
+                  "title": "The entire economics of SLEEPER BUSES | Business Case Study",
+                  "views": 1689241,
+                  "channel": "Business by baniya",
+                  "subs": 7210,
+                  "outlier": 234.29,
+                  "age_days": 30,
+                  "length_min": 10.1
+                },
+                {
+                  "title": "How much does a theater owner actually make from a ₹150 ticket? | Theater Economics Explained",
+                  "views": 509799,
+                  "channel": "Stupid Stories",
+                  "subs": 3560,
+                  "outlier": 143.2,
+                  "age_days": 21,
+                  "length_min": 7.5
+                },
+                {
+                  "title": "The Economics of Owning a Bus Business in Pakistan| Business Case Study",
+                  "views": 338188,
+                  "channel": "PakBiz",
+                  "subs": 1030,
+                  "outlier": 328.34,
+                  "age_days": 9,
+                  "length_min": 5.6
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: who really pays and who profits. Videos that follow the money through a system people already use (credit cards, banks, inflation, national debt) and reveal the hidden payer or winner are outliers on tiny channels.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "How Credit Cards Make Money Even If You Pay in Full",
+                  "views": 139641,
+                  "channel": "Pocket Change",
+                  "subs": 436,
+                  "outlier": 320.28,
+                  "age_days": 7,
+                  "length_min": 18
+                },
+                {
+                  "title": "If Every Nation Is in Debt… Who Are They Paying?",
+                  "views": 807107,
+                  "channel": "Hidden Capital",
+                  "subs": 7100,
+                  "outlier": 113.68,
+                  "age_days": 270,
+                  "length_min": 12
+                },
+                {
+                  "title": "How Banks Treat You at Every Level of Wealth — $0 to $25M",
+                  "views": 1242387,
+                  "channel": "Dark Ledger",
+                  "subs": 31800,
+                  "outlier": 39.07,
+                  "age_days": 180,
+                  "length_min": 14.2
+                },
+                {
+                  "title": "How Banks Make Money, and Why They Still Want Yours",
+                  "views": 28337,
+                  "channel": "The Gears Inside",
+                  "subs": 1520,
+                  "outlier": 18.64,
+                  "age_days": 14,
+                  "length_min": 16.1
+                },
+                {
+                  "title": "How Inflation Actually Works (And Who It Really Hurts)",
+                  "views": 106734,
+                  "channel": "Econ in a Nutshell",
+                  "subs": 6020,
+                  "outlier": 17.73,
+                  "age_days": 10,
+                  "length_min": 9.8
+                },
+                {
+                  "title": "If You Don't Understand the Petrodollar, You Don't Understand Geopolitics",
+                  "views": 2971004,
+                  "channel": "Lock Stock Finance",
+                  "subs": 223000,
+                  "outlier": 13.32,
+                  "age_days": 240,
+                  "length_min": 8.1
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC (news hook): the US national debt passing $40 trillion, asked as 'who does it owe?'. Six small channels broke out on it within 60 days. The topic alone isn't enough, though: about 12 other small-channel videos on the same hook in the same window got under 1,000 views each.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "America's $40 Trillion Debt Explained Like You're 5",
+                  "views": 247329,
+                  "channel": "Econ sketch",
+                  "subs": 689,
+                  "outlier": 358.97,
+                  "age_days": 60,
+                  "length_min": 5.9
+                },
+                {
+                  "title": "Who Does America Owe $40 Trillion? (Explained Like You're 5)",
+                  "views": 1152864,
+                  "channel": "PENNY",
+                  "subs": 8490,
+                  "outlier": 135.79,
+                  "age_days": 21,
+                  "length_min": 14.8
+                },
+                {
+                  "title": "Who Does America Owe $40 Trillion? (Explained Like You're 5)",
+                  "views": 239984,
+                  "channel": "Billionaire Files",
+                  "subs": 1390,
+                  "outlier": 172.65,
+                  "age_days": 1,
+                  "length_min": 20.4
+                },
+                {
+                  "title": "America's $40 Trillion Debt Problem — Who Will Pay for It?",
+                  "views": 15678,
+                  "channel": "The Insight Vault",
+                  "subs": 170,
+                  "outlier": 92.22,
+                  "age_days": 60,
+                  "length_min": 17.5
+                },
+                {
+                  "title": "If Every Country Is in Debt, Who Do They Owe the Money To?",
+                  "views": 10627,
+                  "channel": "Econ Guy",
+                  "subs": 121,
+                  "outlier": 87.83,
+                  "age_days": 21,
+                  "length_min": 9.7
+                },
+                {
+                  "title": "Who Does America Actually Owe? (It's Not China)",
+                  "views": 11308,
+                  "channel": "Benji Bites",
+                  "subs": 152,
+                  "outlier": 74.39,
+                  "age_days": 21,
+                  "length_min": 20
+                },
+                {
+                  "title": "If Every Nation Is in Debt, Who's It Owed To?",
+                  "views": 742487,
+                  "channel": "Noel Lorenzana, CPA",
+                  "subs": 77900,
+                  "outlier": 9.53,
+                  "age_days": 270,
+                  "length_min": 12.9
+                },
+                {
+                  "title": "If Every Country is having a Debt Crisis... Who's Lending the Money",
+                  "views": 2346154,
+                  "channel": "The Invisible Hand",
+                  "subs": 323000,
+                  "outlier": 7.26,
+                  "age_days": 30,
+                  "length_min": 18.2
+                },
+                {
+                  "title": "Who Does America Owe $40 Trillion? (Explained Like You're 5) [same title, flopped]",
+                  "views": 758,
+                  "channel": "Rise With Odn",
+                  "subs": 115000,
+                  "age_days": 13
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE: the suffix 'Explained Like You're 5'. It promises radical simplicity and works with a stick or round-head cartoon look. It appears on outliers from at least 8 channels, and one 6,660-subscriber channel built a whole consistent series on it. Changing the age ('Like You're 3/4/10') didn't help the copies.",
+              "kind": "title",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "The 2008 Financial Crisis Explained Like You're 5",
+                  "views": 246126,
+                  "channel": "Fred - Money Historian",
+                  "subs": 5040,
+                  "outlier": 48.83,
+                  "age_days": 240,
+                  "length_min": 36.1
+                },
+                {
+                  "title": "The Worst Business Deals in History Explained Like You're 5",
+                  "views": 895972,
+                  "channel": "Money Chuck",
+                  "subs": 21400,
+                  "outlier": 41.87,
+                  "age_days": 330,
+                  "length_min": 8.4
+                },
+                {
+                  "title": "Strait of Hormuz Explained Like You're 5",
+                  "views": 250054,
+                  "channel": "Capital Case",
+                  "subs": 12000,
+                  "outlier": 20.84,
+                  "age_days": 180,
+                  "length_min": 9.5
+                },
+                {
+                  "title": "Is the AI Bubble About to Pop? (Explained Like You're 5)",
+                  "views": 162160,
+                  "channel": "PENNY",
+                  "subs": 8490,
+                  "outlier": 19.1,
+                  "age_days": 21,
+                  "length_min": 13.2
+                },
+                {
+                  "title": "The Housing Market Crisis Is 2008 Happening Again… or Something Worse — Explained Like You're 5",
+                  "views": 121250,
+                  "channel": "Explained Like You´re Five",
+                  "subs": 6660,
+                  "outlier": 18.21,
+                  "age_days": 14,
+                  "length_min": 20.5
+                },
+                {
+                  "title": "Why Everyone Feels Broke in a \"Strong\" US Economy — Explained Like You're 5",
+                  "views": 71822,
+                  "channel": "Explained Like You´re Five",
+                  "subs": 6660,
+                  "outlier": 10.78,
+                  "age_days": 14,
+                  "length_min": 19.4
+                },
+                {
+                  "title": "NVIDIA Explained Like You're 5",
+                  "views": 1898520,
+                  "channel": "Crayon Capital",
+                  "subs": 317000,
+                  "outlier": 5.99,
+                  "age_days": 120,
+                  "length_min": 14.5
+                },
+                {
+                  "title": "The Wolf of Wall Street Scam Explained Like You're 4 [flop]",
+                  "views": 419,
+                  "channel": "Know in minutes",
+                  "subs": 11,
+                  "age_days": 12
+                }
+              ]
+            },
+            {
+              "pattern": "FORMAT: complete-set lists ('Every Level of Wealth', 'Every Type of Rich Person', 'Every ___ Explained (in N Minutes)', 'All ___ Explained'). They promise the whole map in one video and make big outliers. But the generic wealth-ladder versions are now late: the winners are 60 to 330 days old, and of about 10 generic copies from the last 28 days, only Rich Kit's fresh twist (first homes by income) broke out. Only fresh subjects work now.",
+              "kind": "format",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "The 7 Levels of wealth",
+                  "views": 1249488,
+                  "channel": "Shain Isley",
+                  "subs": 2280,
+                  "outlier": 548.02,
+                  "age_days": 60,
+                  "length_min": 22.3
+                },
+                {
+                  "title": "Every Money Laundering Technique Explained",
+                  "views": 1366978,
+                  "channel": "Econ in a Nutshell",
+                  "subs": 6020,
+                  "outlier": 227.07,
+                  "age_days": 14,
+                  "length_min": 11.2
+                },
+                {
+                  "title": "All American Banknotes Explained",
+                  "views": 1080557,
+                  "channel": "Money Explained",
+                  "subs": 6130,
+                  "outlier": 176.27,
+                  "age_days": 210,
+                  "length_min": 8.7
+                },
+                {
+                  "title": "Every Type of Rich Person explained in 6 minutes",
+                  "views": 392707,
+                  "channel": "Taleconomics",
+                  "subs": 2880,
+                  "outlier": 136.36,
+                  "age_days": 150,
+                  "length_min": 6.4
+                },
+                {
+                  "title": "What Every Level of Wealth ACTUALLY Feels like",
+                  "views": 569472,
+                  "channel": "Psycho Bro",
+                  "subs": 8330,
+                  "outlier": 68.36,
+                  "age_days": 240,
+                  "length_min": 7.7
+                },
+                {
+                  "title": "Every Way to Get Rich Explained in 14 Minutes",
+                  "views": 626197,
+                  "channel": "how really?",
+                  "subs": 24700,
+                  "outlier": 25.35,
+                  "age_days": 210,
+                  "length_min": 14.3
+                },
+                {
+                  "title": "Every Type of First Home by Income Level Explained",
+                  "views": 26742,
+                  "channel": "Rich Kit",
+                  "subs": 1300,
+                  "outlier": 20.57,
+                  "age_days": 21,
+                  "length_min": 20.5
+                },
+                {
+                  "title": "ALL OF BUSINESS Explained in 20 Minutes",
+                  "views": 446159,
+                  "channel": "All i need is 20 minutes",
+                  "subs": 28700,
+                  "outlier": 15.55,
+                  "age_days": 330,
+                  "length_min": 15.7
+                },
+                {
+                  "title": "Every Level of Wealth Explained [recent copy]",
+                  "views": 799,
+                  "channel": "Mr. Piggybank",
+                  "subs": 274,
+                  "age_days": 14
+                },
+                {
+                  "title": "Every Level of Wealth Explained: From Debt to Billionaire [recent copy]",
+                  "views": 273,
+                  "channel": "Money and Sticks",
+                  "subs": 3660,
+                  "age_days": 21
+                }
+              ]
+            },
+            {
+              "pattern": "TIMING: copying a hit title, and even its thumbnail, almost never works. 17 of the 18 money-laundering videos posted within 14 days of the 1.37M-view hit got under 1,000 views. Copies of the $40T debt title and thumbnail did the same, even on a 115K-subscriber channel. One identical-title copy (Billionaire Files) did break out, so it's a lottery, not a method.",
+              "kind": "timing",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Every Money Laundering Technique Explained [original]",
+                  "views": 1366978,
+                  "channel": "Econ in a Nutshell",
+                  "subs": 6020,
+                  "outlier": 227.07,
+                  "age_days": 14
+                },
+                {
+                  "title": "Every Money Laundering Technique Explained [copy]",
+                  "views": 901,
+                  "channel": "Chill Dude Pro",
+                  "subs": 2140,
+                  "age_days": 6,
+                  "length_min": 13
+                },
+                {
+                  "title": "Every Money Laundering Technique Explained Like You're 5 [copy]",
+                  "views": 874,
+                  "channel": "MoneyCally",
+                  "subs": 990,
+                  "age_days": 8,
+                  "length_min": 10.5
+                },
+                {
+                  "title": "Every Money Laundering Technique Explained [copy]",
+                  "views": 186,
+                  "channel": "The Economics Guy",
+                  "subs": 467,
+                  "age_days": 7,
+                  "length_min": 14.1
+                },
+                {
+                  "title": "Who Does America Owe $40 Trillion? (Explained Like You're 5) [copy]",
+                  "views": 758,
+                  "channel": "Rise With Odn",
+                  "subs": 115000,
+                  "age_days": 13,
+                  "length_min": 8
+                },
+                {
+                  "title": "Who Does America Owe $40 Trillion? with Milo [copy]",
+                  "views": 603,
+                  "channel": "Money Stickman",
+                  "subs": 63,
+                  "age_days": 12,
+                  "length_min": 7
+                },
+                {
+                  "title": "How Banks Treat You at Every Level of Wealth — $0 to $25M [copy]",
+                  "views": 444,
+                  "channel": "Mr Finance Wise",
+                  "subs": 447,
+                  "age_days": 28,
+                  "length_min": 17
+                }
+              ]
+            },
+            {
+              "pattern": "FORMAT: putting 'stick figure' or 'stickman' in the name or title fails. 39 stick-labelled finance explainers on 30 channels have a median of 178 views, and only one has 10K+ views (from an 826K-subscriber channel). Meanwhile 18 'make stickman finance videos with AI' tutorials have 3,077,774 views between them, so the template is being mass-produced. None of the 62 niche outliers at 10x or more mentions 'stick' in its title. The winners use the look but sell the topic.",
+              "kind": "format",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Investing Explained in 2 Minutes (Stickman Animation)",
+                  "views": 5039,
+                  "channel": "Finance With Stickman",
+                  "subs": 2190,
+                  "age_days": 300,
+                  "length_min": 2
+                },
+                {
+                  "title": "Every Investment Explained in 9 Minutes",
+                  "views": 368,
+                  "channel": "Stick Figure Finance",
+                  "subs": 12,
+                  "age_days": 28,
+                  "length_min": 9.1
+                },
+                {
+                  "title": "Every Net Worth Level Explained in 10 Minutes (Stickman Finance)",
+                  "views": 332,
+                  "channel": "Stickman Finance",
+                  "subs": 15,
+                  "age_days": 21,
+                  "length_min": 9.8
+                },
+                {
+                  "title": "What Is a Recession? Explained with Stick Figures",
+                  "views": 129,
+                  "channel": "Economy with sticks",
+                  "subs": 38,
+                  "age_days": 28,
+                  "length_min": 4
+                },
+                {
+                  "title": "How to Make Stickman Animations and Go Viral in 7 Days with AI [tutorial]",
+                  "views": 198263,
+                  "channel": "AI Cash Tom",
+                  "subs": 11900,
+                  "outlier": 16.66,
+                  "age_days": 150,
+                  "length_min": 11
+                },
+                {
+                  "title": "How to Create Stickman Animation with AI 100% FREE [tutorial]",
+                  "views": 602140,
+                  "channel": "Mark Ai Guy",
+                  "subs": 89300,
+                  "outlier": 6.74,
+                  "age_days": 30,
+                  "length_min": 15.9
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: specific-cause cost of living beats the generic version. 'Why is everything so expensive' and 'why you feel broke' titles from small channels mostly got under 1,000 views this month, and PENNY's generic one got 13,628 views while its debt video got 1.15M. Naming one concrete cause, product or comparison (AI costs, McDonald's, a Porsche, Americans in China) makes outliers.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "How AI Became More Expensive Than The Workers It Replaced",
+                  "views": 3858456,
+                  "channel": "Economy Media",
+                  "subs": 140000,
+                  "outlier": 27.56,
+                  "age_days": 120,
+                  "length_min": 11.3
+                },
+                {
+                  "title": "McDonald's Is Losing Everything: When Fast Food Became Too Expensive",
+                  "views": 43571,
+                  "channel": "FoodFall Explainer",
+                  "subs": 34,
+                  "outlier": 1281.5,
+                  "age_days": 14,
+                  "length_min": 12.1
+                },
+                {
+                  "title": "Why You Can't Afford a Porsche 911 (Even if you buy one)",
+                  "views": 89509,
+                  "channel": "Cash with Matt",
+                  "subs": 1030,
+                  "outlier": 86.9,
+                  "age_days": 7,
+                  "length_min": 17.2
+                },
+                {
+                  "title": "Why India Looks Rich and Feels Broke",
+                  "views": 32215,
+                  "channel": "Decode with be10X",
+                  "subs": 450,
+                  "outlier": 71.59,
+                  "age_days": 21,
+                  "length_min": 12.9
+                },
+                {
+                  "title": "Americans in China Are Asking Why Life Back Home Is So EXPENSIVE",
+                  "views": 55964,
+                  "channel": "Fehlerspeicher",
+                  "subs": 2980,
+                  "outlier": 18.78,
+                  "age_days": 21,
+                  "length_min": 20.1
+                },
+                {
+                  "title": "Why Is Everything So Expensive? (Explained Like You're 5) [generic, same channel as the 1.15M hit]",
+                  "views": 13628,
+                  "channel": "PENNY",
+                  "subs": 8490,
+                  "outlier": 1.61,
+                  "age_days": 21,
+                  "length_min": 6.5
+                },
+                {
+                  "title": "If The Economy's So Good, Why Am I Broke? [generic]",
+                  "views": 250,
+                  "channel": "Broken Money",
+                  "subs": 1,
+                  "age_days": 8,
+                  "length_min": 9
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: official data, framed as 'where do you rank?' or 'how many people actually have X?'. Six channels broke out within two weeks on new Federal Reserve wealth figures. Every one targets people near or past 60; no version for other ages appeared.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "The Fed Just Released New Wealth Numbers. Here's Where You Rank After 60",
+                  "views": 37552,
+                  "channel": "Her Portfolio",
+                  "subs": 283,
+                  "outlier": 132.69,
+                  "age_days": 14,
+                  "length_min": 19.4
+                },
+                {
+                  "title": "How Much Have Americans Near 60 Saved? The New Fed Numbers",
+                  "views": 52879,
+                  "channel": "Pop Walter",
+                  "subs": 534,
+                  "outlier": 99.02,
+                  "age_days": 13,
+                  "length_min": 17.2
+                },
+                {
+                  "title": "How Many Retirees Actually Have a Pension? (Federal Reserve Data)",
+                  "views": 40183,
+                  "channel": "Old Man Miller Finance",
+                  "subs": 1120,
+                  "outlier": 35.88,
+                  "age_days": 14,
+                  "length_min": 8.7
+                },
+                {
+                  "title": "How Many Retirees Actually Have Both a Pension and a Paid-Off House? (Federal Reserve Data)",
+                  "views": 31849,
+                  "channel": "Tom – Lazy Real Estate",
+                  "subs": 1810,
+                  "outlier": 17.6,
+                  "age_days": 9,
+                  "length_min": 16.9
+                },
+                {
+                  "title": "Everyone Got Richer. Except One Group.",
+                  "views": 40531,
+                  "channel": "WealthChannels",
+                  "subs": 2850,
+                  "outlier": 14.22,
+                  "age_days": 6,
+                  "length_min": 41.3
+                },
+                {
+                  "title": "How Many Retirees Actually Have $1 Million: Federal Reserve Data",
+                  "views": 185992,
+                  "channel": "Uncle John Financial",
+                  "subs": 48100,
+                  "outlier": 3.87,
+                  "age_days": 150,
+                  "length_min": 19.1
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE: a twist or correction in brackets or after a comma that overturns what the viewer assumes ('(It's Not China)', '(Even If You Pay in Full)', '(Even if you buy one)', '(And Who It Really Hurts)', '(Yet)', '…and Why They Still Want Yours').",
+              "kind": "title",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "How Credit Cards Make Money Even If You Pay in Full",
+                  "views": 139641,
+                  "channel": "Pocket Change",
+                  "subs": 436,
+                  "outlier": 320.28,
+                  "age_days": 7,
+                  "length_min": 18
+                },
+                {
+                  "title": "Why You Can't Afford a Porsche 911 (Even if you buy one)",
+                  "views": 89509,
+                  "channel": "Cash with Matt",
+                  "subs": 1030,
+                  "outlier": 86.9,
+                  "age_days": 7,
+                  "length_min": 17.2
+                },
+                {
+                  "title": "Who Does America Actually Owe? (It's Not China)",
+                  "views": 11308,
+                  "channel": "Benji Bites",
+                  "subs": 152,
+                  "outlier": 74.39,
+                  "age_days": 21,
+                  "length_min": 20
+                },
+                {
+                  "title": "How Banks Make Money, and Why They Still Want Yours",
+                  "views": 28337,
+                  "channel": "The Gears Inside",
+                  "subs": 1520,
+                  "outlier": 18.64,
+                  "age_days": 14,
+                  "length_min": 16.1
+                },
+                {
+                  "title": "How Inflation Actually Works (And Who It Really Hurts)",
+                  "views": 106734,
+                  "channel": "Econ in a Nutshell",
+                  "subs": 6020,
+                  "outlier": 17.73,
+                  "age_days": 10,
+                  "length_min": 9.8
+                },
+                {
+                  "title": "Why Hasn't The AI Bubble Popped (Yet)?",
+                  "views": 2634942,
+                  "channel": "MonkeyExplains",
+                  "subs": 261000,
+                  "outlier": 10.1,
+                  "age_days": 14,
+                  "length_min": 13.9
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE: 'Why hasn't [predicted disaster] happened yet?' and its cousin, the day-by-day 'what happens if' scenario. Curiosity about a widely predicted event that hasn't come. Note that 'collapse' framing can tip into fear-bait.",
+              "kind": "title",
+              "strength": "medium",
+              "evidence": [
+                {
+                  "title": "America Prints Trillions. Why Hasn't the Dollar Collapsed YET?",
+                  "views": 51957,
+                  "channel": "Captain Capital",
+                  "subs": 683,
+                  "outlier": 76.07,
+                  "age_days": 150,
+                  "length_min": 14.2
+                },
+                {
+                  "title": "WHAT HAPPENS IF THE DOLLAR COLLAPSES? | A DAY-BY-DAY SCENARIO",
+                  "views": 79446,
+                  "channel": "Empire of Money",
+                  "subs": 1130,
+                  "outlier": 70.31,
+                  "age_days": 300,
+                  "length_min": 15.5
+                },
+                {
+                  "title": "Why Hasn't The AI Bubble Popped (Yet)?",
+                  "views": 2634942,
+                  "channel": "MonkeyExplains",
+                  "subs": 261000,
+                  "outlier": 10.1,
+                  "age_days": 14,
+                  "length_min": 13.9
+                },
+                {
+                  "title": "Why The U.S. Economy Has Not Collapsed Yet",
+                  "views": 1408470,
+                  "channel": "Mark Tilbury Economics",
+                  "subs": 607000,
+                  "outlier": 2.32,
+                  "age_days": 150,
+                  "length_min": 18.2
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: the money story of one famous company (rise, fall, business model or worst deals). Costco alone produced three outliers on different channels this year.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Blinkit Expose: The Business Model That Is Fooling Everyone | Case Study | 2D Animation",
+                  "views": 1491978,
+                  "channel": "FinXplain Hindi",
+                  "subs": 7070,
+                  "outlier": 211.03,
+                  "age_days": 60,
+                  "length_min": 16.9
+                },
+                {
+                  "title": "Costco's $400 Billion Empire Is Collapsing — And Nobody Can Save It",
+                  "views": 236168,
+                  "channel": "Sarah Johnson",
+                  "subs": 9730,
+                  "outlier": 24.27,
+                  "age_days": 14,
+                  "length_min": 22.9
+                },
+                {
+                  "title": "The $350B Costco Empire: The Only Family WALL STREET Can't Touch...",
+                  "views": 1925564,
+                  "channel": "Global Status",
+                  "subs": 82600,
+                  "outlier": 23.31,
+                  "age_days": 180,
+                  "length_min": 21.6
+                },
+                {
+                  "title": "The ENTIRE History of Costco in 19 Minutes",
+                  "views": 264170,
+                  "channel": "Built On You",
+                  "subs": 16300,
+                  "outlier": 16.21,
+                  "age_days": 21,
+                  "length_min": 19.1
+                },
+                {
+                  "title": "The Airline That Prints Cash: Why Delta Makes More Money Than Everyone Else",
+                  "views": 86350,
+                  "channel": "Planes Inside",
+                  "subs": 9000,
+                  "outlier": 9.59,
+                  "age_days": 210,
+                  "length_min": 11.3
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: money's own history and objects (banknotes, the symbols on the dollar, how money began). Few videos, big ratios.",
+              "kind": "topic",
+              "strength": "medium",
+              "evidence": [
+                {
+                  "title": "All American Banknotes Explained",
+                  "views": 1080557,
+                  "channel": "Money Explained",
+                  "subs": 6130,
+                  "outlier": 176.27,
+                  "age_days": 210,
+                  "length_min": 8.7
+                },
+                {
+                  "title": "History of Money - How did money begin?",
+                  "views": 262022,
+                  "channel": "The First Chapter",
+                  "subs": 9360,
+                  "outlier": 27.99,
+                  "age_days": 90,
+                  "length_min": 13.6
+                },
+                {
+                  "title": "What Do the Symbols on the Dollar Mean?",
+                  "views": 452061,
+                  "channel": "History Helms",
+                  "subs": 31800,
+                  "outlier": 14.22,
+                  "age_days": 28,
+                  "length_min": 10.9
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: textbook definitions underperform even on channels that just had a hit ('banks create money out of thin air', 'what is an ETF', 'what is inflation'). The same channel's angled video wins: Econ in a Nutshell got 1.37M views on laundering but 3,821 on 'How Banks Create Money Out of Thin Air'.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "How Banks Create Money Out of Thin Air (Explained Simply)",
+                  "views": 3821,
+                  "channel": "Econ in a Nutshell",
+                  "subs": 6020,
+                  "age_days": 21,
+                  "length_min": 9.6
+                },
+                {
+                  "title": "How the Rich Avoid Taxes: Offshore Trusts and Tax Havens Explained",
+                  "views": 1871,
+                  "channel": "Econ in a Nutshell",
+                  "subs": 6020,
+                  "age_days": 8,
+                  "length_min": 10.1
+                },
+                {
+                  "title": "How Banks ACTUALLY Create Money (It's Not What You Think!)",
+                  "views": 724,
+                  "channel": "Stick Yield",
+                  "subs": 49,
+                  "age_days": 8,
+                  "length_min": 4.7
+                },
+                {
+                  "title": "Banks Don't Lend Your Savings. They Type New Money.",
+                  "views": 224,
+                  "channel": "Max Follows The Money",
+                  "subs": 5,
+                  "age_days": 14,
+                  "length_min": 10.4
+                },
+                {
+                  "title": "What is an ETF? A 2-Minute Stick-Figure Explainer",
+                  "views": 47,
+                  "channel": "Stickonomics",
+                  "subs": 13,
+                  "age_days": 14,
+                  "length_min": 2.1
+                }
+              ]
+            },
+            {
+              "pattern": "FORMAT: one consistent series promise per channel. The 'Explained Like You´re Five' channel (6,660 subs) posted 9 videos in about 3 weeks under one suffix and one look, and every one got 8.7K to 121K views. PENNY had 3 of 5 videos over 100K.",
+              "kind": "format",
+              "strength": "medium",
+              "evidence": [
+                {
+                  "title": "The Housing Market Crisis Is 2008 Happening Again… or Something Worse — Explained Like You're 5",
+                  "views": 121250,
+                  "channel": "Explained Like You´re Five",
+                  "subs": 6660,
+                  "outlier": 18.21,
+                  "age_days": 14,
+                  "length_min": 20.5
+                },
+                {
+                  "title": "Trump and the Midterms What Happens to Your Money — Explained Like You're 5",
+                  "views": 91856,
+                  "channel": "Explained Like You´re Five",
+                  "subs": 6660,
+                  "outlier": 13.79,
+                  "age_days": 14,
+                  "length_min": 17
+                },
+                {
+                  "title": "How the 2008 Financial Crisis Happened and Who Got Rich — Explained Like You're 5",
+                  "views": 8767,
+                  "channel": "Explained Like You´re Five",
+                  "subs": 6660,
+                  "age_days": 14,
+                  "length_min": 22.5
+                },
+                {
+                  "title": "Did the AI Bubble Just Burst? Explained Like You're 5",
+                  "views": 101559,
+                  "channel": "PENNY",
+                  "subs": 8490,
+                  "outlier": 11.96,
+                  "age_days": 10,
+                  "length_min": 15.7
+                }
+              ]
+            },
+            {
+              "pattern": "LENGTH: across 62 niche outliers at 10x or more (54 channels), the median length is 14.4 minutes and the middle half runs 10.6 to 19.4 minutes. 50 of the 62 are 6 to 25 minutes long; only 2 are under 6 minutes and 3 over 25.",
+              "kind": "length",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Who Does America Owe $40 Trillion? (Explained Like You're 5)",
+                  "views": 1152864,
+                  "channel": "PENNY",
+                  "subs": 8490,
+                  "outlier": 135.79,
+                  "length_min": 14.8
+                },
+                {
+                  "title": "Every Money Laundering Technique Explained",
+                  "views": 1366978,
+                  "channel": "Econ in a Nutshell",
+                  "subs": 6020,
+                  "outlier": 227.07,
+                  "length_min": 11.2
+                },
+                {
+                  "title": "The Economics of Owning ONE Semi-Truck",
+                  "views": 233499,
+                  "channel": "Notably.",
+                  "subs": 1410,
+                  "outlier": 165.6,
+                  "length_min": 17.2
+                },
+                {
+                  "title": "How Credit Cards Make Money Even If You Pay in Full",
+                  "views": 139641,
+                  "channel": "Pocket Change",
+                  "subs": 436,
+                  "outlier": 320.28,
+                  "length_min": 18
+                }
+              ]
+            },
+            {
+              "pattern": "THUMBNAIL: a round-headed stick or cartoon figure caught mid-reaction (sweating, screaming, smirking, usually in a suit), with a huge number or a 2 to 4 word question in heavy outlined type and one real-world object drawn in the same style (the White House, a world map stamped DEBT, a card terminal), on a flat, bright background. All the cartoon-style winners use it, but so do the flops, so it is the minimum, not the edge.",
+              "kind": "thumbnail",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "America's $40 Trillion Debt Explained Like You're 5",
+                  "views": 247329,
+                  "channel": "Econ sketch",
+                  "subs": 689,
+                  "outlier": 358.97
+                },
+                {
+                  "title": "Every Money Laundering Technique Explained",
+                  "views": 1366978,
+                  "channel": "Econ in a Nutshell",
+                  "subs": 6020,
+                  "outlier": 227.07
+                },
+                {
+                  "title": "If Every Nation Is in Debt… Who Are They Paying?",
+                  "views": 807107,
+                  "channel": "Hidden Capital",
+                  "subs": 7100,
+                  "outlier": 113.68
+                },
+                {
+                  "title": "If Every Country Is in Debt, Who Do They Owe the Money To?",
+                  "views": 10627,
+                  "channel": "Econ Guy",
+                  "subs": 121,
+                  "outlier": 87.83
+                },
+                {
+                  "title": "The Housing Market Crisis Is 2008 Happening Again… — Explained Like You're 5",
+                  "views": 121250,
+                  "channel": "Explained Like You´re Five",
+                  "subs": 6660,
+                  "outlier": 18.21
+                },
+                {
+                  "title": "Every Level of Wealth Explained [same style, flop]",
+                  "views": 799,
+                  "channel": "Mr. Piggybank",
+                  "subs": 274
+                }
+              ]
+            },
+            {
+              "pattern": "THUMBNAIL: labelled panels, ladders or grids that show the whole list at a glance: 4 labelled character panels, a staircase of ranks, a grid of icons or banknotes. It carries the complete-set and where-do-you-rank promises.",
+              "kind": "thumbnail",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Every Type of Rich Person explained in 6 minutes",
+                  "views": 392707,
+                  "channel": "Taleconomics",
+                  "subs": 2880,
+                  "outlier": 136.36
+                },
+                {
+                  "title": "All American Banknotes Explained",
+                  "views": 1080557,
+                  "channel": "Money Explained",
+                  "subs": 6130,
+                  "outlier": 176.27
+                },
+                {
+                  "title": "The Fed Just Released New Wealth Numbers. Here's Where You Rank After 60",
+                  "views": 37552,
+                  "channel": "Her Portfolio",
+                  "subs": 283,
+                  "outlier": 132.69
+                },
+                {
+                  "title": "The Worst Business Deals in History Explained Like You're 5",
+                  "views": 895972,
+                  "channel": "Money Chuck",
+                  "subs": 21400,
+                  "outlier": 41.87
+                },
+                {
+                  "title": "Every Type of First Home by Income Level Explained",
+                  "views": 26742,
+                  "channel": "Rich Kit",
+                  "subs": 1300,
+                  "outlier": 20.57
+                },
+                {
+                  "title": "How Banks Treat You at Every Level of Wealth",
+                  "views": 423883,
+                  "channel": "Another Story",
+                  "subs": 26300,
+                  "outlier": 16.12
+                }
+              ]
+            },
+            {
+              "pattern": "THUMBNAIL: the 'SO YOU WANT TO OWN/BUY A ___' template (black type on white, a red underline, the asset pictured), shared by 5 different 'Economics of Owning' channels.",
+              "kind": "thumbnail",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "The Economics Of Owning a Holding Company",
+                  "views": 421782,
+                  "channel": "Useless Money",
+                  "subs": 4890,
+                  "outlier": 86.25
+                },
+                {
+                  "title": "The Economics of Owning a Software Company",
+                  "views": 416404,
+                  "channel": "Cost Anatomy",
+                  "subs": 10400,
+                  "outlier": 40.04
+                },
+                {
+                  "title": "The Economics of Owning a Casino",
+                  "views": 700743,
+                  "channel": "Millionaire Problems",
+                  "subs": 29100,
+                  "outlier": 24.08
+                },
+                {
+                  "title": "The Economics of Owning a Hotel",
+                  "views": 292222,
+                  "channel": "The Profit Problem",
+                  "subs": 12600,
+                  "outlier": 23.19
+                },
+                {
+                  "title": "The Economics of Owning A Ship",
+                  "views": 652106,
+                  "channel": "Neu",
+                  "subs": 40500,
+                  "outlier": 16.1
+                }
+              ]
+            },
+            {
+              "pattern": "TIMING: news-hooked explainers pick up within days. A small channel can reach six figures in 1 to 21 days by explaining a fresh headline (the debt passing $40T, new Fed data, the AI bubble) in simple terms.",
+              "kind": "timing",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Who Does America Owe $40 Trillion? (Explained Like You're 5)",
+                  "views": 239984,
+                  "channel": "Billionaire Files",
+                  "subs": 1390,
+                  "outlier": 172.65,
+                  "age_days": 1
+                },
+                {
+                  "title": "The Economics of Owning an Electric Vehicle in America",
+                  "views": 26156,
+                  "channel": "Wealth Thread",
+                  "subs": 394,
+                  "outlier": 66.39,
+                  "age_days": 1
+                },
+                {
+                  "title": "Who Does America Owe $40 Trillion? (Explained Like You're 5)",
+                  "views": 1152864,
+                  "channel": "PENNY",
+                  "subs": 8490,
+                  "outlier": 135.79,
+                  "age_days": 21
+                },
+                {
+                  "title": "Why Hasn't The AI Bubble Popped (Yet)?",
+                  "views": 2634942,
+                  "channel": "MonkeyExplains",
+                  "subs": 261000,
+                  "outlier": 10.1,
+                  "age_days": 14
+                },
+                {
+                  "title": "Everyone Got Richer. Except One Group.",
+                  "views": 40531,
+                  "channel": "WealthChannels",
+                  "subs": 2850,
+                  "outlier": 14.22,
+                  "age_days": 6
+                }
+              ]
+            }
+          ],
+          "saturation": "The broad searches belong to big channels: How Money Works (1.77M subs), Economics Explained (2.89M), Johnny Harris (8.02M), The Infographics Show (15.5M), Bloomberg Originals (5.23M), LITTLE BIT BETTER (1.44M), Maxinomics (848K), Primate Economics (577K, cartoon 'explained with bananas'), Crayon Capital (317K) and MonkeyExplains (261K). Their videos mostly run at 0.02x to 3x, so they win on subscribers, not packaging.\n\nEven so, YouTube is clearly pushing new channels here. Of the 62 niche outliers at 10x or more, 43 come from channels under 10K subscribers and 58 from channels under 50K, on 54 different channels.\n\nThe stick-figure version, though, is flooded and templated:\n- 39 stick-labelled finance explainers on 30 channels have a median of 178 views, and only one has 10K+ (from an 826K-subscriber channel).\n- 18 AI 'make stickman finance videos' tutorials have 3.08M views between them, so more clones are coming.\n- Copies of hit titles fail: 17 of 18 laundering copies posted within 14 days of the hit got under 1,000 views, and the $40T debt and wealth-ladder copies did the same.\n\nSo there is room for a new channel. A clone gets nothing; what wins is an original angle on a specific subject, sold on the topic rather than the stick-figure look.",
+          "gaps": [
+            "'The Economics of Owning ONE ___' in English for everyday assets and small businesses. Outliers on 15+ channels (semi-truck 165.6x, holding company 86x, EV 66x, hotel 23x), each subject covered by only 1 or 2 videos, and no stick-figure channel in the data has done the format.",
+            "'How [everyday product] makes money even if you ___': credit cards when you pay in full (320x on 436 subs) was the only video of its kind in the results; banks got 18.6x on 1,520 subs. The 'how credit card companies make money' search returned 0 videos this year.",
+            "'Where do you rank' from official data for ages other than 60+: all 6 Fed-data outliers (17.6x to 132.7x) target retirees, and no version for younger adults appeared.",
+            "Specific-cause cost of living (one product, one cause or one comparison, such as AI costs, McDonald's or a Porsche 911) instead of the crowded generic 'why is everything so expensive' and 'why you feel broke', where most small-channel videos this month got under 1,000 views.",
+            "Money history and objects (banknotes 176x, dollar symbols 14x, the origin of money 28x): only a handful of videos in the results.",
+            "Single-company money stories outside Costco (business model, rise and fall): FinXplain's Blinkit at 211x and Delta at 9.6x, with few English competitors per company.",
+            "Fresh twists on the complete-set and ladder format (Rich Kit's first homes by income at 20.6x) rather than the now-saturated generic 'every level of wealth'."
+          ],
+          "thumbnail_notes": "Winners in sheet-year.png and sheet-month.png:\n1. One round-headed stick or cartoon figure, usually in a suit, caught mid-reaction (sweating, screaming, smirking), in the centre or right third.\n2. A huge number or a 2 to 4 word question in heavy outlined type, usually at top left: \"$40 TRILLION\", \"$0 TAX\", \"$1T interest/year\", \"80% GO BROKE?\", \"WHO GETS PAID? Not China.\", \"WHO HAS A PENSION?\", \"IS IT WORTH IT\", \"2008 AGAIN?\", \"WHO WINS FROM INFLATION?\". The text adds a hook instead of repeating the title.\n3. One real-world anchor drawn in the same flat style: the White House with a flag, a world map stamped DEBT, a card terminal, a seesaw, a Costco store.\n4. Flat, bright, uncluttered backgrounds (yellow, red, blue, green). Collapse topics use dark or fire backgrounds instead.\n5. Split or contrast frames: \"$0 | $40 TRILLION\", \"YOU EARN 0.38% / YOU PAY 21%\", \"SELL → $0 TAX\".\n6. Labelled grids and ladders for complete-set topics: 4 captioned panels (OLD MONEY / NEW MONEY / CRYPTO RICH / QUIET MILLIONAIRE; FIXER-UPPER / STUCK AT 3% / HOUSE POOR / OLD MONEY), a rank staircase (\"WHERE DO YOU RANK?\"), icon grids, a banknote grid.\n7. Five 'Economics of Owning' channels share one template: \"SO YOU WANT TO OWN/BUY A ___\" in black on white, a red underline and a photo or illustration of the asset.\n\nThe low-performer sheet (sheet-lowperf-month.png, 273 to 901 views) uses the same round-head figures and the same \"$40 TRILLION\" and Trump-with-money-bag compositions. Near-identical copies of PENNY's \"$0 | $40 TRILLION\" (Rise With Odn, 758 views) and Billionaire Files' \"-$40 TRILLION\" (Money Stickman, 603 views) failed. The style is the minimum; topic choice, a fresh angle and timing made the difference.",
+          "files": [
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/sheet-year.png",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/sheet-month.png",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/sheet-lowperf-month.png",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/all-unique.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/curated-year.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/curated-month.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/lowperf.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/seed-year.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/seed-month.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/q2-year.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-1/q6-month.json"
+          ]
+        },
+        "final": null
+      },
+      {
+        "channel": 2,
+        "what": "documentaries about how real companies rose and collapsed",
+        "scout": {
+          "patterns": [
+            {
+              "pattern": "TOPIC: Carmakers in decline. A named automaker losing ground, money or a market. This is the hottest cluster this month: 10+ small channels hit 10x to 278x within 30 days. It is filling fast, so it needs a different angle, not the same template. Caution: several winners frame companies that are still trading as 'over', which is a misleading-packaging risk.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Honda Is Losing Everything: The $65 Billion Mistake",
+                  "views": 646614,
+                  "channel": "MAXIMUS",
+                  "subs": 2330,
+                  "outlier": 277.52,
+                  "length_min": 26.3,
+                  "age_days": 14
+                },
+                {
+                  "title": "Stellantis Is Losing Everything: Jeep, Dodge & Fiat on the Brink",
+                  "views": 3312185,
+                  "channel": "Nimbus",
+                  "subs": 14500,
+                  "outlier": 228.43,
+                  "length_min": 16.8,
+                  "age_days": 30
+                },
+                {
+                  "title": "The Real Reason Japanese Cars Are Losing Thailand to China",
+                  "views": 10267,
+                  "channel": "The Collapse Engine",
+                  "subs": 48,
+                  "outlier": 213.9,
+                  "length_min": 19.6,
+                  "age_days": 21
+                },
+                {
+                  "title": "How One Ad Destroyed Jaguar's Billion-Dollar Empire",
+                  "views": 2543313,
+                  "channel": "CoreSight",
+                  "subs": 24400,
+                  "outlier": 104.23,
+                  "length_min": 13.3,
+                  "age_days": 330
+                },
+                {
+                  "title": "The Insane Collapse of The \"Tesla Killer\"",
+                  "views": 275681,
+                  "channel": "The Financial Revolution",
+                  "subs": 2930,
+                  "outlier": 94.09,
+                  "length_min": 12.9,
+                  "age_days": 14
+                },
+                {
+                  "title": "The (Overdue) Collapse of Audi",
+                  "views": 31609,
+                  "channel": "Teemotionn",
+                  "subs": 384,
+                  "outlier": 82.32,
+                  "length_min": 13.5,
+                  "age_days": 28
+                },
+                {
+                  "title": "The real reason Western cars suddenly fell behind (and China is behind it)",
+                  "views": 356000,
+                  "channel": "Tony Fiddis",
+                  "subs": 8280,
+                  "outlier": 43,
+                  "length_min": 12.6,
+                  "age_days": 60
+                },
+                {
+                  "title": "How TATA NANO DIED | The One Mistake That Destroyed India's Cheapest Car!",
+                  "views": 505265,
+                  "channel": "Ani Explainer Hindi",
+                  "subs": 12000,
+                  "outlier": 42.11,
+                  "length_min": 23.5,
+                  "age_days": 14
+                },
+                {
+                  "title": "Porsche Lost 93% of Its Profit — Here's WHY",
+                  "views": 756099,
+                  "channel": "The Sleeper List",
+                  "subs": 48900,
+                  "outlier": 15.46,
+                  "length_min": 21.6,
+                  "age_days": 30
+                },
+                {
+                  "title": "The DESERVED Downfall of Ferrari...",
+                  "views": 79710,
+                  "channel": "MadeToDrive",
+                  "subs": 7150,
+                  "outlier": 11.15,
+                  "length_min": 16,
+                  "age_days": 14
+                }
+              ]
+            },
+            {
+              "title": "",
+              "pattern": "TOPIC: Restaurant and food chains that collapsed, shrank or made one famous bad decision. Single-company stories with one concrete decision (KFC dropping Pepsi, Wendy's closing stores, the Sriracha owner) are winning alongside the category lists.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Why KFC Dumped Pepsi",
+                  "views": 318224,
+                  "channel": "Fallen Tickers",
+                  "subs": 2010,
+                  "outlier": 158.32,
+                  "length_min": 13.9,
+                  "age_days": 14
+                },
+                {
+                  "title": "Wendy’s Is Closing Hundreds of Stores… Here’s Why",
+                  "views": 226416,
+                  "channel": "Business Boss",
+                  "subs": 1520,
+                  "outlier": 148.96,
+                  "length_min": 8.8,
+                  "age_days": 330
+                },
+                {
+                  "title": "The (Overdue) Collapse of Bullsh*t Restaurants",
+                  "views": 718888,
+                  "channel": "rooked.",
+                  "subs": 7800,
+                  "outlier": 92.17,
+                  "length_min": 12.3,
+                  "age_days": 12
+                },
+                {
+                  "title": "Every Restaurant Chain That Completely Destroyed Itself",
+                  "views": 868231,
+                  "channel": "Hungerwise",
+                  "subs": 9470,
+                  "outlier": 91.68,
+                  "length_min": 18.6,
+                  "age_days": 14
+                },
+                {
+                  "title": "12 New England Restaurant Chains That Disappeared",
+                  "views": 126826,
+                  "channel": "Hidden New England",
+                  "subs": 2070,
+                  "outlier": 61.27,
+                  "length_min": 21.9,
+                  "age_days": 10
+                },
+                {
+                  "title": "Sriracha: How a Greedy Owner Ruined a $1B Sauce Empire",
+                  "views": 1586324,
+                  "channel": "JunkBondInvestor",
+                  "subs": 79500,
+                  "outlier": 19.95,
+                  "length_min": 13.7,
+                  "age_days": 60
+                },
+                {
+                  "title": "How Crumbl Cookies Fooled The World And Got What They Deserved",
+                  "views": 1237860,
+                  "channel": "The Philosophy Of Marketing",
+                  "subs": 113000,
+                  "outlier": 10.95,
+                  "length_min": 14.2,
+                  "age_days": 12
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: Fad and consumer brands that boomed and crashed (toys, fashion, shoes, coffee, cookies), told while people still remember them. Labubu is the biggest single outlier in the niche by views. Build Inc. is close to the only channel running fashion and consumer collapses as a series.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "WTF Happened to Labubu?",
+                  "views": 2262204,
+                  "channel": "Fortune & Fall",
+                  "subs": 6340,
+                  "outlier": 356.81,
+                  "length_min": 16.5,
+                  "age_days": 21
+                },
+                {
+                  "title": "From $1.7 Billion To Nothing: How Yeezy Lost Everything",
+                  "views": 526107,
+                  "channel": "Build Inc.",
+                  "subs": 26900,
+                  "outlier": 19.56,
+                  "length_min": 33.5,
+                  "age_days": 30
+                },
+                {
+                  "title": "$700 Million To Forgotten: How Ed Hardy Lost Everything",
+                  "views": 423144,
+                  "channel": "Build Inc.",
+                  "subs": 26900,
+                  "outlier": 15.73,
+                  "length_min": 31.7,
+                  "age_days": 21
+                },
+                {
+                  "title": "$625 Million To Forgotten: How TOMS Lost Everything",
+                  "views": 393387,
+                  "channel": "Build Inc.",
+                  "subs": 26900,
+                  "outlier": 14.62,
+                  "length_min": 29.3,
+                  "age_days": 14
+                },
+                {
+                  "title": "How Crumbl Cookies Fooled The World And Got What They Deserved",
+                  "views": 1237860,
+                  "channel": "The Philosophy Of Marketing",
+                  "subs": 113000,
+                  "outlier": 10.95,
+                  "length_min": 14.2,
+                  "age_days": 12
+                },
+                {
+                  "title": "The Rise and Fall of Black Rifle Coffee",
+                  "views": 2039350,
+                  "channel": "Ryan Daniel Moran",
+                  "subs": 194000,
+                  "outlier": 10.51,
+                  "length_min": 22.4,
+                  "age_days": 30
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: Heritage electronics and tech brands that faded (hi-fi, TVs, VHS, phones, PCs). The outliers here are evergreen: they are still pulling views 90 to 300 days after upload. Many near-zero uploads also sit in this space, so quality and packaging decide who wins, not the topic alone.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "The Rise & Fall of the Best-Selling Computer Brands (1978 - 2026)",
+                  "views": 1577483,
+                  "channel": "Favoree",
+                  "subs": 23600,
+                  "outlier": 66.84,
+                  "length_min": 18.3,
+                  "age_days": 270
+                },
+                {
+                  "title": "11 Phones That Were Doomed From Day One",
+                  "views": 497696,
+                  "channel": "Droid Sage",
+                  "subs": 10400,
+                  "outlier": 47.86,
+                  "length_min": 16.9,
+                  "age_days": 21
+                },
+                {
+                  "title": "Tandberg: The Bankrupt Audio Brand That Secretly Built a $3 Billion Empire",
+                  "views": 43279,
+                  "channel": "Forgotten Circuits",
+                  "subs": 957,
+                  "outlier": 45.22,
+                  "length_min": 30.4,
+                  "age_days": 14
+                },
+                {
+                  "title": "The Tragic Story of Philips: How the Company That Invented the CD Quietly Gave Up on Sound",
+                  "views": 520326,
+                  "channel": "Fallen Hi-Fi",
+                  "subs": 15100,
+                  "outlier": 34.46,
+                  "length_min": 35.4,
+                  "age_days": 90
+                },
+                {
+                  "title": "Sony Invented This TV. China Just Bought 51% of Sony’s TVs.",
+                  "views": 112929,
+                  "channel": "China Engineered Docs",
+                  "subs": 4220,
+                  "outlier": 26.76,
+                  "length_min": 27.4,
+                  "age_days": 30
+                },
+                {
+                  "title": "What Really Happened to Aiwa",
+                  "views": 344596,
+                  "channel": "Famous Brands History",
+                  "subs": 15200,
+                  "outlier": 22.67,
+                  "length_min": 15.6,
+                  "age_days": 240
+                },
+                {
+                  "title": "The Dark Story of America's Last TV Factory | Zenith Electronics",
+                  "views": 172371,
+                  "channel": "The Last Shift",
+                  "subs": 15500,
+                  "outlier": 11.12,
+                  "length_min": 9.3,
+                  "age_days": 270
+                },
+                {
+                  "title": "They Were the Best — Now They're a Walmart Brand. What Happened?",
+                  "views": 1613701,
+                  "channel": "Skylabs Audio",
+                  "subs": 220000,
+                  "outlier": 7.34,
+                  "length_min": 16.4,
+                  "age_days": 150
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: Regional and industrial collapses outside the usual US mega-brands: UK haulage and manufacturing, Canadian and US company towns, South African and Australian chains. These get the highest ratios in the data on tiny channels. Eddie Stobart alone has three independent outliers. Absolute views are often modest (13K to 491K).",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Why Did Eddie Stobart Collapse? The Full Story",
+                  "views": 84786,
+                  "channel": "Haul Drive",
+                  "subs": 93,
+                  "outlier": 911.68,
+                  "length_min": 14.8,
+                  "age_days": 14
+                },
+                {
+                  "title": "How One Small Mistake Destroyed Eddie Stobart...",
+                  "views": 491002,
+                  "channel": "Freedom Muscle",
+                  "subs": 11400,
+                  "outlier": 43.07,
+                  "length_min": 18.7,
+                  "age_days": 270
+                },
+                {
+                  "title": "How Just One Mistake Destroyed Eddie Stobart",
+                  "views": 379539,
+                  "channel": "METTLE",
+                  "subs": 59400,
+                  "outlier": 6.39,
+                  "length_min": 33.6,
+                  "age_days": 210
+                },
+                {
+                  "title": "These 12 Big South Africa Car Dealership Chains That Went Bankrupt",
+                  "views": 41594,
+                  "channel": "South Africa Motorsport",
+                  "subs": 493,
+                  "outlier": 84.37,
+                  "length_min": 22.2,
+                  "age_days": 14
+                },
+                {
+                  "title": "How One Company Built and Destroyed an Entire Canadian City: Chatham, Ontario",
+                  "views": 13630,
+                  "channel": "Canada’s Lost Legacy",
+                  "subs": 432,
+                  "outlier": 31.55,
+                  "length_min": 63.2,
+                  "age_days": 8
+                },
+                {
+                  "title": "12 Big South African Car Dealership Chains That Went BANKRUPT — Here's Why!",
+                  "views": 77540,
+                  "channel": "Drive South Africa News",
+                  "subs": 3750,
+                  "outlier": 20.68,
+                  "length_min": 27.9,
+                  "age_days": 21
+                },
+                {
+                  "title": "Inside the Reliant Motor Factory: How Britain's Three-Wheeled Car Empire Collapsed",
+                  "views": 20418,
+                  "channel": "Once Britain",
+                  "subs": 1510,
+                  "outlier": 13.52,
+                  "length_min": 44.9,
+                  "age_days": 11
+                },
+                {
+                  "title": "The Collapse of Warren: The Steel City That Supplied All American Homes — Then Vanished From History",
+                  "views": 16393,
+                  "channel": "Echoes of Industry",
+                  "subs": 1810,
+                  "outlier": 9.06,
+                  "length_min": 71.4,
+                  "age_days": 30
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: Cross-border failure, meaning why a strong company failed in another country or lost a market to a rival. The angle is a built-in mystery (it worked at home, so why not there?) and few videos compete for it.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Why Walmart Failed in Europe...",
+                  "views": 690731,
+                  "channel": "Thingform",
+                  "subs": 4330,
+                  "outlier": 159.52,
+                  "length_min": 8.1,
+                  "age_days": 120
+                },
+                {
+                  "title": "The Real Reason Japanese Cars Are Losing Thailand to China",
+                  "views": 10267,
+                  "channel": "The Collapse Engine",
+                  "subs": 48,
+                  "outlier": 213.9,
+                  "length_min": 19.6,
+                  "age_days": 21
+                },
+                {
+                  "title": "BMW Is Losing Everything: The $4 Billion China Mistake",
+                  "views": 268215,
+                  "channel": "MAXIMUS",
+                  "subs": 2330,
+                  "outlier": 115.11,
+                  "length_min": 25.9,
+                  "age_days": 14
+                },
+                {
+                  "title": "Why Etihad Is a FAILURE, While Emirates Is a Success",
+                  "views": 937527,
+                  "channel": "Beyond Sky",
+                  "subs": 40400,
+                  "outlier": 23.21,
+                  "length_min": 19.1,
+                  "age_days": 180
+                },
+                {
+                  "title": "How Boeing Tried to Outsmart Bombardier - But FAILED Miserably",
+                  "views": 727942,
+                  "channel": "Beyond Sky",
+                  "subs": 40400,
+                  "outlier": 18.02,
+                  "length_min": 20.2,
+                  "age_days": 330
+                },
+                {
+                  "title": "Why American Companies (Usually) Fail in Europe",
+                  "views": 866110,
+                  "channel": "The Invisible Game",
+                  "subs": 57600,
+                  "outlier": 15.04,
+                  "length_min": 13.6,
+                  "age_days": 270
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: Store closings and the 'retail apocalypse' ('X Is Closing Hundreds of Stores… Here's Why'). These were strong over the year but are cold this month: 7 of 9 month results were under 5,000 views. It works like news and has a short shelf life.",
+              "kind": "topic",
+              "strength": "medium",
+              "evidence": [
+                {
+                  "title": "10 Major Stores Closing for Good – The U.S. Retail Apocalypse Explained",
+                  "views": 342553,
+                  "channel": "EconoNova",
+                  "subs": 1990,
+                  "outlier": 172.14,
+                  "length_min": 25.1,
+                  "age_days": 300
+                },
+                {
+                  "title": "Wendy’s Is Closing Hundreds of Stores… Here’s Why",
+                  "views": 226416,
+                  "channel": "Business Boss",
+                  "subs": 1520,
+                  "outlier": 148.96,
+                  "length_min": 8.8,
+                  "age_days": 330
+                },
+                {
+                  "title": "Why are \"small Lotus\" stores closing down?",
+                  "views": 192564,
+                  "channel": "Bizdoc",
+                  "subs": 16200,
+                  "outlier": 11.89,
+                  "length_min": 9.3,
+                  "age_days": 30
+                },
+                {
+                  "title": "Rolex Is Closing Hundreds of Stores… Here’s Why",
+                  "views": 224995,
+                  "channel": "Luxury Secret",
+                  "subs": 27600,
+                  "outlier": 8.15,
+                  "length_min": 35.6,
+                  "age_days": 300
+                },
+                {
+                  "title": "Wendy's Is Closing Hundreds of Restaurants. Here's Why.",
+                  "views": 7008,
+                  "channel": "Behind the Stars",
+                  "subs": 32,
+                  "length_min": 13.3,
+                  "age_days": 21
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: AI bubble, meaning 'who goes bankrupt first' and AI companies falling. Demand is real this month, but these are forward-looking market predictions, not documented rise-and-fall stories, and they read as financial speculation or advice. That is a monetization and brand-safety risk for a documentary channel. If used at all, cover only collapses that have already happened (for example Character.AI or the metaverse spend) and never predictions.",
+              "kind": "topic",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "When the AI Bubble Pops, This Country Goes Bankrupt First",
+                  "views": 61688,
+                  "channel": "Finance District",
+                  "subs": 1130,
+                  "outlier": 54.59,
+                  "length_min": 16.4,
+                  "age_days": 7
+                },
+                {
+                  "title": "$80B Disaster: Zuckerberg's Metaverse Ghost Town",
+                  "views": 928709,
+                  "channel": "TheCollapseCo",
+                  "subs": 21500,
+                  "outlier": 43.2,
+                  "length_min": 21.7,
+                  "age_days": 210
+                },
+                {
+                  "title": "If AI Bubble Pops, Who Goes Bankrupt First?",
+                  "views": 74975,
+                  "channel": "The Money Timeline",
+                  "subs": 7100,
+                  "outlier": 10.56,
+                  "length_min": 16.6,
+                  "age_days": 7
+                },
+                {
+                  "title": "Why Hasn't The AI Bubble Popped (Yet)?",
+                  "views": 2634996,
+                  "channel": "MonkeyExplains",
+                  "subs": 261000,
+                  "outlier": 10.1,
+                  "length_min": 13.9,
+                  "age_days": 14
+                },
+                {
+                  "title": "The (Overdue) Collapse Of The AI Bubble",
+                  "views": 2223718,
+                  "channel": "Damon Cassidy",
+                  "subs": 341000,
+                  "outlier": 6.52,
+                  "length_min": 23.6,
+                  "age_days": 30
+                },
+                {
+                  "title": "Character.AI: The First Giant to Fall In the AI Crash",
+                  "views": 436643,
+                  "channel": "JunkBondInvestor",
+                  "subs": 79500,
+                  "outlier": 5.49,
+                  "length_min": 14.4,
+                  "age_days": 14
+                }
+              ]
+            },
+            {
+              "pattern": "TOPIC: Fraud and 'never real' startups (Byju's, Theranos, WeWork, Zilingo). A few tiny channels got high ratios on small view counts, but this month the space is flooded with low-effort uploads: 18 of 20 'startup fraud collapse' results were under 5,000 views, and about 10 Theranos videos were all under 1,500. Fraud claims also need careful sourcing (legal risk).",
+              "kind": "topic",
+              "strength": "medium",
+              "evidence": [
+                {
+                  "title": "How Byju's Vanished: The Rise and Fall of India's EdTech Giant",
+                  "views": 11086,
+                  "channel": "Corporate Coroner",
+                  "subs": 50,
+                  "outlier": 221.72,
+                  "length_min": 29.7,
+                  "age_days": 14
+                },
+                {
+                  "title": "The $47 Billion Company That Was Never Real",
+                  "views": 13481,
+                  "channel": "The Explained Vault",
+                  "subs": 180,
+                  "outlier": 74.89,
+                  "length_min": 11.2,
+                  "age_days": 60
+                },
+                {
+                  "title": "Why Zilingo Failed ? ₹8000 Crore Crash & Fake Startup of Ankiti Bose",
+                  "views": 143322,
+                  "channel": "Business Pro Plus",
+                  "subs": 8040,
+                  "outlier": 17.83,
+                  "length_min": 12.3,
+                  "age_days": 120
+                },
+                {
+                  "title": "Theranos Was Worth $9 Billion. Then a Reporter Started Asking",
+                  "views": 1481,
+                  "channel": "Rise & Ruin",
+                  "subs": 14,
+                  "length_min": 9.4,
+                  "age_days": 21
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE: '[Brand] Is Losing Everything: [specific cause]' or 'How [Brand] Lost Everything', with the brand name first and a concrete cause or dollar amount after the colon. Caution: MAXIMUS and Nimbus use a near-identical title and thumbnail template. Templating at that level is what YouTube's inauthentic-content rule targets when the videos themselves are mass-produced. Keep the series promise, but vary the content.",
+              "kind": "title",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Honda Is Losing Everything: The $65 Billion Mistake",
+                  "views": 646614,
+                  "channel": "MAXIMUS",
+                  "subs": 2330,
+                  "outlier": 277.52,
+                  "length_min": 26.3,
+                  "age_days": 14
+                },
+                {
+                  "title": "Stellantis Is Losing Everything: Jeep, Dodge & Fiat on the Brink",
+                  "views": 3312185,
+                  "channel": "Nimbus",
+                  "subs": 14500,
+                  "outlier": 228.43,
+                  "length_min": 16.8,
+                  "age_days": 30
+                },
+                {
+                  "title": "Volvo Is Losing Everything: When Going All-Electric Backfires",
+                  "views": 345768,
+                  "channel": "Nimbus",
+                  "subs": 14500,
+                  "outlier": 23.85,
+                  "length_min": 20.9,
+                  "age_days": 21
+                },
+                {
+                  "title": "From $1.7 Billion To Nothing: How Yeezy Lost Everything",
+                  "views": 526107,
+                  "channel": "Build Inc.",
+                  "subs": 26900,
+                  "outlier": 19.56,
+                  "length_min": 33.5,
+                  "age_days": 30
+                },
+                {
+                  "title": "Steve Wynn: The King of Vegas Who Lost Everything Overnight",
+                  "views": 250944,
+                  "channel": "Old Vegas Legends",
+                  "subs": 13300,
+                  "outlier": 18.87,
+                  "length_min": 34.4,
+                  "age_days": 270
+                },
+                {
+                  "title": "The Tragic Story of JVC: How the Company That Invented VHS Lost Everything",
+                  "views": 257618,
+                  "channel": "Fallen Hi-Fi",
+                  "subs": 15100,
+                  "outlier": 17.06,
+                  "length_min": 35.7,
+                  "age_days": 120
+                },
+                {
+                  "title": "$1 Billion To Forgotten: How Dollar Shave Club Lost Everything",
+                  "views": 1497736,
+                  "channel": "Logically Answered",
+                  "subs": 930000,
+                  "outlier": 1.61,
+                  "length_min": 15.5,
+                  "age_days": 90
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE: 'How (Just) One [Ad / Mistake / Decision / Car / Owner] Destroyed [Company]'. The single-cause promise makes a complex story feel solvable and works across cars, haulage, food and towns. The video must then prove that one cause, or the title becomes misleading.",
+              "kind": "title",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "How One Ad Destroyed Jaguar's Billion-Dollar Empire",
+                  "views": 2543313,
+                  "channel": "CoreSight",
+                  "subs": 24400,
+                  "outlier": 104.23,
+                  "length_min": 13.3,
+                  "age_days": 330
+                },
+                {
+                  "title": "How One Small Mistake Destroyed Eddie Stobart...",
+                  "views": 491002,
+                  "channel": "Freedom Muscle",
+                  "subs": 11400,
+                  "outlier": 43.07,
+                  "length_min": 18.7,
+                  "age_days": 270
+                },
+                {
+                  "title": "How TATA NANO DIED | The One Mistake That Destroyed India's Cheapest Car!",
+                  "views": 505265,
+                  "channel": "Ani Explainer Hindi",
+                  "subs": 12000,
+                  "outlier": 42.11,
+                  "length_min": 23.5,
+                  "age_days": 14
+                },
+                {
+                  "title": "How One Company Built and Destroyed an Entire Canadian City: Chatham, Ontario",
+                  "views": 13630,
+                  "channel": "Canada’s Lost Legacy",
+                  "subs": 432,
+                  "outlier": 31.55,
+                  "length_min": 63.2,
+                  "age_days": 8
+                },
+                {
+                  "title": "Sriracha: How a Greedy Owner Ruined a $1B Sauce Empire",
+                  "views": 1586324,
+                  "channel": "JunkBondInvestor",
+                  "subs": 79500,
+                  "outlier": 19.95,
+                  "length_min": 13.7,
+                  "age_days": 60
+                },
+                {
+                  "title": "How Just One Mistake Destroyed The World's Greatest Engine Company",
+                  "views": 462851,
+                  "channel": "METTLE",
+                  "subs": 59400,
+                  "outlier": 7.79,
+                  "length_min": 38,
+                  "age_days": 150
+                },
+                {
+                  "title": "The Datsun Collapse: How Just One Corporate Decision Killed the Greatest Car Brand After 75 Years",
+                  "views": 60545,
+                  "channel": "Unseen History ",
+                  "subs": 17100,
+                  "outlier": 3.54,
+                  "length_min": 41.7,
+                  "age_days": 120
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE: A 'deserved' verdict: 'The (Overdue) Collapse of X', 'The DESERVED Downfall of X', '(Well Deserved)', 'Got What They Deserved'. Viewers click to see a company they already resent get its comeuppance. This is opinion framing, so it must be earned with documented facts, and it is safer against categories than against named people.",
+              "kind": "title",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "The (Overdue) Collapse of Bullsh*t Restaurants",
+                  "views": 718888,
+                  "channel": "rooked.",
+                  "subs": 7800,
+                  "outlier": 92.17,
+                  "length_min": 12.3,
+                  "age_days": 12
+                },
+                {
+                  "title": "The (Overdue) Collapse of Audi",
+                  "views": 31609,
+                  "channel": "Teemotionn",
+                  "subs": 384,
+                  "outlier": 82.32,
+                  "length_min": 13.5,
+                  "age_days": 28
+                },
+                {
+                  "title": "The (Overdue) Collapse of Bullsh*t Companies",
+                  "views": 3144817,
+                  "channel": "The Invisible Game",
+                  "subs": 57600,
+                  "outlier": 54.6,
+                  "length_min": 16.4,
+                  "age_days": 90
+                },
+                {
+                  "title": "How Europe's Car Industry Destroyed Itself (Well Deserved)",
+                  "views": 780208,
+                  "channel": "Nimbus",
+                  "subs": 14500,
+                  "outlier": 53.81,
+                  "length_min": 15.8,
+                  "age_days": 30
+                },
+                {
+                  "title": "The DESERVED Downfall of Ferrari...",
+                  "views": 79710,
+                  "channel": "MadeToDrive",
+                  "subs": 7150,
+                  "outlier": 11.15,
+                  "length_min": 16,
+                  "age_days": 14
+                },
+                {
+                  "title": "How Crumbl Cookies Fooled The World And Got What They Deserved",
+                  "views": 1237860,
+                  "channel": "The Philosophy Of Marketing",
+                  "subs": 113000,
+                  "outlier": 10.95,
+                  "length_min": 14.2,
+                  "age_days": 12
+                },
+                {
+                  "title": "The (Overdue) Collapse Of The AI Bubble",
+                  "views": 2223718,
+                  "channel": "Damon Cassidy",
+                  "subs": 341000,
+                  "outlier": 6.52,
+                  "length_min": 23.6,
+                  "age_days": 30
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE: Put a dollar figure or a percentage drop in the title: '$X To Forgotten', '$65 Billion Mistake', '$80B Disaster', 'Lost 93% of Its Profit', 'Collapsed 96% in a Year'. A hard number signals scale and makes the claim checkable.",
+              "kind": "title",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "The $47 Billion Company That Was Never Real",
+                  "views": 13481,
+                  "channel": "The Explained Vault",
+                  "subs": 180,
+                  "outlier": 74.89,
+                  "length_min": 11.2,
+                  "age_days": 60
+                },
+                {
+                  "title": "$80B Disaster: Zuckerberg's Metaverse Ghost Town",
+                  "views": 928709,
+                  "channel": "TheCollapseCo",
+                  "subs": 21500,
+                  "outlier": 43.2,
+                  "length_min": 21.7,
+                  "age_days": 210
+                },
+                {
+                  "title": "Porsche Lost 93% of Its Profit — Here's WHY",
+                  "views": 756099,
+                  "channel": "The Sleeper List",
+                  "subs": 48900,
+                  "outlier": 15.46,
+                  "length_min": 21.6,
+                  "age_days": 30
+                },
+                {
+                  "title": "$700 Million To Forgotten: How Ed Hardy Lost Everything",
+                  "views": 423144,
+                  "channel": "Build Inc.",
+                  "subs": 26900,
+                  "outlier": 15.73,
+                  "length_min": 31.7,
+                  "age_days": 21
+                },
+                {
+                  "title": "Jaguar Land Rover Lost 99% of Its Profit — Even Its New £130,000 Car Can't Save It",
+                  "views": 17053,
+                  "channel": "The Motor Report",
+                  "subs": 1340,
+                  "outlier": 12.73,
+                  "length_min": 20.9,
+                  "age_days": 28
+                },
+                {
+                  "title": "Lucid: The $90B Company That Collapsed 96% in a Year",
+                  "views": 496868,
+                  "channel": "JunkBondInvestor",
+                  "subs": 79500,
+                  "outlier": 6.25,
+                  "length_min": 16.4,
+                  "age_days": 180
+                },
+                {
+                  "title": "Five Guys: How $24 Burgers Bankrupt a $3.4B Dream",
+                  "views": 395696,
+                  "channel": "JunkBondInvestor",
+                  "subs": 79500,
+                  "outlier": 4.98,
+                  "length_min": 13.1,
+                  "age_days": 90
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE: A short, plain question with the brand name in it: 'Why Did X Collapse? The Full Story', 'WTF Happened to X?', 'What Really Happened to X', 'Why X Failed in Y', 'Who Destroyed X?'. This produced the two highest ratios in the whole data set.",
+              "kind": "title",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Why Did Eddie Stobart Collapse? The Full Story",
+                  "views": 84786,
+                  "channel": "Haul Drive",
+                  "subs": 93,
+                  "outlier": 911.68,
+                  "length_min": 14.8,
+                  "age_days": 14
+                },
+                {
+                  "title": "WTF Happened to Labubu?",
+                  "views": 2262204,
+                  "channel": "Fortune & Fall",
+                  "subs": 6340,
+                  "outlier": 356.81,
+                  "length_min": 16.5,
+                  "age_days": 21
+                },
+                {
+                  "title": "Why Walmart Failed in Europe...",
+                  "views": 690731,
+                  "channel": "Thingform",
+                  "subs": 4330,
+                  "outlier": 159.52,
+                  "length_min": 8.1,
+                  "age_days": 120
+                },
+                {
+                  "title": "Why KFC Dumped Pepsi",
+                  "views": 318224,
+                  "channel": "Fallen Tickers",
+                  "subs": 2010,
+                  "outlier": 158.32,
+                  "length_min": 13.9,
+                  "age_days": 14
+                },
+                {
+                  "title": "What Really Happened to Aiwa",
+                  "views": 344596,
+                  "channel": "Famous Brands History",
+                  "subs": 15200,
+                  "outlier": 22.67,
+                  "length_min": 15.6,
+                  "age_days": 240
+                },
+                {
+                  "title": "Who Destroyed Snapdeal?",
+                  "views": 1683360,
+                  "channel": "Ankul Rajpurohit",
+                  "subs": 200000,
+                  "outlier": 8.42,
+                  "length_min": 13.6,
+                  "age_days": 90
+                },
+                {
+                  "title": "What Happened to Schwinn? The Rise and Fall of America’s Bicycle Empire",
+                  "views": 619129,
+                  "channel": "Back to Yesterday",
+                  "subs": 90500,
+                  "outlier": 6.84,
+                  "length_min": 30.5,
+                  "age_days": 270
+                }
+              ]
+            },
+            {
+              "pattern": "TITLE/FORMAT: Numbered or 'Every [category] that…' lists work (restaurant chains, phones, stores, dealership chains, computer brands). But copying a winning title word for word gets nothing. Within 14 days of Hungerwise's hit, a dozen near-identical titles appeared on other channels, and 18 of 20 results for that query were under 5,000 views. Proof that clones and templated uploads don't get distributed.",
+              "kind": "title",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "10 Major Stores Closing for Good – The U.S. Retail Apocalypse Explained",
+                  "views": 342553,
+                  "channel": "EconoNova",
+                  "subs": 1990,
+                  "outlier": 172.14,
+                  "length_min": 25.1,
+                  "age_days": 300
+                },
+                {
+                  "title": "Every Restaurant Chain That Completely Destroyed Itself",
+                  "views": 868231,
+                  "channel": "Hungerwise",
+                  "subs": 9470,
+                  "outlier": 91.68,
+                  "length_min": 18.6,
+                  "age_days": 14
+                },
+                {
+                  "title": "6 Amazing Tata Cars That Failed Badly in India 😥",
+                  "views": 776451,
+                  "channel": "Truth About Cars",
+                  "subs": 10400,
+                  "outlier": 74.66,
+                  "length_min": 9,
+                  "age_days": 270
+                },
+                {
+                  "title": "11 Phones That Were Doomed From Day One",
+                  "views": 497696,
+                  "channel": "Droid Sage",
+                  "subs": 10400,
+                  "outlier": 47.86,
+                  "length_min": 16.9,
+                  "age_days": 21
+                },
+                {
+                  "title": "Every Restaurant Chain That Accidentally Destroyed Itself",
+                  "views": 113145,
+                  "channel": "Steve Talks Food",
+                  "subs": 18000,
+                  "outlier": 6.29,
+                  "length_min": 19.1,
+                  "age_days": 8
+                },
+                {
+                  "title": "Every Restaurant Chain That Lost Everything (And Why They Failed)",
+                  "views": 3571,
+                  "channel": "Food Mark",
+                  "subs": 12200,
+                  "length_min": 11.2,
+                  "age_days": 3
+                },
+                {
+                  "title": "How Every Restaurant Chain Completely Destroyed Itself",
+                  "views": 343,
+                  "channel": "Products Investigated",
+                  "subs": 299,
+                  "length_min": 10.6,
+                  "age_days": 4
+                },
+                {
+                  "title": "Every Fast Food Chain That Completely Destroyed Itself",
+                  "views": 43,
+                  "channel": "Foodloria",
+                  "subs": 21,
+                  "length_min": 19.6,
+                  "age_days": 1
+                }
+              ]
+            },
+            {
+              "pattern": "LENGTH: 10 to 30 minutes is the band. Of the 43 on-niche outliers on the two contact sheets, 34 are 10 to 30 min (11 at 10-15, 11 at 15-20, 12 at 20-30) and the median is 19 min. Only 2 are under 10 min. The 30-45 min band works for heritage deep dives and the 'lost everything' fashion series.",
+              "kind": "length",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Why Did Eddie Stobart Collapse? The Full Story",
+                  "views": 84786,
+                  "channel": "Haul Drive",
+                  "subs": 93,
+                  "outlier": 911.68,
+                  "length_min": 14.8
+                },
+                {
+                  "title": "WTF Happened to Labubu?",
+                  "views": 2262204,
+                  "channel": "Fortune & Fall",
+                  "subs": 6340,
+                  "outlier": 356.81,
+                  "length_min": 16.5
+                },
+                {
+                  "title": "Honda Is Losing Everything: The $65 Billion Mistake",
+                  "views": 646614,
+                  "channel": "MAXIMUS",
+                  "subs": 2330,
+                  "outlier": 277.52,
+                  "length_min": 26.3
+                },
+                {
+                  "title": "The Tragic Story of Philips: How the Company That Invented the CD Quietly Gave Up on Sound",
+                  "views": 520326,
+                  "channel": "Fallen Hi-Fi",
+                  "subs": 15100,
+                  "outlier": 34.46,
+                  "length_min": 35.4
+                },
+                {
+                  "title": "Tandberg: The Bankrupt Audio Brand That Secretly Built a $3 Billion Empire",
+                  "views": 43279,
+                  "channel": "Forgotten Circuits",
+                  "subs": 957,
+                  "outlier": 45.22,
+                  "length_min": 30.4
+                }
+              ]
+            },
+            {
+              "pattern": "FORMAT: Faceless narrated documentary run as a recognisable series, with one fixed title shape and one fixed thumbnail family per channel. The fastest-growing small channels each own one: MAXIMUS and Nimbus ('Is Losing Everything' plus 'IT'S OVER' on a burning dealership), Build Inc. ('$X To Forgotten' plus 'HOW TO KILL A BRAND'), Fallen Hi-Fi ('The Tragic Story of X' plus a decayed factory), Famous Brands History ('What Really Happened to X'), METTLE ('How Just One Mistake Destroyed').",
+              "kind": "format",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "BMW Is Losing Everything: The $4 Billion China Mistake",
+                  "views": 268215,
+                  "channel": "MAXIMUS",
+                  "subs": 2330,
+                  "outlier": 115.11,
+                  "length_min": 25.9,
+                  "age_days": 14
+                },
+                {
+                  "title": "Nissan Is Losing Everything: When Chasing Volume Backfires",
+                  "views": 286046,
+                  "channel": "Nimbus",
+                  "subs": 14500,
+                  "outlier": 19.73,
+                  "length_min": 20.9,
+                  "age_days": 28
+                },
+                {
+                  "title": "$625 Million To Forgotten: How TOMS Lost Everything",
+                  "views": 393387,
+                  "channel": "Build Inc.",
+                  "subs": 26900,
+                  "outlier": 14.62,
+                  "length_min": 29.3,
+                  "age_days": 14
+                },
+                {
+                  "title": "The Tragic Story of JVC: How the Company That Invented VHS Lost Everything",
+                  "views": 257618,
+                  "channel": "Fallen Hi-Fi",
+                  "subs": 15100,
+                  "outlier": 17.06,
+                  "length_min": 35.7,
+                  "age_days": 120
+                },
+                {
+                  "title": "Electronics Brands That No Longer Exist — or No Longer Matter",
+                  "views": 320799,
+                  "channel": "Famous Brands History",
+                  "subs": 15200,
+                  "outlier": 21.11,
+                  "length_min": 7.6,
+                  "age_days": 300
+                },
+                {
+                  "title": "How Just One Car Destroyed Britain's Car Industry",
+                  "views": 284035,
+                  "channel": "METTLE",
+                  "subs": 59400,
+                  "outlier": 4.78,
+                  "length_min": 29.7,
+                  "age_days": 180
+                }
+              ]
+            },
+            {
+              "pattern": "FORMAT: A whole company history compressed into a stated time ('The ENTIRE History of X in 11 Minutes', 'Rise & Fall of … (1978 - 2026)'). The promise is clear and the video is evergreen.",
+              "kind": "format",
+              "strength": "medium",
+              "evidence": [
+                {
+                  "title": "The ENTIRE History of Coca-Cola in 11 Minutes",
+                  "views": 1189643,
+                  "channel": "CEOzoned",
+                  "subs": 29300,
+                  "outlier": 40.6,
+                  "length_min": 11,
+                  "age_days": 30
+                },
+                {
+                  "title": "The Rise & Fall of the Best-Selling Computer Brands (1978 - 2026)",
+                  "views": 1577483,
+                  "channel": "Favoree",
+                  "subs": 23600,
+                  "outlier": 66.84,
+                  "length_min": 18.3,
+                  "age_days": 270
+                }
+              ]
+            },
+            {
+              "pattern": "TIMING: Two engines. (1) Newsjacking within days or weeks of a brand's bad news gives the fastest views: this month's top outliers are 12 to 30 days old and pull about 100K views a day. (2) Evergreen deep dives on finished stories keep earning for months. A durable channel needs both: timely episodes for reach and evergreen ones for the back catalogue.",
+              "kind": "timing",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Stellantis Is Losing Everything: Jeep, Dodge & Fiat on the Brink",
+                  "views": 3312185,
+                  "channel": "Nimbus",
+                  "subs": 14500,
+                  "outlier": 228.43,
+                  "age_days": 30
+                },
+                {
+                  "title": "WTF Happened to Labubu?",
+                  "views": 2262204,
+                  "channel": "Fortune & Fall",
+                  "subs": 6340,
+                  "outlier": 356.81,
+                  "age_days": 21
+                },
+                {
+                  "title": "How Crumbl Cookies Fooled The World And Got What They Deserved",
+                  "views": 1237860,
+                  "channel": "The Philosophy Of Marketing",
+                  "subs": 113000,
+                  "outlier": 10.95,
+                  "age_days": 12
+                },
+                {
+                  "title": "How One Ad Destroyed Jaguar's Billion-Dollar Empire",
+                  "views": 2543313,
+                  "channel": "CoreSight",
+                  "subs": 24400,
+                  "outlier": 104.23,
+                  "age_days": 330
+                },
+                {
+                  "title": "The Rise & Fall of the Best-Selling Computer Brands (1978 - 2026)",
+                  "views": 1577483,
+                  "channel": "Favoree",
+                  "subs": 23600,
+                  "outlier": 66.84,
+                  "age_days": 270
+                },
+                {
+                  "title": "What Really Happened to Aiwa",
+                  "views": 344596,
+                  "channel": "Famous Brands History",
+                  "subs": 15200,
+                  "outlier": 22.67,
+                  "age_days": 240
+                }
+              ]
+            },
+            {
+              "pattern": "THUMBNAIL: The company's own recognisable thing is the hero (logo on the building, the product, the car, the shoe, the bottle), with no presenter face. It carries a 1-3 word verdict or a money-loss figure in huge block capitals that adds to the title rather than repeating it ('IT'S OVER', 'WORTHLESS NOW', 'WHAT WENT WRONG?', 'DIED', '$47B GONE', '$80B WASTED'). Decay cues sit on top: fire, a red falling arrow or chart, or an abandoned building under grey sky.",
+              "kind": "thumbnail",
+              "strength": "strong",
+              "evidence": [
+                {
+                  "title": "Honda Is Losing Everything: The $65 Billion Mistake",
+                  "views": 646614,
+                  "channel": "MAXIMUS",
+                  "subs": 2330,
+                  "outlier": 277.52
+                },
+                {
+                  "title": "WTF Happened to Labubu?",
+                  "views": 2262204,
+                  "channel": "Fortune & Fall",
+                  "subs": 6340,
+                  "outlier": 356.81
+                },
+                {
+                  "title": "Why Did Eddie Stobart Collapse? The Full Story",
+                  "views": 84786,
+                  "channel": "Haul Drive",
+                  "subs": 93,
+                  "outlier": 911.68
+                },
+                {
+                  "title": "How One Ad Destroyed Jaguar's Billion-Dollar Empire",
+                  "views": 2543313,
+                  "channel": "CoreSight",
+                  "subs": 24400,
+                  "outlier": 104.23
+                },
+                {
+                  "title": "The $47 Billion Company That Was Never Real",
+                  "views": 13481,
+                  "channel": "The Explained Vault",
+                  "subs": 180,
+                  "outlier": 74.89
+                },
+                {
+                  "title": "$80B Disaster: Zuckerberg's Metaverse Ghost Town",
+                  "views": 928709,
+                  "channel": "TheCollapseCo",
+                  "subs": 21500,
+                  "outlier": 43.2
+                },
+                {
+                  "title": "How TATA NANO DIED | The One Mistake That Destroyed India's Cheapest Car!",
+                  "views": 505265,
+                  "channel": "Ani Explainer Hindi",
+                  "subs": 12000,
+                  "outlier": 42.11
+                },
+                {
+                  "title": "From $1.7 Billion To Nothing: How Yeezy Lost Everything",
+                  "views": 526107,
+                  "channel": "Build Inc.",
+                  "subs": 26900,
+                  "outlier": 19.56
+                }
+              ]
+            }
+          ],
+          "saturation": "Big outlets are present but are not the ones being pushed. Business Insider's 'Rise And Fall Of' series (1.9M to 2.9M views), WSJ 'What Went Wrong', Bloomberg Originals (5.23M subs), CNBC (4.18M), Think School (6.62M), ColdFusion (5.26M) and The Infographics Show (15.5M) all show up, but at 0.07x to 2x their subscriber counts. Mid-size business-documentary channels do the same: Logically Answered (930K) 1.61x, Bright Sun Films (1.66M) 0.44x, Modern MBA (848K) 0.25x, Moon (1.8M) 0.28-1.16x, Wendigang (991K) 0.71-2.58x, Weird History Food (786K) 0.18-0.98x. The highest ratios almost all come from channels under 30K subs: Haul Drive 93, MAXIMUS 2,330, Thingform 4,330, Fortune & Fall 6,340, Hungerwise 9,470, Nimbus 14,500, Build Inc. 26,900. So YouTube is actively distributing new channels' packaging in this niche, and no single giant owns it. The crowding is at the bottom instead. Low-effort faceless uploads flood the popular sub-topics: 18 of 20 results for 'restaurant chain that destroyed itself' and 18 of 20 for 'startup fraud collapse' (this month) were under 5,000 views. About 10 Theranos videos uploaded this month all sit under 1,500 views, and 13 of 18 'electronics brand what happened' results this month were under 5,000. The carmaker 'Is Losing Everything' look is copied across several small channels in 30 days. Room for a new channel exists, but only for distinct, well-researched episodes, not clones. One query ('rise and fall of company', month) returned no results.",
+          "gaps": [
+            "Regional and industrial collapses outside the US mega-brands (UK haulage and manufacturing, Canadian and US company towns, South African and Australian chains). These have the highest ratios in the data: Eddie Stobart 911.68x on 93 subs, with three independent outliers; South African dealership chains 84.37x and 20.68x; Chatham, Ontario 31.55x; Reliant 13.52x. Each story has only one to three videos.",
+            "Cross-border failure ('Why X failed in [country]' or 'lost [market] to [rival]'): Walmart in Europe 159.52x on 4,330 subs, Japanese cars losing Thailand 213.9x on 48 subs, BMW's China mistake 115.11x. Few competing videos turned up.",
+            "Fad and consumer brands while the story is live: Labubu reached 2.26M views at 356.81x, and the only other sizeable Labubu video in the data was Statrys at 3.72x. In fashion and consumer collapses, Build Inc. (Yeezy, Ed Hardy, TOMS at 14-20x) is nearly alone with a consistent series.",
+            "Single restaurant chains with one concrete decision, rather than the now-cloned 'Every restaurant chain' lists: Why KFC Dumped Pepsi 158.32x on 2,010 subs, Wendy's store closures 148.96x, Sriracha owner 19.95x, Crumbl 10.95x on 1.24M views.",
+            "Well-made heritage electronics and hi-fi histories: well-made versions win (Philips 34.46x at 520K views, Aiwa 22.67x, computer brands 66.84x at 1.58M), while dozens of thin uploads on the same brands sit at near-zero views. The gap is quality, not the topic.",
+            "For-profit education collapses (weak evidence, two videos): Everest College 47.61x at 490K views on 10,300 subs; Byju's 221.72x on a 50-sub channel."
+          ],
+          "thumbnail_notes": "Both sheets (24 on-niche outliers each, this year and this month) show the same recipe. (1) The hero is the company's own recognisable asset, not a presenter: the logo on the HQ or dealership (Honda, Stellantis, BMW, Volvo, Nissan, Walmart), the product (Labubu doll, Sriracha bottle, Yeezy and TOMS shoes, Ed Hardy shirt, Tata Nano, a phone line-up), or the depot or factory (Eddie Stobart, Philips, JVC, Reliant, Chatham). Faces appear on only about 5 of 48 thumbnails (Eddie Stobart composite, Byju's founder, Wendy's founder, Zuckerberg next to his avatar, one presenter). (2) One to three words of giant block capitals add a verdict or a loss figure that the title doesn't repeat: \"IT'S OVER\" in quotes (Honda, Stellantis, BMW, Volvo, Nissan, and rooked's fast-food boxes), WORTHLESS NOW, WHAT WENT WRONG?, DIED, DISGRACE, IRREVERSIBLE, GAME OVER, BUILT TO FAIL, LOST ITS SOUL, BYE BYE..., HOW TO KILL A BRAND, $533M VANISHED, $47B GONE, $80B WASTED, -99.3% IN 5 YEARS, 800 GONE. (3) Decay cues: fire and flames behind or on the product (the carmaker set, Jaguar, Yeezy, TOMS, Ed Hardy, Nano), a red falling arrow or chart line (Labubu, Byju's, $47B, Sriracha, Europe cars), or abandoned overgrown buildings under grey sky (Eddie Stobart x2, Philips, JVC, the New England drive-in, Chatham). (4) Two visual families work: a loud one (black, red and fire with white or yellow heavy sans) for current and newsy stories, and a quiet heritage one (muted derelict factory with a gold or cream serif title, as on Fallen Hi-Fi, Once Britain and Canada's Lost Legacy) for evergreen industrial and hi-fi histories. (5) List videos use a clean grid of logos on white (Hungerwise's 8 chain logos, copied by rooked.) or a product line-up (Droid Sage's phones). (6) Several winners look AI-composited (the Eddie Stobart executive, the Coca-Cola illustration, Labubu). MAXIMUS and Nimbus share a near-identical template. Copy the principles, never the layout, and avoid 'IT'S OVER'-style verdicts on companies that are still operating unless the video proves them.",
+          "queries_run": [
+            "[year] rise and fall of company",
+            "[year] business documentary",
+            "[year] why company failed",
+            "[year] what happened to brand",
+            "[year] corporate collapse documentary",
+            "[year] how company went bankrupt",
+            "[month] rise and fall of company (no results)",
+            "[month] business documentary",
+            "[month] why company failed",
+            "[month] what happened to brand",
+            "[month] corporate collapse documentary",
+            "[month] how company went bankrupt",
+            "[year] what really happened to",
+            "[year] rise and fall of",
+            "[year] restaurant chain that destroyed itself",
+            "[year] how lost everything company",
+            "[year] dead brands forgotten (no results)",
+            "[year] doomed from day one",
+            "[year] billion dollar company collapse",
+            "[year] startup fraud collapse",
+            "[year] why failed in america",
+            "[year] retail store closing why",
+            "[year] is losing everything",
+            "[year] how one mistake destroyed",
+            "[year] is dying here's why (no results)",
+            "[year] car brand collapse",
+            "[year] electronics brand what happened",
+            "[year] to forgotten how lost everything",
+            "[year] the company that invented",
+            "[year] is closing stores here's why",
+            "[month] rise and fall of",
+            "[month] is losing everything",
+            "[month] how one mistake destroyed",
+            "[month] how lost everything company",
+            "[month] every restaurant chain",
+            "[month] car brand collapse",
+            "[month] electronics brand what happened",
+            "[month] billion dollar company collapse (no results)",
+            "[month] startup fraud collapse",
+            "[month] is closing stores here's why",
+            "[month] AI bubble company collapse",
+            "[month] the untold story of brand (no results)"
+          ],
+          "videos_examined": 655,
+          "files": [
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/seed-year.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/seed-month.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/own-year.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/own2-year.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/own-month.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/curated-year.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/curated-month.json",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/sheet-year.png",
+            "/tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ch-2/sheet-month.png"
+          ]
+        },
+        "final": null
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "portfolio": null
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Scout"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Strategy"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 3,
+      "title": "Scrutiny"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 4,
+      "title": "Portfolio"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "scout:1",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "a93e7dec475d26bcc",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794860152198,
+      "queuedAt": 1794860152172,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "The broad searches belong to big channels: How Money Works …",
+      "promptPreview": "You are the scout for a new faceless YouTube channel: stick-figure money and economics explainers. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-55…",
+      "promptFramed": true,
+      "lastProgressAt": 1794861800309,
+      "tokens": 193753,
+      "toolCalls": 29,
+      "durationMs": 1648110,
+      "resultPreview": "{\"videos_examined\":1176,\"queries_run\":[\"economics explained (year, month)\",\"how money works (year, month)\",\"stick figure explained finance (year, month)\",\"inflation explained (year, month)\",\"why is everything so expensive (year, month)\",\"how banks make money (year, month)\",\"every level of wealth explained (year, month)\",\"every money laundering technique explained (year, month)\",\"how the rich avoid…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "scout:2",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "aa487caf8a9c55964",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1794860152199,
+      "queuedAt": 1794860152172,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Big outlets are present but are not the ones being pushed. …",
+      "promptPreview": "You are the scout for a new faceless YouTube channel: documentaries about how real companies rose and collapsed. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/81…",
+      "promptFramed": true,
+      "lastProgressAt": 1794861698331,
+      "tokens": 165756,
+      "toolCalls": 21,
+      "durationMs": 1545034,
+      "resultPreview": "{\"patterns\":[{\"pattern\":\"TOPIC: Carmakers in decline. A named automaker losing ground, money or a market. This is the hottest cluster this month: 10+ small channels hit 10x to 278x within 30 days. It is filling fast, so it needs a different angle, not the same template. Caution: several winners frame companies that are still trading as 'over', which is a misleading-packaging risk.\",\"kind\":\"topic\",…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "scout:3",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "af6ceea92c9c49ac8",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794861698357,
+      "queuedAt": 1794860152172,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-2…",
+      "promptPreview": "You are the scout for a new faceless YouTube channel: plain-words explainers of how AI and everyday technology work. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jach…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862144430,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 99116,
+      "toolCalls": 7,
+      "durationMs": 446071
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "scout:4",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "a84d12ff175cde060",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794861800322,
+      "queuedAt": 1794860152173,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-2…",
+      "promptPreview": "You are the scout for a new faceless YouTube channel: space and science questions answered with real numbers. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8146f…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862046778,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 77968,
+      "toolCalls": 4,
+      "durationMs": 246456
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "scout:5",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "ac2feeeed3d0b2d78",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862046781,
+      "queuedAt": 1794860152173,
+      "attempt": 1,
+      "promptPreview": "You are the scout for a new faceless YouTube channel: history documentaries told with animated maps. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862047036,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 255
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "scout:6",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "aeded027e732fa5d6",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862047040,
+      "queuedAt": 1794860152173,
+      "attempt": 1,
+      "promptPreview": "You are the scout for a new faceless YouTube channel: multi-hour calm history narration for falling asleep. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8146f71…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862047281,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 240
+    },
+    {
+      "type": "workflow_agent",
+      "index": 7,
+      "label": "scout:7",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "affa134a3cb621eef",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862047286,
+      "queuedAt": 1794860152173,
+      "attempt": 1,
+      "promptPreview": "You are the scout for a new faceless YouTube channel: historic true crime told from court records: heists, frauds, hoaxes. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-use…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862047536,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 250
+    },
+    {
+      "type": "workflow_agent",
+      "index": 8,
+      "label": "scout:8",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "a856509ecfac61a24",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862047539,
+      "queuedAt": 1794860152173,
+      "attempt": 1,
+      "promptPreview": "You are the scout for a new faceless YouTube channel: plain-English explainers of insurance, legal and real-estate terms. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862047781,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 242
+    },
+    {
+      "type": "workflow_agent",
+      "index": 9,
+      "label": "scout:9",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "a1ee5d3e20a2c6843",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862047785,
+      "queuedAt": 1794860152173,
+      "attempt": 1,
+      "promptPreview": "You are the scout for a new faceless YouTube channel: hours-long ambient rain and sleep sound, no voice. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8146f71f-7…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862048036,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 251
+    },
+    {
+      "type": "workflow_agent",
+      "index": 10,
+      "label": "scout:10",
+      "phaseIndex": 1,
+      "phaseTitle": "Scout",
+      "agentId": "a3863c2a1dffe683e",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862048040,
+      "queuedAt": 1794860152173,
+      "attempt": 1,
+      "promptPreview": "You are the scout for a new faceless YouTube channel: wordless 3D-animated Shorts about tiny original characters. Find out, from YouTube's own data, what is winning in this niche right now.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862048289,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 248
+    },
+    {
+      "type": "workflow_agent",
+      "index": 11,
+      "label": "strategy:2",
+      "phaseIndex": 2,
+      "phaseTitle": "Strategy",
+      "agentId": "a598bafc4b509dc85",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862048312,
+      "queuedAt": 1794861698393,
+      "attempt": 1,
+      "promptPreview": "You are the growth strategist for a new faceless YouTube channel: documentaries about how real companies rose and collapsed.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ (your c…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862048556,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 243
+    },
+    {
+      "type": "workflow_agent",
+      "index": 12,
+      "label": "strategy:1",
+      "phaseIndex": 2,
+      "phaseTitle": "Strategy",
+      "agentId": "ae855f8602054af7d",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862048561,
+      "queuedAt": 1794861800342,
+      "attempt": 1,
+      "promptPreview": "You are the growth strategist for a new faceless YouTube channel: stick-figure money and economics explainers.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8146f71f-73d7-5544-b4d0-28b8048fbb36/scratchpad/yt/growth/ (your channel's own f…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862048825,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 264
+    },
+    {
+      "type": "workflow_agent",
+      "index": 13,
+      "label": "scrutiny:2",
+      "phaseIndex": 3,
+      "phaseTitle": "Scrutiny",
+      "agentId": "ae0ced226067a0858",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862048846,
+      "queuedAt": 1794862048561,
+      "attempt": 1,
+      "promptPreview": "You are the skeptic for a growth plan for a new faceless YouTube channel: documentaries about how real companies rose and collapsed. The owner will act on this plan for months, so anything weak, dishonest or risky in it is a real cost. Assume the strategist was too optimistic.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything th…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862049100,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 254
+    },
+    {
+      "type": "workflow_agent",
+      "index": 14,
+      "label": "scrutiny:1",
+      "phaseIndex": 3,
+      "phaseTitle": "Scrutiny",
+      "agentId": "a2c4b26c68ffc6c33",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862049104,
+      "queuedAt": 1794862048845,
+      "attempt": 1,
+      "promptPreview": "You are the skeptic for a growth plan for a new faceless YouTube channel: stick-figure money and economics explainers. The owner will act on this plan for months, so anything weak, dishonest or risky in it is a real cost. Assume the strategist was too optimistic.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862049372,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 268
+    },
+    {
+      "type": "workflow_agent",
+      "index": 15,
+      "label": "portfolio",
+      "phaseIndex": 4,
+      "phaseTitle": "Portfolio",
+      "agentId": "a1821827e1fc9ba6f",
+      "model": "claude-opus-5-5",
+      "state": "error",
+      "startedAt": 1794862144436,
+      "queuedAt": 1794862144432,
+      "attempt": 1,
+      "promptPreview": "You are the portfolio lead for ten new faceless YouTube channels owned by one person on one Google account. Each channel now has a scrutinised growth plan. Plan them as one business.\n\nThis task has nothing to do with the website repository in the working directory. Do not read, edit or commit anything there and do not use git. You may write files ONLY inside /tmp/claude-0/-home-user-Jachi/8146f71f…",
+      "promptFramed": true,
+      "lastProgressAt": 1794862144688,
+      "error": "You've hit your 5-hour limit · resets 11:30pm (UTC)",
+      "tokens": 0,
+      "toolCalls": 0,
+      "durationMs": 252
+    }
+  ],
+  "totalTokens": 536593,
+  "totalToolCalls": 61
+}

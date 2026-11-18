@@ -1,0 +1,24 @@
+CROWDED  Self Dealing  (@SelfDealing; search returned 36 channels)
+           - contains-name channel: "Dealing" @Dealingcom @Dealingcom, 436 subscribers
+TAKEN    Glass Vault  (@GlassVault; search returned 31 channels)
+           - handle @GlassVault is taken by "VeîlBerry"
+           - @TheGlassVault is taken by "The Glass Vault"
+           - same-name channel: "Glass Vault" @GlassVaultMedia @GlassVaultMedia, 2 subscribers
+           - same-name channel: "Glass Vault" @glassvault5223 @glassvault5223, 2 subscribers
+           - contains-name channel: "Glass Vault Studio" @GlassVaultStudio @GlassVaultStudio, 25 subscribers
+           - same-name channel: "The Glass Vault" @GlassVaultSec @GlassVaultSec, 158 subscribers
+           - contains-name channel: "Glass Vault  Files" @glassvaultfiles @glassvaultfiles, 34 subscribers
+           - same-name channel: "Glass Vault" @glassvault3470 @glassvault3470
+           - same-name channel: "The Glass Vault" @TheGlassVault @TheGlassVault, 13 subscribers
+           - same-name channel: "The Glass Vault" @theglassvault6937 @theglassvault6937, 145 subscribers
+           - contains-name channel: "Glass vault. Band." @glassvault.band.4242 @glassvault.band.4242, 3 subscribers
+           - near-name channel: "Glass by Vault" @GlassbyVault @GlassbyVault
+           - contains-name channel: "TheLookingGlassVault" @TheLookingGlassVault @TheLookingGlassVault, 485 subscribers
+TAKEN    Spreadsheet Noir  (@SpreadsheetNoir; search returned 20 channels)
+           - handle @SpreadsheetNoir is taken by "Spreadsheet Noir"
+           - same-name channel: "Spreadsheet Noir" @SpreadsheetNoir @SpreadsheetNoir
+CLEAR    Wire and Watermark  (@WireandWatermark; search returned 22 channels)
+TAKEN    Fire Assay  (@FireAssay; search returned 20 channels)
+           - handle @FireAssay is taken by "Francis Chan"
+           - contains-name channel: "Juan" @fireassayny @fireassayny, 4 subscribers
+CLEAR    Booked Revenue  (@BookedRevenue; search returned 40 channels)
